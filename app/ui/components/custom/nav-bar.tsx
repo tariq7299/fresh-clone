@@ -1,4 +1,6 @@
 
+"use client"
+
 import { ArrowRightEndOnRectangleIcon, Bars3Icon, ChevronDownIcon } from '@heroicons/react/24/outline'
 import {
     DropdownMenu,
@@ -7,24 +9,48 @@ import {
     DropdownMenuTrigger,
 } from "@/ui/components/common/dropdown-menu"
 import MobileNavMenu from '@/ui/components/custom/mobile-nav-menu'
+import { cn } from '@/lib/utils'
+import { useEffect, useState } from 'react'
 
 export default function NavBar() {
 
+    const [isScrolled, setIsScrolled] = useState(window.scrollY > 0)
+
+    useEffect(() => {
+        const options = { passive: true }; // options must match add/remove event
+        const scroll = () => setIsScrolled(window.scrollY > 0);
+        document.addEventListener("scroll", scroll, options);
+
+        // remove event on unmount to prevent a memory leak
+        () => document.removeEventListener("scroll", scroll, true);
+    }, []);
+
 
     return (
-        <>
-            {/* closed navbar on mobile screens */}
-            <nav className="bg-transparent p-5 flex justify-between items-center">
+        <nav className={cn('fixed top-0 left-0 w-full  z-50 ',
+            isScrolled ? 'bg-white shadow-md' : 'bg-transparent'
+        )}>
+
+            <div className="p-5 flex justify-between items-center ">
+
                 <p className="text-lg font-extrabold ">LOGO</p>
 
+                {/* Nav menue trigger on mobile devices */}
                 <div className="md:hidden">
-                    {/* <Bars3Icon className='size-10' /> */}
                     <MobileNavMenu />
                 </div>
 
-                {/*Closed navbar on desktopscreens  */}
+                {/*Closed navbar on desktop screens  */}
                 <DropdownMenu>
-                    <DropdownMenuTrigger className='hidden md:inline-flex border rounded-full  space-x-3 items-center border-gray-200 font-bold py-2 px-5 gap-2'>Menu <ChevronDownIcon className='size-4' /></DropdownMenuTrigger>
+                    <DropdownMenuTrigger className='hidden md:inline-flex border rounded-full  space-x-3 items-center border-gray-200 font-bold py-2 px-5 gap-2 group'>
+
+                        {/*
+                         - "group-data-[state=open]:rotate-180": this was used to create the animation of the arrow icon (up and down)
+                         - "data-[state=open]": This will be given by default to all of DropDownMenu components when the dropdown is open
+                         */}
+                        Menu <ChevronDownIcon className='size-4 transition duration-200
+                         group-data-[state=open]:rotate-180' />
+                    </DropdownMenuTrigger>
                     <DropdownMenuContent className='w-56'>
                         <DropdownMenuItem>
                             <a className='p-2 flex items-center gap-2  w-full'>
@@ -35,10 +61,11 @@ export default function NavBar() {
                     </DropdownMenuContent>
                 </DropdownMenu>
 
-            </nav>
+
+            </div>
 
 
 
-        </>
+        </nav>
     )
 }

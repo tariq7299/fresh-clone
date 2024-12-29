@@ -10,17 +10,13 @@ export default function MobileNavMenu() {
     return (
         <>
 
-
             <Button size="icon" variant={"ghost"} onClick={() => setIsOpen(!isOpen)}>
                 <Bars3Icon className='size-10' />
             </Button>
 
-
-
-            {/* The opend navbar in mobile screens */}
-
+            {/* The opend nav menu on mobile screens */}
             <div className={cn(
-                "bg-gray-100 p-5 h-dvh top-0 left-0 right-0 z-50 transition-all ease-in-out delay-150 duration-300 absolute",
+                "bg-gray-100 p-5 h-dvh top-0 left-0 right-0 z-50 transition-all ease-in-out delay-150 duration-200 absolute ",
                 isOpen
                     ? "-translate-y-1 opacity-100 pointer-events-auto"
                     : "opacity-0 pointer-events-none"
