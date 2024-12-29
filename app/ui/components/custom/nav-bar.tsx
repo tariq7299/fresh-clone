@@ -31,7 +31,7 @@ export default function NavBar() {
             isScrolled ? 'bg-white shadow-md' : 'bg-transparent'
         )}>
 
-            <div className="p-5 flex justify-between items-center ">
+            <div className="p-5 flex justify-between items-center max-w-[1440px] m-auto">
 
                 <p className="text-2xl font-extrabold font-lora text-white">Lumière</p>
 

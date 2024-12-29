@@ -42,7 +42,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${LibreBodoniSerif.variable} ${LoraSerif.variable} ${MontserratSans.variable} ${QuicksandSans.variable} antialiased`}
+        className={`${LibreBodoniSerif.variable} ${LoraSerif.variable} ${MontserratSans.variable} ${QuicksandSans.variable} antialiased `}
       >
         {children}
       </body>

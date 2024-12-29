@@ -12,7 +12,7 @@ export default function Home() {
       <main className="">
         <NavBar />
 
-        <section className=" p-5 pb-20 md:pb-48 grid justify-center relative">
+        <section className=" p-5 pb-14 md:pb-48 grid justify-center relative ">
 
           {/* To make nextJs understand that this image is a local image you need to import it (at the top of the file) */}
           <Image
@@ -26,14 +26,16 @@ export default function Home() {
           />
 
 
-          <div className="max-w-xl lg:max-w-2xl mt-24 relative">
-            <h1 className="text-4xl md:text-5xl lg:text-7xl font-black text-start sm:text-center tracking-tight font-libre-bodoni scale-y-110 text-white">Schedule local salon and wellness appointments</h1>
+          <div className="max-w-xl lg:max-w-2xl mt-24 lg:mt-36 relative ">
+            <h1 className="text-4xl  lg:text-6xl font-black text-start sm:text-start tracking-tight font-libre-bodoni scale-y-110 text-white">
+              Schedule local salon and wellness appointments
+            </h1>
 
             {/* Repace this compnent with "./ui/components/custom/combo-box" */}
             <div>
 
               {/* Write types */}
-              <div className="flex gap-2 p-2 border rounded-lg justify-between mt-8 items-center bg-white  ">
+              <div className="flex gap-2 p-1.5 border rounded-lg justify-between mt-8 lg:mt-16 items-center bg-white  ">
 
                 <Combobox triggerClassName={"border-0 w-full z-10"} triggerIcon={null} labelClassName={"font-semibold"} popoverClassName={"w-[200px] sm:w-[400px]"} />
 
