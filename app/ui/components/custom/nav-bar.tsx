@@ -27,13 +27,13 @@ export default function NavBar() {
 
 
     return (
-        <nav className={cn('fixed top-0 left-0 w-full  z-50 ',
+        <nav className={cn('fixed top-0 left-0 w-full  z-50 mb-28',
             isScrolled ? 'bg-white shadow-md' : 'bg-transparent'
         )}>
 
             <div className="p-5 flex justify-between items-center ">
 
-                <p className="text-lg font-extrabold ">LOGO</p>
+                <p className="text-2xl font-extrabold font-lora">Lumière</p>
 
                 {/* Nav menue trigger on mobile devices */}
                 <div className="md:hidden">
@@ -42,7 +42,7 @@ export default function NavBar() {
 
                 {/*Closed navbar on desktop screens  */}
                 <DropdownMenu>
-                    <DropdownMenuTrigger className='hidden md:inline-flex border rounded-full  space-x-3 items-center border-gray-200 font-bold py-2 px-5 gap-2 group'>
+                    <DropdownMenuTrigger className='hidden md:inline-flex border rounded-full  space-x-3 items-center border-gray-200 font-bold py-2 px-5 gap-2 group font-montserrat'>
 
                         {/*
                          - "group-data-[state=open]:rotate-180": this was used to create the animation of the arrow icon (up and down)

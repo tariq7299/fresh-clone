@@ -38,6 +38,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 ## Steps to init the project
     1. Use the guide in nextJS official docs
     2. 
+
 ## Some tips
 - Try to use clxs lib with classNames to enable you for more contorl on conditional classNames
 - Do this if you want to install a component in a certain path do this `pnpm dlx shadcn@latest add <componentName> --path <path>`
@@ -45,3 +46,47 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 ## Common commands
 `pnpm dlx shadcn@latest add <componentName> --path ./app/ui/components`
 
+## Nice tip from AI on font families
+I'll recommend three font families that would work well for a beauty and spa booking platform, considering both aesthetics and readability:
+
+1. **Primary Font (Headers & Titles)**:
+   - **Playfair Display**
+   - Perfect for your main headings and hero text
+   - Conveys elegance and luxury while remaining readable
+   - Example usage:
+   ```css
+   font-family: 'Playfair Display', serif;
+   ```
+
+2. **Secondary Font (Navigation & Subheadings)**:
+   - **Montserrat**
+   - Great for navigation menus, buttons, and section headers
+   - Clean, modern, and highly legible
+   - Works well in various weights (light to bold)
+   ```css
+   font-family: 'Montserrat', sans-serif;
+   ```
+
+3. **Body Text Font**:
+   - **Lato**
+   - Perfect for body text, descriptions, and smaller content
+   - Excellent readability at different sizes
+   - Professional yet warm appearance
+   ```css
+   font-family: 'Lato', sans-serif;
+   ```
+
+
+These fonts work well together because:
+- They create a clear visual hierarchy
+- They balance elegance (Playfair Display) with modern cleanliness (Montserrat and Lato)
+- They maintain excellent readability across different devices and screen sizes
+- They're widely supported and available on Google Fonts
+- They convey the luxurious, professional nature of beauty and spa services while remaining approachable
+
+```
+Logo: Libre Bodoni
+big-Headers:  Lora
+miduem headers: Montserrat
+body: Quicksand
+```
