@@ -7,7 +7,7 @@ import {
     DropdownMenuContent,
     DropdownMenuItem,
     DropdownMenuTrigger,
-} from "@/ui/components/common/dropdown-menu"
+} from "@/ui/components/dropdown-menu"
 import MobileNavMenu from '@/ui/components/custom/mobile-nav-menu'
 import { cn } from '@/lib/utils'
 import { useEffect, useState } from 'react'

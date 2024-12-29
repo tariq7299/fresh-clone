@@ -45,7 +45,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 ## Common commands
 `pnpm dlx shadcn@latest add <componentName> --path ./app/ui/components`
-
+pnpm dlx shadcn@latest add popover --path /app/ui/components/common
 ## Nice tip from AI on font families
 I'll recommend three font families that would work well for a beauty and spa booking platform, considering both aesthetics and readability:
 
