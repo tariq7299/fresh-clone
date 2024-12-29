@@ -64,7 +64,7 @@
 
 @layer base {
   html {
-    font-family: 'QuickSand', serif;
+    font-family: 'Quicksand', system-ui, sans-serif;
   }
   * {
     @apply border-border;

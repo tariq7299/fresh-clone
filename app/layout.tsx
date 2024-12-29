@@ -7,12 +7,12 @@ import "./ui/globals.css";
 //   subsets: ["latin"],
 // });
 
-const LibreBodoniSansSerif = Libre_Bodoni({
-  variable: "--font-libre-bodoni-sans-serif",
+const LibreBodoniSerif = Libre_Bodoni({
+  variable: "--font-libre-bodoni-serif",
   subsets: ["latin"],
 });
-const LoraSansSerif = Lora({
-  variable: "--font-lora-sans-serif",
+const LoraSerif = Lora({
+  variable: "--font-lora-serif",
   subsets: ["latin"],
 });
 const MontserratSans = Montserrat({
@@ -42,7 +42,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${LibreBodoniSansSerif.variable} ${LoraSansSerif.variable} ${MontserratSans.variable} ${QuicksandSans.variable} antialiased`}
+        className={`${LibreBodoniSerif.variable} ${LoraSerif.variable} ${MontserratSans.variable} ${QuicksandSans.variable} antialiased`}
       >
         {children}
       </body>

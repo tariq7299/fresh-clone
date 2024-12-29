@@ -60,7 +60,8 @@ export default {
 			fontFamily: {
 				'libre-bodoni': ['"Libre Bodoni"', 'serif'],
 				'lora': ['Lora', 'serif'],
-				'montserrat': ['Montserrat', 'serif'],
+				'quicksand': ['"Quicksand"', 'sans-serif'],
+				'montserrat': ['Montserrat', 'sans-serif'],
 			},
 		}
 	},
