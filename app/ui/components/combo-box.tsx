@@ -42,7 +42,7 @@ const frameworks = [
     },
 ]
 
-export function Combobox({ triggerClassName = '', triggerIcon = (<ChevronsUpDown className="opacity-50" />), labelClassName = "" }) {
+export function Combobox({ triggerClassName = '', triggerIcon = (<ChevronsUpDown className="opacity-50" />), labelClassName = "", popoverClassName = "" }) {
     const [open, setOpen] = React.useState(false)
     const [value, setValue] = React.useState("")
 
@@ -61,7 +61,7 @@ export function Combobox({ triggerClassName = '', triggerIcon = (<ChevronsUpDown
                     {triggerIcon}
                 </Button>
             </PopoverTrigger>
-            <PopoverContent className="w-[200px] p-0">
+            <PopoverContent className={cn("w-[200px] p-0", popoverClassName)}>
                 <Command>
                     <CommandInput placeholder="nails..." />
                     <CommandList>

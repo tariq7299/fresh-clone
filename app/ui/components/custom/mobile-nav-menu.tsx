@@ -11,7 +11,7 @@ export default function MobileNavMenu() {
         <>
 
             <Button size="icon" variant={"ghost"} onClick={() => setIsOpen(!isOpen)}>
-                <Bars3Icon className='size-10' />
+                <Bars3Icon className='size-10 text-white' />
             </Button>
 
             {/* The opend nav menu on mobile screens */}

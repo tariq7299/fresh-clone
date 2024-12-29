@@ -63,6 +63,11 @@ export default {
 				'quicksand': ['"Quicksand"', 'sans-serif'],
 				'montserrat': ['Montserrat', 'sans-serif'],
 			},
+			screens: {
+				"3xs": "320px",
+				"2xs": "385px",
+				'xs': '425px',
+			},
 		}
 	},
 	plugins: [require("tailwindcss-animate")],
