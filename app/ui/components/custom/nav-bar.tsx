@@ -6,10 +6,9 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from "@/ui/components/common/dropdown-menu"
-import NavBarMobile from '@/ui/components/custom/nav-bar-mobile'
+import MobileNavMenu from '@/ui/components/custom/mobile-nav-menu'
 
 export default function NavBar() {
-
 
 
     return (
@@ -20,7 +19,7 @@ export default function NavBar() {
 
                 <div className="md:hidden">
                     {/* <Bars3Icon className='size-10' /> */}
-                    <NavBarMobile />
+                    <MobileNavMenu />
                 </div>
 
                 {/*Closed navbar on desktopscreens  */}
