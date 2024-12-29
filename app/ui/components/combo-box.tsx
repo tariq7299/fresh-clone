@@ -17,15 +17,16 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@/ui/components/popover"
+import { categories } from "./custom/category"
 
 const frameworks = [
     {
-        value: "next.js",
-        label: "Next.js",
+        value: "nails",
+        label: "Nails",
     },
     {
-        value: "sveltekit",
-        label: "SvelteKit",
+        value: "hair&styling",
+        label: "Hair & Styling",
     },
     {
         value: "nuxt.js",
@@ -41,7 +42,7 @@ const frameworks = [
     },
 ]
 
-export function Combobox({ triggerClassName = '', triggerIcon = (<ChevronsUpDown className="opacity-50" />) }) {
+export function Combobox({ triggerClassName = '', triggerIcon = (<ChevronsUpDown className="opacity-50" />), labelClassName = "" }) {
     const [open, setOpen] = React.useState(false)
     const [value, setValue] = React.useState("")
 
@@ -55,8 +56,8 @@ export function Combobox({ triggerClassName = '', triggerIcon = (<ChevronsUpDown
                     className={cn("w-[200px] justify-between", triggerClassName)}
                 >
                     {value
-                        ? frameworks.find((framework) => framework.value === value)?.label
-                        : "All salons and categories..."}
+                        ? categories.find((framework) => framework.value === value)?.label
+                        : "Select a category..."}
                     {triggerIcon}
                 </Button>
             </PopoverTrigger>
@@ -66,20 +67,23 @@ export function Combobox({ triggerClassName = '', triggerIcon = (<ChevronsUpDown
                     <CommandList>
                         <CommandEmpty>No salon found.</CommandEmpty>
                         <CommandGroup>
-                            {frameworks.map((framework) => (
+                            {categories.map((category) => (
                                 <CommandItem
-                                    key={framework.value}
-                                    value={framework.value}
+                                    key={category.value}
+                                    value={category.value}
                                     onSelect={(currentValue) => {
                                         setValue(currentValue === value ? "" : currentValue)
                                         setOpen(false)
                                     }}
+                                    className={cn(
+                                        category.icon && "flex items-center gap-2",
+                                    )}
                                 >
-                                    {framework.label}
+                                    {category.icon && (<span className="size-6">{category.icon}</span>)} <span className={cn(labelClassName)}>{category.label}</span>
                                     <Check
                                         className={cn(
                                             "ml-auto",
-                                            value === framework.value ? "opacity-100" : "opacity-0"
+                                            value === category.value ? "opacity-100" : "opacity-0"
                                         )}
                                     />
                                 </CommandItem>

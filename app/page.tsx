@@ -3,6 +3,7 @@ import NavBar from "./ui/components/custom/nav-bar";
 import { Combobox } from "./ui/components/combo-box";
 import { Button } from "./ui/components/custom/button";
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
+import { Separator } from "./ui/components/separator";
 
 export default function Home() {
   return (
@@ -18,7 +19,14 @@ export default function Home() {
             {/* Write types */}
             <div className="flex gap-2 p-2 border rounded-lg justify-between mt-12">
 
-              <Combobox triggerClassName={"border-0 w-full"} triggerIcon={null} />
+              <Combobox triggerClassName={"border-0 w-full"} triggerIcon={null} labelClassName={"font-semibold"} />
+
+              <div>
+                <Separator className=" me-1 h-full" orientation="vertical" />
+
+              </div>
+
+
               <Button size="lg" variant="default" className="inline-flex gap-2 items-center"> <MagnifyingGlassIcon className="size-6" /> Search </Button>
 
             </div>
