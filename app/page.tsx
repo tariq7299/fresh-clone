@@ -74,7 +74,7 @@ export default function Home() {
 
         <section className="px-5 md:px-7  mb-16">
 
-          <div className="max-w-[1440px] m-auto space-y-3">
+          <div className="max-w-[1440px] m-auto space-y-4">
 
             <h1 className="font-semibold font-montserrat text-left text-2xl md:text-3xl ">Recently viewed</h1>
             <div className=" ">
@@ -247,7 +247,7 @@ export default function Home() {
 
         <section className="px-5 md:px-7  mb-16">
 
-          <div className="max-w-[1440px] m-auto space-y-3">
+          <div className="max-w-[1440px] m-auto space-y-4">
 
             <h1 className="font-semibold font-montserrat text-left text-2xl md:text-3xl ">Recommended</h1>
             <div className=" ">
@@ -420,7 +420,7 @@ export default function Home() {
 
         <section className="px-5 md:px-7  mb-16">
 
-          <div className="max-w-[1440px] m-auto space-y-3">
+          <div className="max-w-[1440px] m-auto space-y-4">
 
             <h1 className="font-semibold font-montserrat text-left text-2xl md:text-3xl ">New to <span className="font-lora text-3xl md:text-4xl font-bold">Lumière</span></h1>
             <div className=" ">
@@ -592,7 +592,7 @@ export default function Home() {
         </section>
         <section className="px-5 md:px-7  mb-16">
 
-          <div className="max-w-[1440px] m-auto space-y-3">
+          <div className="max-w-[1440px] m-auto space-y-4">
 
             <h1 className="font-semibold font-montserrat text-left text-2xl md:text-3xl ">Trending</h1>
             <div className=" ">
@@ -752,8 +752,8 @@ export default function Home() {
                   </CarouselItem>
 
                 </CarouselContent>
-                <CarouselPrevious size={"lg"} />
-                <CarouselNext size={"lg"} />
+                <CarouselPrevious size="icon" />
+                <CarouselNext size="icon" />
               </Carousel>
 
             </div>
