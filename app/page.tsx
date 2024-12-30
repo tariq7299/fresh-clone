@@ -22,7 +22,7 @@ export default function Home() {
             // width={1920}
             // height={1200}
             fill={true}
-            className="brightness-50 blur-sm object-cover"
+            className="brightness-50  object-cover"
           />
 
 
@@ -31,12 +31,12 @@ export default function Home() {
               Schedule local salon and wellness appointments
             </h1>
 
-            {/* Repace this compnent with "./ui/components/custom/combo-box" */}
             <div>
 
               {/* Write types */}
               <div className="flex gap-2 p-1.5 border rounded-lg justify-between mt-8 lg:mt-16 items-center bg-white  ">
 
+                {/* Repace this compnent with "./ui/components/custom/combo-box" */}
                 <Combobox triggerClassName={"border-0 w-full z-10"} triggerIcon={null} labelClassName={"font-semibold"} popoverClassName={"w-[200px] sm:w-[400px]"} />
 
                 <div className="self-stretch">
@@ -51,6 +51,17 @@ export default function Home() {
 
           </div>
         </section>
+
+
+        <section className="p-5 bg-gray-100 h-20 md:h-24 flex items-center text-center justify-center text-xs md:text-base">
+          <p className=" ">Beauty on your schedule. Explore local salons and spas with ease.</p>
+
+        </section>
+
+        <section className="p-5 py-14 text-center text-lg md:text-2xl">
+          <p className=" ">Want you business on Lumière? <span className="font-bold underline decoration-2 text-nowrap">Apply now</span></p>
+        </section>
+
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
       </footer>
