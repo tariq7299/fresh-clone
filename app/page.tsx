@@ -5,6 +5,7 @@ import { Button } from "./ui/components/custom/button";
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import { Separator } from "./ui/components/separator";
 import barberShop1 from "@/../public/barber-shop-1.jpg";
+import { ShopCard } from "./ui/components/shop-card";
 
 export default function Home() {
   return (
@@ -61,6 +62,9 @@ export default function Home() {
         <section className="p-5 py-14 text-center text-lg md:text-2xl">
           <p className=" ">Want you business on Lumière? <span className="font-bold underline decoration-2 text-nowrap">Apply now</span></p>
         </section>
+
+        <ShopCard />
+
 
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
