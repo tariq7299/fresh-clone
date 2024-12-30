@@ -6,6 +6,15 @@ import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import { Separator } from "./ui/components/separator";
 import barberShop1 from "@/../public/barber-shop-1.jpg";
 import { ShopCard } from "./ui/components/shop-card";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/ui/components/carousel"
+
+import { Card, CardContent } from "@/ui/components/card"
 
 export default function Home() {
   return (
@@ -63,7 +72,91 @@ export default function Home() {
           <p className=" ">Want you business on Lumière? <span className="font-bold underline decoration-2 text-nowrap">Apply now</span></p>
         </section>
 
-        <ShopCard />
+
+        {/* <section className="p-4 py-14 space-y-2">
+          <h1 className="font-bold font-montserrat text-left ">Recently Viewed</h1>
+          <div className="grid grid-flow-col auto-cols-max gap-4 overflow-x-auto no-scrollbar scroll-smooth snap-x snap-mandatory">
+            <ShopCard className="scroll-ml-6 snap-start" />
+            <ShopCard className="scroll-ml-6 snap-start" />
+            <ShopCard className="scroll-ml-6 snap-start" />
+            <ShopCard className="scroll-ml-6 snap-start" />
+            <ShopCard className="scroll-ml-6 snap-start" />
+            <ShopCard className="scroll-ml-6 snap-start" />
+            <ShopCard className="scroll-ml-6 snap-start" />
+            <ShopCard className="scroll-ml-6 snap-start" />
+            <ShopCard className="scroll-ml-6 snap-start" />
+            <ShopCard className="scroll-ml-6 snap-start" />
+            <ShopCard className="scroll-ml-6 snap-start" />
+            <ShopCard className="scroll-ml-6 snap-start" />
+            <ShopCard className="scroll-ml-6 snap-start" />
+
+          </div>
+
+
+        </section> */}
+
+        <section className="p-5 px-7 py-14 space-y-2">
+          <h1 className="font-bold font-montserrat text-left ">Recently Viewed</h1>
+          <div className="">
+
+            <Carousel className="w-full ">
+
+              <CarouselContent>
+                <CarouselItem className="basis-1/2 md:basis-1/3 lg:basis-1/4">
+                  <ShopCard />
+                </CarouselItem>
+                <CarouselItem className="basis-1/2 md:basis-1/3 lg:basis-1/4">
+                  <ShopCard />
+                </CarouselItem>
+                <CarouselItem className="basis-1/2 md:basis-1/3 lg:basis-1/4">
+                  <ShopCard />
+                </CarouselItem>
+                <CarouselItem className="basis-1/2 md:basis-1/3 lg:basis-1/4">
+                  <ShopCard />
+                </CarouselItem>
+                <CarouselItem className="basis-1/2 md:basis-1/3 lg:basis-1/4">
+                  <ShopCard />
+                </CarouselItem>
+                <CarouselItem className="basis-1/2 md:basis-1/3 lg:basis-1/4">
+                  <ShopCard />
+                </CarouselItem>
+                <CarouselItem className="basis-1/2 md:basis-1/3 lg:basis-1/4">
+                  <ShopCard />
+                </CarouselItem>
+
+
+
+
+              </CarouselContent>
+              <CarouselPrevious />
+              <CarouselNext />
+            </Carousel>
+
+          </div>
+
+
+        </section>
+        <div className="px-12">
+
+          <Carousel className="w-full max-w-xs ">
+            <CarouselContent>
+              {Array.from({ length: 5 }).map((_, index) => (
+                <CarouselItem key={index}>
+                  <div className="p-1">
+                    <Card>
+                      <CardContent className="flex aspect-square items-center justify-center p-6">
+                        <span className="text-4xl font-semibold">{index + 1}</span>
+                      </CardContent>
+                    </Card>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
+
+        </div>
 
 
       </main>

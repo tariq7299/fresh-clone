@@ -1,17 +1,20 @@
 import barberShop from "@/../public/barber-shop-2.jpg"
 import Image from "next/image"
 import { Badge } from "./badge"
+import { cn } from "@/lib/utils"
 
-function ShopCard() {
+function ShopCard({ className = '' }) {
     return (
-        <div className="border border-gray-300 rounded-lg shadow-sm bg-white w-[210px] flex flex-col ">
+        <div className={cn("border border-gray-300 rounded-lg shadow-sm bg-white w-[210px] lg:w-[240px] flex flex-col hover:cursor-pointer  overflow-hidden",
+            className
+        )}>
 
-            <div className="grow-[2] w-full">
+            <div className="grow-[2] w-full  overflow-hidden">
 
                 <Image
                     src={barberShop}
                     alt="Shop image"
-                    className="object-cover rounded-t-lg "
+                    className="object-cover rounded-t-lg hover:scale-110 transistion ease-in-out delay-100 duration-300"
                 />
 
 
