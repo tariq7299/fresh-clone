@@ -19,7 +19,7 @@ import { Card, CardContent } from "@/ui/components/card"
 export default function Home() {
   return (
     <>
-      <main className="">
+      <main className="overflow-x-hidden">
         <NavBar />
 
         <section className=" px-5 md:px-7 pb-14 md:pb-48 grid justify-center relative ">
