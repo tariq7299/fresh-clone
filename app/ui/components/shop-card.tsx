@@ -5,9 +5,12 @@ import { cn } from "@/lib/utils"
 
 function ShopCard({ className = '' }) {
     return (
-        <div className={cn("border border-gray-300 rounded-lg shadow-sm bg-white w-[210px] lg:w-[240px] flex flex-col hover:cursor-pointer  overflow-hidden",
+        <div className={cn("border border-gray-300 rounded-lg shadow-sm bg-white flex flex-col hover:cursor-pointer  overflow-hidden",
             className
         )}>
+            {/* <div className={cn("border border-gray-300 rounded-lg shadow-sm bg-white w-[220px] lg:w-[250px] xl:w-[280px] flex flex-col hover:cursor-pointer  overflow-hidden",
+            className
+        )}> */}
 
             <div className="grow-[2] w-full  overflow-hidden">
 
