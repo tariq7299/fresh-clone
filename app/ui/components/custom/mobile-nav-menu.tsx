@@ -4,19 +4,21 @@ import { cn } from '@/lib/utils'
 import { ArrowRightEndOnRectangleIcon, Bars3Icon, XMarkIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 import { Button } from '@/ui/components/custom/button'
 
-export default function MobileNavMenu() {
+export default function MobileNavMenu({ isScrolled }: { isScrolled: boolean }) {
     const [isOpen, setIsOpen] = useState(false)
 
     return (
         <>
 
             <Button size="icon" variant={"ghost"} onClick={() => setIsOpen(!isOpen)}>
-                <Bars3Icon className='size-10 text-white' />
+                <Bars3Icon className={cn('size-10 ',
+                    isScrolled ? 'text-foreground' : 'text-background hover:text-foreground'
+                )} />
             </Button>
 
             {/* The opend nav menu on mobile screens */}
             <div className={cn(
-                "bg-gray-100 p-5 h-dvh top-0 left-0 right-0 z-50 transition-all ease-in-out delay-150 duration-200 absolute ",
+                "bg-gray-100 p-5 h-dvh top-0 left-0 right-0 z-50 transition-all ease-in-out delay-150 duration-200 absolute text-foreground",
                 isOpen
                     ? "-translate-y-1 opacity-100 pointer-events-auto"
                     : "opacity-0 pointer-events-none"

@@ -752,8 +752,8 @@ export default function Home() {
                   </CarouselItem>
 
                 </CarouselContent>
-                <CarouselPrevious size="icon" />
-                <CarouselNext size="icon" />
+                <CarouselPrevious />
+                <CarouselNext />
               </Carousel>
 
             </div>
