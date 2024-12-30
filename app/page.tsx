@@ -102,25 +102,25 @@ export default function Home() {
             <Carousel className="w-full ">
 
               <CarouselContent>
-                <CarouselItem className="basis-1/2 md:basis-1/3 lg:basis-1/4">
+                <CarouselItem className=" md:basis-1/3 lg:basis-1/4">
                   <ShopCard />
                 </CarouselItem>
-                <CarouselItem className="basis-1/2 md:basis-1/3 lg:basis-1/4">
+                <CarouselItem className=" md:basis-1/3 lg:basis-1/4">
                   <ShopCard />
                 </CarouselItem>
-                <CarouselItem className="basis-1/2 md:basis-1/3 lg:basis-1/4">
+                <CarouselItem className=" md:basis-1/3 lg:basis-1/4">
                   <ShopCard />
                 </CarouselItem>
-                <CarouselItem className="basis-1/2 md:basis-1/3 lg:basis-1/4">
+                <CarouselItem className=" md:basis-1/3 lg:basis-1/4">
                   <ShopCard />
                 </CarouselItem>
-                <CarouselItem className="basis-1/2 md:basis-1/3 lg:basis-1/4">
+                <CarouselItem className=" md:basis-1/3 lg:basis-1/4">
                   <ShopCard />
                 </CarouselItem>
-                <CarouselItem className="basis-1/2 md:basis-1/3 lg:basis-1/4">
+                <CarouselItem className=" md:basis-1/3 lg:basis-1/4">
                   <ShopCard />
                 </CarouselItem>
-                <CarouselItem className="basis-1/2 md:basis-1/3 lg:basis-1/4">
+                <CarouselItem className=" md:basis-1/3 lg:basis-1/4">
                   <ShopCard />
                 </CarouselItem>
 
