@@ -19,6 +19,7 @@ import ShopsCarousel from "./components/shops-carousel";
 import { Card, CardContent } from "@/ui/components/card"
 import FeaturesSection from "./components/features-section";
 import avatar1 from "@/../public/avatar1.png";
+import ChangingAvatar from "./components/changing-avatar";
 
 export default function Home() {
   return (
@@ -37,7 +38,7 @@ export default function Home() {
         </section>
 
         {/* Apply you business now section */}
-        <section className="px-5 md:px-7 mb-16 md:mb-20 py-6 text-center text-lg md:text-2xl">
+        <section className="px-5 md:px-7 mb-16 md:mb-20 py-6 text-center text-xl md:text-2xl">
           <p className=" ">Want you business on <span className="font-lora font-bold">Lumière</span>? <span className="font-bold underline decoration-2 text-nowrap">Apply now</span></p>
         </section>
 
@@ -66,43 +67,14 @@ export default function Home() {
           <div className="max-w-[1440px] m-auto ">
 
 
-            <h1 className="text-center text-3xl font-montserrat font-semibold pb-16">All Hair styles covered</h1>
+            <h1 className="text-center text-3xl font-montserrat font-semibold pb-16">Express Yourself with a Fresh Look!</h1>
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 ">
-
-              <div className=" m-auto rounded-full bg-muted p-8 w-max">
-                <Image
-                  src={avatar1}
-                  alt="Picture of the author"
-                  // width={340}
-                  // height={340}
-                  className="m-auto w-[150px] md:w-[200px] lg:w-[300px]"
-                />
-
-
-              </div>
-              <div className=" m-auto rounded-full bg-muted p-8 w-max">
-                <Image
-                  src={avatar1}
-                  alt="Picture of the author"
-                  // width={340}
-                  // height={340}
-                  className="m-auto w-[150px] md:w-[200px] lg:w-[300px]"
-                />
-
-
-              </div>
-              <div className=" m-auto rounded-full bg-muted p-8 w-max md:col-span-2 xl:col-span-1">
-                <Image
-                  src={avatar1}
-                  alt="Picture of the author"
-                  // width={340}
-                  // height={340}
-                  className="m-auto w-[150px] md:w-[200px] lg:w-[300px]"
-
-                />
-
-
-              </div>
+              <ChangingAvatar />
+              <ChangingAvatar />
+              <ChangingAvatar />
+              <ChangingAvatar className="hidden md:block" />
+              <ChangingAvatar className="hidden md:block" />
+              <ChangingAvatar className="hidden md:block" />
             </div>
           </div>
 
