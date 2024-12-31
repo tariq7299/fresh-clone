@@ -63,42 +63,46 @@ export default function Home() {
 
         {/*  */}
         <section className="px-5 md:px-7 mb-16 md:mb-20 py-6 text-center text-lg md:text-2xl">
-          <h1 className="text-center text-3xl font-montserrat font-semibold pb-16">All Hair styles covered</h1>
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 ">
-
-            <div className="max-w-[1440px] m-auto rounded-full bg-muted p-8 w-max">
-              <Image
-                src={avatar1}
-                alt="Picture of the author"
-                // width={340}
-                // height={340}
-                className="m-auto w-[150px] md:w-[200px] lg:w-[320px]"
-              />
+          <div className="max-w-[1440px] m-auto ">
 
 
-            </div>
-            <div className="max-w-[1440px] m-auto rounded-full bg-muted p-8 w-max">
-              <Image
-                src={avatar1}
-                alt="Picture of the author"
-                // width={340}
-                // height={340}
-                className="m-auto w-[150px] md:w-[200px] lg:w-[320px]"
-              />
+            <h1 className="text-center text-3xl font-montserrat font-semibold pb-16">All Hair styles covered</h1>
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 ">
+
+              <div className=" m-auto rounded-full bg-muted p-8 w-max">
+                <Image
+                  src={avatar1}
+                  alt="Picture of the author"
+                  // width={340}
+                  // height={340}
+                  className="m-auto w-[150px] md:w-[200px] lg:w-[300px]"
+                />
 
 
-            </div>
-            <div className="max-w-[1440px] m-auto rounded-full bg-muted p-8 w-max md:col-span-2 xl:col-span-1">
-              <Image
-                src={avatar1}
-                alt="Picture of the author"
-                // width={340}
-                // height={340}
-                className="m-auto w-[150px] md:w-[200px] lg:w-[320px]"
+              </div>
+              <div className=" m-auto rounded-full bg-muted p-8 w-max">
+                <Image
+                  src={avatar1}
+                  alt="Picture of the author"
+                  // width={340}
+                  // height={340}
+                  className="m-auto w-[150px] md:w-[200px] lg:w-[300px]"
+                />
 
-              />
+
+              </div>
+              <div className=" m-auto rounded-full bg-muted p-8 w-max md:col-span-2 xl:col-span-1">
+                <Image
+                  src={avatar1}
+                  alt="Picture of the author"
+                  // width={340}
+                  // height={340}
+                  className="m-auto w-[150px] md:w-[200px] lg:w-[300px]"
+
+                />
 
 
+              </div>
             </div>
           </div>
 
