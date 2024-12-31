@@ -13,6 +13,8 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/ui/components/carousel"
+import { Award, HandPlatter, CalendarCheck2, ShieldCheck, Sparkles, Star } from 'lucide-react';
+
 
 import { Card, CardContent } from "@/ui/components/card"
 
@@ -20,8 +22,11 @@ export default function Home() {
   return (
     <>
       <main className="overflow-x-hidden">
+
+        {/* Nav bar */}
         <NavBar />
 
+        {/* Hero section */}
         <section className=" px-5 md:px-7 pb-14 md:pb-48 grid justify-center relative ">
 
           {/* To make nextJs understand that this image is a local image you need to import it (at the top of the file) */}
@@ -61,17 +66,18 @@ export default function Home() {
           </div>
         </section>
 
-
+        {/* Gray section under hero section */}
         <section className="px-5 mb-10 md:mb-12 md:px-7 bg-gray-100 h-20 md:h-24 flex items-center text-center justify-center text-xs md:text-base">
           <p className=" ">Beauty on your schedule. Explore local salons and spas with ease.</p>
 
         </section>
 
+        {/* Apply you business now section */}
         <section className="px-5 md:px-7 mb-16 md:mb-20 py-6 text-center text-lg md:text-2xl">
           <p className=" ">Want you business on <span className="font-lora font-bold">Lumière</span>? <span className="font-bold underline decoration-2 text-nowrap">Apply now</span></p>
         </section>
 
-
+        {/* Recently viewed section */}
         <section className="px-5 md:px-7  mb-16">
 
           <div className="max-w-[1440px] m-auto space-y-4">
@@ -245,6 +251,7 @@ export default function Home() {
 
         </section>
 
+        {/* Recommended section */}
         <section className="px-5 md:px-7  mb-16">
 
           <div className="max-w-[1440px] m-auto space-y-4">
@@ -418,6 +425,7 @@ export default function Home() {
 
         </section>
 
+        {/* New to Lumière section */}
         <section className="px-5 md:px-7  mb-16">
 
           <div className="max-w-[1440px] m-auto space-y-4">
@@ -590,6 +598,8 @@ export default function Home() {
 
 
         </section>
+
+        {/* Trending section */}
         <section className="px-5 md:px-7  mb-16">
 
           <div className="max-w-[1440px] m-auto space-y-4">
@@ -763,7 +773,64 @@ export default function Home() {
 
         </section>
 
+
+        <section className="px-5 md:px-7  mb-16">
+          <div className="max-w-[1440px] m-auto ">
+            <h1 className="font-semibold font-montserrat text-left text-2xl md:text-3xl pb-16">
+              The <span className="font-lora text-3xl md:text-4xl font-bold">Lumière</span> difference
+            </h1>
+
+            <h2 className="font-montserrat font-bold text-xl pb-11">For business owners</h2>
+
+
+            <div className="grid grid-auto-flow-row auto-rows-max gap-10 pb-16">
+
+              <div className="flex flex-col gap-1 items-start justify-center">
+                <Award className="size-9 mb-3" />
+                <h3 className="font-bold text-lg">Advanced Booking Management</h3>
+                <p className="leading-tight">Effortlessly track and manage appointments, cancellations, and client details.</p>
+              </div>
+              <div className="flex flex-col gap-1 items-start justify-center">
+                <HandPlatter className="size-9 mb-3" />
+                <h3 className="font-bold text-lg">Free Slot Optimization</h3>
+                <p className="leading-tight">Maximize bookings by efficiently displaying open slots to customers.</p>
+              </div>
+              <div className="flex flex-col gap-1 items-start justify-center">
+                <CalendarCheck2 className="size-9 mb-3" />
+                <h3 className="font-bold text-lg">Service Management</h3>
+                <p className="leading-tight">Add, edit, and organize your offerings to ensure clients see exactly what you provide.</p>
+              </div>
+
+            </div>
+
+            <h2 className="font-montserrat font-bold text-xl pb-11">For customers</h2>
+
+
+            <div className="grid grid-auto-flow-row auto-rows-max gap-10 pb-16">
+
+              <div className="flex flex-col gap-1 items-start justify-center">
+                <ShieldCheck className="size-9 mb-3" />
+                <h3 className="font-bold text-lg">Simple Booking Interface</h3>
+                <p className="leading-tight">Find and book beauty and wellness services in just a few clicks.</p>
+              </div>
+              <div className="flex flex-col gap-1 items-start justify-center">
+                <Sparkles className="size-9 mb-3" />
+                <h3 className="font-bold text-lg">Real-Time Availability</h3>
+                <p className="leading-tight">View updated schedules and available slots instantly.</p>
+              </div>
+              <div className="flex flex-col gap-1 items-start justify-center">
+                <Star className="size-9 mb-3" />
+                <h3 className="font-bold text-lg">Personalized Experience</h3>
+                <p className="leading-tight">Discover services tailored to your preferences and needs.</p>
+              </div>
+
+            </div>
+
+          </div>
+        </section>
+
       </main >
+
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
       </footer>
     </>
