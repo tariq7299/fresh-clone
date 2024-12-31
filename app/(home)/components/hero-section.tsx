@@ -9,10 +9,14 @@ export default function HeroSection() {
             {/* To make nextJs understand that this image is a local image you need to import it (at the top of the file) */}
             <Image
                 src={barberShop1}
-                alt="Picture of the author"
+                alt="Barber shop picture"
+
                 // With local images you don't need to provide the width and height
                 // width={1920}
                 // height={1200}
+
+                // This will ensure that the images are prioritized for loading, which can help improve the Largest Contentful Paint (LCP) metric.
+                priority={true} // Add this line
                 fill={true}
                 className="brightness-50  object-cover"
             />

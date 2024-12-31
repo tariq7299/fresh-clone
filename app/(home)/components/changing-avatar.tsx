@@ -7,14 +7,14 @@ import Image from "next/image"
 
 export default function ChangingAvatar({ className = '' }) {
 
-    const [visibleAvatarIndex, setVisibleAvatarIndex] = useState(0)
+    const [visibleAvatarIndex, setVisibleAvatarIndex] = useState(1)
 
     const avatarImagesNames = useMemo(() => Array.from({ length: 27 }, (_, i) => `avatar${i + 1}.png`), [])
 
     useEffect(() => {
         const intervalId = setInterval(() =>
             // avatarImagesNames.length)
-            setVisibleAvatarIndex(getRandomIntInclusive(0, avatarImagesNames.length))
+            setVisibleAvatarIndex(getRandomIntInclusive(1, avatarImagesNames.length))
             , 2500)
         return () => clearInterval(intervalId)
     }, [avatarImagesNames?.length > 0])
@@ -30,11 +30,11 @@ export default function ChangingAvatar({ className = '' }) {
                 <Image
                     key={avatarImageName}
                     src={`/avatars/${avatarImageName}`}
-                    alt="Picture of the author"
+                    alt="Avatar"
                     width={"300"}
                     height={"300"}
                     className={cn("w-[150px] h-[150px] md:w-[200px] md:h-[200px] lg:w-[240px] lg:h-[240px]",
-                        index === visibleAvatarIndex ? "block" : "hidden"
+                        index + 1 === visibleAvatarIndex ? "block" : "hidden"
                     )}
                 />
             ))}
