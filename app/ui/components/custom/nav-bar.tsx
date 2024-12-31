@@ -42,7 +42,7 @@ export default function NavBar() {
 
                 {/*Closed navbar on desktop screens  */}
                 <DropdownMenu>
-                    <DropdownMenuTrigger className='hidden md:inline-flex border rounded-full space-x-3 items-center border-gray-200 font-bold py-2 px-5 gap-2 group font-montserrat '>
+                    <DropdownMenuTrigger className='hidden md:inline-flex border rounded-full space-x-3 items-center border-gray-200 font-semibold py-2 px-5 gap-2 group font-montserrat '>
                         {/* <DropdownMenuTrigger className='hidden md:inline-flex  rounded-full bg-foreground text-background  space-x-3 items-center  font-bold py-2 px-5 gap-2 group font-montserrat '> */}
 
 
