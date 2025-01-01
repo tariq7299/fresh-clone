@@ -28,7 +28,7 @@ function ShopCard({ className = '' }) {
                 <p className="font-bold text-lg text-nowrap truncate ">Gedo Salon - NasrCity</p>
                 {/* truncate this text */}
                 <p className="text-muted-foreground text-nowrap text-xs md:text-base truncate">Al Manteqa el tasaa, Nasr City</p>
-                <Badge variant="outline">Barbershop</Badge>
+                Terms of service
             </div>
         </div>
 
