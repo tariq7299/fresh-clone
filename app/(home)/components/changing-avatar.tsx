@@ -33,7 +33,7 @@ export default function ChangingAvatar({ className = '' }) {
                     alt="Avatar"
                     width={"300"}
                     height={"300"}
-                    className={cn("w-[150px] h-[150px] md:w-[200px] md:h-[200px] lg:w-[240px] lg:h-[240px]",
+                    className={cn("w-[150px] h-[150px] md:w-[200px] md:h-[200px] lg:w-[220px] lg:h-[220px]",
                         index + 1 === visibleAvatarIndex ? "block" : "hidden"
                     )}
                 />

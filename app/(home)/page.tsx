@@ -32,7 +32,7 @@ export default function Home() {
         <HeroSection />
 
         {/* Gray section under hero section */}
-        <section className="px-5 mb-10 md:mb-16 md:px-7 bg-gray-100 h-20 md:h-24 flex items-center text-center justify-center text-xs md:text-base">
+        <section className="px-5 mb-10 md:mb-16 md:px-7 bg-secondary-100 h-20 md:h-24 flex items-center text-center justify-center text-xs md:text-base">
           <p className=" ">Beauty on your schedule. Explore local salons and spas with ease.</p>
 
         </section>
@@ -79,6 +79,23 @@ export default function Home() {
           </div>
 
         </section>
+
+        <section className="px-5 md:px-7 mb-16 md:mb-20 py-6 text-center ">
+          <div className="max-w-[1440px] m-auto bg-primary rounded-xl p-24 flex flex-col justify-center items-center gap-2">
+            <h1 className="font-libre-bodoni text-5xl font-bold text-background text-center">Looking good has never been this convenient! Book your beauty session today.</h1>
+            <h2 className="text-background pb-5">Your next appointment is waiting. Tap to book now!</h2>
+
+
+            {/* <Button size={"lg"} className="bg-accent text-primary-foreground">Book a service</Button> */}
+            <Button size={"lg"} variant="accent" className="">Book a service</Button>
+            {/* <Button size={"lg"} className="bg-teal-800 text-background">Book a service</Button> */}
+            {/* <Button size={"lg"} className="bg-emerald-400 text-foreground">Book a service</Button> */}
+            {/* <Button size={"lg"} className="bg-emerald-500 text-primary-foreground">Book a service</Button> */}
+            <p className="text-xs  text-background/60">No credit card required</p>
+          </div>
+        </section>
+        <Button size={"lg"} className="bg-slate-500 text-slate-100">Book a service</Button>
+        <Button size={"lg"} className="bg-primary text-primary-foreground">Book a service</Button>
 
 
       </main >

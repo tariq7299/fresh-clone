@@ -14,16 +14,126 @@
     --card-foreground: 240 10% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
-    --primary: 240 5.9% 10%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
+
+      /* Primary Shades */ 
+      /* #f4f4f5 */ 
+      --primary-100: 240 5% 96%; 
+      /* #52525b */ 
+      --primary-200: 240 6% 90%; 
+      /* #d4d4d8 */ 
+      --primary-300: 240 5% 84%; 
+      /* #9ca3af */ 
+      --primary-400: 172 66% 50%; 
+      /* #6b7280 */ 
+      --primary-500: 220 9% 46%;  
+      /* ##4b5563 */ 
+      --primary-600: 215 14% 34%; 
+      /* #3f3f46 */ 
+      --primary-700: 240 5% 26%; 
+      /* #27272a  */ 
+      --primary-800: 240 4% 16%; 
+      /*  #18181b */ 
+      --primary-900: 240 6% 10%; 
+      /*  #09090b */ 
+      --primary-950: 240 10% 4%; 
+      
+      
+      /* Secondary Shades */ 
+    /* #f1f5f9 */ 
+    --secondary-100: 210 40% 96%; 
+    /* #e2e8f0 */ 
+    --secondary-200: 214 32% 91%; 
+    /* ##cbd5e1 */ 
+    --secondary-300: 213 27% 84%; 
+    /* #94a3b8 */ 
+    --secondary-400: 215 20% 65%; 
+    /* #64748b */ 
+    --secondary-500: 215 16% 47%; 
+    /* #475569 */ 
+    --secondary-600: 215 19% 35%; 
+    /* #334155 */ 
+    --secondary-700: 215 25% 27%; 
+    /* #1e293b */ 
+    --secondary-800: 217 33% 17%; 
+    /* #0f172a */ 
+    --secondary-900: 222 47% 11%;
+
+    /* Accent Shades */ 
+    --accent-50: 135 17% 97%;  /* #f5f7f5 */
+    --accent-100: 135 17% 90%;  /* #e3e8e4 */
+    --accent-200: 135 17% 82%;  /* #cdd5cf */
+    --accent-300: 135 17% 70%;  /* #aab8ad */
+    --accent-400: 135 17% 60%;  /* #8ea492 */
+    --accent-500: 135 17% 47%;  /* #638C6D */
+    --accent-600: 135 17% 40%;  /* #557759 */
+    --accent-700: 135 17% 32%;  /* #445f47 */
+    --accent-800: 135 17% 25%;  /* #364a38 */
+    --accent-900: 135 17% 15%;  /* #202c22 */
+    --accent-950: 135 17% 10%;  /* #151d16 */
+
+       /* Destructive Shades */
+       --destructive-100: 0 100% 94%;
+       --destructive-200: 0 98% 89%;
+       --destructive-300: 0 95% 82%;
+       --destructive-400: 0 93% 69%;
+       --destructive-500: 0 86% 60%;
+       --destructive-600: 0 76% 49%;
+       --destructive-700: 0 76% 40%;
+       --destructive-800: 0 82% 36%;
+       --destructive-900: 0 81% 31%;
+       --destructive-950: 0 89% 15%;
+   
+       /* Warning Shades */
+       --warning-100: 54 94% 86%;
+       --warning-200: 54 98% 78%;
+       --warning-300: 54 96% 65%;
+       --warning-400: 54 95% 53%;
+       --warning-500: 54 90% 45%;
+       --warning-600: 54 94% 35%;
+       --warning-700: 42 89% 26%;
+       --warning-800: 34 85% 22%;
+       --warning-900: 33 71% 19%;
+       --warning-950: 30 75% 14%;
+   
+       /* Success Shades */
+       --success-100: 134 82% 89%;
+       --success-200: 134 86% 83%;
+       --success-300: 134 80% 75%;
+       --success-400: 134 78% 64%;
+       --success-500: 134 71% 47%;
+       --success-600: 134 75% 37%;
+       --success-700: 134 79% 35%;
+       --success-800: 134 78% 30%;
+       --success-900: 134 76% 25%;
+       --success-950: 134 83% 9%;
+
+      /* Primary Default Light color */
+      --primary: var(--primary-900);
+      --primary-foreground: var(--primary-100);
+
+     /* Secondary default light theme color */
+     --secondary: var(--secondary-500);
+     --secondary-foreground: var(--secondary-100);
+     
+     /* Accent default light theme color */
+     --accent:  var(--accent-500);
+     --accent-foreground: var(--accent-100);
+
+     /* Destructive default light theme color */
+    --destructive: var(--destructive-500);
+    --destructive-foreground: 60 9.1% 97.8%;
+
+    /* Warning default light theme color */
+    --warning: var(--warning-400);
+    --warning-foreground: 60 9.1% 97.8%;
+
+    /* Success default light theme color */
+    --success: var(--success-500);
+    --success-foreground: 60 9.1% 97.8%;
+
     --muted: 240 4.8% 95.9%;
     --muted-foreground: 240 3.8% 46.1%;
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
+
     --border: 240 5.9% 90%;
     --input: 240 5.9% 90%;
     --ring: 240 10% 3.9%;
