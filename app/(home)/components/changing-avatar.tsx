@@ -23,7 +23,7 @@ export default function ChangingAvatar({ className = '' }) {
     return (
 
         <div className={
-            cn("m-auto rounded-full bg-muted p-8 w-max",
+            cn("m-auto rounded-full bg-primary-100 p-8 w-max",
                 className
             )}>
             {avatarImagesNames.map((avatarImageName, index) => (
@@ -33,10 +33,21 @@ export default function ChangingAvatar({ className = '' }) {
                     alt="Avatar"
                     width={"300"}
                     height={"300"}
-                    className={cn("w-[150px] h-[150px] md:w-[200px] md:h-[200px] lg:w-[220px] lg:h-[220px]",
+                    className={cn("w-[150px] h-[150px] md:w-[110px] md:h-[110px] lg:w-[190px] lg:h-[190px]",
                         index + 1 === visibleAvatarIndex ? "block" : "hidden"
                     )}
                 />
+
+                //     <Image
+                //     key={avatarImageName}
+                //     src={`/avatars/${avatarImageName}`}
+                //     alt="Avatar"
+                //     width={"300"}
+                //     height={"300"}
+                //     className={cn("w-[150px] h-[150px] md:w-[200px] md:h-[200px] lg:w-[190px] lg:h-[190px] transition-all duration-300 ease-in-out delay-150",
+                //         index + 1 === visibleAvatarIndex ? "opacity-100" : "opacity-0"
+                //     )}
+                // />
             ))}
 
         </div>

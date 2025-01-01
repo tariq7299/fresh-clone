@@ -4,7 +4,7 @@ import HeroFilterField from "./hero-filter-field";
 
 export default function HeroSection() {
     return (
-        <section className=" px-5 md:px-7 py-36  lg:py-52 grid justify-center  relative items-center">
+        <>
 
             {/* To make nextJs understand that this image is a local image you need to import it (at the top of the file) */}
             <Image
@@ -30,6 +30,6 @@ export default function HeroSection() {
                 <HeroFilterField />
 
             </div>
-        </section>
+        </>
     )
 }

@@ -1,24 +1,9 @@
-import Image from "next/image";
+
 import NavBar from "../ui/components/custom/nav-bar";
-import { Combobox } from "../ui/components/combo-box";
 import { Button } from "../ui/components/custom/button";
-import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
-import { Separator } from "../ui/components/separator";
-import barberShop1 from "@/../public/barber-shop-1.jpg";
-import { ShopCard } from "../ui/components/shop-card";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/ui/components/carousel"
-import { Award, HandPlatter, CalendarCheck2, ShieldCheck, Sparkles, Star } from 'lucide-react';
 import HeroSection from "./components/hero-section";
 import ShopsCarousel from "./components/shops-carousel";
-import { Card, CardContent } from "@/ui/components/card"
 import FeaturesSection from "./components/features-section";
-import avatar1 from "@/../public/avatar1.png";
 import ChangingAvatar from "./components/changing-avatar";
 
 export default function Home() {
@@ -29,7 +14,9 @@ export default function Home() {
         {/* Nav bar */}
         <NavBar />
 
-        <HeroSection />
+        <section className="px-5 md:px-7 py-36 lg:py-52 grid justify-center  relative items-center">
+          <HeroSection />
+        </section>
 
         {/* Gray section under hero section */}
         <section className="px-5 mb-10 md:mb-16 md:px-7 bg-secondary-100 h-20 md:h-24 flex items-center text-center justify-center text-xs md:text-base">
@@ -38,12 +25,12 @@ export default function Home() {
         </section>
 
         {/* Apply you business now section */}
-        <section className="px-5 md:px-7 mb-16 md:mb-20 py-6 text-center text-xl md:text-2xl">
+        <section className="px-5 md:px-7 mb-16 md:my-32 text-center text-xl md:text-2xl">
           <p className=" ">Want you business on <span className="font-lora font-bold">Lumière</span>? <span className="font-bold underline decoration-2 text-nowrap">Apply now</span></p>
         </section>
 
         {/*Shops Carousels  */}
-        <section className="px-5 md:px-7 mb-20 md:mb-24 space-y-12 md:space-y-16">
+        <section className="px-5 md:px-7 mb-20 md:mb-36 space-y-12 md:space-y-16">
 
           {/* Recently viewed section */}
           <ShopsCarousel sectionTitle={(<h1 className="font-semibold font-montserrat text-left text-2xl md:text-3xl ">Recently viewed</h1>)} />
@@ -59,43 +46,36 @@ export default function Home() {
 
         </section>
 
-        {/* Features/benefits section */}
-        <FeaturesSection />
-
-        {/*  */}
-        <section className="px-5 md:px-7 mb-16 md:mb-20 py-6 text-center text-lg md:text-2xl">
-          <div className="max-w-[1440px] m-auto ">
+        <section className="px-5 md:px-7  mb-36">
+          {/* Features/benefits section */}
+          <FeaturesSection />
+        </section>
 
 
-            <h1 className="text-center text-3xl font-montserrat font-semibold pb-16">Express Yourself with a Fresh Look!</h1>
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 ">
-              <ChangingAvatar />
-              <ChangingAvatar />
-              <ChangingAvatar />
-              <ChangingAvatar className="hidden md:block" />
+        <section className=" px-5 md:px-7 mb-16 md:mb-20 text-center ">
+          <div className="bg-background  max-w-[1440px] m-auto  rounded-xl   flex flex-col justify-center items-center gap-2">
+            <h1 className="font-libre-bodoni lg:text-5xl font-bold text-primary text-center text-3xl">Looking good has never been this convenient!</h1>
+            <h2 className="text-primary pb-6 md:pb-8">Your next appointment is waiting. Tap to book now!</h2>
+
+
+            <Button size="lg" variant="accent" className="">Book a service</Button>
+            <p className="text-xs  text-muted-foreground pb-6 md:pb-10">No credit card required</p>
+
+
+            {/* <h1 className="text-center text-3xl font-montserrat font-semibold pb-16">Express Yourself with a Fresh Look!</h1> */}
+            <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-3 gap-24 ">
+              {/* <ChangingAvatar /> */}
+              {/* <ChangingAvatar /> */}
+              {/* <ChangingAvatar /> */}
+              <ChangingAvatar className="" />
               <ChangingAvatar className="hidden md:block" />
               <ChangingAvatar className="hidden md:block" />
             </div>
-          </div>
 
-        </section>
-
-        <section className="px-5 md:px-7 mb-16 md:mb-20 py-6 text-center ">
-          <div className="max-w-[1440px] m-auto bg-primary rounded-xl p-24 flex flex-col justify-center items-center gap-2">
-            <h1 className="font-libre-bodoni text-5xl font-bold text-background text-center">Looking good has never been this convenient! Book your beauty session today.</h1>
-            <h2 className="text-background pb-5">Your next appointment is waiting. Tap to book now!</h2>
-
-
-            {/* <Button size={"lg"} className="bg-accent text-primary-foreground">Book a service</Button> */}
-            <Button size={"lg"} variant="accent" className="">Book a service</Button>
-            {/* <Button size={"lg"} className="bg-teal-800 text-background">Book a service</Button> */}
-            {/* <Button size={"lg"} className="bg-emerald-400 text-foreground">Book a service</Button> */}
-            {/* <Button size={"lg"} className="bg-emerald-500 text-primary-foreground">Book a service</Button> */}
-            <p className="text-xs  text-background/60">No credit card required</p>
           </div>
         </section>
-        <Button size={"lg"} className="bg-slate-500 text-slate-100">Book a service</Button>
-        <Button size={"lg"} className="bg-primary text-primary-foreground">Book a service</Button>
+
+
 
 
       </main >

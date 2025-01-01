@@ -3,7 +3,7 @@ import { Award, HandPlatter, CalendarCheck2, ShieldCheck, Sparkles, Star } from 
 
 export default function FeaturesSection() {
     return (
-        <section className="px-5 md:px-7  mb-16">
+        <>
             <div className="max-w-[1440px] m-auto ">
 
                 <h1 className="font-semibold font-montserrat text-left text-2xl md:text-3xl pb-16">
@@ -36,7 +36,7 @@ export default function FeaturesSection() {
 
                 <h2 className="font-montserrat font-bold text-xl pb-11 lg:pb-7">For customers</h2>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 pb-16">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 ">
 
                     <div className="flex flex-col gap-1 items-start justify-center">
                         <ShieldCheck className="size-9 mb-3" />
@@ -57,6 +57,6 @@ export default function FeaturesSection() {
                 </div>
 
             </div>
-        </section>
+        </>
     )
 }
