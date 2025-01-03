@@ -29,10 +29,10 @@ export default function NavBar() {
 
     return (
         <nav className={cn('fixed top-0 left-0 w-lvw  z-50 ',
-            isScrolled ? 'bg-white shadow-md' : 'bg-transparent'
+            isScrolled ? 'bg-white shadow' : 'bg-transparent'
         )}>
 
-            <div className="p-5 flex justify-between items-center max-w-[1440px] m-auto pe-9">
+            <div className="p-5 flex justify-between items-center max-w-[1440px] m-auto pe-7">
 
                 <p className={cn("text-2xl font-extrabold font-lora ",
                     isScrolled ? 'text-primary' : 'text-background'
@@ -45,14 +45,14 @@ export default function NavBar() {
 
                 {/*Closed navbar on desktop screens  */}
                 <div className={cn("hidden md:inline-flex space-x-2 items-center",
-                    isScrolled ? 'text-primary' : 'text-foreground'
+                    isScrolled ? 'text-primary' : ' text-background'
                 )}>
-                    <Button borderType="fullRounded" variant="outline" className="font-source-sans font-semibold   ">For business</Button>
+                    <Button borderType="fullRounded" variant="outline" className="bg-transparent font-source-sans font-semibold   hover:bg-muted/50">For business</Button>
 
                     <DropdownMenu>
-                        <DropdownMenuTrigger asChild className=' '>
+                        <DropdownMenuTrigger asChild >
 
-                            <Button borderType="fullRounded" variant="outline" className="inline-flex space-x-3  font-source-sans font-semibold gap-2 group ">
+                            <Button borderType="fullRounded" variant="outline" className=" hover:bg-muted/50 bg-transparent inline-flex space-x-3  font-source-sans font-semibold gap-2 group ">
                                 Menu <ChevronDownIcon className='size-4 transition duration-200
                          group-data-[state=open]:rotate-180' />
                             </Button>

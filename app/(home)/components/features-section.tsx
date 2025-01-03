@@ -7,7 +7,7 @@ export default function FeaturesSection() {
             <div className="max-w-[1440px] m-auto ">
 
                 <h1 className="font-semibold font-source-sans text-left text-2xl md:text-3xl pb-16">
-                    The <span className="font-lora text-3xl md:text-4xl font-bold">Lumière</span> difference
+                    The <span className="font-lora text-3xl  font-bold">Lumière</span> difference
                 </h1>
 
                 <h2 className="font-source-sans font-bold text-xl pb-11 lg:pb-7">For business owners</h2>

@@ -18,7 +18,7 @@ export default function ShopsCarousel({ sectionTitle = (<h1 className="font-semi
     return (
         <section className="  ">
 
-            <div className="max-w-[1440px] m-auto space-y-4">
+            <div className="max-w-[1440px] m-auto space-y-3">
 
                 {/* <h1 className="font-semibold font-source-sans text-left text-2xl md:text-3xl ">{sectionTitle}</h1> */}
                 {sectionTitle}

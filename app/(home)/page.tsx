@@ -9,7 +9,7 @@ import { Badge } from "@/ui/components/badge";
 import Image from "next/image";
 import appleLogo from "@/../public/apple-logo.svg.png";
 import googleLogo from "@/../public/google-logo.png";
-import { Earth } from 'lucide-react';
+import { GlobeAsiaAustraliaIcon } from "@heroicons/react/24/outline";
 
 export default function Home() {
   return (
@@ -31,7 +31,7 @@ export default function Home() {
 
         {/* Apply you business now section */}
         <section className="px-5 md:px-7 mb-16 md:my-32 text-center text-xl md:text-2xl">
-          <p className=" ">Want you business on <span className="font-lora font-bold">Lumière</span>? <span className="font-bold underline decoration-2 text-nowrap">Apply now</span></p>
+          <p className=" ">Want your business on <span className="font-lora font-bold">Lumière</span>? <span className="font-bold underline decoration-2 text-nowrap">Apply now</span></p>
         </section>
 
         {/*Shops Carousels  */}
@@ -44,7 +44,7 @@ export default function Home() {
           <ShopsCarousel sectionTitle={(<h1 className="font-semibold font-source-sans text-left  text-3xl ">Recommended</h1>)} />
 
           {/* New to Lumière section */}
-          <ShopsCarousel sectionTitle={(<h1 className="font-semibold font-source-sans text-left  text-3xl ">New to <span className="font-lora text-3xl md:text-4xl font-bold">Lumière</span></h1>)} />
+          <ShopsCarousel sectionTitle={(<h1 className="font-semibold font-source-sans text-left  text-3xl ">New to <span className="font-lora text-3xl  font-bold">Lumière</span></h1>)} />
 
           {/* Trending section */}
           <ShopsCarousel sectionTitle={(<h1 className="font-semibold font-source-sans text-left  text-3xl ">Trending</h1>)} />
@@ -102,7 +102,7 @@ export default function Home() {
               </div>
 
               <div>
-                <Badge className="bg-background text-foreground border border-secondary-200 p-3 px-5 text-sm lg:text-base font-semibold font-source-sans m-auto min-w-[178px]">Coming soon<Image src={appleLogo} alt="apple logo" className="ms-3 me-1.5 h-4.5 w-4 md:h-5.5 md:w-5" /> <Image src={googleLogo} alt="apple logo" className="h-4.5 w-5 md:h-5.5 md:w-5" /></Badge>
+                <Badge className="hover:bg-background/80 bg-background text-foreground border border-secondary-200 p-3 px-5 text-sm lg:text-base font-semibold font-source-sans m-auto min-w-[178px]">Coming soon<Image src={appleLogo} alt="apple logo" className="ms-3 me-1.5 h-4.5 w-4 md:h-5.5 md:w-5" /> <Image src={googleLogo} alt="apple logo" className="h-4.5 w-5 md:h-5.5 md:w-5" /></Badge>
 
               </div>
 
@@ -117,7 +117,7 @@ export default function Home() {
 
               <p className="text-sm text-muted-foreground ">@2025 <span className="font-lora"></span>Lumière Inc.</p>
 
-              <p className=" flex  items-center gap-1 text-accent-600 pe-0 md:pe-16 font-semibold"><Earth className="h-6 w-5" /> English</p>
+              <p className=" flex  items-center gap-1 text-accent-600 pe-0 md:pe-16 font-semibold"><GlobeAsiaAustraliaIcon className="h-6 w-5" /> English</p>
 
 
 
