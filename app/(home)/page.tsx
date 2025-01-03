@@ -38,16 +38,16 @@ export default function Home() {
         <section className="px-5 md:px-7 mb-20 md:mb-36 space-y-12 md:space-y-16">
 
           {/* Recently viewed section */}
-          <ShopsCarousel sectionTitle={(<h1 className="font-semibold font-source-sans text-left text-2xl md:text-3xl ">Recently viewed</h1>)} />
+          <ShopsCarousel sectionTitle={(<h1 className="font-semibold font-source-sans text-left text-3xl  ">Recently viewed</h1>)} />
 
           {/* Recommended section */}
-          <ShopsCarousel sectionTitle={(<h1 className="font-semibold font-source-sans text-left text-2xl md:text-3xl ">Recommended</h1>)} />
+          <ShopsCarousel sectionTitle={(<h1 className="font-semibold font-source-sans text-left  text-3xl ">Recommended</h1>)} />
 
           {/* New to Lumière section */}
-          <ShopsCarousel sectionTitle={(<h1 className="font-semibold font-source-sans text-left text-2xl md:text-3xl ">New to <span className="font-lora text-3xl md:text-4xl font-bold">Lumière</span></h1>)} />
+          <ShopsCarousel sectionTitle={(<h1 className="font-semibold font-source-sans text-left  text-3xl ">New to <span className="font-lora text-3xl md:text-4xl font-bold">Lumière</span></h1>)} />
 
           {/* Trending section */}
-          <ShopsCarousel sectionTitle={(<h1 className="font-semibold font-source-sans text-left text-2xl md:text-3xl ">Trending</h1>)} />
+          <ShopsCarousel sectionTitle={(<h1 className="font-semibold font-source-sans text-left  text-3xl ">Trending</h1>)} />
 
         </section>
 
@@ -60,7 +60,7 @@ export default function Home() {
         <section className=" px-5 md:px-7 mb-16 md:mb-36 text-center ">
           <div className="bg-background  max-w-[1440px] m-auto  rounded-xl   flex flex-col justify-center items-center gap-2">
 
-            <h1 className="font-libre-bodoni lg:text-5xl font-bold text-primary text-center text-3xl">Looking good has never been this convenient!</h1>
+            <h1 className="font-libre-bodoni lg:text-5xl font-bold text-primary text-center text-4xl">Looking good has never been this convenient!</h1>
 
             <h2 className="text-primary pb-5">Your next appointment is waiting. Tap to book now!</h2>
 
