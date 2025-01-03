@@ -9,6 +9,10 @@ const buttonVariants = cva(
     'inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50',
     {
         variants: {
+            borderType: {
+                fullRounded: 'px-4 py-4.5 rounded-full',
+                default: " px-4 py-2"
+            },
             variant: {
                 default:
                     'bg-primary text-primary-foreground shadow hover:bg-primary/90',
@@ -25,13 +29,14 @@ const buttonVariants = cva(
                 link: 'text-primary underline-offset-4 hover:underline',
             },
             size: {
-                default: 'h-9 px-4 py-2',
-                sm: 'h-8 rounded-md px-3 text-xs',
-                lg: 'h-10 rounded-md px-8',
-                icon: 'h-9 w-9',
+                default: 'h-9 ',
+                sm: 'h-8 rounded-md py-0 px-3 text-xs',
+                lg: 'h-10 rounded-md py-0 px-8',
+                icon: 'h-9 w-9 py-0 px-0',
             },
         },
         defaultVariants: {
+            borderType: 'default',
             variant: 'default',
             size: 'default',
         },
@@ -54,12 +59,12 @@ type ButtonProps = ButtonPropsBase &
     )
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-    ({ className, variant, size, children, ...props }, ref) => {
+    ({ className, borderType, variant, size, children, ...props }, ref) => {
 
         if (props.asChild) {
             return (
                 <Slot
-                    className={cn(buttonVariants({ variant, size, className }))}
+                    className={cn(buttonVariants({ borderType, variant, size, className }))}
                     ref={ref}
                     {...props}
                 >
@@ -78,7 +83,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
         return (
             <button
-                className={cn(buttonVariants({ variant, size, className }))}
+                className={cn(buttonVariants({ borderType, variant, size, className }))}
                 disabled={loading || disabled}
                 ref={ref}
                 {...otherProps}

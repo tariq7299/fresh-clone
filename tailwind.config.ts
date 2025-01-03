@@ -125,7 +125,7 @@ export default {
 				'libre-bodoni': ['"Libre Bodoni"', 'serif'],
 				'lora': ['Lora', 'serif'],
 				'quicksand': ['"Quicksand"', 'sans-serif'],
-				'montserrat': ['Montserrat', 'sans-serif'],
+				'source-sans': ['"Source Sans 3"', 'sans-serif'],
 			},
 			screens: {
 				"3xs": "320px",

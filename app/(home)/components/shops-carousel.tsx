@@ -11,7 +11,7 @@ import {
 import { useId } from "react";
 
 
-export default function ShopsCarousel({ sectionTitle = (<h1 className="font-semibold font-montserrat text-left text-2xl md:text-3xl "></h1>) }) {
+export default function ShopsCarousel({ sectionTitle = (<h1 className="font-semibold font-source-sans text-left text-2xl md:text-3xl "></h1>) }) {
 
     const id = useId()
 
@@ -20,7 +20,7 @@ export default function ShopsCarousel({ sectionTitle = (<h1 className="font-semi
 
             <div className="max-w-[1440px] m-auto space-y-4">
 
-                {/* <h1 className="font-semibold font-montserrat text-left text-2xl md:text-3xl ">{sectionTitle}</h1> */}
+                {/* <h1 className="font-semibold font-source-sans text-left text-2xl md:text-3xl ">{sectionTitle}</h1> */}
                 {sectionTitle}
 
                 <div className=" ">

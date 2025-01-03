@@ -6,11 +6,11 @@ export default function FeaturesSection() {
         <>
             <div className="max-w-[1440px] m-auto ">
 
-                <h1 className="font-semibold font-montserrat text-left text-2xl md:text-3xl pb-16">
+                <h1 className="font-semibold font-source-sans text-left text-2xl md:text-3xl pb-16">
                     The <span className="font-lora text-3xl md:text-4xl font-bold">Lumière</span> difference
                 </h1>
 
-                <h2 className="font-montserrat font-bold text-xl pb-11 lg:pb-7">For business owners</h2>
+                <h2 className="font-source-sans font-bold text-xl pb-11 lg:pb-7">For business owners</h2>
 
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 ">
@@ -34,7 +34,7 @@ export default function FeaturesSection() {
                 </div>
                 <Separator className="w-[50vw] max-w-[370px] m-auto my-16 lg:my-10"></Separator>
 
-                <h2 className="font-montserrat font-bold text-xl pb-11 lg:pb-7">For customers</h2>
+                <h2 className="font-source-sans font-bold text-xl pb-11 lg:pb-7">For customers</h2>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 ">
 
