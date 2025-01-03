@@ -102,7 +102,7 @@ export default function Home() {
               </div>
 
               <div>
-                <Badge className="bg-background text-foreground border border-secondary-200 p-3 px-5 text-sm lg:text-base font-semibold font-source-sans m-auto ">Coming soon<Image src={appleLogo} alt="apple logo" className="ms-3 me-1.5 h-4.5 w-4 md:h-5.5 md:w-5" /> <Image src={googleLogo} alt="apple logo" className="h-4.5 w-5 md:h-5.5 md:w-5" /></Badge>
+                <Badge className="bg-background text-foreground border border-secondary-200 p-3 px-5 text-sm lg:text-base font-semibold font-source-sans m-auto min-w-[178px]">Coming soon<Image src={appleLogo} alt="apple logo" className="ms-3 me-1.5 h-4.5 w-4 md:h-5.5 md:w-5" /> <Image src={googleLogo} alt="apple logo" className="h-4.5 w-5 md:h-5.5 md:w-5" /></Badge>
 
               </div>
 
@@ -117,7 +117,7 @@ export default function Home() {
 
               <p className="text-sm text-muted-foreground ">@2025 <span className="font-lora"></span>Lumière Inc.</p>
 
-              <p className=" flex items-center gap-1 text-accent-600 pe-16 font-semibold"><Earth className="h-6 w-5" /> English</p>
+              <p className=" flex  items-center gap-1 text-accent-600 pe-0 md:pe-16 font-semibold"><Earth className="h-6 w-5" /> English</p>
 
 
 
