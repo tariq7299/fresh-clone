@@ -4,8 +4,9 @@ import { ArrowLeftIcon, GlobeAsiaAustraliaIcon } from "@heroicons/react/24/outli
 import { Label } from "@/ui/components/label";
 import { Input } from "@/ui/components/input";
 import Image from "next/image";
-import techLife from "@/../public/tech-life-illustration.png";
+import barberShop from "@/../public/barber-shop-4.jpg";
 import { cn } from "@/lib/utils";
+import BackButton from "@/ui/components/custom/back-button";
 
 export default function LoginPage() {
     return (
@@ -14,15 +15,15 @@ export default function LoginPage() {
 
             <div className=" col-span-1 relative flex flex-col justify-center items-center ">
 
-                <div className="w-full absolute top-0 z-50 p-4 flex items-center gap-2 justify-between ">
-                    <Button variant={"ghost"} size="icon" className=""> <ArrowLeftIcon className="size-5" /> </Button>
+                <div className="w-full sticky top-0 z-50 p-4 flex items-center gap-2 justify-between ">
+                    <BackButton />
                     <p className={cn("text-2xl font-extrabold font-lora")}>Lumière</p>
                 </div>
 
-                <div className="mt-auto flex flex-col gap-2 max-w-md p-5 pt-20">
+                <div className="mt-auto flex flex-col gap-2 w-full max-w-md p-5 pt-20">
 
 
-                    <h1 className="text-center text-xl font-bold">Log in
+                    <h1 className="text-center text-2xl font-bold">Log in
                     </h1>
                     <p className="text-muted-foreground text-sm text-center pb-4">Welcome back! Enter your details to access your account.</p>
 
@@ -35,13 +36,8 @@ export default function LoginPage() {
                             <Label className="flex justify-between" htmlFor="password">Password <a href="#">Forgot your password?</a></Label>
                             <Input type="password" name="password" id="password" placeholder="Enter your password" />
                         </div>
-                        <Button variant="default" className="w-full font-semibold">Continue</Button>
+                        <Button variant="default" className="w-full font-bold">Continue</Button>
                         <div className="flex justify-between items-center">
-                            {/* <div>
-                            <Input type="checkbox" name="remember" id="remember" />
-                            <Label htmlFor="remember" className="text-sm">Remember me</Label>
-                        </div> */}
-
                         </div>
                         <div className="flex flex-col justify-center items-center">
                             <p className="font-bold text-center">First time?</p>
@@ -59,12 +55,13 @@ export default function LoginPage() {
                 </div>
 
             </div>
-
-            <div className=" col-span-1 hidden md:block justify-self-center self-center">
+            <div className="col-span-1 hidden md:block relative w-full h-full">
                 <Image
-                    src={techLife}
-                    alt="Tech life illustration image"
-                    className="object-cover w-[500px]"
+                    src={barberShop}
+                    alt="Barber shop"
+                    objectFit="cover"
+                    fill={true}
+                    className="object-bottom"
                 />
             </div>
 

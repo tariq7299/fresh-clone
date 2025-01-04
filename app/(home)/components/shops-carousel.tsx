@@ -1,6 +1,6 @@
 "use client"
 
-import { ShopCard } from "@/ui/components/shop-card";
+import { ShopCard } from "@/ui/components/custom/shop-card";
 import {
     Carousel,
     CarouselContent,

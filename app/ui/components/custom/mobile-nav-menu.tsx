@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { cn } from '@/lib/utils'
 import { ArrowRightEndOnRectangleIcon, Bars3Icon, XMarkIcon, ChevronRightIcon, BriefcaseIcon } from '@heroicons/react/24/outline'
 import { Button } from '@/ui/components/custom/button'
-
+import Link from 'next/link'
 export default function MobileNavMenu({ isScrolled }: { isScrolled: boolean }) {
     const [isOpen, setIsOpen] = useState(false)
 
@@ -33,13 +33,18 @@ export default function MobileNavMenu({ isScrolled }: { isScrolled: boolean }) {
 
                 </div>
                 <ul className='space-y-5 font-bold'>
-                    <li className='p-5 bg-white flex items-center gap-2 rounded-xl border-solid	border border-gray-200 '>
-                        <ArrowRightEndOnRectangleIcon className='size-6' /> Log In
-                        <ChevronRightIcon className='size-4 ml-auto' />
+                    <li className=' '>
+                        <Link className='p-5 bg-white flex items-center gap-2 rounded-xl border-solid	border border-gray-200' href="/login">
+                            <ArrowRightEndOnRectangleIcon className='size-6' /> Log In
+                            <ChevronRightIcon className='size-4 ml-auto' />
+                        </Link>
                     </li>
-                    <li className='p-5 bg-white flex items-center gap-2 rounded-xl border-solid	border border-gray-200 '>
-                        <BriefcaseIcon className='size-6' /> For business
-                        <ChevronRightIcon className='size-4 ml-auto' />
+                    <li className=''>
+                        <Link className='p-5 bg-white flex items-center gap-2 rounded-xl border-solid	border border-gray-200' href="/signup">
+                            <BriefcaseIcon className='size-6' /> For business
+                            <ChevronRightIcon className='size-4 ml-auto' />
+                        </Link>
+
                     </li>
                 </ul>
             </div>
