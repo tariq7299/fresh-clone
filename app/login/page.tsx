@@ -3,20 +3,26 @@ import { Button } from "@/ui/components/custom/button";
 import { ArrowLeftIcon, GlobeAsiaAustraliaIcon } from "@heroicons/react/24/outline";
 import { Label } from "@/ui/components/label";
 import { Input } from "@/ui/components/input";
+import Image from "next/image";
+import techLife from "@/../public/tech-life-illustration.png";
+import { cn } from "@/lib/utils";
 
 export default function LoginPage() {
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2  min-h-dvh" >
-            <div className=" col-span-1 relative">
-                <div className="w-full absolute top-0 z-50 p-4">
+        <div className="grid grid-cols-1 md:grid-cols-2  min-h-dvh " >
+
+
+            <div className=" col-span-1 relative flex flex-col justify-center items-center ">
+
+                <div className="w-full absolute top-0 z-50 p-4 flex items-center gap-2 justify-between ">
                     <Button variant={"ghost"} size="icon" className=""> <ArrowLeftIcon className="size-5" /> </Button>
+                    <p className={cn("text-2xl font-extrabold font-lora")}>Lumière</p>
                 </div>
 
+                <div className="mt-auto flex flex-col gap-2 max-w-md p-5 pt-20">
 
-                <div className="flex flex-col gap-2 max-w-md m-auto h-full pt-20 p-5">
 
-
-                    <h1 className="text-center text-lg font-bold">Log in to <span className="font-lora">Lumière</span>
+                    <h1 className="text-center text-xl font-bold">Log in
                     </h1>
                     <p className="text-muted-foreground text-sm text-center pb-4">Welcome back! Enter your details to access your account.</p>
 
@@ -45,19 +51,24 @@ export default function LoginPage() {
 
                     </form>
 
-                    <div className="flex h-full items-end justify-center">
-
-                        <p className=" flex items-center gap-1 text-accent-600 font-semibold "><GlobeAsiaAustraliaIcon className="h-6 w-5" /> English</p>
-
-                    </div>
 
                 </div>
 
+                <div className="p-5 mt-auto">
+                    <p className=" flex items-center  gap-1 text-accent-600 font-semibold "><GlobeAsiaAustraliaIcon className="h-6 w-5" /> English</p>
+                </div>
 
             </div>
 
-            <div className=" col-span-1 hidden md:block">
+            <div className=" col-span-1 hidden md:block justify-self-center self-center">
+                <Image
+                    src={techLife}
+                    alt="Tech life illustration image"
+                    className="object-cover w-[500px]"
+                />
             </div>
+
+
 
         </div>
     )
