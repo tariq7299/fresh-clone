@@ -7,6 +7,7 @@ import Image from "next/image";
 import barberShop from "@/../public/barber-shop-4.jpg";
 import { cn } from "@/lib/utils";
 import BackButton from "@/ui/components/custom/back-button";
+import Link from "next/link";
 
 export default function LoginPage() {
     return (
@@ -17,7 +18,7 @@ export default function LoginPage() {
 
                 <div className="w-full sticky top-0 z-50 p-4 flex items-center gap-2 justify-between ">
                     <BackButton />
-                    <p className={cn("text-2xl font-extrabold font-lora")}>Lumière</p>
+                    <Link href="/" className={cn("text-2xl font-extrabold font-lora")}>Lumière</Link>
                 </div>
 
                 <div className="mt-auto flex flex-col gap-2 w-full max-w-md p-5 pt-20">

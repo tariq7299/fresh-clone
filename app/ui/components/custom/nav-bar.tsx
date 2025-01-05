@@ -5,13 +5,23 @@ import { ArrowRightEndOnRectangleIcon, Bars3Icon, ChevronDownIcon } from '@heroi
 import {
     DropdownMenu,
     DropdownMenuContent,
+    DropdownMenuGroup,
     DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuPortal,
+    DropdownMenuSeparator,
+    DropdownMenuShortcut,
+    DropdownMenuSub,
+    DropdownMenuSubContent,
+    DropdownMenuSubTrigger,
     DropdownMenuTrigger,
 } from "@/ui/components/dropdown-menu"
 import MobileNavMenu from '@/ui/components/custom/mobile-nav-menu'
 import { cn } from '@/lib/utils'
 import { useEffect, useState } from 'react'
 import { Button } from '@/ui/components/custom/button'
+import Link from 'next/link'
+import { GlobeAsiaAustraliaIcon } from "@heroicons/react/24/outline";
 
 export default function NavBar() {
 
@@ -34,9 +44,9 @@ export default function NavBar() {
 
             <div className="p-5 flex justify-between items-center max-w-[1440px] m-auto pe-7">
 
-                <p className={cn("text-2xl font-extrabold font-lora ",
+                <Link href="/" className={cn("text-2xl font-extrabold font-lora ",
                     isScrolled ? 'text-primary' : 'text-background'
-                )}>Lumière</p>
+                )}>Lumière</Link>
 
                 {/* Nav menue trigger on mobile devices */}
                 <div className="md:hidden">
@@ -50,19 +60,30 @@ export default function NavBar() {
                     <Button borderType="fullRounded" variant="outline" className="bg-transparent font-source-sans font-semibold   hover:bg-muted/50">For business</Button>
 
                     <DropdownMenu>
-                        <DropdownMenuTrigger asChild >
 
+                        <DropdownMenuTrigger asChild >
                             <Button borderType="fullRounded" variant="outline" className=" hover:bg-muted/50 bg-transparent inline-flex space-x-3  font-source-sans font-semibold gap-2 group ">
                                 Menu <ChevronDownIcon className='size-4 transition duration-200
                          group-data-[state=open]:rotate-180' />
                             </Button>
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent className='w-56'>
-                            <DropdownMenuItem>
-                                <a className='p-2 flex items-center gap-2  w-full'>
+                        <DropdownMenuContent className='w-56 p-2'>
+
+                            <DropdownMenuItem className=''>
+                                <Link href="/login" className='flex items-center gap-2  w-full'>
                                     <ArrowRightEndOnRectangleIcon className='size-10' />
                                     <p className='font-semibold'>Log In </p>
-                                </a>
+                                </Link>
+                            </DropdownMenuItem>
+                            <DropdownMenuSeparator className='  my-2 mx-2 ' />
+                            <DropdownMenuLabel className='font-bold  text-base'>Other</DropdownMenuLabel>
+                            <DropdownMenuItem className=''>
+                                <Link href="/signup" className='font-semibold '>
+                                    For business
+                                </Link>
+                            </DropdownMenuItem>
+                            <DropdownMenuItem className=' text-accent-600  hover:text-accent-foreground'>
+                                <p className=" flex  items-center gap-2  font-semibold "><GlobeAsiaAustraliaIcon className="h-6 w-5" /> English</p>
                             </DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>

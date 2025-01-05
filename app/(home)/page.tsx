@@ -51,11 +51,6 @@ export default function Home() {
 
         </section>
 
-        <section className="px-5 md:px-7  mb-36">
-          {/* Features/benefits section */}
-          <FeaturesSection />
-        </section>
-
 
         <section className=" px-5 md:px-7 mb-16 md:mb-36 text-center ">
           <div className="bg-background  max-w-[1440px] m-auto  rounded-xl   flex flex-col justify-center items-center gap-2">
@@ -80,6 +75,12 @@ export default function Home() {
             </div>
 
           </div>
+        </section>
+
+
+        <section className="px-5 md:px-7  mb-36">
+          {/* Features/benefits section */}
+          <FeaturesSection />
         </section>
 
 
