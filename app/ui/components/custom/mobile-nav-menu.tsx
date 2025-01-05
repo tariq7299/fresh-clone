@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { GlobeAsiaAustraliaIcon } from "@heroicons/react/24/outline";
 
 export default function MobileNavMenu({ isScrolled }: { isScrolled: boolean }) {
+
     const [isOpen, setIsOpen] = useState(false)
 
     return (

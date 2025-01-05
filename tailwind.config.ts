@@ -132,6 +132,7 @@ export default {
 				"2xs": "385px",
 				'xs': '425px',
 			},
+
 		}
 	},
 	plugins: [require("tailwindcss-animate")],
