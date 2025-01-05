@@ -1,6 +1,6 @@
 import barberShop from "@/../public/barber-shop-2.jpg"
 import Image from "next/image"
-import { Badge } from "./badge"
+import { Badge } from "../badge"
 import { cn } from "@/lib/utils"
 
 function ShopCard({ className = '' }) {
@@ -28,7 +28,7 @@ function ShopCard({ className = '' }) {
                 <p className="font-bold text-lg text-nowrap truncate ">Gedo Salon - NasrCity</p>
                 {/* truncate this text */}
                 <p className="text-muted-foreground text-nowrap text-xs md:text-base truncate">Al Manteqa el tasaa, Nasr City</p>
-                Terms of service
+                <Badge variant="outline">Barbershop</Badge>
             </div>
         </div>
 

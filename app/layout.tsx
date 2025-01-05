@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Libre_Bodoni, Lora, Montserrat, Quicksand } from "next/font/google";
+import { Geist, Geist_Mono, Source_Sans_3, Libre_Bodoni, Lora, Quicksand } from "next/font/google";
 import "./ui/globals.css";
 
 // const geistSans = Geist({
@@ -15,10 +15,11 @@ const LoraSerif = Lora({
   variable: "--font-lora-serif",
   subsets: ["latin"],
 });
-const MontserratSans = Montserrat({
-  variable: "--font-montserrat-sans",
+const SourceSans3Sans = Source_Sans_3({
+  variable: "--font-source-sans-3-sans",
   subsets: ["latin"],
 });
+
 const QuicksandSans = Quicksand({
   variable: "--font-Quicksand-sans",
   subsets: ["latin"],
@@ -42,7 +43,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${LibreBodoniSerif.variable} ${LoraSerif.variable} ${MontserratSans.variable} ${QuicksandSans.variable} antialiased `}
+        className={`${LibreBodoniSerif.variable} ${LoraSerif.variable} ${SourceSans3Sans.variable} ${QuicksandSans.variable} antialiased `}
       >
         {children}
       </body>

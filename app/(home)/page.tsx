@@ -9,7 +9,7 @@ import { Badge } from "@/ui/components/badge";
 import Image from "next/image";
 import appleLogo from "@/../public/apple-logo.svg.png";
 import googleLogo from "@/../public/google-logo.png";
-import { Earth } from 'lucide-react';
+import { GlobeAsiaAustraliaIcon } from "@heroicons/react/24/outline";
 
 export default function Home() {
   return (
@@ -31,23 +31,23 @@ export default function Home() {
 
         {/* Apply you business now section */}
         <section className="px-5 md:px-7 mb-16 md:my-32 text-center text-xl md:text-2xl">
-          <p className=" ">Want you business on <span className="font-lora font-bold">Lumière</span>? <span className="font-bold underline decoration-2 text-nowrap">Apply now</span></p>
+          <p className=" ">Want your business on <span className="font-lora font-bold">Lumière</span>? <span className="font-bold underline decoration-2 text-nowrap">Apply now</span></p>
         </section>
 
         {/*Shops Carousels  */}
         <section className="px-5 md:px-7 mb-20 md:mb-36 space-y-12 md:space-y-16">
 
           {/* Recently viewed section */}
-          <ShopsCarousel sectionTitle={(<h1 className="font-semibold font-montserrat text-left text-2xl md:text-3xl ">Recently viewed</h1>)} />
+          <ShopsCarousel sectionTitle={(<h1 className="font-semibold font-source-sans text-left text-3xl  ">Recently viewed</h1>)} />
 
           {/* Recommended section */}
-          <ShopsCarousel sectionTitle={(<h1 className="font-semibold font-montserrat text-left text-2xl md:text-3xl ">Recommended</h1>)} />
+          <ShopsCarousel sectionTitle={(<h1 className="font-semibold font-source-sans text-left  text-3xl ">Recommended</h1>)} />
 
           {/* New to Lumière section */}
-          <ShopsCarousel sectionTitle={(<h1 className="font-semibold font-montserrat text-left text-2xl md:text-3xl ">New to <span className="font-lora text-3xl md:text-4xl font-bold">Lumière</span></h1>)} />
+          <ShopsCarousel sectionTitle={(<h1 className="font-semibold font-source-sans text-left  text-3xl ">New to <span className="font-lora text-3xl  font-bold">Lumière</span></h1>)} />
 
           {/* Trending section */}
-          <ShopsCarousel sectionTitle={(<h1 className="font-semibold font-montserrat text-left text-2xl md:text-3xl ">Trending</h1>)} />
+          <ShopsCarousel sectionTitle={(<h1 className="font-semibold font-source-sans text-left  text-3xl ">Trending</h1>)} />
 
         </section>
 
@@ -60,7 +60,7 @@ export default function Home() {
         <section className=" px-5 md:px-7 mb-16 md:mb-36 text-center ">
           <div className="bg-background  max-w-[1440px] m-auto  rounded-xl   flex flex-col justify-center items-center gap-2">
 
-            <h1 className="font-libre-bodoni lg:text-5xl font-bold text-primary text-center text-3xl">Looking good has never been this convenient!</h1>
+            <h1 className="font-libre-bodoni lg:text-5xl font-bold text-primary text-center text-4xl">Looking good has never been this convenient!</h1>
 
             <h2 className="text-primary pb-5">Your next appointment is waiting. Tap to book now!</h2>
 
@@ -69,7 +69,7 @@ export default function Home() {
             <p className="text-xs  text-muted-foreground pb-6 md:pb-10">No credit card required</p>
 
 
-            {/* <h1 className="text-center text-3xl font-montserrat font-semibold pb-16">Express Yourself with a Fresh Look!</h1> */}
+            {/* <h1 className="text-center text-3xl font-source-sans font-semibold pb-16">Express Yourself with a Fresh Look!</h1> */}
             <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-3 gap-24 ">
               {/* <ChangingAvatar /> */}
               {/* <ChangingAvatar /> */}
@@ -102,7 +102,11 @@ export default function Home() {
               </div>
 
               <div>
+<<<<<<< HEAD
                 <Badge className=" bg-background text-foreground border border-secondary-200 p-3 px-5 text-sm lg:text-base font-semibold font-montserrat m-auto ">Coming soon<Image src={appleLogo} alt="apple logo" className="ms-3 me-1.5 h-4.5 w-4 md:h-5.5 md:w-5" /> <Image src={googleLogo} alt="apple logo" className="h-4.5 w-5 md:h-5.5 md:w-5" /></Badge>
+=======
+                <Badge className="hover:bg-background/80 bg-background text-foreground border border-secondary-200 p-3 px-5 text-sm lg:text-base font-semibold font-source-sans m-auto min-w-[178px]">Coming soon<Image src={appleLogo} alt="apple logo" className="ms-3 me-1.5 h-4.5 w-4 md:h-5.5 md:w-5" /> <Image src={googleLogo} alt="apple logo" className="h-4.5 w-5 md:h-5.5 md:w-5" /></Badge>
+>>>>>>> 948170c08bbd808671ee858ffdfd1633f786565c
 
               </div>
 
@@ -117,7 +121,11 @@ export default function Home() {
 
               <p className="text-sm text-muted-foreground ">@2025 <span className="font-lora"></span>Lumière Inc.</p>
 
+<<<<<<< HEAD
               <p className=" flex items-center gap-1 text-accent-600  font-semibold "><Earth className="h-6 w-5" /> English</p>
+=======
+              <p className=" flex  items-center gap-1 text-accent-600 pe-0 md:pe-16 font-semibold"><GlobeAsiaAustraliaIcon className="h-6 w-5" /> English</p>
+>>>>>>> 948170c08bbd808671ee858ffdfd1633f786565c
 
 
 

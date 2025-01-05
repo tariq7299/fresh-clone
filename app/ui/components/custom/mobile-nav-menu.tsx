@@ -1,9 +1,9 @@
 'use client'
 import { useState } from 'react'
 import { cn } from '@/lib/utils'
-import { ArrowRightEndOnRectangleIcon, Bars3Icon, XMarkIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
+import { ArrowRightEndOnRectangleIcon, Bars3Icon, XMarkIcon, ChevronRightIcon, BriefcaseIcon } from '@heroicons/react/24/outline'
 import { Button } from '@/ui/components/custom/button'
-
+import Link from 'next/link'
 export default function MobileNavMenu({ isScrolled }: { isScrolled: boolean }) {
     const [isOpen, setIsOpen] = useState(false)
 
@@ -25,17 +25,26 @@ export default function MobileNavMenu({ isScrolled }: { isScrolled: boolean }) {
             )}>
 
                 <div className="bg-transparent  flex justify-between items-center p-5 mb-8">
-                    <p className="text-lg font-extrabold">LOGO</p>
+                    <p className={cn("text-2xl font-extrabold font-lora ")}>Lumière</p>
 
                     <Button size="icon" variant={"ghost"} onClick={() => setIsOpen(!isOpen)}>
                         <XMarkIcon className='size-9' />
                     </Button>
 
                 </div>
-                <ul >
-                    <li className='p-5 bg-white flex items-center gap-2 rounded-xl border-solid	border border-gray-200 '>
-                        <ArrowRightEndOnRectangleIcon className='size-6' /> Log In
-                        <ChevronRightIcon className='size-4 ml-auto' />
+                <ul className='space-y-5 font-bold'>
+                    <li className=' '>
+                        <Link className='p-5 bg-white flex items-center gap-2 rounded-xl border-solid	border border-gray-200' href="/login">
+                            <ArrowRightEndOnRectangleIcon className='size-6' /> Log In
+                            <ChevronRightIcon className='size-4 ml-auto' />
+                        </Link>
+                    </li>
+                    <li className=''>
+                        <Link className='p-5 bg-white flex items-center gap-2 rounded-xl border-solid	border border-gray-200' href="/signup">
+                            <BriefcaseIcon className='size-6' /> For business
+                            <ChevronRightIcon className='size-4 ml-auto' />
+                        </Link>
+
                     </li>
                 </ul>
             </div>
