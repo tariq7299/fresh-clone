@@ -1,5 +1,5 @@
 
-"use client"
+'use client'
 
 import { ArrowRightEndOnRectangleIcon, Bars3Icon, ChevronDownIcon } from '@heroicons/react/24/outline'
 import {
@@ -15,11 +15,11 @@ import { Button } from '@/ui/components/custom/button'
 
 export default function NavBar() {
 
-    const [isScrolled, setIsScrolled] = useState(window.scrollY > 0)
+    const [isScrolled, setIsScrolled] = useState(false)
 
     useEffect(() => {
         const options = { passive: true }; // options must match add/remove event
-        const scroll = () => setIsScrolled(window.scrollY > 0);
+        const scroll = () => setIsScrolled(window?.scrollY > 0);
         document.addEventListener("scroll", scroll, options);
 
         // remove event on unmount to prevent a memory leak

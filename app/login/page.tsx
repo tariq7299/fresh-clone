@@ -59,9 +59,8 @@ export default function LoginPage() {
                 <Image
                     src={barberShop}
                     alt="Barber shop"
-                    objectFit="cover"
                     fill={true}
-                    className="object-bottom"
+                    className="object-bottom object-cover"
                 />
             </div>
 
