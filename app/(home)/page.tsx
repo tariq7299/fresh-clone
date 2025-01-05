@@ -89,11 +89,11 @@ export default function Home() {
         <div className=" bg-secondary-100">
 
           <div className="max-w-[1440px] px-5 md:px-7 py-6 m-auto ">
-            <div className="flex  items-center flex-col md:flex-row  gap-5 justify-between">
+            <div className="flex  items-center flex-col lg:flex-row  gap-5 justify-between">
 
               <p className="text-3xl font-extrabold font-lora ">Lumière</p>
 
-              <div className="flex justify-center gap-3 mlg:gap-11 flex-wrap text-sm lg:text-base font-semibold">
+              <div className="flex justify-center gap-4 mlg:gap-11 flex-wrap text-sm lg:text-base font-semibold">
                 <p>Privacy policy</p>
                 <p>Terms of service</p>
                 <p>Terms of use</p>
@@ -102,7 +102,7 @@ export default function Home() {
               </div>
 
               <div>
-                <Badge className="bg-background text-foreground border border-secondary-200 p-3 px-5 text-sm lg:text-base font-semibold font-montserrat m-auto ">Coming soon<Image src={appleLogo} alt="apple logo" className="ms-3 me-1.5 h-4.5 w-4 md:h-5.5 md:w-5" /> <Image src={googleLogo} alt="apple logo" className="h-4.5 w-5 md:h-5.5 md:w-5" /></Badge>
+                <Badge className=" bg-background text-foreground border border-secondary-200 p-3 px-5 text-sm lg:text-base font-semibold font-montserrat m-auto ">Coming soon<Image src={appleLogo} alt="apple logo" className="ms-3 me-1.5 h-4.5 w-4 md:h-5.5 md:w-5" /> <Image src={googleLogo} alt="apple logo" className="h-4.5 w-5 md:h-5.5 md:w-5" /></Badge>
 
               </div>
 
@@ -113,11 +113,11 @@ export default function Home() {
         <div className=" ">
 
           <div className="max-w-[1440px] px-5 md:px-7 py-3 m-auto ">
-            <div className="flex  items-center flex-col md:flex-row  gap-5 justify-between">
+            <div className="flex  items-center flex-row  gap-5 justify-evenly md:justify-between md:pe-12">
 
               <p className="text-sm text-muted-foreground ">@2025 <span className="font-lora"></span>Lumière Inc.</p>
 
-              <p className=" flex items-center gap-1 text-accent-600 pe-16 font-semibold"><Earth className="h-6 w-5" /> English</p>
+              <p className=" flex items-center gap-1 text-accent-600  font-semibold "><Earth className="h-6 w-5" /> English</p>
 
 
 
