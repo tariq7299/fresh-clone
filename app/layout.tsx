@@ -2,10 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Source_Sans_3, Libre_Bodoni, Lora, Quicksand } from "next/font/google";
 import "./ui/globals.css";
 
-// const geistSans = Geist({
-//   variable: "--font-geist-sans",
-//   subsets: ["latin"],
-// });
+// This is the provider for the nextui library
+// I am using this lib to be able to use the "date-input" component from the nextui library
+import { NextUIProvider } from "@nextui-org/system";
 
 const LibreBodoniSerif = Libre_Bodoni({
   variable: "--font-libre-bodoni-serif",
@@ -45,8 +44,15 @@ export default function RootLayout({
       <body
         className={`${LibreBodoniSerif.variable} ${LoraSerif.variable} ${SourceSans3Sans.variable} ${QuicksandSans.variable} antialiased `}
       >
-        {children}
+        {/* 
+        This is the provider for the nextui library
+        I am using this lib to be able to use the "date-input" component from the nextui library 
+        */}
+        <NextUIProvider>
+          {children}
+        </NextUIProvider>
       </body>
     </html>
+
   );
 }

@@ -1,5 +1,5 @@
-
 import type { Config } from "tailwindcss";
+import { nextui } from "@nextui-org/theme";
 
 export default {
 	darkMode: ["class"],
@@ -7,6 +7,8 @@ export default {
 		"./pages/**/*.{js,ts,jsx,tsx,mdx}",
 		"./app/ui/components/**/*.{js,ts,jsx,tsx,mdx}",
 		"./app/**/*.{js,ts,jsx,tsx,mdx}",
+		// single component styles
+		"./node_modules/@nextui-org/theme/dist/components/date-input.js",
 	],
 	theme: {
 		extend: {
@@ -135,5 +137,8 @@ export default {
 
 		}
 	},
-	plugins: [require("tailwindcss-animate")],
+	// This is the provider for the nextui library
+	//     I am using this lib to be able to use the "date-input" component from the nextui library 
+
+	plugins: [require("tailwindcss-animate"), nextui()],
 } satisfies Config;
