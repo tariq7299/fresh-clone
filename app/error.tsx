@@ -41,7 +41,7 @@ export default function Error({
                     className="flex items-center gap-2"
                     onClick={() => window.history.back()}
                 >
-                    Go back <Undo2 className='size-4' />
+                    Go Back <Undo2 className='size-4' />
                 </Button>
             </div>
         </main>

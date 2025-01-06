@@ -3,7 +3,7 @@ import { ArrowRightIcon } from '@heroicons/react/24/outline'
 
 
 export default function ProfessionalOnboardingLayout({ children }: { children: React.ReactNode }) {
-    throw new Error("test");
+
 
     return <div className=" ">
         <div className="fixed top-0 left-0 bg-background w-full pt-3 px-5 flex flex-col">
