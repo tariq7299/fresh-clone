@@ -4,9 +4,9 @@ import { Textarea } from "@/ui/components/textarea";
 import { Button } from "@/ui/components/custom/button";
 import { ArrowRightIcon } from '@heroicons/react/24/outline'
 
-export default function ProfessionalOnboardingPage() {
+export default function ProfessionalOnboardingLayout({ children }: { children: React.ReactNode }) {
     return <form className=" ">
-
+        {/* 
         <div className="fixed top-0 left-0 bg-background w-full pt-3 px-5 flex flex-col">
             <div className="flex gap-2 w-full justify-center items-center max-w-5xl m-auto">
                 <div className="rounded-full bg-accent-400 flex-auto h-1"></div>
@@ -22,11 +22,9 @@ export default function ProfessionalOnboardingPage() {
                 <Button className="font-bold  gap-2 justify-center items-center hidden lg:flex">Continue  <ArrowRightIcon className="size-4" /></Button>
 
             </div>
-        </div>
+        </div> */}
 
         <div className="flex flex-col gap-2 w-full max-w-lg p-5 py-24 min-h-dvh  items-center m-auto">
-
-
 
             <div className="text-start space-y-1">
 
@@ -61,17 +59,16 @@ export default function ProfessionalOnboardingPage() {
                     <Input type="text" name="websiteUrl" id="websiteUrl" placeholder="https://www.bekkybarber.com" />
                 </div>
 
-                <div className=" fixed bottom-0 left-0 w-full bg-background px-5 py-3.5 flex justify-center items-center border-t-1 lg:hidden">
+
+            </div>
+
+        </div>
+
+        {/* <div className=" fixed bottom-0 left-0 w-full bg-background px-5 py-3.5 flex justify-center items-center border-t-1 lg:hidden">
 
                     <Button className="w-full font-bold flex gap-2 justify-center items-center">
                         Continue  <ArrowRightIcon className="size-4" />
                     </Button>
-                </div>
-
-
-            </div>
-
-
-        </div>
+                </div> */}
     </form>
 }
