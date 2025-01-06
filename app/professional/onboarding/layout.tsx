@@ -1,7 +1,10 @@
 import { Button } from "@/ui/components/custom/button";
 import { ArrowRightIcon } from '@heroicons/react/24/outline'
 
+
 export default function ProfessionalOnboardingLayout({ children }: { children: React.ReactNode }) {
+    throw new Error("test");
+
     return <div className=" ">
         <div className="fixed top-0 left-0 bg-background w-full pt-3 px-5 flex flex-col">
             <div className="flex gap-2 w-full justify-center items-center max-w-5xl m-auto">
