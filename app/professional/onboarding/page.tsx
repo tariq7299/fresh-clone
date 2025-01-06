@@ -5,10 +5,10 @@ import { Button } from "@/ui/components/custom/button";
 import { ArrowRightIcon } from '@heroicons/react/24/outline'
 
 export default function ProfessionalOnboardingPage() {
-    return <div className=" ">
+    return <form className=" ">
 
         <div className="fixed top-0 left-0 bg-background w-full pt-3 px-5 flex flex-col">
-            <div className="flex gap-2 w-full justify-center items-center max-w-3xl m-auto">
+            <div className="flex gap-2 w-full justify-center items-center max-w-5xl m-auto">
                 <div className="rounded-full bg-accent-400 flex-auto h-1"></div>
                 <div className="rounded-full bg-muted flex-auto h-1"></div>
                 <div className="rounded-full bg-muted flex-auto h-1"></div>
@@ -16,12 +16,15 @@ export default function ProfessionalOnboardingPage() {
                 <div className="rounded-full bg-muted flex-auto h-1"></div>
             </div>
             <div className="self-end py-3">
-                <Button variant={"ghost"} className="font-bold px-0 py-0">Log out</Button>
+
+                <Button variant={"ghost"} className="font-bold px-0 py-0 lg:hidden">Log out</Button>
+
+                <Button className="font-bold  gap-2 justify-center items-center hidden lg:flex">Continue  <ArrowRightIcon className="size-4" /></Button>
 
             </div>
         </div>
 
-        <div className="flex flex-col gap-2 w-full max-w-lg p-5 py-24 h-dvh  items-center m-auto">
+        <div className="flex flex-col gap-2 w-full max-w-lg p-5 py-24 min-h-dvh  items-center m-auto">
 
 
 
@@ -30,12 +33,12 @@ export default function ProfessionalOnboardingPage() {
                 <p className="text-sm text-muted-foreground text-start"> Account setup</p>
 
                 {/* Change this to more descriptive title */}
-                <h1 className="text-3xl font-bold font-source-sans"> What's your business info?</h1>
+                <h1 className="text-3xl lg:text-4xl font-bold font-source-sans"> What's your business info?</h1>
 
                 <p className="text-sm text-muted-foreground "> This the brand name your clients will see. Your billing and legal name can be added later.</p>
             </div>
 
-            <form action="" className="flex flex-col gap-4 pt-5 h-full w-full">
+            <div className="flex flex-col gap-5 pt-5 h-full w-full pb-36">
 
                 <div className="flex flex-col gap-2">
                     <Label className="font-bold" htmlFor="nameEn">Business name (En)</Label>
@@ -58,7 +61,7 @@ export default function ProfessionalOnboardingPage() {
                     <Input type="text" name="websiteUrl" id="websiteUrl" placeholder="https://www.bekkybarber.com" />
                 </div>
 
-                <div className=" fixed bottom-0 left-0 w-full bg-background p-5 flex justify-center items-center border-t-1">
+                <div className=" fixed bottom-0 left-0 w-full bg-background px-5 py-3.5 flex justify-center items-center border-t-1 lg:hidden">
 
                     <Button className="w-full font-bold flex gap-2 justify-center items-center">
                         Continue  <ArrowRightIcon className="size-4" />
@@ -66,9 +69,9 @@ export default function ProfessionalOnboardingPage() {
                 </div>
 
 
-            </form>
+            </div>
 
 
         </div>
-    </div>
+    </form>
 }
