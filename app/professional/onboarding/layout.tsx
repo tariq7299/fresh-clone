@@ -28,5 +28,6 @@ export default function ProfessionalOnboardingLayout({ children }: { children: R
                 Continue  <ArrowRightIcon className="size-4" />
             </Button>
         </div>
+
     </div>
 }
