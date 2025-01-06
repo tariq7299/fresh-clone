@@ -33,7 +33,7 @@ export default function LoginPage() {
                 </div>
                 <div className="flex flex-col justify-center items-center">
                     <p className="font-bold text-center">First time?</p>
-                    <Link href="/signup" className=" text-center text-accent text-sm">Sign up</Link>
+                    <Link href="/for-who" className=" text-center text-accent text-sm">Sign up</Link>
 
                 </div>
 
