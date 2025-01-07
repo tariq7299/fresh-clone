@@ -1,74 +1,63 @@
+'use client';
+
+import { useState } from 'react';
+import { businessService } from '@/lib/api-services';
+import { ApiError } from '@/lib/fetch-utils';
 import { Label } from "@/ui/components/label";
 import { Input } from "@/ui/components/input";
 import { Textarea } from "@/ui/components/textarea";
 import { Button } from "@/ui/components/custom/button";
 import { ArrowRightIcon } from '@heroicons/react/24/outline'
 
-export default function ProfessionalOnboardingLayout({ children }: { children: React.ReactNode }) {
-    return <form className=" ">
-        {/* 
-        <div className="fixed top-0 left-0 bg-background w-full pt-3 px-5 flex flex-col">
-            <div className="flex gap-2 w-full justify-center items-center max-w-5xl m-auto">
-                <div className="rounded-full bg-accent-400 flex-auto h-1"></div>
-                <div className="rounded-full bg-muted flex-auto h-1"></div>
-                <div className="rounded-full bg-muted flex-auto h-1"></div>
-                <div className="rounded-full bg-muted flex-auto h-1"></div>
-                <div className="rounded-full bg-muted flex-auto h-1"></div>
-            </div>
-            <div className="self-end py-3">
+export default function ProfessionalOnboardingPage() {
+    const [error, setError] = useState<string | null>(null);
+    const [loading, setLoading] = useState(false);
 
-                <Button variant={"ghost"} className="font-bold px-0 py-0 lg:hidden">Log out</Button>
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        setError(null);
+        setLoading(true);
 
-                <Button className="font-bold  gap-2 justify-center items-center hidden lg:flex">Continue  <ArrowRightIcon className="size-4" /></Button>
+        try {
+            const formData = new FormData(event.currentTarget);
+            const businessData = {
+                nameEn: formData.get('nameEn') as string,
+                nameAr: formData.get('nameAr') as string,
+                descriptionEn: formData.get('descriptionEn') as string,
+                descriptionAr: formData.get('descriptionAr') as string,
+                websiteUrl: formData.get('websiteUrl') as string,
+            };
 
-            </div>
-        </div> */}
+            await businessService.createBusiness(businessData);
+            // Handle success (e.g., redirect or show success message)
 
-        <div className="flex flex-col gap-2 w-full max-w-lg p-5 py-24 min-h-dvh  items-center m-auto">
+        } catch (err) {
+            if (err instanceof ApiError) {
+                setError(err.message);
+            } else {
+                setError('An unexpected error occurred');
+            }
+        } finally {
+            setLoading(false);
+        }
+    };
 
-            <div className="text-start space-y-1">
+    return (
+        <form onSubmit={handleSubmit}>
+            {/* Your existing form fields */}
 
-                <p className="text-sm text-muted-foreground text-start"> Account setup</p>
+            {error && (
+                <div className="text-danger text-sm mt-2">{error}</div>
+            )}
 
-                {/* Change this to more descriptive title */}
-                <h1 className="text-3xl lg:text-4xl font-bold font-source-sans"> What's your business info?</h1>
-
-                <p className="text-sm text-muted-foreground "> This the brand name your clients will see. Your billing and legal name can be added later.</p>
-            </div>
-
-            <div className="flex flex-col gap-5 pt-5 h-full w-full pb-20">
-
-                <div className="flex flex-col gap-2">
-                    <Label className="font-bold" htmlFor="nameEn">Business name (En)</Label>
-                    <Input type="text" name="nameEn" id="nameEn" placeholder="Bekky Barber" />
-                </div>
-                <div className="flex flex-col gap-2">
-                    <Label className="font-bold" htmlFor="nameAr">Business name (Ar)</Label>
-                    <Input type="text" name="nameAr" id="nameAr" placeholder="بيكي باربر" />
-                </div>
-                <div className="flex flex-col gap-2">
-                    <Label className="font-bold" htmlFor="descriptionEn">Description (En)</Label>
-                    <Textarea name="descriptionEn" id="descriptionEn" placeholder="Bekky Barber is a barber shop that..." />
-                </div>
-                <div className="flex flex-col gap-2">
-                    <Label className="font-bold" htmlFor="descriptionAr">Description (Ar)</Label>
-                    <Textarea name="descriptionAr" id="descriptionAr" placeholder="بيكي باربر هو محل حلاقة أنيق يقدم خدمات متنوعة، بما في ذلك الحلاقة وتهذيب الذقن ." />
-                </div>
-                <div className="flex flex-col gap-2">
-                    <Label className="font-bold" htmlFor="websiteUrl">Website (Optional)</Label>
-                    <Input type="text" name="websiteUrl" id="websiteUrl" placeholder="https://www.bekkybarber.com" />
-                </div>
-
-
-            </div>
-
-        </div>
-
-        {/* <div className=" fixed bottom-0 left-0 w-full bg-background px-5 py-3.5 flex justify-center items-center border-t-1 lg:hidden">
-
-                    <Button className="w-full font-bold flex gap-2 justify-center items-center">
-                        Continue  <ArrowRightIcon className="size-4" />
-                    </Button>
-                </div> */}
-    </form>
+            <Button
+                type="submit"
+                disabled={loading}
+                className="w-full font-bold flex gap-2 justify-center items-center"
+            >
+                {loading ? 'Creating...' : 'Continue'}
+                <ArrowRightIcon className="size-4" />
+            </Button>
+        </form>
+    );
 }
