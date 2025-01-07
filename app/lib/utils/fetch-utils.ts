@@ -1,3 +1,5 @@
+import { getSession } from "@/(auth)/_lib/sessions";
+
 type FetchOptions = {
     method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
     body?: any;
@@ -29,15 +31,20 @@ export async function fetchApi<T>(
         auth = true,
     } = options;
 
-    const baseUrl = process.env.NEXT_PUBLIC_API_URL || '/api';
+    const baseUrl = process.env.API_BASE_URL;
+
     const url = `${baseUrl}${endpoint}`;
 
     // Only add token if auth is true
     let authHeaders = {};
+
+    // Fix this !
+    // This can't be executed in client side
+    // As it uses the cookies to store the token, however the cookies can't be accessed in client side (in order to get it and send it as a header)
     if (auth && typeof window !== 'undefined') {
-        const token = localStorage.getItem('authToken');
-        if (token) {
-            authHeaders = { Authorization: `Bearer ${token}` };
+        const session = await getSession();
+        if (session?.token) {
+            authHeaders = { Authorization: `Bearer ${session.token}` };
         }
     }
 
@@ -57,7 +64,7 @@ export async function fetchApi<T>(
     try {
         const response = await fetch(url, fetchOptions);
 
-        // Handle non-JSON responses
+        // Handle JSON responses
         const contentType = response.headers.get('content-type');
         if (contentType?.includes('application/json')) {
             const data = await response.json();
@@ -73,7 +80,6 @@ export async function fetchApi<T>(
             return data as T;
         }
 
-        // Handle non-JSON responses
         if (!response.ok) {
             throw new ApiError(
                 response.status,
@@ -81,6 +87,7 @@ export async function fetchApi<T>(
             );
         }
 
+        // Handle non-JSON responses
         return await response.text() as T;
 
     } catch (error) {

@@ -128,3 +128,33 @@ Run your business from anywhere. Accept bookings, manage schedules, and update s
 Automated Notifications:
 "Smart Reminder System
 Reduce no-shows with automated appointment reminders. Keep clients informed about their upcoming appointments without lifting a finger.
+
+## Notes
+
+### http-only cookies vs Bearer tokens
+
+// Server-side (middleware.ts, server components, API routes)
+✅ cookies()
+✅ getSession()
+❌ localStorage
+❌ sessionStorage
+❌ window
+❌ document
+
+// Client-side (client components)
+✅ localStorage
+✅ sessionStorage
+✅ window
+✅ document
+❌ cookies() // Next.js server-only API
+
+- As you can notice you can't access http-only cookies through client side !, and only you are able to do so in the api !
+- So if your like for example using nextJS with already exsiting api that handlers your cookies and auth, and that api doesn't use http-only cookies and instead it used Bearer token, then you must attach that token sent to you when you login in the headers of the request ! (
+   ```
+    headers: {
+        'Authorization': `Bearer ${token}`
+    }
+   ```
+)
+
+- As you won't be able to access the token if you store it in a cookie instead of like a localstorage, so you have to only use localStorage with Bearer tokens !
