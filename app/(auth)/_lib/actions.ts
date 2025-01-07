@@ -3,6 +3,7 @@
 import { LoginFormSchema, LoginFormState } from '@/(auth)/_lib/definitions'
 import { redirect } from 'next/navigation'
 import { createSession } from '@/(auth)/_lib/sessions';
+import { SessionData } from '@/(auth)/_lib/definitions';
 
 
 async function authenticate(payload) {
@@ -59,15 +60,22 @@ export async function login(state: LoginFormState, formData: FormData) {
         console.log("data", data);
         console.log("data.data.token", data.data.token)
 
-        await createSession(data.data.token)
-
-        // return data;
+        // Store the session in a secure http only cookie
+        await createSession({
+            userId: data.data.user.id,
+            name: data.data.user.name,
+            email: data.data.user.email,
+            role: data.data.user.role,
+            phone: data.data.user.phone_number,
+            isVerified: data.data.user.is_verified,
+            token: data.data.token
+        })
 
     } catch (error) {
         console.error('Error sending data:', error);
         return { message: 'Error sending data' };
     }
 
-    redirect("/for-who");
+    redirect("/professional/dashboard");
 
 };

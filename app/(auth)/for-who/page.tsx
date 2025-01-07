@@ -2,7 +2,7 @@
 import { ArrowRightIcon } from '@heroicons/react/24/outline'
 import Link from "next/link"
 
-export default async function ForWho() {
+export default function ForWho() {
 
     return (
         <div className=" flex flex-col gap-2 w-full max-w-md p-5 pt-5">

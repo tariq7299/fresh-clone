@@ -24,3 +24,13 @@ export type LoginFormState =
         message?: string
     }
     | undefined
+
+export type SessionData = {
+    userId: string;
+    name: string;
+    email: string;
+    role: 'stakeholder' | 'customer' | 'admin';
+    phone: 'string';
+    isVerified: boolean;
+    token: string;
+}

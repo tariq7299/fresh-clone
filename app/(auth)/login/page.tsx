@@ -3,8 +3,6 @@ import LoginForm from "../_components/loginform";
 
 export default function LoginPage() {
 
-
-
     return (
 
         <div className="mt-auto flex flex-col gap-2 w-full max-w-md p-5 pt-20">

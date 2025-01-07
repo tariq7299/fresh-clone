@@ -7,8 +7,6 @@ import Link from "next/link";
 import { useActionState } from 'react'
 import { login } from "@/(auth)/_lib/actions";
 import { LoginFormState } from "../_lib/definitions";
-import { useEffect } from "react";
-import { getSession } from "../_lib/sessions";
 
 
 export default function LoginForm() {
