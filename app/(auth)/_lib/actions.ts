@@ -57,8 +57,9 @@ export async function login(state: LoginFormState, formData: FormData) {
 
         const data = await response.json();
         console.log("data", data);
+        console.log("data.data.token", data.data.token)
 
-        createSession(data.token)
+        await createSession(data.data.token)
 
         // return data;
 

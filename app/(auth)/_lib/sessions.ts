@@ -13,3 +13,9 @@ export async function createSession(token: string) {
         path: '/',
     })
 }
+
+export async function getSession() {
+    const cookie = (await cookies()).get('session')?.value
+    console.log("cookie", cookie)
+    return cookie
+}

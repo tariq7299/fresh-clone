@@ -7,12 +7,17 @@ import Link from "next/link";
 import { useActionState } from 'react'
 import { login } from "@/(auth)/_lib/actions";
 import { LoginFormState } from "../_lib/definitions";
+import { useEffect } from "react";
+import { getSession } from "../_lib/sessions";
+
 
 export default function LoginForm() {
+
     const initialState: LoginFormState = { message: "", errors: {} };
     const [formState, formAction, isPending] = useActionState(login, initialState);
 
     console.log("formState", formState);
+
 
     return <form action={formAction} className="flex flex-col gap-4">
         <div className="flex flex-col gap-2">
