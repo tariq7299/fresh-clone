@@ -1,4 +1,5 @@
 import { getSession } from "@/(auth)/_lib/sessions";
+import SecureLS from 'secure-ls';
 
 type FetchOptions = {
     method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
@@ -10,10 +11,27 @@ type FetchOptions = {
     auth?: boolean;
 };
 
+export interface ApiResponse<T> {
+    success: boolean
+    status: number
+    message: string
+    code: number
+    data: T
+    errors: string[] | string | []
+}
+
 export class ApiError extends Error {
-    constructor(public status: number, message: string) {
+    constructor(
+        public success: boolean,
+        public status: number,
+        message: string,
+        public code: number | string,
+        public data: null,
+        public errors: string[] | string | []
+    ) {
         super(message);
         this.name = 'ApiError';
+
     }
 }
 
@@ -41,7 +59,17 @@ export async function fetchApi<T>(
     // Fix this !
     // This can't be executed in client side
     // As it uses the cookies to store the token, however the cookies can't be accessed in client side (in order to get it and send it as a header)
+
+    // Here i have created two ways of sending the auth token, because this fetch can be used in client side and server side !
+
+    //  **if CLIENT SIDE**
+    // This auth sending token will be used in client side !,
     if (auth && typeof window !== 'undefined') {
+        const ls = new SecureLS();
+        const token = ls.get('token');
+        authHeaders = { Authorization: `Bearer ${token}` };
+        //  **if SERVER SIDE**
+    } else if (auth && typeof window === 'undefined') {
         const session = await getSession();
         if (session?.token) {
             authHeaders = { Authorization: `Bearer ${session.token}` };
@@ -72,8 +100,13 @@ export async function fetchApi<T>(
             // Handle API errors
             if (!response.ok) {
                 throw new ApiError(
+                    data.success,
                     response.status,
-                    data.message || 'Something went wrong'
+                    data.message,
+                    data.code,
+                    data.data,
+                    data.errors
+
                 );
             }
 
@@ -81,8 +114,7 @@ export async function fetchApi<T>(
         }
 
         if (!response.ok) {
-            throw new ApiError(
-                response.status,
+            throw new Error(
                 'Something went wrong'
             );
         }
@@ -92,8 +124,18 @@ export async function fetchApi<T>(
 
     } catch (error) {
         if (error instanceof ApiError) {
-            throw error;
+            throw new ApiError(
+                error.success,
+                error.status,
+                error.message,
+                error.code,
+                error.data,
+                error.errors
+
+            );
         }
-        throw new ApiError(500, 'Network error');
+        throw new Error(
+            'Network error'
+        );
     }
 } 

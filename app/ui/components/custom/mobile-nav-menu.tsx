@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import { cn } from '@/lib/utils'
+import { cn } from '@/lib/utils/utils'
 import { ArrowRightEndOnRectangleIcon, Bars3Icon, XMarkIcon, ChevronRightIcon, BriefcaseIcon } from '@heroicons/react/24/outline'
 import { Button } from '@/ui/components/custom/button'
 import Link from 'next/link'

@@ -1,5 +1,6 @@
 import { fetchApi } from './fetch-utils';
-import { SessionData } from '@/(auth)/_lib/definitions';
+// import { SessionData } from '@/(auth)/_lib/definitions';
+import SecureLS from 'secure-ls';
 
 // Types
 
@@ -8,6 +9,18 @@ import { SessionData } from '@/(auth)/_lib/definitions';
 //     name: string;
 //     email: string;
 // }
+
+export type ApiResponseSessionData = {
+    user: {
+        id: string;
+        name: string;
+        email: string;
+        role: 'stakeholder' | 'customer' | 'admin';
+        phone_number: 'string';
+        is_verified: boolean;
+    }
+    token: string;
+}
 
 type ApiResponseCode =
     | 200 // OK
@@ -36,7 +49,7 @@ interface ApiResponse<T> {
     errors: []
 }
 
-interface LoginResponse extends ApiResponse<SessionData> { }
+interface LoginResponse extends ApiResponse<ApiResponseSessionData> { }
 
 // interface BusinessInfo {
 //     nameEn: string;
@@ -49,7 +62,7 @@ interface LoginResponse extends ApiResponse<SessionData> { }
 // API Services
 export const authService = {
     login: async (email: string, password: string) => {
-        return fetchApi<LoginResponse>('/auth/login', {
+        return fetchApi<LoginResponse>('/auth/stakeholder/login', {
             method: 'POST',
             body: { email, password },
             auth: false,

@@ -1,7 +1,7 @@
 import barberShop from "@/../public/barber-shop-2.jpg"
 import Image from "next/image"
 import { Badge } from "../badge"
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils/utils"
 
 function ShopCard({ className = '' }) {
     return (

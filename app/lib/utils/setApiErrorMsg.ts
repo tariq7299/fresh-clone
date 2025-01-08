@@ -1,37 +1,42 @@
-import { AxiosError } from 'axios';
-import { toastApiMsgs } from './toastApiMsgs';
-import axios from 'axios';
-import { ErrorCallback } from '../types';
+// import { AxiosError } from 'axios';
+// import { toastApiMsgs } from './toastApiMsgs';
+// import axios from 'axios';
+// import { ErrorCallback } from '../types';
 // import { toast } from '@/components/ui/use-toast'
-import { toast } from "sonner"
+// import { toast } from "sonner"
+import { ApiError } from './fetch-utils';
 
 
 
-
-function handleApiError(
-    errResponse: AxiosError | Error,
+function setApiErrorMsg({
+    errResponse,
     // toast: (props: Toast) => void,
-    customErrorMsg: string | null = null,
-    errorCallback?: ErrorCallback
-) {
+    customErrorMsg = null
+    // errorCallback?: ErrorCallback
+}: {
+    errResponse: ApiError | Error,
+    // toast: (props: Toast) => void,
+    customErrorMsg: string | null,
+    // errorCallback?: ErrorCallback
+}): string {
+
+    if (errResponse instanceof ApiError) {
+        // if (axios.isAxiosError(errResponse)) {
 
 
-    if (axios.isAxiosError(errResponse)) {
-
-
-        const statusCode = errResponse.response?.status;
+        const statusCode = errResponse.status;
         const ErrorCode = errResponse.code;
 
-        let errorMessage = customErrorMsg || (errResponse.response?.data as any)?.errors
+        let errorMessage = customErrorMsg || (errResponse.data as any)?.errors
 
         if (statusCode === 401 || statusCode === 419 || statusCode === 403) {
             errorMessage = errorMessage || 'Unauthorized: Please log in! Redirecting to login page...';
-            toastApiMsgs(errorMessage, "destructive");
-            setTimeout(() => {
-                window.location.href = '/sign-in';
-            }, 4000);
-            errorCallback?.();
-            return; // Exit the function early
+            // toastApiMsgs(errorMessage, "destructive");
+            // setTimeout(() => {
+            //     window.location.href = '/login';
+            // }, 4000);
+            // errorCallback?.();
+            return errorMessage; // Exit the function early
         }
 
         switch (statusCode) {
@@ -69,20 +74,25 @@ function handleApiError(
                 }
         }
 
-        if (ErrorCode !== "ERR_CANCELED") {
-            toastApiMsgs(errorMessage, "destructive");
-        }
+        // if (ErrorCode !== "ERR_CANCELED") {
+        //     // toastApiMsgs(errorMessage, "destructive");
+        //     return errorMessage
+        // }
 
-        errorCallback?.();
+        return errorMessage
+
+        // errorCallback?.();
 
     } else {
         console.log(errResponse)
-        toastApiMsgs(errResponse?.message, "destructive");
-        errorCallback?.();
+        // toastApiMsgs(errResponse?.message || "Someting went wrong!", "destructive");
+        return errResponse?.message || "Someting went wrong!", "destructive"
+        // errorCallback?.();
+        // return 
 
     }
 
 
 }
 
-export { handleApiError }
+export { setApiErrorMsg }

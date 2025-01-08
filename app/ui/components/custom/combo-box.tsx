@@ -1,8 +1,8 @@
 "use client"
 
 import * as React from "react"
-import { CheckIcon, ChevronsUpDownIcon } from '@heroicons/react/24/outline'
-import { cn } from "@/lib/utils"
+import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/24/outline'
+import { cn } from "@/lib/utils/utils"
 import { Button } from "@/ui/components/custom/button";
 import {
     Command,
@@ -40,7 +40,7 @@ export function Combobox({ values, field, className, inputPlaceholder = "Select 
                     {field.value && values.length > 0
                         ? values.find((value: { id: number, name: string }) => value.id === field.value)?.name
                         : inputPlaceholder}
-                    <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                    <ChevronUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
             </PopoverTrigger>
             <PopoverContent className=" p-0">

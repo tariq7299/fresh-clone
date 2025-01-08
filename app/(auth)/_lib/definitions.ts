@@ -21,7 +21,8 @@ export type LoginFormState =
             email?: string[]
             password?: string[]
         }
-        message?: string
+        message?: string,
+        token?: string
     }
     | undefined
 

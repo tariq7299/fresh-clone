@@ -5,7 +5,7 @@ import { Label } from "@/ui/components/label";
 import { Input } from "@/ui/components/input";
 import Image from "next/image";
 import barberShop from "@/../public/barber-shop-4.jpg";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/utils";
 import BackButton from "@/ui/components/custom/back-button";
 import Link from "next/link";
 

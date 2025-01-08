@@ -1,7 +1,7 @@
 "use client"
 import { useEffect, useState, useMemo } from "react"
-import { cn } from "@/lib/utils"
-import { getRandomIntInclusive } from "@/lib/utils"
+import { cn } from "@/lib/utils/utils"
+import { getRandomIntInclusive } from "@/lib/utils/utils"
 import Image from "next/image"
 
 

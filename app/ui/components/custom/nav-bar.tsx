@@ -17,7 +17,7 @@ import {
     DropdownMenuTrigger,
 } from "@/ui/components/dropdown-menu"
 import MobileNavMenu from '@/ui/components/custom/mobile-nav-menu'
-import { cn } from '@/lib/utils'
+import { cn } from '@/lib/utils/utils'
 import { useEffect, useState } from 'react'
 import { Button } from '@/ui/components/custom/button'
 import Link from 'next/link'

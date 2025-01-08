@@ -4,15 +4,24 @@ import { Button } from "@/ui/components/custom/button";
 import { Label } from "@/ui/components/label";
 import { Input } from "@/ui/components/input";
 import Link from "next/link";
-import { useActionState } from 'react'
-import { login } from "@/(auth)/_lib/actions";
+import { useActionState, useEffect } from 'react'
+import { loginServerAction } from "@/(auth)/_lib/actions";
 import { LoginFormState } from "../_lib/definitions";
 
 
 export default function LoginForm() {
 
-    const initialState: LoginFormState = { message: "", errors: {} };
+    const initialState: LoginFormState = { message: "", errors: {}, token: '' };
+
     const [formState, formAction, isPending] = useActionState(login, initialState);
+
+    useEffect(() => {
+        // Here we want to 
+
+
+    }, [formState])
+
+
 
     console.log("formState", formState);
 

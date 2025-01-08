@@ -1,0 +1,1 @@
+export type Messages = string | string[] | { [key: string]: string | string[] };

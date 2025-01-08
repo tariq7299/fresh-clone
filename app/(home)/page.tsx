@@ -14,7 +14,7 @@ import { GlobeAsiaAustraliaIcon } from "@heroicons/react/24/outline";
 export default function Home() {
   return (
     <>
-      <main className="overflow-x-hidden">
+      <div className="overflow-x-hidden">
 
         {/* Nav bar */}
         <NavBar />
@@ -84,7 +84,7 @@ export default function Home() {
         </section>
 
 
-      </main >
+      </div >
 
       <footer >
         <div className=" bg-secondary-100">
