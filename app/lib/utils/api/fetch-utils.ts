@@ -89,8 +89,15 @@ export async function fetchApi<T>(
         ...(tags && { next: { tags } }),
     };
 
+    console.log("fetchOptions", fetchOptions)
     try {
         const response = await fetch(url, fetchOptions);
+
+
+        // console.log("responseerere", response)
+
+
+
 
         // Handle JSON responses
         const contentType = response.headers.get('content-type');
@@ -110,6 +117,7 @@ export async function fetchApi<T>(
                 );
             }
 
+            // console.log("dataaaa", data)
             return data as T;
         }
 
@@ -123,6 +131,7 @@ export async function fetchApi<T>(
         return await response.text() as T;
 
     } catch (error) {
+        // console.log("errorrrrr", error)
         if (error instanceof ApiError) {
             throw new ApiError(
                 error.success,

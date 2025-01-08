@@ -16,9 +16,11 @@ function setApiErrorMsg({
 }: {
     errResponse: ApiError | Error,
     // toast: (props: Toast) => void,
-    customErrorMsg: string | null,
+    customErrorMsg?: string | null,
     // errorCallback?: ErrorCallback
-}): string {
+}): string | string[] {
+
+    console.log("errResponsesdsd", errResponse)
 
     if (errResponse instanceof ApiError) {
         // if (axios.isAxiosError(errResponse)) {
@@ -27,10 +29,10 @@ function setApiErrorMsg({
         const statusCode = errResponse.status;
         const ErrorCode = errResponse.code;
 
-        let errorMessage = customErrorMsg || (errResponse.data as any)?.errors
+        let errorMessage = customErrorMsg || errResponse.errors || errResponse.message
 
-        if (statusCode === 401 || statusCode === 419 || statusCode === 403) {
-            errorMessage = errorMessage || 'Unauthorized: Please log in! Redirecting to login page...';
+        if (statusCode === 401 && errorMessage === "Unauthorized") {
+            errorMessage = errorMessage || 'Session expired, please login again!';
             // toastApiMsgs(errorMessage, "destructive");
             // setTimeout(() => {
             //     window.location.href = '/login';
@@ -86,13 +88,11 @@ function setApiErrorMsg({
     } else {
         console.log(errResponse)
         // toastApiMsgs(errResponse?.message || "Someting went wrong!", "destructive");
-        return errResponse?.message || "Someting went wrong!", "destructive"
+        return errResponse?.message || "Someting went wrong!"
         // errorCallback?.();
         // return 
 
     }
-
-
 }
 
 export { setApiErrorMsg }

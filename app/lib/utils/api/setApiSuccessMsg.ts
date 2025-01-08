@@ -11,7 +11,7 @@ function setApiSuccessMsg<T>({
 }: {
     successResponse: ApiResponse<T>,
     // showToast: boolean,
-    customSuccessMsg: string | null,
+    customSuccessMsg?: string | null,
     // successCallback?: SuccessCallback,
 }): string {
 

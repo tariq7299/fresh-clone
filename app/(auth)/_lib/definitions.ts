@@ -17,15 +17,17 @@ export const LoginFormSchema = z.object({
 })
 
 export type LoginFormState =
-    | {
+    {
+        messageType?: "client" | "server",
         errors?: {
             email?: string[]
             password?: string[]
         }
-        message?: string,
-        token?: string
+        message: string | string[],
+        token: string | null
+        success: boolean
     }
-    | undefined
+
 
 export type SessionData = {
     userId: string;
@@ -50,4 +52,6 @@ export type ApiResponseSessionData = {
 }
 
 
-export interface LoginResponse extends ApiResponse<ApiResponseSessionData> { }
+export interface LoginResponse extends ApiResponse<ApiResponseSessionData> {
+
+}

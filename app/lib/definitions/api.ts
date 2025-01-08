@@ -21,6 +21,7 @@ export type ApiResponseCode =
 
 
 export interface ApiResponse<T> {
+    status: number,
     success: boolean,
     code: ApiResponseCode,
     message: string,
