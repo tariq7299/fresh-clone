@@ -31,8 +31,18 @@ function setApiErrorMsg({
 
         let errorMessage = customErrorMsg || errResponse.errors || errResponse.message
 
-        if (statusCode === 401 && errorMessage === "Unauthorized") {
+        if (statusCode === 401 && errResponse.message === "Unauthenticated.") {
             errorMessage = errorMessage || 'Session expired, please login again!';
+            // toastApiMsgs(errorMessage, "destructive");
+            // setTimeout(() => {
+            //     window.location.href = '/login';
+            // }, 4000);
+            // errorCallback?.();
+            return errorMessage; // Exit the function early
+        }
+
+        if (statusCode === 403 && ErrorCode === "NOT_VERIFIED") {
+            errorMessage = errorMessage || "Email verification required. Please verify your email first.";
             // toastApiMsgs(errorMessage, "destructive");
             // setTimeout(() => {
             //     window.location.href = '/login';
