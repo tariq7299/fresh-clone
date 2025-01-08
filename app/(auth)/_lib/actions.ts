@@ -5,8 +5,10 @@ import { redirect } from 'next/navigation'
 import { createSession } from '@/(auth)/_lib/sessions';
 import { SessionData } from '@/(auth)/_lib/definitions';
 import { authService } from '@/lib/utils/api-services';
+import { LoginResponse } from '@/(auth)/_lib/definitions';
+import { fetchApi } from '@/lib/utils/fetch-utils';
 
-export async function loginServerAction(state: LoginFormState, formData: FormData) {
+export async function login(state: LoginFormState, formData: FormData) {
 
     // Validate form fields
     const validatedFields = LoginFormSchema.safeParse({
@@ -28,7 +30,13 @@ export async function loginServerAction(state: LoginFormState, formData: FormDat
     // const response = await authenticate(validatedFields.data)
     try {
 
-        const response = await authService.login(validatedFields.data.email, validatedFields.data.password)
+        // const response = await authService.login(validatedFields.data.email, validatedFields.data.password)
+
+        const response = await fetchApi<LoginResponse>('/auth/stakeholder/login', {
+            method: 'POST',
+            body: validatedFields.data,
+            auth: false,
+        });
 
         console.log("response", response);
 

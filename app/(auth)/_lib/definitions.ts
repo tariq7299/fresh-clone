@@ -1,5 +1,6 @@
 // auth/lib/definitions
 import { z } from 'zod'
+import { ApiResponse } from '@/lib/definitions/api'
 
 export const LoginFormSchema = z.object({
 
@@ -35,3 +36,18 @@ export type SessionData = {
     isVerified: boolean;
     token: string;
 }
+
+export type ApiResponseSessionData = {
+    user: {
+        id: string;
+        name: string;
+        email: string;
+        role: 'stakeholder' | 'customer' | 'admin';
+        phone_number: 'string';
+        is_verified: boolean;
+    }
+    token: string;
+}
+
+
+export interface LoginResponse extends ApiResponse<ApiResponseSessionData> { }

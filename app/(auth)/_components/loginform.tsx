@@ -5,7 +5,7 @@ import { Label } from "@/ui/components/label";
 import { Input } from "@/ui/components/input";
 import Link from "next/link";
 import { useActionState, useEffect } from 'react'
-import { loginServerAction } from "@/(auth)/_lib/actions";
+import { login } from "@/(auth)/_lib/actions";
 import { LoginFormState } from "../_lib/definitions";
 
 
