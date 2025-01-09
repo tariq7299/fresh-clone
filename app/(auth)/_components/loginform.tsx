@@ -14,7 +14,6 @@ import { Alert, AlertDescription, AlertTitle } from "@/ui/components/alert";
 import { AlertCircle } from "lucide-react"
 import useLocalStorage from "@/lib/hooks/use-local-storage";
 import { useRouter } from 'next/navigation'
-import { redirectToOtpIfNotVerified } from "@/lib/utils/api/redirect-otp-if-not-verified";
 
 
 // Constants
@@ -32,15 +31,25 @@ export default function LoginForm() {
 
     const router = useRouter()
 
-    const [sessionData, setSessionData] = useLocalStorage<SessionData | null>({ key: "user", defaultValue: null })
+    const [sessionData, setSessionData] = useLocalStorage<SessionData | null>({
+        key: "user", defaultValue: {
+            token: "",
+            role: "",
+            email: "",
+            name: "",
+            id: "",
+        }
+    })
 
     const [formState, formAction, isPending] = useActionState(login, INITIAL_STATE);
+
+    console.log("isPending", isPending)
 
     // Get the sessionEnded query
     // THis query will be add to the url of login, when 
     const searchParams = useSearchParams();
     const sessionEnded = searchParams.get("sessionEnded") === "true";
-    console.log("formState", formState)
+    // console.log("formState", formState)
 
     // Move session cleanup to useEffect to avoid side effects during render
     useEffect(() => {
@@ -73,7 +82,6 @@ export default function LoginForm() {
             // Use localstorage to store user info
             // Then redirect user to his dashboard/home depending on his role
             setSessionData(formState.sessionData)
-            redirectToOtpIfNotVerified(formState.sessionData.status, formState.sessionData.responseCode)
             console.log("sessionData", sessionData)
 
             if (formState.sessionData.role === "stakeholder") {
@@ -97,17 +105,20 @@ export default function LoginForm() {
         <>
             {/* If the session ended, show the alert */}
             {sessionEnded && (
-                <Alert variant="destructive">
-                    <AlertCircle className="h-4 w-4" />
-                    <AlertTitle>Error</AlertTitle>
-                    <AlertDescription>
-                        Your session has expired. Please log in again.
-                    </AlertDescription>
-                </Alert>
+                <div className="absolute top-0 left-0 w-full pt-20 p-5">
+                    <Alert variant="destructive">
+                        <AlertCircle className="h-4 w-4" />
+                        <AlertTitle>Error</AlertTitle>
+                        <AlertDescription>
+                            Your session has expired. Please log in again.
+                        </AlertDescription>
+                    </Alert>
+                </div>
             )}
 
             <form action={formAction} className="flex flex-col gap-4">
                 <FormField
+                    disabled={isPending}
                     label="Email"
                     name="email"
                     type="email"
@@ -116,6 +127,7 @@ export default function LoginForm() {
                 />
 
                 <FormField
+                    disabled={isPending}
                     label={
                         <div className="flex justify-between w-full">
                             <span>Password</span>
@@ -131,11 +143,12 @@ export default function LoginForm() {
                 />
 
                 <Button
+                    loading={isPending}
                     variant="default"
                     className="w-full font-bold"
                     disabled={isPending}
                 >
-                    {isPending ? 'Loading...' : 'Continue'}
+                    {isPending ? 'Checking...' : 'Continue'}
                 </Button>
 
                 <div className="flex flex-col justify-center items-center">
@@ -162,9 +175,10 @@ interface FormFieldProps {
     type: string;
     placeholder: string;
     error?: string;
+    disabled?: boolean;
 }
 
-function FormField({ label, name, type, placeholder, error }: FormFieldProps) {
+function FormField({ label, name, type, placeholder, error, disabled }: FormFieldProps) {
     return (
         <div className="flex flex-col gap-2">
             <Label htmlFor={name}>{label}</Label>
@@ -173,6 +187,7 @@ function FormField({ label, name, type, placeholder, error }: FormFieldProps) {
                 name={name}
                 id={name}
                 placeholder={placeholder}
+                disabled={disabled}
             />
             {error && <p className="text-red-500 text-sm">{error}</p>}
         </div>

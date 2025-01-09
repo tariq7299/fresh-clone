@@ -9,10 +9,18 @@ import SecureLS from "secure-ls";
 
 export default function ProfessionalDashboard() {
     const ls = new SecureLS();
-    const sessionData = useLocalStorage<SessionData | null>({ key: "user", defaultValue: null })
+    const sessionData = useLocalStorage<SessionData | null>({
+        key: "user", defaultValue: {
+            token: "",
+            role: "",
+            email: "",
+            name: "",
+            id: "",
+        }
+    })
 
 
-    console.log("sessionData", sessionData)
+    console.log("sessionData", sessionData[0])
     console.log("token", ls.get("token"))
 
 
