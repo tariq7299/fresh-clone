@@ -5,43 +5,43 @@ import { Label } from "@/ui/components/label";
 import { Input } from "@/ui/components/input";
 import Link from "next/link";
 import { useActionState, useEffect } from 'react'
-import { login, logout } from "@/(auth)/_lib/actions";
-import { LoginFormState, SessionData } from "../_lib/definitions";
+import { loginUserServerSide, endUserSession } from "@/(auth)/_lib/auth-server-services";
+import { loginUserClientSide } from "@/(auth)/_lib/auth-client-services";
+import { } from "@/(auth)/_lib/auth-server-services";
+import { SuccessLoginFormState, ErrorLoginFormState, SessionData, LoginFieldErrors } from "../_lib/definitions";
+import { FormState } from "@/lib/definitions/definitions";
 import SecureLS from "secure-ls";
 import { toastApiMsgs } from "@/lib/utils/api/toastApiMsgs";
 import { useSearchParams } from 'next/navigation'
 import { Alert, AlertDescription, AlertTitle } from "@/ui/components/alert";
 import { AlertCircle } from "lucide-react"
 import useLocalStorage from "@/lib/hooks/use-local-storage";
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
+import { handleFormResponse } from "@/lib/utils/utils";
 
 
 // Constants
-const INITIAL_STATE: LoginFormState = {
-    messageType: "client",
-    message: "",
-    errors: {},
-    sessionData: null,
-    success: false
+const INITIAL_STATE: SuccessLoginFormState | ErrorLoginFormState = {
+    success: false,
+    clientFieldsErrors: null,
+    apiDataResponse: null,
+    apiMsgs: "",
+    formData: {
+        email: "",
+        password: ""
+    }
 };
 
 export default function LoginForm() {
 
-    const ls = new SecureLS();
+    // const { loginUserServerSide, loginUserClientSide, endUserSession } = authService
 
     const router = useRouter()
+    const pathname = usePathname()
 
-    const [sessionData, setSessionData] = useLocalStorage<SessionData | null>({
-        key: "user", defaultValue: {
-            token: "",
-            role: "",
-            email: "",
-            name: "",
-            id: "",
-        }
-    })
+    const [_, setSessionData] = useLocalStorage<SessionData | null>({ key: "user", defaultValue: null })
 
-    const [formState, formAction, isPending] = useActionState(login, INITIAL_STATE);
+    const [formState, formAction, isPending] = useActionState(loginUserServerSide, INITIAL_STATE);
 
     console.log("isPending", isPending)
 
@@ -54,50 +54,26 @@ export default function LoginForm() {
     // Move session cleanup to useEffect to avoid side effects during render
     useEffect(() => {
         if (sessionEnded) {
-            endUserSession();
+            endUserSession(router, setSessionData, pathname);
         }
     }, [sessionEnded]);
 
-    const endUserSession = async () => {
-        try {
-            await logout();
-            ls.remove('token');
-        } catch (error) {
-            console.error('Error ending session:', error);
-            toastApiMsgs('Error ending session', "destructive");
-        }
-    };
 
     console.log("formState", formState)
 
     // Write commnets
     useEffect(() => {
 
-        if (!formState) return;
-
-        if (formState.success && formState.sessionData) {
-            ls.set('token', formState.sessionData.token);
-            toastApiMsgs(formState.message, "success");
-
-            // Use localstorage to store user info
-            // Then redirect user to his dashboard/home depending on his role
-            setSessionData(formState.sessionData)
-            console.log("sessionData", sessionData)
-
-            if (formState.sessionData.role === "stakeholder") {
-                router.push("/professional/dashboard")
-            } else if (formState.sessionData.role === "admin") {
-                router.push("/admin/dashboard")
-            } else if (formState.sessionData.role === "customer") {
-                router.push("/")
+        // Write types
+        // if (!formState) return;
+        handleFormResponse<SessionData, LoginFieldErrors>(
+            formState,
+            () => {
+                console.log("formState.apiDataResponse", formState.apiDataResponse)
+                loginUserClientSide(formState.apiDataResponse as SessionData, setSessionData, router)
             }
+        )
 
-        }
-
-        if (!formState.success && formState.messageType === "server") {
-            console.log("formState.message", formState.message)
-            toastApiMsgs(formState.message, "destructive");
-        }
 
     }, [formState]);
 
@@ -118,16 +94,20 @@ export default function LoginForm() {
 
             <form action={formAction} className="flex flex-col gap-4">
                 <FormField
+                    defaultValue={formState?.formData?.email}
                     disabled={isPending}
+                    required={true}
                     label="Email"
                     name="email"
                     type="email"
                     placeholder="Enter your email"
-                    error={formState?.errors?.email?.[0]}
+                    error={formState?.clientFieldsErrors?.email?.[0]}
                 />
 
                 <FormField
+                    defaultValue={formState?.formData?.password}
                     disabled={isPending}
+                    required={true}
                     label={
                         <div className="flex justify-between w-full">
                             <span>Password</span>
@@ -139,7 +119,7 @@ export default function LoginForm() {
                     name="password"
                     type="password"
                     placeholder="Enter your password"
-                    error={formState?.errors?.password?.[0]}
+                    error={formState?.clientFieldsErrors?.password?.[0]}
                 />
 
                 <Button
@@ -176,18 +156,22 @@ interface FormFieldProps {
     placeholder: string;
     error?: string;
     disabled?: boolean;
+    defaultValue?: string;
+    required?: boolean;
 }
 
-function FormField({ label, name, type, placeholder, error, disabled }: FormFieldProps) {
+function FormField({ label, name, type, placeholder, error, disabled, defaultValue, required }: FormFieldProps) {
     return (
         <div className="flex flex-col gap-2">
             <Label htmlFor={name}>{label}</Label>
             <Input
+                required={required}
                 type={type}
                 name={name}
                 id={name}
                 placeholder={placeholder}
                 disabled={disabled}
+                defaultValue={defaultValue}
             />
             {error && <p className="text-red-500 text-sm">{error}</p>}
         </div>

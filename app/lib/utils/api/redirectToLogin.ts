@@ -3,7 +3,7 @@
 import { redirect } from 'next/navigation'
 // import { deleteSession } from "@/(auth)/_lib/sessions";
 // import SecureLS from "secure-ls";
-import { navigateToLogin } from "@/lib/actions";
+import { navigateToLoginWithSessionEnded } from "@/(auth)/_lib/actions";
 
 // This function will be used in the responses of server side actions and also client side fetch responses
 // This sole purpose to show message in login that the current user is not session expired
@@ -22,7 +22,7 @@ export function redirectToLogin() {
     } else {
         // const ls = new SecureLS();
         // ls.remove('token');
-        navigateToLogin()
+        navigateToLoginWithSessionEnded()
         //     window.location.href = '/login?sessionEnded=true';
         // }
     }

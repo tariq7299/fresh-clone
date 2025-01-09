@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation'
-import { navigateToLogin } from "@/(auth)/_lib/actions";
+import { navigateToLoginWithSessionEnded } from "@/(auth)/_lib/actions";
 
 const UNAUTHORIZED_STATUS = 401 as const;
 const UNAUTHORIZED_MESSAGE = "Unauthenticated." as const;
@@ -26,7 +26,7 @@ export function redirectToLoginIfNotAuthenticated(status: number, responseMsg: s
             "use server";
             redirect(redirectUrl);
         } else {
-            navigateToLogin();
+            navigateToLoginWithSessionEnded();
         }
     }
 
