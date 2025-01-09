@@ -8,7 +8,7 @@ import { LoginResponse } from '@/(auth)/_lib/definitions';
 import { fetchApi } from '@/lib/utils/api/fetch-utils';
 import { setApiSuccessMsg } from '@/lib/utils/api/setApiSuccessMsg';
 import { setApiErrorMsg } from '@/lib/utils/api/setApiErrorMsg';
-import { checkIfAuthenticated } from '@/lib/utils/api/checkIfAuthenticated';
+// import { redirectToLoginIfNotAuthenticated } from '@/lib/utils/api/redirect-to-login-if-not-authenticated';
 import { ApiError } from 'next/dist/server/api-utils';
 
 
@@ -73,15 +73,15 @@ export async function login(state: LoginFormState, formData: FormData): Promise<
         // console.log("datatatatat", data)
 
         // Store the session in a secure http only cookie
-        // await createSession({
-        //     userId: response.data.user.id,
-        //     name: response.data.user.name,
-        //     email: response.data.user.email,
-        //     role: response.data.user.role,
-        //     phone: response.data.user.phone_number,
-        //     isVerified: response.data.user.is_verified,
-        //     token: response.data.token
-        // })
+        await createSession({
+            userId: response.data.user.id,
+            name: response.data.user.name,
+            email: response.data.user.email,
+            role: response.data.user.role,
+            phone: response.data.user.phone_number,
+            isVerified: response.data.user.is_verified,
+            token: response.data.token
+        })
 
 
 
@@ -113,4 +113,12 @@ export async function login(state: LoginFormState, formData: FormData): Promise<
 
 export async function logout() {
     return deleteSession()
+}
+
+export async function navigateToLogin() {
+    redirect("/login?sessionEnded=true")
+}
+
+export async function navigateToOtp() {
+    redirect("/login?sessionEnded=true")
 }
