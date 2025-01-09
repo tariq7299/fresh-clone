@@ -24,7 +24,7 @@ export type LoginFormState =
             password?: string[]
         }
         message: string | string[],
-        token: string | null
+        sessionData: SessionData | null
         success: boolean
     }
 

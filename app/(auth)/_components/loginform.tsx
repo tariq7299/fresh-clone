@@ -6,30 +6,42 @@ import { Input } from "@/ui/components/input";
 import Link from "next/link";
 import { useActionState, useEffect } from 'react'
 import { login, logout } from "@/(auth)/_lib/actions";
-import { LoginFormState } from "../_lib/definitions";
+import { LoginFormState, SessionData } from "../_lib/definitions";
 import SecureLS from "secure-ls";
 import { toastApiMsgs } from "@/lib/utils/api/toastApiMsgs";
 import { useSearchParams } from 'next/navigation'
-import { Alert, AlertCircle, AlertDescription, AlertTitle } from "@/ui/components/alert";
+import { Alert, AlertDescription, AlertTitle } from "@/ui/components/alert";
+import { AlertCircle } from "lucide-react"
+import useLocalStorage from "@/lib/hooks/use-local-storage";
+import { useRouter } from 'next/navigation'
+import { redirectToOtpIfNotVerified } from "@/lib/utils/api/redirect-otp-if-not-verified";
+
 
 // Constants
 const INITIAL_STATE: LoginFormState = {
     messageType: "client",
     message: "",
     errors: {},
-    token: null,
+    sessionData: null,
     success: false
 };
 
 export default function LoginForm() {
 
     const ls = new SecureLS();
+
+    const router = useRouter()
+
+    const [sessionData, setSessionData] = useLocalStorage<SessionData | null>({ key: "user", defaultValue: null })
+
     const [formState, formAction, isPending] = useActionState(login, INITIAL_STATE);
+
     // Get the sessionEnded query
     // THis query will be add to the url of login, when 
     const searchParams = useSearchParams();
     const sessionEnded = searchParams.get("sessionEnded") === "true";
     console.log("formState", formState)
+
     // Move session cleanup to useEffect to avoid side effects during render
     useEffect(() => {
         if (sessionEnded) {
@@ -54,11 +66,23 @@ export default function LoginForm() {
 
         if (!formState) return;
 
-        if (formState.success && formState.token) {
-            ls.set('token', formState.token);
+        if (formState.success && formState.sessionData) {
+            ls.set('token', formState.sessionData.token);
             toastApiMsgs(formState.message, "success");
 
-            // Use localstorage to 
+            // Use localstorage to store user info
+            // Then redirect user to his dashboard/home depending on his role
+            setSessionData(formState.sessionData)
+            redirectToOtpIfNotVerified(formState.sessionData.status, formState.sessionData.responseCode)
+            console.log("sessionData", sessionData)
+
+            if (formState.sessionData.role === "stakeholder") {
+                router.push("/professional/dashboard")
+            } else if (formState.sessionData.role === "admin") {
+                router.push("/admin/dashboard")
+            } else if (formState.sessionData.role === "customer") {
+                router.push("/")
+            }
 
         }
 
