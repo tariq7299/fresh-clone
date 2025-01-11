@@ -1,11 +1,13 @@
 export type Messages = string | string[] | { [key: string]: string | string[] };
 
-export interface ApiResponse<T> {
-    success: boolean
+
+export type ApiResponse<TApiData> = ApiSucess<TApiData> | ApiError
+export interface ApiSucess<TApiData> {
+    success: true
     status: number
     message: string
     code: number | string
-    data: T
+    data: TApiData
     errors: string[] | string | []
 }
 
@@ -25,14 +27,14 @@ export class ApiError extends Error {
     }
 }
 
-export type NetworkError = {
-    success: false,
-    status: 500,
-    message: "Network error",
-    code: 500,
-    data: null,
-    errors: []
-}
+// export type NetworkError = {
+//     success: false,
+//     status: 500,
+//     message: "Network error",
+//     code: 500,
+//     data: null,
+//     errors: []
+// }
 // export type ApiResponseCode =
 //     | 200 // OK
 //     | 201 // Created

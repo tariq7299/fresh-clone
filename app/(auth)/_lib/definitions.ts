@@ -1,6 +1,6 @@
 // auth/lib/definitions
 import { z } from 'zod'
-import { ApiResponse, ApiError, NetworkError } from '@/lib/definitions/api'
+// import { ApiResponse, ApiError, NetworkError } from '@/lib/definitions/api'
 import { FormState, SuccessFormState, ErrorFormState } from '@/lib/definitions/definitions'
 
 export const LoginFormSchema = z.object({
@@ -61,8 +61,6 @@ export type ApiResponseSessionData = {
     token: string;
 }
 
-export type LoginResponse = ApiResponse<ApiResponseSessionData> | ApiError | NetworkError
-
 // Create the schema for otp verification form
 
 export const OtpFormSchema = z.object({
@@ -81,9 +79,5 @@ export type OtpFieldErrors = {
 }
 // Create the SuccessOtpFormState and ErrorOtpFormState
 
-export type SuccessOtpFormState = SuccessFormState<OtpFormData, OtpFormData>
+export type SuccessOtpFormState = SuccessFormState<SessionData, OtpFormData>
 export type ErrorOtpFormState = ErrorFormState<OtpFieldErrors | null, OtpFormData>
-
-// Create the OtpResponse type
-
-export type OtpApiResponse = ApiResponse<ApiResponseSessionData>

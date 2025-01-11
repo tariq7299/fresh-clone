@@ -1,8 +1,8 @@
 "use server"
 
-import { SessionData } from "./definitions";
+import { ApiResponse } from "@/lib/definitions/api";
+import { ApiResponseSessionData, SessionData } from "./definitions";
 import { fetchApi } from "@/lib/utils/api/fetch-utils";
-import { LoginResponse } from "./definitions";
 import { LoginFormSchema } from "./definitions";
 import { createSession, deleteSession } from '@/(auth)/_lib/sessions';
 import { setApiSuccessMsg } from '@/lib/utils/api/setApiSuccessMsg';
@@ -13,11 +13,13 @@ import { SuccessLoginFormState, ErrorLoginFormState } from "./definitions";
 import { redirect } from 'next/navigation'
 import { logoutUserClientSide } from "./auth-client-services";
 import { ApiError } from "@/lib/definitions/api";
-import { NetworkError } from "@/lib/definitions/api";
-export const authenticateUser = async (formData: FormData): Promise<LoginResponse> => {
+
+
+
+export const authenticateUser = async (formData: FormData): Promise<ApiResponse<ApiResponseSessionData>> => {
 
     try {
-        const response = await fetchApi<LoginResponse>('/auth/stakeholder/login', {
+        const response = await fetchApi<ApiResponse<ApiResponseSessionData>>('/auth/stakeholder/login', {
             method: 'POST',
             body: {
                 email: formData.get('email'),
@@ -28,19 +30,8 @@ export const authenticateUser = async (formData: FormData): Promise<LoginRespons
         return response
     } catch (error) {
 
-        if (error instanceof ApiError) {
-            return error
-        } else {
-            console.error("Error", error)
-            return {
-                success: false,
-                status: 500,
-                message: "Network error",
-                code: 500,
-                data: null,
-                errors: []
-            }
-        }
+        return error as ApiError
+
 
     }
 }

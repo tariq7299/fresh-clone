@@ -51,8 +51,8 @@ export async function navigateToLoginWithSessionEnded() {
     redirect("/login?sessionEnded=true")
 }
 
-export async function navigateToOtp() {
-    redirect("/login?notVerified=true")
+export async function navigateToOtp(email: string) {
+    redirect("/login?notVerified=true&email=" + email)
 }
 
 

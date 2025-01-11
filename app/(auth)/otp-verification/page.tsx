@@ -12,12 +12,15 @@ import { AlertCircle } from "lucide-react"
 export default async function OtpVerificationPage(props: {
     searchParams?: Promise<{
         notVerified?: string;
+        email?: string;
     }>
 }) {
 
     const searchParams = await props.searchParams
     const notVerified = searchParams?.notVerified || "";
+    const email = searchParams?.email || "";
 
+    if (notVerified && !email) throw new Error("No email provided for otp verfication!")
 
     return (
         <>
@@ -43,7 +46,7 @@ export default async function OtpVerificationPage(props: {
 
                 <p className="text-muted-foreground text-sm text-center pb-4">Please enter the 6-digit verification code sent to your email address</p>
 
-                <OtpForm />
+                <OtpForm email={email} />
 
 
             </div>

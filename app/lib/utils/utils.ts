@@ -27,7 +27,7 @@ export function handleFormResponse<ApiDataResponseType, ClientFieldsErrors, Form
   } else {
     if (formState.apiMsgs) {
       toastApiMsgs(formState.apiMsgs, "destructive");
-      errorCallback?.();
     }
+    errorCallback?.();
   }
 }

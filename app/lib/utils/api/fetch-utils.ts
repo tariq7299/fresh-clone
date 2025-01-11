@@ -68,14 +68,8 @@ export async function fetchApi<T>(
         ...(tags && { next: { tags } }),
     };
 
-    console.log("fetchOptions", fetchOptions)
     try {
         const response = await fetch(url, fetchOptions);
-
-
-        // console.log("responseerere", response)
-
-
 
 
         // Handle JSON responses
@@ -96,7 +90,6 @@ export async function fetchApi<T>(
                 );
             }
 
-            // console.log("dataaaa", data)
             return data as T;
         }
 
@@ -110,7 +103,6 @@ export async function fetchApi<T>(
         return await response.text() as T;
 
     } catch (error) {
-        // console.log("errorrrrr", error)
         if (error instanceof ApiError) {
             throw new ApiError(
                 error.success,
@@ -122,10 +114,11 @@ export async function fetchApi<T>(
 
             );
         }
+        // Make this network error in the future ( maybe you can like create a new class that inerit of something...)
         throw new ApiError(
             false,
             500,
-            "Internal Server Error",
+            "Network error",
             500,
             null,
             []

@@ -44,13 +44,10 @@ export default function LoginForm() {
 
     const [formState, formAction, isPending] = useActionState(login, INITIAL_STATE);
 
-    console.log("isPending", isPending)
-
     // Get the sessionEnded query
     // THis query will be add to the url of login, when 
     const searchParams = useSearchParams();
     const sessionEnded = searchParams.get("sessionEnded") === "true";
-    // console.log("formState", formState)
 
     // Move session cleanup to useEffect to avoid side effects during render
     useEffect(() => {
@@ -67,7 +64,7 @@ export default function LoginForm() {
 
         // Write types
         // if (!formState) return;
-        handleFormResponse<SessionData, LoginFieldErrors, LoginFormData>(
+        handleFormResponse(
             formState,
             () => {
                 console.log("formState.apiDataResponse", formState.apiDataResponse)

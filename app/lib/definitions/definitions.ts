@@ -21,7 +21,7 @@ export type ErrorFormState<TErrors, TFormData> = {
     success: false;
     clientFieldsErrors: TErrors;
     apiDataResponse: null;
-    apiMsgs: string | string[];
+    apiMsgs: string | string[] | { [key: string]: any };
     formData: TFormData;
 }
 
