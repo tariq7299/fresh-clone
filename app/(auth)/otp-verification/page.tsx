@@ -20,7 +20,7 @@ export default async function OtpVerificationPage(props: {
     const notVerified = searchParams?.notVerified || "";
     const email = searchParams?.email || "";
 
-    if (notVerified && !email) throw new Error("No email provided for otp verfication!")
+    if (!email) throw new Error("No email provided for otp verfication!")
 
     return (
         <>
