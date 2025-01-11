@@ -20,7 +20,7 @@ import { useRouter, usePathname } from 'next/navigation'
 import { handleFormResponse } from "@/lib/utils/utils";
 import { PasswordInput } from "@/ui/components/custom/password-input";
 import { LoginFormData } from "../_lib/definitions";
-
+import { login } from "../_lib/actions";
 // Constants
 const INITIAL_STATE: SuccessLoginFormState | ErrorLoginFormState = {
     success: false,
@@ -42,7 +42,7 @@ export default function LoginForm() {
 
     const [_, setSessionData] = useLocalStorage<SessionData | null>({ key: "user", defaultValue: null })
 
-    const [formState, formAction, isPending] = useActionState(loginUserServerSide, INITIAL_STATE);
+    const [formState, formAction, isPending] = useActionState(login, INITIAL_STATE);
 
     console.log("isPending", isPending)
 

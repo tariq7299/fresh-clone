@@ -1,7 +1,7 @@
 "use server"
 
 import { SessionData } from "./definitions";
-import { ApiError, fetchApi } from "@/lib/utils/api/fetch-utils";
+import { fetchApi } from "@/lib/utils/api/fetch-utils";
 import { LoginResponse } from "./definitions";
 import { LoginFormSchema } from "./definitions";
 import { createSession, deleteSession } from '@/(auth)/_lib/sessions';
@@ -12,37 +12,11 @@ import { toastApiMsgs } from "@/lib/utils/api/toastApiMsgs";
 import { SuccessLoginFormState, ErrorLoginFormState } from "./definitions";
 import { redirect } from 'next/navigation'
 import { logoutUserClientSide } from "./auth-client-services";
-
-// This is the server side login function
-// It will be used to login the user and return the form state
-// It will be used in the login form component
-export const loginUserServerSide = async (formState: SuccessLoginFormState | ErrorLoginFormState, formData: FormData): Promise<SuccessLoginFormState | ErrorLoginFormState> => {
-    'use server';
-
-    // Validate form fields
-    const validatedFields = LoginFormSchema.safeParse({
-        email: formData.get('email') as string,
-        password: formData.get('password') as string,
-    })
-
-    // If any form fields are invalid, return early
-    if (!validatedFields.success) {
-        return {
-            success: false,
-            clientFieldsErrors: validatedFields.error.flatten().fieldErrors,
-            apiDataResponse: null,
-            apiMsgs: "",
-            formData: {
-                email: formData.get('email') as string,
-                password: formData.get('password') as string,
-            }
-        }
-    }
-
-    let sessionData: SessionData | null = null;
+import { ApiError } from "@/lib/definitions/api";
+import { NetworkError } from "@/lib/definitions/api";
+export const authenticateUser = async (formData: FormData): Promise<LoginResponse> => {
 
     try {
-
         const response = await fetchApi<LoginResponse>('/auth/stakeholder/login', {
             method: 'POST',
             body: {
@@ -51,62 +25,20 @@ export const loginUserServerSide = async (formState: SuccessLoginFormState | Err
             },
             auth: false,
         });
-
-        sessionData = {
-            userId: response.data.user.id,
-            name: response.data.user.name,
-            email: response.data.user.email,
-            role: response.data.user.role,
-            phone: response.data.user.phone_number,
-            isVerified: response.data.user.is_verified,
-            token: response.data.token
-        }
-
-        // Store the session in a secure http only cookie
-        // This will be used to authenticate the user in the next requests
-        // This is only used in the server side and server actions 
-        await createSession(sessionData)
-
-        const successMsg = setApiSuccessMsg({ successResponse: response })
-
-        return {
-            success: true,
-            clientFieldsErrors: null,
-            apiDataResponse: sessionData,
-            apiMsgs: successMsg,
-            formData: {
-                email: formData.get('email') as string,
-                password: formData.get('password') as string,
-            }
-        }
-
+        return response
     } catch (error) {
 
         if (error instanceof ApiError) {
-            const errorMsg = setApiErrorMsg({ errResponse: error })
-            redirectToOtpIfNotVerified(error.status, error.code)
-            return {
-                success: false,
-                clientFieldsErrors: null,
-                apiDataResponse: null,
-                apiMsgs: errorMsg,
-                formData: {
-                    email: formData.get('email') as string,
-                    password: formData.get('password') as string,
-                }
-            }
-
+            return error
         } else {
             console.error("Error", error)
             return {
                 success: false,
-                clientFieldsErrors: null,
-                apiDataResponse: null,
-                apiMsgs: "",
-                formData: {
-                    email: formData.get('email') as string,
-                    password: formData.get('password') as string,
-                }
+                status: 500,
+                message: "Network error",
+                code: 500,
+                data: null,
+                errors: []
             }
         }
 
@@ -114,8 +46,11 @@ export const loginUserServerSide = async (formState: SuccessLoginFormState | Err
 }
 
 
+export const loginUserServerSide = async (sessionData: SessionData): Promise<void> => {
+    await createSession(sessionData)
+}
+
 export const logoutUserServerSide = async (): Promise<void> => {
-    'use server';
     await deleteSession()
 }
 

@@ -1,5 +1,6 @@
 import { getSession } from "@/(auth)/_lib/sessions";
 import SecureLS from 'secure-ls';
+import { ApiError } from "@/lib/definitions/api";
 
 type FetchOptions = {
     method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
@@ -11,29 +12,7 @@ type FetchOptions = {
     auth?: boolean;
 };
 
-export interface ApiResponse<T> {
-    success: boolean
-    status: number
-    message: string
-    code: number
-    data: T
-    errors: string[] | string | []
-}
 
-export class ApiError extends Error {
-    constructor(
-        public success: boolean,
-        public status: number,
-        message: string,
-        public code: number | string,
-        public data: null,
-        public errors: string[] | string | []
-    ) {
-        super(message);
-        this.name = 'ApiError';
-
-    }
-}
 
 export async function fetchApi<T>(
     endpoint: string,
@@ -143,8 +122,13 @@ export async function fetchApi<T>(
 
             );
         }
-        throw new Error(
-            'Network error'
+        throw new ApiError(
+            false,
+            500,
+            "Internal Server Error",
+            500,
+            null,
+            []
         );
     }
 } 

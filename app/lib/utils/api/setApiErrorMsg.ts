@@ -4,7 +4,7 @@
 // import { ErrorCallback } from '../types';
 // import { toast } from '@/components/ui/use-toast'
 // import { toast } from "sonner"
-import { ApiError } from './fetch-utils';
+import { ApiError, NetworkError } from '@/lib/definitions/api';
 
 
 
@@ -14,7 +14,7 @@ function setApiErrorMsg({
     customErrorMsg = null
     // errorCallback?: ErrorCallback
 }: {
-    errResponse: ApiError | Error,
+    errResponse: ApiError | NetworkError,
     // toast: (props: Toast) => void,
     customErrorMsg?: string | null,
     // errorCallback?: ErrorCallback

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 // import { businessService } from '@/lib/api-services/business-service';
-import { ApiError } from '@/lib/utils/api/fetch-utils';
+import { ApiError } from '@/lib/definitions/api';
 import { Label } from "@/ui/components/label";
 import { Input } from "@/ui/components/input";
 import { Textarea } from "@/ui/components/textarea";

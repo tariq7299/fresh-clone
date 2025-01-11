@@ -5,10 +5,9 @@ import { redirect } from 'next/navigation'
 // This is the client side login function
 // It will be used to login the user and return nothing
 // It will be used in the loginform page after the form is submitted
-export const loginUserClientSide = (apiDataResponse: SessionData, setSessionData: (sessionData: SessionData) => void, router: any): void => {
+export const loginUserClientSide = (sessionData: SessionData, setSessionData: (sessionData: SessionData) => void, router: any): void => {
 
     // const { apiDataResponse, success, apiMsgs } = formState;
-    const sessionData = apiDataResponse;
 
     const ls = new SecureLS();
     ls.set('token', sessionData.token);
@@ -55,6 +54,8 @@ export async function navigateToLoginWithSessionEnded() {
 export async function navigateToOtp() {
     redirect("/login?notVerified=true")
 }
+
+
 
 
 // export { authService };
