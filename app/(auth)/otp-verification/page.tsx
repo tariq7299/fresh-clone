@@ -1,10 +1,3 @@
-import {
-    InputOTP,
-    InputOTPGroup,
-    InputOTPSlot,
-    InputOTPSeparator
-} from "@/ui/components/input-otp"
-import { Button } from "@/ui/components/custom/button"
 import OtpForm from "../_components/otp-form"
 import { Alert, AlertDescription, AlertTitle } from "@/ui/components/alert";
 import { AlertCircle } from "lucide-react"

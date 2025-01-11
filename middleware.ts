@@ -3,7 +3,7 @@ import { cookies } from 'next/headers'
 import { getSession } from '@/(auth)/_lib/sessions'
 
 // 1. Specify protected and public routes
-const protectedRoutes = ['/professional/dashboard']
+const protectedRoutes = ['/professional/dashboard', '/admin/dashboard', '/customer']
 // These routes that the user can't access it while authenticated
 // So if he tries to access these then he will be directed to /dashboard
 const publicRoutes = ['/register', '/for-who', "/professional/onboarding", "/otp-verification"]
@@ -29,23 +29,38 @@ export default async function middleware(req: NextRequest) {
         return NextResponse.redirect(new URL('/login', req.nextUrl))
     }
 
-    // 5. Redirect to /dashboard if the user is authenticated
-    if (
-        isPublicRoute &&
-        session?.token &&
-        (!req.nextUrl.pathname.startsWith('/professional/dashboard') || !req.nextUrl.pathname.startsWith('/admin/dashboard'))
-    ) {
+    if (session?.token) {
 
-        if (session.role === "stakeholder") {
-            return NextResponse.redirect(new URL('/professional/dashboard', req.nextUrl))
-        } else if (session.role === "admin") {
-            return NextResponse.redirect(new URL('/admin/dashboard', req.nextUrl))
+        if (session?.role === "stakeholder") {
+
+            if (
+                isPublicRoute &&
+                (!req.nextUrl.pathname.startsWith('/professional/dashboard'))
+            ) return NextResponse.redirect(new URL('/professional/dashboard', req.nextUrl))
+
+            if ((req.nextUrl.pathname.startsWith('/admin')) || (req.nextUrl.pathname.startsWith('/customer'))) return NextResponse.redirect(new URL('/professional/dashboard', req.nextUrl))
+
+            return NextResponse.next()
+
+        } else if (session?.role === "admin") {
+            if (
+                isPublicRoute &&
+                !req.nextUrl.pathname.startsWith('/admin/dashboard')
+            ) return NextResponse.redirect(new URL('/admin/dashboard', req.nextUrl))
+
+            if ((req.nextUrl.pathname.startsWith('/professional')) || (req.nextUrl.pathname.startsWith('/customer'))) return NextResponse.redirect(new URL('/admin/dashboard', req.nextUrl))
+
+            return NextResponse.next()
+
         } else {
-            return NextResponse.redirect(new URL('/', req.nextUrl))
+
+            if (isPublicRoute) return NextResponse.redirect(new URL('/', req.nextUrl))
+
+            if ((req.nextUrl.pathname.startsWith('/professional')) || (req.nextUrl.pathname.startsWith('/admin'))) return NextResponse.redirect(new URL('/', req.nextUrl))
+
+            return NextResponse.next()
         }
     }
-
-    return NextResponse.next()
 }
 
 // Routes Middleware should not run on

@@ -64,19 +64,14 @@ export async function navigateToLogin() {
     redirect("/login")
 }
 
-export async function navigateToDashboard(role: "stakeholder" | "admin" | "customer") {
+export async function navigateToDashboard(role: "stakeholder" | "admin" | "user") {
 
     if (role === "stakeholder") {
         redirect("/professional/dashboard")
     } else if (role === "admin") {
         redirect("/admin/dashboard")
-    } else if (role === "customer") {
+    } else if (role === "user") {
         redirect("/")
     }
 
 }
-
-
-
-
-// export { authService };

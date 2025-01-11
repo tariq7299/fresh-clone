@@ -19,7 +19,7 @@ import { ApiError } from "@/lib/definitions/api";
 export const authenticateUser = async (formData: FormData): Promise<ApiResponse<ApiResponseSessionData>> => {
 
     try {
-        const response = await fetchApi<ApiResponse<ApiResponseSessionData>>('/auth/stakeholder/login', {
+        const response = await fetchApi<ApiResponse<ApiResponseSessionData>>('/auth/user/login', {
             method: 'POST',
             body: {
                 email: formData.get('email'),

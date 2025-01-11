@@ -114,7 +114,7 @@ export const verifyOtp = async (formState: SuccessOtpFormState | ErrorOtpFormSta
 
     try {
 
-        const response = await fetchApi<ApiResponse<ApiResponseSessionData>>('/auth/stakeholder/verify-otp', {
+        const response = await fetchApi<ApiResponse<ApiResponseSessionData>>('/auth/user/verify-otp', {
             method: 'POST',
             body: formDataPayload,
         }) as ApiSucess<ApiResponseSessionData>;

@@ -45,7 +45,7 @@ export default function OtpForm({ email = "" }: { email: string }) {
             () => {
                 console.log("formState.apiDataResponse", formState.apiDataResponse)
                 loginUserClientSide(formState.apiDataResponse as SessionData, setSessionData, router)
-                navigateToDashboard(formState.apiDataResponse?.role as "stakeholder" | "admin" | "customer")
+                navigateToDashboard(formState.apiDataResponse?.role as "stakeholder" | "admin" | "user")
             }, () => {
                 if (formState.clientFieldsErrors) {
                     const { otp, ...rest } = formState.clientFieldsErrors

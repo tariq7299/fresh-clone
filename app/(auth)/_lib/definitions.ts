@@ -43,7 +43,7 @@ export type User = {
     id: string;
     name: string;
     email: string;
-    role: 'stakeholder' | 'customer' | 'admin';
+    role: 'stakeholder' | 'user' | 'admin';
     phone_number: string;
     is_verified: boolean;
 }

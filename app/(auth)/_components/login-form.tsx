@@ -69,7 +69,7 @@ export default function LoginForm() {
             () => {
                 console.log("formState.apiDataResponse", formState.apiDataResponse)
                 loginUserClientSide(formState.apiDataResponse as SessionData, setSessionData, router)
-                navigateToDashboard(formState.apiDataResponse?.role as "stakeholder" | "admin" | "customer")
+                navigateToDashboard(formState.apiDataResponse?.role as "stakeholder" | "admin" | "user")
             }
         )
 
