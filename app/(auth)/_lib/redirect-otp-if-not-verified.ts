@@ -1,6 +1,6 @@
 
 import { redirect } from 'next/navigation'
-import { navigateToOtp } from "@/(auth)/_lib/auth-client-services";
+import { navigateUnverifiedToOtp } from "@/(auth)/_lib/auth-server-services";
 
 const UNAUTHORIZED_STATUS = 403 as const;
 const UNAUTHORIZED_CODE = "NOT_VERIFIED" as const;
@@ -19,9 +19,6 @@ export function redirectToOtpIfNotVerified(status: number, responseCode: string 
         if (isServer) {
             "use server";
             redirect(redirectUrl);
-        } else {
-            // Client side
-            navigateToOtp(email);
         }
     }
 

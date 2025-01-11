@@ -8,9 +8,9 @@ import {
 import { Button } from "@/ui/components/custom/button"
 import { SuccessOtpFormState, ErrorOtpFormState, SessionData, LoginFieldErrors, LoginFormData, OtpFieldErrors, OtpFormData } from "../_lib/definitions"
 import { useActionState, useEffect } from "react"
-import { verifyOtp } from "../_lib/actions"
+import { verifyOtp } from "../_lib/form-actions"
 import { handleFormResponse } from "@/lib/utils/utils"
-import { loginUserClientSide } from "../_lib/auth-client-services"
+import { loginUserClientSide, navigateToDashboard } from "../_lib/auth-client-services"
 import { useRouter } from "next/navigation"
 import useLocalStorage from "@/lib/hooks/use-local-storage";
 import { toastApiMsgs } from "@/lib/utils/api/toastApiMsgs"
@@ -45,6 +45,7 @@ export default function OtpForm({ email = "" }: { email: string }) {
             () => {
                 console.log("formState.apiDataResponse", formState.apiDataResponse)
                 loginUserClientSide(formState.apiDataResponse as SessionData, setSessionData, router)
+                navigateToDashboard(formState.apiDataResponse?.role as "stakeholder" | "admin" | "customer")
             }, () => {
                 if (formState.clientFieldsErrors) {
                     const { otp, ...rest } = formState.clientFieldsErrors

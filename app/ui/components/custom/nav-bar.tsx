@@ -57,7 +57,11 @@ export default function NavBar() {
                 <div className={cn("hidden md:inline-flex space-x-2 items-center",
                     isScrolled ? 'text-primary' : ' text-background'
                 )}>
-                    <Button borderType="fullRounded" variant="outline" className="bg-transparent font-source-sans font-semibold   hover:bg-muted/50">For business</Button>
+                    {/* <Link href="/register?type=professional" className={cn("font-semibold",
+                        isScrolled ? 'text-primary' : ' text-background'
+                    )}>For business</Link> */}
+
+                    <Button borderType="fullRounded" variant="nextLink" href="/register?type=professional" className="bg-transparent font-source-sans font-semibold   hover:bg-muted/50">For business</Button>
 
                     <DropdownMenu>
 
@@ -78,7 +82,7 @@ export default function NavBar() {
                             <DropdownMenuSeparator className='  my-2 mx-2 ' />
                             <DropdownMenuLabel className='font-bold  text-base'>Other</DropdownMenuLabel>
                             <DropdownMenuItem className=''>
-                                <Link href="/signup" className='font-semibold '>
+                                <Link href="/register?type=professional" className='font-semibold '>
                                     For business
                                 </Link>
                             </DropdownMenuItem>

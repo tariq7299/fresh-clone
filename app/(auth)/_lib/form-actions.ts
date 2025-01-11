@@ -2,13 +2,15 @@
 
 import { setApiSuccessMsg } from '@/lib/utils/api/setApiSuccessMsg';
 import { setApiErrorMsg } from '@/lib/utils/api/setApiErrorMsg';
-import { redirectToOtpIfNotVerified } from "@/lib/utils/api/redirect-otp-if-not-verified";
+import { redirectToOtpIfNotVerified } from "./redirect-otp-if-not-verified";
 import { loginUserServerSide, authenticateUser } from "./auth-server-services";
 import { ApiError, ApiSucess } from "@/lib/definitions/api";
 import { SessionData, LoginFormSchema, SuccessLoginFormState, ErrorLoginFormState, OtpFormSchema, SuccessOtpFormState, ErrorOtpFormState, OtpFormData } from "./definitions";
 import { fetchApi } from "@/lib/utils/api/fetch-utils";
 import { ApiResponse } from "@/lib/definitions/api";
 import { ApiResponseSessionData } from "./definitions";
+import { RegisterFormSchema, SuccessRegisterFormState, ErrorRegisterFormState, RegisterFormData } from "./definitions";
+import { redirect } from 'next/navigation';
 
 // This is the server side login function, that will be used in the login form component
 // It will be used to login the user and return the form state
@@ -41,15 +43,9 @@ export const login = async (formState: SuccessLoginFormState | ErrorLoginFormSta
 
     if (authenticateUserResponse.success) {
 
-        sessionData = {
-            userId: authenticateUserResponse.data.user.id,
-            name: authenticateUserResponse.data.user.name,
-            email: authenticateUserResponse.data.user.email,
-            role: authenticateUserResponse.data.user.role,
-            phone: authenticateUserResponse.data.user.phone_number,
-            isVerified: authenticateUserResponse.data.user.is_verified,
-            token: authenticateUserResponse.data.token
-        }
+        sessionData = { ...authenticateUserResponse.data.user, token: authenticateUserResponse.data.token }
+
+        console.log("sessionData", sessionData)
 
 
         const successMsg = setApiSuccessMsg({ successResponse: authenticateUserResponse })
@@ -125,15 +121,8 @@ export const verifyOtp = async (formState: SuccessOtpFormState | ErrorOtpFormSta
 
         const successMsg = setApiSuccessMsg({ successResponse: response })
 
-        sessionData = {
-            userId: response.data.user.id,
-            name: response.data.user.name,
-            email: response.data.user.email,
-            role: response.data.user.role,
-            phone: response.data.user.phone_number,
-            isVerified: response.data.user.is_verified,
-            token: response.data.token
-        }
+        sessionData = { ...response.data.user, token: response.data.token }
+        console.log("sessionData", sessionData)
 
         await loginUserServerSide(sessionData)
 
@@ -144,6 +133,78 @@ export const verifyOtp = async (formState: SuccessOtpFormState | ErrorOtpFormSta
             apiMsgs: successMsg,
             formData: payload
         }
+    } catch (error) {
+        const errorMsg = setApiErrorMsg({ errResponse: error as ApiError })
+        return {
+            success: false,
+            clientFieldsErrors: null,
+            apiDataResponse: null,
+            apiMsgs: errorMsg,
+            formData: payload
+        }
+    }
+
+}
+
+
+export const register = async (formState: SuccessRegisterFormState | ErrorRegisterFormState, formData: FormData): Promise<SuccessRegisterFormState | ErrorRegisterFormState> => {
+
+    const payload = {
+        userType: formState.formData.userType as "professional" | "customer",
+        email: formData.get('email') as string,
+        password: formData.get('password') as string,
+        password_confirmation: formData.get('password_confirmation') as string,
+        firstName: formData.get('firstName') as string,
+        lastName: formData.get('lastName') as string,
+        phone_number: formData.get('phone_number') as string,
+    }
+
+    const validatedFields = RegisterFormSchema.safeParse(payload)
+
+    console.log("payload", payload)
+    console.log("validatedFields", validatedFields)
+    console.log("formState", formState)
+
+    if (!validatedFields.success) {
+        return {
+            success: false,
+            clientFieldsErrors: validatedFields.error.flatten().fieldErrors,
+            apiDataResponse: null,
+            apiMsgs: "",
+            formData: payload
+        }
+    }
+
+    try {
+
+        const url = formState.formData.userType === "professional" ? "/auth/stakeholder/register" : "/auth/user/register"
+
+        const { firstName, lastName, ...rest } = payload
+        const formattedPayload = { ...rest, name: firstName + " " + lastName }
+
+        console.log("formattedPayload", formattedPayload)
+
+        const response = await fetchApi<ApiResponse<Omit<ApiResponseSessionData, "token">>>(url, {
+            method: 'POST',
+            body: formattedPayload,
+        }) as ApiSucess<Omit<ApiResponseSessionData, "token">>;
+
+        const successMsg = setApiSuccessMsg({ successResponse: response })
+
+        // console.log("sessionData", sessionData)
+
+        // await loginUserServerSide(sessionData)
+
+        // redirect("/otp-verification?email=" + payload.email)
+
+        return {
+            success: true,
+            clientFieldsErrors: null,
+            apiDataResponse: response.data.user,
+            apiMsgs: successMsg,
+            formData: payload
+        }
+
     } catch (error) {
         const errorMsg = setApiErrorMsg({ errResponse: error as ApiError })
         return {

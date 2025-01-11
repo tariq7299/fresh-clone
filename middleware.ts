@@ -6,8 +6,8 @@ import { getSession } from '@/(auth)/_lib/sessions'
 const protectedRoutes = ['/professional/dashboard']
 // These routes that the user can't access it while authenticated
 // So if he tries to access these then he will be directed to /dashboard
-const publicRoutes = ['/signup', '/for-who', "/professional/onboarding", "/otp-verification"]
-// const publicRoutes = ['/login', '/signup', '/for-who', "/professional/onboarding"]
+const publicRoutes = ['/register', '/for-who', "/professional/onboarding", "/otp-verification"]
+// const publicRoutes = ['/login', '/register', '/for-who', "/professional/onboarding"]
 
 export default async function middleware(req: NextRequest) {
 

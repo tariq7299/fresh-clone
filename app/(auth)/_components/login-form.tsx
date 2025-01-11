@@ -6,7 +6,7 @@ import { Input } from "@/ui/components/input";
 import Link from "next/link";
 import { useActionState, useEffect } from 'react'
 import { loginUserServerSide, endUserSession } from "@/(auth)/_lib/auth-server-services";
-import { loginUserClientSide } from "@/(auth)/_lib/auth-client-services";
+import { loginUserClientSide, navigateToDashboard } from "@/(auth)/_lib/auth-client-services";
 import { } from "@/(auth)/_lib/auth-server-services";
 import { SuccessLoginFormState, ErrorLoginFormState, SessionData, LoginFieldErrors } from "../_lib/definitions";
 import { FormState } from "@/lib/definitions/definitions";
@@ -20,7 +20,7 @@ import { useRouter, usePathname } from 'next/navigation'
 import { handleFormResponse } from "@/lib/utils/utils";
 import { PasswordInput } from "@/ui/components/custom/password-input";
 import { LoginFormData } from "../_lib/definitions";
-import { login } from "../_lib/actions";
+import { login } from "../_lib/form-actions";
 // Constants
 const INITIAL_STATE: SuccessLoginFormState | ErrorLoginFormState = {
     success: false,
@@ -69,6 +69,7 @@ export default function LoginForm() {
             () => {
                 console.log("formState.apiDataResponse", formState.apiDataResponse)
                 loginUserClientSide(formState.apiDataResponse as SessionData, setSessionData, router)
+                navigateToDashboard(formState.apiDataResponse?.role as "stakeholder" | "admin" | "customer")
             }
         )
 

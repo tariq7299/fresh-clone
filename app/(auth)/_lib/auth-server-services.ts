@@ -7,7 +7,7 @@ import { LoginFormSchema } from "./definitions";
 import { createSession, deleteSession } from '@/(auth)/_lib/sessions';
 import { setApiSuccessMsg } from '@/lib/utils/api/setApiSuccessMsg';
 import { setApiErrorMsg } from '@/lib/utils/api/setApiErrorMsg';
-import { redirectToOtpIfNotVerified } from "@/lib/utils/api/redirect-otp-if-not-verified";
+import { redirectToOtpIfNotVerified } from "@/(auth)/_lib/redirect-otp-if-not-verified";
 import { toastApiMsgs } from "@/lib/utils/api/toastApiMsgs";
 import { SuccessLoginFormState, ErrorLoginFormState } from "./definitions";
 import { redirect } from 'next/navigation'
@@ -49,6 +49,7 @@ export const endUserSession = async (router: any, setSessionData: (sessionData: 
     try {
         await logoutUserServerSide();
         logoutUserClientSide(router, setSessionData, pathname)
+        navigateToLoginWithSessionEnded()
     } catch (error) {
         toastApiMsgs('Error ending session', "destructive");
     }
@@ -60,9 +61,7 @@ export async function navigateToLoginWithSessionEnded() {
     redirect("/login?sessionEnded=true")
 }
 
-export async function navigateToOtp() {
-    redirect("/login?notVerified=true")
+export async function navigateToOtp(email: string) {
+    redirect("/otp-verification?email=" + email)
 }
 
-
-// export { authService };

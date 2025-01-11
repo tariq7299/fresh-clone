@@ -4,6 +4,7 @@ import { cva, type VariantProps } from 'class-variance-authority'
 
 import { cn } from '@/lib/utils/utils'
 import { ArrowPathIcon } from '@heroicons/react/24/outline'
+import Link from 'next/link'
 
 const buttonVariants = cva(
     'inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50',
@@ -27,6 +28,7 @@ const buttonVariants = cva(
                     'bg-accent text-accent-foreground shadow-sm hover:bg-accent/80',
                 ghost: 'hover:bg-accent/10 ',
                 link: 'text-primary underline-offset-4 hover:underline',
+                nextLink: 'border border-input bg-background shadow-sm hover:bg-accent-100 '
             },
             size: {
                 default: 'h-9 ',
@@ -55,6 +57,7 @@ type ButtonProps = ButtonPropsBase &
             loading?: boolean
             leftSection?: JSX.Element
             rightSection?: JSX.Element
+            href?: string
         }
     )
 
@@ -78,28 +81,59 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             leftSection,
             rightSection,
             disabled,
+            href,
             ...otherProps
         } = props
 
         return (
-            <button
-                className={cn(buttonVariants({ borderType, variant, size, className }))}
-                disabled={loading || disabled}
-                ref={ref}
-                {...otherProps}
-            >
-                {((leftSection && loading) ||
-                    (!leftSection && !rightSection && loading)) && (
-                        <ArrowPathIcon className='mr-2 h-4 w-4 animate-spin' />
-                    )}
-                {!loading && leftSection && <div className='mr-2'>{leftSection}</div>}
-                {children}
-                {!loading && rightSection && <div className='ml-2'>{rightSection}</div>}
-                {rightSection && loading && (
-                    <ArrowPathIcon className='ml-2 h-4 w-4 animate-spin' />
+            <>
+                {variant === "nextLink" ? (
+
+                    <Link href={href}
+                        className={
+                            cn(
+                                buttonVariants({ borderType, variant, size, className })
+                                , loading || disabled ? "disabled:opacity-50 disabled:pointer-events-none" : ""
+                            )
+                        }
+                    // disabled={loading || disabled}
+                    // ref={ref}
+                    // {...otherProps}
+                    >
+                        {((leftSection && loading) ||
+                            (!leftSection && !rightSection && loading)) && (
+                                <ArrowPathIcon className='mr-2 h-4 w-4 animate-spin' />
+                            )}
+                        {!loading && leftSection && <div className='mr-2'>{leftSection}</div>}
+                        {children}
+                        {!loading && rightSection && <div className='ml-2'>{rightSection}</div>}
+                        {rightSection && loading && (
+                            <ArrowPathIcon className='ml-2 h-4 w-4 animate-spin' />
+                        )}
+                    </Link>
+                ) : (
+                    <button
+                        className={cn(buttonVariants({ borderType, variant, size, className }))}
+                        disabled={loading || disabled}
+                        ref={ref}
+                        {...otherProps}
+                    >
+                        {((leftSection && loading) ||
+                            (!leftSection && !rightSection && loading)) && (
+                                <ArrowPathIcon className='mr-2 h-4 w-4 animate-spin' />
+                            )}
+                        {!loading && leftSection && <div className='mr-2'>{leftSection}</div>}
+                        {children}
+                        {!loading && rightSection && <div className='ml-2'>{rightSection}</div>}
+                        {rightSection && loading && (
+                            <ArrowPathIcon className='ml-2 h-4 w-4 animate-spin' />
+                        )}
+                    </button>
                 )}
-            </button>
+            </>
+
         )
+
     }
 )
 Button.displayName = 'Button'

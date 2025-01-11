@@ -15,13 +15,13 @@ export const loginUserClientSide = (sessionData: SessionData, setSessionData: (s
     setSessionData(sessionData,)
     console.log("sessionData", sessionData)
 
-    if (sessionData.role === "stakeholder") {
-        router.push("/professional/dashboard")
-    } else if (sessionData.role === "admin") {
-        router.push("/admin/dashboard")
-    } else if (sessionData.role === "customer") {
-        router.push("/")
-    }
+    // if (sessionData.role === "stakeholder") {
+    //     router.push("/professional/dashboard")
+    // } else if (sessionData.role === "admin") {
+    //     router.push("/admin/dashboard")
+    // } else if (sessionData.role === "customer") {
+    //     router.push("/")
+    // }
 
 
 }
@@ -30,10 +30,15 @@ export const logoutUserClientSide = (router: any, setSessionData: (sessionData: 
     const ls = new SecureLS();
     ls.remove('token');
     setSessionData(null)
-    if (pathname !== "/login") {
-        router.push("/login")
-    }
+    // if (pathname !== "/login") {
+    //     router.push("/login")
+    // }
 }
+
+
+
+
+
 
 
 // export const endUserSession = async (router: any, setSessionData: (sessionData: SessionData | null) => void, pathname: string) => {
@@ -52,7 +57,23 @@ export async function navigateToLoginWithSessionEnded() {
 }
 
 export async function navigateToOtp(email: string) {
-    redirect("/login?notVerified=true&email=" + email)
+    redirect("/otp-verification?email=" + email)
+}
+
+export async function navigateToLogin() {
+    redirect("/login")
+}
+
+export async function navigateToDashboard(role: "stakeholder" | "admin" | "customer") {
+
+    if (role === "stakeholder") {
+        redirect("/professional/dashboard")
+    } else if (role === "admin") {
+        redirect("/admin/dashboard")
+    } else if (role === "customer") {
+        redirect("/")
+    }
+
 }
 
 

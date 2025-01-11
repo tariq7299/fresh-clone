@@ -39,25 +39,21 @@ export type LoginFormData = {
     password: string;
 }
 
-export type SessionData = {
-    userId: string;
+export type User = {
+    id: string;
     name: string;
     email: string;
     role: 'stakeholder' | 'customer' | 'admin';
-    phone: 'string';
-    isVerified: boolean;
+    phone_number: string;
+    is_verified: boolean;
+}
+
+export type SessionData = User & {
     token: string;
 }
 
 export type ApiResponseSessionData = {
-    user: {
-        id: string;
-        name: string;
-        email: string;
-        role: 'stakeholder' | 'customer' | 'admin';
-        phone_number: 'string';
-        is_verified: boolean;
-    }
+    user: User
     token: string;
 }
 
@@ -79,5 +75,34 @@ export type OtpFieldErrors = {
 }
 // Create the SuccessOtpFormState and ErrorOtpFormState
 
-export type SuccessOtpFormState = SuccessFormState<SessionData, OtpFormData>
+export type SuccessRegisterFormState = SuccessFormState<Omit<SessionData, "token">, RegisterFormData>
+export type ErrorRegisterFormState = ErrorFormState<RegisterFieldErrors | null, RegisterFormData>
+
+export const RegisterFormSchema = z.object({
+    email: z.string().trim().min(1, { message: "Please enter your email" }).email("Invalid email address"),
+    password: z.string().trim().min(1, { message: 'Please enter your password' }),
+    password_confirmation: z.string().trim().min(1, { message: 'Please enter your password confirmation' }),
+    firstName: z.string().trim().min(1, { message: 'Please enter your first name' }),
+    lastName: z.string().trim().min(1, { message: 'Please enter your last name' }),
+    phone_number: z.string().trim().min(10, { message: 'Please enter your phone number' }).max(15, { message: 'Please enter a valid phone number' }),
+    userType: z.enum(["professional", "customer"])
+}).refine((data) => data.password === data.password_confirmation, {
+    message: "Passwords do not match",
+    path: ["password_confirmation"],
+})
+
+// Create the OtpFormData type
+export type RegisterFormData = z.infer<typeof RegisterFormSchema>
+
+export type RegisterFieldErrors = {
+    userType?: string | string[]
+    email?: string | string[]
+    password?: string | string[]
+    password_confirmation?: string | string[]
+    firstName?: string | string[]
+    lastName?: string | string[]
+    phone_number?: string | string[]
+}
+
+export type SuccessOtpFormState = SuccessFormState<Omit<SessionData, "token">, OtpFormData>
 export type ErrorOtpFormState = ErrorFormState<OtpFieldErrors | null, OtpFormData>

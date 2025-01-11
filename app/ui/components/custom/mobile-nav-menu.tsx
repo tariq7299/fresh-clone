@@ -43,7 +43,7 @@ export default function MobileNavMenu({ isScrolled }: { isScrolled: boolean }) {
                         </Link>
                     </li>
                     <li className='p-5 bg-background rounded-xl border-solid border border-gray-200 space-y-6'>
-                        <Link className=' flex items-center gap-2 ' href="/signup">
+                        <Link className=' flex items-center gap-2 ' href="/register?type=professional">
                             <BriefcaseIcon className='size-6' /> For business
                             <ChevronRightIcon className='size-4 ml-auto' />
                         </Link>
