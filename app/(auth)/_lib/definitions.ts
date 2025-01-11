@@ -31,23 +31,13 @@ export type LoginFieldErrors = {
 // This is the type of the form state for the login form
 // export type LoginFormState = SuccessLoginFormState | ErrorLoginFormState
 
-export type SuccessLoginFormState = SuccessFormState<SessionData>
-export type ErrorLoginFormState = ErrorFormState<LoginFieldErrors | null>
+export type SuccessLoginFormState = SuccessFormState<SessionData, LoginFormData>
+export type ErrorLoginFormState = ErrorFormState<LoginFieldErrors | null, LoginFormData>
 
-
-
-// export type LoginFormState =
-//     {
-//         messageType?: "client" | "server",
-//         errors?: {
-//             email?: string[]
-//             password?: string[]
-//         }
-//         message: string | string[],
-//         sessionData: SessionData | null
-//         success: boolean
-//     }
-
+export type LoginFormData = {
+    email: string;
+    password: string;
+}
 
 export type SessionData = {
     userId: string;
@@ -71,7 +61,34 @@ export type ApiResponseSessionData = {
     token: string;
 }
 
-
 export interface LoginResponse extends ApiResponse<ApiResponseSessionData> {
 
 }
+
+// Create the schema for otp verification form
+
+export const OtpFormSchema = z.object({
+    email: z.email().min(1)
+    otp: z.string().min(1, { message: 'Please enter your OTP' }),
+})
+
+// Create the OtpFormData type
+export type OtpFormData = {
+    email: string;
+    otp: string;
+    src: "register" // Maybe this will change
+}
+
+export type OtpFieldErrors = {
+    email?: string | string[]
+    otp?: string | string[]
+    src?: string | string[]
+}
+// Create the SuccessOtpFormState and ErrorOtpFormState
+
+export type SuccessOtpFormState = SuccessFormState<OtpFormData, OtpFormData>
+export type ErrorOtpFormState = ErrorFormState<OtpFieldErrors | null, OtpFormData>
+
+// Create the OtpResponse type
+
+export type OtpApiResponse = ApiResponse<ApiResponseSessionData>

@@ -1,6 +1,6 @@
 
 import { redirect } from 'next/navigation'
-import { navigateToOtp } from "@/(auth)/_lib/actions";
+import { navigateToOtp } from "@/(auth)/_lib/auth-client-services";
 
 const UNAUTHORIZED_STATUS = 403 as const;
 const UNAUTHORIZED_CODE = "NOT_VERIFIED" as const;

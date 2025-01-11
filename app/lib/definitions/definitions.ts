@@ -1,23 +1,31 @@
-// This is the generic type of the form state 
-// It will be used to define the type of the form state in any form
-export interface FormState<ApiDataResponse, ClientFieldsErrors> {
+// Base form state interface that represents the common structure for all form states
+export interface BaseFormState<TData, TErrors, TFormData> {
     success: boolean;
-    clientFieldsErrors: ClientFieldsErrors;
-    apiDataResponse: ApiDataResponse;
+    clientFieldsErrors: TErrors;
+    apiDataResponse: TData;
     apiMsgs: string | string[];
+    formData: TFormData;
 }
 
-
-export type SuccessFormState<ApiDataResponse> = FormState<ApiDataResponse, null> & {
+// Success form state with valid API response data and no client errors
+export type SuccessFormState<TData, TFormData> = {
     success: true;
     clientFieldsErrors: null;
-    apiDataResponse: ApiDataResponse;
+    apiDataResponse: TData;
     apiMsgs: string | string[];
+    formData: TFormData;
 }
 
-export type ErrorFormState<ClientFieldsErrors> = FormState<null, ClientFieldsErrors> & {
+// Error form state with client validation errors and no API response
+export type ErrorFormState<TErrors, TFormData> = {
     success: false;
-    clientFieldsErrors: ClientFieldsErrors;
+    clientFieldsErrors: TErrors;
     apiDataResponse: null;
     apiMsgs: string | string[];
+    formData: TFormData;
 }
+
+// Union type representing either success or error state
+export type FormState<TData, TErrors, TFormData> =
+    | SuccessFormState<TData, TFormData>
+    | ErrorFormState<TErrors, TFormData>;

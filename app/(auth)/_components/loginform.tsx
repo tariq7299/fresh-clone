@@ -19,7 +19,7 @@ import useLocalStorage from "@/lib/hooks/use-local-storage";
 import { useRouter, usePathname } from 'next/navigation'
 import { handleFormResponse } from "@/lib/utils/utils";
 import { PasswordInput } from "@/ui/components/custom/password-input";
-
+import { LoginFormData } from "../_lib/definitions";
 
 // Constants
 const INITIAL_STATE: SuccessLoginFormState | ErrorLoginFormState = {
@@ -67,7 +67,7 @@ export default function LoginForm() {
 
         // Write types
         // if (!formState) return;
-        handleFormResponse<SessionData, LoginFieldErrors>(
+        handleFormResponse<SessionData, LoginFieldErrors, LoginFormData>(
             formState,
             () => {
                 console.log("formState.apiDataResponse", formState.apiDataResponse)

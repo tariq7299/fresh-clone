@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation'
-import { navigateToLoginWithSessionEnded } from "@/(auth)/_lib/actions";
+import { navigateToLoginWithSessionEnded } from "@/(auth)/_lib/auth-client-services";
 
 const UNAUTHORIZED_STATUS = 401 as const;
 const UNAUTHORIZED_MESSAGE = "Unauthenticated." as const;

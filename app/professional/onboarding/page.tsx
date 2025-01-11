@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { businessService } from '@/lib/api-services';
-import { ApiError } from '@/lib/fetch-utils';
+// import { businessService } from '@/lib/api-services/business-service';
+import { ApiError } from '@/lib/utils/api/fetch-utils';
 import { Label } from "@/ui/components/label";
 import { Input } from "@/ui/components/input";
 import { Textarea } from "@/ui/components/textarea";
@@ -28,7 +28,7 @@ export default function ProfessionalOnboardingPage() {
                 websiteUrl: formData.get('websiteUrl') as string,
             };
 
-            await businessService.createBusiness(businessData);
+            // await businessService.createBusiness(businessData);
             // Handle success (e.g., redirect or show success message)
 
         } catch (err) {

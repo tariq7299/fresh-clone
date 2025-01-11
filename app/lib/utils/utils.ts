@@ -14,8 +14,8 @@ export function getRandomIntInclusive(min: number, max: number) {
   return Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled); // The maximum is inclusive and the minimum is inclusive
 }
 
-export function handleFormResponse<ApiDataResponseType, ClientFieldsErrors>
-  (formState: SuccessFormState<ApiDataResponseType> | ErrorFormState<ClientFieldsErrors>,
+export function handleFormResponse<ApiDataResponseType, ClientFieldsErrors, FormData>
+  (formState: SuccessFormState<ApiDataResponseType, FormData> | ErrorFormState<ClientFieldsErrors, FormData>,
     successCallback?: (apiDataResponse: ApiDataResponseType) => void,
     errorCallback?: () => void) {
   // if (!formState.apiMsgs && !formState.clientFieldsErrors && !formState.apiDataResponse && !formState.formData) return;
