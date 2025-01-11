@@ -18,6 +18,7 @@ import { AlertCircle } from "lucide-react"
 import useLocalStorage from "@/lib/hooks/use-local-storage";
 import { useRouter, usePathname } from 'next/navigation'
 import { handleFormResponse } from "@/lib/utils/utils";
+import { PasswordInput } from "@/ui/components/custom/password-input";
 
 
 // Constants
@@ -104,7 +105,20 @@ export default function LoginForm() {
                     error={formState?.clientFieldsErrors?.email?.[0]}
                 />
 
-                <FormField
+                <div className="flex flex-col gap-2">
+                    <Label htmlFor="password">Password</Label>
+                    <PasswordInput
+                        defaultValue={formState?.formData?.password}
+                        disabled={isPending}
+                        required={true}
+                        name="password"
+                        // type="password"
+                        placeholder="Enter your password"
+                    />
+                    {formState?.clientFieldsErrors?.password?.[0] && <p className="text-red-500 text-sm">{formState?.clientFieldsErrors?.password?.[0]}</p>}
+                </div>
+
+                {/* <FormField
                     defaultValue={formState?.formData?.password}
                     disabled={isPending}
                     required={true}
@@ -120,7 +134,7 @@ export default function LoginForm() {
                     type="password"
                     placeholder="Enter your password"
                     error={formState?.clientFieldsErrors?.password?.[0]}
-                />
+                /> */}
 
                 <Button
                     loading={isPending}
