@@ -13,7 +13,7 @@ export default function ProfessionalOnboardingPage() {
 
     return (
         <form>
-            <div className="flex flex-col gap-2 w-full max-w-lg p-5 py-24 min-h-dvh  items-center m-auto">
+            <div className="flex flex-col gap-2 w-full max-w-lg p-5 py-24 min-h-dvh  items-center m-auto space-y-5">
 
                 <div className="text-start space-y-1">
 
@@ -25,7 +25,7 @@ export default function ProfessionalOnboardingPage() {
                     <p className="text-sm text-muted-foreground "> This the brand name your clients will see. Your billing and legal name can be added later.</p>
                 </div>
 
-                <div className="flex flex-col gap-5 pt-5 h-full w-full pb-20">
+                <div className="flex flex-col gap-5  h-full w-full pb-20">
 
                     <div className="flex flex-col gap-2">
                         <Label className="font-bold" htmlFor="nameEn">Business name (En)</Label>
