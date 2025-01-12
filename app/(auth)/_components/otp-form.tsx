@@ -6,7 +6,7 @@ import {
     InputOTPSeparator
 } from "@/ui/components/input-otp"
 import { Button } from "@/ui/components/custom/button"
-import { SuccessOtpFormState, ErrorOtpFormState, SessionData } from "../_lib/definitions"
+import { SuccessOtpFormState, ErrorOtpFormState, SessionData, UserRole } from "../_lib/definitions"
 import { useActionState, useEffect } from "react"
 import { verifyOtp } from "../_lib/form-actions"
 import { handleFormResponse } from "@/lib/utils/utils"
@@ -42,7 +42,7 @@ export default function OtpForm({ email = "" }: { email: string }) {
             formState,
             () => {
                 loginUserClientSide(formState.apiDataResponse as SessionData, setSessionData, router)
-                navigateToDashboard(formState.apiDataResponse?.role as "stakeholder" | "admin" | "user")
+                navigateToDashboard(formState.apiDataResponse?.role as UserRole)
             }, () => {
                 if (formState.clientFieldsErrors) {
                     const { otp, ...rest } = formState.clientFieldsErrors

@@ -129,6 +129,305 @@ Automated Notifications:
 "Smart Reminder System
 Reduce no-shows with automated appointment reminders. Keep clients informed about their upcoming appointments without lifting a finger.
 
+
+## Businessess categories
+{
+    "success": true,
+    "code": 200,
+    "message": "Categories retrieved successfully",
+    "data": [
+        {
+            "id": 1,
+            "name": "Salon",
+            "description": "Hair and styling services",
+            "is_active": true,
+            "display_order": 1,
+            "created_at": "2025-01-12 16:36:16",
+            "updated_at": "2025-01-12 16:36:16"
+        },
+        {
+            "id": 2,
+            "name": "Spa",
+            "description": "Massage and relaxation services",
+            "is_active": true,
+            "display_order": 2,
+            "created_at": "2025-01-12 16:36:16",
+            "updated_at": "2025-01-12 16:36:16"
+        },
+        {
+            "id": 3,
+            "name": "Beauty Center",
+            "description": "Comprehensive beauty services",
+            "is_active": true,
+            "display_order": 3,
+            "created_at": "2025-01-12 16:36:16",
+            "updated_at": "2025-01-12 16:36:16"
+        },
+        {
+            "id": 4,
+            "name": "Dermatology Clinic",
+            "description": "Skin treatment services",
+            "is_active": true,
+            "display_order": 4,
+            "created_at": "2025-01-12 16:36:16",
+            "updated_at": "2025-01-12 16:36:16"
+        },
+        {
+            "id": 5,
+            "name": "Nail Center",
+            "description": "Nail care and manicure services",
+            "is_active": true,
+            "display_order": 5,
+            "created_at": "2025-01-12 16:36:16",
+            "updated_at": "2025-01-12 16:36:16"
+        },
+        {
+            "id": 6,
+            "name": "Massage Center",
+            "description": "Therapeutic massage services",
+            "is_active": true,
+            "display_order": 6,
+            "created_at": "2025-01-12 16:36:16",
+            "updated_at": "2025-01-12 16:36:16"
+        },
+        {
+            "id": 7,
+            "name": "Men's Salon",
+            "description": "Men's grooming services",
+            "is_active": true,
+            "display_order": 7,
+            "created_at": "2025-01-12 16:36:16",
+            "updated_at": "2025-01-12 16:36:16"
+        },
+        {
+            "id": 8,
+            "name": "Massage Therapy",
+            "description": "Specialized massage sessions",
+            "is_active": true,
+            "display_order": 8,
+            "created_at": "2025-01-12 16:36:16",
+            "updated_at": "2025-01-12 16:36:16"
+        },
+        {
+            "id": 9,
+            "name": "Laser Center",
+            "description": "Laser hair removal services",
+            "is_active": true,
+            "display_order": 9,
+            "created_at": "2025-01-12 16:36:16",
+            "updated_at": "2025-01-12 16:36:16"
+        },
+        {
+            "id": 10,
+            "name": "Dental Clinic",
+            "description": "Cosmetic dental services",
+            "is_active": true,
+            "display_order": 10,
+            "created_at": "2025-01-12 16:36:16",
+            "updated_at": "2025-01-12 16:36:16"
+        },
+        {
+            "id": 11,
+            "name": "Slimming Center",
+            "description": "Weight loss and fitness programs",
+            "is_active": true,
+            "display_order": 11,
+            "created_at": "2025-01-12 16:36:16",
+            "updated_at": "2025-01-12 16:36:16"
+        },
+        {
+            "id": 12,
+            "name": "Nail Art Center",
+            "description": "Nail art and design services",
+            "is_active": true,
+            "display_order": 12,
+            "created_at": "2025-01-12 16:36:16",
+            "updated_at": "2025-01-12 16:36:16"
+        },
+        {
+            "id": 13,
+            "name": "Physiotherapy Center",
+            "description": "Physical therapy services",
+            "is_active": true,
+            "display_order": 13,
+            "created_at": "2025-01-12 16:36:16",
+            "updated_at": "2025-01-12 16:36:16"
+        },
+        {
+            "id": 14,
+            "name": "Specialized Salon",
+            "description": "Specialized beauty services",
+            "is_active": true,
+            "display_order": 14,
+            "created_at": "2025-01-12 16:36:16",
+            "updated_at": "2025-01-12 16:36:16"
+        },
+        {
+            "id": 15,
+            "name": "Hair Beauty Center",
+            "description": "Advanced hair treatments",
+            "is_active": true,
+            "display_order": 15,
+            "created_at": "2025-01-12 16:36:16",
+            "updated_at": "2025-01-12 16:36:16"
+        },
+        {
+            "id": 16,
+            "name": "Makeup Center",
+            "description": "Professional makeup services",
+            "is_active": true,
+            "display_order": 16,
+            "created_at": "2025-01-12 16:36:16",
+            "updated_at": "2025-01-12 16:36:16"
+        },
+        {
+            "id": 17,
+            "name": "Moroccan Bath Center",
+            "description": "Traditional Moroccan bath services",
+            "is_active": true,
+            "display_order": 17,
+            "created_at": "2025-01-12 16:36:16",
+            "updated_at": "2025-01-12 16:36:16"
+        },
+        {
+            "id": 18,
+            "name": "Henna Center",
+            "description": "Henna art and design services",
+            "is_active": true,
+            "display_order": 18,
+            "created_at": "2025-01-12 16:36:16",
+            "updated_at": "2025-01-12 16:36:16"
+        },
+        {
+            "id": 19,
+            "name": "Bridal Beauty Center",
+            "description": "Bridal beauty services",
+            "is_active": true,
+            "display_order": 19,
+            "created_at": "2025-01-12 16:36:16",
+            "updated_at": "2025-01-12 16:36:16"
+        },
+        {
+            "id": 20,
+            "name": "Lash Center",
+            "description": "Eyelash extension services",
+            "is_active": true,
+            "display_order": 20,
+            "created_at": "2025-01-12 16:36:16",
+            "updated_at": "2025-01-12 16:36:16"
+        },
+        {
+            "id": 21,
+            "name": "Eyebrow Center",
+            "description": "Eyebrow design services",
+            "is_active": true,
+            "display_order": 21,
+            "created_at": "2025-01-12 16:36:16",
+            "updated_at": "2025-01-12 16:36:16"
+        },
+        {
+            "id": 22,
+            "name": "Facial Center",
+            "description": "Facial cleaning services",
+            "is_active": true,
+            "display_order": 22,
+            "created_at": "2025-01-12 16:36:16",
+            "updated_at": "2025-01-12 16:36:16"
+        },
+        {
+            "id": 23,
+            "name": "Thai Massage Center",
+            "description": "Thai massage services",
+            "is_active": true,
+            "display_order": 23,
+            "created_at": "2025-01-12 16:36:16",
+            "updated_at": "2025-01-12 16:36:16"
+        },
+        {
+            "id": 24,
+            "name": "Yoga Center",
+            "description": "Yoga classes and sessions",
+            "is_active": true,
+            "display_order": 24,
+            "created_at": "2025-01-12 16:36:16",
+            "updated_at": "2025-01-12 16:36:16"
+        },
+        {
+            "id": 25,
+            "name": "Rehabilitation Center",
+            "description": "Rehabilitation services",
+            "is_active": true,
+            "display_order": 25,
+            "created_at": "2025-01-12 16:36:16",
+            "updated_at": "2025-01-12 16:36:16"
+        },
+        {
+            "id": 26,
+            "name": "Acupuncture Center",
+            "description": "Acupuncture treatment services",
+            "is_active": true,
+            "display_order": 26,
+            "created_at": "2025-01-12 16:36:16",
+            "updated_at": "2025-01-12 16:36:16"
+        },
+        {
+            "id": 27,
+            "name": "Sports Massage Center",
+            "description": "Sports massage services",
+            "is_active": true,
+            "display_order": 27,
+            "created_at": "2025-01-12 16:36:16",
+            "updated_at": "2025-01-12 16:36:16"
+        },
+        {
+            "id": 28,
+            "name": "Foot Beauty Center",
+            "description": "Foot care and pedicure services",
+            "is_active": true,
+            "display_order": 28,
+            "created_at": "2025-01-12 16:36:16",
+            "updated_at": "2025-01-12 16:36:16"
+        },
+        {
+            "id": 29,
+            "name": "Integrated Beauty Center",
+            "description": "Comprehensive beauty services",
+            "is_active": true,
+            "display_order": 29,
+            "created_at": "2025-01-12 16:36:16",
+            "updated_at": "2025-01-12 16:36:16"
+        },
+        {
+            "id": 30,
+            "name": "Beauty Consultation Center",
+            "description": "Beauty consultation services",
+            "is_active": true,
+            "display_order": 30,
+            "created_at": "2025-01-12 16:36:16",
+            "updated_at": "2025-01-12 16:36:16"
+        },
+        {
+            "id": 31,
+            "name": "Hair Treatment Center",
+            "description": "Hair treatment services",
+            "is_active": true,
+            "display_order": 31,
+            "created_at": "2025-01-12 16:36:16",
+            "updated_at": "2025-01-12 16:36:16"
+        },
+        {
+            "id": 32,
+            "name": "Medical Beauty Center",
+            "description": "Medical beauty services",
+            "is_active": true,
+            "display_order": 32,
+            "created_at": "2025-01-12 16:36:16",
+            "updated_at": "2025-01-12 16:36:16"
+        }
+    ],
+    "errors": null
+}
+
 ## Notes
 
 ### http-only cookies vs Bearer tokens

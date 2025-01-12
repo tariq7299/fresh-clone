@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useActionState, useEffect } from 'react'
 import { endUserSession } from "@/(auth)/_lib/auth-client-services";
 import { loginUserClientSide, navigateToDashboard } from "@/(auth)/_lib/auth-client-services";
-import { SuccessLoginFormState, ErrorLoginFormState, SessionData } from "../_lib/definitions";
+import { SuccessLoginFormState, ErrorLoginFormState, SessionData, UserRole } from "../_lib/definitions";
 import { useSearchParams } from 'next/navigation'
 import { Alert, AlertDescription, AlertTitle } from "@/ui/components/alert";
 import { AlertCircle } from "lucide-react"
@@ -55,7 +55,7 @@ export default function LoginForm() {
             formState,
             () => {
                 loginUserClientSide(formState.apiDataResponse as SessionData, setSessionData, router)
-                navigateToDashboard(formState.apiDataResponse?.role as "stakeholder" | "admin" | "user")
+                navigateToDashboard(formState.apiDataResponse?.role as UserRole)
             }
         )
     }, [formState]);

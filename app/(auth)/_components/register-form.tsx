@@ -4,7 +4,7 @@ import { Label } from "@/ui/components/label";
 import { Input } from "@/ui/components/input";
 import { Button } from "@/ui/components/custom/button";
 import Link from "next/link";
-import { SuccessRegisterFormState, ErrorRegisterFormState, SessionData } from "../_lib/definitions";
+import { SuccessRegisterFormState, ErrorRegisterFormState, SessionData, UserRole } from "../_lib/definitions";
 import { useActionState, useEffect } from "react";
 import { register } from "../_lib/form-actions";
 import { handleFormResponse } from "@/lib/utils/utils";
@@ -22,7 +22,7 @@ export default function RegisterForm({ userType }: { userType: string }) {
         apiDataResponse: null,
         apiMsgs: "",
         formData: {
-            userType: userType as "customer" | "professional",
+            userType: userType as UserRole.Professional | UserRole.Customer,
             email: "",
             password: "",
             password_confirmation: "",
@@ -154,8 +154,8 @@ export default function RegisterForm({ userType }: { userType: string }) {
         <div className="flex justify-between items-center">
         </div>
         <div className="flex flex-col justify-center items-center">
-            <p className="font-bold text-center">{userType === "professional" ? "Have a business account?" : "Have a customer account?"}</p>
-            <Link href="/login " className=" text-center text-accent text-sm">{userType === "professional" ? "Sign in as a professional" : "Sign in as a customer"}</Link>
+            <p className="font-bold text-center">{userType === UserRole.Professional ? "Have a business account?" : "Have a customer account?"}</p>
+            <Link href="/login " className=" text-center text-accent text-sm">{userType === UserRole.Professional ? "Sign in as a professional" : "Sign in as a customer"}</Link>
 
         </div>
 

@@ -30,11 +30,17 @@ export type LoginFormData = {
     password: string;
 }
 
+export enum UserRole {
+    Professional = "professional",
+    Customer = "customer",
+    Admin = "admin"
+}
+
 export type User = {
     id: string;
     name: string;
     email: string;
-    role: 'stakeholder' | 'user' | 'admin';
+    role: UserRole;
     phone_number: string;
     is_verified: boolean;
 }

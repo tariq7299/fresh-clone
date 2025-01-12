@@ -1,4 +1,4 @@
-import { SessionData } from "./definitions";
+import { SessionData, UserRole } from "./definitions";
 import SecureLS from "secure-ls";
 import { redirect } from 'next/navigation'
 import { toastApiMsgs } from "@/lib/utils/api/toastApiMsgs";
@@ -31,13 +31,13 @@ export async function navigateToLogin() {
     redirect("/login")
 }
 
-export async function navigateToDashboard(role: "stakeholder" | "admin" | "user") {
+export async function navigateToDashboard(role: UserRole) {
 
-    if (role === "stakeholder") {
+    if (role === UserRole.Professional) {
         redirect("/professional/dashboard")
-    } else if (role === "admin") {
+    } else if (role === UserRole.Admin) {
         redirect("/admin/dashboard")
-    } else if (role === "user") {
+    } else if (role === UserRole.Customer) {
         redirect("/")
     }
 

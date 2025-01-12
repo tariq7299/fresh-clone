@@ -5,7 +5,7 @@ import { setApiErrorMsg } from '@/lib/utils/api/setApiErrorMsg';
 import { redirectToOtpIfNotVerified } from "./redirect-otp-if-not-verified";
 import { loginUserServerSide, authenticateUser } from "./auth-server-services";
 import { ApiError, ApiSucess } from "@/lib/definitions/api";
-import { SessionData, LoginFormSchema, SuccessLoginFormState, ErrorLoginFormState, OtpFormSchema, SuccessOtpFormState, ErrorOtpFormState } from "./definitions";
+import { SessionData, LoginFormSchema, SuccessLoginFormState, ErrorLoginFormState, OtpFormSchema, SuccessOtpFormState, ErrorOtpFormState, UserRole } from "./definitions";
 import { fetchApi } from "@/lib/utils/api/fetch-utils";
 import { ApiResponse } from "@/lib/definitions/api";
 import { ApiResponseSessionData } from "./definitions";
@@ -145,7 +145,7 @@ export const verifyOtp = async (formState: SuccessOtpFormState | ErrorOtpFormSta
 export const register = async (formState: SuccessRegisterFormState | ErrorRegisterFormState, formData: FormData): Promise<SuccessRegisterFormState | ErrorRegisterFormState> => {
 
     const payload = {
-        userType: formState.formData.userType as "professional" | "customer",
+        userType: formState.formData.userType as UserRole.Professional | UserRole.Customer,
         email: formData.get('email') as string,
         password: formData.get('password') as string,
         password_confirmation: formData.get('password_confirmation') as string,
@@ -168,7 +168,7 @@ export const register = async (formState: SuccessRegisterFormState | ErrorRegist
 
     try {
 
-        const url = formState.formData.userType === "professional" ? "/auth/stakeholder/register" : "/auth/user/register"
+        const url = formState.formData.userType === UserRole.Professional ? "/auth/stakeholder/register" : "/auth/user/register"
 
         const { firstName, lastName, ...rest } = payload
         const formattedPayload = { ...rest, name: firstName + " " + lastName }

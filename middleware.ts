@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { cookies } from 'next/headers'
 import { getSession } from '@/(auth)/_lib/sessions'
+import { UserRole } from '@/(auth)/_lib/definitions'
 
 // 1. Specify protected and public routes
 const protectedRoutes = ['/professional/dashboard', '/admin/dashboard', '/customer']
@@ -31,7 +32,7 @@ export default async function middleware(req: NextRequest) {
 
     if (session?.token) {
 
-        if (session?.role === "stakeholder") {
+        if (session?.role === UserRole.Professional) {
 
             if (
                 isPublicRoute &&
@@ -42,7 +43,7 @@ export default async function middleware(req: NextRequest) {
 
             return NextResponse.next()
 
-        } else if (session?.role === "admin") {
+        } else if (session?.role === UserRole.Admin) {
             if (
                 isPublicRoute &&
                 !req.nextUrl.pathname.startsWith('/admin/dashboard')
