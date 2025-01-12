@@ -8,7 +8,7 @@ import { SessionData } from "@/(auth)/_lib/definitions"
 import useLocalStorage from "@/lib/hooks/use-local-storage"
 
 export default function Customer() {
-    const [_, setSessionData] = useLocalStorage<SessionData | null>({ key: "user", defaultValue: null })
+    const [sessionData, setSessionData] = useLocalStorage<SessionData | null>({ key: "user", defaultValue: null })
 
 
     return <div>

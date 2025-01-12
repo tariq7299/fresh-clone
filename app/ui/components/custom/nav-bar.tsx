@@ -1,19 +1,13 @@
 
 'use client'
 
-import { ArrowRightEndOnRectangleIcon, Bars3Icon, ChevronDownIcon } from '@heroicons/react/24/outline'
+import { ArrowRightEndOnRectangleIcon, ChevronDownIcon } from '@heroicons/react/24/outline'
 import {
     DropdownMenu,
     DropdownMenuContent,
-    DropdownMenuGroup,
     DropdownMenuItem,
     DropdownMenuLabel,
-    DropdownMenuPortal,
     DropdownMenuSeparator,
-    DropdownMenuShortcut,
-    DropdownMenuSub,
-    DropdownMenuSubContent,
-    DropdownMenuSubTrigger,
     DropdownMenuTrigger,
 } from "@/ui/components/dropdown-menu"
 import MobileNavMenu from '@/ui/components/custom/mobile-nav-menu'
@@ -22,6 +16,7 @@ import { useEffect, useState } from 'react'
 import { Button } from '@/ui/components/custom/button'
 import Link from 'next/link'
 import { GlobeAsiaAustraliaIcon } from "@heroicons/react/24/outline";
+
 
 export default function NavBar() {
 
