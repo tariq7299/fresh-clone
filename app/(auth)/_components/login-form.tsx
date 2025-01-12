@@ -5,13 +5,9 @@ import { Label } from "@/ui/components/label";
 import { Input } from "@/ui/components/input";
 import Link from "next/link";
 import { useActionState, useEffect } from 'react'
-import { loginUserServerSide, endUserSession } from "@/(auth)/_lib/auth-server-services";
+import { endUserSession } from "@/(auth)/_lib/auth-client-services";
 import { loginUserClientSide, navigateToDashboard } from "@/(auth)/_lib/auth-client-services";
-import { } from "@/(auth)/_lib/auth-server-services";
-import { SuccessLoginFormState, ErrorLoginFormState, SessionData, LoginFieldErrors } from "../_lib/definitions";
-import { FormState } from "@/lib/definitions/definitions";
-import SecureLS from "secure-ls";
-import { toastApiMsgs } from "@/lib/utils/api/toastApiMsgs";
+import { SuccessLoginFormState, ErrorLoginFormState, SessionData } from "../_lib/definitions";
 import { useSearchParams } from 'next/navigation'
 import { Alert, AlertDescription, AlertTitle } from "@/ui/components/alert";
 import { AlertCircle } from "lucide-react"
@@ -19,7 +15,6 @@ import useLocalStorage from "@/lib/hooks/use-local-storage";
 import { useRouter, usePathname } from 'next/navigation'
 import { handleFormResponse } from "@/lib/utils/utils";
 import { PasswordInput } from "@/ui/components/custom/password-input";
-import { LoginFormData } from "../_lib/definitions";
 import { login } from "../_lib/form-actions";
 // Constants
 const INITIAL_STATE: SuccessLoginFormState | ErrorLoginFormState = {
@@ -34,9 +29,6 @@ const INITIAL_STATE: SuccessLoginFormState | ErrorLoginFormState = {
 };
 
 export default function LoginForm() {
-
-    // const { loginUserServerSide, loginUserClientSide, endUserSession } = authService
-
     const router = useRouter()
     const pathname = usePathname()
 
@@ -52,28 +44,20 @@ export default function LoginForm() {
     // Move session cleanup to useEffect to avoid side effects during render
     useEffect(() => {
         if (sessionEnded) {
-            endUserSession(router, setSessionData, pathname);
+            endUserSession(setSessionData);
         }
     }, [sessionEnded]);
 
 
-    console.log("formState", formState)
-
     // Write commnets
     useEffect(() => {
-
-        // Write types
-        // if (!formState) return;
         handleFormResponse(
             formState,
             () => {
-                console.log("formState.apiDataResponse", formState.apiDataResponse)
                 loginUserClientSide(formState.apiDataResponse as SessionData, setSessionData, router)
                 navigateToDashboard(formState.apiDataResponse?.role as "stakeholder" | "admin" | "user")
             }
         )
-
-
     }, [formState]);
 
     return (
@@ -110,29 +94,10 @@ export default function LoginForm() {
                         disabled={isPending}
                         required={true}
                         name="password"
-                        // type="password"
                         placeholder="Enter your password"
                     />
                     {formState?.clientFieldsErrors?.password?.[0] && <p className="text-red-500 text-sm">{formState?.clientFieldsErrors?.password?.[0]}</p>}
                 </div>
-
-                {/* <FormField
-                    defaultValue={formState?.formData?.password}
-                    disabled={isPending}
-                    required={true}
-                    label={
-                        <div className="flex justify-between w-full">
-                            <span>Password</span>
-                            <Link href="/forgot-password" className="text-accent text-sm">
-                                Forgot your password?
-                            </Link>
-                        </div>
-                    }
-                    name="password"
-                    type="password"
-                    placeholder="Enter your password"
-                    error={formState?.clientFieldsErrors?.password?.[0]}
-                /> */}
 
                 <Button
                     loading={isPending}
@@ -149,12 +114,6 @@ export default function LoginForm() {
                         Sign up
                     </Link>
                 </div>
-                {/* 
-            {formState?.message && (
-                <p className="mt-2 text-sm text-red-500">
-                    {formState.message}
-                </p>
-            )} */}
             </form>
         </>
     );

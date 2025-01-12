@@ -10,7 +10,7 @@ export default function HeroFilterField() {
             {/* Write types */}
             <div className="flex gap-2 p-1.5 border rounded-lg justify-between mt-8 lg:mt-16 items-center bg-white  ">
 
-                <Combobox triggerClassName={"border-0 w-full z-10 "} triggerIcon={null} labelClassName={"font-semibold"} popoverClassName={"w-[200px] sm:w-[400px]"} />
+                <Combobox triggerClassName={"border-0 w-full z-10 "} labelClassName={"font-semibold"} popoverClassName={"w-[200px] sm:w-[400px]"} />
 
                 <div className="self-stretch">
                     <Separator className=" me-1 h-full" orientation="vertical" />

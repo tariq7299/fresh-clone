@@ -1,6 +1,6 @@
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
-import { FormState, SuccessFormState, ErrorFormState } from "@/lib/definitions/definitions";
+import { SuccessFormState, ErrorFormState } from "@/lib/definitions/definitions";
 import { toastApiMsgs } from "@/lib/utils/api/toastApiMsgs";
 
 export function cn(...inputs: ClassValue[]) {
@@ -18,7 +18,6 @@ export function handleFormResponse<ApiDataResponseType, ClientFieldsErrors, Form
   (formState: SuccessFormState<ApiDataResponseType, FormData> | ErrorFormState<ClientFieldsErrors, FormData>,
     successCallback?: (apiDataResponse: ApiDataResponseType) => void,
     errorCallback?: () => void) {
-  // if (!formState.apiMsgs && !formState.clientFieldsErrors && !formState.apiDataResponse && !formState.formData) return;
   if (formState.success) {
     if (formState.apiMsgs) {
       toastApiMsgs(formState.apiMsgs, "success");

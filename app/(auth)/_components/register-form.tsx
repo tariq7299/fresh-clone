@@ -12,7 +12,6 @@ import { navigateToOtp } from "../_lib/auth-client-services";
 import useLocalStorage from "@/lib/hooks/use-local-storage";
 import { logoutUserServerSide } from "../_lib/auth-server-services";
 import { logoutUserClientSide } from "../_lib/auth-client-services";
-import { useRouter, usePathname } from "next/navigation";
 import { PhoneInput } from "@/ui/components/custom/phone-input";
 export default function RegisterForm({ userType }: { userType: string }) {
 
@@ -34,25 +33,18 @@ export default function RegisterForm({ userType }: { userType: string }) {
     };
     const [formState, formAction, isPending] = useActionState(register, INITIAL_STATE);
 
-    const router = useRouter()
-    const pathname = usePathname()
 
     const [_, setSessionData] = useLocalStorage<SessionData | null>({ key: "user", defaultValue: null })
 
     // Write commnets
     useEffect(() => {
-
-        // Write types
-        // if (!formState) return;
-
         handleFormResponse(
             formState,
             // This is a successCallback function that will be called only when the form is submitted and retured response is a success
             async () => {
-                console.log("formState.apiDataResponse", formState.apiDataResponse)
 
                 await logoutUserServerSide()
-                logoutUserClientSide(router, setSessionData, pathname)
+                logoutUserClientSide(setSessionData)
 
                 navigateToOtp(formState.apiDataResponse?.email as string)
             }
@@ -61,24 +53,23 @@ export default function RegisterForm({ userType }: { userType: string }) {
 
     }, [formState]);
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        // Write types
-        // if (!formState) return;
+    //     // Write types
+    //     // if (!formState) return;
 
-        handleFormResponse(
-            formState,
-            // This is a successCallback function that will be called only when the form is submitted and retured response is a success
-            async () => {
-                console.log("formState.apiDataResponse", formState.apiDataResponse)
-                await logoutUserServerSide()
-                logoutUserClientSide(router, setSessionData, pathname)
-                navigateToOtp(formState.apiDataResponse?.email as string)
-            }
-        )
+    //     handleFormResponse(
+    //         formState,
+    //         // This is a successCallback function that will be called only when the form is submitted and retured response is a success
+    //         async () => {
+    //             await logoutUserServerSide()
+    //             logoutUserClientSide( setSessionData, pathname)
+    //             navigateToOtp(formState.apiDataResponse?.email as string)
+    //         }
+    //     )
 
 
-    }, []);
+    // }, []);
 
 
 
@@ -125,13 +116,6 @@ export default function RegisterForm({ userType }: { userType: string }) {
         <div className="flex flex-col gap-2">
             <Label htmlFor="phone_number">Phone number</Label>
             <PhoneInput name="phone_number" countries={['EG', 'SA']} defaultCountry='SA' placeholder='0501234567' />
-            {/* <Input
-                defaultValue={formState?.formData?.phone_number}
-                type="text"
-                name="phone_number"
-                id="phone_number"
-                placeholder="Enter your phone number"
-            /> */}
             {formState.clientFieldsErrors?.phone_number && <p className="text-red-500 text-sm">{formState.clientFieldsErrors.phone_number?.[0]}</p>}
         </div>
         <div className="flex flex-col gap-2">

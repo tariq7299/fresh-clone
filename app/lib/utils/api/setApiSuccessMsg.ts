@@ -1,7 +1,7 @@
 // import { SuccessApiResponse } from '../types';
 import { toastApiMsgs } from './toastApiMsgs';
 // import { SuccessCallback } from '../types';
-import { ApiResponse } from './fetch-utils';
+import { ApiResponse } from '@/lib/definitions/api';
 
 function setApiSuccessMsg<T>({
     successResponse,
@@ -32,9 +32,12 @@ function setApiSuccessMsg<T>({
         204: 'Successful! The request was processed with no content to return.',
     };
 
-    successMessage = successMessage || defaultMessages[statusCode] || 'Successful! Your request has succeeded.';
+    // if statusCode is a string, it means it's a status code number
+    const statusCodeNumber = typeof statusCode === 'string' ? 200 : statusCode;
 
-    if (statusCode < 200 || statusCode >= 300) {
+    successMessage = successMessage || defaultMessages[statusCodeNumber] || 'Successful! Your request has succeeded.';
+
+    if (statusCodeNumber < 200 || statusCodeNumber >= 300) {
         throw new Error('An unexpected status code was received. Please contact support!');
     }
     // toastApiMsgs(successMessage, "success");

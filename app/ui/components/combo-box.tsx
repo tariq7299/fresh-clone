@@ -42,7 +42,7 @@ const frameworks = [
     },
 ]
 
-export function Combobox({ triggerClassName = '', triggerIcon = (<ChevronsUpDown className="opacity-50" />), labelClassName = "", popoverClassName = "" }) {
+export function Combobox({ triggerClassName = '', triggerIcon = (<ChevronsUpDown className="opacity-50" />), labelClassName = "", popoverClassName = "" }: { triggerClassName?: string, triggerIcon?: React.ReactNode | null, labelClassName?: string, popoverClassName?: string }) {
     const [open, setOpen] = React.useState(false)
     const [value, setValue] = React.useState("")
 

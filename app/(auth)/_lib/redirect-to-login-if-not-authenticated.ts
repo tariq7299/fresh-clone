@@ -13,10 +13,6 @@ const UNAUTHORIZED_MESSAGE = "Unauthenticated." as const;
  */
 export function redirectToLoginIfNotAuthenticated(status: number, responseMsg: string): void {
 
-    // if (status !== UNAUTHORIZED_STATUS || message !== UNAUTHORIZED_MESSAGE) {
-    //     return;
-    // }
-
     if (status === UNAUTHORIZED_STATUS && responseMsg === UNAUTHORIZED_MESSAGE) {
 
         const isServer = typeof window === "undefined";

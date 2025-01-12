@@ -5,12 +5,11 @@ import { setApiErrorMsg } from '@/lib/utils/api/setApiErrorMsg';
 import { redirectToOtpIfNotVerified } from "./redirect-otp-if-not-verified";
 import { loginUserServerSide, authenticateUser } from "./auth-server-services";
 import { ApiError, ApiSucess } from "@/lib/definitions/api";
-import { SessionData, LoginFormSchema, SuccessLoginFormState, ErrorLoginFormState, OtpFormSchema, SuccessOtpFormState, ErrorOtpFormState, OtpFormData } from "./definitions";
+import { SessionData, LoginFormSchema, SuccessLoginFormState, ErrorLoginFormState, OtpFormSchema, SuccessOtpFormState, ErrorOtpFormState } from "./definitions";
 import { fetchApi } from "@/lib/utils/api/fetch-utils";
 import { ApiResponse } from "@/lib/definitions/api";
 import { ApiResponseSessionData } from "./definitions";
-import { RegisterFormSchema, SuccessRegisterFormState, ErrorRegisterFormState, RegisterFormData } from "./definitions";
-import { redirect } from 'next/navigation';
+import { RegisterFormSchema, SuccessRegisterFormState, ErrorRegisterFormState } from "./definitions";
 
 // This is the server side login function, that will be used in the login form component
 // It will be used to login the user and return the form state
@@ -44,9 +43,6 @@ export const login = async (formState: SuccessLoginFormState | ErrorLoginFormSta
     if (authenticateUserResponse.success) {
 
         sessionData = { ...authenticateUserResponse.data.user, token: authenticateUserResponse.data.token }
-
-        console.log("sessionData", sessionData)
-
 
         const successMsg = setApiSuccessMsg({ successResponse: authenticateUserResponse })
 
@@ -122,7 +118,6 @@ export const verifyOtp = async (formState: SuccessOtpFormState | ErrorOtpFormSta
         const successMsg = setApiSuccessMsg({ successResponse: response })
 
         sessionData = { ...response.data.user, token: response.data.token }
-        console.log("sessionData", sessionData)
 
         await loginUserServerSide(sessionData)
 
@@ -161,10 +156,6 @@ export const register = async (formState: SuccessRegisterFormState | ErrorRegist
 
     const validatedFields = RegisterFormSchema.safeParse(payload)
 
-    console.log("payload", payload)
-    console.log("validatedFields", validatedFields)
-    console.log("formState", formState)
-
     if (!validatedFields.success) {
         return {
             success: false,
@@ -182,20 +173,12 @@ export const register = async (formState: SuccessRegisterFormState | ErrorRegist
         const { firstName, lastName, ...rest } = payload
         const formattedPayload = { ...rest, name: firstName + " " + lastName }
 
-        console.log("formattedPayload", formattedPayload)
-
         const response = await fetchApi<ApiResponse<Omit<ApiResponseSessionData, "token">>>(url, {
             method: 'POST',
             body: formattedPayload,
         }) as ApiSucess<Omit<ApiResponseSessionData, "token">>;
 
         const successMsg = setApiSuccessMsg({ successResponse: response })
-
-        // console.log("sessionData", sessionData)
-
-        // await loginUserServerSide(sessionData)
-
-        // redirect("/otp-verification?email=" + payload.email)
 
         return {
             success: true,

@@ -6,7 +6,7 @@ import {
     InputOTPSeparator
 } from "@/ui/components/input-otp"
 import { Button } from "@/ui/components/custom/button"
-import { SuccessOtpFormState, ErrorOtpFormState, SessionData, LoginFieldErrors, LoginFormData, OtpFieldErrors, OtpFormData } from "../_lib/definitions"
+import { SuccessOtpFormState, ErrorOtpFormState, SessionData } from "../_lib/definitions"
 import { useActionState, useEffect } from "react"
 import { verifyOtp } from "../_lib/form-actions"
 import { handleFormResponse } from "@/lib/utils/utils"
@@ -38,12 +38,9 @@ export default function OtpForm({ email = "" }: { email: string }) {
     // Write commnets
     useEffect(() => {
 
-        // Write types
-        // if (!formState) return;
         handleFormResponse(
             formState,
             () => {
-                console.log("formState.apiDataResponse", formState.apiDataResponse)
                 loginUserClientSide(formState.apiDataResponse as SessionData, setSessionData, router)
                 navigateToDashboard(formState.apiDataResponse?.role as "stakeholder" | "admin" | "user")
             }, () => {
@@ -65,7 +62,6 @@ export default function OtpForm({ email = "" }: { email: string }) {
                     <InputOTPGroup>
                         <InputOTPSlot index={0} />
                         <InputOTPSlot index={1} />
-                        {/* <InputOTPSlot index={2} /> */}
                     </InputOTPGroup>
                     <InputOTPSeparator />
                     <InputOTPGroup>

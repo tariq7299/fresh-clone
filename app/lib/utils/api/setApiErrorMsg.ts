@@ -1,30 +1,13 @@
-// import { AxiosError } from 'axios';
-// import { toastApiMsgs } from './toastApiMsgs';
-// import axios from 'axios';
-// import { ErrorCallback } from '../types';
-// import { toast } from '@/components/ui/use-toast'
-// import { toast } from "sonner"
 import { ApiError } from '@/lib/definitions/api';
-
 
 
 function setApiErrorMsg({
     errResponse,
-    // toast: (props: Toast) => void,
     customErrorMsg = null
-    // errorCallback?: ErrorCallback
 }: {
     errResponse: ApiError,
-    // toast: (props: Toast) => void,
     customErrorMsg?: string | null,
-    // errorCallback?: ErrorCallback
 }): string | string[] {
-
-    console.log("errResponsesdsd", errResponse)
-
-    // if (errResponse instanceof ApiError) {
-    // if (axios.isAxiosError(errResponse)) {
-
 
     const statusCode = errResponse.status;
     const ErrorCode = errResponse.code;
@@ -33,21 +16,11 @@ function setApiErrorMsg({
 
     if (statusCode === 401 && errResponse.message === "Unauthenticated.") {
         errorMessage = errorMessage || 'Session expired, please login again!';
-        // toastApiMsgs(errorMessage, "destructive");
-        // setTimeout(() => {
-        //     window.location.href = '/login';
-        // }, 4000);
-        // errorCallback?.();
         return errorMessage; // Exit the function early
     }
 
     if (statusCode === 403 && ErrorCode === "NOT_VERIFIED") {
         errorMessage = errorMessage || "Email verification required. Please verify your email first.";
-        // toastApiMsgs(errorMessage, "destructive");
-        // setTimeout(() => {
-        //     window.location.href = '/login';
-        // }, 4000);
-        // errorCallback?.();
         return errorMessage; // Exit the function early
     }
 
@@ -86,23 +59,8 @@ function setApiErrorMsg({
             }
     }
 
-    // if (ErrorCode !== "ERR_CANCELED") {
-    //     // toastApiMsgs(errorMessage, "destructive");
-    //     return errorMessage
-    // }
-
     return errorMessage
 
-    // errorCallback?.();
-
-    // } else {
-    // console.log(errResponse)
-    // toastApiMsgs(errResponse?.message || "Someting went wrong!", "destructive");
-    // return errResponse?.message || "Someting went wrong!"
-    // errorCallback?.();
-    // return 
-
-    // }
 }
 
 export { setApiErrorMsg }

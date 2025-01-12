@@ -1,8 +1,5 @@
 
-import { Button } from "@/ui/components/custom/button";
-import { ArrowLeftIcon, GlobeAsiaAustraliaIcon } from "@heroicons/react/24/outline";
-import { Label } from "@/ui/components/label";
-import { Input } from "@/ui/components/input";
+import { GlobeAsiaAustraliaIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import barberShop from "@/../public/barber-shop-4.jpg";
 import { cn } from "@/lib/utils/utils";

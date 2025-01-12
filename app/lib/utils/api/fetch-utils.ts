@@ -35,12 +35,6 @@ export async function fetchApi<T>(
     // Only add token if auth is true
     let authHeaders = {};
 
-    // Fix this !
-    // This can't be executed in client side
-    // As it uses the cookies to store the token, however the cookies can't be accessed in client side (in order to get it and send it as a header)
-
-    // Here i have created two ways of sending the auth token, because this fetch can be used in client side and server side !
-
     //  **if CLIENT SIDE**
     // This auth sending token will be used in client side !,
     if (auth && typeof window !== 'undefined') {

@@ -13,7 +13,6 @@ export default function ChangingAvatar({ className = '' }) {
 
     useEffect(() => {
         const intervalId = setInterval(() =>
-            // avatarImagesNames.length)
             setVisibleAvatarIndex(getRandomIntInclusive(1, avatarImagesNames.length))
             , 2500)
         return () => clearInterval(intervalId)

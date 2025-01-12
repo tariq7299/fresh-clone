@@ -1,10 +1,7 @@
-// auth/lib/definitions
 import { z } from 'zod'
-// import { ApiResponse, ApiError, NetworkError } from '@/lib/definitions/api'
 import { FormState, SuccessFormState, ErrorFormState } from '@/lib/definitions/definitions'
 
 export const LoginFormSchema = z.object({
-
     email: z
         .string()
         .min(1, { message: 'Please enter your email' })
@@ -14,12 +11,6 @@ export const LoginFormSchema = z.object({
         .min(1, {
             message: 'Wrong password',
         })
-        // .min(8, { message: 'Be at least 8 characters long' })
-        // .regex(/[a-zA-Z]/, { message: 'Wrong password' })
-        // .regex(/[0-9]/, { message: 'Wrong password' })
-        // .regex(/[^a-zA-Z0-9]/, {
-        // message: 'Wrong password',
-        // })
         .trim(),
 })
 
@@ -57,15 +48,12 @@ export type ApiResponseSessionData = {
     token: string;
 }
 
-// Create the schema for otp verification form
-
 export const OtpFormSchema = z.object({
     email: z.string().min(1, { message: "Please enter your email" }).email("Invalid email address"),
     otp: z.string().min(1, { message: 'Please enter your OTP' }),
     src: z.enum(["register"])
 })
 
-// Create the OtpFormData type
 export type OtpFormData = z.infer<typeof OtpFormSchema>
 
 export type OtpFieldErrors = {
@@ -73,7 +61,6 @@ export type OtpFieldErrors = {
     otp?: string | string[]
     src?: string | string[]
 }
-// Create the SuccessOtpFormState and ErrorOtpFormState
 
 export type SuccessRegisterFormState = SuccessFormState<Omit<SessionData, "token">, RegisterFormData>
 export type ErrorRegisterFormState = ErrorFormState<RegisterFieldErrors | null, RegisterFormData>
@@ -91,7 +78,6 @@ export const RegisterFormSchema = z.object({
     path: ["password_confirmation"],
 })
 
-// Create the OtpFormData type
 export type RegisterFormData = z.infer<typeof RegisterFormSchema>
 
 export type RegisterFieldErrors = {

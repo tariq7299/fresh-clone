@@ -63,12 +63,7 @@ export default function Home() {
             <Button size="lg" variant="accent" className="">Book a service</Button>
             <p className="text-xs  text-muted-foreground pb-6 md:pb-10">No credit card required</p>
 
-
-            {/* <h1 className="text-center text-3xl font-source-sans font-semibold pb-16">Express Yourself with a Fresh Look!</h1> */}
             <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-3 gap-24 ">
-              {/* <ChangingAvatar /> */}
-              {/* <ChangingAvatar /> */}
-              {/* <ChangingAvatar /> */}
               <ChangingAvatar className="" />
               <ChangingAvatar className="hidden md:block" />
               <ChangingAvatar className="hidden md:block" />
