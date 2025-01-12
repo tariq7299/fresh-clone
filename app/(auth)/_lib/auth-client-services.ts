@@ -23,8 +23,8 @@ export async function navigateToLoginWithSessionEnded() {
     redirect("/login?sessionEnded=true")
 }
 
-export async function navigateToOtp(email: string) {
-    redirect("/otp-verification?email=" + email)
+export async function navigateToOtp(email: string, userRole: UserRole.Professional | UserRole.Customer) {
+    redirect("/otp-verification?email=" + email + "&userRole=" + userRole)
 }
 
 export async function navigateToLogin() {

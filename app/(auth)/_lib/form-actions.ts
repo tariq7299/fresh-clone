@@ -87,6 +87,7 @@ export const verifyOtp = async (formState: SuccessOtpFormState | ErrorOtpFormSta
         email: formState.formData.email as string,
         otp: formData.get('otp') as string,
         src: formState.formData.src as "register",
+        userRole: formState.formData.userRole as UserRole.Professional | UserRole.Customer
     }
 
     // Validate form fields
@@ -104,13 +105,13 @@ export const verifyOtp = async (formState: SuccessOtpFormState | ErrorOtpFormSta
     }
 
     let sessionData: SessionData;
-
+    console.log("payload", payload)
     // Change the otp form string to number before sending it to the server
     const formDataPayload = { ...payload, otp: Number(payload.otp) }
-
+    const url = payload.userRole === UserRole.Professional ? "/auth/stakeholder/verify-otp" : "/auth/user/verify-otp"
     try {
 
-        const response = await fetchApi<ApiResponse<ApiResponseSessionData>>('/auth/user/verify-otp', {
+        const response = await fetchApi<ApiResponse<ApiResponseSessionData>>(url, {
             method: 'POST',
             body: formDataPayload,
         }) as ApiSucess<ApiResponseSessionData>;
@@ -145,7 +146,7 @@ export const verifyOtp = async (formState: SuccessOtpFormState | ErrorOtpFormSta
 export const register = async (formState: SuccessRegisterFormState | ErrorRegisterFormState, formData: FormData): Promise<SuccessRegisterFormState | ErrorRegisterFormState> => {
 
     const payload = {
-        userType: formState.formData.userType as UserRole.Professional | UserRole.Customer,
+        userRole: formState.formData.userRole as UserRole.Professional | UserRole.Customer,
         email: formData.get('email') as string,
         password: formData.get('password') as string,
         password_confirmation: formData.get('password_confirmation') as string,
@@ -168,7 +169,7 @@ export const register = async (formState: SuccessRegisterFormState | ErrorRegist
 
     try {
 
-        const url = formState.formData.userType === UserRole.Professional ? "/auth/stakeholder/register" : "/auth/user/register"
+        const url = formState.formData.userRole === UserRole.Professional ? "/auth/stakeholder/register" : "/auth/user/register"
 
         const { firstName, lastName, ...rest } = payload
         const formattedPayload = { ...rest, name: firstName + " " + lastName }

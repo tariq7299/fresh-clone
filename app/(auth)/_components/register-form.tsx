@@ -13,7 +13,11 @@ import useLocalStorage from "@/lib/hooks/use-local-storage";
 import { logoutUserServerSide } from "../_lib/auth-server-services";
 import { logoutUserClientSide } from "../_lib/auth-client-services";
 import { PhoneInput } from "@/ui/components/custom/phone-input";
-export default function RegisterForm({ userType }: { userType: string }) {
+
+
+export default function RegisterForm({ userRole }: { userRole: string }) {
+
+    if (!userRole) throw new Error("No user role provided for register form!")
 
 
     const INITIAL_STATE: SuccessRegisterFormState | ErrorRegisterFormState = {
@@ -22,7 +26,7 @@ export default function RegisterForm({ userType }: { userType: string }) {
         apiDataResponse: null,
         apiMsgs: "",
         formData: {
-            userType: userType as UserRole.Professional | UserRole.Customer,
+            userRole: userRole as UserRole.Professional | UserRole.Customer,
             email: "",
             password: "",
             password_confirmation: "",
@@ -46,7 +50,7 @@ export default function RegisterForm({ userType }: { userType: string }) {
                 await logoutUserServerSide()
                 logoutUserClientSide(setSessionData)
 
-                navigateToOtp(formState.apiDataResponse?.email as string)
+                navigateToOtp(formState.apiDataResponse?.email as string, userRole as UserRole.Professional | UserRole.Customer)
             }
         )
 
@@ -154,8 +158,8 @@ export default function RegisterForm({ userType }: { userType: string }) {
         <div className="flex justify-between items-center">
         </div>
         <div className="flex flex-col justify-center items-center">
-            <p className="font-bold text-center">{userType === UserRole.Professional ? "Have a business account?" : "Have a customer account?"}</p>
-            <Link href="/login " className=" text-center text-accent text-sm">{userType === UserRole.Professional ? "Sign in as a professional" : "Sign in as a customer"}</Link>
+            <p className="font-bold text-center">{userRole === UserRole.Professional ? "Have a business account?" : "Have a customer account?"}</p>
+            <Link href="/login " className=" text-center text-accent text-sm">{userRole === UserRole.Professional ? "Sign in as a professional" : "Sign in as a customer"}</Link>
 
         </div>
 

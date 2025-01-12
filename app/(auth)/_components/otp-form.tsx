@@ -15,7 +15,7 @@ import { useRouter } from "next/navigation"
 import useLocalStorage from "@/lib/hooks/use-local-storage";
 import { toastApiMsgs } from "@/lib/utils/api/toastApiMsgs"
 
-export default function OtpForm({ email = "" }: { email: string }) {
+export default function OtpForm({ email = "", userRole }: { email: string, userRole: UserRole.Professional | UserRole.Customer }) {
 
 
     const INITIAL_STATE: SuccessOtpFormState | ErrorOtpFormState = {
@@ -26,7 +26,8 @@ export default function OtpForm({ email = "" }: { email: string }) {
         formData: {
             email: email,
             otp: "",
-            src: "register"
+            src: "register",
+            userRole: userRole as UserRole.Professional | UserRole.Customer
         }
     };
 

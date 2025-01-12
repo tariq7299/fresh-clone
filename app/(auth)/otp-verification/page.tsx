@@ -1,19 +1,22 @@
 import OtpForm from "../_components/otp-form"
 import { Alert, AlertDescription, AlertTitle } from "@/ui/components/alert";
 import { AlertCircle } from "lucide-react"
+import { UserRole } from "../_lib/definitions";
 
 export default async function OtpVerificationPage(props: {
     searchParams?: Promise<{
         notVerified?: string;
         email?: string;
+        userRole?: UserRole.Professional | UserRole.Customer;
     }>
 }) {
 
     const searchParams = await props.searchParams
     const notVerified = searchParams?.notVerified || "";
     const email = searchParams?.email || "";
+    const userRole = searchParams?.userRole || UserRole.Customer;
 
-    if (!email) throw new Error("No email provided for otp verfication!")
+    if (!email || !userRole) throw new Error("No email or user role provided for otp verfication!")
 
     return (
         <>
@@ -39,7 +42,8 @@ export default async function OtpVerificationPage(props: {
 
                 <p className="text-muted-foreground text-sm text-center pb-4">Please enter the 6-digit verification code sent to your email address</p>
 
-                <OtpForm email={email} />
+                {/* Iam not using Suspense because Iam passing the userRole as a prop to the OtpForm component, and not like in login-form.tsx where Iam using useSearchParams */}
+                <OtpForm email={email} userRole={userRole} />
 
 
             </div>

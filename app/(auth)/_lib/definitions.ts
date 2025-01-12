@@ -57,7 +57,8 @@ export type ApiResponseSessionData = {
 export const OtpFormSchema = z.object({
     email: z.string().min(1, { message: "Please enter your email" }).email("Invalid email address"),
     otp: z.string().min(1, { message: 'Please enter your OTP' }),
-    src: z.enum(["register"])
+    src: z.enum(["register"]),
+    userRole: z.enum(["professional", "customer"])
 })
 
 export type OtpFormData = z.infer<typeof OtpFormSchema>
@@ -78,7 +79,7 @@ export const RegisterFormSchema = z.object({
     firstName: z.string().trim().min(1, { message: 'Please enter your first name' }),
     lastName: z.string().trim().min(1, { message: 'Please enter your last name' }),
     phone_number: z.string().trim().min(10, { message: 'Please enter your phone number' }).max(15, { message: 'Please enter a valid phone number' }),
-    userType: z.enum(["professional", "customer"])
+    userRole: z.enum(["professional", "customer"])
 }).refine((data) => data.password === data.password_confirmation, {
     message: "Passwords do not match",
     path: ["password_confirmation"],
@@ -87,7 +88,7 @@ export const RegisterFormSchema = z.object({
 export type RegisterFormData = z.infer<typeof RegisterFormSchema>
 
 export type RegisterFieldErrors = {
-    userType?: string | string[]
+    userRole?: string | string[]
     email?: string | string[]
     password?: string | string[]
     password_confirmation?: string | string[]
