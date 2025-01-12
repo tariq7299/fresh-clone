@@ -84,7 +84,7 @@ export default function RegisterForm({ userType }: { userType: string }) {
                     type="text"
                     name="firstName"
                     id="firstName"
-                    placeholder="Enter your first name"
+                    placeholder="John"
                     className="w-full"
                 />
                 {formState.clientFieldsErrors?.firstName && <p className="text-red-500 text-sm">{formState.clientFieldsErrors.firstName?.[0]}</p>}
@@ -96,7 +96,7 @@ export default function RegisterForm({ userType }: { userType: string }) {
                     type="text"
                     name="lastName"
                     id="lastName"
-                    placeholder="Enter your last name"
+                    placeholder="Smith"
                     className="w-full"
                 />
                 {formState.clientFieldsErrors?.lastName && <p className="text-red-500 text-sm">{formState.clientFieldsErrors.lastName?.[0]}</p>}
@@ -109,7 +109,7 @@ export default function RegisterForm({ userType }: { userType: string }) {
                 type="email"
                 name="email"
                 id="email"
-                placeholder="Enter your email"
+                placeholder="john.smith@example.com"
             />
             {formState.clientFieldsErrors?.email && <p className="text-red-500 text-sm">{formState.clientFieldsErrors.email?.[0]}</p>}
         </div>
@@ -125,7 +125,7 @@ export default function RegisterForm({ userType }: { userType: string }) {
                 type="password"
                 name="password"
                 id="password"
-                placeholder="Enter your password"
+                placeholder="MySecurePass123!"
             />
             {formState.clientFieldsErrors?.password && <p className="text-red-500 text-sm">{formState.clientFieldsErrors.password?.[0]}</p>}
         </div>
@@ -136,7 +136,7 @@ export default function RegisterForm({ userType }: { userType: string }) {
                 type="password"
                 name="password_confirmation"
                 id="password_confirmation"
-                placeholder="Confirm your password"
+                placeholder="MySecurePass123!"
             />
             {formState.clientFieldsErrors?.password_confirmation && <p className="text-red-500 text-sm">{formState.clientFieldsErrors.password_confirmation?.[0]}</p>}
         </div>

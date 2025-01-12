@@ -83,7 +83,7 @@ export default function LoginForm() {
                     label="Email"
                     name="email"
                     type="email"
-                    placeholder="Enter your email"
+                    placeholder="john.doe@example.com"
                     error={formState?.clientFieldsErrors?.email?.[0]}
                 />
 
@@ -94,7 +94,7 @@ export default function LoginForm() {
                         disabled={isPending}
                         required={true}
                         name="password"
-                        placeholder="Enter your password"
+                        placeholder="MySecurePass123!"
                     />
                     {formState?.clientFieldsErrors?.password?.[0] && <p className="text-red-500 text-sm">{formState?.clientFieldsErrors?.password?.[0]}</p>}
                 </div>
