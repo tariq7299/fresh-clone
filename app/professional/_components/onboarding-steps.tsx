@@ -12,9 +12,21 @@ const ONBOARDING_STEPS = [
         order: 2
     },
     {
-        name: "business-location",
+        name: "business-services",
         order: 3
-    }
+    },
+    {
+        name: "business-capacity",
+        order: 4
+    },
+    {
+        name: "business-location",
+        order: 5
+    },
+    {
+        name: "business-demographics",
+        order: 6
+    },
 ]
 
 export default function OnboardingSteps() {
