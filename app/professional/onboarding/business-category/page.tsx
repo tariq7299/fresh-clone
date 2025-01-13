@@ -17,7 +17,7 @@ export default function ProfessionalOnboardingPage() {
 
     return (
         <form>
-            <div className="flex flex-col gap-2 w-full max-w-4xl p-5 py-24 min-h-dvh items-stretch m-auto space-y-5">
+            <div className="flex flex-col gap-2 w-full max-w-4xl p-5 py-24 min-h-dvh items-stretch m-auto space-y-5 ">
 
                 <div className="text-start space-y-1">
 
@@ -29,179 +29,26 @@ export default function ProfessionalOnboardingPage() {
                     <p className="text-sm text-muted-foreground ">Choose a category that best describes your business.</p>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 justify-items-stretch md:grid-cols-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 justify-items-stretch md:grid-cols-3 ">
+                    <BusinessCategoryCard categoryName="Haircuts & Styling" categoryIconUrl="/categories/hair.png" categoryId="haircuts-and-styling" />
 
-                    <label htmlFor='business-category-1' className="col-span-1 relative  ">
-                        <input id="business-category-1" type="radio" name="business-category" value="1" className="peer appearance-none hidden" />
-                        <div className={cn(`flex flex-col justify-center gap-3 items-start rounded-lg p-5  border-1.5 border-gray-200  peer-checked:border-accent peer-checked:border-2 transition-all duration-200 box-border`,
-                        )}>
+                    <BusinessCategoryCard categoryName="Nail Care" categoryIconUrl="/categories/hair.png" categoryId="nail-care" />
 
-                            <Image
-                                src="/categories/hair.png"
-                                alt="hair icon"
-                                width={32}
-                                height={32}
-                            />
+                    <BusinessCategoryCard categoryName="Massage Therapy" categoryIconUrl="/categories/hair.png" categoryId="massage" />
 
-                            <h1 className='font-black'>Haircuts & styling</h1>
-                        </div>
-                        <div
-                            className={
-                                cn("absolute top-2 right-2 bg-accent text-background rounded-lg p-0.5  transition-opacity duration-200 opacity-0 peer-checked:opacity-100")
-                            }>
-                            <CheckIcon className="size-5" />
-                        </div>
-                    </label>
-                    <label htmlFor='business-category-2' className="col-span-1 relative  ">
-                        <input id="business-category-2" type="radio" name="business-category" value="2" className="peer appearance-none hidden" />
-                        <div className={cn(`flex flex-col justify-center gap-3 items-start rounded-lg p-5  border-1.5 border-gray-200  peer-checked:border-accent peer-checked:border-2 transition-all duration-200`,
-                        )}>
+                    <BusinessCategoryCard categoryName="Skincare & Facials" categoryIconUrl="/categories/hair.png" categoryId="skincare" />
 
-                            <Image
-                                src="/categories/hair.png"
-                                alt="hair icon"
-                                width={32}
-                                height={32}
-                            />
+                    <BusinessCategoryCard categoryName="Makeup & Beauty" categoryIconUrl="/categories/hair.png" categoryId="makeup" />
 
-                            <h1 className='font-black'>Haircuts & styling</h1>
-                        </div>
-                        <div
-                            className={
-                                cn("absolute top-2 right-2 bg-accent text-background rounded-lg p-0.5  transition-opacity duration-200 opacity-0 peer-checked:opacity-100")
-                            }>
-                            <CheckIcon className="size-5" />
-                        </div>
-                    </label>
-                    <label htmlFor='business-category-3' className="col-span-1 relative  ">
-                        <input id="business-category-3" type="radio" name="business-category" value="3" className="peer appearance-none hidden" />
-                        <div className={cn(`flex flex-col justify-center gap-3 items-start rounded-lg p-5  border-1.5 border-gray-200  peer-checked:border-accent peer-checked:border-2 transition-all duration-200`,
-                        )}>
+                    <BusinessCategoryCard categoryName="Barbering" categoryIconUrl="/categories/hair.png" categoryId="barbering" />
 
-                            <Image
-                                src="/categories/hair.png"
-                                alt="hair icon"
-                                width={32}
-                                height={32}
-                            />
+                    <BusinessCategoryCard categoryName="Spa Services" categoryIconUrl="/categories/hair.png" categoryId="spa" />
 
-                            <h1 className='font-black'>Haircuts & styling</h1>
-                        </div>
-                        <div
-                            className={
-                                cn("absolute top-2 right-2 bg-accent text-background rounded-lg p-0.5  transition-opacity duration-200 opacity-0 peer-checked:opacity-100")
-                            }>
-                            <CheckIcon className="size-5" />
-                        </div>
-                    </label>
+                    <BusinessCategoryCard categoryName="Lash & Brow" categoryIconUrl="/categories/hair.png" categoryId="lash-brow" />
 
+                    <BusinessCategoryCard categoryName="Waxing & Hair Removal" categoryIconUrl="/categories/hair.png" categoryId="waxing" />
 
-
-
-                    <div className='rounded-lg p-5 flex flex-col justify-center items-star gap-3 col-span-1 border-2 border-accent relative'>
-                        <div className="absolute top-2 right-2 bg-accent text-background rounded-lg p-0.5"><CheckIcon className="size-5" /></div>
-
-
-                        <Image
-                            src="/categories/hair.png"
-                            alt="hair icon"
-                            width={32}
-                            height={32}
-                        />
-
-                        <h1 className='font-black'>Haircuts & styling</h1>
-                    </div>
-
-                    <div className='rounded-lg p-5 flex flex-col justify-center items-start border-1.5 border-gray-200 gap-3 col-span-1'>
-                        <Image
-                            src="/categories/hair.png"
-                            alt="hair icon"
-                            width={32}
-                            height={32}
-                        />
-
-                        <h1 className='font-black'>Haircuts & styling</h1>
-                    </div>
-                    <div className='rounded-lg p-5 flex flex-col justify-center items-start border-1.5 border-gray-200 gap-3 col-span-1'>
-                        <Image
-                            src="/categories/hair.png"
-                            alt="hair icon"
-                            width={32}
-                            height={32}
-                        />
-
-                        <h1 className='font-black'>Haircuts & styling</h1>
-                    </div>
-                    <div className='rounded-lg p-5 flex flex-col justify-center items-start border-1.5 border-gray-200 gap-3 col-span-1'>
-                        <Image
-                            src="/categories/hair.png"
-                            alt="hair icon"
-                            width={32}
-                            height={32}
-                        />
-
-                        <h1 className='font-black'>Haircuts & styling</h1>
-                    </div>
-                    <div className='rounded-lg p-5 flex flex-col justify-center items-start border-1.5 border-gray-200 gap-3 col-span-1'>
-                        <Image
-                            src="/categories/hair.png"
-                            alt="hair icon"
-                            width={32}
-                            height={32}
-                        />
-
-                        <h1 className='font-black'>Haircuts & styling</h1>
-                    </div>
-                    <div className='rounded-lg p-5 flex flex-col justify-center items-start border-1.5 border-gray-200 gap-3 col-span-1'>
-                        <Image
-                            src="/categories/hair.png"
-                            alt="hair icon"
-                            width={32}
-                            height={32}
-                        />
-
-                        <h1 className='font-black'>Haircuts & styling</h1>
-                    </div>
-                    <div className='rounded-lg p-5 flex flex-col justify-center items-start border-1.5 border-gray-200 gap-3 col-span-1'>
-                        <Image
-                            src="/categories/hair.png"
-                            alt="hair icon"
-                            width={32}
-                            height={32}
-                        />
-
-                        <h1 className='font-black'>Haircuts & styling</h1>
-                    </div>
-                    <div className='rounded-lg p-5 flex flex-col justify-center items-start border-1.5 border-gray-200 gap-3 col-span-1'>
-                        <Image
-                            src="/categories/hair.png"
-                            alt="hair icon"
-                            width={32}
-                            height={32}
-                        />
-
-                        <h1 className='font-black'>Haircuts & styling</h1>
-                    </div>
-                    <div className='rounded-lg p-5 flex flex-col justify-center items-start border-1.5 border-gray-200 gap-3 col-span-1'>
-                        <Image
-                            src="/categories/hair.png"
-                            alt="hair icon"
-                            width={32}
-                            height={32}
-                        />
-
-                        <h1 className='font-black'>Haircuts & styling</h1>
-                    </div>
-                    <div className='rounded-lg p-5 flex flex-col justify-center items-start border-1.5 border-gray-200 gap-3 col-span-1'>
-                        <Image
-                            src="/categories/hair.png"
-                            alt="hair icon"
-                            width={32}
-                            height={32}
-                        />
-
-                        <h1 className='font-black'>Haircuts & styling</h1>
-                    </div>
+                    <BusinessCategoryCard categoryName="Tanning" categoryIconUrl="/categories/hair.png" categoryId="tanning" />
 
                 </div>
 
