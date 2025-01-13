@@ -5,11 +5,13 @@ import { CheckIcon } from "lucide-react"
 // Supply the col-span-1 class
 export default function BusinessCategoryCard({ categoryName, categoryIconUrl = "/categories/hair.png", categoryId }: { categoryName: string, categoryIconUrl: string, categoryId: string }) {
 
-    return <label htmlFor={categoryId} className="col-span-1 relative  ">
-        <input id={categoryId} type="radio" name="business-category" value={categoryId} className="peer appearance-none hidden " />
-        <div className={cn(`flex flex-col justify-center gap-3 items-start rounded-lg p-5  border-2 border-gray-200  peer-checked:border-accent peer-checked:border-2 transition-all duration-200 box-border`,
+    return <label htmlFor={categoryId} className="col-span-1 relative cursor-pointer w-full">
+        <input id={categoryId} type="radio" name="business-category" value={categoryId} className="peer appearance-none hidden" />
+        <div className={cn(
+            "flex flex-col justify-center gap-3 items-start rounded-lg p-5 transition-all duration-200 box-border",
+            "border-2 border-gray-200 hover:bg-accent/5 ",
+            "peer-checked:border-accent peer-checked:border-2 peer-checked:bg-accent/5 peer-checked:text-accent-600 "
         )}>
-
             <Image
                 src={categoryIconUrl}
                 alt={categoryName}
@@ -17,12 +19,17 @@ export default function BusinessCategoryCard({ categoryName, categoryIconUrl = "
                 height={32}
             />
 
-            <h1 className='font-black'>{categoryName}</h1>
+            <h1 className={cn(
+                'font-black',
+                ''
+            )}>{categoryName}</h1>
         </div>
-        <div
-            className={
-                cn("absolute top-2 right-2 bg-accent text-background rounded-lg p-0.5  transition-opacity duration-200 opacity-0 peer-checked:opacity-100")
-            }>
+        <div className={cn(
+            "absolute top-2 right-2 bg-accent text-background rounded-lg p-0.5",
+            "opacity-0 scale-75", // Hidden by default
+            "transition-all duration-200",
+            "peer-checked:opacity-100 peer-checked:scale-100" // Show and scale up when checked
+        )}>
             <CheckIcon className="size-5" />
         </div>
     </label>

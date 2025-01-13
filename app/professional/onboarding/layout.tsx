@@ -6,7 +6,7 @@ export default function ProfessionalOnboardingLayout({ children }: { children: R
 
 
     return <div className=" ">
-        <div className="fixed top-0 left-0 bg-background w-full pt-3 px-5 flex flex-col">
+        <div className="fixed top-0 left-0 bg-background w-full pt-3 px-5 flex flex-col z-50">
             <OnboardingSteps />
             <div className="self-end py-3">
 
