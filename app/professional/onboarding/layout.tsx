@@ -18,7 +18,7 @@ export default function ProfessionalOnboardingLayout({ children }: { children: R
 
                 <Button variant={"ghost"} className="font-bold px-0 py-0 lg:hidden">Log out</Button>
 
-                <Button className="font-bold  gap-2 justify-center items-center hidden lg:flex">Continue  <ArrowRightIcon className="size-4" /></Button>
+                <Button form="business-onboarding-form" className="font-bold  gap-2 justify-center items-center hidden lg:flex">Continue  <ArrowRightIcon className="size-4" /></Button>
 
             </div>
         </div>
@@ -34,5 +34,3 @@ export default function ProfessionalOnboardingLayout({ children }: { children: R
 
     </div>
 }
-
-//  "prisma": "^6.2.1",
