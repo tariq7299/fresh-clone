@@ -34,3 +34,5 @@ export default function ProfessionalOnboardingLayout({ children }: { children: R
 
     </div>
 }
+
+//  "prisma": "^6.2.1",

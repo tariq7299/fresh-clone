@@ -1,14 +1,54 @@
-'use client';
-
-import { useState } from 'react';
+// import { useState } from 'react';
 import { ApiError } from '@/lib/definitions/api';
 import { Button } from "@/ui/components/custom/button";
 import { ArrowRightIcon } from '@heroicons/react/24/outline'
 import { Label } from "@/ui/components/label";
 import { Input } from "@/ui/components/input";
 import { Textarea } from "@/ui/components/textarea";
+// import { prisma } from '@/lib/prisma';
+import prisma from '@/lib/prisma';
+// import useLocalStorage from '@/lib/hooks/use-local-storage';
+import { SessionData } from '@/(auth)/_lib/definitions';
 
-export default function ProfessionalOnboardingPage() {
+
+export default async function ProfessionalOnboardingPage() {
+
+    // const [user, _] = useLocalStorage<SessionData | null>({ key: "user", defaultValue: null })
+
+    // if (!user) {
+    //     return <div>User not found</div>
+    // }
+
+
+
+    try {
+        const newBusiness = await prisma.business.create({
+            data: {
+                userId: 1,
+                name_ar: "صالون تجميل",
+                name_en: "Beauty Salon",
+                description_ar: "this is desc to buisness arabic",
+                description_en: "this is desc to buisness english",
+                website_url: "https://beautysalon.com",
+                capacity: 20,
+                category_id: 1,
+                address: "456 Beauty Street",
+                gender: "female",
+            },
+        })
+        console.log("newBusiness", newBusiness)
+    } catch (error) {
+        console.error("Error details:", error)
+    }
+
+    // Find many
+    const users = await prisma.business.findMany({
+        where: {
+            userId: 1
+        }
+    })
+
+    console.log("usersss", users)
 
 
     return (
