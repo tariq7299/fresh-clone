@@ -17,7 +17,16 @@ const businessNameSchema = z.object({
 
 export type BusinessNameFormData = z.infer<typeof businessNameSchema>
 
-export type BusinessNameFormState = SuccessFormState<BusinessNameFormData, BusinessNameFormData> | ErrorFormState<BusinessNameFormData, BusinessNameFormData>
+export type BusinessNameFieldErrors = {
+    nameEn?: string | string[]
+    nameAr?: string | string[]
+    descriptionEn?: string | string[]
+    descriptionAr?: string | string[]
+    websiteUrl?: string | string[]
+}
+
+export type BusinessNameFormState = SuccessFormState<BusinessNameFormData, BusinessNameFormData> | ErrorFormState<BusinessNameFieldErrors |
+    null, BusinessNameFormData>
 
 
 

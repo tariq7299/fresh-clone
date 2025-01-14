@@ -27,7 +27,7 @@ export default function BusinessNameForm({ storedStepBusinessInfo }: { storedSte
         }
     }
 
-    const [formState, formAction, pending] = useActionState(handleSubmitBusinessName, initialState)
+    const [formState, formAction, isPending] = useActionState(handleSubmitBusinessName, initialState)
 
     const [formValues, setFormValues] = useState<BusinessNameFormData>(initialState.formData)
 
