@@ -36,23 +36,21 @@ export default function OtpForm({ email = "", userRole }: { email: string, userR
     const router = useRouter()
     const [_, setSessionData] = useLocalStorage<SessionData | null>({ key: "user", defaultValue: null })
 
-    // Write commnets
+    // Handle form submission response
     useEffect(() => {
-
-        handleFormResponse(
+        handleFormResponse({
             formState,
-            () => {
+            successCallback: () => {
                 loginUserClientSide(formState.apiDataResponse as SessionData, setSessionData, router)
                 navigateToDashboard(formState.apiDataResponse?.role as UserRole)
-            }, () => {
+            },
+            errorCallback: () => {
                 if (formState.clientFieldsErrors) {
                     const { otp, ...rest } = formState.clientFieldsErrors
                     toastApiMsgs(rest, "destructive")
                 }
             }
-        )
-
-
+        })
     }, [formState]);
 
     return (

@@ -8,11 +8,11 @@ export const getBusinessStepFormData = async () => {
 
         const session = await getSession()
         const userId = session ? session.id : null
-        console.log("session", session)
-        console.log("userId", userId)
+        // console.log("session", session)
+        // console.log("userId", userId)
         if (!userId) throw new Error("Error getting user id!")
 
-        console.log("userId", userId)
+        // console.log("userId", userId)
 
         const storedStepBusinessInfo = await prisma.business.findFirst({
             where: {
@@ -28,7 +28,7 @@ export const getBusinessStepFormData = async () => {
             }
         })
 
-        console.log("storedStepBusinessInfo", storedStepBusinessInfo)
+        // console.log("storedStepBusinessInfo", storedStepBusinessInfo)
 
         // const successMsg = setApiSuccessMsg({ successResponse: response })
 

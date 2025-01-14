@@ -40,21 +40,16 @@ export default function RegisterForm({ userRole }: { userRole: string }) {
 
     const [_, setSessionData] = useLocalStorage<SessionData | null>({ key: "user", defaultValue: null })
 
-    // Write commnets
+    // Handle form submission response
     useEffect(() => {
-        handleFormResponse(
+        handleFormResponse({
             formState,
-            // This is a successCallback function that will be called only when the form is submitted and retured response is a success
-            async () => {
-
+            successCallback: async () => {
                 await logoutUserServerSide()
                 logoutUserClientSide(setSessionData)
-
                 navigateToOtp(formState.apiDataResponse?.email as string, userRole as UserRole.Professional | UserRole.Customer)
             }
-        )
-
-
+        })
     }, [formState]);
 
     // useEffect(() => {

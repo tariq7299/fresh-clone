@@ -51,13 +51,13 @@ export default function LoginForm() {
 
     // Write commnets
     useEffect(() => {
-        handleFormResponse(
+        handleFormResponse({
             formState,
-            () => {
+            successCallback: () => {
                 loginUserClientSide(formState.apiDataResponse as SessionData, setSessionData, router)
                 navigateToDashboard(formState.apiDataResponse?.role as UserRole)
             }
-        )
+        })
     }, [formState]);
 
     return (

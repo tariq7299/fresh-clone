@@ -32,7 +32,7 @@ export default async function ProfessionalOnboardingPage() {
     //     }
     // })
 
-    console.log("storedStepBusinessInfoCLIENT", storedStepBusinessInfo)
+    // console.log("storedStepBusinessInfoCLIENT", storedStepBusinessInfo)
 
 
     return (

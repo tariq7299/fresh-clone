@@ -3,7 +3,10 @@ import { Label } from '@/ui/components/label';
 import { Input } from '@/ui/components/input';
 import { Textarea } from '@/ui/components/textarea';
 import { useActionState } from 'react';
-import { handleSubmit } from '@/professional/_lib/form-actions';
+import { handleSubmitBusinessName, BusinessNameFormState, BusinessNameFormData } from '@/professional/_lib/form-actions';
+import { handleFormResponse } from '@/lib/utils/utils';
+import { useEffect, useState } from 'react';
+
 // TODO: Add this type
 // import { StepBusinessInfo } from '@/types/business-info';
 
@@ -16,15 +19,27 @@ export default function BusinessNameForm({ storedStepBusinessInfo }: { storedSte
         apiDataResponse: null,
         apiMsgs: "",
         formData: {
-            nameEn: "",
-            nameAr: "",
-            descriptionEn: "",
-            descriptionAr: "",
-            websiteUrl: "",
+            nameEn: storedStepBusinessInfo?.name_en || "",
+            nameAr: storedStepBusinessInfo?.name_ar || "",
+            descriptionEn: storedStepBusinessInfo?.description_en || "",
+            descriptionAr: storedStepBusinessInfo?.description_ar || "",
+            websiteUrl: storedStepBusinessInfo?.website_url || "",
         }
     }
 
-    const [formState, formAction, pending] = useActionState(handleSubmit, initialState)
+    const [formState, formAction, pending] = useActionState(handleSubmitBusinessName, initialState)
+
+    const [formValues, setFormValues] = useState<BusinessNameFormData>(initialState.formData)
+
+    // useEffect(() => {
+    //     console.log("formState", formState)
+    //     handleFormResponse({
+    //         formState,
+    //         showSuccessToast: false,
+    //         showErrorToast: true
+    //     })
+    // }, [formState])
+
 
     console.log("formState", formState)
 
@@ -45,23 +60,28 @@ export default function BusinessNameForm({ storedStepBusinessInfo }: { storedSte
 
                 <div className="flex flex-col gap-2">
                     <Label className="font-bold" htmlFor="nameEn">Business name (En)</Label>
-                    <Input defaultValue={storedStepBusinessInfo?.name_en || ""} type="text" name="nameEn" id="nameEn" placeholder="Bekky Barber" />
+                    <Input value={formValues.nameEn} onChange={(e) => setFormValues({ ...formValues, nameEn: e.target.value })} type="text" name="nameEn" id="nameEn" placeholder="Bekky Barber" />
+                    <p className="text-sm text-destructive ">{formState.clientFieldsErrors?.nameEn?.[0]}</p>
                 </div>
                 <div className="flex flex-col gap-2">
                     <Label className="font-bold" htmlFor="nameAr">Business name (Ar)</Label>
-                    <Input defaultValue={storedStepBusinessInfo?.name_ar || ""} type="text" name="nameAr" id="nameAr" placeholder="بيكي باربر" />
+                    <Input value={formValues.nameAr} onChange={(e) => setFormValues({ ...formValues, nameAr: e.target.value })} type="text" name="nameAr" id="nameAr" placeholder="بيكي باربر" />
+                    <p className="text-sm text-destructive ">{formState.clientFieldsErrors?.nameAr?.[0]}</p>
                 </div>
                 <div className="flex flex-col gap-2">
                     <Label className="font-bold" htmlFor="descriptionEn">Description (En)</Label>
-                    <Textarea defaultValue={storedStepBusinessInfo?.description_en || ""} name="descriptionEn" id="descriptionEn" placeholder="Bekky Barber is a barber shop that..." />
+                    <Textarea value={formValues.descriptionEn} onChange={(e) => setFormValues({ ...formValues, descriptionEn: e.target.value })} name="descriptionEn" id="descriptionEn" placeholder="Bekky Barber is a barber shop that..." />
+                    <p className="text-sm text-destructive ">{formState.clientFieldsErrors?.descriptionEn?.[0]}</p>
                 </div>
                 <div className="flex flex-col gap-2">
                     <Label className="font-bold" htmlFor="descriptionAr">Description (Ar)</Label>
-                    <Textarea defaultValue={storedStepBusinessInfo?.description_ar || ""} name="descriptionAr" id="descriptionAr" placeholder="بيكي باربر هو محل حلاقة أنيق يقدم خدمات متنوعة، بما في ذلك الحلاقة وتهذيب الذقن ." />
+                    <Textarea value={formValues.descriptionAr} onChange={(e) => setFormValues({ ...formValues, descriptionAr: e.target.value })} name="descriptionAr" id="descriptionAr" placeholder="بيكي باربر هو محل حلاقة أنيق يقدم خدمات متنوعة، بما في ذلك الحلاقة وتهذيب الذقن ." />
+                    <p className="text-sm text-destructive ">{formState.clientFieldsErrors?.descriptionAr?.[0]}</p>
                 </div>
                 <div className="flex flex-col gap-2">
                     <Label className="font-bold" htmlFor="websiteUrl">Website (Optional)</Label>
-                    <Input defaultValue={storedStepBusinessInfo?.website_url || ""} type="text" name="websiteUrl" id="websiteUrl" placeholder="https://www.bekkybarber.com" />
+                    <Input value={formValues.websiteUrl} onChange={(e) => setFormValues({ ...formValues, websiteUrl: e.target.value })} type="text" name="websiteUrl" id="websiteUrl" placeholder="https://www.bekkybarber.com" />
+                    <p className="text-sm text-destructive ">{formState.clientFieldsErrors?.websiteUrl?.[0]}</p>
                 </div>
 
 

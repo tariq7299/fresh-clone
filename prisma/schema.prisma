@@ -16,27 +16,24 @@ enum Gender {
 model Business {
   id          Int @id @default(autoincrement())
   userId      Int @unique
-  name_ar     String
-  name_en     String
-  description_ar String
-  description_en String
+  name_ar     String?
+  name_en     String?
+  description_ar String?
+  description_en String?
   website_url String?   // Optional field with ?
-  capacity    Int
-  category_id Int
-  address     String
-  gender     Gender    // You might want to use enum here
+  capacity    Int?
+  category_id Int?
+  address     String?
+  gender     Gender?    // You might want to use enum here
   services    BusinessService[] // Relation to services
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
 }
 
 model BusinessService {
   id          Int      @id @default(autoincrement())
   business    Business @relation(fields: [businessId], references: [id])
   businessId  Int
-  service_id  Int
+  service_id  Int?
   duration    Int?    
   price      Float?
 
-  @@index([businessId])
 }

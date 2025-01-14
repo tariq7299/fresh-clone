@@ -15,16 +15,26 @@ export function getRandomIntInclusive(min: number, max: number) {
 }
 
 export function handleFormResponse<ApiDataResponseType, ClientFieldsErrors, FormData>
-  (formState: SuccessFormState<ApiDataResponseType, FormData> | ErrorFormState<ClientFieldsErrors, FormData>,
+  ({
+    formState,
+    successCallback,
+    errorCallback,
+    showSuccessToast = true,
+    showErrorToast = true,
+  }: {
+    formState: SuccessFormState<ApiDataResponseType, FormData> | ErrorFormState<ClientFieldsErrors, FormData>,
     successCallback?: (apiDataResponse: ApiDataResponseType) => void,
-    errorCallback?: () => void) {
+    errorCallback?: () => void,
+    showSuccessToast?: boolean,
+    showErrorToast?: boolean
+  }) {
   if (formState.success) {
-    if (formState.apiMsgs) {
+    if (formState.apiMsgs && showSuccessToast) {
       toastApiMsgs(formState.apiMsgs, "success");
     }
     successCallback?.(formState.apiDataResponse);
   } else {
-    if (formState.apiMsgs) {
+    if (formState.apiMsgs && showErrorToast) {
       toastApiMsgs(formState.apiMsgs, "destructive");
     }
     errorCallback?.();
