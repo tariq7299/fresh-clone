@@ -14,8 +14,8 @@ enum Gender {
 }
 
 model Business {
-  id          Int       @id @default(autoincrement())
-  userId      Int
+  id          Int @id @default(autoincrement())
+  userId      Int @unique
   name_ar     String
   name_en     String
   description_ar String

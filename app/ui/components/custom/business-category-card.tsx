@@ -25,6 +25,7 @@ export default function BusinessCategoryCard({ categoryName, categoryIconUrl = "
                 'font-black',
                 ''
             )}>{categoryName}</h1>
+
         </div>
         <div className={cn(
             "absolute top-2 right-2 bg-accent text-background rounded-lg p-0.5 scale-75",

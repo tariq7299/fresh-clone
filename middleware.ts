@@ -7,7 +7,7 @@ import { UserRole } from '@/(auth)/_lib/definitions'
 const protectedRoutes = ['/professional/dashboard', '/admin/dashboard', '/customer']
 // These routes that the user can't access it while authenticated
 // So if he tries to access these then he will be directed to /dashboard
-const publicRoutes = ['/register', '/for-who', "/professional/onboarding", "/otp-verification"]
+const publicRoutes = ['/register', '/for-who', "/otp-verification"]
 // const publicRoutes = ['/login', '/register', '/for-who', "/professional/onboarding"]
 
 export default async function middleware(req: NextRequest) {
@@ -40,6 +40,11 @@ export default async function middleware(req: NextRequest) {
             ) return NextResponse.redirect(new URL('/professional/dashboard', req.nextUrl))
 
             if ((req.nextUrl.pathname.startsWith('/admin')) || (req.nextUrl.pathname.startsWith('/customer'))) return NextResponse.redirect(new URL('/professional/dashboard', req.nextUrl))
+
+            // I have hardCoded until backend return it, then i will remove this
+            // const userHasBusiness = false
+            // if (!userHasBusiness) return NextResponse.redirect(new URL
+            //     ('/professional/onboarding/business-name', req.nextUrl))
 
             return NextResponse.next()
 
