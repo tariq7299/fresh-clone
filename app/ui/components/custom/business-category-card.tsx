@@ -12,7 +12,7 @@ export default function BusinessCategoryCard({ categoryName, categoryIconUrl = "
         <input id={categoryId} type="radio" name="business-category" value={categoryId} className="peer appearance-none hidden" />
         <div className={cn(
             "flex flex-col justify-center gap-3 items-start rounded-lg p-5 transition-all duration-200 box-border",
-            "border-1 border-gray-200 bg-white hover:bg-accent/5 ",
+            "border-1 border-gray-200 bg-background hover:bg-accent/5 ",
             "peer-checked:border-accent  peer-checked:bg-accent/5 peer-checked:text-accent-600 relative "
         )}>
 

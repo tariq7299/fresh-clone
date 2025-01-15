@@ -23,7 +23,7 @@ import {
 
 // Add types
 // export function Combobox<TFieldValues extends FieldValues, TName extends FieldPath<TFieldValues>>({ values, field, className, inputPlaceholder = "Select value...", searchPlaceholder = "Search..." }: ComboboxProps<TFieldValues, TName>) {
-export function Combobox({ values, field, className, inputPlaceholder = "Select value...", searchPlaceholder = "Search..." }) {
+export function Combobox({ values, field, className, inputPlaceholder = "Select value...", searchPlaceholder = "Search..." }: { values: { id: number, name: string }[], field?: any, className?: string, inputPlaceholder?: string, searchPlaceholder?: string }) {
 
 
     const [open, setOpen] = React.useState(false)
