@@ -3,7 +3,7 @@ import { getSession } from '@/(auth)/_lib/sessions'
 import { UserRole } from '@/(auth)/_lib/definitions'
 
 // 1. Specify protected and public routes
-const protectedRoutes = ['/professional/dashboard', '/admin/dashboard', '/customer']
+const protectedRoutes = ['/professional', '/admin', '/customer']
 // These routes that the user can't access it while authenticated
 // So if he tries to access these then he will be directed to /dashboard
 const publicRoutes = ['/register', '/for-who', "/otp-verification"]

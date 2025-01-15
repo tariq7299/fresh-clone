@@ -15,8 +15,6 @@ export default function ProfessionalOnboardingLayout({ children }: { children: R
 
                 <OnboardingSteps />
 
-
-
                 <div className="flex justify-between items-center py-3">
                     <BackButton backTo={"/professional"} />
 

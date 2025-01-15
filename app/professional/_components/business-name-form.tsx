@@ -47,8 +47,6 @@ export default function BusinessNameForm({ storedStepBusinessInfo }: { storedSte
         setIsLoading(isPending)
     }, [isPending])
 
-    console.log("formState", formState)
-
     return <form action={formAction} id="business-onboarding-form">
         <div className="flex flex-col gap-2 w-full max-w-lg p-5 py-24 min-h-dvh  items-center m-auto space-y-5">
 

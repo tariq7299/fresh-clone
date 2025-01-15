@@ -44,8 +44,6 @@ export const login = async (formState: SuccessLoginFormState | ErrorLoginFormSta
 
         sessionData = { ...authenticateUserResponse.data.user, token: authenticateUserResponse.data.token }
 
-        console.log("sessionDataLOGIN", sessionData)
-
         const successMsg = setApiSuccessMsg({ successResponse: authenticateUserResponse })
 
         await loginUserServerSide(sessionData)
@@ -107,7 +105,6 @@ export const verifyOtp = async (formState: SuccessOtpFormState | ErrorOtpFormSta
     }
 
     let sessionData: SessionData;
-    console.log("payload", payload)
     // Change the otp form string to number before sending it to the server
     const formDataPayload = { ...payload, otp: Number(payload.otp) }
     const url = payload.userRole === UserRole.Professional ? "/auth/stakeholder/verify-otp" : "/auth/user/verify-otp"
@@ -121,8 +118,6 @@ export const verifyOtp = async (formState: SuccessOtpFormState | ErrorOtpFormSta
         const successMsg = setApiSuccessMsg({ successResponse: response })
 
         sessionData = { ...response.data.user, token: response.data.token }
-
-        console.log("sessionData", sessionData)
 
         await loginUserServerSide(sessionData)
 

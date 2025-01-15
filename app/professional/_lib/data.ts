@@ -2,39 +2,45 @@
 import { getSession } from "@/(auth)/_lib/sessions"
 import prisma from "@/lib/prisma"
 
-export const getBusinessStepFormData = async () => {
+export const getBusinessStepFormData = async (stepName: string) => {
 
     try {
 
         const session = await getSession()
         const userId = session ? session.id : null
-        // console.log("session", session)
-        // console.log("userId", userId)
         if (!userId) throw new Error("Error getting user id!")
 
-        // console.log("userId", userId)
+        if (stepName === "businessNameStep") {
 
-        const storedStepBusinessInfo = await prisma.business.findFirst({
-            where: {
-                userId: Number(userId)
-            },
-            select: {
-                name_ar: true,
-                name_en: true,
-                description_ar: true,
-                description_en: true,
-                website_url: true,
-                capacity: true,
-            }
-        })
+            const storedStepBusinessInfo = await prisma.business.findUnique({
+                where: {
+                    userId: userId
+                },
+                select: {
+                    name_ar: true,
+                    name_en: true,
+                    description_ar: true,
+                    description_en: true,
+                    website_url: true,
+                    capacity: true,
+                }
+            })
 
-        // console.log("storedStepBusinessInfo", storedStepBusinessInfo)
 
-        // const successMsg = setApiSuccessMsg({ successResponse: response })
+            return storedStepBusinessInfo
+        } else if (stepName === "storedStepCategory") {
 
-        return storedStepBusinessInfo
+            const storedStepCategory = await prisma.business.findUnique({
+                where: {
+                    userId: userId
+                },
+                select: {
+                    category_id: true
+                }
+            })
 
-        // return storedStepBusinessInfo
+            return storedStepCategory
+        }
 
     } catch (error) {
 

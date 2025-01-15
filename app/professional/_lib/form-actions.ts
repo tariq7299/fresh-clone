@@ -15,7 +15,13 @@ const businessNameSchema = z.object({
     websiteUrl: z.string().trim().min(3, { message: "Website URL is required" }),
 })
 
+const businessCategorySchema = z.object({
+    category_id: z.string().trim().min(1, { message: "Category is required" }),
+})
+
+// 
 export type BusinessNameFormData = z.infer<typeof businessNameSchema>
+export type BusinessCategoryFormData = z.infer<typeof businessCategorySchema>
 
 export type BusinessNameFieldErrors = {
     nameEn?: string | string[]
@@ -27,14 +33,6 @@ export type BusinessNameFieldErrors = {
 
 export type BusinessNameFormState = SuccessFormState<BusinessNameFormData, BusinessNameFormData> | ErrorFormState<BusinessNameFieldErrors |
     null, BusinessNameFormData>
-
-
-
-export const handleSubmit = async (formState: any, formData: FormData) => {
-    console.log("formState", formState)
-    console.log("formData", formData)
-    return formState
-}
 
 export const handleSubmitBusinessName = async (formState: BusinessNameFormState, formData: FormData) => {
 
@@ -107,4 +105,51 @@ export const handleSubmitBusinessName = async (formState: BusinessNameFormState,
 
 
     redirect("/professional/onboarding/business-category")
+}
+
+
+export const handleSubmitBusinessCategory = async (formState: any, formData: FormData) => {
+
+    const session = await getSession()
+    const userId = session ? session.id : null
+    if (!userId) throw new Error("Error getting user id!")
+
+    try {
+
+        console.log("formState", formState)
+        console.log("formData", formData)
+
+
+        const validatedFields = businessCategorySchema.safeParse({ category_id: formData.get("business-category") })
+
+        if (!validatedFields.success) {
+            return {
+                success: false,
+                clientFieldsErrors: validatedFields.error.flatten().fieldErrors,
+                apiDataResponse: null,
+                apiMsgs: "",
+                formData: formData
+            }
+        }
+
+        await prisma.business.upsert({
+            where: {
+                userId: userId
+            },
+            data: {
+                category_id: validatedFields.data.category_id
+            }
+        })
+
+        return formState
+    } catch (error) {
+        console.error('Database Error:', error);
+        return {
+            success: false,
+            clientFieldsErrors: null,
+            apiDataResponse: null,
+            apiMsgs: "Error fetching form data",
+            formData: formData
+        }
+    }
 }
