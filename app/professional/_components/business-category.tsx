@@ -22,8 +22,10 @@ export default function BusinessCategoryForm({ storedStepCategory, categories }:
 
     const [formState, formAction, isPending] = useActionState(handleSubmitBusinessCategory, initialState)
 
+    console.log("formStateCLIENT", formState)
+
     useEffect(() => {
-        setIsLoading(false)
+        setIsLoading(isPending)
     }, [isPending])
 
 
@@ -45,7 +47,7 @@ export default function BusinessCategoryForm({ storedStepCategory, categories }:
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 justify-items-stretch md:grid-cols-3 ">
                 {categories.map((category: any) => (
-                    <BusinessCategoryCard key={category.id} categoryName={category.name} categoryIconUrl={"/categories/hair.png"} categoryId={category.id} />
+                    <BusinessCategoryCard key={category.id} categoryName={category.name} categoryIconUrl={"/categories/hair.png"} categoryId={category.id} isPending={isPending} />
                 ))}
             </div>
 

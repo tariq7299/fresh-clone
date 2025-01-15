@@ -93,7 +93,7 @@ export const handleSubmitBusinessName = async (formState: BusinessNameFormState,
 
 
     } catch (error) {
-        console.error('Database Error:', error);
+        console.error('Error submitting business name:', error);
         return {
             success: false,
             clientFieldsErrors: null,
@@ -116,10 +116,6 @@ export const handleSubmitBusinessCategory = async (formState: any, formData: For
 
     try {
 
-        console.log("formState", formState)
-        console.log("formData", formData)
-
-
         const validatedFields = businessCategorySchema.safeParse({ category_id: formData.get("business-category") })
 
         if (!validatedFields.success) {
@@ -134,16 +130,20 @@ export const handleSubmitBusinessCategory = async (formState: any, formData: For
 
         await prisma.business.upsert({
             where: {
-                userId: userId
+                userId,
             },
-            data: {
-                category_id: validatedFields.data.category_id
+            update: {
+                category_id: Number(validatedFields.data.category_id)
+            },
+            create: {
+                userId,
+                category_id: Number(validatedFields.data.category_id)
             }
         })
 
-        return formState
+
     } catch (error) {
-        console.error('Database Error:', error);
+        console.error('Error submitting business category:', error);
         return {
             success: false,
             clientFieldsErrors: null,
@@ -152,4 +152,6 @@ export const handleSubmitBusinessCategory = async (formState: any, formData: For
             formData: formData
         }
     }
+
+    redirect("/professional/onboarding/business-services")
 }
