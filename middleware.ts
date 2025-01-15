@@ -22,59 +22,64 @@ export default async function middleware(req: NextRequest) {
         getSession()
     // const session = (await cookies()).get('session')?.value
 
-    console.log("sessionMIDDLEWARE", session)
-    console.log("session?.has_business", session?.has_business)
-    console.log("session?.has_business", typeof session?.has_business)
+    // console.log("sessionMIDDLEWARE", session)
+    // console.log("session?.has_business", session?.has_business)
+    // console.log("session?.has_business", typeof session?.has_business)
 
     //   const session = await decrypt(cookie)
 
     // 4. Redirect to /login if the user is not authenticated
-    if (isProtectedRoute && !session?.token) {
-        return NextResponse.redirect(new URL('/login', req.nextUrl))
-    }
+    // if (isProtectedRoute && !session?.token) {
+    //     return NextResponse.redirect(new URL('/login', req.nextUrl))
+    // }
 
     if (session?.token) {
 
         if (session?.role === UserRole.Professional) {
 
-            if (
-                isPublicRoute &&
-                (!req.nextUrl.pathname.startsWith('/professional/dashboard'))
-            ) return NextResponse.redirect(new URL('/professional/dashboard', req.nextUrl))
+            // if (
+            //     isPublicRoute &&
+            //     (!req.nextUrl.pathname.startsWith('/professional/dashboard'))
+            // ) return NextResponse.redirect(new URL('/professional/dashboard', req.nextUrl))
 
             if ((req.nextUrl.pathname.startsWith('/admin')) || (req.nextUrl.pathname.startsWith('/customer'))) return NextResponse.redirect(new URL('/professional/dashboard', req.nextUrl))
 
-            const userHasBusiness = session?.has_business !== null
-
-            console.log("userHasBusiness", userHasBusiness)
-
             // I have hardCoded until backend return it, then i will remove this
             // const userHasBusin
-            // if (!userHasBusiness) return NextResponse.redirect(new URL
-            //     ('/login', req.nextUrl))
+            console.log("session", session)
+            // console.log("req", req)
+            if (!session?.has_business) {
+                //     console.log("qawDFFWEDSRFWER")
+                return NextResponse.redirect(new URL
+                    ('/professional', req.nextUrl))
+            }
+
+            //     return NextResponse.next()
+            // }
 
             return NextResponse.next()
 
-        } else if (session?.role === UserRole.Admin) {
-            if (
-                isPublicRoute &&
-                !req.nextUrl.pathname.startsWith('/admin/dashboard')
-            ) return NextResponse.redirect(new URL('/admin/dashboard', req.nextUrl))
+            // } else if (session?.role === UserRole.Admin) {
+            //     if (
+            //         isPublicRoute &&
+            //         !req.nextUrl.pathname.startsWith('/admin/dashboard')
+            //     ) return NextResponse.redirect(new URL('/admin/dashboard', req.nextUrl))
 
-            if ((req.nextUrl.pathname.startsWith('/professional')) || (req.nextUrl.pathname.startsWith('/customer'))) return NextResponse.redirect(new URL('/admin/dashboard', req.nextUrl))
+            //     if ((req.nextUrl.pathname.startsWith('/professional')) || (req.nextUrl.pathname.startsWith('/customer'))) return NextResponse.redirect(new URL('/admin/dashboard', req.nextUrl))
 
-            return NextResponse.next()
+            //     return NextResponse.next()
 
-        } else {
+            // } else {
 
-            if (isPublicRoute) return NextResponse.redirect(new URL('/', req.nextUrl))
+            //     if (isPublicRoute) return NextResponse.redirect(new URL('/', req.nextUrl))
 
-            if ((req.nextUrl.pathname.startsWith('/professional')) || (req.nextUrl.pathname.startsWith('/admin'))) return NextResponse.redirect(new URL('/', req.nextUrl))
+            //     if ((req.nextUrl.pathname.startsWith('/professional')) || (req.nextUrl.pathname.startsWith('/admin'))) return NextResponse.redirect(new URL('/', req.nextUrl))
 
-            return NextResponse.next()
+            //     return NextResponse.next()
         }
     }
 }
+
 
 // Routes Middleware should not run on
 export const config = {
