@@ -9,7 +9,7 @@ import { Button } from '@/ui/components/custom/button';
 // import { PlusIcon } from '@heroicons/react/24/outline';
 import { Plus, EllipsisVertical } from 'lucide-react';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/ui/components/dropdown-menu';
-
+import EditServiceDialog from '@/professional/_components/edit-service-dialog';
 
 export default function BusinessServicesPage() {
 
@@ -84,8 +84,14 @@ export default function BusinessServicesPage() {
                             </DropdownMenuTrigger>
                             <DropdownMenuContent className='space-y-'>
 
-                                <DropdownMenuItem className='py-2 font-semibold'>
-                                    <p>Edit</p>
+                                <DropdownMenuItem className='py-2 font-semibold' asChild >
+                                    <EditServiceDialog service={{
+                                        name: "Manicure",
+                                        price: 27,
+                                        duration: 45,
+                                        category: "Beauty",
+                                        currency: "EGP"
+                                    }} />
                                 </DropdownMenuItem>
                                 <DropdownMenuItem className='py-2 text-destructive font-semibold'>
                                     <p>Delete</p>
@@ -205,6 +211,7 @@ export default function BusinessServicesPage() {
 
                             </DropdownMenuContent>
                         </DropdownMenu>
+
                     </div>
                 </div>
                 <div className='border-l-8 border-l-secondary-400 border-t-1 border-r-1 border-b-1 border border-gray-200 p-5 flex justify-between items-center rounded-lg'>
