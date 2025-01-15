@@ -6,12 +6,15 @@ import { useActionState } from 'react';
 import { handleSubmitBusinessName, BusinessNameFormState, BusinessNameFormData } from '@/professional/_lib/form-actions';
 import { handleFormResponse } from '@/lib/utils/utils';
 import { useEffect, useState } from 'react';
+import { useBusinessFormContext } from './business-form-provider';
 
 // TODO: Add this type
 // import { StepBusinessInfo } from '@/types/business-info';
 
 // TODO: Add this type
 export default function BusinessNameForm({ storedStepBusinessInfo }: { storedStepBusinessInfo: any }) {
+
+    const { setIsLoading } = useBusinessFormContext()
 
     const initialState = {
         success: false,
@@ -40,6 +43,9 @@ export default function BusinessNameForm({ storedStepBusinessInfo }: { storedSte
     //     })
     // }, [formState])
 
+    useEffect(() => {
+        setIsLoading(isPending)
+    }, [isPending])
 
     console.log("formState", formState)
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useActionState } from 'react';
 import { ApiError } from '@/lib/definitions/api';
 import { Button } from "@/ui/components/custom/button";
 import { ArrowRightIcon } from '@heroicons/react/24/outline'
@@ -11,9 +11,17 @@ import Image from 'next/image';
 import { CheckIcon } from '@heroicons/react/24/outline';
 import BusinessCategoryCard from '@/ui/components/custom/business-category-card';
 import { cn } from '@/lib/utils/utils';
+import { useBusinessFormContext } from '@/professional/_components/business-form-provider';
 
 export default function ProfessionalOnboardingPage() {
 
+    const { setIsLoading } = useBusinessFormContext()
+
+    // const [formState, formAction, isPending] = useActionState(handleSubmitBusinessName, initialState)       
+
+    // useEffect(() => {
+    //     setIsLoading(false)
+    // }, [isPending])
 
     return (
         <form>
