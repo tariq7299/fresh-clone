@@ -9,9 +9,9 @@ import SubmitButton from "../_components/submit-button";
 export default function ProfessionalOnboardingLayout({ children }: { children: React.ReactNode }) {
 
 
-    return <div className=" ">
+    return <div className=" w-lvw">
         <BusinessFormProvider>
-            <div className="fixed top-0 left-1/2 -translate-x-1/2 bg-background w-full pt-3 px-5 flex flex-col z-50 max-w-5xl ">
+            <div className="fixed top-0 left-1/2 -translate-x-1/2 bg-background w-svw pt-3 px-5 flex flex-col z-50 max-w-5xl ">
 
                 <OnboardingSteps />
 
