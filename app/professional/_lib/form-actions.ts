@@ -83,14 +83,6 @@ export const handleSubmitBusinessName = async (formState: BusinessNameFormState,
             }
         })
 
-        // return {
-        //     success: true,
-        //     clientFieldsErrors: null,
-        //     apiDataResponse: null,
-        //     apiMsgs: "",
-        //     formData: formData
-        // }
-
 
     } catch (error) {
         console.error('Error submitting business name:', error);
