@@ -73,7 +73,7 @@ export default function BusinessServicesPage() {
                         <p className='text-muted-foreground'>45min</p>
                     </div>
                     <div className='flex items-center gap-2'>
-                        <p>EGP 27</p>
+                        <p className='font-semibold'    >EGP 27</p>
 
                         <DropdownMenu>
 
