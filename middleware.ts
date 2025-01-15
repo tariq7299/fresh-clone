@@ -22,6 +22,9 @@ export default async function middleware(req: NextRequest) {
         getSession()
     // const session = (await cookies()).get('session')?.value
 
+    console.log("sessionMIDDLEWARE", session)
+    console.log("session?.has_business", session?.has_business)
+    console.log("session?.has_business", typeof session?.has_business)
 
     //   const session = await decrypt(cookie)
 
@@ -41,10 +44,14 @@ export default async function middleware(req: NextRequest) {
 
             if ((req.nextUrl.pathname.startsWith('/admin')) || (req.nextUrl.pathname.startsWith('/customer'))) return NextResponse.redirect(new URL('/professional/dashboard', req.nextUrl))
 
+            const userHasBusiness = session?.has_business !== null
+
+            console.log("userHasBusiness", userHasBusiness)
+
             // I have hardCoded until backend return it, then i will remove this
-            // const userHasBusiness = false
+            // const userHasBusin
             // if (!userHasBusiness) return NextResponse.redirect(new URL
-            //     ('/professional/onboarding/business-name', req.nextUrl))
+            //     ('/login', req.nextUrl))
 
             return NextResponse.next()
 

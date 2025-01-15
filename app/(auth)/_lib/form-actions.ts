@@ -44,6 +44,8 @@ export const login = async (formState: SuccessLoginFormState | ErrorLoginFormSta
 
         sessionData = { ...authenticateUserResponse.data.user, token: authenticateUserResponse.data.token }
 
+        console.log("sessionDataLOGIN", sessionData)
+
         const successMsg = setApiSuccessMsg({ successResponse: authenticateUserResponse })
 
         await loginUserServerSide(sessionData)
@@ -119,6 +121,8 @@ export const verifyOtp = async (formState: SuccessOtpFormState | ErrorOtpFormSta
         const successMsg = setApiSuccessMsg({ successResponse: response })
 
         sessionData = { ...response.data.user, token: response.data.token }
+
+        console.log("sessionData", sessionData)
 
         await loginUserServerSide(sessionData)
 

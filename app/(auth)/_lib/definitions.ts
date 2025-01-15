@@ -43,6 +43,7 @@ export type User = {
     email: string;
     role: UserRole;
     phone_number: string;
+    has_business: boolean;
     is_verified: boolean;
 }
 
