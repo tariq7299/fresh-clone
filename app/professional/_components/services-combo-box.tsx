@@ -39,7 +39,7 @@ export function ServicesComboBox({ servicesList, selectedService, setSelectedSer
                     variant="outline"
                     role="combobox"
                     aria-expanded={open}
-                    className=" justify-between"
+                    className=" justify-between active:scale-100"
                 >
                     {selectedService.serviceCategory && servicesList.length > 0
                         ? servicesList.find((item: { name: string, services: Service[] }) => item.name === selectedService.serviceCategory)?.services.find((service: Service) => service.id === Number(selectedService.serviceId))?.name
@@ -71,6 +71,7 @@ export function ServicesComboBox({ servicesList, selectedService, setSelectedSer
                                             {item.services.map((service: Service) => (
 
                                                 <CommandItem
+                                                    className=""
                                                     key={service.id}
                                                     value={service.name}
                                                     onSelect={() => {

@@ -21,14 +21,14 @@ const buttonVariants = cva(
                     'bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90',
                 outline:
                     // 'border border-input bg-background shadow-sm hover:bg-secondary-100 hover:text-accent-foreground',
-                    'border border-input bg-background shadow-sm hover:bg-accent-100 ',
+                    'border border-input bg-background shadow-sm hover:bg-accent/5 ',
                 secondary:
                     'bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80',
                 accent:
                     'bg-accent text-accent-foreground shadow-sm hover:bg-accent/80',
                 ghost: 'hover:bg-accent/10 ',
                 link: 'text-primary underline-offset-4 hover:underline',
-                nextLink: 'border border-input bg-background shadow-sm hover:bg-accent-100 '
+                nextLink: 'border border-input bg-background shadow-sm hover:bg-accent/5 '
             },
             size: {
                 default: 'h-9 ',

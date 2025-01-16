@@ -66,7 +66,7 @@ export default function EditServiceDialog({ service, selectedServicesList, setSe
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
 
-                <Button variant="ghost" className="w-full justify-start  p-2 hover:bg-accent hover:text-accent-foreground font-semibold transition-colors duration-200 ease-in-out">Edit</Button>
+                <Button variant="ghost" className="w-full justify-start  p-2 hover:bg-accent-100/80  font-semibold transition-colors duration-200 ease-in-out">Edit</Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
