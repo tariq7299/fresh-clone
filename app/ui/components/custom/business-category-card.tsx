@@ -9,7 +9,7 @@ import { Button } from "./button"
 export default function BusinessCategoryCard({ categoryName, categoryIconUrl = "/categories/hair.png", categoryId, isPending, defaultChecked }: { categoryName: string, categoryIconUrl: string, categoryId: string, isPending: boolean, defaultChecked: boolean }) {
 
     return <label htmlFor={categoryId} className={cn("col-span-1 relative cursor-pointer w-full active:scale-95 transition-transform duration-150 before:content-[''] before:absolute before:inset-0 before:w-full before:h-full before:border-2 before:border-accent before:rounded-lg", isPending && "opacity-50 pointer-events-none")}>
-        <input id={categoryId} type="radio" name="business-category" defaultChecked={defaultChecked} value={categoryId} className="peer appearance-none hidden" />
+        <input id={categoryId} type="radio" name="category_id" defaultChecked={defaultChecked} value={categoryId} className="peer appearance-none hidden" />
         <div className={cn(
             "flex flex-col justify-center gap-3 items-start rounded-lg p-5 transition-all duration-200 box-border",
             "border-1 border-gray-200 bg-background hover:bg-accent/5 ",

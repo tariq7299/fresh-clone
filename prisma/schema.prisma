@@ -36,4 +36,6 @@ model BusinessService {
   duration    Int?    
   price      Float?
 
+  @@unique([businessId, service_id])
+
 }

@@ -1,6 +1,7 @@
 
 import { getSession } from "@/(auth)/_lib/sessions"
 import prisma from "@/lib/prisma"
+import { redirect } from "next/navigation"
 
 export const getBusinessStepFormData = async (stepName: string) => {
 
@@ -8,7 +9,7 @@ export const getBusinessStepFormData = async (stepName: string) => {
 
         const session = await getSession()
         const userId = session ? session.id : null
-        if (!userId) throw new Error("Error getting user id!")
+        if (!userId) redirect("/login?sessionExpired=true")
 
         if (stepName === "businessNameStep") {
 

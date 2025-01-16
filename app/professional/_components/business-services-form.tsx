@@ -1,12 +1,13 @@
 "use client"
 
-import { useState } from 'react';
+import { useActionState, useEffect, useState } from 'react';
 import { Button } from '@/ui/components/custom/button';
 import { Plus, EllipsisVertical } from 'lucide-react';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/ui/components/dropdown-menu';
 import EditServiceDialog from '@/professional/_components/edit-service-dialog';
 import { ServicesComboBox } from '@/professional/_components/services-combo-box';
-
+import { handleSubmitBusinessServices } from '@/professional/_lib/form-actions';
+import { useBusinessFormContext } from './business-form-provider';
 
 export type Service = {
     id: number,
@@ -31,8 +32,10 @@ export type selectedService = {
     serviceCurrency: string,
 }
 
-
+// TODO: Write comments
 export default function BusinessServicesForm({ services }: { services: servicesList }) {
+
+    const { setIsLoading } = useBusinessFormContext()
 
     const [servicesList, setServicesList] = useState(services)
 
@@ -56,6 +59,7 @@ export default function BusinessServicesForm({ services }: { services: servicesL
         serviceDuration: "",
         serviceCurrency: "",
     })
+
 
     function handleAddingService() {
 
@@ -97,7 +101,43 @@ export default function BusinessServicesForm({ services }: { services: servicesL
     }
 
 
-    return <form>
+    // TODO: Write types
+    // const [formState, formAction, isPending] = useActionState(handleSubmitBusinessServices, initialState)
+
+    // State to hold form values
+    const [formData, setFormData] = useState({
+        name: "John Doe",
+        email: "johndoe@example.com",
+    });
+
+    const INITIAL_FORM_STATE = {
+        success: false,
+        clientFieldsErrors: null,
+        apiDataResponse: null,
+        apiMsgs: "",
+        formData: selectedServicesList
+    }
+
+    const [formState, setFormState] = useState(INITIAL_FORM_STATE)
+    const [isPending, setIsPending] = useState(false)
+
+    // Handle form submission
+    const handleSubmit = async (event: any) => {
+        event.preventDefault();
+        setIsPending(true)
+        const result = await handleSubmitBusinessServices(selectedServicesList);
+        setFormState(result)
+        setIsPending(false)
+        return
+
+    };
+
+    useEffect(() => {
+        setIsLoading(isPending)
+    }, [isPending])
+
+
+    return <form onSubmit={handleSubmit} id="business-onboarding-form">
         <div className="flex flex-col gap-2 w-full max-w-4xl p-5 py-24 min-h-dvh items-stretch m-auto space-y-5 ">
 
             <div className="text-start space-y-1">
@@ -110,7 +150,7 @@ export default function BusinessServicesForm({ services }: { services: servicesL
                 <p className="text-sm text-muted-foreground ">Choose a service then press <span className="font-bold text-accent-600">Add</span> to add it to your list.</p>
             </div>
 
-            {/* {formState.clientFieldsErrors?.category_id && <p className="text-destructive text-sm py-2">You must select a category</p>} */}
+            {formState.clientFieldsErrors?.service && <p className="text-destructive text-sm py-2">{formState.clientFieldsErrors?.service}</p>}
             <div className='flex max-w-xl gap-2 justify-center items-center mx-auto w-full'>
 
                 <ServicesComboBox className=' w-full' servicesList={servicesList} selectedService={selectedService} setSelectedService={setSelectedService} setServicesList={setServicesList} />
