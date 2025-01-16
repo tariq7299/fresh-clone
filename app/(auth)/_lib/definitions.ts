@@ -78,8 +78,8 @@ export const RegisterFormSchema = z.object({
     email: z.string().trim().min(1, { message: "Please enter your email" }).email("Invalid email address"),
     password: z.string().trim().min(1, { message: 'Please enter your password' }),
     password_confirmation: z.string().trim().min(1, { message: 'Please enter your password confirmation' }),
-    firstName: z.string().trim().min(1, { message: 'Please enter your first name' }),
-    lastName: z.string().trim().min(1, { message: 'Please enter your last name' }),
+    first_name: z.string().trim().min(1, { message: 'Please enter your first name' }),
+    last_name: z.string().trim().min(1, { message: 'Please enter your last name' }),
     phone_number: z.string().trim().min(10, { message: 'Please enter your phone number' }).max(15, { message: 'Please enter a valid phone number' }),
     userRole: z.enum(["professional", "customer"])
 }).refine((data) => data.password === data.password_confirmation, {
@@ -94,8 +94,8 @@ export type RegisterFieldErrors = {
     email?: string | string[]
     password?: string | string[]
     password_confirmation?: string | string[]
-    firstName?: string | string[]
-    lastName?: string | string[]
+    first_name?: string | string[]
+    last_name?: string | string[]
     phone_number?: string | string[]
 }
 

@@ -30,8 +30,8 @@ export default function RegisterForm({ userRole }: { userRole: string }) {
             email: "",
             password: "",
             password_confirmation: "",
-            firstName: "",
-            lastName: "",
+            first_name: "",
+            last_name: "",
             phone_number: "",
         }
     };
@@ -79,26 +79,26 @@ export default function RegisterForm({ userRole }: { userRole: string }) {
             <div className="flex flex-col gap-2 w-full">
                 <Label htmlFor="firstName">First Name</Label>
                 <Input
-                    defaultValue={formState?.formData?.firstName}
+                    defaultValue={formState?.formData?.first_name}
                     type="text"
-                    name="firstName"
-                    id="firstName"
+                    name="first_name"
+                    id="first_name"
                     placeholder="John"
                     className="w-full"
                 />
-                {formState.clientFieldsErrors?.firstName && <p className="text-red-500 text-sm">{formState.clientFieldsErrors.firstName?.[0]}</p>}
+                {formState.clientFieldsErrors?.first_name && <p className="text-red-500 text-sm">{formState.clientFieldsErrors.first_name?.[0]}</p>}
             </div>
             <div className="flex flex-col gap-2 w-full">
                 <Label htmlFor="lastName">Last Name</Label>
                 <Input
-                    defaultValue={formState?.formData?.lastName}
+                    defaultValue={formState?.formData?.last_name}
                     type="text"
-                    name="lastName"
-                    id="lastName"
+                    name="last_name"
+                    id="last_name"
                     placeholder="Smith"
                     className="w-full"
                 />
-                {formState.clientFieldsErrors?.lastName && <p className="text-red-500 text-sm">{formState.clientFieldsErrors.lastName?.[0]}</p>}
+                {formState.clientFieldsErrors?.last_name && <p className="text-red-500 text-sm">{formState.clientFieldsErrors.last_name?.[0]}</p>}
             </div>
         </div>
         <div className="flex flex-col gap-2">

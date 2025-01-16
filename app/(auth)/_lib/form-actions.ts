@@ -149,8 +149,8 @@ export const register = async (formState: SuccessRegisterFormState | ErrorRegist
         email: formData.get('email') as string,
         password: formData.get('password') as string,
         password_confirmation: formData.get('password_confirmation') as string,
-        firstName: formData.get('firstName') as string,
-        lastName: formData.get('lastName') as string,
+        first_name: formData.get('first_name') as string,
+        last_name: formData.get('last_name') as string,
         phone_number: formData.get('phone_number') as string,
     }
 
@@ -170,12 +170,12 @@ export const register = async (formState: SuccessRegisterFormState | ErrorRegist
 
         const url = formState.formData.userRole === UserRole.Professional ? "/auth/stakeholder/register" : "/auth/user/register"
 
-        const { firstName, lastName, ...rest } = payload
-        const formattedPayload = { ...rest, name: firstName + " " + lastName }
+        // const { firstName, lastName, ...rest } = payload
+        // const formattedPayload = { ...rest, name: firstName + " " + lastName }
 
         const response = await fetchApi<ApiResponse<Omit<ApiResponseSessionData, "token">>>(url, {
             method: 'POST',
-            body: formattedPayload,
+            body: payload,
         }) as ApiSucess<Omit<ApiResponseSessionData, "token">>;
 
         const successMsg = setApiSuccessMsg({ successResponse: response })

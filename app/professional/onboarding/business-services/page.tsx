@@ -1,893 +1,209 @@
-"use client"
+import { getAllServices } from '@/lib/data';
+import BusinessServicesForm from '@/professional/_components/business-services-form';
 
-import { getBusinessStepFormData } from '@/professional/_lib/data';
-import { getBusinessCategories } from '@/lib/data';
-import BusinessCategoryForm from '@/professional/_components/business-category';
-import { Combobox } from '@/ui/components/custom/combo-box';
-import { useState } from 'react';
-import { Button } from '@/ui/components/custom/button';
-// import { PlusIcon } from '@heroicons/react/24/outline';
-import { Plus, EllipsisVertical } from 'lucide-react';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/ui/components/dropdown-menu';
-import EditServiceDialog from '@/professional/_components/edit-service-dialog';
+export default async function BusinessServicesPage() {
 
-export default function BusinessServicesPage() {
-
-    const values = [
-        { id: 1, name: "Hair Styling" },
-        { id: 2, name: "Nail Care" },
-        { id: 3, name: "Massage Therapy" },
-        { id: 4, name: "Facial Treatments" },
-        { id: 5, name: "Waxing" },
-        { id: 6, name: "Makeup Services" },
-        { id: 7, name: "Hair Coloring" },
-        { id: 8, name: "Manicure" },
-        { id: 9, name: "Pedicure" },
-        { id: 10, name: "Body Treatments" },
-        { id: 11, name: "Eyelash Extensions" },
-        { id: 12, name: "Eyebrow Shaping" },
-        { id: 13, name: "Hair Extensions" },
-        { id: 14, name: "Deep Tissue Massage" },
-        { id: 15, name: "Swedish Massage" },
-        { id: 16, name: "Spa Packages" },
-        { id: 17, name: "Skin Care" },
-        { id: 18, name: "Hair Removal" },
-        { id: 19, name: "Tanning Services" },
-        { id: 20, name: "Beauty Consultation" }
-    ]
-
-    const [field, setField] = useState({
-        value: "",
-        onChange: (value: string) => {
-            setField({ value, onChange: (value: string) => { } })
-        }
-    })
 
     // const storedStepCategory = await getBusinessStepFormData("categoryStep")
 
-    // const categories = await getBusinessCategories()
-
-    return <form>
-        <div className="flex flex-col gap-2 w-full max-w-4xl p-5 py-24 min-h-dvh items-stretch m-auto space-y-5 ">
-
-            <div className="text-start space-y-1">
-
-                <p className="text-sm text-muted-foreground text-start"> Account setup</p>
-
-                <h1 className="text-3xl lg:text-4xl font-bold font-source-sans">Build Your Service List</h1>
-
-                <p className="text-sm text-muted-foreground ">Choose a service then press <span className="font-bold text-accent-600">Add</span> to add it to your list.</p>
-            </div>
-
-            {/* {formState.clientFieldsErrors?.category_id && <p className="text-destructive text-sm py-2">You must select a category</p>} */}
-            <div className='flex max-w-xl gap-2 justify-center items-center mx-auto w-full'>
-                <Combobox className=' w-full' values={values} field={field} />
-                <Button className='font-bold flex items-center gap-2'>Add<Plus className='size-4' /></Button>
-
-            </div>
-
-            <div className="grid grid-cols-1 gap-4">
-                <div className='border-l-8 border-l-secondary-400 border-t-1 border-r-1 border-b-1 border border-gray-200 p-5 flex justify-between items-center rounded-lg'>
-                    <div>
-                        <p className='text-lg font-bold'>Manicure</p>
-                        <p className='text-muted-foreground'>45min</p>
-                    </div>
-                    <div className='flex items-center gap-2'>
-                        <p className='font-semibold'    >EGP 27</p>
-
-                        <DropdownMenu>
-
-                            <DropdownMenuTrigger asChild >
-                                <Button variant="ghost">
-                                    <EllipsisVertical className='size-5' />
-                                </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent className='space-y-'>
-
-                                <DropdownMenuItem className='py-2 font-semibold' asChild >
-                                    <EditServiceDialog service={{
-                                        name: "Manicure",
-                                        price: 27,
-                                        duration: 45,
-                                        category: "Beauty",
-                                        currency: "EGP"
-                                    }} />
-                                </DropdownMenuItem>
-                                <DropdownMenuItem className='py-2 text-destructive font-semibold'>
-                                    <p>Delete</p>
-                                </DropdownMenuItem>
-
-                            </DropdownMenuContent>
-                        </DropdownMenu>
-                    </div>
-                </div>
-                <div className='border-l-8 border-l-secondary-400 border-t-1 border-r-1 border-b-1 border border-gray-200 p-5 flex justify-between items-center rounded-lg'>
-                    <div>
-                        <p className='text-lg font-bold'>Manicure</p>
-                        <p className='text-muted-foreground'>45min</p>
-                    </div>
-                    <div className='flex items-center gap-2'>
-                        <p>EGP 27</p>
-
-                        <DropdownMenu>
-
-                            <DropdownMenuTrigger asChild >
-                                <Button variant="ghost">
-                                    <EllipsisVertical className='size-5' />
-                                </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent className='space-y-'>
-
-                                <DropdownMenuItem className='py-2 font-semibold' asChild >
-                                    <EditServiceDialog service={{
-                                        name: "Manicure",
-                                        price: 27,
-                                        duration: 45,
-                                        category: "Beauty",
-                                        currency: "EGP"
-                                    }} />
-                                </DropdownMenuItem>
-                                <DropdownMenuItem className='py-2 text-destructive font-semibold'>
-                                    <p>Delete</p>
-                                </DropdownMenuItem>
-
-                            </DropdownMenuContent>
-                        </DropdownMenu>
-                    </div>
-                </div>
-                <div className='border-l-8 border-l-secondary-400 border-t-1 border-r-1 border-b-1 border border-gray-200 p-5 flex justify-between items-center rounded-lg'>
-                    <div>
-                        <p className='text-lg font-bold'>Manicure</p>
-                        <p className='text-muted-foreground'>45min</p>
-                    </div>
-                    <div className='flex items-center gap-2'>
-                        <p>EGP 27</p>
-
-                        <DropdownMenu>
-
-                            <DropdownMenuTrigger asChild >
-                                <Button variant="ghost">
-                                    <EllipsisVertical className='size-5' />
-                                </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent className='space-y-'>
-
-                                <DropdownMenuItem className='py-2 font-semibold' asChild >
-                                    <EditServiceDialog service={{
-                                        name: "Manicure",
-                                        price: 27,
-                                        duration: 45,
-                                        category: "Beauty",
-                                        currency: "EGP"
-                                    }} />
-                                </DropdownMenuItem>
-                                <DropdownMenuItem className='py-2 text-destructive font-semibold'>
-                                    <p>Delete</p>
-                                </DropdownMenuItem>
-
-                            </DropdownMenuContent>
-                        </DropdownMenu>
-                    </div>
-                </div>
-                <div className='border-l-8 border-l-secondary-400 border-t-1 border-r-1 border-b-1 border border-gray-200 p-5 flex justify-between items-center rounded-lg'>
-                    <div>
-                        <p className='text-lg font-bold'>Manicure</p>
-                        <p className='text-muted-foreground'>45min</p>
-                    </div>
-                    <div className='flex items-center gap-2'>
-                        <p>EGP 27</p>
-
-                        <DropdownMenu>
-
-                            <DropdownMenuTrigger asChild >
-                                <Button variant="ghost">
-                                    <EllipsisVertical className='size-5' />
-                                </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent className='space-y-'>
-
-                                <DropdownMenuItem className='py-2 font-semibold' asChild >
-                                    <EditServiceDialog service={{
-                                        name: "Manicure",
-                                        price: 27,
-                                        duration: 45,
-                                        category: "Beauty",
-                                        currency: "EGP"
-                                    }} />
-                                </DropdownMenuItem>
-                                <DropdownMenuItem className='py-2 text-destructive font-semibold'>
-                                    <p>Delete</p>
-                                </DropdownMenuItem>
-
-                            </DropdownMenuContent>
-                        </DropdownMenu>
-                    </div>
-                </div>
-                <div className='border-l-8 border-l-secondary-400 border-t-1 border-r-1 border-b-1 border border-gray-200 p-5 flex justify-between items-center rounded-lg'>
-                    <div>
-                        <p className='text-lg font-bold'>Manicure</p>
-                        <p className='text-muted-foreground'>45min</p>
-                    </div>
-                    <div className='flex items-center gap-2'>
-                        <p>EGP 27</p>
-
-                        <DropdownMenu>
-
-                            <DropdownMenuTrigger asChild >
-                                <Button variant="ghost">
-                                    <EllipsisVertical className='size-5' />
-                                </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent className='space-y-'>
-
-                                <DropdownMenuItem className='py-2 font-semibold' asChild >
-                                    <EditServiceDialog service={{
-                                        name: "Manicure",
-                                        price: 27,
-                                        duration: 45,
-                                        category: "Beauty",
-                                        currency: "EGP"
-                                    }} />
-                                </DropdownMenuItem>
-                                <DropdownMenuItem className='py-2 text-destructive font-semibold'>
-                                    <p>Delete</p>
-                                </DropdownMenuItem>
-
-                            </DropdownMenuContent>
-                        </DropdownMenu>
-                    </div>
-                </div>
-                <div className='border-l-8 border-l-secondary-400 border-t-1 border-r-1 border-b-1 border border-gray-200 p-5 flex justify-between items-center rounded-lg'>
-                    <div>
-                        <p className='text-lg font-bold'>Manicure</p>
-                        <p className='text-muted-foreground'>45min</p>
-                    </div>
-                    <div className='flex items-center gap-2'>
-                        <p>EGP 27</p>
-
-                        <DropdownMenu>
-
-                            <DropdownMenuTrigger asChild >
-                                <Button variant="ghost">
-                                    <EllipsisVertical className='size-5' />
-                                </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent className='space-y-'>
-
-                                <DropdownMenuItem className='py-2 font-semibold' asChild >
-                                    <EditServiceDialog service={{
-                                        name: "Manicure",
-                                        price: 27,
-                                        duration: 45,
-                                        category: "Beauty",
-                                        currency: "EGP"
-                                    }} />
-                                </DropdownMenuItem>
-                                <DropdownMenuItem className='py-2 text-destructive font-semibold'>
-                                    <p>Delete</p>
-                                </DropdownMenuItem>
-
-                            </DropdownMenuContent>
-                        </DropdownMenu>
-                    </div>
-                </div>
-                <div className='border-l-8 border-l-secondary-400 border-t-1 border-r-1 border-b-1 border border-gray-200 p-5 flex justify-between items-center rounded-lg'>
-                    <div>
-                        <p className='text-lg font-bold'>Manicure</p>
-                        <p className='text-muted-foreground'>45min</p>
-                    </div>
-                    <div className='flex items-center gap-2'>
-                        <p>EGP 27</p>
-
-                        <DropdownMenu>
-
-                            <DropdownMenuTrigger asChild >
-                                <Button variant="ghost">
-                                    <EllipsisVertical className='size-5' />
-                                </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent className='space-y-'>
-
-                                <DropdownMenuItem className='py-2 font-semibold' asChild >
-                                    <EditServiceDialog service={{
-                                        name: "Manicure",
-                                        price: 27,
-                                        duration: 45,
-                                        category: "Beauty",
-                                        currency: "EGP"
-                                    }} />
-                                </DropdownMenuItem>
-                                <DropdownMenuItem className='py-2 text-destructive font-semibold'>
-                                    <p>Delete</p>
-                                </DropdownMenuItem>
-
-                            </DropdownMenuContent>
-                        </DropdownMenu>
-                    </div>
-                </div>
-                <div className='border-l-8 border-l-secondary-400 border-t-1 border-r-1 border-b-1 border border-gray-200 p-5 flex justify-between items-center rounded-lg'>
-                    <div>
-                        <p className='text-lg font-bold'>Manicure</p>
-                        <p className='text-muted-foreground'>45min</p>
-                    </div>
-                    <div className='flex items-center gap-2'>
-                        <p>EGP 27</p>
-
-                        <DropdownMenu>
-
-                            <DropdownMenuTrigger asChild >
-                                <Button variant="ghost">
-                                    <EllipsisVertical className='size-5' />
-                                </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent className='space-y-'>
-
-                                <DropdownMenuItem className='py-2 font-semibold' asChild >
-                                    <EditServiceDialog service={{
-                                        name: "Manicure",
-                                        price: 27,
-                                        duration: 45,
-                                        category: "Beauty",
-                                        currency: "EGP"
-                                    }} />
-                                </DropdownMenuItem>
-                                <DropdownMenuItem className='py-2 text-destructive font-semibold'>
-                                    <p>Delete</p>
-                                </DropdownMenuItem>
-
-                            </DropdownMenuContent>
-                        </DropdownMenu>
-                    </div>
-                </div>
-                <div className='border-l-8 border-l-secondary-400 border-t-1 border-r-1 border-b-1 border border-gray-200 p-5 flex justify-between items-center rounded-lg'>
-                    <div>
-                        <p className='text-lg font-bold'>Manicure</p>
-                        <p className='text-muted-foreground'>45min</p>
-                    </div>
-                    <div className='flex items-center gap-2'>
-                        <p>EGP 27</p>
-
-                        <DropdownMenu>
-
-                            <DropdownMenuTrigger asChild >
-                                <Button variant="ghost">
-                                    <EllipsisVertical className='size-5' />
-                                </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent className='space-y-'>
-
-                                <DropdownMenuItem className='py-2 font-semibold' asChild >
-                                    <EditServiceDialog service={{
-                                        name: "Manicure",
-                                        price: 27,
-                                        duration: 45,
-                                        category: "Beauty",
-                                        currency: "EGP"
-                                    }} />
-                                </DropdownMenuItem>
-                                <DropdownMenuItem className='py-2 text-destructive font-semibold'>
-                                    <p>Delete</p>
-                                </DropdownMenuItem>
-
-                            </DropdownMenuContent>
-                        </DropdownMenu>
-                    </div>
-                </div>
-                <div className='border-l-8 border-l-secondary-400 border-t-1 border-r-1 border-b-1 border border-gray-200 p-5 flex justify-between items-center rounded-lg'>
-                    <div>
-                        <p className='text-lg font-bold'>Manicure</p>
-                        <p className='text-muted-foreground'>45min</p>
-                    </div>
-                    <div className='flex items-center gap-2'>
-                        <p>EGP 27</p>
-
-                        <DropdownMenu>
-
-                            <DropdownMenuTrigger asChild >
-                                <Button variant="ghost">
-                                    <EllipsisVertical className='size-5' />
-                                </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent className='space-y-'>
-
-                                <DropdownMenuItem className='py-2 font-semibold' asChild >
-                                    <EditServiceDialog service={{
-                                        name: "Manicure",
-                                        price: 27,
-                                        duration: 45,
-                                        category: "Beauty",
-                                        currency: "EGP"
-                                    }} />
-                                </DropdownMenuItem>
-                                <DropdownMenuItem className='py-2 text-destructive font-semibold'>
-                                    <p>Delete</p>
-                                </DropdownMenuItem>
-
-                            </DropdownMenuContent>
-                        </DropdownMenu>
-                    </div>
-                </div>
-                <div className='border-l-8 border-l-secondary-400 border-t-1 border-r-1 border-b-1 border border-gray-200 p-5 flex justify-between items-center rounded-lg'>
-                    <div>
-                        <p className='text-lg font-bold'>Manicure</p>
-                        <p className='text-muted-foreground'>45min</p>
-                    </div>
-                    <div className='flex items-center gap-2'>
-                        <p>EGP 27</p>
-
-                        <DropdownMenu>
-
-                            <DropdownMenuTrigger asChild >
-                                <Button variant="ghost">
-                                    <EllipsisVertical className='size-5' />
-                                </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent className='space-y-'>
-
-                                <DropdownMenuItem className='py-2 font-semibold' asChild >
-                                    <EditServiceDialog service={{
-                                        name: "Manicure",
-                                        price: 27,
-                                        duration: 45,
-                                        category: "Beauty",
-                                        currency: "EGP"
-                                    }} />
-                                </DropdownMenuItem>
-                                <DropdownMenuItem className='py-2 text-destructive font-semibold'>
-                                    <p>Delete</p>
-                                </DropdownMenuItem>
-
-                            </DropdownMenuContent>
-                        </DropdownMenu>
-                    </div>
-                </div>
-                <div className='border-l-8 border-l-secondary-400 border-t-1 border-r-1 border-b-1 border border-gray-200 p-5 flex justify-between items-center rounded-lg'>
-                    <div>
-                        <p className='text-lg font-bold'>Manicure</p>
-                        <p className='text-muted-foreground'>45min</p>
-                    </div>
-                    <div className='flex items-center gap-2'>
-                        <p>EGP 27</p>
-
-                        <DropdownMenu>
-
-                            <DropdownMenuTrigger asChild >
-                                <Button variant="ghost">
-                                    <EllipsisVertical className='size-5' />
-                                </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent className='space-y-'>
-
-                                <DropdownMenuItem className='py-2 font-semibold' asChild >
-                                    <EditServiceDialog service={{
-                                        name: "Manicure",
-                                        price: 27,
-                                        duration: 45,
-                                        category: "Beauty",
-                                        currency: "EGP"
-                                    }} />
-                                </DropdownMenuItem>
-                                <DropdownMenuItem className='py-2 text-destructive font-semibold'>
-                                    <p>Delete</p>
-                                </DropdownMenuItem>
-
-                            </DropdownMenuContent>
-                        </DropdownMenu>
-                    </div>
-                </div>
-                <div className='border-l-8 border-l-secondary-400 border-t-1 border-r-1 border-b-1 border border-gray-200 p-5 flex justify-between items-center rounded-lg'>
-                    <div>
-                        <p className='text-lg font-bold'>Manicure</p>
-                        <p className='text-muted-foreground'>45min</p>
-                    </div>
-                    <div className='flex items-center gap-2'>
-                        <p>EGP 27</p>
-
-                        <DropdownMenu>
-
-                            <DropdownMenuTrigger asChild >
-                                <Button variant="ghost">
-                                    <EllipsisVertical className='size-5' />
-                                </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent className='space-y-'>
-
-                                <DropdownMenuItem className='py-2 font-semibold' asChild >
-                                    <EditServiceDialog service={{
-                                        name: "Manicure",
-                                        price: 27,
-                                        duration: 45,
-                                        category: "Beauty",
-                                        currency: "EGP"
-                                    }} />
-                                </DropdownMenuItem>
-                                <DropdownMenuItem className='py-2 text-destructive font-semibold'>
-                                    <p>Delete</p>
-                                </DropdownMenuItem>
-
-                            </DropdownMenuContent>
-                        </DropdownMenu>
-                    </div>
-                </div>
-                <div className='border-l-8 border-l-secondary-400 border-t-1 border-r-1 border-b-1 border border-gray-200 p-5 flex justify-between items-center rounded-lg'>
-                    <div>
-                        <p className='text-lg font-bold'>Manicure</p>
-                        <p className='text-muted-foreground'>45min</p>
-                    </div>
-                    <div className='flex items-center gap-2'>
-                        <p>EGP 27</p>
-
-                        <DropdownMenu>
-
-                            <DropdownMenuTrigger asChild >
-                                <Button variant="ghost">
-                                    <EllipsisVertical className='size-5' />
-                                </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent className='space-y-'>
-
-                                <DropdownMenuItem className='py-2 font-semibold' asChild >
-                                    <EditServiceDialog service={{
-                                        name: "Manicure",
-                                        price: 27,
-                                        duration: 45,
-                                        category: "Beauty",
-                                        currency: "EGP"
-                                    }} />
-                                </DropdownMenuItem>
-                                <DropdownMenuItem className='py-2 text-destructive font-semibold'>
-                                    <p>Delete</p>
-                                </DropdownMenuItem>
-
-                            </DropdownMenuContent>
-                        </DropdownMenu>
-                    </div>
-                </div>
-                <div className='border-l-8 border-l-secondary-400 border-t-1 border-r-1 border-b-1 border border-gray-200 p-5 flex justify-between items-center rounded-lg'>
-                    <div>
-                        <p className='text-lg font-bold'>Manicure</p>
-                        <p className='text-muted-foreground'>45min</p>
-                    </div>
-                    <div className='flex items-center gap-2'>
-                        <p>EGP 27</p>
-
-                        <DropdownMenu>
-
-                            <DropdownMenuTrigger asChild >
-                                <Button variant="ghost">
-                                    <EllipsisVertical className='size-5' />
-                                </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent className='space-y-'>
-
-                                <DropdownMenuItem className='py-2 font-semibold' asChild >
-                                    <EditServiceDialog service={{
-                                        name: "Manicure",
-                                        price: 27,
-                                        duration: 45,
-                                        category: "Beauty",
-                                        currency: "EGP"
-                                    }} />
-                                </DropdownMenuItem>
-                                <DropdownMenuItem className='py-2 text-destructive font-semibold'>
-                                    <p>Delete</p>
-                                </DropdownMenuItem>
-
-                            </DropdownMenuContent>
-                        </DropdownMenu>
-                    </div>
-                </div>
-                <div className='border-l-8 border-l-secondary-400 border-t-1 border-r-1 border-b-1 border border-gray-200 p-5 flex justify-between items-center rounded-lg'>
-                    <div>
-                        <p className='text-lg font-bold'>Manicure</p>
-                        <p className='text-muted-foreground'>45min</p>
-                    </div>
-                    <div className='flex items-center gap-2'>
-                        <p>EGP 27</p>
-
-                        <DropdownMenu>
-
-                            <DropdownMenuTrigger asChild >
-                                <Button variant="ghost">
-                                    <EllipsisVertical className='size-5' />
-                                </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent className='space-y-'>
-
-                                <DropdownMenuItem className='py-2 font-semibold' asChild >
-                                    <EditServiceDialog service={{
-                                        name: "Manicure",
-                                        price: 27,
-                                        duration: 45,
-                                        category: "Beauty",
-                                        currency: "EGP"
-                                    }} />
-                                </DropdownMenuItem>
-                                <DropdownMenuItem className='py-2 text-destructive font-semibold'>
-                                    <p>Delete</p>
-                                </DropdownMenuItem>
-
-                            </DropdownMenuContent>
-                        </DropdownMenu>
-                    </div>
-                </div>
-                <div className='border-l-8 border-l-secondary-400 border-t-1 border-r-1 border-b-1 border border-gray-200 p-5 flex justify-between items-center rounded-lg'>
-                    <div>
-                        <p className='text-lg font-bold'>Manicure</p>
-                        <p className='text-muted-foreground'>45min</p>
-                    </div>
-                    <div className='flex items-center gap-2'>
-                        <p>EGP 27</p>
-
-                        <DropdownMenu>
-
-                            <DropdownMenuTrigger asChild >
-                                <Button variant="ghost">
-                                    <EllipsisVertical className='size-5' />
-                                </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent className='space-y-'>
-
-                                <DropdownMenuItem className='py-2 font-semibold' asChild >
-                                    <EditServiceDialog service={{
-                                        name: "Manicure",
-                                        price: 27,
-                                        duration: 45,
-                                        category: "Beauty",
-                                        currency: "EGP"
-                                    }} />
-                                </DropdownMenuItem>
-                                <DropdownMenuItem className='py-2 text-destructive font-semibold'>
-                                    <p>Delete</p>
-                                </DropdownMenuItem>
-
-                            </DropdownMenuContent>
-                        </DropdownMenu>
-                    </div>
-                </div>
-                <div className='border-l-8 border-l-secondary-400 border-t-1 border-r-1 border-b-1 border border-gray-200 p-5 flex justify-between items-center rounded-lg'>
-                    <div>
-                        <p className='text-lg font-bold'>Manicure</p>
-                        <p className='text-muted-foreground'>45min</p>
-                    </div>
-                    <div className='flex items-center gap-2'>
-                        <p>EGP 27</p>
-
-                        <DropdownMenu>
-
-                            <DropdownMenuTrigger asChild >
-                                <Button variant="ghost">
-                                    <EllipsisVertical className='size-5' />
-                                </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent className='space-y-'>
-
-                                <DropdownMenuItem className='py-2 font-semibold' asChild >
-                                    <EditServiceDialog service={{
-                                        name: "Manicure",
-                                        price: 27,
-                                        duration: 45,
-                                        category: "Beauty",
-                                        currency: "EGP"
-                                    }} />
-                                </DropdownMenuItem>
-                                <DropdownMenuItem className='py-2 text-destructive font-semibold'>
-                                    <p>Delete</p>
-                                </DropdownMenuItem>
-
-                            </DropdownMenuContent>
-                        </DropdownMenu>
-                    </div>
-                </div>
-                <div className='border-l-8 border-l-secondary-400 border-t-1 border-r-1 border-b-1 border border-gray-200 p-5 flex justify-between items-center rounded-lg'>
-                    <div>
-                        <p className='text-lg font-bold'>Manicure</p>
-                        <p className='text-muted-foreground'>45min</p>
-                    </div>
-                    <div className='flex items-center gap-2'>
-                        <p>EGP 27</p>
-
-                        <DropdownMenu>
-
-                            <DropdownMenuTrigger asChild >
-                                <Button variant="ghost">
-                                    <EllipsisVertical className='size-5' />
-                                </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent className='space-y-'>
-
-                                <DropdownMenuItem className='py-2 font-semibold' asChild >
-                                    <EditServiceDialog service={{
-                                        name: "Manicure",
-                                        price: 27,
-                                        duration: 45,
-                                        category: "Beauty",
-                                        currency: "EGP"
-                                    }} />
-                                </DropdownMenuItem>
-                                <DropdownMenuItem className='py-2 text-destructive font-semibold'>
-                                    <p>Delete</p>
-                                </DropdownMenuItem>
-
-                            </DropdownMenuContent>
-                        </DropdownMenu>
-                    </div>
-                </div>
-                <div className='border-l-8 border-l-secondary-400 border-t-1 border-r-1 border-b-1 border border-gray-200 p-5 flex justify-between items-center rounded-lg'>
-                    <div>
-                        <p className='text-lg font-bold'>Manicure</p>
-                        <p className='text-muted-foreground'>45min</p>
-                    </div>
-                    <div className='flex items-center gap-2'>
-                        <p>EGP 27</p>
-
-                        <DropdownMenu>
-
-                            <DropdownMenuTrigger asChild >
-                                <Button variant="ghost">
-                                    <EllipsisVertical className='size-5' />
-                                </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent className='space-y-'>
-
-                                <DropdownMenuItem className='py-2 font-semibold' asChild >
-                                    <EditServiceDialog service={{
-                                        name: "Manicure",
-                                        price: 27,
-                                        duration: 45,
-                                        category: "Beauty",
-                                        currency: "EGP"
-                                    }} />
-                                </DropdownMenuItem>
-                                <DropdownMenuItem className='py-2 text-destructive font-semibold'>
-                                    <p>Delete</p>
-                                </DropdownMenuItem>
-
-                            </DropdownMenuContent>
-                        </DropdownMenu>
-                    </div>
-                </div>
-                <div className='border-l-8 border-l-secondary-400 border-t-1 border-r-1 border-b-1 border border-gray-200 p-5 flex justify-between items-center rounded-lg'>
-                    <div>
-                        <p className='text-lg font-bold'>Manicure</p>
-                        <p className='text-muted-foreground'>45min</p>
-                    </div>
-                    <div className='flex items-center gap-2'>
-                        <p>EGP 27</p>
-
-                        <DropdownMenu>
-
-                            <DropdownMenuTrigger asChild >
-                                <Button variant="ghost">
-                                    <EllipsisVertical className='size-5' />
-                                </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent className='space-y-'>
-
-                                <DropdownMenuItem className='py-2 font-semibold' asChild >
-                                    <EditServiceDialog service={{
-                                        name: "Manicure",
-                                        price: 27,
-                                        duration: 45,
-                                        category: "Beauty",
-                                        currency: "EGP"
-                                    }} />
-                                </DropdownMenuItem>
-                                <DropdownMenuItem className='py-2 text-destructive font-semibold'>
-                                    <p>Delete</p>
-                                </DropdownMenuItem>
-
-                            </DropdownMenuContent>
-                        </DropdownMenu>
-                    </div>
-                </div>
-                <div className='border-l-8 border-l-secondary-400 border-t-1 border-r-1 border-b-1 border border-gray-200 p-5 flex justify-between items-center rounded-lg'>
-                    <div>
-                        <p className='text-lg font-bold'>Manicure</p>
-                        <p className='text-muted-foreground'>45min</p>
-                    </div>
-                    <div className='flex items-center gap-2'>
-                        <p>EGP 27</p>
-
-                        <DropdownMenu>
-
-                            <DropdownMenuTrigger asChild >
-                                <Button variant="ghost">
-                                    <EllipsisVertical className='size-5' />
-                                </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent className='space-y-'>
-
-                                <DropdownMenuItem className='py-2 font-semibold' asChild >
-                                    <EditServiceDialog service={{
-                                        name: "Manicure",
-                                        price: 27,
-                                        duration: 45,
-                                        category: "Beauty",
-                                        currency: "EGP"
-                                    }} />
-                                </DropdownMenuItem>
-                                <DropdownMenuItem className='py-2 text-destructive font-semibold'>
-                                    <p>Delete</p>
-                                </DropdownMenuItem>
-
-                            </DropdownMenuContent>
-                        </DropdownMenu>
-                    </div>
-                </div>
-                <div className='border-l-8 border-l-secondary-400 border-t-1 border-r-1 border-b-1 border border-gray-200 p-5 flex justify-between items-center rounded-lg'>
-                    <div>
-                        <p className='text-lg font-bold'>Manicure</p>
-                        <p className='text-muted-foreground'>45min</p>
-                    </div>
-                    <div className='flex items-center gap-2'>
-                        <p>EGP 27</p>
-
-                        <DropdownMenu>
-
-                            <DropdownMenuTrigger asChild >
-                                <Button variant="ghost">
-                                    <EllipsisVertical className='size-5' />
-                                </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent className='space-y-'>
-
-                                <DropdownMenuItem className='py-2 font-semibold' asChild >
-                                    <EditServiceDialog service={{
-                                        name: "Manicure",
-                                        price: 27,
-                                        duration: 45,
-                                        category: "Beauty",
-                                        currency: "EGP"
-                                    }} />
-                                </DropdownMenuItem>
-                                <DropdownMenuItem className='py-2 text-destructive font-semibold'>
-                                    <p>Delete</p>
-                                </DropdownMenuItem>
-
-                            </DropdownMenuContent>
-                        </DropdownMenu>
-                    </div>
-                </div>
-                <div className='border-l-8 border-l-secondary-400 border-t-1 border-r-1 border-b-1 border border-gray-200 p-5 flex justify-between items-center rounded-lg'>
-                    <div>
-                        <p className='text-lg font-bold'>Manicure</p>
-                        <p className='text-muted-foreground'>45min</p>
-                    </div>
-                    <div className='flex items-center gap-2'>
-                        <p>EGP 27</p>
-
-                        <DropdownMenu>
-
-                            <DropdownMenuTrigger asChild >
-                                <Button variant="ghost">
-                                    <EllipsisVertical className='size-5' />
-                                </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent className='space-y-'>
-
-                                <DropdownMenuItem className='py-2 font-semibold' asChild >
-                                    <EditServiceDialog service={{
-                                        name: "Manicure",
-                                        price: 27,
-                                        duration: 45,
-                                        category: "Beauty",
-                                        currency: "EGP"
-                                    }} />
-                                </DropdownMenuItem>
-                                <DropdownMenuItem className='py-2 text-destructive font-semibold'>
-                                    <p>Delete</p>
-                                </DropdownMenuItem>
-
-                            </DropdownMenuContent>
-                        </DropdownMenu>
-                    </div>
-                </div>
-
-
-
-            </div>
-            {/* <Button type="submit">Next</Button> */}
-        </div>
-    </form>
+    const services_with_categories = [
+        {
+            name: "NAILS",
+            services: [
+                {
+                    "id": 1,
+                    "name": "Manicure",
+                    "desc": "A cosmetic beauty treatment for the fingernails and hands.",
+                    "duration": 30,
+                    "price": 25.00
+                },
+                {
+                    "id": 2,
+                    "name": "Pedicure",
+                    "desc": "A cosmetic treatment of the feet and toenails.",
+                    "duration": 45,
+                    "price": 35.00
+                }
+            ]
+        },
+        {
+            name: "HAIR",
+            services: [
+                {
+                    "id": 3,
+                    "name": "Haircut",
+                    "desc": "Basic haircut and style.",
+                    "duration": 45,
+                    "price": 40.00
+                },
+                {
+                    "id": 4,
+                    "name": "Color",
+                    "desc": "Full hair coloring service.",
+                    "duration": 120,
+                    "price": 100.00
+                }
+            ]
+        },
+        {
+            name: "MASSAGE",
+            services: [
+                {
+                    "id": 5,
+                    "name": "Swedish Massage",
+                    "desc": "Relaxing full body massage.",
+                    "duration": 60,
+                    "price": 80.00
+                },
+                {
+                    "id": 6,
+                    "name": "Deep Tissue",
+                    "desc": "Therapeutic deep tissue massage.",
+                    "duration": 60,
+                    "price": 90.00
+                }
+            ]
+        },
+        {
+            name: "FACIAL",
+            services: [
+                {
+                    "id": 7,
+                    "name": "Basic Facial",
+                    "desc": "Cleansing and moisturizing facial treatment.",
+                    "duration": 45,
+                    "price": 60.00
+                },
+                {
+                    "id": 8,
+                    "name": "Anti-Aging Facial",
+                    "desc": "Advanced anti-aging facial treatment.",
+                    "duration": 75,
+                    "price": 120.00
+                }
+            ]
+        },
+        {
+            name: "WAXING",
+            services: [
+                {
+                    "id": 9,
+                    "name": "Leg Wax",
+                    "desc": "Full leg waxing service.",
+                    "duration": 45,
+                    "price": 50.00
+                },
+                {
+                    "id": 10,
+                    "name": "Brazilian Wax",
+                    "desc": "Brazilian waxing service.",
+                    "duration": 30,
+                    "price": 65.00
+                }
+            ]
+        },
+        {
+            name: "MAKEUP",
+            services: [
+                {
+                    "id": 11,
+                    "name": "Natural Makeup",
+                    "desc": "Light, natural makeup application.",
+                    "duration": 45,
+                    "price": 55.00
+                },
+                {
+                    "id": 12,
+                    "name": "Special Event Makeup",
+                    "desc": "Full makeup for special occasions.",
+                    "duration": 60,
+                    "price": 85.00
+                }
+            ]
+        },
+        {
+            name: "LASHES",
+            services: [
+                {
+                    "id": 13,
+                    "name": "Lash Extensions",
+                    "desc": "Full set of eyelash extensions.",
+                    "duration": 120,
+                    "price": 150.00
+                },
+                {
+                    "id": 14,
+                    "name": "Lash Fill",
+                    "desc": "Maintenance fill for lash extensions.",
+                    "duration": 60,
+                    "price": 75.00
+                }
+            ]
+        },
+        {
+            name: "BROWS",
+            services: [
+                {
+                    "id": 15,
+                    "name": "Brow Shaping",
+                    "desc": "Professional eyebrow shaping.",
+                    "duration": 20,
+                    "price": 25.00
+                },
+                {
+                    "id": 16,
+                    "name": "Brow Tinting",
+                    "desc": "Eyebrow tinting service.",
+                    "duration": 30,
+                    "price": 35.00
+                }
+            ]
+        },
+        {
+            name: "TANNING",
+            services: [
+                {
+                    "id": 17,
+                    "name": "Spray Tan",
+                    "desc": "Full body spray tanning service.",
+                    "duration": 30,
+                    "price": 45.00
+                },
+                {
+                    "id": 18,
+                    "name": "Airbrush Tan",
+                    "desc": "Custom airbrush tanning service.",
+                    "duration": 45,
+                    "price": 65.00
+                }
+            ]
+        },
+        {
+            name: "BODY TREATMENTS",
+            services: [
+                {
+                    "id": 19,
+                    "name": "Body Wrap",
+                    "desc": "Detoxifying body wrap treatment.",
+                    "duration": 90,
+                    "price": 110.00
+                },
+                {
+                    "id": 20,
+                    "name": "Body Scrub",
+                    "desc": "Full body exfoliation treatment.",
+                    "duration": 60,
+                    "price": 85.00
+                }
+            ]
+        }
+    ]
+
+
+    const services = await getAllServices()
+
+    console.log("services", services)
+
+
+    return <BusinessServicesForm services={services_with_categories} />
 }
