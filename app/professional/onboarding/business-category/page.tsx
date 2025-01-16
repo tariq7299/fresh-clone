@@ -8,6 +8,8 @@ export default async function BusinessCategoryPage() {
 
     const storedStepCategory = await getBusinessStepFormData("categoryStep")
 
+    console.log("storedStepCategory", storedStepCategory)
+
     const categories = await getAllCategories()
 
     return (

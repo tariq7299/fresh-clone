@@ -52,6 +52,7 @@ export async function fetchApi<T>(
     const fetchOptions: RequestInit = {
         method,
         headers: {
+            'Accept-Language': 'en',
             'Content-Type': 'application/json',
             ...authHeaders,
             ...headers,

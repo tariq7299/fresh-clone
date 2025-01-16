@@ -28,7 +28,7 @@ export const getBusinessStepFormData = async (stepName: string) => {
 
 
             return storedStepBusinessInfo
-        } else if (stepName === "storedStepCategory") {
+        } else if (stepName === "categoryStep") {
 
             const storedStepCategory = await prisma.business.findUnique({
                 where: {

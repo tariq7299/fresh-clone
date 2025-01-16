@@ -11,9 +11,10 @@ import { ServicesComboBox } from '@/professional/_components/services-combo-box'
 export type Service = {
     id: number,
     name: string,
-    desc: string,
+    description: string,
     duration: number,
-    price: number
+    price: number,
+    // currency: string
 }
 
 export type servicesList = {
