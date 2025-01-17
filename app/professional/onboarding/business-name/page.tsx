@@ -5,6 +5,10 @@ export default async function BusinessNamePage({ }) {
 
     const storedStepBusinessInfo = await getBusinessStepFormData("businessNameStep")
 
+    console.log("storedStepBusinessInfo", storedStepBusinessInfo)
+
+
+
     // try {
     //     const newBusiness = await prisma.business.create({
     //         data: {

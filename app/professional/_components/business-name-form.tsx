@@ -64,27 +64,27 @@ export default function BusinessNameForm({ storedStepBusinessInfo }: { storedSte
 
                 <div className="flex flex-col gap-2">
                     <Label className="font-bold" htmlFor="nameEn">Business name (En)</Label>
-                    <Input value={formValues.nameEn} onChange={(e) => setFormValues({ ...formValues, nameEn: e.target.value })} type="text" name="nameEn" id="nameEn" placeholder="Bekky Barber" />
+                    <Input disabled={isPending} value={formValues.nameEn} onChange={(e) => setFormValues({ ...formValues, nameEn: e.target.value })} type="text" name="nameEn" id="nameEn" placeholder="Bekky Barber" />
                     <p className="text-sm text-destructive ">{formState.clientFieldsErrors?.nameEn?.[0]}</p>
                 </div>
                 <div className="flex flex-col gap-2">
                     <Label className="font-bold" htmlFor="nameAr">Business name (Ar)</Label>
-                    <Input value={formValues.nameAr} onChange={(e) => setFormValues({ ...formValues, nameAr: e.target.value })} type="text" name="nameAr" id="nameAr" placeholder="بيكي باربر" />
+                    <Input disabled={isPending} value={formValues.nameAr} onChange={(e) => setFormValues({ ...formValues, nameAr: e.target.value })} type="text" name="nameAr" id="nameAr" placeholder="بيكي باربر" />
                     <p className="text-sm text-destructive ">{formState.clientFieldsErrors?.nameAr?.[0]}</p>
                 </div>
                 <div className="flex flex-col gap-2">
                     <Label className="font-bold" htmlFor="descriptionEn">Description (En)</Label>
-                    <Textarea value={formValues.descriptionEn} onChange={(e) => setFormValues({ ...formValues, descriptionEn: e.target.value })} name="descriptionEn" id="descriptionEn" placeholder="Bekky Barber is a barber shop that..." />
+                    <Textarea disabled={isPending} value={formValues.descriptionEn} onChange={(e) => setFormValues({ ...formValues, descriptionEn: e.target.value })} name="descriptionEn" id="descriptionEn" placeholder="Bekky Barber is a barber shop that..." />
                     <p className="text-sm text-destructive ">{formState.clientFieldsErrors?.descriptionEn?.[0]}</p>
                 </div>
                 <div className="flex flex-col gap-2">
                     <Label className="font-bold" htmlFor="descriptionAr">Description (Ar)</Label>
-                    <Textarea value={formValues.descriptionAr} onChange={(e) => setFormValues({ ...formValues, descriptionAr: e.target.value })} name="descriptionAr" id="descriptionAr" placeholder="بيكي باربر هو محل حلاقة أنيق يقدم خدمات متنوعة، بما في ذلك الحلاقة وتهذيب الذقن ." />
+                    <Textarea disabled={isPending} value={formValues.descriptionAr} onChange={(e) => setFormValues({ ...formValues, descriptionAr: e.target.value })} name="descriptionAr" id="descriptionAr" placeholder="بيكي باربر هو محل حلاقة أنيق يقدم خدمات متنوعة، بما في ذلك الحلاقة وتهذيب الذقن ." />
                     <p className="text-sm text-destructive ">{formState.clientFieldsErrors?.descriptionAr?.[0]}</p>
                 </div>
                 <div className="flex flex-col gap-2">
                     <Label className="font-bold" htmlFor="websiteUrl">Website (Optional)</Label>
-                    <Input value={formValues.websiteUrl} onChange={(e) => setFormValues({ ...formValues, websiteUrl: e.target.value })} type="text" name="websiteUrl" id="websiteUrl" placeholder="https://www.bekkybarber.com" />
+                    <Input disabled={isPending} value={formValues.websiteUrl} onChange={(e) => setFormValues({ ...formValues, websiteUrl: e.target.value })} type="text" name="websiteUrl" id="websiteUrl" placeholder="https://www.bekkybarber.com" />
                     <p className="text-sm text-destructive ">{formState.clientFieldsErrors?.websiteUrl?.[0]}</p>
                 </div>
 

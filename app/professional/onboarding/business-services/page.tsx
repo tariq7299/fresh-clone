@@ -1,5 +1,6 @@
 import { getAllServices } from '@/lib/data';
 import BusinessServicesForm from '@/professional/_components/business-services-form';
+import { getBusinessStepFormData } from '@/professional/_lib/data';
 
 export default async function BusinessServicesPage() {
 
@@ -10,6 +11,10 @@ export default async function BusinessServicesPage() {
 
     const services = await getAllServices()
 
+    const storedServices = await getBusinessStepFormData("servicesStep")
 
-    return <BusinessServicesForm services={services} />
+    // console.log("storedServices", storedServices)
+
+
+    return <BusinessServicesForm services={services} storedServices={storedServices} />
 }

@@ -8,6 +8,10 @@ import EditServiceDialog from '@/professional/_components/edit-service-dialog';
 import { ServicesComboBox } from '@/professional/_components/services-combo-box';
 import { handleSubmitBusinessServices } from '@/professional/_lib/form-actions';
 import { useBusinessFormContext } from './business-form-provider';
+import { cn } from '@/lib/utils/utils';
+
+
+// TODO: Remove all those types from here and move them to definitions file
 
 export type Service = {
     id: number,
@@ -16,6 +20,12 @@ export type Service = {
     duration: number,
     price: number,
     // currency: string
+}
+
+export type StoredService = {
+    service_id: number
+    duration: number
+    price: number
 }
 
 export type servicesList = {
@@ -33,20 +43,38 @@ export type selectedService = {
 }
 
 // TODO: Write comments
-export default function BusinessServicesForm({ services }: { services: servicesList }) {
+export default function BusinessServicesForm({ services, storedServices }: { services: servicesList, storedServices: StoredService[] }) {
 
     const { setIsLoading } = useBusinessFormContext()
 
     const [servicesList, setServicesList] = useState(services)
 
-    const initialSelectedServicesList = servicesList.length > 0 ? servicesList.slice(0, 5).map(item => ({
-        serviceCategory: item.name,
-        serviceId: item.services[0].id.toString(),
-        serviceName: item.services[0].name,
-        servicePrice: item.services[0].price.toString(),
-        serviceDuration: item.services[0].duration.toString(),
-        serviceCurrency: "EGP",
-    })) : []
+    // TODO: Create a function to retrun the initial selected services list
+    let initialSelectedServicesList: selectedService[] = [];
+    if (storedServices?.length > 0) {
+        initialSelectedServicesList = servicesList.flatMap(serviceWithCategory =>
+            serviceWithCategory.services.filter(service => storedServices.some(storedService => storedService.service_id === service.id)).map(service => {
+                return {
+                    serviceCategory: serviceWithCategory.name,
+                    serviceId: service.id.toString(),
+                    serviceName: service.name,
+                    servicePrice: storedServices.find(storedService => storedService.service_id === service.id)?.price.toString() || "",
+                    serviceDuration: storedServices.find(storedService => storedService.service_id === service.id)?.duration.toString() || "",
+                    serviceCurrency: "EGP",
+                }
+            })
+        )
+
+    } else {
+        initialSelectedServicesList = servicesList.slice(0, 5).map(item => ({
+            serviceCategory: item.name,
+            serviceId: item.services[0].id.toString(),
+            serviceName: item.services[0].name,
+            servicePrice: item.services[0].price.toString(),
+            serviceDuration: item.services[0].duration.toString(),
+            serviceCurrency: "EGP",
+        }))
+    }
 
     const [selectedServicesList, setSelectedServicesList] = useState<selectedService[]>(initialSelectedServicesList)
 
@@ -102,13 +130,6 @@ export default function BusinessServicesForm({ services }: { services: servicesL
 
 
     // TODO: Write types
-    // const [formState, formAction, isPending] = useActionState(handleSubmitBusinessServices, initialState)
-
-    // State to hold form values
-    const [formData, setFormData] = useState({
-        name: "John Doe",
-        email: "johndoe@example.com",
-    });
 
     const INITIAL_FORM_STATE = {
         success: false,
@@ -137,7 +158,7 @@ export default function BusinessServicesForm({ services }: { services: servicesL
     }, [isPending])
 
 
-    return <form onSubmit={handleSubmit} id="business-onboarding-form">
+    return <form onSubmit={handleSubmit} id="business-onboarding-form" >
         <div className="flex flex-col gap-2 w-full max-w-4xl p-5 py-24 min-h-dvh items-stretch m-auto space-y-5 ">
 
             <div className="text-start space-y-1">
@@ -151,7 +172,8 @@ export default function BusinessServicesForm({ services }: { services: servicesL
             </div>
 
             {formState.clientFieldsErrors?.service && <p className="text-destructive text-sm py-2">{formState.clientFieldsErrors?.service}</p>}
-            <div className='flex max-w-xl gap-2 justify-center items-center mx-auto w-full'>
+
+            <div className={cn('flex max-w-xl gap-2 justify-center items-center mx-auto w-full', isPending && "pointer-events-none opacity-50")}>
 
                 <ServicesComboBox className=' w-full' servicesList={servicesList} selectedService={selectedService} setSelectedService={setSelectedService} setServicesList={setServicesList} />
 
@@ -159,7 +181,7 @@ export default function BusinessServicesForm({ services }: { services: servicesL
 
             </div>
 
-            <div className="grid grid-cols-1 gap-4">
+            <div className={cn("grid grid-cols-1 gap-4", isPending && "pointer-events-none opacity-50")}>
 
                 {selectedServicesList.map((selectedService, index) => (
                     <div key={selectedService.serviceId} className='border-l-8 border-l-secondary-400 border-t-1 border-r-1 border-b-1 border border-gray-200 p-5 flex justify-between items-center rounded-lg'>
@@ -196,7 +218,7 @@ export default function BusinessServicesForm({ services }: { services: servicesL
 
 
             </div>
-            {/* <Button type="submit">Next</Button> */}
+
         </div>
     </form>
 }

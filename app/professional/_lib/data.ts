@@ -11,6 +11,8 @@ export const getBusinessStepFormData = async (stepName: string) => {
         const userId = session ? session.id : null
         if (!userId) redirect("/login?sessionExpired=true")
 
+        console.log("userId", userId)
+
         if (stepName === "businessNameStep") {
 
             const storedStepBusinessInfo = await prisma.business.findUnique({
@@ -41,6 +43,20 @@ export const getBusinessStepFormData = async (stepName: string) => {
             })
 
             return storedStepCategory
+        } else if (stepName === "servicesStep") {
+
+            const storedStepServices = await prisma.business.findUnique({
+                where: {
+                    userId: userId
+                },
+                select: {
+                    services: true
+                }
+            })
+
+            console.log("storedStepServices", storedStepServices)
+
+            return storedStepServices.services
         }
 
     } catch (error) {
