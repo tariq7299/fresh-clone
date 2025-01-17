@@ -23,8 +23,6 @@ export default function BusinessFormProvider({ children }: { children: React.Rea
         setIsLoading
     };
 
-    console.log("value", value)
-
     return (
         <BusinessFormContext.Provider value={value}>
             {children}

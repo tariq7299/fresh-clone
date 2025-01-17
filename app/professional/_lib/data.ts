@@ -43,9 +43,10 @@ export const getBusinessStepFormData = async (stepName: string) => {
             })
 
             return storedStepCategory
+
         } else if (stepName === "servicesStep") {
 
-            const storedStepServices = await prisma.business.findUnique({
+            const storedTempServices = await prisma.business.findUnique({
                 where: {
                     userId: userId
                 },
@@ -54,9 +55,20 @@ export const getBusinessStepFormData = async (stepName: string) => {
                 }
             })
 
-            console.log("storedStepServices", storedStepServices)
+            console.log("storedTempServices", storedTempServices)
 
-            return storedStepServices.services
+            // TODO: change the naminf from the db schema directly and remove this after
+            const formattedServices = storedTempServices.services.map((storedService: any) => {
+                return {
+                    serviceId: storedService.service_id,
+                    servicePrice: storedService.price,
+                    serviceDuration: storedService.duration,
+                    // serviceCurrency: "EGP"
+                }
+            })
+
+
+            return formattedServices
         }
 
     } catch (error) {

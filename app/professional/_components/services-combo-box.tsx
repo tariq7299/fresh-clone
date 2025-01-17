@@ -18,17 +18,15 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@/ui/components/popover"
-import { Service, servicesList, selectedService } from "./business-services-form"
-
+import { Service, ApiServicesWithCategory, ApiService } from "./business-services-form"
 
 // import { ComboboxProps } from "@/helper/types"
 // import { FieldValues, FieldPath } from "react-hook-form"
 
 // Add types
 // export function Combobox<TFieldValues extends FieldValues, TName extends FieldPath<TFieldValues>>({ values, field, className, inputPlaceholder = "Select value...", searchPlaceholder = "Search..." }: ComboboxProps<TFieldValues, TName>) {
-export function ServicesComboBox({ servicesList, selectedService, setSelectedService, setServicesList, className, inputPlaceholder = "Select value...", searchPlaceholder = "Search..." }: { servicesList: servicesList, selectedService: selectedService, setSelectedService: any, setServicesList?: any, className?: string, inputPlaceholder?: string, searchPlaceholder?: string }) {
+export function ServicesComboBox({ servicesList, selectedService, setSelectedService, className, inputPlaceholder = "Select value...", searchPlaceholder = "Search..." }: { servicesList: ApiServicesWithCategory[], selectedService: Service, setSelectedService: any, className?: string, inputPlaceholder?: string, searchPlaceholder?: string }) {
 
-    console.log("servicesList", servicesList)
 
     const [open, setOpen] = React.useState(false)
 
@@ -42,7 +40,7 @@ export function ServicesComboBox({ servicesList, selectedService, setSelectedSer
                     className=" justify-between active:scale-100"
                 >
                     {selectedService.serviceCategory && servicesList.length > 0
-                        ? servicesList.find((item: { name: string, services: Service[] }) => item.name === selectedService.serviceCategory)?.services.find((service: Service) => service.id === Number(selectedService.serviceId))?.name
+                        ? servicesList.find((item: { name: string, services: ApiService[] }) => item.name === selectedService.serviceCategory)?.services.find((service: ApiService) => service.id === Number(selectedService.serviceId))?.name
                         : inputPlaceholder}
                     <ChevronUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
@@ -65,10 +63,10 @@ export function ServicesComboBox({ servicesList, selectedService, setSelectedSer
 
                                     <CommandEmpty>No value found.</CommandEmpty>
 
-                                    {servicesList.map((item: { name: string, services: Service[] }) => (
+                                    {servicesList.map((item: { name: string, services: ApiService[] }) => (
                                         <CommandGroup key={item.name} heading={item.name}>
 
-                                            {item.services.map((service: Service) => (
+                                            {item.services.map((service: ApiService) => (
 
                                                 <CommandItem
                                                     className=""
@@ -78,8 +76,9 @@ export function ServicesComboBox({ servicesList, selectedService, setSelectedSer
                                                         setSelectedService({
                                                             serviceCategory: item.name,
                                                             serviceName: service.name,
-                                                            servicePrice: String(service.price), serviceDuration: String(service.duration), serviceCurrency: "EGP",
-                                                            serviceId: String(service.id)
+                                                            servicePrice: service.price,
+                                                            serviceDuration: service.duration, serviceCurrency: "EGP",
+                                                            serviceId: service.id
                                                         });
                                                         setOpen(false);
                                                     }}

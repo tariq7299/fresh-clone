@@ -7,6 +7,7 @@ import { getSession } from "@/(auth)/_lib/sessions"
 import { redirect } from "next/navigation"
 import { SuccessFormState } from "@/lib/definitions/definitions"
 import { ErrorFormState } from "@/lib/definitions/definitions"
+import { Service } from "./definitions"
 
 const businessNameSchema = z.object({
     nameEn: z.string().trim().min(3, { message: "Business name (En) is required" }),
@@ -35,14 +36,15 @@ export type BusinessNameFieldErrors = {
 export type BusinessNameFormState = SuccessFormState<BusinessNameFormData, BusinessNameFormData> | ErrorFormState<BusinessNameFieldErrors |
     null, BusinessNameFormData>
 
-export const handleSubmitBusinessName = async (formState: BusinessNameFormState, formData: FormData) => {
+export const handleSubmitBusinessName = async (formState: BusinessNameFormState, formData: FormData): Promise<ErrorFormState<BusinessNameFieldErrors |
+    null, BusinessNameFormData>> => {
 
     const payload = {
-        nameEn: formData.get("nameEn"),
-        nameAr: formData.get("nameAr"),
-        descriptionEn: formData.get("descriptionEn"),
-        descriptionAr: formData.get("descriptionAr"),
-        websiteUrl: formData.get("websiteUrl"),
+        nameEn: formData.get("nameEn") as string || "",
+        nameAr: formData.get("nameAr") as string || "",
+        descriptionEn: formData.get("descriptionEn") as string || "",
+        descriptionAr: formData.get("descriptionAr") as string || "",
+        websiteUrl: formData.get("websiteUrl") as string || "",
     }
 
     try {
@@ -92,7 +94,7 @@ export const handleSubmitBusinessName = async (formState: BusinessNameFormState,
             clientFieldsErrors: null,
             apiDataResponse: null,
             apiMsgs: "Error fetching form data",
-            formData: formData
+            formData: payload
         }
     }
 
@@ -157,7 +159,7 @@ export const handleSubmitBusinessCategory = async (formState: any, formData: For
 
 
 // TODO: Write types
-export const handleSubmitBusinessServices = async (formData: any) => {
+export const handleSubmitBusinessServices = async (formData: Service[]): Promise<ErrorFormState<{ service?: string } | null, Service[]>> => {
 
     console.log("formData", formData)
 
@@ -174,16 +176,6 @@ export const handleSubmitBusinessServices = async (formData: any) => {
     }
 
     try {
-
-        const formattedFormData = formData?.map((selectedService: any) => {
-            return {
-                service_id: Number(selectedService.serviceId),
-                service_price: Number(selectedService.servicePrice),
-                service_duration: Number(selectedService.serviceDuration),
-            }
-        })
-
-        console.log("formattedFormData", formattedFormData)
 
         const session = await getSession()
         const userId = session ? session.id : null
@@ -204,19 +196,19 @@ export const handleSubmitBusinessServices = async (formData: any) => {
 
         // TODO: write types
         // TODO: write comments
-        await prisma.$transaction(async (tx) => {
+        await prisma.$transaction(async (tx: any) => {
 
 
 
             // Use Promise.all with map instead of forEach
-            await Promise.all(formattedFormData.map(async (service) => {
+            await Promise.all(formData.map(async (service: Service) => {
 
-                // First, delete all services that are not in the new formattedFormData
+                // First, delete all services that are not in the new formData
                 await tx.businessService.deleteMany({
                     where: {
                         businessId: business.id,
                         service_id: {
-                            notIn: formattedFormData.map(service => service.service_id)
+                            notIn: formData.map((item: Service) => item.serviceId)
                         }
                     }
                 });
@@ -231,17 +223,17 @@ export const handleSubmitBusinessServices = async (formData: any) => {
                                 where: {
                                     businessId_service_id: {  // Use composite unique constraint
                                         businessId: business.id,
-                                        service_id: service.service_id
+                                        service_id: service.serviceId
                                     }
                                 },
                                 update: {
-                                    duration: service.service_duration,
-                                    price: service.service_price
+                                    duration: service.serviceDuration,
+                                    price: service.servicePrice
                                 },
                                 create: {
-                                    service_id: service.service_id,
-                                    duration: service.service_duration,
-                                    price: service.service_price
+                                    service_id: service.serviceId,
+                                    duration: service.serviceDuration,
+                                    price: service.servicePrice
                                 }
                             }
                         }
@@ -251,14 +243,15 @@ export const handleSubmitBusinessServices = async (formData: any) => {
                         userId: userId,
                         services: {
                             create: {
-                                service_id: service.service_id,
-                                duration: service.service_duration,
-                                price: service.service_price
+                                service_id: service.serviceId,
+                                duration: service.serviceDuration,
+                                price: service.servicePrice
                             }
                         }
                     }
                 });
             }));
+
         });
 
     } catch (error) {

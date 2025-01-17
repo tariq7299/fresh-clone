@@ -4,17 +4,13 @@ import { getBusinessStepFormData } from '@/professional/_lib/data';
 
 export default async function BusinessServicesPage() {
 
-
-    // const storedStepCategory = await getBusinessStepFormData("categoryStep")
-
-
-
+    // Get all services from backend
     const services = await getAllServices()
+    if (services.length === 0 || !services) throw new Error("Services list is empty")
 
-    const storedServices = await getBusinessStepFormData("servicesStep")
+    // Get the services from the db that the user has submitted before
+    const stroredTempServices = await getBusinessStepFormData("servicesStep")
 
-    // console.log("storedServices", storedServices)
 
-
-    return <BusinessServicesForm services={services} storedServices={storedServices} />
+    return <BusinessServicesForm services={services} stroredTempServices={stroredTempServices} />
 }

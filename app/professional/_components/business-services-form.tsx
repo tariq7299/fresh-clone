@@ -3,135 +3,79 @@
 import { useActionState, useEffect, useState } from 'react';
 import { Button } from '@/ui/components/custom/button';
 import { Plus, EllipsisVertical } from 'lucide-react';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/ui/components/dropdown-menu';
-import EditServiceDialog from '@/professional/_components/edit-service-dialog';
 import { ServicesComboBox } from '@/professional/_components/services-combo-box';
 import { handleSubmitBusinessServices } from '@/professional/_lib/form-actions';
 import { useBusinessFormContext } from './business-form-provider';
 import { cn } from '@/lib/utils/utils';
-
+import ServiceCard from '@/ui/components/custom/service-card';
+import { ApiService, ApiServicesWithCategory, Service, StoredService } from '@/professional/_lib/definitions';
+import { ErrorFormState, SuccessFormState } from '@/lib/definitions/definitions';
 
 // TODO: Remove all those types from here and move them to definitions file
-
-export type Service = {
-    id: number,
-    name: string,
-    description: string,
-    duration: number,
-    price: number,
-    // currency: string
-}
-
-export type StoredService = {
-    service_id: number
-    duration: number
-    price: number
-}
-
-export type servicesList = {
-    name: string,
-    services: Service[]
-}[]
-
-export type selectedService = {
-    serviceCategory: string,
-    serviceId: string,
-    serviceName: string,
-    servicePrice: string,
-    serviceDuration: string,
-    serviceCurrency: string,
-}
-
-// TODO: Write comments
-export default function BusinessServicesForm({ services, storedServices }: { services: servicesList, storedServices: StoredService[] }) {
-
-    const { setIsLoading } = useBusinessFormContext()
-
-    const [servicesList, setServicesList] = useState(services)
-
-    // TODO: Create a function to retrun the initial selected services list
-    let initialSelectedServicesList: selectedService[] = [];
-    if (storedServices?.length > 0) {
-        initialSelectedServicesList = servicesList.flatMap(serviceWithCategory =>
-            serviceWithCategory.services.filter(service => storedServices.some(storedService => storedService.service_id === service.id)).map(service => {
-                return {
-                    serviceCategory: serviceWithCategory.name,
-                    serviceId: service.id.toString(),
-                    serviceName: service.name,
-                    servicePrice: storedServices.find(storedService => storedService.service_id === service.id)?.price.toString() || "",
-                    serviceDuration: storedServices.find(storedService => storedService.service_id === service.id)?.duration.toString() || "",
-                    serviceCurrency: "EGP",
-                }
-            })
-        )
-
-    } else {
-        initialSelectedServicesList = servicesList.slice(0, 5).map(item => ({
-            serviceCategory: item.name,
-            serviceId: item.services[0].id.toString(),
-            serviceName: item.services[0].name,
-            servicePrice: item.services[0].price.toString(),
-            serviceDuration: item.services[0].duration.toString(),
-            serviceCurrency: "EGP",
-        }))
+/**
+ * Gets the initial list of services to display in the form
+ * If there are stored services (from a previous session), it will return those
+ * Otherwise, it will return the first 5 services from the available services list
+ * 
+ * @param services - List of available services grouped by category
+ * @param stroredTempServices - List of previously stored services (if any)
+ * @returns List of services with prices and durations
+ */
+function getInitialSelectedServicesList(services: ApiServicesWithCategory[], stroredTempServices: StoredService[]): Service[] {
+    // If we have stored services from a previous session, use those
+    if (stroredTempServices?.length > 0) {
+        return services.flatMap((serviceWithCategory: ApiServicesWithCategory) =>
+            serviceWithCategory.services
+                // Only include services that were previously stored
+                .filter((service: ApiService) =>
+                    stroredTempServices.some((storedService: StoredService) =>
+                        storedService.serviceId === service.id))
+                .map((service: ApiService) => {
+                    // Find the stored service to get its price and duration
+                    const storedService = stroredTempServices.find(
+                        (stored: StoredService) => stored.serviceId === service.id
+                    );
+                    return {
+                        serviceCategory: serviceWithCategory.name,
+                        serviceId: service.id,
+                        serviceName: service.name,
+                        servicePrice: storedService?.servicePrice || 0,
+                        serviceDuration: storedService?.serviceDuration || 0,
+                        serviceCurrency: "EGP",
+                    }
+                })
+        );
     }
 
-    const [selectedServicesList, setSelectedServicesList] = useState<selectedService[]>(initialSelectedServicesList)
+    // If no stored services, return first 5 services as defaults
+    return services.slice(0, 5).map(item => ({
+        serviceCategory: item.name,
+        serviceId: item.services[0].id,
+        serviceName: item.services[0].name,
+        servicePrice: item.services[0].price,
+        serviceDuration: item.services[0].duration,
+        serviceCurrency: "EGP",
+    }))
+}
 
 
+
+export default function BusinessServicesForm({ services, stroredTempServices }: { services: ApiServicesWithCategory[], stroredTempServices: StoredService[] }) {
+
+    // I am using this because I want to show the loading state in button found in the parent component
+    const { setIsLoading } = useBusinessFormContext()
+    const initialSelectedServicesList = getInitialSelectedServicesList(services, stroredTempServices);
+    const [selectedServicesList, setSelectedServicesList] = useState<Service[]>(initialSelectedServicesList)
     const [selectedService, setSelectedService] = useState({
         serviceCategory: "",
-        serviceId: "",
+        serviceId: -1,
         serviceName: "",
-        servicePrice: "",
-        serviceDuration: "",
+        servicePrice: 0,
+        serviceDuration: 0,
         serviceCurrency: "",
     })
 
-
-    function handleAddingService() {
-
-        if (selectedService.serviceId === "") {
-            return
-        }
-
-        // If the service is already in the list, don't add it, and just clear the selected service
-
-        const isServiceAlreadyInList = selectedServicesList?.some(item => item.serviceId === selectedService.serviceId)
-
-        if (isServiceAlreadyInList) {
-            setSelectedService({
-                serviceCategory: "",
-                serviceId: "",
-                serviceName: "",
-                servicePrice: "",
-                serviceDuration: "",
-                serviceCurrency: "",
-            })
-        } else {
-            setSelectedServicesList([{
-                serviceCategory: selectedService.serviceCategory,
-                serviceId: selectedService.serviceId,
-                serviceName: selectedService.serviceName,
-                servicePrice: selectedService.servicePrice,
-                serviceDuration: selectedService.serviceDuration,
-                serviceCurrency: "EGP"
-            }, ...selectedServicesList])
-            setSelectedService({
-                serviceCategory: "",
-                serviceId: "",
-                serviceName: "",
-                servicePrice: "",
-                serviceDuration: "",
-                serviceCurrency: "",
-            })
-        }
-    }
-
-
-    // TODO: Write types
-
-    const INITIAL_FORM_STATE = {
+    const INITIAL_FORM_STATE: ErrorFormState<{ service?: string } | null, Service[]> = {
         success: false,
         clientFieldsErrors: null,
         apiDataResponse: null,
@@ -142,7 +86,56 @@ export default function BusinessServicesForm({ services, storedServices }: { ser
     const [formState, setFormState] = useState(INITIAL_FORM_STATE)
     const [isPending, setIsPending] = useState(false)
 
+    useEffect(() => {
+        setIsLoading(isPending)
+    }, [isPending])
+
+    function handleAddingService() {
+
+        if (selectedService.serviceId === -1) {
+            return
+        }
+
+        // If the service is already in the list, don't add it, and just clear the selected service
+        const isServiceAlreadyInList = selectedServicesList?.some(item => item.serviceId === selectedService.serviceId)
+
+        if (isServiceAlreadyInList) {
+
+            // Clear the selected service (this will just unselect the service form the combobox element)
+            setSelectedService({
+                serviceCategory: "",
+                serviceId: -1,
+                serviceName: "",
+                servicePrice: 0,
+                serviceDuration: 0,
+                serviceCurrency: "",
+            })
+
+        } else {
+            // Add the service the user just choosed to the list of selected services
+            setSelectedServicesList([{
+                serviceCategory: selectedService.serviceCategory,
+                serviceId: selectedService.serviceId,
+                serviceName: selectedService.serviceName,
+                servicePrice: selectedService.servicePrice,
+                serviceDuration: selectedService.serviceDuration,
+                serviceCurrency: "EGP"
+            }, ...selectedServicesList])
+
+            // Clear the selected service (this will just unselect the service form the combobox element)
+            setSelectedService({
+                serviceCategory: "",
+                serviceId: -1,
+                serviceName: "",
+                servicePrice: 0,
+                serviceDuration: 0,
+                serviceCurrency: "",
+            })
+        }
+    }
+
     // Handle form submission
+    // Iam handling the form submission manually instead of using useActionState because there is no inputs in the form, and instead the formData is a state which i manage manually
     const handleSubmit = async (event: any) => {
         event.preventDefault();
         setIsPending(true)
@@ -150,73 +143,55 @@ export default function BusinessServicesForm({ services, storedServices }: { ser
         setFormState(result)
         setIsPending(false)
         return
-
     };
 
-    useEffect(() => {
-        setIsLoading(isPending)
-    }, [isPending])
-
-
     return <form onSubmit={handleSubmit} id="business-onboarding-form" >
+        {/* Main container with responsive max width and vertical padding */}
         <div className="flex flex-col gap-2 w-full max-w-4xl p-5 py-24 min-h-dvh items-stretch m-auto space-y-5 ">
 
+            {/* Header section with title and description */}
             <div className="text-start space-y-1">
-
                 <p className="text-sm text-muted-foreground text-start"> Account setup</p>
-
                 <h1 className="text-3xl lg:text-4xl font-bold font-source-sans">Build Your Service List</h1>
-
-
                 <p className="text-sm text-muted-foreground ">Choose a service then press <span className="font-bold text-accent-600">Add</span> to add it to your list.</p>
             </div>
 
+            {/* Display validation error if service selection is empty */}
             {formState.clientFieldsErrors?.service && <p className="text-destructive text-sm py-2">{formState.clientFieldsErrors?.service}</p>}
 
-            <div className={cn('flex max-w-xl gap-2 justify-center items-center mx-auto w-full', isPending && "pointer-events-none opacity-50")}>
+            {/* Service selection controls - ComboBox and Add button */}
+            <div className={cn('flex max-w-xl gap-2 justify-center items-center mx-auto w-full',
+                // Disable interaction while form is submitting
+                isPending && "pointer-events-none opacity-50"
+            )}>
+                {/* Dropdown for selecting services */}
+                <ServicesComboBox
+                    className=' w-full'
+                    servicesList={services}
+                    selectedService={selectedService}
+                    setSelectedService={setSelectedService}
+                />
 
-                <ServicesComboBox className=' w-full' servicesList={servicesList} selectedService={selectedService} setSelectedService={setSelectedService} setServicesList={setServicesList} />
-
-                <Button type='button' onClick={handleAddingService} className='font-bold flex items-center gap-2'>Add<Plus className='size-4' /></Button>
-
+                {/* Add button with plus icon */}
+                <Button type='button' onClick={handleAddingService} className='font-bold flex items-center gap-2'>
+                    Add<Plus className='size-4' />
+                </Button>
             </div>
 
-            <div className={cn("grid grid-cols-1 gap-4", isPending && "pointer-events-none opacity-50")}>
-
-                {selectedServicesList.map((selectedService, index) => (
-                    <div key={selectedService.serviceId} className='border-l-8 border-l-secondary-400 border-t-1 border-r-1 border-b-1 border border-gray-200 p-5 flex justify-between items-center rounded-lg'>
-                        <div>
-                            <p className='text-lg font-bold'>{selectedService.serviceName}</p>
-                            <p className='text-muted-foreground'>{selectedService.serviceDuration}min</p>
-                        </div>
-                        <div className='flex items-center gap-2'>
-                            <p className='font-semibold'    >{selectedService.serviceCurrency} {selectedService.servicePrice}</p>
-
-                            <DropdownMenu>
-
-                                <DropdownMenuTrigger asChild >
-                                    <Button variant="ghost">
-                                        <EllipsisVertical className='size-5' />
-                                    </Button>
-                                </DropdownMenuTrigger>
-                                <DropdownMenuContent className='space-y-'>
-
-                                    <DropdownMenuItem className='py-2 font-semibold' asChild >
-                                        <EditServiceDialog selectedServicesList={selectedServicesList} setSelectedServicesList={setSelectedServicesList} service={selectedService} />
-                                    </DropdownMenuItem>
-                                    <DropdownMenuItem className='py-2 text-destructive font-semibold' onClick={() => {
-                                        setSelectedServicesList(selectedServicesList.filter(item => item.serviceId !== selectedService.serviceId))
-                                    }}>
-                                        <p>Delete</p>
-                                    </DropdownMenuItem>
-
-                                </DropdownMenuContent>
-                            </DropdownMenu>
-                        </div>
-                    </div>
+            {/* Grid container for selected service cards */}
+            <div className={cn("grid grid-cols-1 gap-4",
+                // Disable interaction while form is submitting 
+                isPending && "pointer-events-none opacity-50"
+            )}>
+                {/* Map through selected services and render a card for each */}
+                {selectedServicesList.map((selectedService) => (
+                    <ServiceCard
+                        key={selectedService.serviceId}
+                        service={selectedService}
+                        services={selectedServicesList}
+                        setServices={setSelectedServicesList}
+                    />
                 ))}
-
-
             </div>
 
         </div>

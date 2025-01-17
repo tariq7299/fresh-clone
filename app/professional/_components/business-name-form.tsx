@@ -3,10 +3,10 @@ import { Label } from '@/ui/components/label';
 import { Input } from '@/ui/components/input';
 import { Textarea } from '@/ui/components/textarea';
 import { useActionState } from 'react';
-import { handleSubmitBusinessName, BusinessNameFormState, BusinessNameFormData } from '@/professional/_lib/form-actions';
-import { handleFormResponse } from '@/lib/utils/utils';
+import { handleSubmitBusinessName, BusinessNameFormData, BusinessNameFieldErrors } from '@/professional/_lib/form-actions';
 import { useEffect, useState } from 'react';
 import { useBusinessFormContext } from './business-form-provider';
+import { ErrorFormState } from '@/lib/definitions/definitions';
 
 // TODO: Add this type
 // import { StepBusinessInfo } from '@/types/business-info';
@@ -16,7 +16,8 @@ export default function BusinessNameForm({ storedStepBusinessInfo }: { storedSte
 
     const { setIsLoading } = useBusinessFormContext()
 
-    const initialState = {
+    const initialState: ErrorFormState<BusinessNameFieldErrors |
+        null, BusinessNameFormData> = {
         success: false,
         clientFieldsErrors: null,
         apiDataResponse: null,

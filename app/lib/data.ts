@@ -25,8 +25,9 @@ export const getAllServices = async () => {
 
     try {
 
-        const services = await fetchApi("/services/active-with-groups")
-        return services.data
+        const response = await fetchApi("/services/active-with-groups")
+
+        return response.data
 
     } catch (error) {
         console.log("error", error)

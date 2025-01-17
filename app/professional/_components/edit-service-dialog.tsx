@@ -10,7 +10,7 @@ import {
 } from "@/ui/components/dialog"
 import { Input } from "@/ui/components/input"
 import { Label } from "@/ui/components/label"
-import { selectedService } from "@/professional/_components/business-services-form"
+import { Service } from "@/professional/_lib/definitions"
 import { useState } from "react"
 import { z } from "zod"
 
@@ -20,20 +20,20 @@ const editServiceSchema = z.object({
 })
 
 
-export default function EditServiceDialog({ service, selectedServicesList, setSelectedServicesList }: {
-    service: selectedService,
-    selectedServicesList: selectedService[],
-    setSelectedServicesList: (services: selectedService[]) => void
+export default function EditServiceDialog({ currentService, services, setServices }: {
+    currentService: Service,
+    services: Service[],
+    setServices: (services: Service[]) => void
 }) {
 
     const [isOpen, setIsOpen] = useState(false)
 
     const [value, setValue] = useState({
-        servicePrice: service.servicePrice || "",
-        serviceDuration: service.serviceDuration || "",
+        servicePrice: currentService?.servicePrice || 0,
+        serviceDuration: currentService?.serviceDuration || 0,
         errors: {
-            servicePrice: [],
-            serviceDuration: []
+            servicePrice: [] as string[] | undefined,
+            serviceDuration: [] as string[] | undefined
         }
     })
 
@@ -43,22 +43,32 @@ export default function EditServiceDialog({ service, selectedServicesList, setSe
 
         const validatedData = editServiceSchema.safeParse({ servicePrice: Number(value.servicePrice), serviceDuration: Number(value.serviceDuration) })
         if (!validatedData.success) {
-            setValue({ ...value, errors: validatedData.error.flatten().fieldErrors })
+
+            if (validatedData.error.flatten().fieldErrors.servicePrice) {
+                setValue({ ...value, errors: { servicePrice: validatedData.error.flatten().fieldErrors.servicePrice, serviceDuration: [] } })
+            }
+
+            if (validatedData.error.flatten().fieldErrors.serviceDuration) {
+                setValue({ ...value, errors: { servicePrice: [], serviceDuration: validatedData.error.flatten().fieldErrors.serviceDuration } })
+            }
+
             return
         }
-
-        const updatedServicesList = selectedServicesList.map((selectedService) => {
-            if (selectedService.serviceId === service.serviceId) {
+        // Create a new array by mapping over the existing services
+        // For the service being edited, update its price and duration
+        // Leave all other services unchanged
+        const updatedServicesList = services.map((service) => {
+            if (service.serviceId === currentService.serviceId) {
                 return {
-                    ...selectedService,
-                    servicePrice: String(value.servicePrice),
-                    serviceDuration: String(value.serviceDuration),
+                    ...service,
+                    servicePrice: value.servicePrice,
+                    serviceDuration: value.serviceDuration,
                 }
             }
-            return selectedService
+            return service
         })
 
-        setSelectedServicesList(updatedServicesList)
+        setServices(updatedServicesList)
         setIsOpen(false)
     }
 
@@ -70,7 +80,7 @@ export default function EditServiceDialog({ service, selectedServicesList, setSe
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
-                    <DialogTitle>Edit <span className="font-bold">{service.serviceName}</span></DialogTitle>
+                    <DialogTitle>Edit <span className="font-bold">{currentService?.serviceName}</span></DialogTitle>
                     <DialogDescription>
                         Make changes to your service here. Click save when you're done.
                     </DialogDescription>
@@ -85,14 +95,13 @@ export default function EditServiceDialog({ service, selectedServicesList, setSe
                                 <Input
                                     id="name"
                                     type="number"
-                                    // defaultValue={""}
                                     className="remove-default-input-styles"
                                     value={value.serviceDuration}
-                                    onChange={(e) => setValue({ ...value, serviceDuration: e.target.value })}
+                                    onChange={(e) => setValue({ ...value, serviceDuration: Number(e.target.value) })}
                                 />
                                 <p className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground text-xs italic p-2">min</p>
                             </div>
-                            {value.errors.serviceDuration?.length > 0 && <p className=" text-destructive text-sm col-span-3 pt-2">{value.errors.serviceDuration?.[0]}</p>}
+                            {value.errors.serviceDuration && value?.errors?.serviceDuration?.length > 0 && <p className=" text-destructive text-sm col-span-3 pt-2">{value?.errors?.serviceDuration?.[0]}</p>}
 
                         </div>
                     </div>
@@ -107,16 +116,15 @@ export default function EditServiceDialog({ service, selectedServicesList, setSe
                                 <Input
                                     type="number"
                                     id="username"
-                                    // defaultValue={""}
                                     className="remove-default-input-styles"
                                     value={value.servicePrice}
-                                    onChange={(e) => setValue({ ...value, servicePrice: e.target.value })}
+                                    onChange={(e) => setValue({ ...value, servicePrice: Number(e.target.value) })}
                                 />
-                                <p className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground text-xs italic p-2">{service.serviceCurrency}</p>
+                                <p className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground text-xs italic p-2">{currentService?.serviceCurrency}</p>
 
                             </div>
 
-                            {value.errors.servicePrice?.length > 0 && <p className=" text-destructive text-sm col-span-3 pt-2">{value.errors.servicePrice?.[0]}</p>}
+                            {value.errors.servicePrice && value?.errors?.servicePrice?.length > 0 && <p className=" text-destructive text-sm col-span-3 pt-2">{value?.errors?.servicePrice?.[0]}</p>}
                         </div>
                     </div>
                 </div>
