@@ -15,10 +15,10 @@ export type Category = {
 }
 
 export type StoredTempCategory = {
-    id: number,
+    id: number | null,
 }
 
-export default function BusinessCategoryForm({ storedTempCategory, categories }: { storedTempCategory: StoredTempCategory, categories: Category[] }) {
+export default function BusinessCategoryForm({ storedTempCategory, categories }: { storedTempCategory: StoredTempCategory | null, categories: Category[] }) {
 
     const { setIsLoading } = useBusinessFormContext()
 
@@ -28,7 +28,7 @@ export default function BusinessCategoryForm({ storedTempCategory, categories }:
         apiDataResponse: null,
         apiMsgs: "",
         formData: {
-            categoryId: String(storedTempCategory?.id) || "",
+            categoryId: storedTempCategory?.id ? String(storedTempCategory?.id) : "",
         }
     }
 

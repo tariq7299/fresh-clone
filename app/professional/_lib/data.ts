@@ -7,6 +7,8 @@ import { StoredTempCategory } from "../_components/business-category-form"
 
 export const getBusinessStepFormData = async (stepName: string) => {
 
+    if (!stepName) throw new Error("Step name is required")
+
     try {
 
         const session = await getSession()
@@ -43,7 +45,7 @@ export const getBusinessStepFormData = async (stepName: string) => {
             })
 
             const formattedCategory: StoredTempCategory = {
-                id: storedTempCategory?.category_id,
+                id: storedTempCategory?.category_id ?? null,
             }
 
             return formattedCategory
@@ -59,6 +61,7 @@ export const getBusinessStepFormData = async (stepName: string) => {
                 }
             })
 
+            // This error is not from me ! there is bug in the 
             const formattedServices: StoredService[] = storedTempServices.services.map((storedService: {
                 service_id: number,
                 price: number,
@@ -76,10 +79,13 @@ export const getBusinessStepFormData = async (stepName: string) => {
             return formattedServices
         }
 
+        return null
+
     } catch (error) {
 
         console.error('Database Error:', error);
         throw new Error('Failed to fetch form data');
+
 
     }
 }

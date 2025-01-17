@@ -32,9 +32,9 @@ model BusinessService {
   id          Int      @id @default(autoincrement())
   business    Business @relation(fields: [businessId], references: [id])
   businessId  Int
-  service_id  Int?
-  duration    Int?    
-  price      Float?
+  service_id  Int
+  duration    Int    
+  price      Float
 
   @@unique([businessId, service_id])
 
