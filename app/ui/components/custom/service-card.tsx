@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils/utils';
-import { Service } from '@/professional/_components/business-services-form';
+import { Service } from '@/professional/_lib/definitions';
 import ServiceCardActions from '@/ui/components/custom/service-card-actions';
 
 export default function ServiceCard({ service, services, setServices, className }: { service: Service, services: Service[], setServices: (services: Service[]) => void, className?: string }) {

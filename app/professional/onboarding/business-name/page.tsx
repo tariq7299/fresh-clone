@@ -3,9 +3,9 @@ import { getBusinessStepFormData } from '@/professional/_lib/data';
 
 export default async function BusinessNamePage({ }) {
 
-    const storedStepBusinessInfo = await getBusinessStepFormData("businessNameStep")
+    const storedTempBusinessInfo = await getBusinessStepFormData("businessNameStep")
 
-    console.log("storedStepBusinessInfo", storedStepBusinessInfo)
+    console.log("storedTempBusinessInfo", storedTempBusinessInfo)
 
 
 
@@ -36,11 +36,11 @@ export default async function BusinessNamePage({ }) {
     //     }
     // })
 
-    // console.log("storedStepBusinessInfoCLIENT", storedStepBusinessInfo)
+    // console.log("storedStepBusinessInfoCLIENT", storedTempBusinessInfo)
 
 
     return (
-        <BusinessNameForm storedStepBusinessInfo={storedStepBusinessInfo} />
+        <BusinessNameForm storedTempBusinessInfo={storedTempBusinessInfo} />
 
     );
 }

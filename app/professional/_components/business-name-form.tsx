@@ -7,12 +7,13 @@ import { handleSubmitBusinessName, BusinessNameFormData, BusinessNameFieldErrors
 import { useEffect, useState } from 'react';
 import { useBusinessFormContext } from './business-form-provider';
 import { ErrorFormState } from '@/lib/definitions/definitions';
+import { StoredTempBusinessInfo } from '../_lib/definitions';
 
 // TODO: Add this type
 // import { StepBusinessInfo } from '@/types/business-info';
 
 // TODO: Add this type
-export default function BusinessNameForm({ storedStepBusinessInfo }: { storedStepBusinessInfo: any }) {
+export default function BusinessNameForm({ storedTempBusinessInfo }: { storedTempBusinessInfo: StoredTempBusinessInfo }) {
 
     const { setIsLoading } = useBusinessFormContext()
 
@@ -23,26 +24,17 @@ export default function BusinessNameForm({ storedStepBusinessInfo }: { storedSte
         apiDataResponse: null,
         apiMsgs: "",
         formData: {
-            nameEn: storedStepBusinessInfo?.name_en || "",
-            nameAr: storedStepBusinessInfo?.name_ar || "",
-            descriptionEn: storedStepBusinessInfo?.description_en || "",
-            descriptionAr: storedStepBusinessInfo?.description_ar || "",
-            websiteUrl: storedStepBusinessInfo?.website_url || "",
+            nameEn: storedTempBusinessInfo?.name_en || "",
+            nameAr: storedTempBusinessInfo?.name_ar || "",
+            descriptionEn: storedTempBusinessInfo?.description_en || "",
+            descriptionAr: storedTempBusinessInfo?.description_ar || "",
+            websiteUrl: storedTempBusinessInfo?.website_url || "",
         }
     }
 
     const [formState, formAction, isPending] = useActionState(handleSubmitBusinessName, initialState)
 
     const [formValues, setFormValues] = useState<BusinessNameFormData>(initialState.formData)
-
-    // useEffect(() => {
-    //     console.log("formState", formState)
-    //     handleFormResponse({
-    //         formState,
-    //         showSuccessToast: false,
-    //         showErrorToast: true
-    //     })
-    // }, [formState])
 
     useEffect(() => {
         setIsLoading(isPending)

@@ -6,14 +6,16 @@ export default async function BusinessCategoryPage() {
 
 
 
-    const storedStepCategory = await getBusinessStepFormData("categoryStep")
+    const storedTempCategory = await getBusinessStepFormData("categoryStep")
 
-    console.log("storedStepCategory", storedStepCategory)
+    console.log("storedTempCategory", storedTempCategory)
 
     const categories = await getAllCategories()
 
+    if (!categories || categories.length === 0) throw new Error("Failed to fetch categories")
+
     return (
         // TODO: Write types
-        <BusinessCategoryForm storedStepCategory={storedStepCategory} categories={categories} />
+        <BusinessCategoryForm storedTempCategory={storedTempCategory} categories={categories} />
     );
 }

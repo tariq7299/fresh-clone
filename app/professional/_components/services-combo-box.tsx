@@ -18,7 +18,7 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@/ui/components/popover"
-import { Service, ApiServicesWithCategory, ApiService } from "./business-services-form"
+import { Service, ApiServicesWithCategory, ApiService } from "@/professional/_lib/definitions"
 
 // import { ComboboxProps } from "@/helper/types"
 // import { FieldValues, FieldPath } from "react-hook-form"

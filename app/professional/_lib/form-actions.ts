@@ -18,7 +18,7 @@ const businessNameSchema = z.object({
 })
 
 const businessCategorySchema = z.object({
-    category_id: z.string().trim().min(1, { message: "Please select a category" }),
+    categoryId: z.string().trim().min(1, { message: "Please select a category" }),
 })
 
 // 
@@ -89,13 +89,14 @@ export const handleSubmitBusinessName = async (formState: BusinessNameFormState,
 
     } catch (error) {
         console.error('Error submitting business name:', error);
-        return {
-            success: false,
-            clientFieldsErrors: null,
-            apiDataResponse: null,
-            apiMsgs: "Error fetching form data",
-            formData: payload
-        }
+        throw new Error("Error submitting business name")
+        // return {
+        //     success: false,
+        //     clientFieldsErrors: null,
+        //     apiDataResponse: null,
+        //     apiMsgs: "Error fetching form data",
+        //     formData: payload
+        // }
     }
 
 
@@ -103,7 +104,7 @@ export const handleSubmitBusinessName = async (formState: BusinessNameFormState,
 }
 
 
-export const handleSubmitBusinessCategory = async (formState: any, formData: FormData) => {
+export const handleSubmitBusinessCategory = async (formState: ErrorFormState<{ categoryId?: string } | null, BusinessCategoryFormData>, formData: FormData) => {
 
     const session = await getSession()
     const userId = session ? session.id : null
@@ -111,7 +112,7 @@ export const handleSubmitBusinessCategory = async (formState: any, formData: For
 
     try {
 
-        const validatedFields = businessCategorySchema.safeParse({ category_id: formData.get("category_id") })
+        const validatedFields = businessCategorySchema.safeParse({ categoryId: formData.get("categoryId") })
 
         if (!validatedFields.success) {
             return {
@@ -128,24 +129,25 @@ export const handleSubmitBusinessCategory = async (formState: any, formData: For
                 userId,
             },
             update: {
-                category_id: Number(validatedFields.data.category_id)
+                category_id: Number(validatedFields.data.categoryId)
             },
             create: {
                 userId,
-                category_id: Number(validatedFields.data.category_id)
+                category_id: Number(validatedFields.data.categoryId)
             }
         })
 
 
     } catch (error) {
         console.error('Error submitting business category:', error);
-        return {
-            success: false,
-            clientFieldsErrors: null,
-            apiDataResponse: null,
-            apiMsgs: "Error fetching form data",
-            formData: formData
-        }
+        throw new Error("Error submitting business category")
+        // return {
+        //     success: false,
+        //     clientFieldsErrors: null,
+        //     apiDataResponse: null,
+        //     apiMsgs: "Error fetching form data",
+        //     formData: formData
+        // }
     }
 
     redirect("/professional/onboarding/business-services")

@@ -6,7 +6,7 @@ export default async function BusinessServicesPage() {
 
     // Get all services from backend
     const services = await getAllServices()
-    if (services.length === 0 || !services) throw new Error("Services list is empty")
+    if (services && services.length === 0 || !services) throw new Error("Services list is empty")
 
     // Get the services from the db that the user has submitted before
     const stroredTempServices = await getBusinessStepFormData("servicesStep")

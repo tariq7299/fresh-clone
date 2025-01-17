@@ -4,6 +4,11 @@ import { getSession } from "@/(auth)/_lib/sessions";
 import { redirect } from "next/navigation";
 import { redirectToOtpIfNotVerified } from "@/(auth)/_lib/redirect-otp-if-not-verified";
 import { redirectToLoginIfNotAuthenticated } from "@/(auth)/_lib/redirect-to-login-if-not-authenticated";
+import { ApiServicesWithCategory } from "@/professional/_lib/definitions";
+import { ApiResponse } from "./definitions/api";
+import { Category } from "@/professional/_components/business-category-form";
+
+
 
 // TODO: Write types
 // TODO: Write comments
@@ -11,7 +16,7 @@ export const getAllCategories = async () => {
 
     try {
 
-        const categories = await fetchApi("/active-categories")
+        const categories = await fetchApi<ApiResponse<Category[]>>("/active-categories")
         return categories.data
     } catch (error) {
         console.error('Database Error:', error);
@@ -25,7 +30,7 @@ export const getAllServices = async () => {
 
     try {
 
-        const response = await fetchApi("/services/active-with-groups")
+        const response = await fetchApi<ApiResponse<ApiServicesWithCategory[]>>("/services/active-with-groups")
 
         return response.data
 

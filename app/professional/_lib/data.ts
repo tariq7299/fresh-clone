@@ -2,6 +2,8 @@
 import { getSession } from "@/(auth)/_lib/sessions"
 import prisma from "@/lib/prisma"
 import { redirect } from "next/navigation"
+import { StoredService } from "./definitions"
+import { StoredTempCategory } from "../_components/business-category-form"
 
 export const getBusinessStepFormData = async (stepName: string) => {
 
@@ -15,7 +17,7 @@ export const getBusinessStepFormData = async (stepName: string) => {
 
         if (stepName === "businessNameStep") {
 
-            const storedStepBusinessInfo = await prisma.business.findUnique({
+            const storedTempBusinessInfo = await prisma.business.findUnique({
                 where: {
                     userId: userId
                 },
@@ -30,10 +32,10 @@ export const getBusinessStepFormData = async (stepName: string) => {
             })
 
 
-            return storedStepBusinessInfo
+            return storedTempBusinessInfo
         } else if (stepName === "categoryStep") {
 
-            const storedStepCategory = await prisma.business.findUnique({
+            const storedTempCategory = await prisma.business.findUnique({
                 where: {
                     userId: userId
                 },
@@ -42,7 +44,11 @@ export const getBusinessStepFormData = async (stepName: string) => {
                 }
             })
 
-            return storedStepCategory
+            const formattedCategory: StoredTempCategory = {
+                id: storedTempCategory?.category_id,
+            }
+
+            return formattedCategory
 
         } else if (stepName === "servicesStep") {
 
@@ -58,7 +64,11 @@ export const getBusinessStepFormData = async (stepName: string) => {
             console.log("storedTempServices", storedTempServices)
 
             // TODO: change the naminf from the db schema directly and remove this after
-            const formattedServices = storedTempServices.services.map((storedService: any) => {
+            const formattedServices = storedTempServices.services.map((storedService: {
+                service_id: number,
+                price: number,
+                duration: number,
+            }) => {
                 return {
                     serviceId: storedService.service_id,
                     servicePrice: storedService.price,

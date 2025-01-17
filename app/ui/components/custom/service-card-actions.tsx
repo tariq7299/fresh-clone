@@ -1,7 +1,7 @@
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/ui/components/dropdown-menu';
 import { Button } from '@/ui/components/custom/button';
 import EditServiceDialog from '@/professional/_components/edit-service-dialog';
-import { Service } from '@/professional/_components/business-services-form';
+import { Service } from '@/professional/_lib/definitions';
 import { EllipsisVertical } from 'lucide-react';
 
 export default function ServiceCardActions({ services, setServices, service }: { services: Service[], setServices: (services: Service[]) => void, service: Service }) {

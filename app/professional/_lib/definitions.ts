@@ -24,3 +24,12 @@ export type ApiServicesWithCategory = {
     name: string,
     services: ApiService[]
 }
+
+export type StoredTempBusinessInfo = {
+    name_en: string,
+    name_ar: string,
+    description_en: string,
+    description_ar: string,
+    website_url: string,
+}
+

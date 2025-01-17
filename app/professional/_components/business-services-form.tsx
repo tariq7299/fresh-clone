@@ -9,7 +9,7 @@ import { useBusinessFormContext } from './business-form-provider';
 import { cn } from '@/lib/utils/utils';
 import ServiceCard from '@/ui/components/custom/service-card';
 import { ApiService, ApiServicesWithCategory, Service, StoredService } from '@/professional/_lib/definitions';
-import { ErrorFormState, SuccessFormState } from '@/lib/definitions/definitions';
+import { ErrorFormState } from '@/lib/definitions/definitions';
 
 // TODO: Remove all those types from here and move them to definitions file
 /**

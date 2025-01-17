@@ -4,26 +4,38 @@
 import BusinessCategoryCard from "@/ui/components/custom/business-category-card";
 import { useActionState, useEffect } from "react";
 import { useBusinessFormContext } from "./business-form-provider";
-import { handleSubmitBusinessCategory } from "../_lib/form-actions";
+import { BusinessCategoryFormData, handleSubmitBusinessCategory } from "../_lib/form-actions";
+import { ErrorFormState } from "@/lib/definitions/definitions";
 
-export default function BusinessCategoryForm({ storedStepCategory, categories }: { storedStepCategory: any, categories: any }) {
+
+export type Category = {
+    id: number,
+    name: string,
+    description: string,
+}
+
+export type StoredTempCategory = {
+    id: number,
+}
+
+export default function BusinessCategoryForm({ storedTempCategory, categories }: { storedTempCategory: StoredTempCategory, categories: Category[] }) {
 
     const { setIsLoading } = useBusinessFormContext()
 
-    const initialState = {
+    const initialState: ErrorFormState<{ categoryId?: string } | null, BusinessCategoryFormData> = {
         success: false,
         clientFieldsErrors: null,
         apiDataResponse: null,
         apiMsgs: "",
         formData: {
-            category_id: storedStepCategory?.category_id || "",
+            categoryId: String(storedTempCategory?.id) || "",
         }
     }
 
     const [formState, formAction, isPending] = useActionState(handleSubmitBusinessCategory, initialState)
 
     console.log("formStateCLIENT", formState)
-    console.log("storedStepCategory", storedStepCategory)
+    console.log("storedTempCategory", storedTempCategory)
 
     useEffect(() => {
         setIsLoading(isPending)
@@ -44,11 +56,11 @@ export default function BusinessCategoryForm({ storedStepCategory, categories }:
                 <p className="text-sm text-muted-foreground ">Choose a category that best describes your business.</p>
             </div>
 
-            {formState.clientFieldsErrors?.category_id && <p className="text-destructive text-sm py-2">You must select a category</p>}
+            {formState.clientFieldsErrors?.categoryId && <p className="text-destructive text-sm py-2">You must select a category</p>}
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 justify-items-stretch md:grid-cols-3 ">
                 {categories.map((category: any) => (
-                    <BusinessCategoryCard key={category.id} categoryName={category.name} categoryIconUrl={"/categories/hair.png"} categoryId={category.id} isPending={isPending} defaultChecked={storedStepCategory?.category_id === category.id} />
+                    <BusinessCategoryCard key={category.id} categoryName={category.name} categoryIconUrl={"/categories/hair.png"} categoryId={category.id} isPending={isPending} defaultChecked={storedTempCategory?.id === category.id} />
                 ))}
             </div>
 
