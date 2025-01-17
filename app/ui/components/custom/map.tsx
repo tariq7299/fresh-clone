@@ -2,77 +2,44 @@
 we need to make this component client rendered as well*/
 'use client'
 
-import { GoogleMap, Marker } from "@react-google-maps/api";
-import { useState, useCallback } from "react";
+import { Map as MapComponent, Marker, MapCameraChangedEvent } from "@vis.gl/react-google-maps";
+import { useCallback, useState } from "react";
 
-//Map's styling
-const defaultMapContainerStyle = {
-    width: '100%',
-    height: '100%',
-    borderRadius: '15px 0px 0px 15px',
-};
+// Set the marker at the center of the map when user drags the map  
+// Solution 1
 
-//K2's coordinates
-const defaultMapCenter = {
-    lat: 35.8799866,
-    lng: 76.5048004
-}
+const DEFAULT_CENTER = { lat: 22.54992, lng: 0 }
 
-//Default zoom level, can be adjusted
-const defaultMapZoom = 18
 
-//Map options
-const defaultMapOptions = {
-    zoomControl: true,
-    tilt: 0,
-    gestureHandling: 'auto',
-    mapTypeId: 'satellite',
-};
 
-const MapComponent = () => {
-    // State to track the current center of the map
-    const [center, setCenter] = useState(defaultMapCenter);
 
-    // Callback function that fires when the map's center changes
-    const onCenterChanged = useCallback(() => {
-        // We'll update this when we have access to the map instance
+function Map() {
+    const [center, setCetner] = useState(DEFAULT_CENTER)
+    const [query, setQuery] = 
+
+
+    const handleCameraChange = useCallback((ev: MapCameraChangedEvent) => {
+        console.log('camera changed: ', ev.detail);
+        console.log("ev.type", ev.type)
+        setCetner(ev.detail.center)
+
     }, []);
-
-    // Callback to store the map instance
-    const [map, setMap] = useState<google.maps.Map | null>(null);
-    const onLoad = useCallback((map: google.maps.Map) => {
-        setMap(map);
-    }, []);
-
-    // Update center when map is dragged
-    const onDragEnd = () => {
-        if (map) {
-            const newCenter = map.getCenter();
-            if (newCenter) {
-                setCenter({
-                    lat: newCenter.lat(),
-                    lng: newCenter.lng()
-                });
-            }
-        }
-    };
 
     return (
-        <GoogleMap
-            mapContainerStyle={defaultMapContainerStyle}
-            center={defaultMapCenter}
-            zoom={defaultMapZoom}
-            options={defaultMapOptions}
-            onLoad={onLoad}
-            onDragEnd={onDragEnd}
+        <MapComponent
+            style={{ width: '100%', height: '100%' }}
+            defaultCenter={DEFAULT_CENTER}
+            defaultZoom={3}
+            gestureHandling={'greedy'}
+            disableDefaultUI={true}
+            onCameraChanged={handleCameraChange}
         >
             <Marker
                 position={center}
-                // Optional: make the marker draggable
                 draggable={false}
             />
-        </GoogleMap>
+        </MapComponent>
     );
 };
 
-export { MapComponent };
+export { Map };

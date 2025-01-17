@@ -9,7 +9,7 @@ import { useBusinessFormContext } from './business-form-provider';
 import { ErrorFormState } from '@/lib/definitions/definitions';
 import { StoredTempBusinessInfo } from '../_lib/definitions';
 
-export default function BusinessNameForm({ storedTempBusinessInfo }: { storedTempBusinessInfo: StoredTempBusinessInfo }) {
+export default function BusinessNameForm({ storedTempBusinessInfo }: { storedTempBusinessInfo: StoredTempBusinessInfo | null }) {
 
     const { setIsLoading } = useBusinessFormContext()
 
