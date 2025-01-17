@@ -47,6 +47,12 @@ export const handleSubmitBusinessName = async (formState: BusinessNameFormState,
         websiteUrl: formData.get("websiteUrl") as string || "",
     }
 
+    const session = await getSession()
+    const userId = session ? session.id : null
+    if (!userId) {
+        redirect("/login?sessionExpired=true")
+    }
+
     try {
 
         const validatedFields = businessNameSchema.safeParse(payload)
@@ -61,9 +67,6 @@ export const handleSubmitBusinessName = async (formState: BusinessNameFormState,
             }
         }
 
-        const session = await getSession()
-        const userId = session ? session.id : null
-        if (!userId) redirect("/login?sessionExpired=true")
 
         await prisma.business.upsert({
             where: {
@@ -109,7 +112,9 @@ export const handleSubmitBusinessCategory = async (formState: ErrorFormState<{ c
 
     const session = await getSession()
     const userId = session ? session.id : null
-    if (!userId) redirect("/login?sessionEnded=true")
+    if (!userId) {
+        redirect("/login?sessionEnded=true")
+    }
 
     try {
 
@@ -170,11 +175,13 @@ export const handleSubmitBusinessServices = async (formData: Service[]): Promise
         }
     }
 
+    const session = await getSession()
+    const userId = session ? session.id : null
+    if (!userId) {
+        redirect("/login?sessionEnded=true")
+    }
     try {
 
-        const session = await getSession()
-        const userId = session ? session.id : null
-        if (!userId) redirect("/login?sessionEnded=true")
 
         const business = await prisma.business.findUnique({
             where: {

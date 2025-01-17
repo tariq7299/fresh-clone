@@ -9,11 +9,14 @@ export const getBusinessStepFormData = async (stepName: string) => {
 
     if (!stepName) throw new Error("Step name is required")
 
+    const session = await getSession()
+    const userId = session ? session.id : null
+    console.log("userId", userId)
+    if (!userId) {
+        redirect("/login?sessionExpired=true")
+    }
     try {
 
-        const session = await getSession()
-        const userId = session ? session.id : null
-        if (!userId) redirect("/login?sessionExpired=true")
 
         if (stepName === "businessNameStep") {
 
