@@ -4,12 +4,12 @@ import { Button } from "@/ui/components/custom/button";
 import { ArrowRightIcon } from '@heroicons/react/24/outline'
 import { useState } from "react";
 import { useBusinessFormContext } from "./business-form-provider";
-
-export default function SubmitButton() {
+import { cn } from "@/lib/utils/utils";
+export default function SubmitButton({ className }: { className?: string }) {
 
     // const [isLoading, setIsLoading] = useState(false)
 
     const { isLoading } = useBusinessFormContext()
 
-    return <Button loading={isLoading} form="business-onboarding-form" className="font-bold  gap-2 justify-center items-center hidden lg:flex">{isLoading ? "loading..." : "Continue"}  <ArrowRightIcon className="size-4" /></Button>
+    return <Button size={"lg"} loading={isLoading} form="business-onboarding-form" className={cn("font-bold flex gap-2 justify-center items-center", className)}>{isLoading ? "loading..." : "Continue"}  <ArrowRightIcon className="size-4" /></Button>
 }

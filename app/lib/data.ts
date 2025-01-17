@@ -10,8 +10,6 @@ import { Category } from "@/professional/_components/business-category-form";
 
 
 
-// TODO: Write types
-// TODO: Write comments
 export const getAllCategories = async () => {
 
     try {
@@ -24,8 +22,6 @@ export const getAllCategories = async () => {
     }
 }
 
-// TODO: Write types
-// TODO: Write comments
 export const getAllServices = async () => {
 
     try {

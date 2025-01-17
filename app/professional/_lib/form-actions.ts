@@ -90,6 +90,7 @@ export const handleSubmitBusinessName = async (formState: BusinessNameFormState,
     } catch (error) {
         console.error('Error submitting business name:', error);
         throw new Error("Error submitting business name")
+        // TODO: Make the client side accept the error and toast it
         // return {
         //     success: false,
         //     clientFieldsErrors: null,
@@ -157,8 +158,6 @@ export const handleSubmitBusinessCategory = async (formState: ErrorFormState<{ c
 
 export const handleSubmitBusinessServices = async (formData: Service[]): Promise<ErrorFormState<{ service?: string } | null, Service[]>> => {
 
-    console.log("formData", formData)
-
     if (formData.length === 0) {
         return {
             success: false,
@@ -185,8 +184,6 @@ export const handleSubmitBusinessServices = async (formData: Service[]): Promise
                 id: true
             }
         })
-
-        console.log("business", business)
 
         if (!business) throw new Error("Business not found")
 

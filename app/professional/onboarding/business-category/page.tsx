@@ -4,11 +4,7 @@ import BusinessCategoryForm from '@/professional/_components/business-category-f
 
 export default async function BusinessCategoryPage() {
 
-
-
     const storedTempCategory = await getBusinessStepFormData("categoryStep")
-
-    console.log("storedTempCategory", storedTempCategory)
 
     const categories = await getAllCategories()
 

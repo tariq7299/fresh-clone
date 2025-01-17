@@ -11,7 +11,6 @@ import ServiceCard from '@/ui/components/custom/service-card';
 import { ApiService, ApiServicesWithCategory, Service, StoredService } from '@/professional/_lib/definitions';
 import { ErrorFormState } from '@/lib/definitions/definitions';
 
-// TODO: Remove all those types from here and move them to definitions file
 /**
  * Gets the initial list of services to display in the form
  * If there are stored services (from a previous session), it will return those

@@ -34,8 +34,6 @@ export default function BusinessCategoryForm({ storedTempCategory, categories }:
 
     const [formState, formAction, isPending] = useActionState(handleSubmitBusinessCategory, initialState)
 
-    console.log("formStateCLIENT", formState)
-    console.log("storedTempCategory", storedTempCategory)
 
     useEffect(() => {
         setIsLoading(isPending)

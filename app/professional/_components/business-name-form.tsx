@@ -9,10 +9,6 @@ import { useBusinessFormContext } from './business-form-provider';
 import { ErrorFormState } from '@/lib/definitions/definitions';
 import { StoredTempBusinessInfo } from '../_lib/definitions';
 
-// TODO: Add this type
-// import { StepBusinessInfo } from '@/types/business-info';
-
-// TODO: Add this type
 export default function BusinessNameForm({ storedTempBusinessInfo }: { storedTempBusinessInfo: StoredTempBusinessInfo }) {
 
     const { setIsLoading } = useBusinessFormContext()

@@ -13,8 +13,6 @@ export const getBusinessStepFormData = async (stepName: string) => {
         const userId = session ? session.id : null
         if (!userId) redirect("/login?sessionExpired=true")
 
-        console.log("userId", userId)
-
         if (stepName === "businessNameStep") {
 
             const storedTempBusinessInfo = await prisma.business.findUnique({
@@ -61,10 +59,7 @@ export const getBusinessStepFormData = async (stepName: string) => {
                 }
             })
 
-            console.log("storedTempServices", storedTempServices)
-
-            // TODO: change the naminf from the db schema directly and remove this after
-            const formattedServices = storedTempServices.services.map((storedService: {
+            const formattedServices: StoredService[] = storedTempServices.services.map((storedService: {
                 service_id: number,
                 price: number,
                 duration: number,

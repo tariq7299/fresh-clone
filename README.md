@@ -42,6 +42,8 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 ## Some tips
 - Try to use clxs lib with classNames to enable you for more contorl on conditional classNames
 - Do this if you want to install a component in a certain path do this `pnpm dlx shadcn@latest add <componentName> --path <path>`
+- `NEXT_PUBLIC_` This is the correct prefix for environment variables that need to be exposed to the browser/client-side code in Next.js and Without this prefix, the variable would only be available server-side
+
 
 ## Common commands
 `pnpm dlx shadcn@latest add <componentName> --path ./app/ui/components`
