@@ -104,7 +104,7 @@ export const handleSubmitBusinessName = async (formState: BusinessNameFormState,
 }
 
 
-export const handleSubmitBusinessCategory = async (formState: ErrorFormState<{ categoryId?: string } | null, BusinessCategoryFormData>, formData: FormData) => {
+export const handleSubmitBusinessCategory = async (formState: ErrorFormState<{ categoryId?: string | string[] } | null, BusinessCategoryFormData>, formData: FormData): Promise<ErrorFormState<{ categoryId?: string[] | string } | null, BusinessCategoryFormData>> => {
 
     const session = await getSession()
     const userId = session ? session.id : null
@@ -120,7 +120,9 @@ export const handleSubmitBusinessCategory = async (formState: ErrorFormState<{ c
                 clientFieldsErrors: validatedFields.error.flatten().fieldErrors,
                 apiDataResponse: null,
                 apiMsgs: "",
-                formData: formData
+                formData: {
+                    categoryId: formData.get("categoryId") as string || ""
+                }
             }
         }
 
@@ -153,14 +155,6 @@ export const handleSubmitBusinessCategory = async (formState: ErrorFormState<{ c
     redirect("/professional/onboarding/business-services")
 }
 
-// const businessServicesSchema = z.object({
-//     serviceId: z.number(),
-//     servicePrice: z.number().gte(1, { message: "Please provide a valid price" }),
-//     serviceDuration: z.number().gte(1, { message: "Please provide a valid duration" })
-// }).array()
-
-
-// TODO: Write types
 export const handleSubmitBusinessServices = async (formData: Service[]): Promise<ErrorFormState<{ service?: string } | null, Service[]>> => {
 
     console.log("formData", formData)
@@ -196,11 +190,7 @@ export const handleSubmitBusinessServices = async (formData: Service[]): Promise
 
         if (!business) throw new Error("Business not found")
 
-        // TODO: write types
-        // TODO: write comments
         await prisma.$transaction(async (tx: any) => {
-
-
 
             // Use Promise.all with map instead of forEach
             await Promise.all(formData.map(async (service: Service) => {

@@ -15,7 +15,6 @@ export default async function BusinessCategoryPage() {
     if (!categories || categories.length === 0) throw new Error("Failed to fetch categories")
 
     return (
-        // TODO: Write types
         <BusinessCategoryForm storedTempCategory={storedTempCategory} categories={categories} />
     );
 }
