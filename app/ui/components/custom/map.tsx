@@ -6,8 +6,16 @@ import { Map as MapComponent, Marker, MapCameraChangedEvent, useMapsLibrary, use
 import { useCallback, useEffect, useState } from "react";
 import { Input } from "../input";
 import { useGeolocation } from "@/lib/hooks/use-geo-location";
-import Image from "next/image";
-
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+    PopoverAnchor,
+    PopoverPortal
+} from "@/ui/components/custom/custom-popover"
+import { useDebouncedCallback } from "use-debounce";
+import { MapPin } from "lucide-react";
+import { Checkbox } from "../checkbox";
 
 // Set the marker at the center of the map when user drags the map  
 // Solution 1
@@ -36,6 +44,7 @@ function Map() {
         lng: number
     }>(DEFAULT_CENTER)
 
+    const [value, setValue] = useState("")
     const [query, setQuery] = useState("")
     const [address, setAddress] = useState({
         address: "",
@@ -73,7 +82,52 @@ function Map() {
         setPlacesService(new placesLibrary.PlacesService(map));
     }, [placesLibrary, map]);
 
-    useEffect(() => {
+    // useEffect(() => {
+
+    //     if (!placesService) return;
+
+    //     // Set types to limit and provide better performance and resutelss
+    //     // limit resultes to 3 only
+    //     const request = {
+    //         query,
+    //         bounds: map?.getBounds() ?? undefined,
+    //         types: ["beauty_salon", "store", "shopping_mall", "establishment", "point_of_interest"]
+    //     };
+
+    //     console.log("request", request)
+
+    //     placesService.textSearch(
+    //         request,
+    //         (
+    //             results: google.maps.places.PlaceResult[] | null,
+    //             status: google.maps.places.PlacesServiceStatus
+    //         ) => {
+    //             if (status === google.maps.places.PlacesServiceStatus.OK && results) {
+
+    //                 setResult(results.length > 0 ? results.slice(0, 3).map(({ formatted_address, geometry }) => ({ formatted_address, geometry })) : [])
+    //                 setCenter({
+    //                     lat: results[0].geometry?.location?.lat() ?? lat,
+    //                     lng: results[0].geometry?.location?.lng() ?? lng
+    //                 })
+
+    //                 if (results[0].formatted_address) {
+    //                     setAddress({
+    //                         ...address, address: results[0].formatted_address, district: results[0].formatted_address.split(",")?.[0], city: results[0].formatted_address.split(",")?.[1] || ""
+
+    //                     })
+    //                 }
+    //             }
+    //         }
+    //     )
+
+    //     console.log("result", result)
+
+    //     setOpen(true)
+
+    //     // ...use placesService...
+    // }, [placesService, query]);
+
+    const handleSearch = useDebouncedCallback((query) => {
 
         if (!placesService) return;
 
@@ -106,13 +160,16 @@ function Map() {
                             ...address, address: results[0].formatted_address, district: results[0].formatted_address.split(",")?.[0], city: results[0].formatted_address.split(",")?.[1] || ""
 
                         })
+                        setOpen(true)
                     }
                 }
             }
         )
 
-        // ...use placesService...
-    }, [placesService, query]);
+        console.log("result", result)
+
+
+    }, 300);
 
 
 
@@ -138,6 +195,8 @@ function Map() {
         size: new coreLibrary.Size(60, 60)
     } : undefined;
 
+    const [open, setOpen] = useState(false)
+
     return (
 
         <>
@@ -156,8 +215,50 @@ function Map() {
                     draggable={false}
                 />
             </MapComponent>
-            <Input value={query} onChange={(e) => setQuery(e.target.value)} />
-            {result && result.map((place) => <p className="text-sm p-2" key={place.formatted_address}>{place.formatted_address}</p>)}
+            {/* <Input value={query} onChange={(e) => setQuery(e.target.value)} /> */}
+
+            <p className=" font-bold">Where is your business located?</p>
+            <div className="">
+                <Popover open={open} onOpenChange={setOpen} data-side={"bottom"}>
+                    <PopoverAnchor>
+                        {/* <Input value={query} onChange={(e) => setQuery(e.target.value)} className="w-full" /> */}
+                        <div className="relative">
+                            <div className="absolute left-2 top-1/2 -translate-y-1/2  text-muted-foreground/70">
+                                <MapPin className="w-5 h-5" />
+                            </div>
+                            <Input value={value} onChange={(e) => {
+                                handleSearch(e.target.value)
+                                setValue(e.target.value)
+                            }} className="w-full  p-6 ps-10" />
+                        </div>
+                        <p className="text-sm text-destructive pt-1
+                        ">Please enter a valid address</p>
+                    </PopoverAnchor>
+
+                    <PopoverContent sideOffset={8} side="bottom" className=" text-nowrap truncate w-full md:w-[500px] grid grid-cols-1 gap-y-4 gap-x-3 font-semibold rounded-lg" onOpenAutoFocus={(e) => e.preventDefault()} onInteractOutside={(e) => {
+                        // setOpen(false)
+                        // setValue("")
+                        // setQuery("")
+                        e.preventDefault()
+                    }}>
+                        {/* <div className=" text-wrap truncate"> */}
+                        {result && result.map((place) => <p className="text-md  w-full text-nowrap truncate " key={place.formatted_address}>{place.formatted_address}</p>)}
+
+                        {/* </div> */}
+                    </PopoverContent>
+                </Popover>
+
+                <div className="flex items-center space-x-2 pt-4">
+                    <Checkbox variant="accent" id="terms" className="size-6 border-gray-300 " />
+                    <label
+                        htmlFor="terms"
+                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    >
+                        I don't have a business address (mobile and online services only)
+                    </label>
+                </div>
+
+            </div>
 
 
 
