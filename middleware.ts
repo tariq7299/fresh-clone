@@ -3,7 +3,8 @@ import { getSession } from '@/(auth)/_lib/sessions'
 import { UserRole } from '@/(auth)/_lib/definitions'
 
 // 1. Specify protected and public routes
-const protectedRoutes = ['/professional', '/admin', '/customer']
+// const protectedRoutes = ['/professional', '/admin/dashboard', '/customer', '/professional/onboarding/*',]
+
 // These routes that the user can't access it while authenticated
 // So if he tries to access these then he will be directed to /dashboard
 const publicRoutes = ['/register', '/for-who', "/otp-verification"]
@@ -11,9 +12,11 @@ const publicRoutes = ['/register', '/for-who', "/otp-verification"]
 
 export default async function middleware(req: NextRequest) {
 
+    console.log("req.nextUrl.pathname", req.nextUrl.pathname)
+
     // 2. Check if the current route is protected or public
     const path = req.nextUrl.pathname
-    const isProtectedRoute = protectedRoutes.includes(path)
+    // const isProtectedRoute = protectedRoutes.includes(path)
     const isPublicRoute = publicRoutes.includes(path)
 
     // 3. Decrypt the session from the cookie
@@ -21,9 +24,12 @@ export default async function middleware(req: NextRequest) {
         getSession()
 
     // 4. Redirect to /login if the user is not authenticated
-    if (isProtectedRoute && !session?.token) {
+    if ((req.nextUrl.pathname.startsWith('/professional') || req.nextUrl.pathname.startsWith('/admin') || req.nextUrl.pathname.startsWith('/customer')) && !session?.token) {
         return NextResponse.redirect(new URL('/login', req.nextUrl))
     }
+    // if (isProtectedRoute && !session?.token) {
+    //     return NextResponse.redirect(new URL('/login', req.nextUrl))
+    // }
 
     if (session?.token) {
 

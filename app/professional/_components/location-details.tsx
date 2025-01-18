@@ -5,8 +5,8 @@ import { Button } from "@/ui/components/custom/button";
 export default function LocationDetails({ address, className }: { address: any, className: string }) {
     return <>
 
-        <div className={cn("flex gap-2 w-full justify-between pb-3", className)}>
-            <div className="flex flex-col text-md">
+        <div className={cn("flex gap-2 w-full justify-between", className)}>
+            <div className="flex flex-col text-base ">
                 {address.apt && <p className="">{address.apt}</p>}
                 {address.address && <p className="">{address.address}</p>}
                 {address.district && <p className="">{address.district}</p>}

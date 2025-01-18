@@ -46,36 +46,29 @@ export default function SearchLocation({ className, setOpen, open, handleSearch,
             ">Please enter a valid address</p>
             </PopoverAnchor>
 
-            <PopoverContent sideOffset={8} side="bottom" className=" text-nowrap truncate  w-[340px] sm:w-[500px] md:w-[630px] grid grid-cols-1 gap-y-4 gap-x-3 font-semibold rounded-lg " onOpenAutoFocus={(e) => e.preventDefault()} onInteractOutside={(e) => {
+            <PopoverContent sideOffset={8} side="bottom" className=" text-nowrap truncate  w-[340px] sm:w-[500px] md:w-[630px] grid grid-cols-1  font-semibold rounded-lg p-2" onOpenAutoFocus={(e) => e.preventDefault()} onInteractOutside={(e) => {
                 // setOpen(false)
                 // setValue("")
                 // setQuery("")
                 // e.preventDefault()
             }}>
-                {isSearching && <p className="text-sm text-muted-foreground">Searching for your address...</p>}
+                {isSearching && <p className="text-sm text-muted-foreground px-3 py-2">Searching for your address...</p>}
                 {/* <div className=" text-wrap truncate"> */}
-                {result && result.map((place: { formatted_address: string | undefined; geometry: { location?: { lat: () => number; lng: () => number; } | undefined; } | undefined; place_id: string | undefined; }) => <p
-                    onClick={
-                        () => {
-                            setOpen(false)
-                            handleSettingLocation(place)
-                        }
+                {result && result.map((place: { formatted_address: string | undefined; geometry: { location?: { lat: () => number; lng: () => number; } | undefined; } | undefined; place_id: string | undefined; }) =>
+                    <p
+                        onClick={
+                            () => {
+                                setOpen(false)
+                                handleSettingLocation(place)
+                            }
 
-                    } className="text-md  w-full text-nowrap truncate " key={place.formatted_address}>{place.formatted_address}</p>)}
+                        } className="text-md  w-full text-nowrap truncate hover:bg-muted cursor-pointer p-3  rounded-lg" key={place.formatted_address}>{place.formatted_address}</p>)}
 
                 {/* </div> */}
             </PopoverContent>
         </Popover>
 
-        <div className="flex items-center space-x-2 pt-4">
-            <Checkbox variant="accent" id="terms" className="size-6 border-gray-300 " />
-            <label
-                htmlFor="terms"
-                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-            >
-                I don't have a business address (mobile and online services only)
-            </label>
-        </div>
+
 
     </div>
 
