@@ -1,4 +1,5 @@
-import { Map } from "@/ui/components/custom/map";
+import BusinessLocationForm from "@/professional/_components/business-location-form";
+import { MapProvider } from "@/lib/providers/map-providers";
 
 export default function BusinessLocationPage() {
     return <form id="business-onboarding-form">
@@ -14,8 +15,9 @@ export default function BusinessLocationPage() {
                 <p className="text-sm text-muted-foreground text-start "> This is where your business is located. Your billing and legal name can be added later.</p>
             </div>
 
-            <Map />
-
+            <MapProvider>
+                <BusinessLocationForm />
+            </MapProvider>
 
         </div>
     </form>

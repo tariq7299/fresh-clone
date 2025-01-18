@@ -5,13 +5,13 @@ import { Map as MapComponent, Marker, MapCameraChangedEvent, useMapsLibrary, use
 import { useCallback, useEffect, useState, useTransition } from "react";
 import { useGeolocation } from "@/lib/hooks/use-geo-location";
 import { useDebouncedCallback } from "use-debounce";
-import { Checkbox } from "../checkbox";
+import { Checkbox } from "../../ui/components/checkbox";
 import SearchLocation from "@/professional/_components/search-location";
 import LocationDetails from "@/professional/_components/location-details";
 import { cn } from "@/lib/utils/utils";
 
 // TODO: Remove most of that code, and put it in didcated hook or provider, maybe use
-function Map() {
+export default function BusinessLocationForm() {
     // State for handling loading states and transitions
     const [isPending, startTransition] = useTransition()
     const [isSearching, setIsSearching] = useState(false)
@@ -217,5 +217,3 @@ function Map() {
         </>
     );
 };
-
-export { Map };
