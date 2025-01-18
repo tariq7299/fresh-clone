@@ -12,7 +12,7 @@ function setApiErrorMsg({
     const statusCode = errResponse.status;
     const ErrorCode = errResponse.code;
 
-    let errorMessage = customErrorMsg || errResponse.errors || errResponse.message
+    let errorMessage = customErrorMsg || (errResponse.errors && errResponse.errors.length > 0 ? errResponse.errors : errResponse.message)
 
     if (statusCode === 401 && errResponse.message === "Unauthenticated.") {
         errorMessage = errorMessage || 'Session expired, please login again!';
