@@ -1,10 +1,23 @@
 import { Map } from "@/ui/components/custom/map";
 
 export default function BusinessLocationPage() {
-    return <div className="min-w-[200px] w-full min-h-[200px] h-full">
-        <div className=" grid grid-cols-1 gap-y-4 w-full">
-            <h1 className="text-2xl font-bold">Select your business location</h1>
+    return <form id="business-onboarding-form">
+        <div className="flex flex-col gap-2 w-full max-w-2xl p-5 py-24 min-h-dvh  items-stretch m-auto space-y-5 text-start">
+
+            <div className="text-start space-y-1">
+
+                <p className="text-sm text-muted-foreground text-start"> Account setup</p>
+
+                {/* Change this to more descriptive title */}
+                <h1 className="text-3xl lg:text-4xl font-bold font-source-sans text-start"> Where is your business located?</h1>
+
+                <p className="text-sm text-muted-foreground text-start "> This is where your business is located. Your billing and legal name can be added later.</p>
+            </div>
+
             <Map />
+
+
         </div>
-    </div>
+    </form>
 }
+
