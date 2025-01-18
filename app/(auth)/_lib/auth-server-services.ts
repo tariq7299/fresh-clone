@@ -4,10 +4,7 @@ import { ApiResponse } from "@/lib/definitions/api";
 import { ApiResponseSessionData, SessionData } from "./definitions";
 import { fetchApi } from "@/lib/utils/api/fetch-utils";
 import { createSession, deleteSession } from '@/(auth)/_lib/sessions';
-import { redirectToOtpIfNotVerified } from "@/(auth)/_lib/redirect-otp-if-not-verified";
-import { toastApiMsgs } from "@/lib/utils/api/toastApiMsgs";
 import { redirect } from 'next/navigation'
-import { logoutUserClientSide } from "./auth-client-services";
 import { ApiError } from "@/lib/definitions/api";
 
 export const authenticateUser = async (formData: FormData): Promise<ApiResponse<ApiResponseSessionData>> => {

@@ -65,6 +65,9 @@ export const login = async (formState: SuccessLoginFormState | ErrorLoginFormSta
 
         const errorMsg = setApiErrorMsg({ errResponse: authenticateUserResponse as ApiError })
 
+        console.log("authenticateUserResponse", authenticateUserResponse)
+        console.log("errorMsg", errorMsg)
+
         return {
             success: false,
             clientFieldsErrors: null,

@@ -10,7 +10,7 @@ export default function BusinessLocationPage() {
                 <p className="text-sm text-muted-foreground text-start"> Account setup</p>
 
                 {/* Change this to more descriptive title */}
-                <h1 className="text-3xl lg:text-4xl font-bold font-source-sans text-start"> Where is your business located?</h1>
+                <h1 className="text-3xl lg:text-4xl font-bold font-source-sans text-start"> Where's your business located?</h1>
 
                 <p className="text-sm text-muted-foreground text-start "> This is where your business is located. Your billing and legal name can be added later.</p>
             </div>

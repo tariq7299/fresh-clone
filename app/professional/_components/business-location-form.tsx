@@ -145,9 +145,6 @@ export default function BusinessLocationForm() {
                     setResult(results.length > 0 ? results.slice(0, 3).map(({ formatted_address, geometry, place_id }) => ({ formatted_address, geometry, place_id })) : [])
                     setIsSearching(false)
                     setOpen(true)
-                } else {
-
-                    throw new Error("Failed to get search results")
                 }
             }
         )
