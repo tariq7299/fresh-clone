@@ -15,9 +15,9 @@ import { Input } from "@/ui/components/input"
 import { Label } from "@/ui/components/label"
 import { Textarea } from "@/ui/components/textarea";
 import { useState } from "react"
-import { BusinessLocationErrors, businessLocationSchema } from "./business-location-form"
+import { BusinessLocationErrors } from "./business-location-form"
 import { z } from "zod"
-import { BusinessLocationFormData } from "@/professional/_lib/definitions"
+import { BusinessLocationFormData } from "@/professional/_components/business-location-form"
 
 const locationDetailsSchema = z.object({
     address: z.string().trim().min(1, { message: "Please provide a location" }),
@@ -37,7 +37,7 @@ export default function LocationDetails({ setLocation, location, className }: { 
 
     const [isOpen, setIsOpen] = useState(false)
 
-    const [value, setValue] = useState<BusinessLocationFormData>(location)
+    const [value, setValue] = useState(location)
     const [errors, setErrors] = useState<BusinessLocationDetailsErrors | null>(null)
 
     const handleSave = () => {
@@ -53,6 +53,10 @@ export default function LocationDetails({ setLocation, location, className }: { 
         }
 
 
+    }
+
+    if (location.online_business) {
+        return null
     }
 
     return <>
