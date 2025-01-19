@@ -15,7 +15,7 @@ import { z } from "zod";
 import { useBusinessFormContext } from "./business-form-provider";
 import { StoredTempLocation } from "../_lib/definitions";
 
-const businessLocationSchema = z.discriminatedUnion('online_business', [
+export const businessLocationSchema = z.discriminatedUnion('online_business', [
     // When online_business is true, don't allow any other fields
     z.object({
         online_business: z.literal(true)
@@ -154,8 +154,8 @@ export default function BusinessLocationForm({ storedTempLocation }: { storedTem
                     startTransition(() => {
                         setLocation({
                             ...location,
-                            lat: place.geometry?.location?.lat() ?? lat,
-                            lng: place.geometry?.location?.lng() ?? lng,
+                            lat: place.geometry?.location?.lat() ?? defaultLat,
+                            lng: place.geometry?.location?.lng() ?? defaultLng,
                             place_id: place.place_id || "",
                             address: results?.[0]?.formatted_address || "",
                             district: place.formatted_address?.split(",")?.[0] || "",
@@ -164,8 +164,8 @@ export default function BusinessLocationForm({ storedTempLocation }: { storedTem
                         });
 
                         setCenter({
-                            lat: place.geometry?.location?.lat() ?? lat,
-                            lng: place.geometry?.location?.lng() ?? lng
+                            lat: place.geometry?.location?.lat() ?? defaultLat,
+                            lng: place.geometry?.location?.lng() ?? defaultLng
                         });
                     });
                 } else {
@@ -287,7 +287,7 @@ export default function BusinessLocationForm({ storedTempLocation }: { storedTem
                 <SearchLocation online_business={location.online_business} className={cn(location.online_business ? "pointer-events-none" : location.place_id && location.lat && location.lng ? "hidden" : "block")} setOpen={setOpen} open={open} handleSearch={handleSearch} handleSettingLocation={handleSettingLocation} result={result} isSearching={isSearching} clientFieldsErrors={formState.clientFieldsErrors} />
 
                 {/* Display selected location details */}
-                <LocationDetails location={location} className={cn(location.online_business ? "hidden" : location.place_id && location.lat && location.lng ? "flex" : "hidden")} />
+                <LocationDetails setLocation={setLocation} location={location} className={cn(location.online_business ? "hidden" : location.place_id && location.lat && location.lng ? "flex" : "hidden")} />
 
                 <div className={cn(location.online_business ? "hidden" : location.place_id && location.lat && location.lng ? "block" : "hidden")}>
 

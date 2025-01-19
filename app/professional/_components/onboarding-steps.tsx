@@ -16,16 +16,12 @@ const ONBOARDING_STEPS = [
         order: 3
     },
     {
-        name: "business-capacity",
+        name: "business-location",
         order: 4
     },
     {
-        name: "business-location",
+        name: "business-capacity",
         order: 5
-    },
-    {
-        name: "business-demographics",
-        order: 6
     },
 ]
 

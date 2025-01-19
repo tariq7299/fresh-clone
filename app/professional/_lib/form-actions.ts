@@ -267,22 +267,6 @@ export const handleSubmitBusinessServices = async (formData: Service[]): Promise
 
 }
 
-// TODO: Remove this schema, and use the one in the form (but it shows an error if i import it!!!!! very wierdd)
-// const businessLocationSchema = z.object({
-//     lat: z.number().gt(0, { message: "Please provide a location" }),
-//     lng: z.number().gt(0, { message: "Please provide a location" }),
-//     place_id: z.string().trim().min(1, { message: "Please provide a location" }),
-//     address: z.string().trim().min(1, { message: "Please provide a location" }),
-//     district: z.string().optional(),
-//     city: z.string().optional(),
-//     country: z.string().trim().min(1, { message: "Please provide a location" }),
-//     directions: z.string().optional(),
-//     street: z.string().optional(),
-//     apartment: z.string().optional(),
-//     building: z.string().optional(),
-
-// })
-
 const businessLocationSchema = z.object({
     online_business: z.boolean(),
 }).and(
