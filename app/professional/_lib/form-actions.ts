@@ -334,20 +334,20 @@ export const handleSubmitBusinessLocation = async (formData: BusinessLocationFor
         console.log("business", business)
 
         // TODO: Use validatedData instead of payload
-        await prisma.business.upsert({
+        await prisma.business.update({
             where: {
                 userId: userId,
             },
-            update: {
+            data: {
                 location: {
                     upsert: {
                         where: {
-                            businessId: business.id,
-                            place_id: payload.place_id
+                            businessId: business.id
                         },
                         update: {
                             lat: payload.lat,
                             lng: payload.lng,
+                            place_id: payload.place_id,
                             address: payload.address,
                             district: payload.district,
                             city: payload.city,
@@ -370,25 +370,6 @@ export const handleSubmitBusinessLocation = async (formData: BusinessLocationFor
                             apartment: payload.apartment,
                             building: payload.building,
                         }
-                    }
-                }
-            },
-            create: {
-                userId: userId,
-                id: business.id,
-                location: {
-                    create: {
-                        lat: payload.lat,
-                        lng: payload.lng,
-                        place_id: payload.place_id,
-                        address: payload.address,
-                        district: payload.district,
-                        city: payload.city,
-                        country: payload.country,
-                        directions: payload.directions,
-                        street: payload.street,
-                        apartment: payload.apartment,
-                        building: payload.building,
                     }
                 }
             }

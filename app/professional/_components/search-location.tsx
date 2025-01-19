@@ -11,7 +11,7 @@ import { MapPin } from "lucide-react";
 import { cn } from "@/lib/utils/utils";
 import { BusinessLocationErrors } from "./business-location-form";
 
-export default function SearchLocation({ className, setOpen, open, handleSearch, handleSettingLocation, result, isSearching, clientFieldsErrors }: { className: string, setOpen: (open: boolean) => void, open: boolean, handleSearch: (value: string) => void, handleSettingLocation: (place: any) => void, result: any, isSearching: boolean, clientFieldsErrors: BusinessLocationErrors }) {
+export default function SearchLocation({ className, setOpen, open, handleSearch, handleSettingLocation, result, isSearching, clientFieldsErrors }: { className: string, setOpen: (open: boolean) => void, open: boolean, handleSearch: (value: string) => void, handleSettingLocation: (place: any) => void, result: any, isSearching: boolean, clientFieldsErrors: BusinessLocationErrors | null }) {
 
     // const [value, setValue] = useState("")
 

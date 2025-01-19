@@ -1,4 +1,8 @@
+import { Nullable } from "@/lib/utils/utils";
+
+
 // Coming from api like that (before mapping and changing its keys)
+
 export type ApiService = {
     id: number,
     name: string,
@@ -17,7 +21,23 @@ export type Service = {
     serviceCurrency: string,
 }
 
-export type StoredService = Pick<Service, "serviceCategory" | "serviceId" | "servicePrice" | "serviceDuration">
+export type StoredService = Pick<Service, "serviceId" | "servicePrice" | "serviceDuration">
+
+export type BusinessLocation = {
+    lat: number,
+    lng: number,
+    place_id: string,
+    address: string,
+    district: string,
+    city: string,
+    country: string,
+    directions: string,
+    street: string,
+    apartment: string,
+    building: string,
+}
+
+export type StoredTempLocation = Nullable<BusinessLocation>
 
 export type ApiServicesWithCategory = {
     // The name of the category of the services

@@ -20,9 +20,9 @@ import { ErrorFormState } from '@/lib/definitions/definitions';
  * @param stroredTempServices - List of previously stored services (if any)
  * @returns List of services with prices and durations
  */
-function getInitialSelectedServicesList(services: ApiServicesWithCategory[], stroredTempServices: StoredService[]): Service[] {
+function getInitialSelectedServicesList(services: ApiServicesWithCategory[], stroredTempServices: StoredService[] | null): Service[] {
     // If we have stored services from a previous session, use those
-    if (stroredTempServices?.length > 0) {
+    if (stroredTempServices && stroredTempServices.length > 0) {
         return services.flatMap((serviceWithCategory: ApiServicesWithCategory) =>
             serviceWithCategory.services
                 // Only include services that were previously stored
@@ -59,7 +59,7 @@ function getInitialSelectedServicesList(services: ApiServicesWithCategory[], str
 
 
 
-export default function BusinessServicesForm({ services, stroredTempServices }: { services: ApiServicesWithCategory[], stroredTempServices: StoredService[] }) {
+export default function BusinessServicesForm({ services, stroredTempServices }: { services: ApiServicesWithCategory[], stroredTempServices: StoredService[] | null }) {
 
     // I am using this because I want to show the loading state in button found in the parent component
     const { setIsLoading } = useBusinessFormContext()

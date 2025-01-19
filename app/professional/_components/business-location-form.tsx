@@ -13,6 +13,7 @@ import { handleSubmitBusinessLocation } from "../_lib/form-actions";
 import { ErrorFormState } from "@/lib/definitions/definitions";
 import { z } from "zod";
 import { useBusinessFormContext } from "./business-form-provider";
+import { StoredTempLocation } from "../_lib/definitions";
 
 export const businessLocationSchema = z.object({
     lat: z.number().gt(0, { message: "Please provide a location" }),
@@ -49,7 +50,7 @@ export type BusinessLocationErrors = {
 export type BusinessLocationFormData = z.infer<typeof businessLocationSchema>
 
 // TODO: Remove most of that code, and put it in didcated hook or provider, maybe use
-export default function BusinessLocationForm() {
+export default function BusinessLocationForm({ storedTempLocation }: { storedTempLocation: StoredTempLocation | null }) {
     // State for handling loading states and transitions
     const [_, startTransition] = useTransition()
     const { setIsLoading } = useBusinessFormContext()
@@ -68,19 +69,21 @@ export default function BusinessLocationForm() {
         lng: number
     }>(DEFAULT_CENTER)
 
+    console.log("storedTempLocation", storedTempLocation)
+
     // State for storing complete address details
     const [location, setLocation] = useState({
-        lat: 0,
-        lng: 0,
-        place_id: "",
-        address: "",
-        building: "",
-        apartment: "",
-        street: "",
-        district: "",
-        city: "",
-        country: "",
-        directions: ""
+        lat: storedTempLocation?.lat ?? 0,
+        lng: storedTempLocation?.lng ?? 0,
+        place_id: storedTempLocation?.place_id ?? "",
+        address: storedTempLocation?.address ?? "",
+        building: storedTempLocation?.building ?? "",
+        apartment: storedTempLocation?.apartment ?? "",
+        street: storedTempLocation?.street ?? "",
+        district: storedTempLocation?.district ?? "",
+        city: storedTempLocation?.city ?? "",
+        country: storedTempLocation?.country ?? "",
+        directions: storedTempLocation?.directions ?? ""
     })
 
     // State for storing search results from Places API
@@ -236,6 +239,7 @@ export default function BusinessLocationForm() {
         e.preventDefault()
         setIsPending(true)
         const result = await handleSubmitBusinessLocation({ ...location })
+        console.log("result", result)
         result && setFormState(result)
         setIsPending(false)
     }

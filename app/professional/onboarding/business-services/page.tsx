@@ -1,6 +1,7 @@
 import { getAllServices } from '@/lib/data';
 import BusinessServicesForm from '@/professional/_components/business-services-form';
 import { getBusinessStepFormData } from '@/professional/_lib/data';
+import { StoredService } from '@/professional/_lib/definitions';
 
 export default async function BusinessServicesPage() {
 
@@ -9,7 +10,9 @@ export default async function BusinessServicesPage() {
     if (services && services.length === 0 || !services) throw new Error("Services list is empty")
 
     // Get the services from the db that the user has submitted before
-    const stroredTempServices = await getBusinessStepFormData("servicesStep")
+    // i need to use type assertion because the function returns other types of data, but here because the param of "servicesStep", so it will return the services only  
+
+    const stroredTempServices = await getBusinessStepFormData("servicesStep") as StoredService[] | null
 
 
     return <BusinessServicesForm services={services} stroredTempServices={stroredTempServices} />

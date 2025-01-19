@@ -1,9 +1,9 @@
 
-import { getSession } from "@/(auth)/_lib/sessions"
-import prisma from "@/lib/prisma"
-import { redirect } from "next/navigation"
-import { StoredService } from "./definitions"
-import { StoredTempCategory } from "../_components/business-category-form"
+import { getSession } from "@/(auth)/_lib/sessions";
+import prisma from "@/lib/prisma";
+import { redirect } from "next/navigation";
+import { StoredTempCategory } from "../_components/business-category-form";
+import { StoredTempLocation } from "./definitions";
 
 export const getBusinessStepFormData = async (stepName: string) => {
 
@@ -65,10 +65,14 @@ export const getBusinessStepFormData = async (stepName: string) => {
             })
 
             // This error is not from me ! there is bug in the 
-            const formattedServices: StoredService[] = storedTempServices.services.map((storedService: {
-                service_id: number,
-                price: number,
-                duration: number,
+            const formattedServices: {
+                serviceId: number | null,
+                servicePrice: number | null,
+                serviceDuration: number | null,
+            }[] | null = storedTempServices ? storedTempServices?.services.map((storedService: {
+                service_id: number | null,
+                price: number | null,
+                duration: number | null,
             }) => {
                 return {
                     serviceId: storedService.service_id,
@@ -76,10 +80,38 @@ export const getBusinessStepFormData = async (stepName: string) => {
                     serviceDuration: storedService.duration,
                     // serviceCurrency: "EGP"
                 }
-            })
+            }) : null
 
 
             return formattedServices
+        } else if (stepName === "locationStep") {
+
+            const storedTempLocation = await prisma.business.findUnique({
+                where: {
+                    userId: userId
+                },
+                select: {
+                    location: true
+                }
+            })
+
+            console.log("storedTempLocation", storedTempLocation)
+
+            const formattedLocation: StoredTempLocation = {
+                lat: storedTempLocation?.location?.lat ?? null,
+                lng: storedTempLocation?.location?.lng ?? null,
+                place_id: storedTempLocation?.location?.place_id ?? null,
+                address: storedTempLocation?.location?.address ?? null,
+                building: storedTempLocation?.location?.building ?? null,
+                apartment: storedTempLocation?.location?.apartment ?? null,
+                street: storedTempLocation?.location?.street ?? null,
+                district: storedTempLocation?.location?.district ?? null,
+                city: storedTempLocation?.location?.city ?? null,
+                country: storedTempLocation?.location?.country ?? null,
+                directions: storedTempLocation?.location?.directions ?? null,
+            }
+
+            return formattedLocation
         }
 
         return null
