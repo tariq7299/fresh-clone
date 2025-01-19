@@ -181,6 +181,8 @@ export const register = async (formState: SuccessRegisterFormState | ErrorRegist
             body: payload,
         }) as ApiSucess<Omit<ApiResponseSessionData, "token">>;
 
+        console.log("response", response)
+
         const successMsg = setApiSuccessMsg({ successResponse: response })
 
         return {
@@ -192,6 +194,7 @@ export const register = async (formState: SuccessRegisterFormState | ErrorRegist
         }
 
     } catch (error) {
+        console.log("error", error)
         const errorMsg = setApiErrorMsg({ errResponse: error as ApiError })
         return {
             success: false,

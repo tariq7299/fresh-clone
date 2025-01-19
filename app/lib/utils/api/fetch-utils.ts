@@ -64,8 +64,10 @@ export async function fetchApi<T>(
     };
 
     try {
+        console.log("FETCH_UTILS fetchOptions", fetchOptions)
+        console.log("FETCH_UTILS url", url)
         const response = await fetch(url, fetchOptions);
-
+        console.log("FETCH_UTILS response", response)
 
         // Handle JSON responses
         const contentType = response.headers.get('content-type');
@@ -99,6 +101,14 @@ export async function fetchApi<T>(
 
     } catch (error) {
         if (error instanceof ApiError) {
+            console.log("FETCH_UTILS error", {
+                success: error.success,
+                status: error.status,
+                message: error.message,
+                code: error.code,
+                data: error.data,
+                errors: error.errors
+            })
             throw new ApiError(
                 error.success,
                 error.status,

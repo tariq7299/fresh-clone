@@ -1,16 +1,16 @@
 import { useState, useEffect } from 'react';
 
 interface LocationState {
-    lat: number;
-    lng: number;
+    defaultLat: number;
+    defaultLng: number;
     error: string | null;
     loading: boolean;
 }
 
 export const useGeolocation = () => {
     const [location, setLocation] = useState<LocationState>({
-        lat: 30.042617388660606, // Egypt Cairo
-        lng: 31.23340646299468, // Egypt Cairo
+        defaultLat: 30.042617388660606, // Egypt Cairo
+        defaultLng: 31.23340646299468, // Egypt Cairo
         error: null,
         loading: true
     });
@@ -28,8 +28,8 @@ export const useGeolocation = () => {
         navigator.geolocation.getCurrentPosition(
             (position) => {
                 setLocation({
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude,
+                    defaultLat: position.coords.latitude,
+                    defaultLng: position.coords.longitude,
                     error: null,
                     loading: false
                 });

@@ -44,16 +44,17 @@ model BusinessLocation {
   id          Int      @id @default(autoincrement())
   business    Business @relation(fields: [businessId], references: [id])
   businessId  Int      @unique
-  lat         Float    // Use Float for latitude
-  lng         Float    // Use Float for longitude
-  place_id    String   @unique
-  address     String   // Full address (can be optional if place_id is unique)
+  lat         Float?    // Use Float for latitude
+  lng         Float?    // Use Float for longitude
+  place_id    String?   
+  address     String?   // Full address (can be optional if place_id is unique)
   district    String?  // District (optional)
   city        String?  // City (optional)
-  country     String   // Country (required)
+  country     String?
   directions  String?  
   street  String?  
   apartment  String?  
-  building  String?  
+  building  String? 
+  online_business Boolean @default(false)
 
 }

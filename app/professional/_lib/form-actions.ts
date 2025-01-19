@@ -268,21 +268,46 @@ export const handleSubmitBusinessServices = async (formData: Service[]): Promise
 }
 
 // TODO: Remove this schema, and use the one in the form (but it shows an error if i import it!!!!! very wierdd)
+// const businessLocationSchema = z.object({
+//     lat: z.number().gt(0, { message: "Please provide a location" }),
+//     lng: z.number().gt(0, { message: "Please provide a location" }),
+//     place_id: z.string().trim().min(1, { message: "Please provide a location" }),
+//     address: z.string().trim().min(1, { message: "Please provide a location" }),
+//     district: z.string().optional(),
+//     city: z.string().optional(),
+//     country: z.string().trim().min(1, { message: "Please provide a location" }),
+//     directions: z.string().optional(),
+//     street: z.string().optional(),
+//     apartment: z.string().optional(),
+//     building: z.string().optional(),
+
+// })
+
 const businessLocationSchema = z.object({
-    lat: z.number().gt(0, { message: "Please provide a location" }),
-    lng: z.number().gt(0, { message: "Please provide a location" }),
-    place_id: z.string().trim().min(1, { message: "Please provide a location" }),
-    address: z.string().trim().min(1, { message: "Please provide a location" }),
-    district: z.string().optional(),
-    city: z.string().optional(),
-    country: z.string().trim().min(1, { message: "Please provide a location" }),
-    directions: z.string().optional(),
-    street: z.string().optional(),
-    apartment: z.string().optional(),
-    building: z.string().optional(),
-
-})
-
+    online_business: z.boolean(),
+}).and(
+    z.discriminatedUnion('online_business', [
+        // When online_business is true, don't allow any other fields
+        z.object({
+            online_business: z.literal(true)
+        }),
+        // When online_business is false, require location fields
+        z.object({
+            online_business: z.literal(false),
+            lat: z.number(),
+            lng: z.number(),
+            place_id: z.string().trim().min(1, { message: "Please provide a location" }),
+            address: z.string().trim().min(1, { message: "Please provide a location" }),
+            district: z.string().optional(),
+            city: z.string().optional(),
+            country: z.string().trim().min(1, { message: "Please provide a location" }),
+            directions: z.string().optional(),
+            street: z.string().optional(),
+            apartment: z.string().optional(),
+            building: z.string().optional(),
+        })
+    ])
+);
 
 export const handleSubmitBusinessLocation = async (formData: BusinessLocationFormData): Promise<ErrorFormState<BusinessLocationErrors | null, BusinessLocationFormData> | void> => {
 
@@ -290,19 +315,30 @@ export const handleSubmitBusinessLocation = async (formData: BusinessLocationFor
     const userId = session ? session.id : null
     if (!userId) redirect("/login?sessionEnded=true")
 
-    const payload = {
-        lat: formData.lat,
-        lng: formData.lng,
-        place_id: formData.place_id,
-        address: formData.address,
-        district: formData.district,
-        city: formData.city,
-        country: formData.country,
-        directions: formData.directions,
-        street: formData.street,
-        apartment: formData.apartment,
-        building: formData.building,
+    let payload: BusinessLocationFormData;
+
+    if (formData.online_business) {
+
+        payload = {
+            online_business: formData.online_business,
+        }
+    } else {
+        payload = {
+            online_business: formData.online_business,
+            lat: formData.lat,
+            lng: formData.lng,
+            place_id: formData.place_id,
+            address: formData.address,
+            district: formData.district,
+            city: formData.city,
+            country: formData.country,
+            directions: formData.directions,
+            street: formData.street,
+            apartment: formData.apartment,
+            building: formData.building,
+        }
     }
+
 
     console.log("payload", payload)
 
@@ -333,47 +369,99 @@ export const handleSubmitBusinessLocation = async (formData: BusinessLocationFor
 
         console.log("business", business)
 
-        // TODO: Use validatedData instead of payload
-        await prisma.business.update({
-            where: {
-                userId: userId,
-            },
-            data: {
-                location: {
-                    upsert: {
-                        where: {
-                            businessId: business.id
-                        },
-                        update: {
-                            lat: payload.lat,
-                            lng: payload.lng,
-                            place_id: payload.place_id,
-                            address: payload.address,
-                            district: payload.district,
-                            city: payload.city,
-                            country: payload.country,
-                            directions: payload.directions,
-                            street: payload.street,
-                            apartment: payload.apartment,
-                            building: payload.building,
-                        },
-                        create: {
-                            lat: payload.lat,
-                            lng: payload.lng,
-                            place_id: payload.place_id,
-                            address: payload.address,
-                            district: payload.district,
-                            city: payload.city,
-                            country: payload.country,
-                            directions: payload.directions,
-                            street: payload.street,
-                            apartment: payload.apartment,
-                            building: payload.building,
+        if (payload.online_business) {
+
+            // TODO: Use validatedData instead of payload
+            await prisma.business.update({
+                where: {
+                    userId: userId,
+                },
+                data: {
+                    location: {
+                        upsert: {
+                            where: {
+
+                                businessId: business.id
+                            },
+                            update: {
+                                lat: 0,
+                                lng: 0,
+                                place_id: "",
+                                address: "",
+                                district: "",
+                                city: "",
+                                country: "",
+                                directions: "",
+                                street: "",
+                                apartment: "",
+                                building: "",
+                                online_business: true
+                            },
+                            create: {
+                                lat: 0,
+                                lng: 0,
+                                place_id: "",
+                                address: "",
+                                district: "",
+                                city: "",
+                                country: "",
+                                directions: "",
+                                street: "",
+                                apartment: "",
+                                building: "",
+                                online_business: true
+                            }
                         }
                     }
                 }
-            }
-        })
+            })
+
+        } else {
+            // TODO: Use validatedData instead of payload
+            await prisma.business.update({
+                where: {
+                    userId: userId,
+                },
+                data: {
+                    location: {
+                        upsert: {
+                            where: {
+                                businessId: business.id
+                            },
+                            update: {
+                                lat: payload.lat,
+                                lng: payload.lng,
+                                place_id: payload.place_id,
+                                address: payload.address,
+                                district: payload.district,
+                                city: payload.city,
+                                country: payload.country,
+                                directions: payload.directions,
+                                street: payload.street,
+                                apartment: payload.apartment,
+                                building: payload.building,
+                                online_business: false
+                            },
+                            create: {
+                                lat: payload.lat,
+                                lng: payload.lng,
+                                place_id: payload.place_id,
+                                address: payload.address,
+                                district: payload.district,
+                                city: payload.city,
+                                country: payload.country,
+                                directions: payload.directions,
+                                street: payload.street,
+                                apartment: payload.apartment,
+                                building: payload.building,
+                                online_business: false
+                            }
+                        }
+                    }
+                }
+            })
+
+        }
 
     } catch (error) {
         console.error('Error submitting business location:', error);

@@ -3,7 +3,8 @@ import { getSession } from "@/(auth)/_lib/sessions";
 import prisma from "@/lib/prisma";
 import { redirect } from "next/navigation";
 import { StoredTempCategory } from "../_components/business-category-form";
-import { StoredTempLocation } from "./definitions";
+import { BusinessLocation, StoredTempLocation } from "./definitions";
+import { Nullable } from "@/lib/utils/utils";
 
 export const getBusinessStepFormData = async (stepName: string) => {
 
@@ -97,21 +98,22 @@ export const getBusinessStepFormData = async (stepName: string) => {
 
             console.log("storedTempLocation", storedTempLocation)
 
-            const formattedLocation: StoredTempLocation = {
-                lat: storedTempLocation?.location?.lat ?? null,
-                lng: storedTempLocation?.location?.lng ?? null,
-                place_id: storedTempLocation?.location?.place_id ?? null,
-                address: storedTempLocation?.location?.address ?? null,
-                building: storedTempLocation?.location?.building ?? null,
-                apartment: storedTempLocation?.location?.apartment ?? null,
-                street: storedTempLocation?.location?.street ?? null,
-                district: storedTempLocation?.location?.district ?? null,
-                city: storedTempLocation?.location?.city ?? null,
-                country: storedTempLocation?.location?.country ?? null,
-                directions: storedTempLocation?.location?.directions ?? null,
-            }
+            // const formattedLocation: StoredTempLocation = {
+            //     lat: storedTempLocation?.location?.lat ?? null,
+            //     lng: storedTempLocation?.location?.lng ?? null,
+            //     place_id: storedTempLocation?.location?.place_id ?? null,
+            //     address: storedTempLocation?.location?.address ?? null,
+            //     building: storedTempLocation?.location?.building ?? null,
+            //     apartment: storedTempLocation?.location?.apartment ?? null,
+            //     street: storedTempLocation?.location?.street ?? null,
+            //     district: storedTempLocation?.location?.district ?? null,
+            //     city: storedTempLocation?.location?.city ?? null,
+            //     country: storedTempLocation?.location?.country ?? null,
+            //     directions: storedTempLocation?.location?.directions ?? null,
+            //     online_business: storedTempLocation?.location?.online_business ?? false,
+            // }
 
-            return formattedLocation
+            return storedTempLocation ? storedTempLocation?.location : null
         }
 
         return null

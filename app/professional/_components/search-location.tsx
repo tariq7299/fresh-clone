@@ -11,7 +11,7 @@ import { MapPin } from "lucide-react";
 import { cn } from "@/lib/utils/utils";
 import { BusinessLocationErrors } from "./business-location-form";
 
-export default function SearchLocation({ className, setOpen, open, handleSearch, handleSettingLocation, result, isSearching, clientFieldsErrors }: { className: string, setOpen: (open: boolean) => void, open: boolean, handleSearch: (value: string) => void, handleSettingLocation: (place: any) => void, result: any, isSearching: boolean, clientFieldsErrors: BusinessLocationErrors | null }) {
+export default function SearchLocation({ className, setOpen, open, handleSearch, handleSettingLocation, result, isSearching, clientFieldsErrors, online_business }: { className: string, setOpen: (open: boolean) => void, open: boolean, handleSearch: (value: string) => void, handleSettingLocation: (place: any) => void, result: any, isSearching: boolean, clientFieldsErrors: BusinessLocationErrors | null, online_business: boolean }) {
 
     // const [value, setValue] = useState("")
 
@@ -23,7 +23,7 @@ export default function SearchLocation({ className, setOpen, open, handleSearch,
                     <div className="absolute left-4 top-1/2 -translate-y-1/2  text-muted-foreground/70">
                         <MapPin className="w-5 h-5" />
                     </div>
-                    <Input onChange={(e) => handleSearch(e.target.value)} className="w-full  p-6 ps-12" />
+                    <Input disabled={online_business} onChange={(e) => handleSearch(e.target.value)} className={cn("w-full  p-6 ps-12")} />
                 </div>
                 {clientFieldsErrors?.address && <p className="text-sm text-destructive pt-2 ">{clientFieldsErrors?.address}</p>}
             </PopoverAnchor>

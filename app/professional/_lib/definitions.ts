@@ -35,6 +35,7 @@ export type BusinessLocation = {
     street: string,
     apartment: string,
     building: string,
+    online_business: boolean
 }
 
 export type StoredTempLocation = Nullable<BusinessLocation>

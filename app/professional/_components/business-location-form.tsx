@@ -15,20 +15,28 @@ import { z } from "zod";
 import { useBusinessFormContext } from "./business-form-provider";
 import { StoredTempLocation } from "../_lib/definitions";
 
-export const businessLocationSchema = z.object({
-    lat: z.number().gt(0, { message: "Please provide a location" }),
-    lng: z.number().gt(0, { message: "Please provide a location" }),
-    place_id: z.string().trim().min(1, { message: "Please provide a location" }),
-    address: z.string().trim().min(1, { message: "Address is required" }),
-    district: z.string().optional(),
-    city: z.string().optional(),
-    country: z.string().trim().min(1, { message: "Country is required" }),
-    directions: z.string().optional(),
-    street: z.string().optional(),
-    apartment: z.string().optional(),
-    building: z.string().optional(),
+const businessLocationSchema = z.discriminatedUnion('online_business', [
+    // When online_business is true, don't allow any other fields
+    z.object({
+        online_business: z.literal(true)
+    }),
+    // When online_business is false, require location fields
+    z.object({
+        online_business: z.literal(false),
+        lat: z.number(),
+        lng: z.number(),
+        place_id: z.string().trim().min(1, { message: "Please provide a location" }),
+        address: z.string().trim().min(1, { message: "Please provide a location" }),
+        district: z.string().optional(),
+        city: z.string().optional(),
+        country: z.string().trim().min(1, { message: "Please provide a location" }),
+        directions: z.string().optional(),
+        street: z.string().optional(),
+        apartment: z.string().optional(),
+        building: z.string().optional(),
+    })
+])
 
-})
 
 export type BusinessLocationErrors = {
     lat?: string | string[]
@@ -42,9 +50,8 @@ export type BusinessLocationErrors = {
     street?: string | string[]
     apartment?: string | string[]
     building?: string | string[]
+    online_business?: string | string[]
 }
-
-
 
 // TODO: Create the BusinessLocationFormData type
 export type BusinessLocationFormData = z.infer<typeof businessLocationSchema>
@@ -59,22 +66,25 @@ export default function BusinessLocationForm({ storedTempLocation }: { storedTem
 
     // TODO: Add loading JSX when getting user's geolocation, and if error, show error message, or the user didn't allow location access then show error message that they need to allow location access
     // Get user's current geolocation coordinates
-    const { lng, lat, loading, error } = useGeolocation();
-    const DEFAULT_CENTER = { lat, lng }
+    const { defaultLng, defaultLat, loading, error } = useGeolocation();
+    // const DEFAULT_CENTER = { lat: defaultLat, lng: defaultLng }
 
 
     // State for tracking map center coordinates
     const [center, setCenter] = useState<{
         lat: number,
         lng: number
-    }>(DEFAULT_CENTER)
+    }>({
+        lat: storedTempLocation?.lat ?? defaultLat,
+        lng: storedTempLocation?.lng ?? defaultLng
+    })
 
     console.log("storedTempLocation", storedTempLocation)
 
     // State for storing complete address details
-    const [location, setLocation] = useState({
-        lat: storedTempLocation?.lat ?? 0,
-        lng: storedTempLocation?.lng ?? 0,
+    const [location, setLocation] = useState<BusinessLocationFormData>({
+        lat: storedTempLocation?.lat ?? defaultLat,
+        lng: storedTempLocation?.lng ?? defaultLng,
         place_id: storedTempLocation?.place_id ?? "",
         address: storedTempLocation?.address ?? "",
         building: storedTempLocation?.building ?? "",
@@ -83,7 +93,8 @@ export default function BusinessLocationForm({ storedTempLocation }: { storedTem
         district: storedTempLocation?.district ?? "",
         city: storedTempLocation?.city ?? "",
         country: storedTempLocation?.country ?? "",
-        directions: storedTempLocation?.directions ?? ""
+        directions: storedTempLocation?.directions ?? "",
+        online_business: storedTempLocation?.online_business ?? false
     })
 
     // State for storing search results from Places API
@@ -129,6 +140,8 @@ export default function BusinessLocationForm({ storedTempLocation }: { storedTem
         } | undefined,
         place_id: string | undefined
     }) => {
+
+        if (location.online_business) return
         if (!geocodingService || !place.place_id) return;
 
         setOpen(false);
@@ -165,6 +178,7 @@ export default function BusinessLocationForm({ storedTempLocation }: { storedTem
     // Debounced function to handle location search
     const handleSearch = useDebouncedCallback((query: string) => {
         if (!placesService) return;
+        if (location.online_business) return
 
         setIsSearching(true)
 
@@ -193,14 +207,16 @@ export default function BusinessLocationForm({ storedTempLocation }: { storedTem
     }, 300);
 
     // Handle map camera position changes
-    const handleCameraChange = useCallback((ev: MapCameraChangedEvent) => {
+    const handleCameraChange = (ev: MapCameraChangedEvent) => {
+        if (location.online_business) return
         setCenter(ev.detail.center)
+        console.log("ev.detail.center", ev.detail.center)
         setLocation({
             ...location,
             lat: ev.detail.center.lat,
             lng: ev.detail.center.lng
         })
-    }, [center.lat]);
+    };
 
     // Configure custom marker icon
     const customIcon = coreLibrary ? {
@@ -218,7 +234,6 @@ export default function BusinessLocationForm({ storedTempLocation }: { storedTem
         apiDataResponse: null,
         apiMsgs: "",
         formData: {
-
             lat: 0,
             lng: 0,
             place_id: "",
@@ -230,6 +245,7 @@ export default function BusinessLocationForm({ storedTempLocation }: { storedTem
             street: "",
             apartment: "",
             building: "",
+            online_business: false
         }
     }
 
@@ -247,6 +263,9 @@ export default function BusinessLocationForm({ storedTempLocation }: { storedTem
         setIsLoading(isPending)
     }, [isPending])
 
+
+    console.log("location", location)
+
     return (
         <form id="business-onboarding-form" onSubmit={handleSubmit}>
 
@@ -262,20 +281,25 @@ export default function BusinessLocationForm({ storedTempLocation }: { storedTem
 
                     <p className="text-sm text-muted-foreground text-start "> This is where your business is located. Your billing and legal name can be added later.</p>
                 </div>
-                {/* Display selected location details */}
-                <LocationDetails location={location} className={cn(location.place_id && location.lat && location.lng ? "flex" : "hidden")} />
 
-                <div className={cn(location.place_id && location.lat && location.lng ? "block" : "hidden")}>
+
+                {/* Location search component */}
+                <SearchLocation online_business={location.online_business} className={cn(location.online_business ? "pointer-events-none" : location.place_id && location.lat && location.lng ? "hidden" : "block")} setOpen={setOpen} open={open} handleSearch={handleSearch} handleSettingLocation={handleSettingLocation} result={result} isSearching={isSearching} clientFieldsErrors={formState.clientFieldsErrors} />
+
+                {/* Display selected location details */}
+                <LocationDetails location={location} className={cn(location.online_business ? "hidden" : location.place_id && location.lat && location.lng ? "flex" : "hidden")} />
+
+                <div className={cn(location.online_business ? "hidden" : location.place_id && location.lat && location.lng ? "block" : "hidden")}>
 
                     <h2 className="text-lg font-bold">Is the pin in the right place?</h2>
                     <p className="text-sm text-muted-foreground pb-4">If not, you can drag it to the correct location</p>
 
                     {/* Map component with marker */}
                     <MapComponent
-                        className={cn("rounded-lg w-full h-[320px] overflow-hidden", location.place_id && location.lat && location.lng ? "block" : "hidden")}
-                        defaultCenter={DEFAULT_CENTER}
+                        className={cn("rounded-lg w-full h-[320px] overflow-hidden", location.online_business ? "hidden" : location.place_id && location.lat && location.lng ? "block" : "hidden")}
+                        defaultCenter={center}
                         center={center}
-                        defaultZoom={12}
+                        defaultZoom={15}
                         gestureHandling={'greedy'}
                         disableDefaultUI={true}
                         onCameraChanged={handleCameraChange}
@@ -289,15 +313,13 @@ export default function BusinessLocationForm({ storedTempLocation }: { storedTem
 
                 </div>
 
-                {/* Location search component */}
-                <SearchLocation className={cn(location.place_id && location.lat && location.lng ? "hidden" : "block")} setOpen={setOpen} open={open} handleSearch={handleSearch} handleSettingLocation={handleSettingLocation} result={result} isSearching={isSearching} clientFieldsErrors={formState.clientFieldsErrors} />
 
                 {/* Mobile/online services checkbox */}
                 <div className="flex items-center space-x-2">
-                    <Checkbox variant="accent" id="terms" className="size-6 border-gray-300 " />
+                    <Checkbox checked={location.online_business} onCheckedChange={() => setLocation({ ...location, online_business: !location.online_business })} variant="accent" id="terms" className="size-6 border-gray-300 " />
                     <label
                         htmlFor="terms"
-                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                        className=" cursor-pointer font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                     >
                         I don't have a business address (mobile and online services only)
                     </label>
