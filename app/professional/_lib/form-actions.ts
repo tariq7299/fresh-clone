@@ -8,6 +8,8 @@ import { redirect } from "next/navigation"
 import { SuccessFormState } from "@/lib/definitions/definitions"
 import { ErrorFormState } from "@/lib/definitions/definitions"
 import { Service } from "./definitions"
+import { BusinessLocationErrors } from "../_components/business-location-form"
+import { BusinessLocationFormData } from "../_components/business-location-form"
 
 const businessNameSchema = z.object({
     nameEn: z.string().trim().min(3, { message: "Business name (En) is required" }),
@@ -163,6 +165,9 @@ export const handleSubmitBusinessCategory = async (formState: ErrorFormState<{ c
 
 export const handleSubmitBusinessServices = async (formData: Service[]): Promise<ErrorFormState<{ service?: string } | null, Service[]>> => {
 
+    // Validating form data 
+    // Here it dones't require a schema, because the data has already been validated in the edit service dialog/modal  
+    // and here i just want to check if there is at least one service !
     if (formData.length === 0) {
         return {
             success: false,
@@ -180,6 +185,7 @@ export const handleSubmitBusinessServices = async (formData: Service[]): Promise
     if (!userId) {
         redirect("/login?sessionEnded=true")
     }
+
     try {
 
 
@@ -234,6 +240,8 @@ export const handleSubmitBusinessServices = async (formData: Service[]): Promise
                             }
                         }
                     },
+                    // This part is not neccessary as if id (business.id) doesn't exist it, will throw an error from the begning
+                    // So this part will never be touched
                     create: {
                         id: business.id,
                         userId: userId,
@@ -255,6 +263,143 @@ export const handleSubmitBusinessServices = async (formData: Service[]): Promise
         throw new Error("Error submitting business services")
     }
 
+    redirect("/professional/onboarding/business-location")
+
+}
+
+// TODO: Remove this schema, and use the one in the form (but it shows an error if i import it!!!!! very wierdd)
+const businessLocationSchema = z.object({
+    lat: z.number().gt(0, { message: "Please provide a location" }),
+    lng: z.number().gt(0, { message: "Please provide a location" }),
+    place_id: z.string().trim().min(1, { message: "Please provide a location" }),
+    address: z.string().trim().min(1, { message: "Please provide a location" }),
+    district: z.string().optional(),
+    city: z.string().optional(),
+    country: z.string().trim().min(1, { message: "Please provide a location" }),
+    directions: z.string().optional(),
+    street: z.string().optional(),
+    apartment: z.string().optional(),
+    building: z.string().optional(),
+
+})
+
+
+export const handleSubmitBusinessLocation = async (formData: BusinessLocationFormData): Promise<ErrorFormState<BusinessLocationErrors | null, BusinessLocationFormData> | void> => {
+
+    const session = await getSession()
+    const userId = session ? session.id : null
+    if (!userId) redirect("/login?sessionEnded=true")
+
+    const payload = {
+        lat: formData.lat,
+        lng: formData.lng,
+        place_id: formData.place_id,
+        address: formData.address,
+        district: formData.district,
+        city: formData.city,
+        country: formData.country,
+        directions: formData.directions,
+        street: formData.street,
+        apartment: formData.apartment,
+        building: formData.building,
+    }
+
+    console.log("payload", payload)
+
+    const validatedFields = businessLocationSchema.safeParse(payload)
+
+    if (!validatedFields.success) {
+        return {
+            success: false,
+            clientFieldsErrors: validatedFields.error.flatten().fieldErrors,
+            apiDataResponse: null,
+            apiMsgs: "",
+            formData: payload
+        }
+    }
+
+    try {
+
+        const business = await prisma.business.findUnique({
+            where: {
+                userId: Number(userId)
+            },
+            select: {
+                id: true
+            }
+        })
+
+        if (!business) throw new Error("Business not found")
+
+        console.log("business", business)
+
+        // TODO: Use validatedData instead of payload
+        await prisma.business.upsert({
+            where: {
+                userId: userId,
+            },
+            update: {
+                location: {
+                    upsert: {
+                        where: {
+                            businessId: business.id,
+                            place_id: payload.place_id
+                        },
+                        update: {
+                            lat: payload.lat,
+                            lng: payload.lng,
+                            address: payload.address,
+                            district: payload.district,
+                            city: payload.city,
+                            country: payload.country,
+                            directions: payload.directions,
+                            street: payload.street,
+                            apartment: payload.apartment,
+                            building: payload.building,
+                        },
+                        create: {
+                            lat: payload.lat,
+                            lng: payload.lng,
+                            place_id: payload.place_id,
+                            address: payload.address,
+                            district: payload.district,
+                            city: payload.city,
+                            country: payload.country,
+                            directions: payload.directions,
+                            street: payload.street,
+                            apartment: payload.apartment,
+                            building: payload.building,
+                        }
+                    }
+                }
+            },
+            create: {
+                userId: userId,
+                id: business.id,
+                location: {
+                    create: {
+                        lat: payload.lat,
+                        lng: payload.lng,
+                        place_id: payload.place_id,
+                        address: payload.address,
+                        district: payload.district,
+                        city: payload.city,
+                        country: payload.country,
+                        directions: payload.directions,
+                        street: payload.street,
+                        apartment: payload.apartment,
+                        building: payload.building,
+                    }
+                }
+            }
+        })
+
+    } catch (error) {
+        console.error('Error submitting business location:', error);
+        throw new Error("Error submitting business location")
+    }
+
     redirect("/professional/onboarding/business-capacity")
+
 
 }

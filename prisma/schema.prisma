@@ -23,7 +23,7 @@ model Business {
   website_url String?   // Optional field with ?
   capacity    Int?
   category_id Int?
-  address     String?
+  location     BusinessLocation?
   gender     Gender?    // You might want to use enum here
   services    BusinessService[] // Relation to services
 }
@@ -37,5 +37,23 @@ model BusinessService {
   price      Float
 
   @@unique([businessId, service_id])
+
+}
+
+model BusinessLocation {
+  id          Int      @id @default(autoincrement())
+  business    Business @relation(fields: [businessId], references: [id])
+  businessId  Int      @unique
+  lat         Float    // Use Float for latitude
+  lng         Float    // Use Float for longitude
+  place_id    String   @unique
+  address     String   // Full address (can be optional if place_id is unique)
+  district    String?  // District (optional)
+  city        String?  // City (optional)
+  country     String   // Country (required)
+  directions  String?  
+  street  String?  
+  apartment  String?  
+  building  String?  
 
 }

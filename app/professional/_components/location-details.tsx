@@ -2,16 +2,18 @@ import { cn } from "@/lib/utils/utils";
 import { Button } from "@/ui/components/custom/button";
 
 // TODO: Write types
-export default function LocationDetails({ address, className }: { address: any, className: string }) {
+export default function LocationDetails({ location, className }: { location: any, className: string }) {
     return <>
 
         <div className={cn("flex gap-2 w-full justify-between", className)}>
             <div className="flex flex-col text-base ">
-                {address.apt && <p className="">{address.apt}</p>}
-                {address.address && <p className="">{address.address}</p>}
-                {address.district && <p className="">{address.district}</p>}
-                {address.city && <p className="">{address.city}</p>}
-                {address.country && <p className="">{address.country}</p>}
+
+                {(location.apartment || location.building || location.street) && <p className="">{`${location.street && location.street + ","} ${location.building && location.building + ","} ${location.apartment && location.apartment}`}</p>}
+
+                {location.address && <p className="">{location.address}</p>}
+                {location.district && <p className="">{location.district}</p>}
+                {location.city && <p className="">{location.city}</p>}
+                {location.country && <p className="">{location.country}</p>}
             </div>
             <div>
                 <Button size={"sm"} variant={"outline"} className="font-bold">Edit</Button>

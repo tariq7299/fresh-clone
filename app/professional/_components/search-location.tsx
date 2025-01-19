@@ -9,8 +9,9 @@ import {
 } from "@/ui/components/popover"
 import { MapPin } from "lucide-react";
 import { cn } from "@/lib/utils/utils";
+import { BusinessLocationErrors } from "./business-location-form";
 
-export default function SearchLocation({ className, setOpen, open, handleSearch, handleSettingLocation, result, isSearching }: { className: string, setOpen: (open: boolean) => void, open: boolean, handleSearch: (value: string) => void, handleSettingLocation: (place: any) => void, result: any, isSearching: boolean }) {
+export default function SearchLocation({ className, setOpen, open, handleSearch, handleSettingLocation, result, isSearching, clientFieldsErrors }: { className: string, setOpen: (open: boolean) => void, open: boolean, handleSearch: (value: string) => void, handleSettingLocation: (place: any) => void, result: any, isSearching: boolean, clientFieldsErrors: BusinessLocationErrors }) {
 
     // const [value, setValue] = useState("")
 
@@ -24,8 +25,7 @@ export default function SearchLocation({ className, setOpen, open, handleSearch,
                     </div>
                     <Input onChange={(e) => handleSearch(e.target.value)} className="w-full  p-6 ps-12" />
                 </div>
-                {/* <p className="text-sm text-destructive pt-1 */}
-                {/* ">Please enter a valid address</p> */}
+                {clientFieldsErrors?.address && <p className="text-sm text-destructive pt-2 ">{clientFieldsErrors?.address}</p>}
             </PopoverAnchor>
 
             <PopoverContent sideOffset={8} side="bottom" className=" text-nowrap truncate  w-[340px] sm:w-[500px] md:w-[630px] grid grid-cols-1  font-semibold rounded-lg p-2" onOpenAutoFocus={(e) => e.preventDefault()}>

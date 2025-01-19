@@ -9,11 +9,51 @@ import { Checkbox } from "../../ui/components/checkbox";
 import SearchLocation from "@/professional/_components/search-location";
 import LocationDetails from "@/professional/_components/location-details";
 import { cn } from "@/lib/utils/utils";
+import { handleSubmitBusinessLocation } from "../_lib/form-actions";
+import { ErrorFormState } from "@/lib/definitions/definitions";
+import { z } from "zod";
+import { useBusinessFormContext } from "./business-form-provider";
+
+export const businessLocationSchema = z.object({
+    lat: z.number().gt(0, { message: "Please provide a location" }),
+    lng: z.number().gt(0, { message: "Please provide a location" }),
+    place_id: z.string().trim().min(1, { message: "Please provide a location" }),
+    address: z.string().trim().min(1, { message: "Address is required" }),
+    district: z.string().optional(),
+    city: z.string().optional(),
+    country: z.string().trim().min(1, { message: "Country is required" }),
+    directions: z.string().optional(),
+    street: z.string().optional(),
+    apartment: z.string().optional(),
+    building: z.string().optional(),
+
+})
+
+export type BusinessLocationErrors = {
+    lat?: string | string[]
+    lng?: string | string[]
+    place_id?: string | string[]
+    address?: string | string[]
+    district?: string | string[]
+    city?: string | string[]
+    country?: string | string[]
+    directions?: string | string[]
+    street?: string | string[]
+    apartment?: string | string[]
+    building?: string | string[]
+}
+
+
+
+// TODO: Create the BusinessLocationFormData type
+export type BusinessLocationFormData = z.infer<typeof businessLocationSchema>
 
 // TODO: Remove most of that code, and put it in didcated hook or provider, maybe use
 export default function BusinessLocationForm() {
     // State for handling loading states and transitions
-    const [isPending, startTransition] = useTransition()
+    const [_, startTransition] = useTransition()
+    const { setIsLoading } = useBusinessFormContext()
+    const [isPending, setIsPending] = useState(false)
     const [isSearching, setIsSearching] = useState(false)
 
     // TODO: Add loading JSX when getting user's geolocation, and if error, show error message, or the user didn't allow location access then show error message that they need to allow location access
@@ -29,14 +69,14 @@ export default function BusinessLocationForm() {
     }>(DEFAULT_CENTER)
 
     // State for storing complete address details
-    const [address, setAddress] = useState({
-        positionOnMap: {
-            lat: 0,
-            lng: 0
-        },
+    const [location, setLocation] = useState({
+        lat: 0,
+        lng: 0,
         place_id: "",
         address: "",
-        apt: "",
+        building: "",
+        apartment: "",
+        street: "",
         district: "",
         city: "",
         country: "",
@@ -96,12 +136,10 @@ export default function BusinessLocationForm() {
                 if (status === 'OK' && results) {
                     // Update address and map center with selected location details
                     startTransition(() => {
-                        setAddress({
-                            ...address,
-                            positionOnMap: {
-                                lat: place.geometry?.location?.lat() ?? lat,
-                                lng: place.geometry?.location?.lng() ?? lng
-                            },
+                        setLocation({
+                            ...location,
+                            lat: place.geometry?.location?.lat() ?? lat,
+                            lng: place.geometry?.location?.lng() ?? lng,
                             place_id: place.place_id || "",
                             address: results?.[0]?.formatted_address || "",
                             district: place.formatted_address?.split(",")?.[0] || "",
@@ -122,7 +160,7 @@ export default function BusinessLocationForm() {
     };
 
     // Debounced function to handle location search
-    const handleSearch = useDebouncedCallback((query) => {
+    const handleSearch = useDebouncedCallback((query: string) => {
         if (!placesService) return;
 
         setIsSearching(true)
@@ -142,7 +180,8 @@ export default function BusinessLocationForm() {
                 status: google.maps.places.PlacesServiceStatus
             ) => {
                 if (status === google.maps.places.PlacesServiceStatus.OK && results) {
-                    setResult(results.length > 0 ? results.slice(0, 3).map(({ formatted_address, geometry, place_id }) => ({ formatted_address, geometry, place_id })) : [])
+                    console.log("results", results)
+                    setResult(results.length > 0 ? results.slice(0, 5).map(({ formatted_address, geometry, place_id }) => ({ formatted_address, geometry, place_id })) : [])
                     setIsSearching(false)
                     setOpen(true)
                 }
@@ -153,9 +192,10 @@ export default function BusinessLocationForm() {
     // Handle map camera position changes
     const handleCameraChange = useCallback((ev: MapCameraChangedEvent) => {
         setCenter(ev.detail.center)
-        setAddress({
-            ...address,
-            positionOnMap: ev.detail.center
+        setLocation({
+            ...location,
+            lat: ev.detail.center.lat,
+            lng: ev.detail.center.lng
         })
     }, [center.lat]);
 
@@ -169,48 +209,97 @@ export default function BusinessLocationForm() {
     // State for controlling search results dropdown
     const [open, setOpen] = useState(false)
 
+    const INITIAL_FORM_STATE: ErrorFormState<BusinessLocationErrors | null, BusinessLocationFormData> = {
+        success: false,
+        clientFieldsErrors: null,
+        apiDataResponse: null,
+        apiMsgs: "",
+        formData: {
+
+            lat: 0,
+            lng: 0,
+            place_id: "",
+            address: "",
+            district: "",
+            city: "",
+            country: "",
+            directions: "",
+            street: "",
+            apartment: "",
+            building: "",
+        }
+    }
+
+    const [formState, setFormState] = useState<ErrorFormState<BusinessLocationErrors | null, BusinessLocationFormData>>(INITIAL_FORM_STATE)
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        setIsPending(true)
+        const result = await handleSubmitBusinessLocation({ ...location })
+        result && setFormState(result)
+        setIsPending(false)
+    }
+    useEffect(() => {
+        setIsLoading(isPending)
+    }, [isPending])
+
     return (
-        <>
-            {/* Display selected location details */}
-            <LocationDetails address={address} className={cn(address.place_id && address.positionOnMap.lat && address.positionOnMap.lng ? "flex" : "hidden")} />
+        <form id="business-onboarding-form" onSubmit={handleSubmit}>
 
-            <div className={cn(address.place_id && address.positionOnMap.lat && address.positionOnMap.lng ? "block" : "hidden")}>
+            <div className="flex flex-col gap-2 w-full max-w-2xl p-5 py-24 
+        min-h-dvh  items-stretch m-auto space-y-5 text-start">
 
-                <h2 className="text-lg font-bold">Is the pin in the right place?</h2>
-                <p className="text-sm text-muted-foreground pb-4">If not, you can drag it to the correct location</p>
+                <div className="text-start space-y-1">
 
-                {/* Map component with marker */}
-                <MapComponent
-                    className={cn("rounded-lg w-full h-[320px] overflow-hidden", address.place_id && address.positionOnMap.lat && address.positionOnMap.lng ? "block" : "hidden")}
-                    defaultCenter={DEFAULT_CENTER}
-                    center={center}
-                    defaultZoom={12}
-                    gestureHandling={'greedy'}
-                    disableDefaultUI={true}
-                    onCameraChanged={handleCameraChange}
-                >
-                    <Marker
-                        icon={customIcon}
-                        position={center}
-                        draggable={false}
-                    />
-                </MapComponent>
+                    <p className="text-sm text-muted-foreground text-start"> Account setup</p>
 
+                    {/* Change this to more descriptive title */}
+                    <h1 className="text-3xl lg:text-4xl font-bold font-source-sans text-start"> Where's your business located?</h1>
+
+                    <p className="text-sm text-muted-foreground text-start "> This is where your business is located. Your billing and legal name can be added later.</p>
+                </div>
+                {/* Display selected location details */}
+                <LocationDetails location={location} className={cn(location.place_id && location.lat && location.lng ? "flex" : "hidden")} />
+
+                <div className={cn(location.place_id && location.lat && location.lng ? "block" : "hidden")}>
+
+                    <h2 className="text-lg font-bold">Is the pin in the right place?</h2>
+                    <p className="text-sm text-muted-foreground pb-4">If not, you can drag it to the correct location</p>
+
+                    {/* Map component with marker */}
+                    <MapComponent
+                        className={cn("rounded-lg w-full h-[320px] overflow-hidden", location.place_id && location.lat && location.lng ? "block" : "hidden")}
+                        defaultCenter={DEFAULT_CENTER}
+                        center={center}
+                        defaultZoom={12}
+                        gestureHandling={'greedy'}
+                        disableDefaultUI={true}
+                        onCameraChanged={handleCameraChange}
+                    >
+                        <Marker
+                            icon={customIcon}
+                            position={center}
+                            draggable={false}
+                        />
+                    </MapComponent>
+
+                </div>
+
+                {/* Location search component */}
+                <SearchLocation className={cn(location.place_id && location.lat && location.lng ? "hidden" : "block")} setOpen={setOpen} open={open} handleSearch={handleSearch} handleSettingLocation={handleSettingLocation} result={result} isSearching={isSearching} clientFieldsErrors={formState.clientFieldsErrors} />
+
+                {/* Mobile/online services checkbox */}
+                <div className="flex items-center space-x-2">
+                    <Checkbox variant="accent" id="terms" className="size-6 border-gray-300 " />
+                    <label
+                        htmlFor="terms"
+                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    >
+                        I don't have a business address (mobile and online services only)
+                    </label>
+                </div>
             </div>
+        </form>
 
-            {/* Location search component */}
-            <SearchLocation className={cn(address.place_id && address.positionOnMap.lat && address.positionOnMap.lng ? "hidden" : "block")} setOpen={setOpen} open={open} handleSearch={handleSearch} handleSettingLocation={handleSettingLocation} result={result} isSearching={isSearching} />
-
-            {/* Mobile/online services checkbox */}
-            <div className="flex items-center space-x-2">
-                <Checkbox variant="accent" id="terms" className="size-6 border-gray-300 " />
-                <label
-                    htmlFor="terms"
-                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                >
-                    I don't have a business address (mobile and online services only)
-                </label>
-            </div>
-        </>
     );
 };
