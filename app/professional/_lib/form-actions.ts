@@ -3,7 +3,7 @@
 import { categories } from "@/ui/components/custom/category"
 import { z } from "zod"
 import prisma from "@/lib/prisma"
-import { getSession } from "@/(auth)/_lib/sessions"
+import { createSession, getSession, updateSessionServer } from "@/(auth)/_lib/sessions"
 import { redirect } from "next/navigation"
 import { SuccessFormState } from "@/lib/definitions/definitions"
 import { ErrorFormState } from "@/lib/definitions/definitions"
@@ -16,14 +16,16 @@ import { ApiError, ApiResponse, ApiSucess } from "@/lib/definitions/api"
 import { fetchApi } from "@/lib/utils/api/fetch-utils"
 import { setApiSuccessMsg } from "@/lib/utils/api/setApiSuccessMsg"
 import { setApiErrorMsg } from "@/lib/utils/api/setApiErrorMsg"
-
+import { handleCreatingNewbusiness, removeTempBusinessFormSumbissions } from "./data"
+import { SessionData } from "@/(auth)/_lib/definitions"
+import { updateProfessionalHasBusinessServerSide } from "@/(auth)/_lib/sessions"
 const businessNameSchema = z.object({
     nameEn: z.string().trim().min(3, { message: "Business name (En) is required" }),
     nameAr: z.string().trim().min(3, { message: "Business name (Ar) is required" }),
     descriptionEn: z.string().trim().min(3, { message: "Description (En) is required" }),
     descriptionAr: z.string().trim().min(3, { message: "Description (Ar) is required" }),
     websiteUrl: z.string().trim().min(3, { message: "Website URL is required" }),
-    genderOfCustomers: z.enum(["men", "women", "both"], { message: "Please select a gender" })
+    genderOfCustomers: z.enum(["male", "female", "both"], { message: "Please select a gender" })
 })
 
 const businessCategorySchema = z.object({
@@ -467,11 +469,13 @@ const businessCapacitySchema = z.object({
     capacity: z.number().gte(1, { message: "Please enter a valid capacity" }).lte(10, { message: "Please enter a valid capacity" })
 })
 
+// TODO: Write types
 export const handleSubmitBusinessCapacity = async (formState: ErrorFormState<BusinessCapacityFieldErrors | null, BusinessCapacityFormData>, formData: FormData): Promise<ErrorFormState<BusinessCapacityFieldErrors | null, BusinessCapacityFormData> | void> => {
 
     const session = await getSession()
     const userId = session ? session.id : null
-    if (!userId) redirect("/login?sessionEnded=true")
+    if (!userId || !session) redirect("/login?sessionEnded=true")
+
 
     const validatedFields = businessCapacitySchema.safeParse({ capacity: Number(formData.get("capacity")) || 0 } as BusinessCapacityFormData)
 
@@ -508,28 +512,39 @@ export const handleSubmitBusinessCapacity = async (formState: ErrorFormState<Bus
             }
         })
 
-        const newBusiness = await prisma.business.findUnique({
-            where: {
-                userId: userId
+        const response = await handleCreatingNewbusiness()
+
+        if (response.success) {
+
+            const successMsg = setApiSuccessMsg({ successResponse: response })
+
+            await createSession({
+                ...session,
+                has_business: true
+            })
+
+            // await updateProfessionalHasBusinessServerSide(session as SessionData)
+
+            await removeTempBusinessFormSumbissions(business.id)
+
+
+            return {
+                success: response.success,
+                clientFieldsErrors: null,
+                apiDataResponse: session,
+                apiMsgs: successMsg,
+                formData: { capacity: Number(formData.get("capacity")) || 0 }
             }
-        })
-
-        // Send request to   backend to create a business  
-
-        const response = await fetchApi<ApiResponse<Business>>("/businesses", {
-            method: "POST",
-            body: newBusiness
-        }) as ApiSucess<Business>
-
-        const successMsg = setApiSuccessMsg({ successResponse: response })
-
-        // return {
-        //     success: true,
-        //     clientFieldsErrors: null,
-        //     apiDataResponse: response.data.user,
-        //     apiMsgs: successMsg,
-        //     formData: { capacity: Number(formData.get("capacity")) || 0 }
-        // }
+        } else {
+            const errorMsg = setApiErrorMsg({ errResponse: response as ApiError })
+            return {
+                success: false,
+                clientFieldsErrors: null,
+                apiDataResponse: null,
+                apiMsgs: errorMsg,
+                formData: { capacity: Number(formData.get("capacity")) || 0 }
+            }
+        }
 
 
 
@@ -549,6 +564,6 @@ export const handleSubmitBusinessCapacity = async (formState: ErrorFormState<Bus
 
 
 
-    redirect("/professional/dashboard")
+    // redirect("/professional/dashboard")
 
-}
+}  

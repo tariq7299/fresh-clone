@@ -8,8 +8,8 @@ datasource db {
 }
 
 enum GenderOfCustomers {
-  men
-  women
+  male
+  female
   both
 }
 
@@ -56,5 +56,4 @@ model BusinessLocation {
   apartment  String?  
   building  String? 
   online_business Boolean @default(false)
-
 }

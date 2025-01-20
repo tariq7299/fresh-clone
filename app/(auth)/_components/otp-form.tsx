@@ -41,7 +41,7 @@ export default function OtpForm({ email = "", userRole }: { email: string, userR
         handleFormResponse({
             formState,
             successCallback: () => {
-                loginUserClientSide(formState.apiDataResponse as SessionData, setSessionData, router)
+                loginUserClientSide(formState.apiDataResponse as SessionData, setSessionData)
                 navigateToDashboard(formState.apiDataResponse?.role as UserRole)
             },
             errorCallback: () => {

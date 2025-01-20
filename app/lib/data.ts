@@ -35,3 +35,4 @@ export const getAllServices = async () => {
         throw new Error("Failed to fetch services")
     }
 }
+

@@ -1,5 +1,5 @@
 -- CreateEnum
-CREATE TYPE "GenderOfCustomers" AS ENUM ('men', 'women', 'both');
+CREATE TYPE "GenderOfCustomers" AS ENUM ('male', 'female', 'both');
 
 -- CreateTable
 CREATE TABLE "Business" (

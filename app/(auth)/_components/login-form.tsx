@@ -54,7 +54,7 @@ export default function LoginForm() {
         handleFormResponse({
             formState,
             successCallback: () => {
-                loginUserClientSide(formState.apiDataResponse as SessionData, setSessionData, router)
+                loginUserClientSide(formState.apiDataResponse as SessionData, setSessionData)
                 navigateToDashboard(formState.apiDataResponse?.role as UserRole)
             }
         })

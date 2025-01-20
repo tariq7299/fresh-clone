@@ -69,8 +69,8 @@ export default function Form({ storedTempBusinessInfo }: { storedTempBusinessInf
             <Label className="font-bold" htmlFor="genderOfCustomers">Who is your business for?</Label>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 justify-items-stretch  ">
-                <CategoryCard defaultChecked={formValues.genderOfCustomers === GenderOfCustomers.Men} inputName="genderOfCustomers" inputValue="men" categoryName="Men" categoryIconUrl="/man-avatar.png" isPending={isPending} categoryIconWidth={48} categoryIconHeight={48} />
-                <CategoryCard defaultChecked={formValues.genderOfCustomers === GenderOfCustomers.Women} inputName="genderOfCustomers" inputValue="women" categoryName="Women" categoryIconUrl="/man-avatar.png" isPending={isPending} categoryIconWidth={48} categoryIconHeight={48} />
+                <CategoryCard defaultChecked={formValues.genderOfCustomers === GenderOfCustomers.Male} inputName="genderOfCustomers" inputValue="male" categoryName="Men" categoryIconUrl="/man-avatar.png" isPending={isPending} categoryIconWidth={48} categoryIconHeight={48} />
+                <CategoryCard defaultChecked={formValues.genderOfCustomers === GenderOfCustomers.Female} inputName="genderOfCustomers" inputValue="female" categoryName="Women" categoryIconUrl="/man-avatar.png" isPending={isPending} categoryIconWidth={48} categoryIconHeight={48} />
                 <CategoryCard defaultChecked={formValues.genderOfCustomers === GenderOfCustomers.Both} inputName="genderOfCustomers" inputValue="both" categoryName="Both" categoryIconUrl="/man-avatar.png" categoryIconWidth={48} categoryIconHeight={48} isPending={isPending} />
             </div>
 

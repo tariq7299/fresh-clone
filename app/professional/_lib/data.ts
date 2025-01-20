@@ -1,10 +1,13 @@
 
-import { getSession } from "@/(auth)/_lib/sessions";
+import { createSession, getSession } from "@/(auth)/_lib/sessions";
 import prisma from "@/lib/prisma";
 import { redirect } from "next/navigation";
 import { StoredTempCategory } from "../onboarding/business-category/business-category-form";
-import { BusinessLocation, StoredTempLocation } from "./definitions";
-import { Nullable } from "@/lib/utils/utils";
+import { Business } from "./definitions";
+import { fetchApi } from "@/lib/utils/api/fetch-utils";
+import { ApiResponse, ApiError, ApiSucess } from "@/lib/definitions/api";
+import { SessionData } from "@/(auth)/_lib/definitions";
+import SecureLS from "secure-ls";
 
 export const getBusinessStepFormData = async (stepName: string) => {
 
@@ -123,3 +126,123 @@ export const getBusinessStepFormData = async (stepName: string) => {
     }
 }
 
+export const handleCreatingNewbusiness = async (): Promise<ApiResponse<Business>> => {
+
+    const session = await getSession()
+    const userId = session ? session.id : null
+    if (!userId) {
+        redirect("/login?sessionExpired=true")
+    }
+
+    try {
+
+        const newBusiness = await prisma.business.findUnique({
+            where: {
+                userId: userId
+            },
+            select: {
+                id: true,
+                name_ar: true,
+                name_en: true,
+                description_ar: true,
+                description_en: true,
+                website_url: true,
+                capacity: true,
+                category_id: true,
+                gender_of_customers: true,
+                services: {
+                    select: {
+                        service_id: true,
+                        duration: true,
+                        price: true
+                    }
+                },
+                location: true
+            }
+        })
+
+
+
+        const formattedBusiness = {
+            ...newBusiness,
+            location: {
+                longitude: newBusiness?.location?.lng,
+                latitude: newBusiness?.location?.lat,
+                place_id: newBusiness?.location?.place_id,
+                address: newBusiness?.location?.address,
+                district: newBusiness?.location?.district,
+                city: newBusiness?.location?.city,
+                country: newBusiness?.location?.country,
+                directions: newBusiness?.location?.directions,
+                street: newBusiness?.location?.street,
+                apartment: newBusiness?.location?.apartment,
+                building: newBusiness?.location?.building,
+                // floor: newBusiness?.location?.floor,
+                online_business: newBusiness?.location?.online_business
+            },
+            gender: newBusiness?.gender_of_customers
+        }
+
+
+        delete formattedBusiness.gender_of_customers
+        delete formattedBusiness.id
+
+
+
+
+
+        console.log("newbusiness", newBusiness)
+        console.log("formattedBusiness", formattedBusiness)
+        // Send request to   backend to create a business  
+
+        const successResponse = await fetchApi<ApiResponse<Business>>("/businesses", {
+            method: "POST",
+            body: formattedBusiness
+        }) as ApiSucess<Business>
+
+        // const successMsg = setApiSuccessMsg({ successResponse: response })
+
+        console.log("newBusiness?.id", newBusiness?.id)
+
+        // Option 3: Delete with include to confirm related records are deleted
+
+
+        return successResponse
+
+
+
+
+
+    } catch (errorResponse) {
+        console.error('Error creating new business:', errorResponse);
+        return errorResponse as ApiError
+    }
+
+
+}
+
+export const removeTempBusinessFormSumbissions = async (businessId: number) => {
+
+    try {
+        // First delete all related services
+        await prisma.$transaction(async (tx) => {
+            await tx.businessService.deleteMany({
+                where: {
+                    businessId: businessId
+                }
+            });
+            await tx.businessLocation.deleteMany({
+                where: {
+                    businessId: businessId
+                }
+            });
+            await tx.business.delete({
+                where: {
+                    id: businessId
+                }
+            });
+        });
+    } catch (error) {
+        console.error('Error deleting temporary business:', error);
+    }
+}

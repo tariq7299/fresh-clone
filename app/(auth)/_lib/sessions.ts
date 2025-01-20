@@ -1,6 +1,8 @@
 import 'server-only'
 import { cookies } from 'next/headers'
 import { SessionData } from './definitions'
+
+
 export async function createSession(sessionData: SessionData) {
     const cookieStore = await cookies()
 

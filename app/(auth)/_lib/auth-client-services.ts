@@ -7,7 +7,7 @@ import { logoutUserServerSide } from "./auth-server-services";
 // This is the client side login function
 // It will be used to login the user and return nothing
 // It will be used in the loginform page after the form is submitted
-export const loginUserClientSide = (sessionData: SessionData, setSessionData: (sessionData: SessionData) => void, router: any): void => {
+export const loginUserClientSide = (sessionData: SessionData, setSessionData: (sessionData: SessionData) => void): void => {
     const ls = new SecureLS();
     ls.set('token', sessionData.token);
     setSessionData(sessionData,)

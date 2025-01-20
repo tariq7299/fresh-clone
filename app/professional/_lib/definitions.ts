@@ -4,8 +4,8 @@ import { Nullable } from "@/lib/utils/utils";
 // Coming from api like that (before mapping and changing its keys)
 
 export enum GenderOfCustomers {
-    Men = "men",
-    Women = "women",
+    Male = "male",
+    Female = "female",
     Both = "both"
 }
 
