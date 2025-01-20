@@ -2,7 +2,7 @@
 import { getSession } from "@/(auth)/_lib/sessions";
 import prisma from "@/lib/prisma";
 import { redirect } from "next/navigation";
-import { StoredTempCategory } from "../_components/business-category-form";
+import { StoredTempCategory } from "../onboarding/business-category/business-category-form";
 import { BusinessLocation, StoredTempLocation } from "./definitions";
 import { Nullable } from "@/lib/utils/utils";
 

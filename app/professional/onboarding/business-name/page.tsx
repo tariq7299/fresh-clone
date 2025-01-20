@@ -1,12 +1,12 @@
-import BusinessNameForm from '@/professional/_components/business-name-form';
+import BusinessNameForm from '@/professional/onboarding/business-name/business-name-form';
 import { getBusinessStepFormData } from '@/professional/_lib/data';
 import { StoredTempBusinessInfo } from '@/professional/_lib/definitions';
 import { Suspense } from 'react';
-import { OnboardingBusinessNameSkeleton } from '@/ui/skeletons';
+import { OnboardingBusinessCapacitySkeleton, OnboardingBusinessLocationSkeleton, OnboardingBusinessNameSkeleton } from '@/ui/skeletons';
 
-export default async function BusinessNamePage({ }) {
+export default function BusinessNamePage({ }) {
 
-    const storedTempBusinessInfo = await getBusinessStepFormData("businessNameStep") as StoredTempBusinessInfo | null
+
 
 
     return <div className='w-full max-w-2xl p-5 py-24 min-h-dvh  mx-auto space-y-8 pb-20'>
@@ -23,7 +23,7 @@ export default async function BusinessNamePage({ }) {
         </div>
 
         <Suspense fallback={<OnboardingBusinessNameSkeleton />}>
-            <BusinessNameForm storedTempBusinessInfo={storedTempBusinessInfo} />
+            <BusinessNameForm />
         </Suspense>
     </div>
 }

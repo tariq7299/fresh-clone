@@ -9,7 +9,7 @@ import {
 } from "@/ui/components/popover"
 import { MapPin } from "lucide-react";
 import { cn } from "@/lib/utils/utils";
-import { BusinessLocationErrors } from "./business-location-form";
+import { BusinessLocationErrors } from "../onboarding/business-location/business-location-form";
 
 export default function SearchLocation({ className, setOpen, open, handleSearch, handleSettingLocation, result, isSearching, clientFieldsErrors, online_business }: { className: string, setOpen: (open: boolean) => void, open: boolean, handleSearch: (value: string) => void, handleSettingLocation: (place: any) => void, result: any, isSearching: boolean, clientFieldsErrors: BusinessLocationErrors | null, online_business: boolean }) {
 

@@ -5,15 +5,15 @@ import { Map as MapComponent, Marker, MapCameraChangedEvent, useMapsLibrary, use
 import { useCallback, useEffect, useState, useTransition } from "react";
 import { useGeolocation } from "@/lib/hooks/use-geo-location";
 import { useDebouncedCallback } from "use-debounce";
-import { Checkbox } from "../../ui/components/checkbox";
+import { Checkbox } from "../../../ui/components/checkbox";
 import SearchLocation from "@/professional/_components/search-location";
 import LocationDetails from "@/professional/_components/location-details";
 import { cn } from "@/lib/utils/utils";
-import { handleSubmitBusinessLocation } from "../_lib/form-actions";
+import { handleSubmitBusinessLocation } from "../../_lib/form-actions";
 import { ErrorFormState } from "@/lib/definitions/definitions";
 import { z } from "zod";
-import { useBusinessFormContext } from "./business-form-provider";
-import { StoredTempLocation } from "../_lib/definitions";
+import { useBusinessFormContext } from "../../_components/business-form-provider";
+import { StoredTempLocation } from "../../_lib/definitions";
 
 export const businessLocationSchema = z.discriminatedUnion('online_business', [
     // When online_business is true, don't allow any other fields
@@ -57,7 +57,7 @@ export type BusinessLocationErrors = {
 export type BusinessLocationFormData = z.infer<typeof businessLocationSchema>
 
 // TODO: Remove most of that code, and put it in didcated hook or provider, maybe use
-export default function BusinessLocationForm({ storedTempLocation }: { storedTempLocation: StoredTempLocation | null }) {
+export default function Form({ storedTempLocation }: { storedTempLocation: StoredTempLocation | null }) {
     // State for handling loading states and transitions
     const [_, startTransition] = useTransition()
     const { setIsLoading } = useBusinessFormContext()

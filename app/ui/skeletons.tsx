@@ -62,23 +62,42 @@ export function OnboardingBusinessServicesSkeleton() {
 export function OnboardingBusinessLocationSkeleton() {
     const categories = Array(10).fill(null);
 
-    return <div className="w-full max-w-4xl mx-auto ">
-        <div className=" grid grid-cols-1 justify-items-stretch items-stretch gap-4">
+    return <div className="w-full max-w-2xl mx-auto space-y-6">
 
-            {Array(10).fill(null).map((_, i) => (
-                <div key={i} className="flex gap-2 border-1 border-gray-100 rounded-lg p-6 justify-between">
-                    <div className="flex flex-col gap-2">
-                        <Skeleton className="w-24 h-6 rounded-full" />
-                        <Skeleton className="w-14 h-3 rounded-full" />
-                    </div>
-                    <div className="flex gap-2 items-center">
-                        <Skeleton className="w-6 h-3 rounded-full" />
-                        <Skeleton className="w-6 h-3 rounded-full" />
-                        <Skeleton className="ps-5 w-3 h-8 rounded-full" />
-                    </div>
-                </div>
+        <div className="flex justify-between pb-4">
 
-            ))}
+            <div className="flex flex-col gap-2 w-full">
+                <Skeleton className="w-56 h-2 rounded-full" />
+                <Skeleton className="w-44 h-2 rounded-full" />
+                <Skeleton className="w-32 h-2 rounded-full" />
+                <Skeleton className="w-40 h-2 rounded-full" />
+            </div>
+            <div>
+                <Skeleton className="w-16 h-8 rounded-lg" />
+
+            </div>
+
         </div>
+
+        <div className="space-y-1 ">
+            <Skeleton className="w-64 h-2" />
+            <Skeleton className="w-32 h-2" />
+        </div>
+
+        <div>
+            <Skeleton className="w-full h-96" />
+
+        </div>
+
+    </div>
+}
+
+export function OnboardingBusinessCapacitySkeleton() {
+
+    return <div className="w-full max-w-3xl mx-auto space-y-2">
+
+        <Skeleton className="w-1/4 h-2 rounded-lg" />
+        <Skeleton className="w-full h-12 rounded-lg" />
+
     </div>
 }

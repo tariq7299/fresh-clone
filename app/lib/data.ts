@@ -6,7 +6,7 @@ import { redirectToOtpIfNotVerified } from "@/(auth)/_lib/redirect-otp-if-not-ve
 import { redirectToLoginIfNotAuthenticated } from "@/(auth)/_lib/redirect-to-login-if-not-authenticated";
 import { ApiServicesWithCategory } from "@/professional/_lib/definitions";
 import { ApiResponse } from "./definitions/api";
-import { Category } from "@/professional/_components/business-category-form";
+import { Category } from "@/professional/onboarding/business-category/business-category-form";
 
 
 

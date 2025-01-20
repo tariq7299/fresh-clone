@@ -1,16 +1,10 @@
 import { getBusinessStepFormData } from '@/professional/_lib/data';
 import { getAllCategories } from '@/lib/data';
-import BusinessCategoryForm, { StoredTempCategory } from '@/professional/_components/business-category-form';
+import BusinessCategoryForm, { StoredTempCategory } from '@/professional/onboarding/business-category/business-category-form';
 import { OnboardingBusinessCategorySkeleton } from '@/ui/skeletons';
 import { Suspense } from 'react';
 
-export default async function BusinessCategoryPage() {
-
-    const storedTempCategory = await getBusinessStepFormData("categoryStep") as StoredTempCategory | null
-
-    const categories = await getAllCategories()
-
-    if (!categories || categories.length === 0) throw new Error("Failed to fetch categories")
+export default function BusinessCategoryPage() {
 
     return <div className='w-full max-w-5xl p-5 py-24 min-h-dvh  mx-auto space-y-8 pb-20'>
 
@@ -26,7 +20,7 @@ export default async function BusinessCategoryPage() {
             </div>
         </div>
         <Suspense fallback={<OnboardingBusinessCategorySkeleton />}>
-            <BusinessCategoryForm storedTempCategory={storedTempCategory} categories={categories} />
+            <BusinessCategoryForm />
         </Suspense>
     </div>
 }

@@ -1,12 +1,11 @@
-import BusinessLocationForm from "@/professional/_components/business-location-form";
+import BusinessLocationForm from "@/professional/onboarding/business-location/business-location-form";
 import { MapProvider } from "@/lib/providers/map-providers";
-import { getBusinessStepFormData } from "@/professional/_lib/data";
-import { StoredTempLocation } from "@/professional/_lib/definitions";
+import { OnboardingBusinessLocationSkeleton } from "@/ui/skeletons";
+import { Suspense } from "react";
 
-export default async function BusinessLocationPage() {
+export default function BusinessLocationPage() {
 
 
-    const storedTempLocation = await getBusinessStepFormData("locationStep") as StoredTempLocation | null
 
     return <MapProvider>
         <div className='w-full max-w-2xl p-5 py-24 min-h-dvh  mx-auto space-y-8 pb-20'>
@@ -22,7 +21,9 @@ export default async function BusinessLocationPage() {
             </div>
 
 
-            <BusinessLocationForm storedTempLocation={storedTempLocation} />
+            <Suspense fallback={<OnboardingBusinessLocationSkeleton />}>
+                <BusinessLocationForm />
+            </Suspense>
         </div>
     </MapProvider>
 

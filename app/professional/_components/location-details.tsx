@@ -15,9 +15,9 @@ import { Input } from "@/ui/components/input"
 import { Label } from "@/ui/components/label"
 import { Textarea } from "@/ui/components/textarea";
 import { useState } from "react"
-import { BusinessLocationErrors } from "./business-location-form"
+import { BusinessLocationErrors } from "../onboarding/business-location/business-location-form"
 import { z } from "zod"
-import { BusinessLocationFormData } from "@/professional/_components/business-location-form"
+import { BusinessLocationFormData } from "@/professional/onboarding/business-location/business-location-form"
 
 const locationDetailsSchema = z.object({
     address: z.string().trim().min(1, { message: "Please provide a location" }),

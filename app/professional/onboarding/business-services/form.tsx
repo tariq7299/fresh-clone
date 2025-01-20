@@ -5,7 +5,7 @@ import { Button } from '@/ui/components/custom/button';
 import { Plus, EllipsisVertical } from 'lucide-react';
 import { ServicesComboBox } from '@/professional/_components/services-combo-box';
 import { handleSubmitBusinessServices } from '@/professional/_lib/form-actions';
-import { useBusinessFormContext } from './business-form-provider';
+import { useBusinessFormContext } from '../../_components/business-form-provider';
 import { cn } from '@/lib/utils/utils';
 import ServiceCard from '@/ui/components/custom/service-card';
 import { ApiService, ApiServicesWithCategory, Service, StoredService } from '@/professional/_lib/definitions';
@@ -59,7 +59,7 @@ function getInitialSelectedServicesList(services: ApiServicesWithCategory[], str
 
 
 
-export default function BusinessServicesForm({ services, stroredTempServices }: { services: ApiServicesWithCategory[], stroredTempServices: StoredService[] | null }) {
+export default function Form({ services, stroredTempServices }: { services: ApiServicesWithCategory[], stroredTempServices: StoredService[] | null }) {
 
     // I am using this because I want to show the loading state in button found in the parent component
     const { setIsLoading } = useBusinessFormContext()

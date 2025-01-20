@@ -3,8 +3,8 @@
 
 import CategoryCard from "@/ui/components/custom/business-category-card";
 import { useActionState, useEffect } from "react";
-import { useBusinessFormContext } from "./business-form-provider";
-import { BusinessCategoryFormData, handleSubmitBusinessCategory } from "../_lib/form-actions";
+import { useBusinessFormContext } from "../../_components/business-form-provider";
+import { BusinessCategoryFormData, handleSubmitBusinessCategory } from "../../_lib/form-actions";
 import { ErrorFormState } from "@/lib/definitions/definitions";
 
 
@@ -18,7 +18,7 @@ export type StoredTempCategory = {
     id: number | null,
 }
 
-export default function BusinessCategoryForm({ storedTempCategory, categories }: { storedTempCategory: StoredTempCategory | null, categories: Category[] }) {
+export default function Form({ storedTempCategory, categories }: { storedTempCategory: StoredTempCategory | null, categories: Category[] }) {
 
     const { setIsLoading } = useBusinessFormContext()
 

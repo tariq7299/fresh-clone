@@ -1,5 +1,0 @@
--- AlterTable
-ALTER TABLE "BusinessLocation" ADD COLUMN     "online_business" BOOLEAN NOT NULL DEFAULT false,
-ALTER COLUMN "lat" DROP NOT NULL,
-ALTER COLUMN "lng" DROP NOT NULL,
-ALTER COLUMN "country" DROP NOT NULL;
