@@ -1,4 +1,4 @@
-import { Button } from "@/ui/components/custom/button";
+import LogoutButton from "@/ui/components/logout-button";
 import OnboardingSteps from "../_components/onboarding-steps";
 import BackButton from "@/ui/components/custom/back-button";
 import BusinessFormProvider from "../_components/business-form-provider";
@@ -18,7 +18,8 @@ export default function ProfessionalOnboardingLayout({ children }: { children: R
                     <BackButton />
 
 
-                    <Button size={"lg"} variant={"ghost"} className="font-bold px-0 py-0 lg:hidden">Log out</Button>
+                    {/* <Button onClick size={"lg"} variant={"ghost"} className="font-bold px-0 py-0 lg:hidden">Log out</Button> */}
+                    <LogoutButton />
 
                     <SubmitButton className="hidden lg:flex text-md" />
 

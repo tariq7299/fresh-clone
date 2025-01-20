@@ -11,6 +11,7 @@ import { SessionData } from '@/(auth)/_lib/definitions';
 import useLocalStorage from '@/lib/hooks/use-local-storage';
 import { useRouter } from 'next/navigation';
 import SecureLS from 'secure-ls';
+import { navigateToDashboard } from '@/(auth)/_lib/auth-client-services';
 
 export type BusinessCapacityFormData = {
     capacity?: number | string
@@ -66,7 +67,7 @@ export default function Form({ storedTempCapacity }: { storedTempCapacity: numbe
                         setSessionData({ ...sessionData, has_business: true })
 
                         // Redirect to professional dashboard
-                        router.push("/professional/dashboard")
+                        navigateToDashboard(sessionData.role)
 
 
                     }
@@ -81,9 +82,9 @@ export default function Form({ storedTempCapacity }: { storedTempCapacity: numbe
 
 
 
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 ">
             {/* <Label className="font-bold" htmlFor="capacity">Business capacity</Label> */}
-            <Select name="capacity" value={formValues.capacity?.toString() || ""} onValueChange={(value) => setFormValues({ capacity: Number(value) })}>
+            <Select disabled={isPending} name="capacity" value={formValues.capacity?.toString() || ""} onValueChange={(value) => setFormValues({ capacity: Number(value) })}>
                 <SelectTrigger className="w-full p-6 text-md">
                     <SelectValue placeholder="Select a your business capacity" />
                 </SelectTrigger>

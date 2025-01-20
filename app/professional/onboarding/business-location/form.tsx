@@ -14,6 +14,7 @@ import { ErrorFormState } from "@/lib/definitions/definitions";
 import { z } from "zod";
 import { useBusinessFormContext } from "../../_components/business-form-provider";
 import { StoredTempLocation } from "../../_lib/definitions";
+import { OnboardingBusinessLocationSkeleton } from "@/ui/skeletons";
 
 export const businessLocationSchema = z.discriminatedUnion('online_business', [
     // When online_business is true, don't allow any other fields
@@ -257,6 +258,8 @@ export default function Form({ storedTempLocation }: { storedTempLocation: Store
     useEffect(() => {
         setIsLoading(isPending)
     }, [isPending])
+
+    if (loading) return <OnboardingBusinessLocationSkeleton />
 
 
     return (

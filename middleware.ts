@@ -21,6 +21,7 @@ export default async function middleware(req: NextRequest) {
     const session = await
         getSession()
 
+
     // 4. Redirect to /login if the user is not authenticated
     if ((req.nextUrl.pathname.startsWith('/professional') || req.nextUrl.pathname.startsWith('/admin') || req.nextUrl.pathname.startsWith('/customer')) && !session?.token) {
         return NextResponse.redirect(new URL('/login', req.nextUrl))

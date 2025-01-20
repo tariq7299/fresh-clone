@@ -11,9 +11,9 @@ const UNAUTHORIZED_MESSAGE = "Unauthenticated." as const;
  * @param status HTTP status code
  * @returns void
  */
-export function redirectToLoginIfNotAuthenticated(status: number, responseMsg: string): void {
+export function redirectToLoginIfNotAuthenticated(status: number, code: string | number): void {
 
-    if (status === UNAUTHORIZED_STATUS && responseMsg === UNAUTHORIZED_MESSAGE) {
+    if (status === UNAUTHORIZED_STATUS && code === UNAUTHORIZED_MESSAGE && typeof code === "string") {
 
         const isServer = typeof window === "undefined";
         const redirectUrl = "/login?sessionEnded=true";

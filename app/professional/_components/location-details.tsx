@@ -39,7 +39,7 @@ export default function LocationDetails({ setLocation, location, className }: { 
 
     const [isOpen, setIsOpen] = useState(false)
 
-    const [value, setValue] = useState(location)
+    const [value, setValue] = useState({ ...location })
     const [errors, setErrors] = useState<BusinessLocationDetailsErrors | null>(null)
 
     const handleSave = () => {
@@ -56,6 +56,9 @@ export default function LocationDetails({ setLocation, location, className }: { 
 
 
     }
+
+    console.log("locationDETAILLLSSS", location)
+    console.log("value43434", value)
 
     return <>
 

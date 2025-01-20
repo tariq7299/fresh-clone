@@ -19,6 +19,7 @@ import { setApiErrorMsg } from "@/lib/utils/api/setApiErrorMsg"
 import { handleCreatingNewbusiness, removeTempBusinessFormSumbissions } from "./data"
 import { SessionData } from "@/(auth)/_lib/definitions"
 import { updateProfessionalHasBusinessServerSide } from "@/(auth)/_lib/sessions"
+import { redirectToLoginIfNotAuthenticated } from "@/(auth)/_lib/redirect-to-login-if-not-authenticated"
 const businessNameSchema = z.object({
     nameEn: z.string().trim().min(3, { message: "Business name (En) is required" }),
     nameAr: z.string().trim().min(3, { message: "Business name (Ar) is required" }),
@@ -518,6 +519,7 @@ export const handleSubmitBusinessCapacity = async (formState: ErrorFormState<Bus
 
             const successMsg = setApiSuccessMsg({ successResponse: response })
 
+            // TODO: write types
             await createSession({
                 ...session,
                 has_business: true
@@ -527,7 +529,7 @@ export const handleSubmitBusinessCapacity = async (formState: ErrorFormState<Bus
 
             await removeTempBusinessFormSumbissions(business.id)
 
-
+            // TODO: write types
             return {
                 success: response.success,
                 clientFieldsErrors: null,
@@ -536,14 +538,8 @@ export const handleSubmitBusinessCapacity = async (formState: ErrorFormState<Bus
                 formData: { capacity: Number(formData.get("capacity")) || 0 }
             }
         } else {
-            const errorMsg = setApiErrorMsg({ errResponse: response as ApiError })
-            return {
-                success: false,
-                clientFieldsErrors: null,
-                apiDataResponse: null,
-                apiMsgs: errorMsg,
-                formData: { capacity: Number(formData.get("capacity")) || 0 }
-            }
+            throw new Error("Error submitting business capacity")
+
         }
 
 
@@ -551,6 +547,11 @@ export const handleSubmitBusinessCapacity = async (formState: ErrorFormState<Bus
     } catch (error) {
         console.error('Error submitting business capacity:', error);
         const errorMsg = setApiErrorMsg({ errResponse: error as ApiError })
+
+        if (error instanceof ApiError) {
+            redirectToLoginIfNotAuthenticated(error.status, error.code)
+        }
+
         return {
             success: false,
             clientFieldsErrors: null,
@@ -558,12 +559,7 @@ export const handleSubmitBusinessCapacity = async (formState: ErrorFormState<Bus
             apiMsgs: errorMsg,
             formData: { capacity: Number(formData.get("capacity")) || 0 }
         }
-        // throw new Error("Error submitting business capacity")
 
     }
-
-
-
-    // redirect("/professional/dashboard")
 
 }  

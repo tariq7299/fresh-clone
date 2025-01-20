@@ -11,5 +11,12 @@ export default function SubmitButton({ className }: { className?: string }) {
 
     const { isLoading } = useBusinessFormContext()
 
-    return <Button size={"lg"} loading={isLoading} form="business-onboarding-form" className={cn("font-bold flex gap-2 justify-center items-center", className)}>{isLoading ? "loading..." : "Continue"}  <ArrowRightIcon className="size-4" /></Button>
+    return <Button size={"lg"} loading={isLoading} form="business-onboarding-form" className={cn("font-bold flex gap-2 justify-center items-center", className)}>
+        {isLoading ? "loading..." : (
+            <>
+                Continue
+                <ArrowRightIcon className="size-4" />
+            </>
+        )}
+    </Button>
 }
