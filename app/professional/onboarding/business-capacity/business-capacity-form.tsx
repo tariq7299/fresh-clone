@@ -1,4 +1,4 @@
-import { OnboardingBusinessCapacitySkeleton } from '@/ui/skeletons';
+import { OnboardingBusinessCapacitySkeleton } from '@/professional/_components/skeletons';
 import Form from './form';
 import { getBusinessStepFormData } from '@/professional/_lib/data';
 

@@ -1,6 +1,6 @@
 import BusinessLocationForm from "@/professional/onboarding/business-location/business-location-form";
 import { MapProvider } from "@/lib/providers/map-providers";
-import { OnboardingBusinessLocationSkeleton } from "@/ui/skeletons";
+import { OnboardingBusinessLocationSkeleton } from "@/professional/_components/skeletons";
 import { Suspense } from "react";
 
 export default function BusinessLocationPage() {

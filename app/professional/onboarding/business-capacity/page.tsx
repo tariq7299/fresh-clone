@@ -1,5 +1,5 @@
 import BusinessCapacityForm from "@/professional/onboarding/business-capacity/business-capacity-form";
-import { OnboardingBusinessCapacitySkeleton } from "@/ui/skeletons";
+import { OnboardingBusinessCapacitySkeleton } from "@/professional/_components/skeletons";
 import { Suspense } from "react";
 
 export default function BusinessCapacityPage() {

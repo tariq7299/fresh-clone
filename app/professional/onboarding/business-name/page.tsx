@@ -2,7 +2,7 @@ import BusinessNameForm from '@/professional/onboarding/business-name/business-n
 import { getBusinessStepFormData } from '@/professional/_lib/data';
 import { StoredTempBusinessInfo } from '@/professional/_lib/definitions';
 import { Suspense } from 'react';
-import { OnboardingBusinessCapacitySkeleton, OnboardingBusinessLocationSkeleton, OnboardingBusinessNameSkeleton } from '@/ui/skeletons';
+import { OnboardingBusinessCapacitySkeleton, OnboardingBusinessLocationSkeleton, OnboardingBusinessNameSkeleton } from '@/professional/_components/skeletons';
 
 export default function BusinessNamePage({ }) {
 

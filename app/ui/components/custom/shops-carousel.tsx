@@ -11,9 +11,13 @@ import {
 import { useId } from "react";
 
 
-export default function ShopsCarousel({ sectionTitle = (<h1 className="font-semibold font-source-sans text-left text-2xl md:text-3xl "></h1>) }) {
+export default function ShopsCarousel({ data, sectionTitle = (<h1 className="font-semibold font-source-sans text-left text-2xl md:text-3xl "></h1>) }: { data: any, sectionTitle?: React.ReactNode }) {
 
     const id = useId()
+
+    console.log("data", data)
+
+    if (!data) return null
 
     return (
         <section className="  ">
@@ -45,9 +49,9 @@ export default function ShopsCarousel({ sectionTitle = (<h1 className="font-semi
 
                     <Carousel className="w-full " opts={{ breakpoints: { '(min-width: 768px)': { slidesToScroll: 3 }, '(min-width: 1024px)': { slidesToScroll: 4 } } }}>
                         <CarouselContent >
-                            {Array.from({ length: 12 }, (_, i) =>
+                            {data.map((item: any, i: number) =>
                                 <CarouselItem key={`${id}+${i}`} className="xs:basis-1/2   md:basis-1/4 lg:basis-1/4 xl:base-1/5">
-                                    <ShopCard />
+                                    <ShopCard item={item} />
                                 </CarouselItem>
                             )}
 

@@ -1,4 +1,4 @@
-import { Skeleton } from "./components/skeleton"
+import { Skeleton } from "../../ui/components/skeleton"
 
 export function OnboardingBusinessNameSkeleton() {
     const fields = Array(5).fill(null);

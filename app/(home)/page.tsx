@@ -1,16 +1,20 @@
 
 import NavBar from "../ui/components/custom/nav-bar";
 import { Button } from "../ui/components/custom/button";
-import HeroSection from "./components/hero-section";
-import ShopsCarousel from "./components/shops-carousel";
-import FeaturesSection from "./components/features-section";
-import ChangingAvatar from "./components/changing-avatar";
+import HeroSection from "./_components/hero-section";
+import ShopsCarousel from "../ui/components/custom/shops-carousel";
+import FeaturesSection from "./_components/features-section";
+import ChangingAvatar from "./_components/changing-avatar";
 import { Badge } from "@/ui/components/badge";
 import Image from "next/image";
 import appleLogo from "@/../public/apple-logo.svg.png";
 import googleLogo from "@/../public/google-logo.png";
 import { GlobeAsiaAustraliaIcon } from "@heroicons/react/24/outline";
-
+import { RecommendedBusinesses } from "./_components/recommended-businesses";
+import NewBusinesses from "./_components/new-businesses";
+import TrendingBusinesses from "./_components/trending-businesses";
+import { ShopsCarouselSkeleton } from "./_components/skeletons";
+import { Suspense } from "react";
 export default function Home() {
   return (
     <>
@@ -38,16 +42,23 @@ export default function Home() {
         <section className="px-5 md:px-7 mb-20 md:mb-36 space-y-12 md:space-y-16">
 
           {/* Recently viewed section */}
-          <ShopsCarousel sectionTitle={(<h1 className="font-semibold font-source-sans text-left text-3xl  ">Recently viewed</h1>)} />
+          {/* <ShopsCarousel sectionTitle={(<h1 className="font-semibold font-source-sans text-left text-3xl  ">Recently viewed</h1>)} /> */}
 
-          {/* Recommended section */}
-          <ShopsCarousel sectionTitle={(<h1 className="font-semibold font-source-sans text-left  text-3xl ">Recommended</h1>)} />
+          <Suspense fallback={<ShopsCarouselSkeleton />}>
+            {/* Recommended section */}
+            <RecommendedBusinesses />
+          </Suspense>
 
           {/* New to Lumière section */}
-          <ShopsCarousel sectionTitle={(<h1 className="font-semibold font-source-sans text-left  text-3xl ">New to <span className="font-lora text-3xl  font-bold">Lumière</span></h1>)} />
+          <Suspense fallback={<ShopsCarouselSkeleton />}>
+            <NewBusinesses />
+          </Suspense>
 
           {/* Trending section */}
-          <ShopsCarousel sectionTitle={(<h1 className="font-semibold font-source-sans text-left  text-3xl ">Trending</h1>)} />
+          <Suspense fallback={<ShopsCarouselSkeleton />}>
+            <TrendingBusinesses />
+          </Suspense>
+
 
         </section>
 

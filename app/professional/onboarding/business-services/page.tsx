@@ -1,6 +1,6 @@
 import BusinessServicesForm from '@/professional/onboarding/business-services/business-services-form';
 import { Suspense } from 'react';
-import { OnboardingBusinessServicesSkeleton } from '@/ui/skeletons';
+import { OnboardingBusinessServicesSkeleton } from '@/professional/_components/skeletons';
 
 export default function BusinessServicesPage() {
 

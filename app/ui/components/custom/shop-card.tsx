@@ -3,7 +3,8 @@ import Image from "next/image"
 import { Badge } from "../badge"
 import { cn } from "@/lib/utils/utils"
 
-function ShopCard({ className = '' }) {
+// TODO: write types
+function ShopCard({ className = '', item }: { className?: string, item: any }) {
     return (
         <div className={cn("border border-gray-300 rounded-lg shadow-sm bg-white flex flex-col hover:cursor-pointer  overflow-hidden",
             className
@@ -15,7 +16,7 @@ function ShopCard({ className = '' }) {
             <div className="grow-[2] w-full  overflow-hidden">
 
                 <Image
-                    src={barberShop}
+                    src={item.cover_image || barberShop}
                     alt="Shop image"
                     className="object-cover rounded-t-lg hover:scale-110 transistion ease-in-out delay-100 duration-300"
                 />
@@ -25,10 +26,10 @@ function ShopCard({ className = '' }) {
 
 
             <div className="space-y-1 p-2.5  self-center grow-[1] text-left w-full">
-                <p className="font-bold text-lg text-nowrap truncate ">Gedo Salon - NasrCity</p>
+                <p className="font-bold text-lg text-nowrap truncate ">{item.name}</p>
                 {/* truncate this text */}
-                <p className="text-muted-foreground text-nowrap text-xs md:text-base truncate">Al Manteqa el tasaa, Nasr City</p>
-                <Badge variant="outline">Barbershop</Badge>
+                <p className="text-muted-foreground text-nowrap text-xs md:text-base truncate">{item.description}</p>
+                <Badge variant="outline">{item.category.name}</Badge>
             </div>
         </div>
 
