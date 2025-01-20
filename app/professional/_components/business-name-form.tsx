@@ -82,9 +82,9 @@ export default function BusinessNameForm({ storedTempBusinessInfo }: { storedTem
                     <Label className="font-bold" htmlFor="genderOfCustomers">Who is your business for?</Label>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 justify-items-stretch  ">
-                        <CategoryCard defaultChecked={formValues.genderOfCustomers === GenderOfCustomers.Men} inputName="genderOfCustomers" inputValue="men" categoryName="Men" categoryIconUrl="/man-avatar.png" categoryId={1} isPending={isPending} categoryIconWidth={48} categoryIconHeight={48} />
-                        <CategoryCard defaultChecked={formValues.genderOfCustomers === GenderOfCustomers.Women} inputName="genderOfCustomers" inputValue="women" categoryName="Women" categoryIconUrl="/man-avatar.png" categoryId={2} isPending={isPending} categoryIconWidth={48} categoryIconHeight={48} />
-                        <CategoryCard defaultChecked={formValues.genderOfCustomers === GenderOfCustomers.Both} inputName="genderOfCustomers" inputValue="both" categoryName="Both" categoryIconUrl="/man-avatar.png" categoryIconWidth={48} categoryIconHeight={48} categoryId={3} isPending={isPending} />
+                        <CategoryCard defaultChecked={formValues.genderOfCustomers === GenderOfCustomers.Men} inputName="genderOfCustomers" inputValue="men" categoryName="Men" categoryIconUrl="/man-avatar.png" isPending={isPending} categoryIconWidth={48} categoryIconHeight={48} />
+                        <CategoryCard defaultChecked={formValues.genderOfCustomers === GenderOfCustomers.Women} inputName="genderOfCustomers" inputValue="women" categoryName="Women" categoryIconUrl="/man-avatar.png" isPending={isPending} categoryIconWidth={48} categoryIconHeight={48} />
+                        <CategoryCard defaultChecked={formValues.genderOfCustomers === GenderOfCustomers.Both} inputName="genderOfCustomers" inputValue="both" categoryName="Both" categoryIconUrl="/man-avatar.png" categoryIconWidth={48} categoryIconHeight={48} isPending={isPending} />
                     </div>
 
 
