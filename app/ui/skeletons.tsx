@@ -58,3 +58,27 @@ export function OnboardingBusinessServicesSkeleton() {
         </div>
     </div>
 }
+
+export function OnboardingBusinessLocationSkeleton() {
+    const categories = Array(10).fill(null);
+
+    return <div className="w-full max-w-4xl mx-auto ">
+        <div className=" grid grid-cols-1 justify-items-stretch items-stretch gap-4">
+
+            {Array(10).fill(null).map((_, i) => (
+                <div key={i} className="flex gap-2 border-1 border-gray-100 rounded-lg p-6 justify-between">
+                    <div className="flex flex-col gap-2">
+                        <Skeleton className="w-24 h-6 rounded-full" />
+                        <Skeleton className="w-14 h-3 rounded-full" />
+                    </div>
+                    <div className="flex gap-2 items-center">
+                        <Skeleton className="w-6 h-3 rounded-full" />
+                        <Skeleton className="w-6 h-3 rounded-full" />
+                        <Skeleton className="ps-5 w-3 h-8 rounded-full" />
+                    </div>
+                </div>
+
+            ))}
+        </div>
+    </div>
+}
