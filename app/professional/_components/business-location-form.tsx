@@ -79,8 +79,6 @@ export default function BusinessLocationForm({ storedTempLocation }: { storedTem
         lng: storedTempLocation?.lng ?? defaultLng
     })
 
-    console.log("storedTempLocation", storedTempLocation)
-
     // State for storing complete address details
     const [location, setLocation] = useState<BusinessLocationFormData>({
         lat: storedTempLocation?.lat ?? defaultLat,
@@ -197,7 +195,6 @@ export default function BusinessLocationForm({ storedTempLocation }: { storedTem
                 status: google.maps.places.PlacesServiceStatus
             ) => {
                 if (status === google.maps.places.PlacesServiceStatus.OK && results) {
-                    console.log("results", results)
                     setResult(results.length > 0 ? results.slice(0, 5).map(({ formatted_address, geometry, place_id }) => ({ formatted_address, geometry, place_id })) : [])
                     setIsSearching(false)
                     setOpen(true)
@@ -210,7 +207,6 @@ export default function BusinessLocationForm({ storedTempLocation }: { storedTem
     const handleCameraChange = (ev: MapCameraChangedEvent) => {
         if (location.online_business) return
         setCenter(ev.detail.center)
-        console.log("ev.detail.center", ev.detail.center)
         setLocation({
             ...location,
             lat: ev.detail.center.lat,
@@ -255,7 +251,6 @@ export default function BusinessLocationForm({ storedTempLocation }: { storedTem
         e.preventDefault()
         setIsPending(true)
         const result = await handleSubmitBusinessLocation({ ...location })
-        console.log("result", result)
         result && setFormState(result)
         setIsPending(false)
     }
@@ -263,8 +258,6 @@ export default function BusinessLocationForm({ storedTempLocation }: { storedTem
         setIsLoading(isPending)
     }, [isPending])
 
-
-    console.log("location", location)
 
     return (
         <form id="business-onboarding-form" onSubmit={handleSubmit}>

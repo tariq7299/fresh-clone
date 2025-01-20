@@ -3,6 +3,13 @@ import { Nullable } from "@/lib/utils/utils";
 
 // Coming from api like that (before mapping and changing its keys)
 
+export enum GenderOfCustomers {
+    Men = "men",
+    Women = "women",
+    Both = "both"
+}
+
+
 export type ApiService = {
     id: number,
     name: string,
@@ -52,5 +59,35 @@ export type StoredTempBusinessInfo = {
     description_en: string,
     description_ar: string,
     website_url: string,
+    gender_of_customers: GenderOfCustomers
 }
 
+export type Business = {
+    name_ar: string;
+    name_en: string;
+    description_ar: string;
+    description_en: string;
+    website_url: string;
+    capacity: number;
+    category_id: number;
+    location: {
+        country: string;
+        city: string;
+        address: string;
+        longitude: number;
+        latitude: number;
+        street: string;
+        building: string;
+        floor: string;
+        apartment: string;
+        district: string;
+        direction: string;
+        place_id: string;
+    };
+    gender_of_customers: GenderOfCustomers;
+    services: {
+        service_id: number;
+        duration: number;
+        price: number;
+    }[];
+}

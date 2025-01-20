@@ -7,9 +7,9 @@ datasource db {
   url = env("DATABASE_URL")
 }
 
-enum Gender {
-  male
-  female
+enum GenderOfCustomers {
+  men
+  women
   both
 }
 
@@ -24,7 +24,7 @@ model Business {
   capacity    Int?
   category_id Int?
   location     BusinessLocation?
-  gender     Gender?    // You might want to use enum here
+  gender_of_customers     GenderOfCustomers?    // You might want to use enum here
   services    BusinessService[] // Relation to services
 }
 

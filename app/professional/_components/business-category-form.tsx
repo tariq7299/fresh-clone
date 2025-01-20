@@ -1,7 +1,7 @@
 
 "use client"
 
-import BusinessCategoryCard from "@/ui/components/custom/business-category-card";
+import CategoryCard from "@/ui/components/custom/business-category-card";
 import { useActionState, useEffect } from "react";
 import { useBusinessFormContext } from "./business-form-provider";
 import { BusinessCategoryFormData, handleSubmitBusinessCategory } from "../_lib/form-actions";
@@ -58,7 +58,7 @@ export default function BusinessCategoryForm({ storedTempCategory, categories }:
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 justify-items-stretch md:grid-cols-3 ">
                 {categories.map((category: any) => (
-                    <BusinessCategoryCard key={category.id} categoryName={category.name} categoryIconUrl={"/categories/hair.png"} categoryId={category.id} isPending={isPending} defaultChecked={storedTempCategory?.id === category.id} />
+                    <CategoryCard key={category.id} categoryName={category.name} categoryIconUrl={"/categories/hair.png"} categoryId={category.id} isPending={isPending} defaultChecked={storedTempCategory?.id === category.id} inputName="categoryId" inputValue={String(category.id)} />
                 ))}
             </div>
 

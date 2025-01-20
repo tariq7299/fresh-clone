@@ -7,9 +7,15 @@ import { getSession } from "@/(auth)/_lib/sessions"
 import { redirect } from "next/navigation"
 import { SuccessFormState } from "@/lib/definitions/definitions"
 import { ErrorFormState } from "@/lib/definitions/definitions"
-import { Service } from "./definitions"
+import { Business, GenderOfCustomers, Service } from "./definitions"
 import { BusinessLocationErrors } from "../_components/business-location-form"
 import { BusinessLocationFormData } from "../_components/business-location-form"
+import { BusinessCapacityFormData } from "../_components/business-capacity-form"
+import { BusinessCapacityFieldErrors } from "../_components/business-capacity-form"
+import { ApiError, ApiResponse, ApiSucess } from "@/lib/definitions/api"
+import { fetchApi } from "@/lib/utils/api/fetch-utils"
+import { setApiSuccessMsg } from "@/lib/utils/api/setApiSuccessMsg"
+import { setApiErrorMsg } from "@/lib/utils/api/setApiErrorMsg"
 
 const businessNameSchema = z.object({
     nameEn: z.string().trim().min(3, { message: "Business name (En) is required" }),
@@ -17,6 +23,7 @@ const businessNameSchema = z.object({
     descriptionEn: z.string().trim().min(3, { message: "Description (En) is required" }),
     descriptionAr: z.string().trim().min(3, { message: "Description (Ar) is required" }),
     websiteUrl: z.string().trim().min(3, { message: "Website URL is required" }),
+    genderOfCustomers: z.enum(["men", "women", "both"], { message: "Please select a gender" })
 })
 
 const businessCategorySchema = z.object({
@@ -33,6 +40,7 @@ export type BusinessNameFieldErrors = {
     descriptionEn?: string | string[]
     descriptionAr?: string | string[]
     websiteUrl?: string | string[]
+    genderOfCustomers?: string | string[]
 }
 
 export type BusinessNameFormState = SuccessFormState<BusinessNameFormData, BusinessNameFormData> | ErrorFormState<BusinessNameFieldErrors |
@@ -47,6 +55,7 @@ export const handleSubmitBusinessName = async (formState: BusinessNameFormState,
         descriptionEn: formData.get("descriptionEn") as string || "",
         descriptionAr: formData.get("descriptionAr") as string || "",
         websiteUrl: formData.get("websiteUrl") as string || "",
+        genderOfCustomers: formData.get("genderOfCustomers") as GenderOfCustomers || "",
     }
 
     const session = await getSession()
@@ -80,6 +89,7 @@ export const handleSubmitBusinessName = async (formState: BusinessNameFormState,
                 description_en: validatedFields.data.descriptionEn,
                 description_ar: validatedFields.data.descriptionAr,
                 website_url: validatedFields.data.websiteUrl,
+                gender_of_customers: validatedFields.data.genderOfCustomers,
             },
             create: {
                 userId: Number(userId),
@@ -88,6 +98,7 @@ export const handleSubmitBusinessName = async (formState: BusinessNameFormState,
                 description_en: validatedFields.data.descriptionEn,
                 description_ar: validatedFields.data.descriptionAr,
                 website_url: validatedFields.data.websiteUrl,
+                gender_of_customers: validatedFields.data.genderOfCustomers,
             }
         })
 
@@ -323,9 +334,6 @@ export const handleSubmitBusinessLocation = async (formData: BusinessLocationFor
         }
     }
 
-
-    console.log("payload", payload)
-
     const validatedFields = businessLocationSchema.safeParse(payload)
 
     if (!validatedFields.success) {
@@ -350,8 +358,6 @@ export const handleSubmitBusinessLocation = async (formData: BusinessLocationFor
         })
 
         if (!business) throw new Error("Business not found")
-
-        console.log("business", business)
 
         if (payload.online_business) {
 
@@ -454,5 +460,95 @@ export const handleSubmitBusinessLocation = async (formData: BusinessLocationFor
 
     redirect("/professional/onboarding/business-capacity")
 
+
+}
+
+const businessCapacitySchema = z.object({
+    capacity: z.number().gte(1, { message: "Please enter a valid capacity" }).lte(10, { message: "Please enter a valid capacity" })
+})
+
+export const handleSubmitBusinessCapacity = async (formState: ErrorFormState<BusinessCapacityFieldErrors | null, BusinessCapacityFormData>, formData: FormData): Promise<ErrorFormState<BusinessCapacityFieldErrors | null, BusinessCapacityFormData> | void> => {
+
+    const session = await getSession()
+    const userId = session ? session.id : null
+    if (!userId) redirect("/login?sessionEnded=true")
+
+    const validatedFields = businessCapacitySchema.safeParse({ capacity: Number(formData.get("capacity")) || 0 } as BusinessCapacityFormData)
+
+    if (!validatedFields.success) {
+        return {
+            success: false,
+            clientFieldsErrors: validatedFields.error.flatten().fieldErrors,
+            apiDataResponse: null,
+            apiMsgs: "",
+            formData: { capacity: Number(formData.get("capacity")) || 0 }
+        }
+    }
+
+    try {
+
+
+        const business = await prisma.business.findUnique({
+            where: {
+                userId: userId
+            },
+            select: {
+                id: true
+            }
+        })
+
+        if (!business) throw new Error("Business not found")
+
+        await prisma.business.update({
+            where: {
+                userId: userId
+            },
+            data: {
+                capacity: validatedFields.data.capacity
+            }
+        })
+
+        const newBusiness = await prisma.business.findUnique({
+            where: {
+                userId: userId
+            }
+        })
+
+        // Send request to   backend to create a business  
+
+        const response = await fetchApi<ApiResponse<Business>>("/businesses", {
+            method: "POST",
+            body: newBusiness
+        }) as ApiSucess<Business>
+
+        const successMsg = setApiSuccessMsg({ successResponse: response })
+
+        // return {
+        //     success: true,
+        //     clientFieldsErrors: null,
+        //     apiDataResponse: response.data.user,
+        //     apiMsgs: successMsg,
+        //     formData: { capacity: Number(formData.get("capacity")) || 0 }
+        // }
+
+
+
+    } catch (error) {
+        console.error('Error submitting business capacity:', error);
+        const errorMsg = setApiErrorMsg({ errResponse: error as ApiError })
+        return {
+            success: false,
+            clientFieldsErrors: null,
+            apiDataResponse: null,
+            apiMsgs: errorMsg,
+            formData: { capacity: Number(formData.get("capacity")) || 0 }
+        }
+        // throw new Error("Error submitting business capacity")
+
+    }
+
+
+
+    redirect("/professional/dashboard")
 
 }

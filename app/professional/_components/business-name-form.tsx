@@ -7,7 +7,8 @@ import { handleSubmitBusinessName, BusinessNameFormData, BusinessNameFieldErrors
 import { useEffect, useState } from 'react';
 import { useBusinessFormContext } from './business-form-provider';
 import { ErrorFormState } from '@/lib/definitions/definitions';
-import { StoredTempBusinessInfo } from '../_lib/definitions';
+import { GenderOfCustomers, StoredTempBusinessInfo } from '../_lib/definitions';
+import CategoryCard from '@/ui/components/custom/business-category-card';
 
 export default function BusinessNameForm({ storedTempBusinessInfo }: { storedTempBusinessInfo: StoredTempBusinessInfo | null }) {
 
@@ -25,6 +26,7 @@ export default function BusinessNameForm({ storedTempBusinessInfo }: { storedTem
             descriptionEn: storedTempBusinessInfo?.description_en || "",
             descriptionAr: storedTempBusinessInfo?.description_ar || "",
             websiteUrl: storedTempBusinessInfo?.website_url || "",
+            genderOfCustomers: storedTempBusinessInfo?.gender_of_customers || "",
         }
     }
 
@@ -37,7 +39,7 @@ export default function BusinessNameForm({ storedTempBusinessInfo }: { storedTem
     }, [isPending])
 
     return <form action={formAction} id="business-onboarding-form">
-        <div className="flex flex-col gap-2 w-full max-w-lg p-5 py-24 min-h-dvh  items-center m-auto space-y-5">
+        <div className="flex flex-col gap-2 w-full max-w-xl p-5 py-24 min-h-dvh  items-center m-auto space-y-5">
 
             <div className="text-start space-y-1">
 
@@ -75,6 +77,18 @@ export default function BusinessNameForm({ storedTempBusinessInfo }: { storedTem
                     <Label className="font-bold" htmlFor="websiteUrl">Website (Optional)</Label>
                     <Input disabled={isPending} value={formValues.websiteUrl} onChange={(e) => setFormValues({ ...formValues, websiteUrl: e.target.value })} type="text" name="websiteUrl" id="websiteUrl" placeholder="https://www.bekkybarber.com" />
                     <p className="text-sm text-destructive ">{formState.clientFieldsErrors?.websiteUrl?.[0]}</p>
+                </div>
+                <div className="flex flex-col gap-2">
+                    <Label className="font-bold" htmlFor="genderOfCustomers">Who is your business for?</Label>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 justify-items-stretch  ">
+                        <CategoryCard defaultChecked={formValues.genderOfCustomers === GenderOfCustomers.Men} inputName="genderOfCustomers" inputValue="men" categoryName="Men" categoryIconUrl="/man-avatar.png" categoryId={1} isPending={isPending} categoryIconWidth={48} categoryIconHeight={48} />
+                        <CategoryCard defaultChecked={formValues.genderOfCustomers === GenderOfCustomers.Women} inputName="genderOfCustomers" inputValue="women" categoryName="Women" categoryIconUrl="/man-avatar.png" categoryId={2} isPending={isPending} categoryIconWidth={48} categoryIconHeight={48} />
+                        <CategoryCard defaultChecked={formValues.genderOfCustomers === GenderOfCustomers.Both} inputName="genderOfCustomers" inputValue="both" categoryName="Both" categoryIconUrl="/man-avatar.png" categoryIconWidth={48} categoryIconHeight={48} categoryId={3} isPending={isPending} />
+                    </div>
+
+
+                    <p className="text-sm text-destructive ">{formState.clientFieldsErrors?.genderOfCustomers?.[0]}</p>
                 </div>
 
 
