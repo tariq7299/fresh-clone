@@ -30,10 +30,12 @@ const locationDetailsSchema = z.object({
     building: z.string().optional(),
 })
 
+export type LocationDetails = z.infer<typeof locationDetailsSchema>
+
 type BusinessLocationDetailsErrors = Omit<BusinessLocationErrors, "online_business" | "place_id" | "lat" | "lng">
 
 // TODO: Write types
-export default function LocationDetails({ setLocation, location, className }: { setLocation: (location: BusinessLocationFormData) => void, location: BusinessLocationFormData, className: string }) {
+export default function LocationDetails({ setLocation, location, className }: { setLocation: (any: any) => void, location: any, className: string }) {
 
     const [isOpen, setIsOpen] = useState(false)
 
@@ -53,10 +55,6 @@ export default function LocationDetails({ setLocation, location, className }: { 
         }
 
 
-    }
-
-    if (location.online_business) {
-        return null
     }
 
     return <>
