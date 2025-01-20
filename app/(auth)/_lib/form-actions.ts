@@ -65,9 +65,6 @@ export const login = async (formState: SuccessLoginFormState | ErrorLoginFormSta
 
         const errorMsg = setApiErrorMsg({ errResponse: authenticateUserResponse as ApiError })
 
-        console.log("authenticateUserResponse", authenticateUserResponse)
-        console.log("errorMsg", errorMsg)
-
         return {
             success: false,
             clientFieldsErrors: null,
@@ -180,8 +177,6 @@ export const register = async (formState: SuccessRegisterFormState | ErrorRegist
             method: 'POST',
             body: payload,
         }) as ApiSucess<Omit<ApiResponseSessionData, "token">>;
-
-        console.log("response", response)
 
         const successMsg = setApiSuccessMsg({ successResponse: response })
 

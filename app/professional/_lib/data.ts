@@ -12,10 +12,10 @@ export const getBusinessStepFormData = async (stepName: string) => {
 
     const session = await getSession()
     const userId = session ? session.id : null
-    console.log("userId", userId)
     if (!userId) {
         redirect("/login?sessionExpired=true")
     }
+
     try {
 
 
@@ -32,6 +32,7 @@ export const getBusinessStepFormData = async (stepName: string) => {
                     description_en: true,
                     website_url: true,
                     capacity: true,
+                    gender_of_customers: true,
                 }
             })
 
@@ -96,24 +97,19 @@ export const getBusinessStepFormData = async (stepName: string) => {
                 }
             })
 
-            console.log("storedTempLocation", storedTempLocation)
-
-            // const formattedLocation: StoredTempLocation = {
-            //     lat: storedTempLocation?.location?.lat ?? null,
-            //     lng: storedTempLocation?.location?.lng ?? null,
-            //     place_id: storedTempLocation?.location?.place_id ?? null,
-            //     address: storedTempLocation?.location?.address ?? null,
-            //     building: storedTempLocation?.location?.building ?? null,
-            //     apartment: storedTempLocation?.location?.apartment ?? null,
-            //     street: storedTempLocation?.location?.street ?? null,
-            //     district: storedTempLocation?.location?.district ?? null,
-            //     city: storedTempLocation?.location?.city ?? null,
-            //     country: storedTempLocation?.location?.country ?? null,
-            //     directions: storedTempLocation?.location?.directions ?? null,
-            //     online_business: storedTempLocation?.location?.online_business ?? false,
-            // }
-
             return storedTempLocation ? storedTempLocation?.location : null
+        } else if (stepName === "capacityStep") {
+
+            const storedTempCapacity = await prisma.business.findUnique({
+                where: {
+                    userId: userId
+                },
+                select: {
+                    capacity: true
+                }
+            })
+
+            return storedTempCapacity ? storedTempCapacity?.capacity : null
         }
 
         return null

@@ -6,10 +6,10 @@ import { CheckIcon } from "lucide-react"
 import { Button } from "./button"
 
 // Supply the col-span-1 class
-export default function BusinessCategoryCard({ categoryName, categoryIconUrl = "/categories/hair.png", categoryId, isPending, defaultChecked }: { categoryName: string, categoryIconUrl: string, categoryId: number, isPending: boolean, defaultChecked: boolean }) {
+export default function CategoryCard({ categoryName, categoryIconUrl = "/categories/hair.png", isPending, defaultChecked, className, categoryIconWidth = 32, categoryIconHeight = 32, inputName, inputValue }: { categoryName: string, categoryIconUrl: string, isPending: boolean, defaultChecked: boolean, className?: string, categoryIconWidth?: number, categoryIconHeight?: number, inputName: string, inputValue: string }) {
 
-    return <label htmlFor={String(categoryId)} className={cn("col-span-1 relative cursor-pointer w-full active:scale-95 transition-transform duration-150 before:content-[''] before:absolute before:inset-0 before:w-full before:h-full before:border-2 before:border-accent before:rounded-lg", isPending && "opacity-50 pointer-events-none")}>
-        <input id={String(categoryId)} type="radio" name="categoryId" defaultChecked={defaultChecked} value={String(categoryId)} className="peer appearance-none hidden" />
+    return <label htmlFor={inputValue} className={cn("col-span-1 relative cursor-pointer w-full active:scale-95 transition-transform duration-150 before:content-[''] before:absolute before:inset-0 before:w-full before:h-full before:border-2 before:border-accent before:rounded-lg", isPending && "opacity-50 pointer-events-none", className)}>
+        <input id={inputValue} type="radio" name={inputName} defaultChecked={defaultChecked} value={inputValue} className="peer appearance-none hidden" />
         <div className={cn(
             "flex flex-col justify-center gap-3 items-start rounded-lg p-5 transition-all duration-200 box-border",
             "border-1 border-gray-200 bg-background hover:bg-accent/5 ",
@@ -19,8 +19,8 @@ export default function BusinessCategoryCard({ categoryName, categoryIconUrl = "
             <Image
                 src={categoryIconUrl}
                 alt={categoryName}
-                width={32}
-                height={32}
+                width={categoryIconWidth}
+                height={categoryIconHeight}
             />
 
             <h1 className={cn(
