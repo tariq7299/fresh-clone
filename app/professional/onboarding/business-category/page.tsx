@@ -12,7 +12,7 @@ export default async function BusinessCategoryPage() {
 
     if (!categories || categories.length === 0) throw new Error("Failed to fetch categories")
 
-    return <div className='w-full max-w-4xl p-5 py-24 min-h-dvh  mx-auto space-y-8 pb-20'>
+    return <div className='w-full max-w-5xl p-5 py-24 min-h-dvh  mx-auto space-y-8 pb-20'>
 
         <div className='flex flex-col gap-2 w-full'>
 
@@ -25,9 +25,7 @@ export default async function BusinessCategoryPage() {
                 <p className="text-sm text-muted-foreground ">Choose a category that best describes your business.</p>
             </div>
         </div>
-
         <Suspense fallback={<OnboardingBusinessCategorySkeleton />}>
-
             <BusinessCategoryForm storedTempCategory={storedTempCategory} categories={categories} />
         </Suspense>
     </div>

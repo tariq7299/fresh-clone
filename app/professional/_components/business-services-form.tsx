@@ -144,55 +144,47 @@ export default function BusinessServicesForm({ services, stroredTempServices }: 
         return
     };
 
-    return <form onSubmit={handleSubmit} id="business-onboarding-form" >
+    return <form onSubmit={handleSubmit} id="business-onboarding-form" className="flex flex-col gap-2 w-full ">
         {/* Main container with responsive max width and vertical padding */}
-        <div className="flex flex-col gap-2 w-full max-w-4xl p-5 py-24 min-h-dvh items-stretch m-auto space-y-5 ">
 
-            {/* Header section with title and description */}
-            <div className="text-start space-y-1">
-                <p className="text-sm text-muted-foreground text-start"> Account setup</p>
-                <h1 className="text-3xl lg:text-4xl font-bold font-source-sans">Build Your Service List</h1>
-                <p className="text-sm text-muted-foreground ">Choose a service then press <span className="font-bold text-accent-600">Add</span> to add it to your list.</p>
-            </div>
 
-            {/* Display validation error if service selection is empty */}
-            {formState.clientFieldsErrors?.service && <p className="text-destructive text-sm py-2">{formState.clientFieldsErrors?.service}</p>}
+        {/* Display validation error if service selection is empty */}
+        {formState.clientFieldsErrors?.service && <p className="text-destructive text-sm py-2">{formState.clientFieldsErrors?.service}</p>}
 
-            {/* Service selection controls - ComboBox and Add button */}
-            <div className={cn('flex max-w-xl gap-2 justify-center items-center mx-auto w-full',
-                // Disable interaction while form is submitting
-                isPending && "pointer-events-none opacity-50"
-            )}>
-                {/* Dropdown for selecting services */}
-                <ServicesComboBox
-                    className=' w-full'
-                    servicesList={services}
-                    selectedService={selectedService}
-                    setSelectedService={setSelectedService}
-                />
+        {/* Service selection controls - ComboBox and Add button */}
+        <div className={cn('flex max-w-xl gap-2 justify-center items-center mx-auto w-full pb-4',
+            // Disable interaction while form is submitting
+            isPending && "pointer-events-none opacity-50"
+        )}>
+            {/* Dropdown for selecting services */}
+            <ServicesComboBox
+                className=' w-full '
+                servicesList={services}
+                selectedService={selectedService}
+                setSelectedService={setSelectedService}
+            />
 
-                {/* Add button with plus icon */}
-                <Button type='button' onClick={handleAddingService} className='font-bold flex items-center gap-2'>
-                    Add<Plus className='size-4' />
-                </Button>
-            </div>
-
-            {/* Grid container for selected service cards */}
-            <div className={cn("grid grid-cols-1 gap-4",
-                // Disable interaction while form is submitting 
-                isPending && "pointer-events-none opacity-50"
-            )}>
-                {/* Map through selected services and render a card for each */}
-                {selectedServicesList.map((selectedService) => (
-                    <ServiceCard
-                        key={selectedService.serviceId}
-                        service={selectedService}
-                        services={selectedServicesList}
-                        setServices={setSelectedServicesList}
-                    />
-                ))}
-            </div>
-
+            {/* Add button with plus icon */}
+            <Button type='button' onClick={handleAddingService} className='font-bold flex items-center gap-2'>
+                Add<Plus className='size-4' />
+            </Button>
         </div>
+
+        {/* Grid container for selected service cards */}
+        <div className={cn("grid grid-cols-1 gap-4",
+            // Disable interaction while form is submitting 
+            isPending && "pointer-events-none opacity-50"
+        )}>
+            {/* Map through selected services and render a card for each */}
+            {selectedServicesList.map((selectedService) => (
+                <ServiceCard
+                    key={selectedService.serviceId}
+                    service={selectedService}
+                    services={selectedServicesList}
+                    setServices={setSelectedServicesList}
+                />
+            ))}
+        </div>
+
     </form>
 }

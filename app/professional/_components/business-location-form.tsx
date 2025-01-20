@@ -260,63 +260,55 @@ export default function BusinessLocationForm({ storedTempLocation }: { storedTem
 
 
     return (
-        <form id="business-onboarding-form" onSubmit={handleSubmit}>
-
-            <div className="flex flex-col gap-2 w-full max-w-2xl p-5 py-24 
-        min-h-dvh  items-stretch m-auto space-y-5 text-start">
-
-                <div className="text-start space-y-1">
-
-                    <p className="text-sm text-muted-foreground text-start"> Account setup</p>
-
-                    {/* Change this to more descriptive title */}
-                    <h1 className="text-3xl lg:text-4xl font-bold font-source-sans text-start"> Where's your business located?</h1>
-
-                    <p className="text-sm text-muted-foreground text-start "> This is where your business is located. Your billing and legal name can be added later.</p>
-                </div>
+        <form id="business-onboarding-form" onSubmit={handleSubmit} className="flex flex-col gap-2 w-full space-y-2 ">
 
 
-                {/* Location search component */}
-                <SearchLocation online_business={location.online_business} className={cn(location.online_business ? "pointer-events-none" : location.place_id && location.lat && location.lng ? "hidden" : "block")} setOpen={setOpen} open={open} handleSearch={handleSearch} handleSettingLocation={handleSettingLocation} result={result} isSearching={isSearching} clientFieldsErrors={formState.clientFieldsErrors} />
+            {/* Location search component */}
+            <SearchLocation online_business={location.online_business} className={cn(location.online_business ? "pointer-events-none" : location.place_id && location.lat && location.lng ? "hidden" : "block")} setOpen={setOpen} open={open} handleSearch={handleSearch} handleSettingLocation={handleSettingLocation} result={result} isSearching={isSearching} clientFieldsErrors={formState.clientFieldsErrors} />
 
-                {/* Display selected location details */}
-                <LocationDetails setLocation={setLocation} location={location} className={cn(location.online_business ? "hidden" : location.place_id && location.lat && location.lng ? "flex" : "hidden")} />
+            {/* Display selected location details */}
+            <LocationDetails setLocation={setLocation} location={location} className={cn(
+                "pb-4",
+                location.online_business ? "hidden" : location.place_id && location.lat && location.lng ? "flex" : "hidden")} />
 
-                <div className={cn(location.online_business ? "hidden" : location.place_id && location.lat && location.lng ? "block" : "hidden")}>
+            <div className={cn(
+                "space-y-4",
+                location.online_business ? "hidden" : location.place_id && location.lat && location.lng ? "block" : "hidden")}>
+                <div>
 
                     <h2 className="text-lg font-bold">Is the pin in the right place?</h2>
-                    <p className="text-sm text-muted-foreground pb-4">If not, you can drag it to the correct location</p>
-
-                    {/* Map component with marker */}
-                    <MapComponent
-                        className={cn("rounded-lg w-full h-[320px] overflow-hidden", location.online_business ? "hidden" : location.place_id && location.lat && location.lng ? "block" : "hidden")}
-                        defaultCenter={center}
-                        center={center}
-                        defaultZoom={15}
-                        gestureHandling={'greedy'}
-                        disableDefaultUI={true}
-                        onCameraChanged={handleCameraChange}
-                    >
-                        <Marker
-                            icon={customIcon}
-                            position={center}
-                            draggable={false}
-                        />
-                    </MapComponent>
-
+                    <p className="text-sm text-muted-foreground ">If not, you can drag it to the correct location</p>
                 </div>
 
+                {/* Map component with marker */}
+                <MapComponent
+                    className={cn("rounded-lg w-full h-[320px] overflow-hidden", location.online_business ? "hidden" : location.place_id && location.lat && location.lng ? "block" : "hidden")}
+                    defaultCenter={center}
+                    center={center}
+                    defaultZoom={15}
+                    gestureHandling={'greedy'}
+                    disableDefaultUI={true}
+                    onCameraChanged={handleCameraChange}
+                >
+                    <Marker
+                        icon={customIcon}
+                        position={center}
+                        draggable={false}
+                    />
+                </MapComponent>
 
-                {/* Mobile/online services checkbox */}
-                <div className="flex items-center space-x-2">
-                    <Checkbox checked={location.online_business} onCheckedChange={() => setLocation({ ...location, online_business: !location.online_business })} variant="accent" id="terms" className="size-6 border-gray-300 " />
-                    <label
-                        htmlFor="terms"
-                        className=" cursor-pointer font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                    >
-                        I don't have a business address (mobile and online services only)
-                    </label>
-                </div>
+            </div>
+
+
+            {/* Mobile/online services checkbox */}
+            <div className="flex items-center space-x-2">
+                <Checkbox checked={location.online_business} onCheckedChange={() => setLocation({ ...location, online_business: !location.online_business })} variant="accent" id="terms" className="size-6 border-gray-300 " />
+                <label
+                    htmlFor="terms"
+                    className=" cursor-pointer font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                    I don't have a business address (mobile and online services only)
+                </label>
             </div>
         </form>
 
