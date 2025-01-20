@@ -10,7 +10,7 @@ export default function ProfessionalOnboardingLayout({ children }: { children: R
 
     return <div className=" w-lvw">
         <BusinessFormProvider>
-            <div className="fixed top-0 left-1/2 -translate-x-1/2 bg-background w-svw pt-3 px-5 flex flex-col z-50 max-w-5xl ">
+            <div className="fixed top-0 left-1/2 -translate-x-1/2 bg-background w-svw pt-3 px-5 flex flex-col z-50 max-w-6xl ">
 
                 <OnboardingSteps />
 
