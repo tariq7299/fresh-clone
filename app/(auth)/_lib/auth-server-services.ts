@@ -3,7 +3,7 @@
 import { ApiResponse } from "@/lib/definitions/api";
 import { ApiResponseSessionData, SessionData } from "./definitions";
 import { fetchApi } from "@/lib/utils/api/fetch-utils";
-import { createSession, deleteSession } from '@/(auth)/_lib/sessions';
+import { createSession, deleteSession, getSession } from '@/(auth)/_lib/sessions';
 import { redirect } from 'next/navigation'
 import { ApiError } from "@/lib/definitions/api";
 
@@ -38,3 +38,13 @@ export async function navigateToLoginWithSessionEnded() {
 export async function navigateToOtp(email: string) {
     redirect("/otp-verification?email=" + email)
 }
+
+export async function getUserData() {
+    const session = await getSession()
+    if (!session) return null
+
+    const { id, role } = session
+
+    return { id, role }
+}
+

@@ -179,6 +179,8 @@ export const handleSubmitBusinessCategory = async (formState: ErrorFormState<{ c
 
 export const handleSubmitBusinessServices = async (formData: Service[]): Promise<ErrorFormState<{ service?: string } | null, Service[]>> => {
 
+    console.log("formData", formData)
+
     // Validating form data 
     // Here it dones't require a schema, because the data has already been validated in the edit service dialog/modal  
     // and here i just want to check if there is at least one service !

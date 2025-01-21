@@ -1,7 +1,7 @@
 
 'use client'
 
-import { ArrowRightEndOnRectangleIcon, ChevronDownIcon } from '@heroicons/react/24/outline'
+import { ArrowRightEndOnRectangleIcon, BriefcaseIcon, ChevronDownIcon } from '@heroicons/react/24/outline'
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -21,6 +21,14 @@ import useIsScrolled from '../_lib/hooks/use-is-scrolled'
 
 export default function PublicNavBar() {
 
+    const navTabs = [
+        {
+            title: 'For business',
+            href: '/register?type=professional',
+            icon: (<BriefcaseIcon className='size-6' />)
+        },
+    ]
+
 
     const isScrolled = useIsScrolled()
     return (
@@ -36,7 +44,7 @@ export default function PublicNavBar() {
 
                 {/* Nav menue trigger on mobile devices */}
                 <div className="md:hidden">
-                    <MobileNavMenu isScrolled={isScrolled} />
+                    <MobileNavMenu authenticated={false} navTabs={navTabs} isScrolled={isScrolled} />
                 </div>
 
                 {/*Closed navbar on desktop screens  */}
@@ -72,7 +80,7 @@ export default function PublicNavBar() {
                                     For business
                                 </Link>
                             </DropdownMenuItem>
-                            <DropdownMenuItem className=' text-accent-600  hover:text-accent-foreground'>
+                            <DropdownMenuItem className=' text-accent-600  '>
                                 <p className=" flex  items-center gap-2  font-semibold "><GlobeAsiaAustraliaIcon className="h-6 w-5" /> English</p>
                             </DropdownMenuItem>
                         </DropdownMenuContent>

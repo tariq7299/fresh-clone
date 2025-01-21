@@ -17,6 +17,8 @@ export async function createSession(sessionData: SessionData) {
         sameSite: 'lax',
         path: '/',
     })
+
+
 }
 
 export async function deleteSession() {
@@ -27,6 +29,7 @@ export async function deleteSession() {
 export async function getSession(): Promise<SessionData | null> {
     const session = (await cookies()).get('session')
 
+
     if (!session?.value) return null
 
     try {
@@ -34,5 +37,4 @@ export async function getSession(): Promise<SessionData | null> {
     } catch {
         return null
     }
-
 }

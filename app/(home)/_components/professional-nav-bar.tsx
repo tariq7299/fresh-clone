@@ -79,7 +79,7 @@ export default function ProfessionalNavBar() {
                             </DropdownMenuItem>
                             <DropdownMenuSeparator className='  my-2 mx-2 ' />
                             <DropdownMenuLabel className='font-bold  text-base'>Other</DropdownMenuLabel>
-                            <DropdownMenuItem className=' text-accent-600  hover:text-accent-foreground'>
+                            <DropdownMenuItem className=' text-accent-600  '>
                                 <p className=" flex  items-center gap-2  font-semibold "><GlobeAsiaAustraliaIcon className="h-6 w-5" /> English</p>
                             </DropdownMenuItem>
                         </DropdownMenuContent>

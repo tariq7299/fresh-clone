@@ -15,14 +15,16 @@ import NewBusinesses from "./_components/new-businesses";
 import TrendingBusinesses from "./_components/trending-businesses";
 import { ShopsCarouselSkeleton } from "./_components/skeletons";
 import { Suspense } from "react";
-
+import { NavBarSkeleton } from "./_components/skeletons";
 export default function Home() {
   return (
     <>
       <div className="overflow-x-hidden">
 
         {/* Nav bar */}
-        <NavBar />
+        <Suspense fallback={<NavBarSkeleton />}>
+          <NavBar />
+        </Suspense>
 
         <section className="px-5 md:px-7 py-36 lg:py-52 grid justify-center  relative items-center">
           <HeroSection />

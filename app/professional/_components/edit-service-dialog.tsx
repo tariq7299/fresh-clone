@@ -13,6 +13,7 @@ import { Label } from "@/ui/components/label"
 import { Service } from "@/professional/_lib/definitions"
 import { useState } from "react"
 import { z } from "zod"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, SelectGroup, SelectLabel } from '@/ui/components/select';
 
 const editServiceSchema = z.object({
     servicePrice: z.number().gte(1, { message: "Enter a valid price" }),
@@ -92,6 +93,30 @@ export default function EditServiceDialog({ currentService, services, setService
                         </Label>
                         <div className=" col-span-3">
                             <div className="relative roudned-lg  ">
+                                <Select name="duration" value={value.serviceDuration?.toString() || ""} onValueChange={(e) => setValue({ ...value, serviceDuration: Number(e) })}>
+                                    <SelectTrigger className="w-full  text-md">
+                                        <SelectValue placeholder="Select a your business capacity" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectGroup>
+                                            <SelectLabel>Duration</SelectLabel>
+                                            {[15, 30, 45, 60, 75, 90, 105, 120].map((duration) => (
+                                                <SelectItem key={duration} value={duration.toString()}>
+                                                    <span className="text-sm">{duration} min</span>
+                                                </SelectItem>
+                                            ))}
+
+                                        </SelectGroup>
+                                    </SelectContent>
+                                </Select>
+
+                                {/* <p className="absolute right-9 top-1/2 -translate-y-1/2 text-muted-foreground text-xs italic p-2">min</p> */}
+                            </div>
+                            {value.errors.serviceDuration && value?.errors?.serviceDuration?.length > 0 && <p className=" text-destructive text-sm col-span-3 pt-2">{value?.errors?.serviceDuration?.[0]}</p>}
+
+                        </div>
+                        {/* <div className=" col-span-3">
+                            <div className="relative roudned-lg  ">
                                 <Input
                                     id="name"
                                     type="number"
@@ -103,7 +128,7 @@ export default function EditServiceDialog({ currentService, services, setService
                             </div>
                             {value.errors.serviceDuration && value?.errors?.serviceDuration?.length > 0 && <p className=" text-destructive text-sm col-span-3 pt-2">{value?.errors?.serviceDuration?.[0]}</p>}
 
-                        </div>
+                        </div> */}
                     </div>
                     <div className="grid grid-cols-4 items-center gap-4">
                         <Label htmlFor="username" className="text-right">

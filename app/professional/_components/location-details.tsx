@@ -14,7 +14,7 @@ import {
 import { Input } from "@/ui/components/input"
 import { Label } from "@/ui/components/label"
 import { Textarea } from "@/ui/components/textarea";
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { BusinessLocationErrors } from "../onboarding/business-location/business-location-form"
 import { z } from "zod"
 import { BusinessLocationFormData } from "@/professional/onboarding/business-location/business-location-form"
@@ -39,7 +39,16 @@ export default function LocationDetails({ setLocation, location, className }: { 
 
     const [isOpen, setIsOpen] = useState(false)
 
-    const [value, setValue] = useState({ ...location })
+    const [value, setValue] = useState<LocationDetails>({
+        address: '',
+        district: '',
+        city: '',
+        country: '',
+        directions: '',
+        street: '',
+        apartment: '',
+        building: ''
+    })
     const [errors, setErrors] = useState<BusinessLocationDetailsErrors | null>(null)
 
     const handleSave = () => {
@@ -59,6 +68,10 @@ export default function LocationDetails({ setLocation, location, className }: { 
 
     console.log("locationDETAILLLSSS", location)
     console.log("value43434", value)
+
+    useEffect(() => {
+        setValue({ ...location })
+    }, [location])
 
     return <>
 

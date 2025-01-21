@@ -93,7 +93,7 @@ export default function CustomerNavBar() {
                                 ))}
 
                             </DropdownMenuItem>
-                            <DropdownMenuItem className=' text-accent-600  hover:text-accent-foreground'>
+                            <DropdownMenuItem className=' text-accent-600  '>
                                 <p className=" flex  items-center gap-2  font-semibold "><GlobeAsiaAustraliaIcon className="h-6 w-5" /> English</p>
                             </DropdownMenuItem>
                         </DropdownMenuContent>
