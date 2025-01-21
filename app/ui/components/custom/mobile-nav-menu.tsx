@@ -6,7 +6,7 @@ import { Button } from '@/ui/components/custom/button'
 import Link from 'next/link'
 import { GlobeAsiaAustraliaIcon } from "@heroicons/react/24/outline";
 
-export default function MobileNavMenu({ isScrolled }: { isScrolled: boolean }) {
+export default function MobileNavMenu({ authenticated, navTabs, isScrolled }: { authenticated: boolean, navTabs: { title: string, href: string, icon: JSX.Element }[], isScrolled: boolean }) {
 
     const [isOpen, setIsOpen] = useState(false)
 
@@ -36,19 +36,39 @@ export default function MobileNavMenu({ isScrolled }: { isScrolled: boolean }) {
 
                 </div>
                 <ul className='space-y-5 font-bold text-lg'>
-                    <li className=' '>
-                        <Link className='p-5 bg-white flex items-center gap-2 rounded-xl border-solid	border border-gray-200' href="/login">
-                            <ArrowRightEndOnRectangleIcon className='size-6' /> Log In
-                            <ChevronRightIcon className='size-4 ml-auto' />
-                        </Link>
-                    </li>
-                    <li className='p-5 bg-background rounded-xl border-solid border border-gray-200 space-y-6'>
-                        <Link className=' flex items-center gap-2 ' href="/register?type=professional">
-                            <BriefcaseIcon className='size-6' /> For business
-                            <ChevronRightIcon className='size-4 ml-auto' />
-                        </Link>
+                    {/* Log in and log out */}
 
-                        <p className=" flex  items-center gap-2  pe-0  font-semibold">
+                    <li className=' '>
+                        {authenticated ? <>
+                            <Link className='p-5 bg-white flex items-center gap-3 rounded-xl border-solid	border border-gray-200' href="/login?sessionEnded=true">
+                                <ArrowRightEndOnRectangleIcon className='size-6' />
+                                Log out
+                                <ChevronRightIcon className='size-4 ml-auto' />
+                            </Link>
+                        </>
+                            : <>
+                                <Link className='p-5 bg-white flex items-center gap-3 rounded-xl border-solid	border border-gray-200' href="/login">
+                                    <ArrowRightEndOnRectangleIcon className='size-6' />
+                                    Log In
+                                    <ChevronRightIcon className='size-4 ml-auto' />
+                                </Link>
+                            </>
+                        }
+
+                    </li>
+
+                    <li className='p-5 bg-background rounded-xl border-solid border border-gray-200 space-y-6'>
+
+                        {/* Nav tabs */}
+                        {navTabs && navTabs?.length > 0 && navTabs.map((tab) => (
+                            <Link key={tab.title} className=' flex items-center gap-3 ' href={tab.href}>
+                                {tab.icon} {tab.title}
+                                <ChevronRightIcon className='size-4 ml-auto' />
+                            </Link>
+                        ))}
+
+                        {/* Language selector */}
+                        <p className=" flex  items-center gap-3  pe-0  font-semibold">
                             <GlobeAsiaAustraliaIcon className="size-6 text-accent-600" />
                             <span className='text-accent-600'>English</span>
                             <ChevronRightIcon className='size-4 ml-auto' />

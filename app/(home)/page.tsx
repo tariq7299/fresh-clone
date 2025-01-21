@@ -15,6 +15,7 @@ import NewBusinesses from "./_components/new-businesses";
 import TrendingBusinesses from "./_components/trending-businesses";
 import { ShopsCarouselSkeleton } from "./_components/skeletons";
 import { Suspense } from "react";
+
 export default function Home() {
   return (
     <>

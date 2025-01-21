@@ -7,7 +7,8 @@ import { UserRole } from '@/(auth)/_lib/definitions'
 
 // These routes that the user can't access it while authenticated
 // So if he tries to access these then he will be directed to /dashboard
-const publicRoutes = ['/register', '/for-who', "/otp-verification"]
+// const publicRoutes = ['/register', '/for-who', "/otp-verification"]
+const publicRoutes = [""]
 // const publicRoutes = ['/login', '/register', '/for-who', "/professional/onboarding"]
 
 export default async function middleware(req: NextRequest) {
