@@ -21,7 +21,7 @@ import useIsScrolled from '../_lib/hooks/use-is-scrolled'
 import Image from 'next/image'
 import userAvatar from "@/../public/avatars/avatar11.png"
 
-export default function CustomerNavBar() {
+export default function CustomerNavBar({ fixed = false, hideInMobile = false }: { fixed?: boolean, hideInMobile?: boolean }) {
 
     const isScrolled = useIsScrolled()
 
@@ -34,24 +34,27 @@ export default function CustomerNavBar() {
     ]
 
     return (
-        <nav className={cn('fixed top-0 left-0 w-lvw  z-50 ',
-            isScrolled ? 'bg-white shadow' : 'bg-transparent'
+        <nav className={cn(' w-lvw  z-50 ',
+            fixed ? 'bg-white shadow' : isScrolled ? 'bg-white shadow' : 'bg-transparent',
+            hideInMobile ? 'hidden md:block fixed top-0 left-0' : 'fixed top-0 left-0'
         )}>
 
             <div className="p-5 flex justify-between items-center max-w-[1440px] m-auto pe-7">
 
                 <Link href="/" className={cn("text-2xl font-extrabold font-lora ",
-                    isScrolled ? 'text-primary' : 'text-background'
+                    fixed ? 'text-primary' : isScrolled ? 'text-primary' : 'text-background'
                 )}>Lumière</Link>
 
                 {/* Nav menue trigger on mobile devices */}
-                <div className="md:hidden">
-                    <MobileNavMenu authenticated={true} navTabs={navTabs} isScrolled={isScrolled} />
+                <div className={cn("md:hidden",
+                    hideInMobile ? 'hidden' : ''
+                )}>
+                    <MobileNavMenu authenticated={true} navTabs={navTabs} isScrolled={isScrolled} fixed={fixed} />
                 </div>
 
                 {/*Closed navbar on desktop screens  */}
                 <div className={cn("hidden md:inline-flex space-x-2 items-center",
-                    isScrolled ? 'text-primary' : ' text-background'
+                    fixed ? 'text-primary' : isScrolled ? 'text-primary' : ' text-background'
                 )}>
                     {/* <Link href="/register?type=professional" className={cn("font-semibold",
                         isScrolled ? 'text-primary' : ' text-background'

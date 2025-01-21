@@ -62,7 +62,7 @@ export type StoredTempBusinessInfo = {
     gender_of_customers: GenderOfCustomers
 }
 
-export type Business = {
+export type BusinessOnboarding = {
     name_ar: string;
     name_en: string;
     description_ar: string;

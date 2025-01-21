@@ -7,7 +7,7 @@ import { createSession, getSession, updateSessionServer } from "@/(auth)/_lib/se
 import { redirect } from "next/navigation"
 import { SuccessFormState } from "@/lib/definitions/definitions"
 import { ErrorFormState } from "@/lib/definitions/definitions"
-import { Business, GenderOfCustomers, Service } from "./definitions"
+import { BusinessOnboarding, GenderOfCustomers, Service } from "./definitions"
 import { BusinessLocationErrors } from "../onboarding/business-location/business-location-form"
 import { BusinessLocationFormData } from "../onboarding/business-location/business-location-form"
 import { BusinessCapacityFormData } from "../onboarding/business-capacity/business-capacity-form"
@@ -18,7 +18,6 @@ import { setApiSuccessMsg } from "@/lib/utils/api/setApiSuccessMsg"
 import { setApiErrorMsg } from "@/lib/utils/api/setApiErrorMsg"
 import { handleCreatingNewbusiness, removeTempBusinessFormSumbissions } from "./data"
 import { SessionData } from "@/(auth)/_lib/definitions"
-import { updateProfessionalHasBusinessServerSide } from "@/(auth)/_lib/sessions"
 import { redirectToLoginIfNotAuthenticated } from "@/(auth)/_lib/redirect-to-login-if-not-authenticated"
 const businessNameSchema = z.object({
     nameEn: z.string().trim().min(3, { message: "Business name (En) is required" }),

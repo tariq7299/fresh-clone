@@ -13,7 +13,6 @@ import {
 } from "@/ui/components/dropdown-menu"
 import MobileNavMenu from '@/ui/components/custom/mobile-nav-menu'
 import { cn } from '@/lib/utils/utils'
-import { useEffect, useState } from 'react'
 import { Button } from '@/ui/components/custom/button'
 import Link from 'next/link'
 import { GlobeAsiaAustraliaIcon } from "@heroicons/react/24/outline";
@@ -21,36 +20,32 @@ import useIsScrolled from '../_lib/hooks/use-is-scrolled'
 import Image from 'next/image'
 import userAvatar from "@/../public/avatars/avatar11.png"
 
-export default function ProfessionalNavBar() {
+export default function ProfessionalNavBar({ fixed = false, hideInMobile = false }: { fixed?: boolean, hideInMobile?: boolean }) {
 
 
     const isScrolled = useIsScrolled()
 
     return (
-        <nav className={cn('fixed top-0 left-0 w-lvw  z-50 ',
-            isScrolled ? 'bg-white shadow' : 'bg-transparent'
+        <nav className={cn(' w-lvw  z-50 ',
+            fixed ? 'bg-white shadow' : isScrolled ? 'bg-white shadow' : 'bg-transparent',
+            hideInMobile ? 'hidden md:block fixed top-0 left-0' : 'fixed top-0 left-0'
         )}>
 
             <div className="p-5 flex justify-between items-center max-w-[1440px] m-auto pe-7">
 
                 <Link href="/" className={cn("text-2xl font-extrabold font-lora ",
-                    isScrolled ? 'text-primary' : 'text-background'
+                    fixed ? 'text-primary' : isScrolled ? 'text-primary' : 'text-background'
                 )}>Lumière</Link>
 
                 {/* Nav menue trigger on mobile devices */}
                 <div className="md:hidden">
-                    <MobileNavMenu authenticated={true} navTabs={[]} isScrolled={isScrolled} />
+                    <MobileNavMenu authenticated={true} navTabs={[]} isScrolled={isScrolled} fixed={fixed} />
                 </div>
 
                 {/*Closed navbar on desktop screens  */}
                 <div className={cn("hidden md:inline-flex space-x-2 items-center",
-                    isScrolled ? 'text-primary' : ' text-background'
+                    fixed ? 'text-primary' : isScrolled ? 'text-primary' : ' text-background'
                 )}>
-                    {/* <Link href="/register?type=professional" className={cn("font-semibold",
-                        isScrolled ? 'text-primary' : ' text-background'
-                    )}>For business</Link> */}
-
-                    <Button borderType="fullRounded" variant="nextLink" href="/register?type=professional" className="bg-transparent font-source-sans font-semibold   hover:bg-muted/50">For business</Button>
 
                     <DropdownMenu>
 

@@ -6,7 +6,6 @@ import { ErrorFormState } from '@/lib/definitions/definitions';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, SelectGroup, SelectLabel } from '@/ui/components/select';
 import { handleSubmitBusinessCapacity } from '@/professional/_lib/form-actions';
 import { handleFormResponse } from '@/lib/utils/utils';
-import { removeTempBusinessFormSumbissions, updateProfessionalHasBusinessClientSide } from '@/professional/_lib/data';
 import { SessionData } from '@/(auth)/_lib/definitions';
 import useLocalStorage from '@/lib/hooks/use-local-storage';
 import { useRouter } from 'next/navigation';

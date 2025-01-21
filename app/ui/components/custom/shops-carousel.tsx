@@ -17,7 +17,7 @@ export default function ShopsCarousel({ data, sectionTitle = (<h1 className="fon
 
     console.log("data", data)
 
-    if (!data) return null
+    if (!data || data.length === 0) return null
 
     return (
         <section className="  ">

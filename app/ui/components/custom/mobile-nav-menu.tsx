@@ -6,7 +6,7 @@ import { Button } from '@/ui/components/custom/button'
 import Link from 'next/link'
 import { GlobeAsiaAustraliaIcon } from "@heroicons/react/24/outline";
 
-export default function MobileNavMenu({ authenticated, navTabs, isScrolled }: { authenticated: boolean, navTabs: { title: string, href: string, icon: JSX.Element }[], isScrolled: boolean }) {
+export default function MobileNavMenu({ authenticated, navTabs, isScrolled, fixed }: { authenticated: boolean, navTabs: { title: string, href: string, icon: JSX.Element }[], isScrolled: boolean, fixed: boolean }) {
 
     const [isOpen, setIsOpen] = useState(false)
 
@@ -15,7 +15,7 @@ export default function MobileNavMenu({ authenticated, navTabs, isScrolled }: { 
 
             <Button size="icon" variant={"ghost"} onClick={() => setIsOpen(!isOpen)}>
                 <Bars3Icon className={cn('size-10 ',
-                    isScrolled ? 'text-foreground' : 'text-background hover:text-foreground'
+                    fixed ? 'text-foreground' : isScrolled ? 'text-foreground' : 'text-background hover:text-foreground'
                 )} />
             </Button>
 

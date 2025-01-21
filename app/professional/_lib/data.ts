@@ -3,7 +3,7 @@ import { createSession, getSession } from "@/(auth)/_lib/sessions";
 import prisma from "@/lib/prisma";
 import { redirect } from "next/navigation";
 import { StoredTempCategory } from "../onboarding/business-category/business-category-form";
-import { Business } from "./definitions";
+import { BusinessOnboarding } from "./definitions";
 import { fetchApi } from "@/lib/utils/api/fetch-utils";
 import { ApiResponse, ApiError, ApiSucess } from "@/lib/definitions/api";
 import { SessionData } from "@/(auth)/_lib/definitions";
@@ -126,7 +126,7 @@ export const getBusinessStepFormData = async (stepName: string) => {
     }
 }
 
-export const handleCreatingNewbusiness = async (): Promise<ApiResponse<Business>> => {
+export const handleCreatingNewbusiness = async (): Promise<ApiResponse<BusinessOnboarding>> => {
 
     const session = await getSession()
     const userId = session ? session.id : null
@@ -195,10 +195,10 @@ export const handleCreatingNewbusiness = async (): Promise<ApiResponse<Business>
         console.log("formattedBusiness", formattedBusiness)
         // Send request to   backend to create a business  
 
-        const successResponse = await fetchApi<ApiResponse<Business>>("/businesses", {
+        const successResponse = await fetchApi<ApiResponse<BusinessOnboarding>>("/businesses", {
             method: "POST",
             body: formattedBusiness
-        }) as ApiSucess<Business>
+        }) as ApiSucess<BusinessOnboarding>
 
         // const successMsg = setApiSuccessMsg({ successResponse: response })
 
