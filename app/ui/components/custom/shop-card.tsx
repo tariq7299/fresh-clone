@@ -2,11 +2,12 @@ import barberShop from "@/../public/barber-shop-2.jpg"
 import Image from "next/image"
 import { Badge } from "../badge"
 import { cn } from "@/lib/utils/utils"
+import Link from "next/link"
 
 // TODO: write types
 function ShopCard({ className = '', item }: { className?: string, item: any }) {
     return (
-        <div className={cn("border border-gray-300 rounded-lg shadow-sm bg-white flex flex-col hover:cursor-pointer  overflow-hidden",
+        <Link href={`/business/${item.id}`} className={cn("border border-gray-300 rounded-lg shadow-sm bg-white flex flex-col hover:cursor-pointer  overflow-hidden",
             className
         )}>
             {/* <div className={cn("border border-gray-300 rounded-lg shadow-sm bg-white w-[220px] lg:w-[250px] xl:w-[280px] flex flex-col hover:cursor-pointer  overflow-hidden",
@@ -31,7 +32,7 @@ function ShopCard({ className = '', item }: { className?: string, item: any }) {
                 <p className="text-muted-foreground text-nowrap text-xs md:text-base truncate">{item.description}</p>
                 <Badge variant="outline">{item.category.name}</Badge>
             </div>
-        </div>
+        </Link>
 
         // <div className="border border-gray-300 rounded-lg shadow-sm bg-white w-[240px]  grid grid-rows-3 grid-cols-1 ">
 
