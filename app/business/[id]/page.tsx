@@ -2,7 +2,7 @@ import { ApiServicesWithCategory } from "@/professional/_lib/definitions";
 import { getBusinessData } from "../_lib/data";
 import Image from "next/image";
 import barberShop from "@/../public/barber-shop-2.jpg"
-import { Dot } from 'lucide-react';
+import { Dot, Link } from 'lucide-react';
 import {
     Tabs,
     TabsContent,
@@ -29,6 +29,28 @@ interface Category {
     name: string;
 }
 
+interface Coordinates {
+    longitude: number;
+    latitude: number;
+};
+
+interface AddressDetails {
+    apartment: string;
+    floor: string;
+    building: string;
+    district: string;
+    direction: string;
+};
+
+interface Address {
+    country: string;
+    city: string;
+    street: string;
+    address: string;
+    coordinates: Coordinates;
+    details: AddressDetails;
+    place_id: string;
+}
 
 // Main business type
 interface Business {
@@ -39,7 +61,7 @@ interface Business {
     business_hours: BusinessHour[];
     is_active: boolean;
     capacity: number;
-    address: string | null;
+    location: Address;
     gender: string;
     category: Category;
     services_with_categories: ApiServicesWithCategory[];
@@ -80,8 +102,8 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
                     <div className="hidden md:block">
                         <Dot className="size-full" />
                     </div>
-                    <p className=" text-muted-foreground">{businessData.address}</p>
-                    <p className=" text-accent ">Get Directions</p>
+                    <p className=" text-muted-foreground">{businessData.location.address}</p>
+                    <a href={`https://www.google.com/maps/dir/?api=1&destination=${businessData.location.coordinates.latitude},${businessData.location.coordinates.longitude}`} className=" text-accent ">Get Directions</a>
 
                 </div>
 
@@ -113,13 +135,14 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
                         <div className="rounded-lg overflow-hidden">
                             <img
                                 className=""
-                                src="https://api.mapbox.com/styles/v1/mapbox/streets-v12/static/pin-s+555555(30.042617388660606,31.23340646299468)/30.042617388660606,31.23340646299468,9.26,0/884x472@2x?access_token=pk.eyJ1IjoidGFyaXE3Mjk5IiwiYSI6ImNtNjZ5NDYydTA1NGMycXIyN3YwMDdya28ifQ.PLTA5eR2eDKUFwM8IiOjEQ"
+                                src={`https://api.mapbox.com/styles/v1/mapbox/streets-v12/static/pin-s+555555(${businessData.location.coordinates.latitude},${businessData.location.coordinates.longitude})/${businessData.location.coordinates.latitude},${businessData.location.coordinates.longitude},9.26,0/884x472@2x?access_token=pk.eyJ1IjoidGFyaXE3Mjk5IiwiYSI6ImNtNjZ5NDYydTA1NGMycXIyN3YwMDdya28ifQ.PLTA5eR2eDKUFwM8IiOjEQ`}
                                 alt="Salon location on map"
                                 loading="lazy"
                             />
 
+
                         </div>
-                        <p className=" text-muted-foreground pt-4">{businessData.address} Get Directions</p>
+                        <p className=" text-muted-foreground pt-4">{businessData.location.address} <a href={`https://www.google.com/maps/dir/?api=1&destination=${businessData.location.coordinates.latitude},${businessData.location.coordinates.longitude}`} className=" text-accent ">Get Directions</a></p>
                     </div>
 
                     <BusinessHours business_hours={businessData.business_hours} className="pb-6" />

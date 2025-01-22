@@ -15,7 +15,7 @@ export default function BusinessLayout({ children }: { children: React.ReactNode
 
         {children}
 
-        <Footer className="" />
+        {/* <Footer className="" /> */}
 
     </>
 }
