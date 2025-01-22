@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils/utils";
 import { handleSubmitBusinessLocation } from "../../_lib/form-actions";
 import { ErrorFormState } from "@/lib/definitions/definitions";
 import { z } from "zod";
-import { useBusinessFormContext } from "../../_components/business-form-provider";
+import { useBusinessFormContext } from "../../../lib/providers/business-form-provider";
 import { StoredTempLocation } from "../../_lib/definitions";
 import { OnboardingBusinessLocationSkeleton } from "@/professional/_components/skeletons";
 

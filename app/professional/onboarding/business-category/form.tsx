@@ -3,7 +3,7 @@
 
 import CategoryCard from "@/ui/components/custom/business-category-card";
 import { useActionState, useEffect } from "react";
-import { useBusinessFormContext } from "../../_components/business-form-provider";
+import { useBusinessFormContext } from "../../../lib/providers/business-form-provider";
 import { BusinessCategoryFormData, handleSubmitBusinessCategory } from "../../_lib/form-actions";
 import { ErrorFormState } from "@/lib/definitions/definitions";
 

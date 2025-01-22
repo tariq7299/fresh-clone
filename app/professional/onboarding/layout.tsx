@@ -1,8 +1,8 @@
 import LogoutButton from "@/ui/components/logout-button";
 import OnboardingSteps from "../_components/onboarding-steps";
 import BackButton from "@/ui/components/custom/back-button";
-import BusinessFormProvider from "../_components/business-form-provider";
-import SubmitButton from "../_components/submit-button";
+import BusinessFormProvider from "../../lib/providers/business-form-provider";
+import SubmitButton from "../../ui/components/custom/submit-button";
 
 
 export default function ProfessionalOnboardingLayout({ children }: { children: React.ReactNode }) {

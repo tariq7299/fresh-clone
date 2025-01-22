@@ -5,7 +5,7 @@ import { Button } from '@/ui/components/custom/button';
 import { Plus, EllipsisVertical } from 'lucide-react';
 import { ServicesComboBox } from '@/professional/_components/services-combo-box';
 import { handleSubmitBusinessServices } from '@/professional/_lib/form-actions';
-import { useBusinessFormContext } from '../../_components/business-form-provider';
+import { useBusinessFormContext } from '../../../lib/providers/business-form-provider';
 import { cn } from '@/lib/utils/utils';
 import ServiceCard from '@/ui/components/custom/service-card';
 import { ApiService, ApiServicesWithCategory, Service, StoredService } from '@/professional/_lib/definitions';

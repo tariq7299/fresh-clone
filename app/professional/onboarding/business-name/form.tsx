@@ -5,7 +5,7 @@ import { Textarea } from '@/ui/components/textarea';
 import { useActionState } from 'react';
 import { handleSubmitBusinessName, BusinessNameFormData, BusinessNameFieldErrors } from '@/professional/_lib/form-actions';
 import { useEffect, useState } from 'react';
-import { useBusinessFormContext } from '../../_components/business-form-provider';
+import { useBusinessFormContext } from '../../../lib/providers/business-form-provider';
 import { ErrorFormState } from '@/lib/definitions/definitions';
 import { GenderOfCustomers, StoredTempBusinessInfo } from '../../_lib/definitions';
 import CategoryCard from '@/ui/components/custom/business-category-card';

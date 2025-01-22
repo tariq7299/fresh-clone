@@ -3,8 +3,9 @@
 import { Button } from "@/ui/components/custom/button";
 import { ArrowRightIcon } from '@heroicons/react/24/outline'
 import { useState } from "react";
-import { useBusinessFormContext } from "./business-form-provider";
+import { useBusinessFormContext } from "../../../lib/providers/business-form-provider";
 import { cn } from "@/lib/utils/utils";
+
 export default function SubmitButton({ className }: { className?: string }) {
 
     // const [isLoading, setIsLoading] = useState(false)

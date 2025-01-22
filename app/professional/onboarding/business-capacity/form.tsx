@@ -1,7 +1,7 @@
 "use client"
 
 import { useActionState, useEffect, useState } from 'react';
-import { useBusinessFormContext } from '../../_components/business-form-provider';
+import { useBusinessFormContext } from '../../../lib/providers/business-form-provider';
 import { ErrorFormState } from '@/lib/definitions/definitions';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, SelectGroup, SelectLabel } from '@/ui/components/select';
 import { handleSubmitBusinessCapacity } from '@/professional/_lib/form-actions';
