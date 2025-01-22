@@ -11,7 +11,7 @@ export default function BookingPage() {
 
 
     const [elements, setElements] = useState<Element[]>([])
-    const [currentIntersectingElementIndex] = useScrollspy(elements, { offset: 700 })
+    const [currentIntersectingElementIndex] = useScrollspy(elements, { offset: 500 })
 
     useEffect(() => {
 
