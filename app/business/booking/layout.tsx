@@ -10,7 +10,7 @@ export default function BookingLayout({ children }: { children: React.ReactNode 
 
     return <div className="">
         <BusinessFormProvider>
-            <div className="">
+            {/* <div className="">
 
                 <div className="fixed top-0 left-1/2 -translate-x-1/2 bg-background  px-5 flex flex-col z-50 shadow-sm w-svw">
 
@@ -25,7 +25,7 @@ export default function BookingLayout({ children }: { children: React.ReactNode 
                     </div>
 
                 </div>
-            </div>
+            </div> */}
 
             {children}
 

@@ -7,8 +7,6 @@ import { OnboardingBusinessCapacitySkeleton, OnboardingBusinessLocationSkeleton,
 export default function BusinessNamePage({ }) {
 
 
-
-
     return <div className='w-full max-w-2xl p-5 py-24 min-h-dvh  mx-auto space-y-8 pb-20'>
 
 

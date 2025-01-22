@@ -2,13 +2,13 @@
 
 import React from "react";
 
-const useScrollspy = (
-    elements: Element[],
+export const useScrollspy = (
+    elements: Element[] | null[],
     options?: {
         offset?: number;
         root?: Element;
     }
-): [number, Element[], number[]] => {
+): [number] => {
     const [
         currentIntersectingElementIndex,
         setCurrentIntersectingElementIndex,
