@@ -12,8 +12,11 @@ import {
 import { ScrollArea, ScrollBar } from "@/ui/components/scroll-area"
 import { Button } from "@/ui/components/custom/button";
 import { Badge } from "@/ui/components/badge";
+import { ServicesTabs } from "../_components/services-tabs";
+import { cn } from "@/lib/utils/utils";
+import { BusinessHours } from "../_components/business-hours";
 
-interface BusinessHour {
+export interface BusinessHour {
     day: 'sunday' | 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday';
     open: string | null;
     close: string | null;
@@ -54,6 +57,8 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
 
     console.log("businessData", businessData)
 
+    const servicesCount = businessData.services_with_categories.reduce((acc, curr) => acc + curr.services.length, 0);
+
     return <div className="">
 
         <div className="pt-0 md:pt-28 max-w-[1440px] m-auto">
@@ -68,15 +73,15 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
 
             <div className="p-5 ">
 
-                <div className="flex items-center gap-2"><h1 className="text-3xl md:text-5xl   font-bold font-source-sans pb-1 md:pb-0">{businessData.name} </h1> <Badge variant="outline" className="text-md md:text-lg">Nails</Badge></div>
+                <div className="flex items-center gap-2"><h1 className="text-3xl md:text-5xl   font-bold font-source-sans pb-1 md:pb-0">{businessData.name} </h1> <Badge variant="outline" className="text-md md:text-lg">{businessData.category.name}</Badge></div>
 
                 <div className="flex flex-col md:flex-row items-start md:items-start  ">
                     <p className=" text-muted-foreground">Open until 10:00 PM</p>
                     <div className="hidden md:block">
                         <Dot className="size-full" />
                     </div>
-                    <p className=" text-muted-foreground">123 Business Street, Suite 456, Dubai, UAE</p>
-                    <p className=" text-accent "> Get Directions</p>
+                    <p className=" text-muted-foreground">{businessData.address}</p>
+                    <p className=" text-accent ">Get Directions</p>
 
                 </div>
 
@@ -94,89 +99,16 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
                     <div className="">
                         <h2 className="text-2xl md:text-4xl font-bold font-source-sans pb-3">Services</h2>
 
-                        <Tabs defaultValue="featured">
-                            <TabsList className="w-full bg-transparent">
-                                <ScrollArea className="w-full whitespace-nowrap ">
+                        <ServicesTabs services={businessData.services_with_categories} />
 
-                                    <div className="flex gap-2 py-4">
-                                        <TabsTrigger className="data-[state=active]:bg-foreground data-[state=active]:text-background rounded-full font-bold text-foreground" value="featured">Feastured</TabsTrigger>
-                                        <TabsTrigger className="data-[state=active]:bg-foreground data-[state=active]:text-background rounded-full font-bold text-foreground" value="body-care">Body care</TabsTrigger>
-                                        <TabsTrigger className="data-[state=active]:bg-foreground data-[state=active]:text-background rounded-full font-bold text-foreground" value="hair-care">Hair care</TabsTrigger>
-                                        <TabsTrigger className="data-[state=active]:bg-foreground data-[state=active]:text-background rounded-full font-bold text-foreground" value="skin-care">Skin care</TabsTrigger>
-                                        <TabsTrigger className="data-[state=active]:bg-foreground data-[state=active]:text-background rounded-full font-bold text-foreground" value="makeup">Makeup</TabsTrigger>
-                                        <TabsTrigger className="data-[state=active]:bg-foreground data-[state=active]:text-background rounded-full font-bold text-foreground" value="nail-care">Nail care</TabsTrigger>
-                                        <TabsTrigger className="data-[state=active]:bg-foreground data-[state=active]:text-background rounded-full font-bold text-foreground" value="hair-care">Hair care</TabsTrigger>
-                                        <TabsTrigger className="data-[state=active]:bg-foreground data-[state=active]:text-background rounded-full font-bold text-foreground" value="skin-care">Skin care</TabsTrigger>
-                                        <TabsTrigger className="data-[state=active]:bg-foreground data-[state=active]:text-background rounded-full font-bold text-foreground" value="makeup">Makeup</TabsTrigger>
-                                        <TabsTrigger className="data-[state=active]:bg-foreground data-[state=active]:text-background rounded-full font-bold text-foreground" value="nail-care">Nail care</TabsTrigger>
-                                        <TabsTrigger className="data-[state=active]:bg-foreground data-[state=active]:text-background rounded-full font-bold text-foreground" value="other">Other</TabsTrigger>
-                                    </div>
-
-
-                                    <ScrollBar orientation="horizontal" />
-                                </ScrollArea>
-                            </TabsList>
-
-                            <TabsContent value="featured" className="grid grid-cols-1 justify-items-stretch gap-8 md:gap-3 w-full py-6">
-
-                                <div className="flex justify-between items-center w-full md:border border-gray-200 md:rounded-lg md:p-4">
-                                    <div>
-                                        <p className="font-semibold">Eyebrow</p>
-                                        <p className="text-sm text-muted-foreground pb-3">15min</p>
-                                        <p className="font-semibold text-sm">EGP 100</p>
-                                    </div>
-
-                                    <Button borderType="fullRounded" variant={"outline"} className="font-semibold">Book</Button>
-                                </div>
-                                <div className="flex justify-between items-center w-full md:border border-gray-200 md:rounded-lg md:p-4">
-                                    <div>
-                                        <p className="font-semibold">Eyebrow</p>
-                                        <p className="text-sm text-muted-foreground pb-3">15min</p>
-                                        <p className="font-semibold text-sm">EGP 100</p>
-                                    </div>
-
-                                    <Button borderType="fullRounded" variant={"outline"} className="font-semibold">Book</Button>
-                                </div>
-                                <div className="flex justify-between items-center w-full md:border border-gray-200 md:rounded-lg md:p-4">
-                                    <div>
-                                        <p className="font-semibold">Eyebrow</p>
-                                        <p className="text-sm text-muted-foreground pb-3">15min</p>
-                                        <p className="font-semibold text-sm">EGP 100</p>
-                                    </div>
-
-                                    <Button borderType="fullRounded" variant={"outline"} className="font-semibold">Book</Button>
-                                </div>
-                                <div className="flex justify-between items-center w-full md:border border-gray-200 md:rounded-lg md:p-4">
-                                    <div>
-                                        <p className="font-semibold">Eyebrow</p>
-                                        <p className="text-sm text-muted-foreground pb-3">15min</p>
-                                        <p className="font-semibold text-sm">EGP 100</p>
-                                    </div>
-
-                                    <Button borderType="fullRounded" variant={"outline"} className="font-semibold">Book</Button>
-                                </div>
-
-                            </TabsContent>
-                            <TabsContent value="body-care">
-                                <p>Reviews</p>
-                            </TabsContent>
-                            <TabsContent value="hair-care">
-                                <p>Hair care</p>
-                            </TabsContent>
-                            <TabsContent value="skin-care">
-                                <p>Skin care</p>
-                            </TabsContent>
-
-                        </Tabs>
                         <Button variant={"outline"} className="w-full md:w-auto  md:p-5">See all</Button>
                     </div>
-
 
                     <div>
                         <div className="pb-6">
 
                             <h2 className="text-2xl md:text-4xl font-bold font-source-sans pb-1">About</h2>
-                            <p className=" ">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos quos quos quosquosquosquosquos quos quosquosquosquos  quosquos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos quos quos quosquosquosquosquos quos quosquosquosquos  quosq</p>
+                            <p className=" ">{businessData.description}</p>
                         </div>
                         <div className="rounded-lg overflow-hidden">
                             <img
@@ -187,41 +119,12 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
                             />
 
                         </div>
-                        <p className=" text-muted-foreground pt-4">123 Business Street, Suite 456, Dubai, UAE Get Directions</p>
+                        <p className=" text-muted-foreground pt-4">{businessData.address} Get Directions</p>
                     </div>
 
-                    <div className="pb-6">
-                        <h2 className="text-xl md:text-2xl font-semibold font-source-sans pb-2">Opening times</h2>
-
-                        <div className="space-y-2 md:w-1/2">
-
-                            <div className="flex justify-between">
-                                <div className="flex items-center gap-2"><div className="size-3 rounded-full bg-success" />Monday</div>
-                                <p>10:00 AM - 10:00 PM</p>
-                            </div>
-                            <div className="flex justify-between">
-                                <div className="flex items-center gap-2"><div className="size-3 rounded-full bg-success" />Monday</div>
-                                <p>10:00 AM - 10:00 PM</p>
-                            </div>
-                            <div className="flex justify-between">
-                                <div className="flex items-center gap-2"><div className="size-3 rounded-full bg-success" />Monday</div>
-                                <p>10:00 AM - 10:00 PM</p>
-                            </div>
-                            <div className="flex justify-between">
-                                <div className="flex items-center gap-2"><div className="size-3 rounded-full bg-success" />Monday</div>
-                                <p>10:00 AM - 10:00 PM</p>
-                            </div>
-                            <div className="flex justify-between">
-                                <div className="flex items-center gap-2"><div className="size-3 rounded-full bg-success" />Monday</div>
-                                <p>10:00 AM - 10:00 PM</p>
-                            </div>
-
-                        </div>
-                    </div>
-
+                    <BusinessHours business_hours={businessData.business_hours} className="pb-6" />
 
                 </div>
-
 
             </div>
 
@@ -234,10 +137,10 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
 
             <div className="flex justify-between w-full max-w-[1440px] m-auto items-center p-5">
                 <h1 className="hidden md:block text-lg md:text-2xl font-semibold">{businessData.name}</h1>
-                <p className="text-muted-foreground md:hidden">91 services available</p>
+                <p className="text-muted-foreground md:hidden">{servicesCount} services available</p>
 
                 <div className="flex items-center gap-4">
-                    <p className=" hidden md:block ">91 services available</p>
+                    <p className=" hidden md:block ">{servicesCount} services available</p>
                     <Button size={"lg"} variant={"default"} className="text-md md:text-lg font-semibold ">Book now</Button>
                 </div>
             </div>
