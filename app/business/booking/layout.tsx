@@ -34,7 +34,7 @@ export default function BookingLayout({ children }: { children: React.ReactNode 
                     <p className="text-sm">EGP 37</p>
                     <p className="text-muted-foreground text-xs">3 services . 1 hour 25 mins</p>
                 </div>
-                <SubmitButton className="" />
+                <SubmitButton hasIcon={false} className="" />
             </div>
 
         </BusinessFormProvider>

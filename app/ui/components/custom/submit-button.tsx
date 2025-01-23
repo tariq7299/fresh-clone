@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useBusinessFormContext } from "../../../lib/providers/business-form-provider";
 import { cn } from "@/lib/utils/utils";
 
-export default function SubmitButton({ className }: { className?: string }) {
+export default function SubmitButton({ className, hasIcon = true }: { className?: string, hasIcon?: boolean }) {
 
     // const [isLoading, setIsLoading] = useState(false)
 
@@ -16,7 +16,7 @@ export default function SubmitButton({ className }: { className?: string }) {
         {isLoading ? "loading..." : (
             <>
                 Continue
-                <ArrowRightIcon className="size-4" />
+                {hasIcon && <ArrowRightIcon className="size-4" />}
             </>
         )}
     </Button>
