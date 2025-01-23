@@ -15,7 +15,7 @@ export default function BookingLayout({ children }: { children: React.ReactNode 
                 <div className="fixed top-0 left-1/2 -translate-x-1/2 bg-background  px-5 flex flex-col z-50 shadow-sm w-svw">
 
 
-                    <div className="flex justify-between items-center py-3 w-full max-w-6xl mx-auto">
+                    <div className="flex justify-between items-center py-3 w-full max-w-7xl mx-auto">
                         <BackButton />
 
 
