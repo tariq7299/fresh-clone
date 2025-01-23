@@ -1,5 +1,5 @@
 import { ApiServicesWithCategory } from "@/professional/_lib/definitions";
-import { getBusinessData } from "../_lib/data";
+import { getBusinessData } from "../../_lib/data";
 import Image from "next/image";
 import barberShop from "@/../public/barber-shop-2.jpg"
 import { Dot, Link } from 'lucide-react';
@@ -12,9 +12,9 @@ import {
 import { ScrollArea, ScrollBar } from "@/ui/components/scroll-area"
 import { Button } from "@/ui/components/custom/button";
 import { Badge } from "@/ui/components/badge";
-import { ServicesTabs } from "../_components/services-tabs";
+import { ServicesTabs } from "../../_components/services-tabs";
 import { cn } from "@/lib/utils/utils";
-import { BusinessHours } from "../_components/business-hours";
+import { BusinessHours } from "../../_components/business-hours";
 
 export interface BusinessHour {
     day: 'sunday' | 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday';
