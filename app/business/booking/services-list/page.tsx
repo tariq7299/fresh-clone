@@ -36,7 +36,7 @@ export default function BookingPage() {
                 {/* Services categories tabs */}
                 <nav className="w-full bg-background sticky top-16 left-0">
                     <ScrollSpy onChangeActiveId={onChangeActiveId} activeClass="nav-active" activeAttr={true} offsetTop={0} offsetLeft={0} >
-                        <div className="flex gap-2 py-3 w-full whitespace-nowrap relative overflow-x-auto">
+                        <div className="flex gap-2 py-4 w-full whitespace-nowrap relative overflow-x-auto">
                             {tabTitles.map((title, index) => (
                                 <a href={`#${title}`} className={cn(" px-4 py-2 rounded-full font-bold  text-foreground", "data-[active=true]:bg-foreground data-[active=true]:text-background hover:bg-muted  ")} key={title} ref={tabsRefs.current[index]}>{title}</a>
                             ))}

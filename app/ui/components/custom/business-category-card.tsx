@@ -3,7 +3,6 @@
 import { cn } from "@/lib/utils/utils"
 import Image from "next/image"
 import { CheckIcon } from "lucide-react"
-import { Button } from "./button"
 
 // Supply the col-span-1 class
 export default function CategoryCard({ categoryName, categoryIconUrl = "/categories/hair.png", isPending, defaultChecked, className, categoryIconWidth = 32, categoryIconHeight = 32, inputName, inputValue }: { categoryName: string, categoryIconUrl: string, isPending: boolean, defaultChecked: boolean, className?: string, categoryIconWidth?: number, categoryIconHeight?: number, inputName: string, inputValue: string }) {
