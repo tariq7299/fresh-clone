@@ -352,7 +352,9 @@ export default function BookingPage() {
                             </div>
                         </div>
 
-                        <div className="flex flex-col gap-2 ">
+                        <div className="flex flex-col gap-2 max-h-[500px] overflow-y-auto py-3">
+
+
                             <div className="flex justify-between items-start w-full  " >
                                 <div>
                                     <p className="font-semibold text-lg">Featured</p>
@@ -369,33 +371,29 @@ export default function BookingPage() {
                                 </div>
                                 <p className="font-semibold text-sm">EGP 100</p>
                             </div>
-                            <div className="flex justify-between items-start w-full  " >
-                                <div>
-                                    <p className="font-semibold text-lg">Featured</p>
-                                    <p className="text-sm text-muted-foreground pb-3">10min</p>
 
-                                </div>
-                                <p className="font-semibold text-sm">EGP 100</p>
-                            </div>
-                            <div className="flex justify-between items-start w-full  " >
-                                <div>
-                                    <p className="font-semibold text-lg">Featured</p>
-                                    <p className="text-sm text-muted-foreground pb-3">10min</p>
 
-                                </div>
-                                <p className="font-semibold text-sm">EGP 100</p>
-                            </div>
 
-                            <div className="flex justify-between items-center w-full   border-t pt-4 border-gray-200" >
+
+                        </div>
+
+                        <div className="sticky bottom-0 left-0 w-full bg-background py-3.5  flex flex-col  items-center border-t-1 ">
+
+                            <div className="flex justify-between items-center w-full  " >
                                 <p className="font-bold text-lg">Total</p>
                                 <p className="font-semibold text-sm">EGP 100</p>
                             </div>
 
+                            <div className="w-full">
 
-                            <Button className="w-full mt-10">
-                                Continue
-                            </Button>
+                                <Button className="w-full mt-10">
+                                    Continue
+                                </Button>
+                            </div>
+
                         </div>
+
+
 
                     </div>
                 </div>
