@@ -1,20 +1,6 @@
 import { Skeleton } from "@/ui/components/skeleton";
 
-export function AddServiceCardSkeleton() {
-    return <div className="w-full md:border border-gray-200 md:rounded-lg md:p-4">
-        <div className="flex justify-between items-center">
-            <div className="space-y-2">
-                <Skeleton className="h-5 w-32" />
-                <Skeleton className="h-4 w-24" />
-                <Skeleton className="h-4 w-16" />
-            </div>
-            <Skeleton className="h-9 w-20 rounded-full" />
-        </div>
-    </div>
-}
-
-
-export function BookingPageSkeleton() {
+export default function LoadingBooking() {
     return <>
         <Skeleton className="h-12 w-3/4 mb-6" /> {/* Title skeleton */}
 

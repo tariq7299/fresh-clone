@@ -20,7 +20,6 @@ export default async function CartDefaultPage(props: { params: Promise<{ id: str
     console.log("items", items)
     console.log("businessData", businessData)
 
-    return <div>
-        <Cart services={services} businessCoverPhoto={""} businessName={businessName} businessAddress={businessAddress} />
-    </div>
+    return <Cart services={services} businessId={businessId} businessCoverPhoto={""} businessName={businessName} businessAddress={businessAddress} />
+
 }

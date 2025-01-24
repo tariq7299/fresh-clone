@@ -8,7 +8,7 @@ import { Business } from "@/business/[id]/(business-overview)/page";
 import { ApiServicesWithCategory } from "@/professional/_lib/definitions";
 
 
-export default async function Cart({ services, businessCoverPhoto, businessName, businessAddress }: { services: ApiServicesWithCategory[], businessCoverPhoto: string, businessName: string, businessAddress: string }) {
+export default async function Cart({ services, businessId, businessCoverPhoto, businessName, businessAddress }: { services: ApiServicesWithCategory[], businessId: string, businessCoverPhoto: string, businessName: string, businessAddress: string }) {
 
     // const params = await props.params
     // const searchParams = await props.searchParams
@@ -25,7 +25,7 @@ export default async function Cart({ services, businessCoverPhoto, businessName,
 
         <div className=" sticky  bg-background  ">
 
-            <CartHeader businessCoverPhoto={businessCoverPhoto} businessName={businessName} businessAddress={businessAddress} />
+            <CartHeader businessId={businessId} businessCoverPhoto={businessCoverPhoto} businessName={businessName} businessAddress={businessAddress} />
 
         </div>
 

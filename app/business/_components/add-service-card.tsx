@@ -9,7 +9,7 @@ import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 // export const dynamic = 'force-dynamic'
-import { SkeletonAddServiceCard } from "./skeletons";
+import { AddServiceCardSkeleton } from "./skeletons";
 
 export function AddServiceCard({ service }: { service: ApiService }) {
 
@@ -48,7 +48,7 @@ export function AddServiceCard({ service }: { service: ApiService }) {
 
     if (isLoading) {
         return (
-            <SkeletonAddServiceCard />
+            <AddServiceCardSkeleton />
         )
     }
 

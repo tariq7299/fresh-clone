@@ -117,7 +117,7 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
 
                         <ServicesOverview services={businessData.services_with_categories} />
 
-                        <Button variant={"outline"} className="w-full md:w-auto  md:p-5">See all</Button>
+                        <Button isLink={true} href={`/business/${businessData.id}/booking/select-services`} variant={"outline"} className="w-full md:w-auto  md:p-5">See all</Button>
                     </div>
 
                     <div>
