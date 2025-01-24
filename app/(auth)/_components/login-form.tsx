@@ -40,6 +40,8 @@ export default function LoginForm() {
     // THis query will be add to the url of login, when 
     const searchParams = useSearchParams();
     const sessionEnded = searchParams.get("sessionEnded") === "true";
+    const loginRequiredForBooking = searchParams.get("loginRequiredForBooking") === "true";
+
 
     // Move session cleanup to useEffect to avoid side effects during render
     useEffect(() => {
@@ -55,7 +57,11 @@ export default function LoginForm() {
             formState,
             successCallback: () => {
                 loginUserClientSide(formState.apiDataResponse as SessionData, setSessionData)
-                navigateToDashboard(formState.apiDataResponse?.role as UserRole)
+                if (loginRequiredForBooking) {
+                    router.back()
+                } else {
+                    navigateToDashboard(formState.apiDataResponse?.role as UserRole)
+                }
             }
         })
     }, [formState]);
@@ -110,9 +116,26 @@ export default function LoginForm() {
 
                 <div className="flex flex-col justify-center items-center">
                     <p className="font-bold text-center">First time?</p>
-                    <Link href="/for-who" className="text-center text-accent text-sm">
-                        Sign up
-                    </Link>
+
+                    {/* If the login is required for booking, and replace the link with the for-who page, instead of pushing, so if i go back, i will not be redirected to the login page ! and instead i will be redirected to the 'business/[id]/booking/time' page */}
+                    {loginRequiredForBooking ? (
+                        <Link
+                            href={`/register?${new URLSearchParams({
+                                type: 'customer',
+                                loginRequiredForBooking: 'true'
+                            }).toString()}`}
+                            className="text-center text-accent text-sm"
+                            replace={true}
+                        >
+                            Sign up
+                        </Link>
+                    ) : (
+                        <Link href="/for-who" className="text-center text-accent text-sm">
+                            Sign up
+                        </Link>
+                    )}
+
+
                 </div>
             </form>
         </>

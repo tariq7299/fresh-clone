@@ -11,6 +11,7 @@ export default async function OtpVerificationPage(props: {
         notVerified?: string;
         email?: string;
         userRole?: UserRole.Professional | UserRole.Customer;
+        loginRequiredForBooking?: string;
     }>
 }) {
 
@@ -18,6 +19,7 @@ export default async function OtpVerificationPage(props: {
     const notVerified = searchParams?.notVerified || "";
     const email = searchParams?.email || "";
     const userRole = searchParams?.userRole || UserRole.Customer;
+    const loginRequiredForBooking = searchParams?.loginRequiredForBooking === "true";
 
     if (!email || !userRole) throw new Error("No email or user role provided for otp verfication!")
 
@@ -53,7 +55,7 @@ export default async function OtpVerificationPage(props: {
                     <p className="text-muted-foreground text-sm text-center pb-4">Please enter the 6-digit verification code sent to your email address</p>
 
                     {/* Iam not using Suspense because Iam passing the userRole as a prop to the OtpForm component, and not like in login-form.tsx where Iam using useSearchParams */}
-                    <OtpForm email={email} userRole={userRole} />
+                    <OtpForm email={email} userRole={userRole} loginRequiredForBooking={loginRequiredForBooking} />
 
 
                 </div>

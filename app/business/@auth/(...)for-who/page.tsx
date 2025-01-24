@@ -6,9 +6,14 @@ import LoginForm from "@/(auth)/_components/login-form";
 import { Button } from "@/ui/components/button";
 import Link from "next/link";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
+import { usePathname, useSearchParams } from "next/navigation";
 
 export default function ForWhoDialog() {
     const router = useRouter();
+
+    const searchParams = useSearchParams();
+
+    const loginRequiredForBooking = searchParams.get("loginRequiredForBooking") === "true";
 
     return (
         <Dialog open={true} onOpenChange={() => router.back()}>
@@ -25,20 +30,46 @@ export default function ForWhoDialog() {
                         <p className="text-muted-foreground text-sm text-center pb-4">How would you like to use <span className="font-extrabold font-lora">Lumière</span>?</p>
 
                         <div className="flex flex-col gap-3">
-                            <Link href="/register?type=customer" className="flex  justify-between items-center p-4 border rounded-lg hover:bg-muted">
-                                <div>
-                                    <p><span className="font-extrabold font-lora">Lumière</span> for customers</p>
-                                    <p>Book salons and spas near you</p>
-                                </div>
-                                <ArrowRightIcon className="size-5" />
-                            </Link>
-                            <Link href="/register?type=professional" className="flex  justify-between items-center p-4 border rounded-lg hover:bg-muted">
-                                <div>
-                                    <p><span className="font-extrabold font-lora">Lumière</span> for professionals</p>
-                                    <p>Manage and grow your business</p>
-                                </div>
-                                <ArrowRightIcon className="size-5" />
-                            </Link>
+                            {loginRequiredForBooking ? (
+                                <>
+
+                                    <Link href="/register?type=customer?loginRequiredForBooking=true" className="flex  justify-between items-center p-4 border rounded-lg hover:bg-muted" replace>
+                                        <div>
+                                            <p><span className="font-extrabold font-lora">Lumière</span> for customers</p>
+                                            <p>Book salons and spas near you</p>
+                                        </div>
+                                        <ArrowRightIcon className="size-5" />
+                                    </Link>
+
+                                    <Link href="/register?type=professional?loginRequiredForBooking=true" className="flex  justify-between items-center p-4 border rounded-lg hover:bg-muted" replace>
+                                        <div>
+                                            <p><span className="font-extrabold font-lora">Lumière</span> for professionals</p>
+                                            <p>Manage and grow your business</p>
+                                        </div>
+                                        <ArrowRightIcon className="size-5" />
+                                    </Link>
+                                </>
+
+                            ) : (
+
+                                <>
+                                    <Link href="/register?type=customer" className="flex  justify-between items-center p-4 border rounded-lg hover:bg-muted">
+                                        <div>
+                                            <p><span className="font-extrabold font-lora">Lumière</span> for customers</p>
+                                            <p>Book salons and spas near you</p>
+                                        </div>
+                                        <ArrowRightIcon className="size-5" />
+                                    </Link>
+
+                                    <Link href="/register?type=professional" className="flex  justify-between items-center p-4 border rounded-lg hover:bg-muted">
+                                        <div>
+                                            <p><span className="font-extrabold font-lora">Lumière</span> for professionals</p>
+                                            <p>Manage and grow your business</p>
+                                        </div>
+                                        <ArrowRightIcon className="size-5" />
+                                    </Link>
+                                </>
+                            )}
                         </div>
 
 

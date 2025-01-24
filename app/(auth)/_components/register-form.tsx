@@ -8,14 +8,14 @@ import { SuccessRegisterFormState, ErrorRegisterFormState, SessionData, UserRole
 import { useActionState, useEffect } from "react";
 import { register } from "../_lib/form-actions";
 import { handleFormResponse } from "@/lib/utils/utils";
-import { navigateToOtp } from "../_lib/auth-client-services";
+import { navigateToDashboard, navigateToOtp } from "../_lib/auth-client-services";
 import useLocalStorage from "@/lib/hooks/use-local-storage";
 import { logoutUserServerSide } from "../_lib/auth-server-services";
 import { logoutUserClientSide } from "../_lib/auth-client-services";
 import { PhoneInput } from "@/ui/components/custom/phone-input";
 
 
-export default function RegisterForm({ userRole }: { userRole: string }) {
+export default function RegisterForm({ userRole, loginRequiredForBooking = false }: { userRole: string, loginRequiredForBooking?: boolean }) {
 
     if (!userRole) throw new Error("No user role provided for register form!")
 
@@ -47,7 +47,11 @@ export default function RegisterForm({ userRole }: { userRole: string }) {
             successCallback: async () => {
                 await logoutUserServerSide()
                 logoutUserClientSide(setSessionData)
-                navigateToOtp(formState.apiDataResponse?.email as string, userRole as UserRole.Professional | UserRole.Customer)
+
+                loginRequiredForBooking ?
+                    navigateToOtp(formState.apiDataResponse?.email as string, userRole as UserRole.Professional | UserRole.Customer, loginRequiredForBooking)
+                    :
+                    navigateToOtp(formState.apiDataResponse?.email as string, userRole as UserRole.Professional | UserRole.Customer)
             }
         })
     }, [formState]);

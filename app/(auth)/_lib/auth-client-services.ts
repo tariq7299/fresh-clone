@@ -23,9 +23,14 @@ export async function navigateToLoginWithSessionEnded() {
     redirect("/login?sessionEnded=true")
 }
 
-export async function navigateToOtp(email: string, userRole: UserRole.Professional | UserRole.Customer) {
-    redirect("/otp-verification?email=" + email + "&userRole=" + userRole)
+export async function navigateToOtp(email: string, userRole: UserRole.Professional | UserRole.Customer, loginRequiredForBooking: boolean = false) {
+    if (loginRequiredForBooking) {
+        redirect("/otp-verification?email=" + email + "&userRole=" + userRole + "&loginRequiredForBooking=true",)
+    } else {
+        redirect("/otp-verification?email=" + email + "&userRole=" + userRole)
+    }
 }
+
 
 export async function navigateToLogin() {
     redirect("/login")

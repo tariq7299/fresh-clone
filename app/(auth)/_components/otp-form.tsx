@@ -15,7 +15,8 @@ import { useRouter } from "next/navigation"
 import useLocalStorage from "@/lib/hooks/use-local-storage";
 import { toastApiMsgs } from "@/lib/utils/api/toastApiMsgs"
 
-export default function OtpForm({ email = "", userRole }: { email: string, userRole: UserRole.Professional | UserRole.Customer }) {
+export default function OtpForm({ email = "", userRole, loginRequiredForBooking = false }: { email: string, userRole: UserRole.Professional | UserRole.Customer, loginRequiredForBooking?: boolean }) {
+
 
 
     const INITIAL_STATE: SuccessOtpFormState | ErrorOtpFormState = {
@@ -42,7 +43,10 @@ export default function OtpForm({ email = "", userRole }: { email: string, userR
             formState,
             successCallback: () => {
                 loginUserClientSide(formState.apiDataResponse as SessionData, setSessionData)
-                navigateToDashboard(formState.apiDataResponse?.role as UserRole)
+                loginRequiredForBooking ?
+                    router.back()
+                    :
+                    navigateToDashboard(formState.apiDataResponse?.role as UserRole)
             },
             errorCallback: () => {
                 if (formState.clientFieldsErrors) {

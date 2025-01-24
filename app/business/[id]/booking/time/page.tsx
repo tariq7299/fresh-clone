@@ -8,9 +8,9 @@ import { useState } from "react"
 import { cn } from "@/lib/utils/utils"
 import { format } from "date-fns"
 import Link from "next/link"
-
+import { useRouter } from "next/navigation"
 export default function TimePage() {
-
+    const router = useRouter();
     const [date, setDate] = useState<Date | undefined>(new Date())
     return <>
 
@@ -116,12 +116,13 @@ export default function TimePage() {
             </div>
 
         </div>
-        <Link href="/login" scroll={false}>
-            <Button>
-                test
-            </Button>
+        <Link href="/login?loginRequiredForBooking=true" scroll={false} >
+            {/* <Button onClick={() => window.location.href = '/login'}   > */}
+            {/* <Button onClick={() => router.push("/login")}   > */}
+            test
+            {/* </Button> */}
         </Link>
-        <Link href="/register" scroll={false}>
+        {/* <Link href="/register" scroll={false} >
             <Button>
                 test
             </Button>
@@ -130,7 +131,7 @@ export default function TimePage() {
             <Button>
                 test
             </Button>
-        </Link>
+        </Link> */}
 
     </>
 }
