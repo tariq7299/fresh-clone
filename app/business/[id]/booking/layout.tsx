@@ -4,10 +4,10 @@ import SubmitButton from "@/ui/components/custom/submit-button";
 import BackButton from "@/ui/components/custom/back-button";
 import { X } from 'lucide-react';
 import { Button } from "@/ui/components/custom/button";
-import Cart from "@/business/_components/cart";
 import { Suspense } from "react";
 
-export default function BookingLayout({ children }: { children: React.ReactNode }) {
+export default function BookingLayout({ children, cart }: { children: React.ReactNode, cart: React.ReactNode }) {
+
 
 
     return <div className="">
@@ -45,12 +45,12 @@ export default function BookingLayout({ children }: { children: React.ReactNode 
 
                         <div className="sticky top-16 left-0 pt-5 ">
 
-                            <Suspense fallback={<div className="animate-pulse space-y-8">
-                                <div className="h-12 w-3/4 bg-muted rounded-lg"></div>
-                                <div className="h-6 w-1/2 bg-muted rounded-lg"></div>
-                            </div>}>
-                                <Cart />
-                            </Suspense>
+                            {cart}
+                            {/* <Suspense fallback={<div className="animate-pulse space-y-8"> */}
+                            {/* <div className="h-12 w-3/4 bg-muted rounded-lg"></div> */}
+                            {/* <div className="h-6 w-1/2 bg-muted rounded-lg"></div> */}
+                            {/* </div>}> */}
+                            {/* </Suspense> */}
 
                         </div>
                     </div>
