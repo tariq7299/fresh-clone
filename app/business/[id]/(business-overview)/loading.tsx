@@ -1,5 +1,5 @@
-export default function Loading() {
-    return <div className="w-full max-w-6xl p-5 py-24 min-h-dvh mx-auto space-y-8 pb-20">
+export default function BusinessOverviewLoading() {
+    return <div className="w-full max-w-[1440px] p-5 py-24 min-h-dvh mx-auto space-y-8 pb-20">
         <div className="animate-pulse space-y-8">
             {/* Hero section */}
             <div className="space-y-4">

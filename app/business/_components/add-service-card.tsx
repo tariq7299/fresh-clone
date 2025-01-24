@@ -52,7 +52,7 @@ export function AddServiceCard({ service }: { service: ApiService }) {
         )
     }
 
-    return <div onClick={handleClickingService} className={cn("flex justify-between items-center w-full md:border border-gray-200 rounded-lg p-4 md:p-5 border-b pb-4 cursor-pointer hover:bg-accent/10 group transition-colors duration-150 ", checked ? "bg-accent/5 ring-2 ring-accent" : "")} >
+    return <div onClick={handleClickingService} className={cn("flex justify-between items-center w-full md:border border-gray-200 rounded-lg p-4 md:p-5 border-b pb-4 cursor-pointer hover:bg-accent/10 group transition-colors duration-150 ", checked ? "bg-accent/5 ring-2 ring-accent text-accent-600" : "")} >
         <div className="flex-auto overflow-hidden">
             <p className="font-semibold text-lg">{service.name}</p>
             <p className="text-sm text-muted-foreground">{service.duration}min</p>
