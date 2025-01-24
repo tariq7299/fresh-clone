@@ -45,11 +45,11 @@ export default function BookingPage() {
 
         <div className="grid grid-cols-1 justify-items-stretch gap-8 md:gap-3 w-full py-6 space-y-8">
 
-            <div id="Featured" className="flex flex-col gap-4">
+            <section id="Featured" className="flex flex-col gap-4">
                 {/* Featured */}
                 <h2 className="text-2xl md:text-3xl font-bold font-source-sans pb-3">Featured</h2>
 
-
+                {/* service */}
                 <div className="flex justify-between items-center w-full md:border border-gray-200 md:rounded-lg md:p-5 border-b pb-4 ring-2 ring-accent bg-accent/5 text-accent-700 transition-colors duration-200 cursor-pointer hover:bg-accent/10" >
                     <div>
                         <p className="font-semibold text-lg">Featured</p>
@@ -60,6 +60,7 @@ export default function BookingPage() {
                         <Check />
                     </Button>
                 </div>
+
                 <div className="flex justify-between items-center w-full md:border border-gray-200 md:rounded-lg md:p-5 border-b pb-4 cursor-pointer hover:bg-accent/10 group" >
                     <div>
                         <p className="font-semibold text-lg">Featured</p>
@@ -70,6 +71,7 @@ export default function BookingPage() {
                         <Plus />
                     </Button>
                 </div>
+
                 <div className="flex justify-between items-center w-full md:border border-gray-200 md:rounded-lg md:p-5 border-b pb-4" >
                     <div>
                         <p className="font-semibold text-lg">Featured</p>
@@ -142,7 +144,7 @@ export default function BookingPage() {
                 </div>
 
 
-            </div>
+            </section>
             <div id="Hair" className="flex flex-col gap-4">
                 {/* Hair */}
                 <h2 className="text-2xl md:text-3xl font-bold font-source-sans pb-3">Hair</h2>

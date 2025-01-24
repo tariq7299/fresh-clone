@@ -13,7 +13,10 @@ export default function BusinessLayout({ children }: { children: React.ReactNode
             <NavBar fixed={true} hideInMobile={true} />
         </Suspense>
 
-        {children}
+        <Suspense>
+            {children}
+        </Suspense>
+
 
         {/* <Footer className="" /> */}
 
