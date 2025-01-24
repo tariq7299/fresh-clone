@@ -11,7 +11,7 @@ export default async function RegisterPage(props: {
     const searchParams = await props.searchParams
     const type = searchParams?.type || "";
 
-    if (!type) throw new Error("No user type provided for register page!")
+    // if (!type) throw new Error("No user type provided for register page!")
 
     return (
 

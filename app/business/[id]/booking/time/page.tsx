@@ -7,6 +7,7 @@ import { CalendarIcon, CalendarOff } from "lucide-react"
 import { useState } from "react"
 import { cn } from "@/lib/utils/utils"
 import { format } from "date-fns"
+import Link from "next/link"
 
 export default function TimePage() {
 
@@ -115,6 +116,21 @@ export default function TimePage() {
             </div>
 
         </div>
+        <Link href="/login" scroll={false}>
+            <Button>
+                test
+            </Button>
+        </Link>
+        <Link href="/register" scroll={false}>
+            <Button>
+                test
+            </Button>
+        </Link>
+        <Link href="/otp-verification" scroll={false}>
+            <Button>
+                test
+            </Button>
+        </Link>
 
     </>
 }

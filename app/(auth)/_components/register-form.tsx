@@ -17,7 +17,7 @@ import { PhoneInput } from "@/ui/components/custom/phone-input";
 
 export default function RegisterForm({ userRole }: { userRole: string }) {
 
-    if (!userRole) throw new Error("No user role provided for register form!")
+    // if (!userRole) throw new Error("No user role provided for register form!")
 
 
     const INITIAL_STATE: SuccessRegisterFormState | ErrorRegisterFormState = {

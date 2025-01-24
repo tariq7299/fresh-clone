@@ -60,7 +60,7 @@ export default function BookingLayout({ children, cart, auth }: { children: Reac
                 <SubmitButton hasIcon={false} className="" />
             </div>
 
-            {auth}
+            {/* {auth} */}
 
         </BusinessFormProvider>
 
