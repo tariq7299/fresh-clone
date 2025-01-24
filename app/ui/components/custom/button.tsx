@@ -28,8 +28,12 @@ const buttonVariants = cva(
                     'bg-accent text-accent-foreground shadow-sm hover:bg-accent/80',
                 ghost: 'hover:bg-accent/10 ',
                 link: 'text-primary underline-offset-4 hover:underline',
-                nextLink: 'border border-input bg-background shadow-sm hover:bg-accent/5 '
+                // nextLink: 'border border-input bg-background shadow-sm hover:bg-accent/5 '
             },
+            // isLink: {
+            //     true: 'link',
+            //     false: 'default'
+            // },
             size: {
                 default: 'h-9 ',
                 sm: 'h-8 rounded-md py-0 px-3 text-xs',
@@ -57,12 +61,14 @@ type ButtonProps = ButtonPropsBase &
             loading?: boolean
             leftSection?: JSX.Element
             rightSection?: JSX.Element
-            href?: string
         }
-    )
+    ) & {
+        isLink?: boolean
+        href?: string
+    }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-    ({ className, borderType, variant, size, children, ...props }, ref) => {
+    ({ className, borderType, variant, isLink = false, size, children, ...props }, ref) => {
 
         if (props.asChild) {
             return (
@@ -87,7 +93,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
         return (
             <>
-                {variant === "nextLink" ? (
+                {isLink && href ? (
 
                     <Link href={href}
                         className={

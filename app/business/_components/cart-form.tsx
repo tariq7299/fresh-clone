@@ -67,29 +67,29 @@ export default function CartForm({ servicesWithCategories }: { servicesWithCateg
 
 
     return <>
-        <div className="flex flex-col gap-2 max-h-[65dvh] overflow-y-auto pt-3">
+        <div className="flex flex-col gap-2 max-h-[65dvh] overflow-y-auto pt-3 scroll-smooth snap-y snap-mandatory scroll-pt-6">
 
 
             {selectedItems?.items?.length > 0 && selectedItems.items.map((item) => (
-                <div key={item.id} className="flex justify-between items-start w-fuxll  " >
+                <div key={item.id} className="flex justify-between items-start w-full  snap-start px-2" >
                     <div>
                         <p className="font-semibold ">{item.name}</p>
                         <p className="text-sm text-muted-foreground pb-3">{item.duration}min</p>
                     </div>
-                    <p className="font-semibold text-sm">{item.price}</p>
+                    <p className="font-semibold text-sm">EGP {item.price}</p>
                 </div>
             ))}
 
-            <div className="sticky bottom-0 left-0 w-full bg-background py-3.5  flex flex-col  items-center border-t-1 ">
+            <div className="sticky bottom-0 left-0 w-full bg-background pt-3.5  flex flex-col  items-center border-t-1 ">
 
-                <div className="flex justify-between items-center w-full  " >
-                    <p className="font-bold text-lg">Total</p>
-                    <p className="font-semibold text-sm">EGP {selectedItems?.total}</p>
+                <div className="flex justify-between items-center w-full  font-bold text-lg " >
+                    <p className="">Total</p>
+                    <p className="">EGP {selectedItems?.total}</p>
                 </div>
 
                 <div className="w-full">
 
-                    <Button className="w-full mt-6">
+                    <Button size="lg" className="w-full mt-6 text-md">
                         Continue
                     </Button>
                 </div>

@@ -2,18 +2,10 @@ import { ApiServicesWithCategory } from "@/professional/_lib/definitions";
 import { getBusinessData } from "../../_lib/data";
 import Image from "next/image";
 import barberShop from "@/../public/barber-shop-2.jpg"
-import { Dot, Link } from 'lucide-react';
-import {
-    Tabs,
-    TabsContent,
-    TabsList,
-    TabsTrigger,
-} from "@/ui/components/tabs"
-import { ScrollArea, ScrollBar } from "@/ui/components/scroll-area"
+import { Dot } from 'lucide-react';
 import { Button } from "@/ui/components/custom/button";
 import { Badge } from "@/ui/components/badge";
-import { BusinessServicesOverview } from "../../_components/business-services-overview";
-import { cn } from "@/lib/utils/utils";
+import { ServicesOverview } from "../../_components/services-overview";
 import { BusinessHours } from "../../_components/business-hours";
 
 export interface BusinessHour {
@@ -95,15 +87,17 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
 
             <div className="p-5 ">
 
-                <div className="flex items-center gap-2"><h1 className="text-3xl md:text-5xl   font-bold font-source-sans pb-1 md:pb-0">{businessData.name} </h1> <Badge variant="outline" className="text-md md:text-lg">{businessData.category.name}</Badge></div>
+                <div className="flex items-center gap-2 flex-wrap">
+                    <h1 className="text-3xl md:text-5xl   font-bold font-source-sans pb-1 md:pb-0">{businessData.name} </h1>
+                    <Badge variant="outline" className="text-sm md:text-md">{businessData.category.name}</Badge>
+                </div>
 
-                <div className="flex flex-col md:flex-row items-start md:items-start  ">
+                <div className="flex flex-col md:flex-row items-start md:items-start  md:gap-1">
                     <p className=" text-muted-foreground">Open until 10:00 PM</p>
-                    <div className="hidden md:block">
-                        <Dot className="size-full" />
-                    </div>
-                    <p className=" text-muted-foreground">{businessData.location.address}</p>
-                    <a href={`https://www.google.com/maps/dir/?api=1&destination=${businessData.location.coordinates.latitude},${businessData.location.coordinates.longitude}`} className=" text-accent ">Get Directions</a>
+                    <Dot className="hidden md:block" />
+                    <p className=" text-muted-foreground">{businessData.location.address} </p>
+
+                    <a href={`https://www.google.com/maps/dir/?api=1&destination=${businessData.location.coordinates.latitude},${businessData.location.coordinates.longitude}`} className=" text-accent ">   Get Directions</a>
 
                 </div>
 
@@ -121,7 +115,7 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
                     <div className="">
                         <h2 className="text-2xl md:text-4xl font-bold font-source-sans pb-3">Services</h2>
 
-                        <BusinessServicesOverview services={businessData.services_with_categories} />
+                        <ServicesOverview services={businessData.services_with_categories} />
 
                         <Button variant={"outline"} className="w-full md:w-auto  md:p-5">See all</Button>
                     </div>
@@ -164,7 +158,7 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
 
                 <div className="flex items-center gap-4">
                     <p className=" hidden md:block ">{servicesCount} services available</p>
-                    <Button size={"lg"} variant={"default"} className="text-md md:text-lg font-semibold ">Book now</Button>
+                    <Button href={`/business/${businessData.id}/booking/select-services`} size={"lg"} isLink={true} className="text-md md:text-lg font-semibold ">Book now</Button>
                 </div>
             </div>
         </div>

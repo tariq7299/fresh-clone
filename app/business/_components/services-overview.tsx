@@ -5,10 +5,14 @@ import { ScrollArea, ScrollBar } from "@/ui/components/scroll-area"
 import { Button } from "@/ui/components/custom/button";
 import { ApiServicesWithCategory } from "@/professional/_lib/definitions";
 import { useState } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
 
-export function BusinessServicesOverview({ services }: { services: ApiServicesWithCategory[] }) {
+export function ServicesOverview({ services }: { services: ApiServicesWithCategory[] }) {
 
     const tabTitles = services.map(service => service.name)
+
+    const searchParams = useSearchParams()
+    const pathname = usePathname()
 
     // const [selectedTab, setSelectedTab] = useState<ApiServicesWithCategory | null>(null)
 
@@ -16,9 +20,15 @@ export function BusinessServicesOverview({ services }: { services: ApiServicesWi
     //     setSelectedTab(services.find(service => service.name === tabTitleName) || null)
     // } 
 
+    const createUrl = (serviceId: number) => {
+
+        const params = new URLSearchParams(searchParams)
+        params.set('items', serviceId.toString())
+
+        return `${pathname}/booking/select-services?${params.toString()}`
+    }
+
     console.log("services", services)
-
-
 
     return (
 
@@ -27,7 +37,7 @@ export function BusinessServicesOverview({ services }: { services: ApiServicesWi
                 <ScrollArea className="w-full whitespace-nowrap ">
 
                     <div className="flex gap-2 py-4">
-                        {tabTitles.map((title, index) => (
+                        {tabTitles.map((title, _) => (
                             <TabsTrigger className="data-[state=active]:bg-foreground data-[state=active]:text-background rounded-full font-bold text-foreground" value={title} key={title}>{title}</TabsTrigger>
                         ))}
 
@@ -38,20 +48,20 @@ export function BusinessServicesOverview({ services }: { services: ApiServicesWi
                 </ScrollArea>
             </TabsList>
 
-            {services.map((serviceWithCategory, index) => (
-                <TabsContent key={index} value={serviceWithCategory.name} asChild>
+            {services.map((serviceWithCategory, _) => (
+                <TabsContent key={serviceWithCategory.name} value={serviceWithCategory.name} asChild>
 
                     <div className="grid grid-cols-1 justify-items-stretch gap-8 md:gap-3 w-full py-6">
 
-                        {serviceWithCategory.services.map((service, index) => (
-                            <div className="flex justify-between items-center w-full md:border border-gray-200 md:rounded-lg md:p-4" key={index}>
+                        {serviceWithCategory.services.map((service, _) => (
+                            <div className="flex justify-between items-center w-full md:border border-gray-200 md:rounded-lg md:p-4" key={service.id}>
                                 <div>
                                     <p className="font-semibold">{service.name}</p>
                                     <p className="text-sm text-muted-foreground pb-3">{service.duration}min</p>
                                     <p className="font-semibold text-sm">EGP {service.price}</p>
                                 </div>
 
-                                <Button borderType="fullRounded" variant={"outline"} className="font-semibold">Book</Button>
+                                <Button borderType="fullRounded" isLink={true} href={createUrl(service.id)} variant={"outline"} className="font-semibold">Book</Button>
                             </div>
                         ))}
 

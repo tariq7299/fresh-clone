@@ -57,7 +57,7 @@ export default function PublicNavBar({ fixed = false, hideInMobile = false }: { 
                         isScrolled ? 'text-primary' : ' text-background'
                     )}>For business</Link> */}
 
-                    <Button borderType="fullRounded" variant="nextLink" href="/register?type=professional" className="bg-transparent font-source-sans font-semibold   hover:bg-muted/50">For business</Button>
+                    <Button borderType="fullRounded" isLink={true} variant="outline" href="/register?type=professional" className="bg-transparent font-source-sans font-semibold   hover:bg-muted/50">For business</Button>
 
                     <DropdownMenu>
 

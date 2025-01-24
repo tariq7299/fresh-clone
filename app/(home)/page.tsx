@@ -32,72 +32,76 @@ export default function Home() {
           <HeroSection />
         </section>
 
-        {/* Gray section under hero section */}
-        <section className="px-5 mb-10 md:mb-16 md:px-7 bg-secondary-100 h-20 md:h-24 flex items-center text-center justify-center text-xs md:text-base">
-          <p className=" ">Beauty on your schedule. Explore local salons and spas with ease.</p>
 
-        </section>
+        <div className="space-y-36">
+          {/* Gray section under hero section */}
+          <section className="px-5 mb-10 md:mb-16 md:px-7 bg-secondary-100 h-20 md:h-24 flex items-center text-center justify-center text-xs md:text-base">
+            <p className=" ">Beauty on your schedule. Explore local salons and spas with ease.</p>
 
-        {/* Apply you business now section */}
-        <section className="px-5 md:px-7 mb-16 md:my-32 text-center text-xl md:text-2xl">
-          <p className=" ">Want your business on <span className="font-lora font-bold">Lumière</span>? <span className="font-bold underline decoration-2 text-nowrap">Apply now</span></p>
-        </section>
+          </section>
 
-        {/*Shops Carousels  */}
-        <section className="px-5 md:px-7 mb-20 md:mb-36 space-y-12 md:space-y-16">
+          {/* Apply you business now section */}
+          <section className="px-5 md:px-7  text-center text-xl md:text-3xl">
+            <p className=" ">Want your business on <span className="font-lora font-bold">Lumière</span>? <span className="font-bold underline decoration-2 text-nowrap">Apply now</span></p>
+          </section>
 
-          {/* Recently viewed section */}
-          {/* <ShopsCarousel sectionTitle={(<h1 className="font-semibold font-source-sans text-left text-3xl  ">Recently viewed</h1>)} /> */}
+          {/*Shops Carousels  */}
+          <section className="px-5 md:px-7  space-y-12 md:space-y-16">
 
-          <Suspense fallback={<ShopsCarouselSkeleton />}>
-            {/* Recommended section */}
-            <RecommendedBusinesses />
-          </Suspense>
+            {/* Recently viewed section */}
+            {/* <ShopsCarousel sectionTitle={(<h1 className="font-semibold font-source-sans text-left text-3xl  ">Recently viewed</h1>)} /> */}
 
-          {/* New to Lumière section */}
-          <Suspense fallback={<ShopsCarouselSkeleton />}>
-            <NewBusinesses />
-          </Suspense>
+            <Suspense fallback={<ShopsCarouselSkeleton />}>
+              {/* Recommended section */}
+              <RecommendedBusinesses />
+            </Suspense>
 
-          {/* Trending section */}
-          <Suspense fallback={<ShopsCarouselSkeleton />}>
-            <TrendingBusinesses />
-          </Suspense>
+            {/* New to Lumière section */}
+            <Suspense fallback={<ShopsCarouselSkeleton />}>
+              <NewBusinesses />
+            </Suspense>
 
-
-        </section>
-
-
-        <section className=" px-5 md:px-7 mb-16 md:mb-36 text-center ">
-          <div className="bg-background  max-w-[1440px] m-auto  rounded-xl   flex flex-col justify-center items-center gap-2">
-
-            <h1 className="font-libre-bodoni lg:text-5xl font-bold text-primary text-center text-4xl">Looking good has never been this convenient!</h1>
-
-            <h2 className="text-primary pb-5">Your next appointment is waiting. Tap to book now!</h2>
+            {/* Trending section */}
+            <Suspense fallback={<ShopsCarouselSkeleton />}>
+              <TrendingBusinesses />
+            </Suspense>
 
 
-            <Button size="lg" variant="accent" className="">Book a service</Button>
-            <p className="text-xs  text-muted-foreground pb-6 md:pb-10">No credit card required</p>
+          </section>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-3 gap-24 ">
-              <ChangingAvatar className="" />
-              <ChangingAvatar className="hidden md:block" />
-              <ChangingAvatar className="hidden md:block" />
+
+          <section className=" px-5 md:px-7   text-center ">
+            <div className="bg-background  max-w-[1440px] m-auto  rounded-xl   flex flex-col justify-center items-center gap-2">
+
+              <h1 className="font-libre-bodoni lg:text-5xl font-bold text-primary text-center text-4xl">Looking good has never been this convenient!</h1>
+
+              <h2 className="text-primary pb-5">Your next appointment is waiting. Tap to book now!</h2>
+
+
+              <Button size="lg" variant="accent" className="">Book a service</Button>
+              <p className="text-xs  text-muted-foreground pb-6 md:pb-10">No credit card required</p>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-3 gap-24 ">
+                <ChangingAvatar className="" />
+                <ChangingAvatar className="hidden md:block" />
+                <ChangingAvatar className="hidden md:block" />
+              </div>
+
             </div>
-
-          </div>
-        </section>
+          </section>
 
 
-        <section className="px-5 md:px-7  mb-36">
-          {/* Features/benefits section */}
-          <FeaturesSection />
-        </section>
+          <section className="px-5 md:px-7 ">
+            {/* Features/benefits section */}
+            <FeaturesSection />
+          </section>
+
+          <Footer />
+        </div>
 
 
       </div >
 
-      <Footer />
 
     </>
   );

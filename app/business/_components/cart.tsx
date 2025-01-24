@@ -21,7 +21,7 @@ export default async function Cart({ services, businessCoverPhoto, businessName,
     // const services = businessData?.services_with_categories
 
 
-    return <div className="border border-gray-200 rounded-lg p-5 space-y-4">
+    return <div className="border border-gray-200 rounded-lg p-5 space-y-4 shadow-sm">
 
         <div className=" sticky  bg-background  ">
 

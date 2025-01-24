@@ -52,20 +52,24 @@ export function AddServiceCard({ service }: { service: ApiService }) {
         )
     }
 
-    return <div onClick={handleClickingService} className={cn("flex justify-between items-center w-full md:border border-gray-200 md:rounded-lg md:p-5 border-b pb-4 cursor-pointer hover:bg-accent/10 group transition-colors duration-150 ", checked ? "bg-accent/5 ring-2 ring-accent" : "")} >
-        <div>
+    return <div onClick={handleClickingService} className={cn("flex justify-between items-center w-full md:border border-gray-200 rounded-lg p-4 md:p-5 border-b pb-4 cursor-pointer hover:bg-accent/10 group transition-colors duration-150 ", checked ? "bg-accent/5 ring-2 ring-accent" : "")} >
+        <div className="flex-auto overflow-hidden">
             <p className="font-semibold text-lg">{service.name}</p>
             <p className="text-sm text-muted-foreground">{service.duration}min</p>
-            <p className="text-sm text-muted-foreground pb-3">{service.description}min</p>
+            <p className="text-sm text-muted-foreground pb-3 text-nowrap truncate ">{service.description}</p>
             <p className="font-semibold text-sm">{service.price} EGP</p>
         </div>
-        <Button size={"icon"} className={cn("font-semibold h-7 w-7 p-1 bg-muted rounded-lg shadow-none text-primary   transition-colors duration-150 ", checked ? "bg-accent text-background group-hover:bg-destructive" : "group-hover:bg-accent/10")}>
-            {checked ? (
-                <>
-                    <Check className="group-hover:hidden" />
-                    <Minus className="hidden group-hover:block" />
-                </>
-            ) : (<Plus className="" />)}
-        </Button>
-    </div>
+        <div className="flex-none ">
+
+            <Button size={"icon"} className={cn("font-semibold h-7 w-7 p-1 bg-muted rounded-lg shadow-none text-primary   transition-colors duration-150 ", checked ? "bg-accent text-background group-hover:bg-accent/90" : "group-hover:bg-accent/10")}>
+                {checked ? <Check className="" /> : <Plus className="" />}
+                {/* {checked ? (
+                    <>
+                        <Check className="group-hover:hidden" />
+                        <Minus className="hidden group-hover:block" />
+                    </>
+                ) : (<Plus className="" />)} */}
+            </Button>
+        </div>
+    </div >
 }
