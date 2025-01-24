@@ -12,7 +12,7 @@ import {
 import { ScrollArea, ScrollBar } from "@/ui/components/scroll-area"
 import { Button } from "@/ui/components/custom/button";
 import { Badge } from "@/ui/components/badge";
-import { ServicesTabs } from "../../_components/services-tabs-1";
+import { BusinessServicesOverview } from "../../_components/business-services-overview";
 import { cn } from "@/lib/utils/utils";
 import { BusinessHours } from "../../_components/business-hours";
 
@@ -121,7 +121,7 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
                     <div className="">
                         <h2 className="text-2xl md:text-4xl font-bold font-source-sans pb-3">Services</h2>
 
-                        <ServicesTabs services={businessData.services_with_categories} />
+                        <BusinessServicesOverview services={businessData.services_with_categories} />
 
                         <Button variant={"outline"} className="w-full md:w-auto  md:p-5">See all</Button>
                     </div>

@@ -6,7 +6,7 @@ import { Button } from "@/ui/components/custom/button";
 import { ApiServicesWithCategory } from "@/professional/_lib/definitions";
 import { useState } from "react";
 
-export function ServicesTabs({ services }: { services: ApiServicesWithCategory[] }) {
+export function BusinessServicesOverview({ services }: { services: ApiServicesWithCategory[] }) {
 
     const tabTitles = services.map(service => service.name)
 
