@@ -12,7 +12,7 @@ import {
 import { ScrollArea, ScrollBar } from "@/ui/components/scroll-area"
 import { Button } from "@/ui/components/custom/button";
 import { Badge } from "@/ui/components/badge";
-import { ServicesTabs } from "../../_components/services-tabs";
+import { ServicesTabs } from "../../_components/services-tabs-1";
 import { cn } from "@/lib/utils/utils";
 import { BusinessHours } from "../../_components/business-hours";
 
@@ -53,7 +53,7 @@ interface Address {
 }
 
 // Main business type
-interface Business {
+export interface Business {
     id: number;
     name: string;
     description: string;

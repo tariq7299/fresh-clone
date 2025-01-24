@@ -45,10 +45,10 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 - `NEXT_PUBLIC_` This is the correct prefix for environment variables that need to be exposed to the browser/client-side code in Next.js and Without this prefix, the variable would only be available server-side
 
 
-## Common commands
+### Common commands
 `pnpm dlx shadcn@latest add <componentName> --path ./app/ui/components`
 pnpm dlx shadcn@latest add popover --path /app/ui/components/common
-## Nice tip from AI on font families
+### Nice tip from AI on font families
 I'll recommend three font families that would work well for a beauty and spa booking platform, considering both aesthetics and readability:
 
 1. **Primary Font (Headers & Titles)**:
@@ -91,6 +91,34 @@ Logo: Libre Bodoni
 big-Headers:  Lora
 miduem headers: Montserrat
 body: Quicksand
+```
+
+### A nice snippet of code of searchParams and URL in client compoennt
+
+```tsx
+"use client"
+ const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const currentPage = Number(searchParams.get('page')) || 1;
+  const allPages = generatePagination(currentPage, totalPages);
+
+  const createPageURL = (pageNumber: number | string) => {
+    const params = new URLSearchParams(searchParams);
+    params.set('page', pageNumber.toString());
+    return `${pathname}?${params.toString()}`;
+  };
+```  
+
+### Also a nice table explaining the differenve between searchParams(queries) and pathParams  
+```tsx
+
+| Feature          | Path Parameters                     | Query/Search Parameters            |
+|------------------|-------------------------------------|------------------------------------|
+| **Location in URL** | Part of the path (e.g., `/users/123`) | In the query string (e.g., `?page=2`) |
+| **Purpose**      | Identifies a specific resource      | Modifies or filters a request      |
+| **Format**       | `/path/:param` or `/path/value`     | `?key=value&key2=value2`           |
+| **Required?**    | Usually required                   | Often optional                     |
+
 ```
 
 ## Description of the app
