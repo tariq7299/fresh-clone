@@ -13,6 +13,8 @@ import { AddServiceCardSkeleton } from "./skeletons";
 
 export function AddServiceCard({ service }: { service: ApiService }) {
 
+    const router = useRouter()
+
     const pathname = usePathname();
     const searchParams = useSearchParams();
     const [items, setItems] = useState<number[]>([])
@@ -42,8 +44,11 @@ export function AddServiceCard({ service }: { service: ApiService }) {
         // This will update the URL without triggering a full page reload
         window.history.replaceState(null, '', `${pathname}?${params.toString()}`);
 
-        // I coudl't use router.replace because it will trigger like a partial page reload and ruins my scroll spied sections !
-        // router.replace(`${pathname}?${params.toString()}`, undefined, { shallow: true });
+        // TODO: Try to enable it again and test in production !
+        // This is slower than window.history.replaceState !!!!!!!!!!! very weird !
+        // Try to enable it againa and add service or remove service and see by yourself !, you will notive that the cart gets updated in more time than the window.history.replaceState !
+        // Maybe in production it will be better to use it !
+        // router.replace(`${pathname}?${params.toString()}`, { scroll: false });
     }
 
     if (isLoading) {

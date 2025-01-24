@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import { TriangleAlert, RefreshCcw, Undo2 } from 'lucide-react';
 import { Button } from '@/ui/components/custom/button';
-
+import { useRouter } from 'next/navigation';
 export default function Error({
     error,
     reset,
@@ -11,7 +11,7 @@ export default function Error({
     error: Error & { digest?: string };
     reset: () => void;
 }) {
-
+    const router = useRouter()
     useEffect(() => {
         // Optionally log the error to an error reporting service
         console.error(error);
@@ -39,7 +39,8 @@ export default function Error({
                 <Button
                     variant={"outline"}
                     className="flex items-center gap-2"
-                    onClick={() => window.history.back()}
+                    onClick={() => router.back()}
+                // onClick={() => window.history.back()}
                 >
                     Go Back <Undo2 className='size-4' />
                 </Button>

@@ -3,13 +3,14 @@
 import { Button } from "@/ui/components/custom/button";
 import { ApiService, ApiServicesWithCategory } from "@/professional/_lib/definitions";
 import { useState, useEffect } from "react";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
 export default function CartForm({ servicesWithCategories }: { servicesWithCategories: ApiServicesWithCategory[] }) {
 
 
     const pathname = usePathname();
     const searchParams = useSearchParams();
+    const router = useRouter();
     const [selectedItems, setSelectedItems] = useState<{
         total: number
         items: ApiService[]
@@ -91,7 +92,7 @@ export default function CartForm({ servicesWithCategories }: { servicesWithCateg
 
                 <div className="w-full">
 
-                    <Button disabled={selectedItems?.items?.length === 0} size="lg" className="w-full mt-6 text-md">
+                    <Button onClick={() => router.push("/login")} size="lg" className="w-full mt-6 text-md">
                         Continue
                     </Button>
                 </div>

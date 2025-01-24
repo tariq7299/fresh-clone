@@ -3,8 +3,11 @@ import Link from 'next/link';
 import { FaceFrownIcon } from '@heroicons/react/24/outline';
 import { Button } from '@/ui/components/custom/button';
 import { RefreshCcw, Undo2 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 export default function NotFound() {
+
+    const router = useRouter()
 
     return (
         <main className="flex h-dvh flex-col items-center justify-center gap-1 p-5">
@@ -20,14 +23,14 @@ export default function NotFound() {
                 <Button
                     variant={"default"}
                     className="flex items-center gap-2 "
-                    onClick={() => window.location.href = '/'}
+                    onClick={() => router.push('/')}
                 >
                     Go Home
                 </Button>
                 <Button
                     variant={"outline"}
                     className="flex items-center gap-2"
-                    onClick={() => window.history.back()}
+                    onClick={() => router.back()}
                 >
                     Go Back <Undo2 className='size-4' />
                 </Button>

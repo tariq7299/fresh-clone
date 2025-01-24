@@ -7,11 +7,13 @@ import { Button } from "@/ui/components/custom/button";
 import { Suspense } from "react";
 import { BookingPageSkeleton } from "@/business/_components/skeletons";
 
-export default function BookingLayout({ children, cart }: { children: React.ReactNode, cart: React.ReactNode }) {
+export default function BookingLayout({ children, cart, auth }: { children: React.ReactNode, cart: React.ReactNode, auth: React.ReactNode }) {
 
 
 
     return <>
+
+
 
         <BusinessFormProvider>
 
@@ -57,6 +59,8 @@ export default function BookingLayout({ children, cart }: { children: React.Reac
                 </div>
                 <SubmitButton hasIcon={false} className="" />
             </div>
+
+            {auth}
 
         </BusinessFormProvider>
 

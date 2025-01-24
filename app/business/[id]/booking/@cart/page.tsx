@@ -4,7 +4,7 @@ import { Business } from "@/business/[id]/(business-overview)/page";
 
 export default async function CartPage(props: { params: Promise<{ id: string }>, searchParams: Promise<{ items: string }> }) {
 
-
+    return null
     const params = await props.params
     const searchParams = await props.searchParams
     const businessId = params?.id
@@ -20,6 +20,6 @@ export default async function CartPage(props: { params: Promise<{ id: string }>,
     console.log("businessData", businessData)
 
     return <div>
-        <Cart services={services} businessCoverPhoto={""} businessName={businessName} businessAddress={businessAddress} />
+        <Cart businessId="" services={services} businessCoverPhoto={""} businessName={businessName} businessAddress={businessAddress} />
     </div>
 }
