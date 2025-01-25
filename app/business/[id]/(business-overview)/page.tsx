@@ -69,8 +69,6 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
 
     const businessData = await getBusinessData(id) as Business
 
-    console.log("businessData", businessData)
-
     const servicesCount = businessData.services_with_categories.reduce((acc, curr) => acc + curr.services.length, 0);
 
     return <div className="">

@@ -15,8 +15,6 @@ export default function ShopsCarousel({ data, sectionTitle = (<h1 className="fon
 
     const id = useId()
 
-    console.log("data", data)
-
     if (!data || data.length === 0) return null
 
     return (

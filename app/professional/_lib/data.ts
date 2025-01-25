@@ -187,12 +187,6 @@ export const handleCreatingNewbusiness = async (): Promise<ApiResponse<BusinessO
         delete formattedBusiness.gender_of_customers
         delete formattedBusiness.id
 
-
-
-
-
-        console.log("newbusiness", newBusiness)
-        console.log("formattedBusiness", formattedBusiness)
         // Send request to   backend to create a business  
 
         const successResponse = await fetchApi<ApiResponse<BusinessOnboarding>>("/businesses", {
@@ -200,17 +194,8 @@ export const handleCreatingNewbusiness = async (): Promise<ApiResponse<BusinessO
             body: formattedBusiness
         }) as ApiSucess<BusinessOnboarding>
 
-        // const successMsg = setApiSuccessMsg({ successResponse: response })
-
-        console.log("newBusiness?.id", newBusiness?.id)
-
-        // Option 3: Delete with include to confirm related records are deleted
-
 
         return successResponse
-
-
-
 
 
     } catch (errorResponse) {

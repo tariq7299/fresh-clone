@@ -18,7 +18,6 @@ export default function ServicesTabsScrollSpied({ tabTitles }: { tabTitles: stri
         const element = tabsRefs.current.find(ref => ref.current?.innerText === current)?.current
         const container = element?.parentElement;
         const offsetLeft = element?.offsetLeft; // Element's position within the container
-        console.log("offsetLeft", offsetLeft)
         container?.scrollTo({
             left: offsetLeft,
             behavior: "smooth",

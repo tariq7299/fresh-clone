@@ -73,6 +73,7 @@ export async function fetchApi<T>(
         const contentType = response.headers.get('content-type');
         if (contentType?.includes('application/json')) {
             const data = await response.json();
+            console.log("FETCH_UTILS JSON response", data)
 
             // Handle API errors
             if (!response.ok) {
@@ -100,6 +101,7 @@ export async function fetchApi<T>(
         return await response.text() as T;
 
     } catch (error) {
+        console.log("FETCH_UTILS errorrr", error)
         if (error instanceof ApiError) {
             console.log("FETCH_UTILS error", {
                 success: error.success,

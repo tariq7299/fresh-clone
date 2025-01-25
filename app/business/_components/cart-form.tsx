@@ -4,6 +4,7 @@ import { Button } from "@/ui/components/custom/button";
 import { ApiService, ApiServicesWithCategory } from "@/professional/_lib/definitions";
 import { useState, useEffect } from "react";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
+import { getItemsFromSearchParams } from "../_lib/utils";
 
 export default function CartForm({ servicesWithCategories }: { servicesWithCategories: ApiServicesWithCategory[] }) {
 
@@ -18,11 +19,16 @@ export default function CartForm({ servicesWithCategories }: { servicesWithCateg
         total: 0,
         items: []
     })
+
+    const isBookingPage = pathname.includes("/select-services")
+    const timePagePath = pathname.replace("/select-services", "/time")
+    const isTimePage = pathname.includes("/time")
+
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
 
-        const servicesIds = getItemsFromSearchParams()
+        const servicesIds = getItemsFromSearchParams(searchParams)
         const allServices = servicesWithCategories.flatMap(servicesWithCategory => servicesWithCategory.services)
 
         const selectedServices = allServices.filter(service => servicesIds.includes(service.id))
@@ -34,11 +40,7 @@ export default function CartForm({ servicesWithCategories }: { servicesWithCateg
         setIsLoading(false)
     }, [searchParams])
 
-    function getItemsFromSearchParams() {
-        const items = searchParams.get("items")
-        const itemsList = items?.split(",").map(item => Number(item.trim())) || []
-        return itemsList
-    }
+
 
     if (isLoading) {
         return (
@@ -92,9 +94,22 @@ export default function CartForm({ servicesWithCategories }: { servicesWithCateg
 
                 <div className="w-full">
 
-                    <Button onClick={() => router.push("/login")} size="lg" className="w-full mt-6 text-md">
+                    {isBookingPage ?
+                        <Button isLink
+                            href={createPageURL(timePagePath, searchParams)}
+                            disabled={selectedItems?.items?.length === 0}
+                            size="lg"
+                            className="w-full mt-6 text-md">
+                            Continue
+                        </Button> :
+                        <Button
+                            disabled={selectedItems?.items?.length === 0} onClick={() => router.push("/login")} size="lg" className="w-full mt-6 text-md">
+                            Continue
+                        </Button>}
+
+                    {/* <Button disabled={selectedItems?.items?.length === 0} onClick={() => router.push("/login")} size="lg" className="w-full mt-6 text-md">
                         Continue
-                    </Button>
+                    </Button> */}
                 </div>
 
             </div>

@@ -28,8 +28,6 @@ export function ServicesOverview({ services }: { services: ApiServicesWithCatego
         return `${pathname}/booking/select-services?${params.toString()}`
     }
 
-    console.log("services", services)
-
     return (
 
         <Tabs defaultValue={tabTitles[0]}>

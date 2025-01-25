@@ -13,9 +13,6 @@ export default function RegisterModal() {
     const loginRequiredForBooking = searchParams.get("loginRequiredForBooking") === "true";
     const type = searchParams.get("type") || "";
 
-    console.log("loginRequiredForBookingIN REGISTER", loginRequiredForBooking)
-    console.log("typeIN REGISTER", type)
-
 
     const router = useRouter();
     return <Dialog open={true} onOpenChange={() => router.back()}   >

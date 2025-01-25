@@ -8,18 +8,7 @@ import { Business } from "@/business/[id]/(business-overview)/page";
 import { ApiServicesWithCategory } from "@/professional/_lib/definitions";
 
 
-export default async function Cart({ services, businessId, businessCoverPhoto, businessName, businessAddress }: { services: ApiServicesWithCategory[], businessId: string, businessCoverPhoto: string, businessName: string, businessAddress: string }) {
-
-    // const params = await props.params
-    // const searchParams = await props.searchParams
-    // const businessId = params?.id
-    // const items = searchParams.items
-
-    // console.log("items", items)
-
-    // const businessData = await getBusinessData(businessId) as Business
-    // const services = businessData?.services_with_categories
-
+export default function Cart({ services, businessId, businessCoverPhoto, businessName, businessAddress }: { services: ApiServicesWithCategory[], businessId: string, businessCoverPhoto: string, businessName: string, businessAddress: string }) {
 
     return <div className="border border-gray-200 rounded-lg p-5 space-y-4 shadow-sm">
 

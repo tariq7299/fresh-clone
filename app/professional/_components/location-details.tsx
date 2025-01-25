@@ -66,9 +66,6 @@ export default function LocationDetails({ setLocation, location, className }: { 
 
     }
 
-    console.log("locationDETAILLLSSS", location)
-    console.log("value43434", value)
-
     useEffect(() => {
         setValue({ ...location })
     }, [location])
