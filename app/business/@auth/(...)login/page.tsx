@@ -1,6 +1,6 @@
 "use client";
 
-import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/ui/components/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/ui/components/dialog";
 import { useRouter } from "next/navigation";
 import LoginForm from "@/(auth)/_components/login-form";
 import { Button } from "@/ui/components/button";
@@ -10,18 +10,15 @@ export default function LoginPage() {
 
     return (
         <Dialog open={true} onOpenChange={() => router.back()}>
-            <DialogContent className="sm:max-w-[425px]">
-                <DialogHeader>
-                    <DialogTitle>Login</DialogTitle>
+            <DialogContent className="sm:max-w-[425px] p-8">
+                <DialogHeader className="">
+                    <DialogTitle className="text-3xl font-bold p">Login</DialogTitle>
+                    <DialogDescription>Please log in or create an account to book appointments.
+                    </DialogDescription>
                 </DialogHeader>
-                <div className="grid gap-4 py-4">
+                <div className="py-4">
                     <LoginForm />
                 </div>
-                <DialogFooter>
-                    <Button onClick={() => router.back()}>
-                        Cancel
-                    </Button>
-                </DialogFooter>
             </DialogContent>
         </Dialog>
     );
