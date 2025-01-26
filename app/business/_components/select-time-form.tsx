@@ -14,7 +14,7 @@ import { addDays } from "date-fns"
 import { useEffect } from "react"
 import { fetchApi } from "@/lib/utils/api/fetch-utils-client"
 import { ApiResponse } from "@/lib/definitions/api"
-import { handleSelectingSlot } from "../_lib/form-actions"
+import { handleBooking } from "../_lib/form-actions"
 import { handleFormResponse } from "@/lib/utils/utils"
 import { SuccessFormState, ErrorFormState } from "@/lib/definitions/definitions"
 import { z } from "zod"
@@ -92,19 +92,20 @@ export default function SelectTimeForm({ businessId, minDateToBook, maxDateToBoo
         }
     }
     // Create a bound version of handleSelectingSlot with all required params
-    const boundHandleSelectingSlot = handleSelectingSlot.bind(null, {
+    const boundHandleBooking = handleBooking.bind(null, {
         businessId,
         date: date as Date,
         serviceIds
     });
 
-    const [formState, formAction, isPending] = useActionState(boundHandleSelectingSlot, initialState)
+    const [formState, formAction, isPending] = useActionState(boundHandleBooking, initialState)
 
     // Handle form submission response
     useEffect(() => {
         handleFormResponse({
             formState,
             successCallback: () => {
+                router.push(`/business/${businessId}/successful-reservation`)
                 console.log("successsss")
 
             }
@@ -121,6 +122,10 @@ export default function SelectTimeForm({ businessId, minDateToBook, maxDateToBoo
     // }
 
     return <div className="space-y-8">
+
+        <Button isLink href={`/business/${businessId}/successful-reservation`} variant={"outline"}>
+            done
+        </Button>
 
 
         <div className="flex justify-between items-center">
@@ -201,6 +206,15 @@ export default function SelectTimeForm({ businessId, minDateToBook, maxDateToBoo
 
 
             </div>
+
+            <Link href={`/login?${new URLSearchParams({
+                type: 'customer',
+                loginRequiredForBooking: 'true'
+            }).toString()}`}>
+                <Button>
+                    test
+                </Button>
+            </Link>
 
             {/* <div className="min-h-[400px] flex flex-col items-center justify-center gap-4 md:border md:border-gray-200 rounded-lg">
 

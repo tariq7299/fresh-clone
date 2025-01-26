@@ -16,7 +16,7 @@ import { selectTimeFormSchema } from "./definitions"
 
 // TODO: Write comments
 // TODO: Write types
-export const handleSelectingSlot = async (
+export const handleBooking = async (
     { businessId, date, serviceIds }: { businessId: number, date: Date, serviceIds: number[] }
     , formState: ErrorFormState<SelectTimeClientErrors | null, SelectTimeFormData>
         | SuccessFormState<SelectTimeClientErrors | null, SelectTimeFormData>,

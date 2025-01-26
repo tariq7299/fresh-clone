@@ -22,8 +22,8 @@ export default function CartForm({ servicesWithCategories }: { servicesWithCateg
     })
 
     const isBookingPage = pathname.includes("/select-services")
+    // const isTimePage = pathname.includes("/time")
     const timePagePath = pathname.replace("/select-services", "/time")
-    const isTimePage = pathname.includes("/time")
 
     const [isLoading, setIsLoading] = useState(true)
 
