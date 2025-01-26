@@ -24,15 +24,16 @@ export default async function TimePage(props: { searchParams: Promise<{ items: s
     return <>
 
         <h1 className="text-4xl md:text-5xl font-bold font-source-sans pb-6">Select time</h1>
+
         <Form businessId={businessId} minDateToBook={minDateToBook} maxDateToBook={maxDateToBook} defaultSlots={defaultSlots} serviceIds={serviceIds} />
 
 
-        <Link href="/login?loginRequiredForBooking=true" scroll={false} >
-            {/* <Button onClick={() => window.location.href = '/login'}   > */}
-            {/* <Button onClick={() => router.push("/login")}   > */}
-            test
-            {/* </Button> */}
-        </Link>
+        {/* <Link href="/login?loginRequiredForBooking=true" scroll={false} > */}
+        {/* <Button onClick={() => window.location.href = '/login'}   > */}
+        {/* <Button onClick={() => router.push("/login")}   > */}
+        {/* test */}
+        {/* </Button> */}
+        {/* </Link> */}
         {/* <Link href="/register" scroll={false} >
             <Button>
                 test

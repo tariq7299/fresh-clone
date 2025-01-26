@@ -11,12 +11,14 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { Slot } from "@/business/_lib/definitions"
 import { addDays } from "date-fns"
-// import { getAvailableSlots } from "../_lib/data"
 import { useEffect } from "react"
 import { fetchApi } from "@/lib/utils/api/fetch-utils-client"
 import { ApiResponse } from "@/lib/definitions/api"
 import { handleSelectingSlot } from "../_lib/form-actions"
 import { handleFormResponse } from "@/lib/utils/utils"
+import { SuccessFormState, ErrorFormState } from "@/lib/definitions/definitions"
+import { z } from "zod"
+import { SelectTimeClientErrors, SelectTimeFormData } from "../_lib/definitions"
 
 export default function SelectTimeForm({ businessId, minDateToBook, maxDateToBook, defaultSlots, serviceIds }: { businessId: number, minDateToBook: Date, maxDateToBook: Date, defaultSlots: string[], serviceIds: number[] }) {
 
@@ -77,7 +79,7 @@ export default function SelectTimeForm({ businessId, minDateToBook, maxDateToBoo
     }, [date]);
 
 
-    const initialState = {
+    const initialState: SuccessFormState<SelectTimeClientErrors | null, SelectTimeFormData> | ErrorFormState<SelectTimeClientErrors | null, SelectTimeFormData> = {
         success: false,
         clientFieldsErrors: null,
         apiDataResponse: null,
@@ -85,14 +87,14 @@ export default function SelectTimeForm({ businessId, minDateToBook, maxDateToBoo
         formData: {
             slot: "",
             businessId,
-            date,
+            date: date as Date,
             serviceIds
         }
     }
     // Create a bound version of handleSelectingSlot with all required params
     const boundHandleSelectingSlot = handleSelectingSlot.bind(null, {
         businessId,
-        date,
+        date: date as Date,
         serviceIds
     });
 
@@ -104,6 +106,7 @@ export default function SelectTimeForm({ businessId, minDateToBook, maxDateToBoo
             formState,
             successCallback: () => {
                 console.log("successsss")
+
             }
         })
     }, [formState]);
