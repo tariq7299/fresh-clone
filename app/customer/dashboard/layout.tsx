@@ -4,6 +4,7 @@ import { Suspense } from "react"
 import NavBar from "@/ui/components/custom/nav-bar"
 import { NavBarSkeleton } from "@/(home)/_components/skeletons"
 import { getUserData } from "@/(auth)/_lib/auth-server-services"
+import { div } from "framer-motion/client"
 
 export default async function CustomerLayout({ children }: { children: React.ReactNode }) {
 
@@ -12,18 +13,21 @@ export default async function CustomerLayout({ children }: { children: React.Rea
     console.log("userData", userData)
 
     return (
-        <SidebarProvider>
-            <AppSidebar userData={userData} />
+        <div className="md:mt-20">
+            <SidebarProvider>
+                <AppSidebar userData={userData} />
 
-            {/* Nav bar */}
-            <Suspense fallback={<NavBarSkeleton />}>
-                <NavBar className="max-w-full" fixed={true} hideInMobile={true} />
-            </Suspense>
+                {/* Nav bar */}
+                <Suspense fallback={<NavBarSkeleton />}>
+                    <NavBar className="max-w-full" fixed={true} hideInMobile={true} />
+                </Suspense>
 
-            <div className="bg-gray-50 h-dvh w-full">
-                <SidebarTrigger />
-                {children}
-            </div>
-        </SidebarProvider>
+                <div className="bg-gray-50 h-dvh w-full">
+                    <SidebarTrigger />
+                    {children}
+                </div>
+            </SidebarProvider>
+        </div>
+
     )
 }
