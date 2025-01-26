@@ -16,7 +16,7 @@ export default function BookingDonePage() {
             <p className="text-sm">Please check your inbox (and spam folder) for the confirmation.</p>
         </>)}
         link1="/"
-        link2="/business/reservations"
+        link2="/business/appointments"
         button1Text="Go to Home"
-        button2Text="Go to Reservations" />
+        button2Text="Go to Appointments" />
 }

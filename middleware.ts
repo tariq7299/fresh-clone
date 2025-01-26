@@ -9,7 +9,10 @@ import { UserRole } from '@/(auth)/_lib/definitions'
 // So if he tries to access these then he will be directed to /dashboard
 // const publicRoutes = ['/register', '/for-who', "/otp-verification"]
 const publicRoutes = [""]
-// const publicRoutes = ['/login', '/register', '/for-who', "/professional/onboarding"]
+// const publicRoutes = ['/login', '/register', '/for-who', "/professional/onboarding"]  
+
+
+
 
 export default async function middleware(req: NextRequest) {
 
@@ -21,6 +24,8 @@ export default async function middleware(req: NextRequest) {
     // 3. Decrypt the session from the cookie
     const session = await
         getSession()
+
+    console.log("session", session)
 
     // 4. Redirect to /login if the user is not authenticated
     if ((req.nextUrl.pathname.startsWith('/professional') || req.nextUrl.pathname.startsWith('/admin') || req.nextUrl.pathname.startsWith('/customer')) && !session?.token) {

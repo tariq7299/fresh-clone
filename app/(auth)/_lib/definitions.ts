@@ -39,7 +39,9 @@ export enum UserRole {
 export type User = {
 
     id: number;
-    name: string;
+    first_name: string;
+    last_name: string;
+    full_name: string;
     email: string;
     role: UserRole;
     phone_number: string;

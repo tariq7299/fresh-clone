@@ -43,8 +43,8 @@ export async function getUserData() {
     const session = await getSession()
     if (!session) return null
 
-    const { id, role } = session
+    const { id, role, full_name } = session
 
-    return { id, role }
+    return { id, role, full_name }
 }
 

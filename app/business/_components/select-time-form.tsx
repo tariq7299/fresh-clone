@@ -105,7 +105,7 @@ export default function SelectTimeForm({ businessId, minDateToBook, maxDateToBoo
         handleFormResponse({
             formState,
             successCallback: () => {
-                router.push(`/business/${businessId}/successful-reservation`)
+                router.push(`/business/${businessId}/successful-appointment`)
                 console.log("successsss")
 
             }

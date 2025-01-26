@@ -1,0 +1,29 @@
+import { SidebarProvider, SidebarTrigger } from "@/ui/components/sidebar"
+import { AppSidebar } from "@/customer/_components/app-sidebar"
+import { Suspense } from "react"
+import NavBar from "@/ui/components/custom/nav-bar"
+import { NavBarSkeleton } from "@/(home)/_components/skeletons"
+import { getUserData } from "@/(auth)/_lib/auth-server-services"
+
+export default async function CustomerLayout({ children }: { children: React.ReactNode }) {
+
+    const userData = await getUserData()
+
+    console.log("userData", userData)
+
+    return (
+        <SidebarProvider>
+            <AppSidebar userData={userData} />
+
+            {/* Nav bar */}
+            <Suspense fallback={<NavBarSkeleton />}>
+                <NavBar className="max-w-full" fixed={true} hideInMobile={true} />
+            </Suspense>
+
+            <div className="bg-gray-50 h-dvh w-full">
+                <SidebarTrigger />
+                {children}
+            </div>
+        </SidebarProvider>
+    )
+}
