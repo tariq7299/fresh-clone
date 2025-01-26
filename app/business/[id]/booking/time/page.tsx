@@ -1,4 +1,4 @@
-import { format } from "date-fns"
+import { addDays, format } from "date-fns"
 import Link from "next/link"
 import Form from "@/business/_components/select-time-form"
 import { getAvailableSlots } from "@/business/_lib/data"
@@ -7,22 +7,25 @@ import { getItemsFromSearchParams } from "@/business/_lib/utils"
 export default async function TimePage(props: { searchParams: Promise<{ items: string }>, params: Promise<{ id: string }> }) {
 
     const { id } = await props.params
+    const businessId = Number(id)
     const searchParams = await props.searchParams
     const items = searchParams.items
-    const service_ids = items?.split(",").map(item => Number(item.trim())) || []
+    const serviceIds = items?.split(",").map(item => Number(item.trim())) || []
     console.log("items", typeof items)
     console.log("id", id)
-    const date = format(new Date(), "yyyy-MM-dd")
 
-    // const defaultSlots = await getAvailableSlots(Number(id), date, service_ids)
-    // console.log("defaultSlots", defaultSlots)
+    const minDateToBook = new Date();
+    const maxDateToBook = addDays(minDateToBook, 60);
+    const formattedDate = format(minDateToBook, "yyyy-MM-dd")
+
+    const defaultSlots = await getAvailableSlots(businessId, formattedDate, serviceIds).then(slots => slots.map(slot => slot.start_time))
+    console.log("defaultSlots", defaultSlots)
 
 
     return <>
 
         <h1 className="text-4xl md:text-5xl font-bold font-source-sans pb-6">Select time</h1>
-
-        <Form defaultSlots={[]} />
+        <Form businessId={businessId} minDateToBook={minDateToBook} maxDateToBook={maxDateToBook} defaultSlots={defaultSlots} serviceIds={serviceIds} />
 
 
         <Link href="/login?loginRequiredForBooking=true" scroll={false} >

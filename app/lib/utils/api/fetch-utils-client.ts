@@ -1,4 +1,5 @@
-import { getSession } from "@/(auth)/_lib/sessions";
+// import { getSession } from "@/(auth)/_lib/sessions";
+import SecureLS from 'secure-ls';
 import { ApiError } from "@/lib/definitions/api";
 
 type FetchOptions = {
@@ -10,7 +11,6 @@ type FetchOptions = {
     tags?: string[];
     auth?: boolean;
 };
-
 
 
 export async function fetchApi<T>(
@@ -27,6 +27,9 @@ export async function fetchApi<T>(
         auth = true,
     } = options;
 
+    const ls = new SecureLS();
+    const token = ls.get('token');
+
     const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
     const url = `${baseUrl}${endpoint}`;
@@ -34,14 +37,14 @@ export async function fetchApi<T>(
     // Only add token if auth is true
     let authHeaders = {};
 
-    if (auth && typeof window === 'undefined') {
-        const session = await getSession();
-        if (session?.token) {
-            authHeaders = { Authorization: `Bearer ${session.token}` };
-        }
+    //  **if CLIENT SIDE**
+    // This auth sending token will be used in client side !,
+    if (auth && typeof window !== 'undefined' && token) {
+        authHeaders = { Authorization: `Bearer ${token}` };
     }
 
     const fetchOptions: RequestInit = {
+        credentials: 'include',
         method,
         headers: {
             'Accept-Language': 'en',
@@ -56,16 +59,16 @@ export async function fetchApi<T>(
     };
 
     try {
-        // console.log("FETCH_UTILS fetchOptions", fetchOptions)
-        // console.log("FETCH_UTILS url", url)
+        console.log("FETCH_UTILS fetchOptions", fetchOptions)
+        console.log("FETCH_UTILS url", url)
         const response = await fetch(url, fetchOptions);
-        // console.log("FETCH_UTILS response", response)
+        console.log("FETCH_UTILS response", response)
 
         // Handle JSON responses
         const contentType = response.headers.get('content-type');
         if (contentType?.includes('application/json')) {
             const data = await response.json();
-            // console.log("FETCH_UTILS JSON response", data)
+            console.log("FETCH_UTILS JSON response", data)
 
             // Handle API errors
             if (!response.ok) {
@@ -93,7 +96,7 @@ export async function fetchApi<T>(
         return await response.text() as T;
 
     } catch (error) {
-        // console.log("FETCH_UTILS errorrr", error)
+        console.log("FETCH_UTILS errorrr", error)
         if (error instanceof ApiError) {
             console.log("FETCH_UTILS error", {
                 success: error.success,

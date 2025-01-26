@@ -20,7 +20,7 @@ export const getBusinessData = async (id: string) => {
 
 }
 
-export const getAvailableSlots = async (id: number, date: string, service_ids: number[]) => {
+export const getAvailableSlots = async (id: number, date: string, service_ids: number[]): Promise<Slot[]> => {
 
     // const formDataPayload = {
     //     business_id: id,
