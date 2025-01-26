@@ -11,12 +11,12 @@ const UNAUTHORIZED_MESSAGE = "Unauthenticated." as const;
  * @param status HTTP status code
  * @returns void
  */
-export function redirectToLoginIfNotAuthenticated(status: number, code: string | number): void {
+export function redirectToLoginIfNotAuthenticated(status: number, code: string | number, addSessionEndedParam: boolean = true): void {
 
     if (status === UNAUTHORIZED_STATUS && code === UNAUTHORIZED_MESSAGE && typeof code === "string") {
 
         const isServer = typeof window === "undefined";
-        const redirectUrl = "/login?sessionEnded=true";
+        const redirectUrl = "/login" + (addSessionEndedParam ? "?sessionEnded=true" : "");
 
         if (isServer) {
             "use server";

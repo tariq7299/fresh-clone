@@ -44,7 +44,6 @@ export async function fetchApi<T>(
     }
 
     const fetchOptions: RequestInit = {
-        credentials: 'include',
         method,
         headers: {
             'Accept-Language': 'en',

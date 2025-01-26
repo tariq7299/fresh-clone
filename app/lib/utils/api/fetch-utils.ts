@@ -56,16 +56,16 @@ export async function fetchApi<T>(
     };
 
     try {
-        // console.log("FETCH_UTILS fetchOptions", fetchOptions)
-        // console.log("FETCH_UTILS url", url)
+        console.log("FETCH_UTILS fetchOptions", fetchOptions)
+        console.log("FETCH_UTILS url", url)
         const response = await fetch(url, fetchOptions);
-        // console.log("FETCH_UTILS response", response)
+        console.log("FETCH_UTILS response", response)
 
         // Handle JSON responses
         const contentType = response.headers.get('content-type');
         if (contentType?.includes('application/json')) {
             const data = await response.json();
-            // console.log("FETCH_UTILS JSON response", data)
+            console.log("FETCH_UTILS JSON response", data)
 
             // Handle API errors
             if (!response.ok) {
@@ -93,7 +93,7 @@ export async function fetchApi<T>(
         return await response.text() as T;
 
     } catch (error) {
-        // console.log("FETCH_UTILS errorrr", error)
+        console.log("FETCH_UTILS errorrr", error)
         if (error instanceof ApiError) {
             console.log("FETCH_UTILS error", {
                 success: error.success,

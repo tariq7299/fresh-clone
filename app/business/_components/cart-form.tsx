@@ -104,7 +104,9 @@ export default function CartForm({ servicesWithCategories }: { servicesWithCateg
                             Continue
                         </Button> :
                         <Button
-                            disabled={selectedItems?.items?.length === 0} onClick={() => router.push("/login")} size="lg" className="w-full mt-6 text-md">
+                            form="select-time-form"
+                            type="submit"
+                            disabled={selectedItems?.items?.length === 0} size="lg" className="w-full mt-6 text-md">
                             Continue
                         </Button>}
 

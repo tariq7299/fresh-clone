@@ -4,7 +4,7 @@ import { Button } from "@/ui/components/custom/button"
 import { Calendar } from "@/ui/components/calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/ui/components/popover"
 import { CalendarIcon, CalendarOff } from "lucide-react"
-import { useState } from "react"
+import { useActionState, useState } from "react"
 import { cn } from "@/lib/utils/utils"
 import { format } from "date-fns"
 import Link from "next/link"
@@ -15,6 +15,8 @@ import { addDays } from "date-fns"
 import { useEffect } from "react"
 import { fetchApi } from "@/lib/utils/api/fetch-utils-client"
 import { ApiResponse } from "@/lib/definitions/api"
+import { handleSelectingSlot } from "../_lib/form-actions"
+import { handleFormResponse } from "@/lib/utils/utils"
 
 export default function SelectTimeForm({ businessId, minDateToBook, maxDateToBook, defaultSlots, serviceIds }: { businessId: number, minDateToBook: Date, maxDateToBook: Date, defaultSlots: string[], serviceIds: number[] }) {
 
@@ -28,10 +30,9 @@ export default function SelectTimeForm({ businessId, minDateToBook, maxDateToBoo
     const [date, setDate] = useState<Date | undefined>(INITIAL_DATE)
     const [selectedSlot, setSelectedSlot] = useState<string>('')
     const [slots, setSlots] = useState<string[]>([])
-    const [isLoadingSlots, setIsLoadingSlots] = useState(false)
+    const [isLoadingSlots, setIsLoadingSlots] = useState(true)
 
     const handleDateChange = async (date: Date) => {
-        setIsLoadingSlots(true)
         const formattedDate = format(date, "yyyy-MM-dd")
         try {
             // const response = await fetchApi<ApiResponse<{ slots: Slot[] }>>(`/businesses/available-slots`, {
@@ -74,6 +75,47 @@ export default function SelectTimeForm({ businessId, minDateToBook, maxDateToBoo
     useEffect(() => {
         handleDateChange(date || INITIAL_DATE);
     }, [date]);
+
+
+    const initialState = {
+        success: false,
+        clientFieldsErrors: null,
+        apiDataResponse: null,
+        apiMsgs: "",
+        formData: {
+            slot: "",
+            businessId,
+            date,
+            serviceIds
+        }
+    }
+    // Create a bound version of handleSelectingSlot with all required params
+    const boundHandleSelectingSlot = handleSelectingSlot.bind(null, {
+        businessId,
+        date,
+        serviceIds
+    });
+
+    const [formState, formAction, isPending] = useActionState(boundHandleSelectingSlot, initialState)
+
+    // Handle form submission response
+    useEffect(() => {
+        handleFormResponse({
+            formState,
+            successCallback: () => {
+                console.log("successsss")
+            }
+        })
+    }, [formState]);
+    console.log("formState", formState)
+
+    // const handleSelectingSlot = (event: React.FormEvent<HTMLFormElement>) => {
+    //     event.preventDefault()
+    //     const formData = new FormData(event.target as HTMLFormElement)
+    //     const slot = formData.get('slot') as string
+    //     console.log("slot", slot)
+    //     // setSelectedSlot(slot)
+    // }
 
     return <div className="space-y-8">
 
@@ -123,7 +165,8 @@ export default function SelectTimeForm({ businessId, minDateToBook, maxDateToBoo
         </div>
 
 
-        <div className="w-full">
+
+        <form className="w-full" action={formAction} id="select-time-form">
 
             <div className="grid grid-cols-1 gap-4">
                 {isLoadingSlots ? (
@@ -135,9 +178,11 @@ export default function SelectTimeForm({ businessId, minDateToBook, maxDateToBoo
                     ))
                 ) : slots.length > 0 ? (
                     slots.map((slot, index) => (
-                        <div className="flex justify-start grow border-b md:border border-gray-200 md:rounded-lg py-4 md:p-5 cursor-pointer hover:bg-accent/5 transition-colors duration-150" key={slot}>
-                            <p className="text-xl font-semibold ">{slot}</p>
-                        </div>
+                        <label key={slot} htmlFor={slot} className="flex justify-start grow border-b md:border border-gray-200 md:rounded-lg py-4 md:p-5 cursor-pointer hover:bg-accent/5 transition-colors duration-150 relative">
+                            <input type="radio" id={slot} className="peer hidden appearance-none" name="slot" value={slot} />
+                            <p className="text-xl font-semibold peer-checked:text-accent-600">{slot}</p>
+                            <div className="peer-checked:ring-2 ring-accent peer-checked:bg-accent/5 absolute inset-0 rounded-lg"></div>
+                        </label>
                     ))
                 ) : (
                     <div className="min-h-[400px] flex flex-col items-center justify-center gap-4 md:border md:border-gray-200 rounded-lg">
@@ -159,7 +204,7 @@ export default function SelectTimeForm({ businessId, minDateToBook, maxDateToBoo
                         <CalendarOff className="text-accent size-14 sm:size-16 md:size-16" />
                         <p className="text-xl font-bold">Fully booked on this date</p>
                     </div> */}
-        </div>
+        </form>
 
     </div>
 }

@@ -19,7 +19,6 @@ export default async function TimePage(props: { searchParams: Promise<{ items: s
     const formattedDate = format(minDateToBook, "yyyy-MM-dd")
 
     const defaultSlots = await getAvailableSlots(businessId, formattedDate, serviceIds).then(slots => slots.map(slot => slot.start_time))
-    console.log("defaultSlots", defaultSlots)
 
 
     return <>
