@@ -14,8 +14,8 @@ export default async function TimePage(props: { searchParams: Promise<{ items: s
     console.log("id", id)
     const date = format(new Date(), "yyyy-MM-dd")
 
-    const defaultSlots = await getAvailableSlots(Number(id), date, service_ids)
-    console.log("defaultSlots", defaultSlots)
+    // const defaultSlots = await getAvailableSlots(Number(id), date, service_ids)
+    // console.log("defaultSlots", defaultSlots)
 
 
     return <>
