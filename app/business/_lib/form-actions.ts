@@ -52,6 +52,8 @@ export const handleBooking = async (
         payment_method: "cash"
     }
 
+    console.log("formattedPayload", formattedPayload)
+
 
     try {
         // TODO:write types
@@ -59,6 +61,8 @@ export const handleBooking = async (
             method: "POST",
             body: formattedPayload
         })
+
+        console.log("response", response)
 
         const successMsg = setApiSuccessMsg({ successResponse: response })
 

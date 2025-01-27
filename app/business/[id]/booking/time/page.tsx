@@ -3,6 +3,7 @@ import Link from "next/link"
 import Form from "@/business/_components/select-time-form"
 import { getAvailableSlots } from "@/business/_lib/data"
 import { getItemsFromSearchParams } from "@/business/_lib/utils"
+import { useBusinessFormContext } from "@/lib/providers/business-form-provider"
 
 export default async function TimePage(props: { searchParams: Promise<{ items: string }>, params: Promise<{ id: string }> }) {
 
@@ -19,6 +20,10 @@ export default async function TimePage(props: { searchParams: Promise<{ items: s
         return number
     }).filter(item => item !== null) || []
 
+    console.log("serviceIds", serviceIds)
+
+
+
 
     // console.log("id", id)
     console.log("serviceIds", serviceIds)
@@ -32,7 +37,6 @@ export default async function TimePage(props: { searchParams: Promise<{ items: s
     const minDateToBook = new Date();
     const maxDateToBook = addDays(minDateToBook, 60);
     const formattedDate = format(minDateToBook, "yyyy-MM-dd")
-
     const defaultSlots = await getAvailableSlots(businessId, formattedDate, serviceIds).then(slots => slots.map(slot => slot.start_time))
 
 

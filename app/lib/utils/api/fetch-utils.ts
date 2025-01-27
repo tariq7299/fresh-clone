@@ -34,7 +34,7 @@ export async function fetchApi<T>(
     // Only add token if auth is true
     let authHeaders = {};
 
-    if (auth && typeof window === 'undefined') {
+    if (false && typeof window === 'undefined') {
         const session = await getSession();
         if (session?.token) {
             authHeaders = { Authorization: `Bearer ${session.token}` };

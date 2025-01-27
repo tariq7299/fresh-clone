@@ -6,10 +6,12 @@ import { useState, useEffect } from "react";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { getItemsFromSearchParams } from "../_lib/utils";
 import { createPageURL } from "@/business/_lib/utils";
+import { useBusinessFormContext } from "@/lib/providers/business-form-provider";
 
 export default function CartForm({ servicesWithCategories }: { servicesWithCategories: ApiServicesWithCategory[] }) {
 
 
+    const { isLoading } = useBusinessFormContext()
     const pathname = usePathname();
     const searchParams = useSearchParams();
     const router = useRouter();
@@ -21,11 +23,11 @@ export default function CartForm({ servicesWithCategories }: { servicesWithCateg
         items: []
     })
 
-    const isBookingPage = pathname.includes("/select-services")
+    const isSelectServicesPage = pathname.includes("/select-services")
     // const isTimePage = pathname.includes("/time")
     const timePagePath = pathname.replace("/select-services", "/time")
 
-    const [isLoading, setIsLoading] = useState(true)
+    const [isLoadingCartServices, setIsLoadingCartServices] = useState(true)
 
     useEffect(() => {
 
@@ -38,12 +40,13 @@ export default function CartForm({ servicesWithCategories }: { servicesWithCateg
 
         setSelectedItems({ items: selectedServices, total })
 
-        setIsLoading(false)
+        setIsLoadingCartServices(false)
     }, [searchParams])
 
 
 
-    if (isLoading) {
+
+    if (isLoadingCartServices) {
         return (
             <div className="flex flex-col gap-2 py-4">
                 {[1, 2, 3].map((i) => (
@@ -94,7 +97,7 @@ export default function CartForm({ servicesWithCategories }: { servicesWithCateg
 
                 <div className="w-full">
 
-                    {isBookingPage ?
+                    {isSelectServicesPage ?
                         <Button isLink
                             href={createPageURL(timePagePath, searchParams)}
                             disabled={selectedItems?.items?.length === 0}
@@ -105,8 +108,8 @@ export default function CartForm({ servicesWithCategories }: { servicesWithCateg
                         <Button
                             form="select-time-form"
                             type="submit"
-                            disabled={selectedItems?.items?.length === 0} size="lg" className="w-full mt-6 text-md">
-                            Continue
+                            disabled={selectedItems?.items?.length === 0 || isLoading} size="lg" className="w-full mt-6 text-md">
+                            {isLoading ? "Loading..." : "Continue"}
                         </Button>}
 
                     {/* <Button disabled={selectedItems?.items?.length === 0} onClick={() => router.push("/login")} size="lg" className="w-full mt-6 text-md">

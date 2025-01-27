@@ -19,11 +19,14 @@ import { handleFormResponse } from "@/lib/utils/utils"
 import { SuccessFormState, ErrorFormState } from "@/lib/definitions/definitions"
 import { z } from "zod"
 import { SelectTimeClientErrors, SelectTimeFormData } from "../_lib/definitions"
+import { useBusinessFormContext } from "@/lib/providers/business-form-provider"
 
 export default function SelectTimeForm({ businessId, minDateToBook, maxDateToBook, defaultSlots, serviceIds }: { businessId: number, minDateToBook: Date, maxDateToBook: Date, defaultSlots: string[], serviceIds: number[] }) {
 
     const router = useRouter();
     const INITIAL_DATE = minDateToBook;
+
+    const { setIsLoading } = useBusinessFormContext()
 
 
     const [date, setDate] = useState<Date | undefined>(INITIAL_DATE)
@@ -32,7 +35,9 @@ export default function SelectTimeForm({ businessId, minDateToBook, maxDateToBoo
     const [isLoadingSlots, setIsLoadingSlots] = useState(true)
 
     const handleDateChange = async (date: Date) => {
+        setIsLoadingSlots(true)
         const formattedDate = format(date, "yyyy-MM-dd")
+        console.log("formattedDate", formattedDate)
         try {
             const response = await fetchApi<ApiResponse<{ slots: Slot[] }>>(`/businesses/available-slots`, {
                 method: "POST",
@@ -71,11 +76,6 @@ export default function SelectTimeForm({ businessId, minDateToBook, maxDateToBoo
         }
     }
 
-    useEffect(() => {
-        handleDateChange(date || INITIAL_DATE);
-    }, [date]);
-
-
     const initialState: SuccessFormState<SelectTimeClientErrors | null, SelectTimeFormData> | ErrorFormState<SelectTimeClientErrors | null, SelectTimeFormData> = {
         success: false,
         clientFieldsErrors: null,
@@ -96,6 +96,18 @@ export default function SelectTimeForm({ businessId, minDateToBook, maxDateToBoo
     });
 
     const [formState, formAction, isPending] = useActionState(boundHandleBooking, initialState)
+
+    useEffect(() => {
+        handleDateChange(date || INITIAL_DATE);
+    }, [date]);
+
+    useEffect(() => {
+        setIsLoading(isPending)
+    }, [isPending])
+
+    console.log("isLodingSlots", isLoadingSlots)
+
+
 
     // Handle form submission response
     useEffect(() => {
