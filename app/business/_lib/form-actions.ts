@@ -31,7 +31,6 @@ export const handleBooking = async (
         serviceIds
     }
 
-    // console.log("payload", payload)
     const validatedData = selectTimeFormSchema.safeParse(payload)
 
     if (!validatedData.success) {
@@ -52,8 +51,6 @@ export const handleBooking = async (
         payment_method: "cash"
     }
 
-    console.log("formattedPayload", formattedPayload)
-
     let result;
 
     try {
@@ -62,8 +59,6 @@ export const handleBooking = async (
             method: "POST",
             body: formattedPayload
         })
-
-        console.log("response", response)
 
         const successMsg = setApiSuccessMsg({ successResponse: response })
 
@@ -83,7 +78,6 @@ export const handleBooking = async (
 
         const apiError = error as ApiError
         // redirectToLoginIfNotAuthenticated(apiError.status, apiError.code, false)
-        console.log("apiErrorrrr", apiError)
         const errorMsg = setApiErrorMsg({ errResponse: apiError })
         result = {
             apiResponse: apiError,

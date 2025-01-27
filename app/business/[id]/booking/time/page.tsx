@@ -11,7 +11,6 @@ export default async function TimePage(props: { searchParams: Promise<{ items: s
     const businessId = Number(id)
     const searchParams = await props.searchParams
     const items = searchParams.items
-    console.log("items", items)
     const serviceIds = items?.split(",").map(item => item.trim()).filter(item => item !== "").map(item => {
         const number = Number(item)
         if (isNaN(number)) {
@@ -19,14 +18,6 @@ export default async function TimePage(props: { searchParams: Promise<{ items: s
         }
         return number
     }).filter(item => item !== null) || []
-
-    console.log("serviceIds", serviceIds)
-
-
-
-
-    // console.log("id", id)
-    console.log("serviceIds", serviceIds)
 
     if (serviceIds.length === 0) {
         return <div className="w-full">

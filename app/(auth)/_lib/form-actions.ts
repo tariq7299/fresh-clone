@@ -189,7 +189,6 @@ export const register = async (formState: SuccessRegisterFormState | ErrorRegist
         }
 
     } catch (error) {
-        console.log("error", error)
         const errorMsg = setApiErrorMsg({ errResponse: error as ApiError })
         return {
             success: false,

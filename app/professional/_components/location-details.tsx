@@ -60,7 +60,6 @@ export default function LocationDetails({ setLocation, location, className }: { 
             setLocation({ ...location, ...value })
         } else {
             setErrors(result.error.flatten().fieldErrors)
-            console.log("error", result.error)
         }
 
 

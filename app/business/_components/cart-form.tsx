@@ -7,41 +7,14 @@ import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { getItemsFromSearchParams } from "../_lib/utils";
 import { createPageURL } from "@/business/_lib/utils";
 import { useBusinessFormContext } from "@/lib/providers/business-form-provider";
+import useBookingCart from "../_lib/hooks/use-booking-cart";
 
-export default function CartForm({ servicesWithCategories }: { servicesWithCategories: ApiServicesWithCategory[] }) {
+export default function DesktopCartForm({ servicesWithCategories }: { servicesWithCategories: ApiServicesWithCategory[] }) {
 
 
     const { isLoading } = useBusinessFormContext()
-    const pathname = usePathname();
-    const searchParams = useSearchParams();
-    const router = useRouter();
-    const [selectedItems, setSelectedItems] = useState<{
-        total: number
-        items: ApiService[]
-    }>({
-        total: 0,
-        items: []
-    })
 
-    const isSelectServicesPage = pathname.includes("/select-services")
-    // const isTimePage = pathname.includes("/time")
-    const timePagePath = pathname.replace("/select-services", "/time")
-
-    const [isLoadingCartServices, setIsLoadingCartServices] = useState(true)
-
-    useEffect(() => {
-
-        const servicesIds = getItemsFromSearchParams(searchParams)
-        const allServices = servicesWithCategories.flatMap(servicesWithCategory => servicesWithCategory.services)
-
-        const selectedServices = allServices.filter(service => servicesIds.includes(service.id.toString()))
-
-        const total = selectedServices.reduce((acc, curr) => acc + curr.price, 0)
-
-        setSelectedItems({ items: selectedServices, total })
-
-        setIsLoadingCartServices(false)
-    }, [searchParams])
+    const { isLoadingCartServices, selectedItems, isSelectServicesPage, timePageUrl } = useBookingCart({ servicesWithCategories })
 
 
 
@@ -74,8 +47,6 @@ export default function CartForm({ servicesWithCategories }: { servicesWithCateg
 
     return <>
         <div className="flex flex-col gap-2 max-h-[65dvh] overflow-y-auto pt-3 scroll-smooth snap-y snap-mandatory scroll-pt-6">
-
-
             {selectedItems?.items?.length > 0 ? selectedItems.items.map((item) => (
                 <div key={item.id} className="flex justify-between items-start w-full  snap-start px-2" >
                     <div>
@@ -92,14 +63,14 @@ export default function CartForm({ servicesWithCategories }: { servicesWithCateg
 
                 <div className="flex justify-between items-center w-full  font-bold text-lg " >
                     <p className="">Total</p>
-                    <p className="">EGP {selectedItems?.total}</p>
+                    <p className="">EGP {selectedItems?.totalAmount}</p>
                 </div>
 
                 <div className="w-full">
 
                     {isSelectServicesPage ?
                         <Button isLink
-                            href={createPageURL(timePagePath, searchParams)}
+                            href={timePageUrl}
                             disabled={selectedItems?.items?.length === 0}
                             size="lg"
                             className="w-full mt-6 text-md">

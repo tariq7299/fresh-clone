@@ -2,7 +2,7 @@ import Image from "next/image";
 import barberShop from "@/../public/barber-shop-2.jpg"
 import Link from "next/link";
 
-export default function CartHeader({ businessId, businessCoverPhoto, businessName, businessAddress }: { businessId: string, businessCoverPhoto: string, businessName: string, businessAddress: string }) {
+export default function DesktopCartHeader({ businessId, businessCoverPhoto, businessName, businessAddress }: { businessId: string, businessCoverPhoto: string, businessName: string, businessAddress: string }) {
 
 
     return <Link href={`/business/${businessId}`} className="flex justify-center items-start gap-4 cursor-pointer">

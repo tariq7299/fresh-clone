@@ -34,7 +34,7 @@ export function handleFormResponse<ApiDataResponseType, ClientFieldsErrors, Form
     }
     successCallback?.(formState.apiDataResponse);
   } else {
-    if (formState.apiMsgs && showErrorToast) {
+    if (formState.apiMsgs && showErrorToast && formState.apiMsgs !== "Session expired") {
       toastApiMsgs(formState.apiMsgs, "destructive");
     }
     errorCallback?.();

@@ -38,7 +38,6 @@ export default function SelectTimeForm({ businessId, minDateToBook, maxDateToBoo
     const handleDateChange = async (date: Date) => {
         setIsLoadingSlots(true)
         const formattedDate = format(date, "yyyy-MM-dd")
-        console.log("formattedDate", formattedDate)
         try {
             const response = await fetchApi<ApiResponse<{ slots: Slot[] }>>(`/businesses/available-slots`, {
                 method: "POST",
@@ -48,26 +47,6 @@ export default function SelectTimeForm({ businessId, minDateToBook, maxDateToBoo
                     service_ids: serviceIds
                 }
             })
-            console.log("response", response)
-            // const allPossibleSlots = [
-            //     '10:00', '10:15', '10:30', '10:45',
-            //     '11:00', '11:15', '11:30', '11:45',
-            //     '12:00', '12:15', '12:30', '12:45',
-            //     '13:00', '13:15', '13:30', '13:45',
-            //     '14:00', '14:15', '14:30', '14:45',
-            //     '15:00', '15:15', '15:30', '15:45',
-            //     '16:00', '16:15', '16:30', '16:45',
-            //     '17:00', '17:15'
-            // ]
-
-            // const testSlots = await new Promise<string[]>((resolve) => {
-            //     // Randomly select between 5-15 slots
-            //     const numSlots = Math.floor(Math.random() * 11) + 5
-            //     const shuffled = [...allPossibleSlots].sort(() => 0.5 - Math.random())
-            //     setTimeout(() => {
-            //         resolve(shuffled.slice(0, numSlots).sort())
-            //     }, 2000)
-            // })
             setSlots(response.data?.slots.map(slot => slot.start_time) || [])
             setIsLoadingSlots(false)
         } catch (error) {
@@ -106,10 +85,6 @@ export default function SelectTimeForm({ businessId, minDateToBook, maxDateToBoo
         setIsLoading(isPending)
     }, [isPending])
 
-    console.log("isLodingSlots", isLoadingSlots)
-
-
-
     // Handle form submission response
     useEffect(() => {
         handleFormResponse({
@@ -118,34 +93,16 @@ export default function SelectTimeForm({ businessId, minDateToBook, maxDateToBoo
             formState,
             successCallback: () => {
                 router.push(`/business/${businessId}/successful-appointment`)
-                console.log("successsss")
-
             },
             errorCallback: () => {
                 if (formState.apiMsgs === "Session expired") {
-                    // router.push(`/login?sessionEnded=true`)
                     redirectToLoginIfNotAuthenticated(formState.apiMsgs, ["loginRequiredForBooking=true"])
                 }
-                console.log("errorrr")
             }
         })
     }, [formState]);
-    console.log("formState", formState)
 
-    // const handleSelectingSlot = (event: React.FormEvent<HTMLFormElement>) => {
-    //     event.preventDefault()
-    //     const formData = new FormData(event.target as HTMLFormElement)
-    //     const slot = formData.get('slot') as string
-    //     console.log("slot", slot)
-    //     // setSelectedSlot(slot)
-    // }
-
-    return <div className="space-y-8">
-
-        <Button isLink href={`/business/${businessId}/successful-appointment`} variant={"outline"}>
-            done
-        </Button>
-
+    return <div className={cn("space-y-8", isPending ? "opacity-50 pointer-events-none" : "")}>
 
         <div className="flex justify-between items-center">
 
@@ -193,7 +150,7 @@ export default function SelectTimeForm({ businessId, minDateToBook, maxDateToBoo
 
 
 
-        <form className="w-full" action={formAction} id="select-time-form">
+        <form className={cn("w-full")} action={formAction} id="select-time-form">
 
             <div className="grid grid-cols-1 gap-4">
                 {isLoadingSlots ? (
@@ -205,10 +162,10 @@ export default function SelectTimeForm({ businessId, minDateToBook, maxDateToBoo
                     ))
                 ) : slots.length > 0 ? (
                     slots.map((slot, index) => (
-                        <label key={slot} htmlFor={slot} className="flex justify-start grow border-b md:border border-gray-200 md:rounded-lg py-4 md:p-5 cursor-pointer hover:bg-accent/5 transition-colors duration-150 relative">
+                        <label key={slot} htmlFor={slot} className="flex justify-start grow border-b md:border border-gray-200 md:rounded-lg p-4 md:p-5 cursor-pointer hover:bg-accent/5 transition-colors duration-150 relative">
                             <input defaultChecked={formState.formData.slot === slot} type="radio" id={slot} className="peer hidden appearance-none" name="slot" value={slot} />
                             <p className="text-xl font-semibold peer-checked:text-accent-600">{slot}</p>
-                            <div className="peer-checked:ring-2 ring-accent peer-checked:bg-accent/5 absolute inset-0 rounded-lg"></div>
+                            <div className="peer-checked:ring-2 peer-checked:ring-accent peer-checked:bg-accent/5 absolute inset-0 rounded-lg transition-all duration-150"></div>
                         </label>
                     ))
                 ) : (
@@ -218,28 +175,8 @@ export default function SelectTimeForm({ businessId, minDateToBook, maxDateToBoo
                     </div>
                 )}
 
-                {/* <div className="flex justify-start grow border-b md:border border-gray-200 md:rounded-lg py-4 md:p-5 cursor-pointer hover:bg-accent/5 transition-colors duration-150 ring-2 ring-accent text-accent-600 bg-accent/5">
-                        <p className="text-xl font-semibold">9:00 AM</p>
-                    </div> */}
-
-
-
             </div>
 
-            <Link href={`/login?${new URLSearchParams({
-                type: 'customer',
-                loginRequiredForBooking: 'true'
-            }).toString()}`} scroll={false}>
-                <Button>
-                    test
-                </Button>
-            </Link>
-
-            {/* <div className="min-h-[400px] flex flex-col items-center justify-center gap-4 md:border md:border-gray-200 rounded-lg">
-
-                        <CalendarOff className="text-accent size-14 sm:size-16 md:size-16" />
-                        <p className="text-xl font-bold">Fully booked on this date</p>
-                    </div> */}
         </form>
 
     </div>

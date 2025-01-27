@@ -8,7 +8,7 @@ import { Suspense } from "react";
 import { BookingPageSkeleton } from "@/business/_components/skeletons";
 import ExitStepsButton from "@/ui/components/custom/exit-steps-button";
 
-export default async function BookingLayout({ children, cart, auth, params }: { children: React.ReactNode, cart: React.ReactNode, auth: React.ReactNode, params: Promise<{ id: string }> }) {
+export default async function BookingLayout({ children, desktopCart, mobileCart, params }: { children: React.ReactNode, desktopCart: React.ReactNode, mobileCart: React.ReactNode, params: Promise<{ id: string }> }) {
 
     const { id } = await params
     const closeButtonLink = `/business/${id}`
@@ -46,7 +46,7 @@ export default async function BookingLayout({ children, cart, auth, params }: { 
                     <div className="col-span-4 relative hidden md:block">
 
                         <div className="sticky top-16 left-0 pt-5 md:ms-0 lg:ms-14 ">
-                            {cart}
+                            {desktopCart}
                         </div>
                     </div>
 
@@ -54,6 +54,10 @@ export default async function BookingLayout({ children, cart, auth, params }: { 
 
             </div>
 
+
+            <div className=" fixed bottom-0 left-0 w-full bg-background px-5 py-3.5  border-t-1 md:hidden">
+                {mobileCart}
+            </div>
             {/* 
             <div className=" fixed bottom-0 left-0 w-full bg-background px-5 py-3.5  border-t-1 md:hidden">
                 <div className="flex justify-between items-center">

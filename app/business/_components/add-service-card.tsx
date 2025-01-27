@@ -21,8 +21,6 @@ export function AddServiceCard({ service }: { service: ApiService }) {
     const checked = items.includes(service.id.toString())
     const [isLoading, setIsLoading] = useState(true)
 
-    console.log("getItemsFromSearchParams()", getItemsFromSearchParams())
-
     useEffect(() => {
         setItems(getItemsFromSearchParams())
         setIsLoading(false)
@@ -30,9 +28,7 @@ export function AddServiceCard({ service }: { service: ApiService }) {
 
     function getItemsFromSearchParams() {
         const items = searchParams.get("items")
-        // console.log("itemsss", items)
         const itemsList = items?.split(",").map(item => item.trim()).filter(item => item !== "") || []
-        console.log("itemsList", itemsList)
         return itemsList
     }
 
@@ -40,8 +36,6 @@ export function AddServiceCard({ service }: { service: ApiService }) {
     function handleClickingService() {
 
         const newItems: string[] = checked ? items.filter(item => item !== service.id.toString()).filter(item => item !== "") : [...items, service.id.toString()]
-
-        console.log("newItems", newItems)
 
         setItems(newItems)
         const params = new URLSearchParams(searchParams);
