@@ -17,7 +17,7 @@ export default function Customer() {
         <Button onClick={() => {
             logoutUserServerSide()
             logoutUserClientSide(setSessionData)
-            navigateToLogin()
+            navigateToLogin(["sessionEnded=true"])
         }}>Logout</Button>
 
     </div>

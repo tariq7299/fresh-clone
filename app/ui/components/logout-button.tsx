@@ -13,6 +13,6 @@ export default function LogoutButton() {
     return <Button onClick={() => {
         logoutUserServerSide()
         logoutUserClientSide(setSessionData)
-        navigateToLogin()
+        navigateToLogin(["sessionEnded=true"])
     }} size={"lg"} variant={"ghost"} className="font-bold p-3 lg:hidden">Log out</Button>
 }

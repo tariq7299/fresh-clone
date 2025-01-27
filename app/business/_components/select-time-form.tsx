@@ -20,6 +20,7 @@ import { SuccessFormState, ErrorFormState } from "@/lib/definitions/definitions"
 import { z } from "zod"
 import { SelectTimeClientErrors, SelectTimeFormData } from "../_lib/definitions"
 import { useBusinessFormContext } from "@/lib/providers/business-form-provider"
+import { redirectToLoginIfNotAuthenticated } from "@/(auth)/_lib/redirect-to-login-if-not-authenticated"
 
 export default function SelectTimeForm({ businessId, minDateToBook, maxDateToBook, defaultSlots, serviceIds }: { businessId: number, minDateToBook: Date, maxDateToBook: Date, defaultSlots: string[], serviceIds: number[] }) {
 
@@ -113,6 +114,7 @@ export default function SelectTimeForm({ businessId, minDateToBook, maxDateToBoo
     useEffect(() => {
         handleFormResponse({
             showSuccessToast: false,
+            showErrorToast: true,
             formState,
             successCallback: () => {
                 router.push(`/business/${businessId}/successful-appointment`)
@@ -120,6 +122,10 @@ export default function SelectTimeForm({ businessId, minDateToBook, maxDateToBoo
 
             },
             errorCallback: () => {
+                if (formState.apiMsgs === "Session expired") {
+                    // router.push(`/login?sessionEnded=true`)
+                    redirectToLoginIfNotAuthenticated(formState.apiMsgs, ["loginRequiredForBooking=true"])
+                }
                 console.log("errorrr")
             }
         })

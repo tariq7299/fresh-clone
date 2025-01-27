@@ -98,6 +98,6 @@ export const handleBooking = async (
     if (result.success) {
         return result as SuccessFormState<SelectTimeClientErrors | null, SelectTimeFormData>
     }
-    redirectToLoginIfNotAuthenticated(result.apiMsgs, false)
+    // redirectToLoginIfNotAuthenticated(result.apiMsgs, false)
     return result as ErrorFormState<SelectTimeClientErrors | null, SelectTimeFormData>
 }

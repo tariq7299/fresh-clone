@@ -158,7 +158,15 @@ export default function RegisterForm({ userRole, loginRequiredForBooking = false
         </div>
         <div className="flex flex-col justify-center items-center">
             <p className="font-bold text-center">{userRole === UserRole.Professional ? "Have a business account?" : "Have a customer account?"}</p>
-            <Link href="/login " className=" text-center text-accent text-sm">{userRole === UserRole.Professional ? "Sign in as a professional" : "Sign in as a customer"}</Link>
+
+            {loginRequiredForBooking ? (
+                <Link href={`/login?${new URLSearchParams({
+                    type: userRole,
+                    loginRequiredForBooking: 'true'
+                }).toString()}`} className=" text-center text-accent text-sm" replace={true}>{userRole === UserRole.Professional ? "Sign in as a professional" : "Sign in as a customer"}</Link>
+            ) : (
+                <Link href="/login " className=" text-center text-accent text-sm">{userRole === UserRole.Professional ? "Sign in as a professional" : "Sign in as a customer"}</Link>
+            )}
 
         </div>
 

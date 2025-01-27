@@ -1,8 +1,8 @@
 import { SessionData, UserRole } from "./definitions";
 import SecureLS from "secure-ls";
-import { redirect } from 'next/navigation'
+import { redirect, RedirectType } from 'next/navigation'
 import { toastApiMsgs } from "@/lib/utils/api/toastApiMsgs";
-import { logoutUserServerSide } from "./auth-server-services";
+import { logoutUserServerSide, navigateToLoginWithSessionEnded } from "./auth-server-services";
 
 // This is the client side login function
 // It will be used to login the user and return nothing
@@ -19,8 +19,10 @@ export const logoutUserClientSide = (setSessionData: (sessionData: SessionData |
     setSessionData(null)
 }
 
-export async function navigateToLoginWithSessionEnded() {
-    redirect("/login?sessionEnded=true")
+export async function navigateToLogin(params: string[] = []) {
+    const redirectUrl = "/login" + (params.length > 0 ? "?" + params.join("&") : "");
+    console.log("redirectUrl", redirectUrl)
+    redirect("/login" + (params.length > 0 ? "?" + params.join("&") : ""), RedirectType.push)
 }
 
 export async function navigateToOtp(email: string, userRole: UserRole.Professional | UserRole.Customer, loginRequiredForBooking: boolean = false) {
@@ -32,9 +34,9 @@ export async function navigateToOtp(email: string, userRole: UserRole.Profession
 }
 
 
-export async function navigateToLogin() {
-    redirect("/login")
-}
+// export async function navigateToLogin() {
+//     redirect("/login")
+// }
 
 export async function navigateToDashboard(role: UserRole) {
 
@@ -53,7 +55,7 @@ export const endUserSession = async (setSessionData: (sessionData: SessionData |
     try {
         await logoutUserServerSide();
         logoutUserClientSide(setSessionData)
-        navigateToLoginWithSessionEnded()
+        navigateToLogin(["sessionEnded=true"])
     } catch (error) {
         toastApiMsgs('Error ending session', "destructive");
     }

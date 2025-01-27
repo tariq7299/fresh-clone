@@ -16,7 +16,7 @@ export default function AdminDashboard() {
         <Button onClick={() => {
             logoutUserServerSide()
             logoutUserClientSide(setSessionData)
-            navigateToLogin()
+            navigateToLogin(["sessionEnded=true"])
         }}>Logout</Button>
 
     </div>

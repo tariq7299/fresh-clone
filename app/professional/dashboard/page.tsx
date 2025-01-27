@@ -16,7 +16,7 @@ export default function ProfessionalDashboard() {
         <Button onClick={() => {
             logoutUserServerSide()
             logoutUserClientSide(setSessionData)
-            navigateToLogin()
+            navigateToLogin(["sessionEnded=true"])
         }}>Logout</Button>
 
     </div>
