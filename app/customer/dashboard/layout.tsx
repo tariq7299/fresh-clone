@@ -21,7 +21,7 @@ export default async function CustomerLayout({ children }: { children: React.Rea
                 </Suspense>
 
                 <div className="bg-gray-50 h-dvh w-full">
-                    <SidebarTrigger />
+                    <SidebarTrigger className="md:hidden fixed top-0 left-0" />
                     {children}
                 </div>
             </SidebarProvider>

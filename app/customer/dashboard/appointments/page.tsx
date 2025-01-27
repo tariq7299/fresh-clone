@@ -58,7 +58,7 @@ const invoices = [
 export default function Appointments() {
     return (
 
-        <div className="p-5">
+        <div className="p-5 ps-7 mt-6">
 
 
             <h1 className="text-2xl md:text-3xl font-semibold font-source-sans pb-3">Appointments</h1>

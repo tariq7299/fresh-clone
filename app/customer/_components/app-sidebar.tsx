@@ -9,6 +9,7 @@ import {
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
+    SidebarTrigger,
     useSidebar,
 } from "@/ui/components/sidebar"
 import Link from "next/link"
@@ -57,6 +58,9 @@ export function AppSidebar({ userData }:
 
     return (
         <Sidebar className={cn("bg-background  ", open ? "mt-16  p-3" : "mt-20 ")} collapsible={"icon"}>
+
+            <SidebarTrigger className={cn("hidden md:inline-flex fixed  transition-all duration-200 ease-in-out", open ? "top-20 left-64" : "top-20 left-12")} />
+
             <SidebarHeader className={cn(open ? "py-3 " : "flex justify-center items-center")}>
                 {/* TODO: Create a header component */}
                 {open ? <p className="text-lg font-bold font-source-sans"> {userData?.full_name}</p> : <p className="text-lg font-bold font-source-sans"> {userData?.first_name.charAt(0) + userData?.last_name.charAt(0)}</p>}
