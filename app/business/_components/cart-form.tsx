@@ -67,6 +67,8 @@ export default function CartForm({ servicesWithCategories }: { servicesWithCateg
         )
     }
 
+    console.log("selectedItems", selectedItems)
+
 
 
 
@@ -98,7 +100,7 @@ export default function CartForm({ servicesWithCategories }: { servicesWithCateg
                     {isBookingPage ?
                         <Button isLink
                             href={createPageURL(timePagePath, searchParams)}
-                            disabled={selectedItems?.items?.length === 0}
+                            disabled={true}
                             size="lg"
                             className="w-full mt-6 text-md">
                             Continue

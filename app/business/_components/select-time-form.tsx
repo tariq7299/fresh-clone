@@ -37,35 +37,35 @@ export default function SelectTimeForm({ businessId, minDateToBook, maxDateToBoo
     const handleDateChange = async (date: Date) => {
         const formattedDate = format(date, "yyyy-MM-dd")
         try {
-            // const response = await fetchApi<ApiResponse<{ slots: Slot[] }>>(`/businesses/available-slots`, {
-            //     method: "POST",
-            //     body: {
-            //         business_id: businessId,
-            //         date: formattedDate,
-            //         service_ids: serviceIds
-            //     }
-            // })
-            // console.log("response", response)
-            const allPossibleSlots = [
-                '10:00', '10:15', '10:30', '10:45',
-                '11:00', '11:15', '11:30', '11:45',
-                '12:00', '12:15', '12:30', '12:45',
-                '13:00', '13:15', '13:30', '13:45',
-                '14:00', '14:15', '14:30', '14:45',
-                '15:00', '15:15', '15:30', '15:45',
-                '16:00', '16:15', '16:30', '16:45',
-                '17:00', '17:15'
-            ]
-
-            const testSlots = await new Promise<string[]>((resolve) => {
-                // Randomly select between 5-15 slots
-                const numSlots = Math.floor(Math.random() * 11) + 5
-                const shuffled = [...allPossibleSlots].sort(() => 0.5 - Math.random())
-                setTimeout(() => {
-                    resolve(shuffled.slice(0, numSlots).sort())
-                }, 2000)
+            const response = await fetchApi<ApiResponse<{ slots: Slot[] }>>(`/businesses/available-slots`, {
+                method: "POST",
+                body: {
+                    business_id: businessId,
+                    date: formattedDate,
+                    service_ids: serviceIds
+                }
             })
-            setSlots(testSlots)
+            console.log("response", response)
+            // const allPossibleSlots = [
+            //     '10:00', '10:15', '10:30', '10:45',
+            //     '11:00', '11:15', '11:30', '11:45',
+            //     '12:00', '12:15', '12:30', '12:45',
+            //     '13:00', '13:15', '13:30', '13:45',
+            //     '14:00', '14:15', '14:30', '14:45',
+            //     '15:00', '15:15', '15:30', '15:45',
+            //     '16:00', '16:15', '16:30', '16:45',
+            //     '17:00', '17:15'
+            // ]
+
+            // const testSlots = await new Promise<string[]>((resolve) => {
+            //     // Randomly select between 5-15 slots
+            //     const numSlots = Math.floor(Math.random() * 11) + 5
+            //     const shuffled = [...allPossibleSlots].sort(() => 0.5 - Math.random())
+            //     setTimeout(() => {
+            //         resolve(shuffled.slice(0, numSlots).sort())
+            //     }, 2000)
+            // })
+            setSlots(response.data?.slots.map(slot => slot.start_time) || [])
             setIsLoadingSlots(false)
         } catch (error) {
             console.log("error", error)
