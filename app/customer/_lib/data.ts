@@ -4,7 +4,7 @@ export const getAppointments = async () => {
 
     try {
         const appointments = await fetchApi("/bookings/user")
-        return appointments
+        return appointments?.data?.bookings || []
     } catch (error) {
         console.error(error)
         throw new Error("Failed to fetch appointments")

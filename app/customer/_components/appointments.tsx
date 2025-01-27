@@ -1,14 +1,57 @@
+import { getAppointments } from "../_lib/data";
 import AppointmentsTable from "./appointments-table";
+
+
+interface Service {
+    id: number,
+    name: string,
+    price: number,
+    duration: number,
+}
+
+interface ApiAppointment {
+    user: any,
+    business: {
+        id: number,
+        name: string,
+        address: string,
+    },
+    id: string,
+    booking_date: string,
+    start_time: string,
+    end_time: string,
+    status: string,
+    payment_method: string,
+    booking_data: {
+        services: Service[]
+        total_duration: number
+        total_price: number
+    }
+}
 
 
 export default async function Appointments() {
 
-    const appointments = await getAppointments()
+    const appointments = await getAppointments().then(appointments => appointments.map((row: ApiAppointment) => {
+        const { user, business, booking_data, ...rest } = row
+        return {
+            ...rest,
+            services: row.booking_data.services,
+            business_name: business.name,
+            business_address: business.address,
+            total_duration: row.booking_data.total_duration,
+            total_price: row.booking_data.total_price
+        }
+    }
+
+
+    ))
+    console.log("appointments", appointments)
 
     return (
-        <div className="p-5 ps-7 mt-6 md:mt-24 size-full">
+        <div className="p-5 ps-7 pt-6 md:pt-32 size-full">
             <h1 className="text-2xl md:text-3xl font-semibold font-source-sans pb-3">Appointments</h1>
-            <AppointmentsTable />
+            <AppointmentsTable appointments={appointments} />
         </div>
     )
 }

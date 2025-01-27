@@ -1,3 +1,5 @@
+"use client"
+
 import {
     Table,
     TableBody,
@@ -8,36 +10,85 @@ import {
     TableHeader,
     TableRow,
 } from "@/ui/components/table"
+import { DataTable } from "@/ui/components/custom/data-table"
+
+import { ColumnDef } from "@tanstack/react-table"
+
+type Service = {
+    service_id: string
+    name: string
+    price: number
+    duration: number
+}
+
+type Appointment = {
+    id: string
+    booking_date: string
+    start_time: string
+    end_time: string
+    status: string
+    payment_method: string
+    services: Service[]
+    business_name: string
+    business_address: string
+    total_duration: number
+    total_price: number
+}
+
+export default function AppointmentsTable({ appointments }: { appointments: Appointment[] }) {
+
+    const columns: ColumnDef<Appointment>[] = [
+        {
+            accessorKey: "id",
+            header: "ID"
+        },
+        {
+            accessorKey: "business_name",
+            header: "Business Name"
+        },
+        {
+            accessorKey: "business_address",
+            header: "Business Address"
+        },
+        {
+            accessorKey: "total_duration",
+            header: "Total Duration"
+        },
+        {
+            accessorKey: "total_price",
+            header: "Total Price"
+        },
+        {
+            accessorKey: "status",
+            header: "Status"
+        },
+        {
+            accessorKey: "payment_method",
+            header: "Payment Method"
+        },
+        // {
+        //     accessorKey: "services",
+        //     header: "Services"
+        // },
+        {
+            accessorKey: "booking_date",
+            header: "Booking Date"
+        },
+        {
+            accessorKey: "start_time",
+            header: "Start Time"
+        },
+        {
+            accessorKey: "end_time",
+            header: "End Time"
+        },
+
+    ]
 
 
-export default function AppointmentsTable() {
     return (
-        <Table>
-            <TableCaption>A list of your recent invoices.</TableCaption>
-            <TableHeader>
-                <TableRow>
-                    <TableHead className="w-[100px]">Invoice</TableHead>
-                    <TableHead>Status</TableHead>
-                    <TableHead>Method</TableHead>
-                    <TableHead className="text-right">Amount</TableHead>
-                </TableRow>
-            </TableHeader>
-            <TableBody>
-                {invoices.map((invoice) => (
-                    <TableRow key={invoice.invoice}>
-                        <TableCell className="font-medium">{invoice.invoice}</TableCell>
-                        <TableCell>{invoice.paymentStatus}</TableCell>
-                        <TableCell>{invoice.paymentMethod}</TableCell>
-                        <TableCell className="text-right">{invoice.totalAmount}</TableCell>
-                    </TableRow>
-                ))}
-            </TableBody>
-            <TableFooter>
-                <TableRow>
-                    <TableCell colSpan={3}>Total</TableCell>
-                    <TableCell className="text-right">$2,500.00</TableCell>
-                </TableRow>
-            </TableFooter>
-        </Table>
+        <DataTable columns={columns} data={appointments} />
+
+
     )
 }
