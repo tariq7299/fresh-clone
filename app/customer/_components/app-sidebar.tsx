@@ -32,24 +32,24 @@ export function AppSidebar({ userData }:
             href: '/customer/dashboard/appointments',
             icon: (<NotepadText />)
         },
-        {
-            key: 'reservations',
-            title: 'Reservations',
-            href: '/business/dashboard/reservations',
-            icon: (<NotepadText />)
-        },
-        {
-            key: 'sadfasdf',
-            title: 'sadfasdf',
-            href: '/business/dashboard/sadfasdf',
-            icon: (<NotepadText />)
-        },
-        {
-            key: 'sadfasddf',
-            title: 'sadfasddf',
-            href: '/business/dashboard/sadfasddf',
-            icon: (<NotepadText />)
-        },
+        // {
+        //     key: 'reservations',
+        //     title: 'Reservations',
+        //     href: '/business/dashboard/reservations',
+        //     icon: (<NotepadText />)
+        // },
+        // {
+        //     key: 'sadfasdf',
+        //     title: 'sadfasdf',
+        //     href: '/business/dashboard/sadfasdf',
+        //     icon: (<NotepadText />)
+        // },
+        // {
+        //     key: 'sadfasddf',
+        //     title: 'sadfasddf',
+        //     href: '/business/dashboard/sadfasddf',
+        //     icon: (<NotepadText />)
+        // },
     ]
 
 
@@ -59,7 +59,7 @@ export function AppSidebar({ userData }:
     return (
         <Sidebar className={cn("bg-background  ", open ? "mt-16  p-3" : "pt-16 ")} collapsible={"icon"}>
 
-            <SidebarTrigger className={cn("hidden md:inline-flex fixed  transition-all duration-200 ease-in-out top-20", open ? " left-64" : " left-12")} />
+            <SidebarTrigger className={cn("hidden md:inline-flex fixed  transition-all duration-250  ease-in-out top-20", open ? " left-64" : " left-12")} />
 
             <SidebarHeader className={cn(open ? "py-3 " : "flex justify-center items-center")}>
                 {/* TODO: Create a header component */}

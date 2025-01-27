@@ -66,10 +66,10 @@ export default function AppointmentsTable({ appointments }: { appointments: Appo
             accessorKey: "payment_method",
             header: "Payment Method"
         },
-        // {
-        //     accessorKey: "services",
-        //     header: "Services"
-        // },
+        {
+            accessorKey: "services",
+            header: "Services"
+        },
         {
             accessorKey: "booking_date",
             header: "Booking Date"
