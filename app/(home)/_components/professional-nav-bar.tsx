@@ -31,7 +31,7 @@ export default function ProfessionalNavBar({ fixed = false, hideInMobile = false
             hideInMobile ? 'hidden md:block fixed top-0 left-0' : 'fixed top-0 left-0'
         )}>
 
-            <div className="p-5 flex justify-between items-center max-w-[1440px] m-auto pe-7">
+            <div className="p-5 py-4 flex justify-between items-center max-w-[1440px] m-auto pe-7">
 
                 <Link href="/" className={cn("text-2xl font-extrabold font-lora ",
                     fixed ? 'text-primary' : isScrolled ? 'text-primary' : 'text-background'

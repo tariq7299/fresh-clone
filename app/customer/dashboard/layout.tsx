@@ -11,21 +11,21 @@ export default async function CustomerLayout({ children }: { children: React.Rea
     const userData = await getUserData()
 
     return (
-        <div className="md:mt-20">
-            <SidebarProvider>
-                <AppSidebar userData={userData} />
+        <SidebarProvider>
+            <AppSidebar userData={userData} />
 
-                {/* Nav bar */}
-                <Suspense fallback={<NavBarSkeleton />}>
-                    <NavBar className="max-w-full" fixed={true} hideInMobile={true} />
-                </Suspense>
+            {/* Nav bar */}
+            <Suspense fallback={<NavBarSkeleton />}>
+                <NavBar className="max-w-full" fixed={true} hideInMobile={true} />
+            </Suspense>
 
-                <div className="bg-gray-50 h-dvh w-full">
-                    <SidebarTrigger className="md:hidden fixed top-0 left-0" />
-                    {children}
-                </div>
-            </SidebarProvider>
-        </div>
+            <div className="bg-gray-50 h-dvh w-full">
+                {/* <div className=""> */}
+                <SidebarTrigger className="md:hidden fixed top-0 left-0" />
+                {children}
+            </div>
+            {/* </div> */}
+        </SidebarProvider>
 
     )
 }

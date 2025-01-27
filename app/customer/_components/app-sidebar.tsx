@@ -57,9 +57,9 @@ export function AppSidebar({ userData }:
     const { state, open, setOpen } = useSidebar()
 
     return (
-        <Sidebar className={cn("bg-background  ", open ? "mt-16  p-3" : "mt-20 ")} collapsible={"icon"}>
+        <Sidebar className={cn("bg-background  ", open ? "mt-16  p-3" : "pt-16 ")} collapsible={"icon"}>
 
-            <SidebarTrigger className={cn("hidden md:inline-flex fixed  transition-all duration-200 ease-in-out", open ? "top-20 left-64" : "top-20 left-12")} />
+            <SidebarTrigger className={cn("hidden md:inline-flex fixed  transition-all duration-200 ease-in-out top-20", open ? " left-64" : " left-12")} />
 
             <SidebarHeader className={cn(open ? "py-3 " : "flex justify-center items-center")}>
                 {/* TODO: Create a header component */}

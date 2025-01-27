@@ -55,10 +55,10 @@ const invoices = [
     },
 ]
 
-export default function Appointments() {
+export default function AppointmentsPage() {
     return (
 
-        <div className="p-5 ps-7 mt-6">
+        <div className="p-5 ps-7 mt-6 md:mt-24 size-full">
 
 
             <h1 className="text-2xl md:text-3xl font-semibold font-source-sans pb-3">Appointments</h1>
