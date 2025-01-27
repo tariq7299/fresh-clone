@@ -31,7 +31,7 @@ export const handleBooking = async (
         serviceIds
     }
 
-    console.log("payload", payload)
+    // console.log("payload", payload)
     const validatedData = selectTimeFormSchema.safeParse(payload)
 
     if (!validatedData.success) {

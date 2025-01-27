@@ -1,6 +1,6 @@
 export function getItemsFromSearchParams(searchParams: URLSearchParams) {
     const items = searchParams.get("items")
-    const itemsList = items?.split(",").map(item => Number(item.trim())) || []
+    const itemsList = items?.split(",").map(item => item.trim()).filter(item => item !== "") || []
     return itemsList
 }
 

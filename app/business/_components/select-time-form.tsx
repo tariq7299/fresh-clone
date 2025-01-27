@@ -25,9 +25,6 @@ export default function SelectTimeForm({ businessId, minDateToBook, maxDateToBoo
     const router = useRouter();
     const INITIAL_DATE = minDateToBook;
 
-    console.log("minDate", minDateToBook)
-    console.log("maxDate", maxDateToBook)
-
 
     const [date, setDate] = useState<Date | undefined>(INITIAL_DATE)
     const [selectedSlot, setSelectedSlot] = useState<string>('')

@@ -10,9 +10,24 @@ export default async function TimePage(props: { searchParams: Promise<{ items: s
     const businessId = Number(id)
     const searchParams = await props.searchParams
     const items = searchParams.items
-    const serviceIds = items?.split(",").map(item => Number(item.trim())) || []
-    console.log("items", typeof items)
-    console.log("id", id)
+    console.log("items", items)
+    const serviceIds = items?.split(",").map(item => item.trim()).filter(item => item !== "").map(item => {
+        const number = Number(item)
+        if (isNaN(number)) {
+            return null
+        }
+        return number
+    }).filter(item => item !== null) || []
+
+
+    // console.log("id", id)
+    console.log("serviceIds", serviceIds)
+
+    if (serviceIds.length === 0) {
+        return <div className="w-full">
+            <p className="text-sm text-muted-foreground">No services selected</p>
+        </div>
+    }
 
     const minDateToBook = new Date();
     const maxDateToBook = addDays(minDateToBook, 60);
@@ -24,6 +39,7 @@ export default async function TimePage(props: { searchParams: Promise<{ items: s
     return <>
 
         <h1 className="text-4xl md:text-5xl font-bold font-source-sans pb-6">Select time</h1>
+
 
         <Form businessId={businessId} minDateToBook={minDateToBook} maxDateToBook={maxDateToBook} defaultSlots={defaultSlots} serviceIds={serviceIds} />
 

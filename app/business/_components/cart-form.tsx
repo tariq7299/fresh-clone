@@ -32,7 +32,7 @@ export default function CartForm({ servicesWithCategories }: { servicesWithCateg
         const servicesIds = getItemsFromSearchParams(searchParams)
         const allServices = servicesWithCategories.flatMap(servicesWithCategory => servicesWithCategory.services)
 
-        const selectedServices = allServices.filter(service => servicesIds.includes(service.id))
+        const selectedServices = allServices.filter(service => servicesIds.includes(service.id.toString()))
 
         const total = selectedServices.reduce((acc, curr) => acc + curr.price, 0)
 
@@ -67,9 +67,6 @@ export default function CartForm({ servicesWithCategories }: { servicesWithCateg
         )
     }
 
-    console.log("selectedItems", selectedItems)
-
-
 
 
     return <>
@@ -100,7 +97,7 @@ export default function CartForm({ servicesWithCategories }: { servicesWithCateg
                     {isBookingPage ?
                         <Button isLink
                             href={createPageURL(timePagePath, searchParams)}
-                            disabled={true}
+                            disabled={selectedItems?.items?.length === 0}
                             size="lg"
                             className="w-full mt-6 text-md">
                             Continue

@@ -99,7 +99,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                         className={
                             cn(
                                 buttonVariants({ borderType, variant, size, className })
-                                , loading || disabled ? "disabled:opacity-50 disabled:pointer-events-none" : ""
+                                , loading || disabled ? "opacity-50 pointer-events-none" : ""
                             )
                         }
                     // disabled={loading || disabled}

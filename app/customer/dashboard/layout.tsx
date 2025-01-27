@@ -10,8 +10,6 @@ export default async function CustomerLayout({ children }: { children: React.Rea
 
     const userData = await getUserData()
 
-    console.log("userData", userData)
-
     return (
         <div className="md:mt-20">
             <SidebarProvider>
