@@ -12,7 +12,6 @@ type FetchOptions = {
 };
 
 
-
 export async function fetchApi<T>(
     endpoint: string,
     options: FetchOptions = {}
@@ -34,7 +33,7 @@ export async function fetchApi<T>(
     // Only add token if auth is true
     let authHeaders = {};
 
-    if (false && typeof window === 'undefined') {
+    if (auth && typeof window === 'undefined') {
         const session = await getSession();
         if (session?.token) {
             authHeaders = { Authorization: `Bearer ${session.token}` };
@@ -45,7 +44,19 @@ export async function fetchApi<T>(
         method,
         headers: {
             'Accept-Language': 'en',
+            // 'Content-Type': 'application/json',
+            // 'Accept-Language': 'en-US,en;q=0.5',
             'Content-Type': 'application/json',
+            'Accept': 'application/json, text/plain, */*',
+            // 'Accept-Encoding': 'gzip, deflate, br, zstd',
+            // 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:134.0) Gecko/20100101 Firefox/134.0',
+            // 'Origin': 'http://localhost:3000',
+            // 'Connection': 'keep-alive',
+            // 'Referer': 'http://localhost:3000/',
+            // 'Sec-Fetch-Dest': 'empty',
+            // 'Sec-Fetch-Mode': 'cors',
+            // 'Sec-Fetch-Site': 'cross-site',
+
             ...authHeaders,
             ...headers,
         },

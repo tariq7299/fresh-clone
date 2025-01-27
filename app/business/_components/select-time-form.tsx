@@ -112,11 +112,15 @@ export default function SelectTimeForm({ businessId, minDateToBook, maxDateToBoo
     // Handle form submission response
     useEffect(() => {
         handleFormResponse({
+            showSuccessToast: false,
             formState,
             successCallback: () => {
                 router.push(`/business/${businessId}/successful-appointment`)
                 console.log("successsss")
 
+            },
+            errorCallback: () => {
+                console.log("errorrr")
             }
         })
     }, [formState]);
@@ -132,7 +136,7 @@ export default function SelectTimeForm({ businessId, minDateToBook, maxDateToBoo
 
     return <div className="space-y-8">
 
-        <Button isLink href={`/business/${businessId}/successful-reservation`} variant={"outline"}>
+        <Button isLink href={`/business/${businessId}/successful-appointment`} variant={"outline"}>
             done
         </Button>
 
@@ -196,7 +200,7 @@ export default function SelectTimeForm({ businessId, minDateToBook, maxDateToBoo
                 ) : slots.length > 0 ? (
                     slots.map((slot, index) => (
                         <label key={slot} htmlFor={slot} className="flex justify-start grow border-b md:border border-gray-200 md:rounded-lg py-4 md:p-5 cursor-pointer hover:bg-accent/5 transition-colors duration-150 relative">
-                            <input type="radio" id={slot} className="peer hidden appearance-none" name="slot" value={slot} />
+                            <input defaultChecked={formState.formData.slot === slot} type="radio" id={slot} className="peer hidden appearance-none" name="slot" value={slot} />
                             <p className="text-xl font-semibold peer-checked:text-accent-600">{slot}</p>
                             <div className="peer-checked:ring-2 ring-accent peer-checked:bg-accent/5 absolute inset-0 rounded-lg"></div>
                         </label>
@@ -219,7 +223,7 @@ export default function SelectTimeForm({ businessId, minDateToBook, maxDateToBoo
             <Link href={`/login?${new URLSearchParams({
                 type: 'customer',
                 loginRequiredForBooking: 'true'
-            }).toString()}`}>
+            }).toString()}`} scroll={false}>
                 <Button>
                     test
                 </Button>

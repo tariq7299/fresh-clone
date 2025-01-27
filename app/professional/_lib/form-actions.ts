@@ -547,8 +547,9 @@ export const handleSubmitBusinessCapacity = async (formState: ErrorFormState<Bus
         console.error('Error submitting business capacity:', error);
         const errorMsg = setApiErrorMsg({ errResponse: error as ApiError })
 
+        // Move this outside of the catch block
         if (error instanceof ApiError) {
-            redirectToLoginIfNotAuthenticated(error.status, error.code)
+            redirectToLoginIfNotAuthenticated(errorMsg)
         }
 
         return {

@@ -47,13 +47,14 @@ export const handleBooking = async (
     const formattedPayload = {
         business_id: payload.businessId,
         date: formatDate(payload.date, "yyyy-MM-dd"),
-        slot: payload.slot,
+        preferred_time: payload.slot,
         service_ids: payload.serviceIds,
         payment_method: "cash"
     }
 
     console.log("formattedPayload", formattedPayload)
 
+    let result;
 
     try {
         // TODO:write types
@@ -66,7 +67,11 @@ export const handleBooking = async (
 
         const successMsg = setApiSuccessMsg({ successResponse: response })
 
-        return {
+
+
+
+        result = {
+            apiResponse: response,
             success: true,
             clientFieldsErrors: null,
             apiDataResponse: response,
@@ -77,10 +82,11 @@ export const handleBooking = async (
     } catch (error) {
 
         const apiError = error as ApiError
-
-        redirectToLoginIfNotAuthenticated(apiError.status, apiError.code, false)
+        // redirectToLoginIfNotAuthenticated(apiError.status, apiError.code, false)
+        console.log("apiErrorrrr", apiError)
         const errorMsg = setApiErrorMsg({ errResponse: apiError })
-        return {
+        result = {
+            apiResponse: apiError,
             success: false,
             clientFieldsErrors: null,
             apiDataResponse: null,
@@ -88,4 +94,10 @@ export const handleBooking = async (
             formData: payload
         }
     }
+
+    if (result.success) {
+        return result as SuccessFormState<SelectTimeClientErrors | null, SelectTimeFormData>
+    }
+    redirectToLoginIfNotAuthenticated(result.apiMsgs, false)
+    return result as ErrorFormState<SelectTimeClientErrors | null, SelectTimeFormData>
 }

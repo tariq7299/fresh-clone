@@ -15,7 +15,7 @@ function setApiErrorMsg({
     let errorMessage = customErrorMsg || (errResponse.errors && Object.keys(errResponse.errors).length > 0 ? errResponse.errors : errResponse.message)
 
     if (statusCode === 401 && errResponse.message === "Unauthenticated.") {
-        errorMessage = errorMessage || 'Session expired, please login again!';
+        errorMessage = 'Session expired';
         return errorMessage; // Exit the function early
     }
 

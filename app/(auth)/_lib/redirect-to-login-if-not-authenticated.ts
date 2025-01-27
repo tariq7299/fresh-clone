@@ -2,7 +2,7 @@ import { redirect } from 'next/navigation'
 import { navigateToLoginWithSessionEnded } from "@/(auth)/_lib/auth-client-services";
 
 const UNAUTHORIZED_STATUS = 401 as const;
-const UNAUTHORIZED_MESSAGE = "Unauthenticated." as const;
+const UNAUTHORIZED_MESSAGE = "Session expired" as const;
 
 /**
  * Handles authentication failures by redirecting to login page
@@ -11,9 +11,11 @@ const UNAUTHORIZED_MESSAGE = "Unauthenticated." as const;
  * @param status HTTP status code
  * @returns void
  */
-export function redirectToLoginIfNotAuthenticated(status: number, code: string | number, addSessionEndedParam: boolean = true): void {
+export function redirectToLoginIfNotAuthenticated(code: string | number | string[], addSessionEndedParam: boolean = true): void {
 
-    if (status === UNAUTHORIZED_STATUS && code === UNAUTHORIZED_MESSAGE && typeof code === "string") {
+    console.log("code", code)
+
+    if (code === UNAUTHORIZED_MESSAGE && typeof code === "string") {
 
         const isServer = typeof window === "undefined";
         const redirectUrl = "/login" + (addSessionEndedParam ? "?sessionEnded=true" : "");

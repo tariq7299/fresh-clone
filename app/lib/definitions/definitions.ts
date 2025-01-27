@@ -1,3 +1,5 @@
+import { ApiResponse } from "./api";
+
 // Base form state interface that represents the common structure for all form states
 export interface BaseFormState<TData, TErrors, TFormData> {
     success: boolean;
@@ -9,6 +11,7 @@ export interface BaseFormState<TData, TErrors, TFormData> {
 
 // Success form state with valid API response data and no client errors
 export type SuccessFormState<TData, TFormData> = {
+    apiResponse?: ApiResponse<any>;
     success: true;
     clientFieldsErrors: null;
     apiDataResponse: TData;
@@ -18,6 +21,7 @@ export type SuccessFormState<TData, TFormData> = {
 
 // Error form state with client validation errors and no API response
 export type ErrorFormState<TErrors, TFormData> = {
+    apiResponse?: ApiResponse<any>;
     success: false;
     clientFieldsErrors: TErrors;
     apiDataResponse: null;
