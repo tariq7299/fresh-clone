@@ -5,7 +5,7 @@ import { ArrowRightEndOnRectangleIcon, Bars3Icon, XMarkIcon, ChevronRightIcon, B
 import { Button } from '@/ui/components/custom/button'
 import Link from 'next/link'
 import { GlobeAsiaAustraliaIcon } from "@heroicons/react/24/outline";
-
+import MobileNavToggler from './mobile-nav-toggler'
 export default function MobileNavMenu({ authenticated, navTabs, isScrolled, fixed }: { authenticated: boolean, navTabs: { title: string, href: string, icon: JSX.Element }[], isScrolled: boolean, fixed: boolean }) {
 
     const [isOpen, setIsOpen] = useState(false)
@@ -13,11 +13,13 @@ export default function MobileNavMenu({ authenticated, navTabs, isScrolled, fixe
     return (
         <>
 
-            <Button size="icon" variant={"ghost"} onClick={() => setIsOpen(!isOpen)}>
+            {/* <Button size="icon" variant={"ghost"} onClick={() => setIsOpen(!isOpen)}>
                 <Bars3Icon className={cn('size-10 ',
                     fixed ? 'text-foreground' : isScrolled ? 'text-foreground' : 'text-background hover:text-foreground'
                 )} />
-            </Button>
+            </Button> */}
+
+            <MobileNavToggler setIsOpen={setIsOpen} fixed={fixed} isScrolled={isScrolled} authenticated={authenticated} isOpen={isOpen} />
 
             {/* The opend nav menu on mobile screens */}
             <div className={cn(
