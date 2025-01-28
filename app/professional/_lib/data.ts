@@ -8,6 +8,9 @@ import { fetchApi } from "@/lib/utils/api/fetch-utils";
 import { ApiResponse, ApiError, ApiSucess } from "@/lib/definitions/api";
 import { SessionData } from "@/(auth)/_lib/definitions";
 import SecureLS from "secure-ls";
+import { setApiErrorMsg } from "@/lib/utils/api/setApiErrorMsg";
+import { setApiSuccessMsg } from "@/lib/utils/api/setApiSuccessMsg";
+import { redirectToLoginIfNotAuthenticated } from "@/(auth)/_lib/redirect-to-login-if-not-authenticated";
 
 export const getBusinessStepFormData = async (stepName: string) => {
 
@@ -231,3 +234,46 @@ export const removeTempBusinessFormSumbissions = async (businessId: number) => {
         console.error('Error deleting temporary business:', error);
     }
 }
+
+export const getAppointments = async () => {
+    let result;
+    try {
+        const res = await fetchApi("/businesses/1/bookings", {
+            method: "GET"
+        })
+
+        const successMsg = setApiSuccessMsg({ successResponse: res })
+
+        result = {
+            apiResponse: res,
+            success: true,
+            data: res.data.bookings,
+            msg: successMsg,
+        }
+
+
+        // return appointments?.data || []
+    } catch (error) {
+        console.error('Error fetching appointments:', error);
+        const errorMsg = setApiErrorMsg({ errResponse: error })
+        result = {
+            apiResponse: error,
+            success: false,
+            data: null,
+            msg: errorMsg,
+        }
+
+    }
+
+    if (result.success) {
+        return result.data
+    }
+
+    console.log("result", result)
+
+    console.log("result.msg", result.msg)
+    redirectToLoginIfNotAuthenticated(result.msg, ["sessionEnded=true"])
+    return []
+
+}
+

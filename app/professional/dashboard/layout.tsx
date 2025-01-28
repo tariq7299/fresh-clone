@@ -4,10 +4,9 @@ import { Suspense } from "react"
 import NavBar from "@/ui/components/custom/nav-bar"
 import { NavBarSkeleton } from "@/(home)/_components/skeletons"
 import { getUserData } from "@/(auth)/_lib/auth-server-services"
-import { div } from "framer-motion/client"
 import { NotepadText } from "lucide-react"
 
-export default async function CustomerLayout({ children }: { children: React.ReactNode }) {
+export default async function ProfessionalDashboardLayout({ children }: { children: React.ReactNode }) {
 
     const userData = await getUserData()
 
@@ -15,7 +14,7 @@ export default async function CustomerLayout({ children }: { children: React.Rea
         {
             key: 'appointments',
             title: 'Appointments',
-            href: '/customer/dashboard/appointments',
+            href: '/professional/dashboard/appointments',
             icon: (<NotepadText />)
         },
         // {
@@ -41,20 +40,14 @@ export default async function CustomerLayout({ children }: { children: React.Rea
 
     return (
         <SidebarProvider>
-            <AppSidebar userData={userData} sidebarTabs={sidebarTabs} containerClass="pt-[70px]" triggerClass="top-16" />
-
-            {/* Nav bar */}
-            <Suspense fallback={<NavBarSkeleton />}>
-                <NavBar className="max-w-full" fixed={true} hideInMobile={true} />
-            </Suspense>
+            <AppSidebar userData={userData} sidebarTabs={sidebarTabs} triggerClass="top-0" />
 
             <div className="bg-gray-50 h-dvh w-full">
-
-                {/* Sidebar trigger on mobile */}
+                {/* <div className=""> */}
                 <SidebarTrigger className="md:hidden fixed top-0 left-0" />
                 {children}
             </div>
-
+            {/* </div> */}
         </SidebarProvider>
 
     )

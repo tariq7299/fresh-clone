@@ -40,6 +40,7 @@ export default function LoginForm() {
     // THis query will be add to the url of login, when 
     const searchParams = useSearchParams();
     const sessionEnded = searchParams.get("sessionEnded") === "true";
+    const userRole = searchParams.get("type") as UserRole;
     const loginRequiredForBooking = searchParams.get("loginRequiredForBooking") === "true";
 
 
@@ -58,7 +59,11 @@ export default function LoginForm() {
             successCallback: () => {
                 loginUserClientSide(formState.apiDataResponse as SessionData, setSessionData)
                 if (loginRequiredForBooking) {
-                    router.back()
+                    if (formState.apiDataResponse?.role as UserRole === "customer") {
+                        router.back()
+                    } else {
+                        navigateToDashboard(formState.apiDataResponse?.role as UserRole)
+                    }
                 } else {
                     navigateToDashboard(formState.apiDataResponse?.role as UserRole)
                 }
@@ -121,7 +126,7 @@ export default function LoginForm() {
                     {loginRequiredForBooking ? (
                         <Link
                             href={`/register?${new URLSearchParams({
-                                type: 'customer',
+                                type: userRole,
                                 loginRequiredForBooking: 'true'
                             }).toString()}`}
                             className="text-center text-accent text-sm"

@@ -18,7 +18,27 @@ import { Badge } from "@/ui/components/badge"
 import { Button } from "@/ui/components/button"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/ui/components/dialog"
 import { getTotalDuration } from "@/lib/utils/utils"
-import { Appointment, Service } from "../_lib/definitions"
+
+type Service = {
+    service_id: number
+    name: string
+    price: number
+    duration: number
+}
+
+type Appointment = {
+    id: string
+    booking_date: string
+    start_time: string
+    end_time: string
+    status: string
+    payment_method: string
+    services: Service[]
+    // business_name: string
+    // business_address: string
+    total_duration: number
+    total_price: number
+}
 
 export default function AppointmentsTable({ appointments }: { appointments: Appointment[] }) {
 
@@ -27,14 +47,14 @@ export default function AppointmentsTable({ appointments }: { appointments: Appo
             accessorKey: "id",
             header: "ID"
         },
-        {
-            accessorKey: "business_name",
-            header: "Business Name"
-        },
-        {
-            accessorKey: "business_address",
-            header: "Business Address"
-        },
+        // {
+        //     accessorKey: "business_name",
+        //     header: "Business Name"
+        // },
+        // {
+        //     accessorKey: "business_address",
+        //     header: "Business Address"
+        // },
         {
             accessorKey: "total_duration",
             header: "Total Duration"

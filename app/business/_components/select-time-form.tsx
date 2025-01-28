@@ -7,17 +7,14 @@ import { CalendarIcon, CalendarOff } from "lucide-react"
 import { useActionState, useState } from "react"
 import { cn } from "@/lib/utils/utils"
 import { format } from "date-fns"
-import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { Slot } from "@/business/_lib/definitions"
-import { addDays } from "date-fns"
 import { useEffect } from "react"
 import { fetchApi } from "@/lib/utils/api/fetch-utils-client"
 import { ApiResponse } from "@/lib/definitions/api"
 import { handleBooking } from "../_lib/form-actions"
 import { handleFormResponse } from "@/lib/utils/utils"
 import { SuccessFormState, ErrorFormState } from "@/lib/definitions/definitions"
-import { z } from "zod"
 import { SelectTimeClientErrors, SelectTimeFormData } from "../_lib/definitions"
 import { useBusinessFormContext } from "@/lib/providers/business-form-provider"
 import { redirectToLoginIfNotAuthenticated } from "@/(auth)/_lib/redirect-to-login-if-not-authenticated"
@@ -96,7 +93,7 @@ export default function SelectTimeForm({ businessId, minDateToBook, maxDateToBoo
             // },
             errorCallback: () => {
                 if (formState.apiMsgs === "Session expired") {
-                    redirectToLoginIfNotAuthenticated(formState.apiMsgs, ["loginRequiredForBooking=true"])
+                    redirectToLoginIfNotAuthenticated(formState.apiMsgs, ["loginRequiredForBooking=true", "type=customer"])
                 }
             }
         })

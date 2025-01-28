@@ -1,5 +1,5 @@
 import { Nullable } from "@/lib/utils/utils";
-
+import { Appointment as CustomerAppointment } from "@/customer/_lib/definitions";
 
 // Coming from api like that (before mapping and changing its keys)
 
@@ -91,3 +91,6 @@ export type BusinessOnboarding = {
         price: number;
     }[];
 }
+
+export type Appointment = Omit<CustomerAppointment, "business_name" | "business_address">
+

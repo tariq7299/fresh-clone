@@ -17,6 +17,7 @@ export function redirectToLoginIfNotAuthenticated(code: string | number | string
 
         const isServer = typeof window === "undefined";
 
+        console.log("code", code)
 
         const redirectUrl = "/login" + (params.length > 0 ? "?" + params.join("&") : "");
 
