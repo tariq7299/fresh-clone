@@ -91,9 +91,9 @@ export default function SelectTimeForm({ businessId, minDateToBook, maxDateToBoo
             showSuccessToast: false,
             showErrorToast: true,
             formState,
-            successCallback: () => {
-                router.push(`/business/${businessId}/successful-appointment`)
-            },
+            // successCallback: () => {
+            //     router.push(`/business/${businessId}/successful-appointment`)
+            // },
             errorCallback: () => {
                 if (formState.apiMsgs === "Session expired") {
                     redirectToLoginIfNotAuthenticated(formState.apiMsgs, ["loginRequiredForBooking=true"])

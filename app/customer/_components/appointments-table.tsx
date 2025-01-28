@@ -10,9 +10,14 @@ import {
     TableHeader,
     TableRow,
 } from "@/ui/components/table"
+
 import { DataTable } from "@/ui/components/custom/data-table"
 
 import { ColumnDef } from "@tanstack/react-table"
+import { Badge } from "@/ui/components/badge"
+import { Button } from "@/ui/components/button"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/ui/components/dialog"
+import { getTotalDuration } from "@/lib/utils/utils"
 
 type Service = {
     service_id: string
@@ -60,7 +65,12 @@ export default function AppointmentsTable({ appointments }: { appointments: Appo
         },
         {
             accessorKey: "status",
-            header: "Status"
+            header: "Status",
+            cell: ({ row }) => {
+                const status = row.getValue("status") as string
+                return <Badge color={status === "pending" ? "warning" : status === "confirmed" ? "success" : "error"}>{status}</Badge>
+            }
+
         },
         {
             accessorKey: "payment_method",
@@ -68,7 +78,54 @@ export default function AppointmentsTable({ appointments }: { appointments: Appo
         },
         {
             accessorKey: "services",
-            header: "Services"
+            header: "Services",
+            cell: ({ row }) => {
+                const services = row.getValue("services") as Service[]
+                const total_duration = row.getValue("total_duration") as number
+                const total_price = row.getValue("total_price") as number
+                const formattedTotalDuration = getTotalDuration(total_duration)
+
+                return <Dialog >
+                    <DialogTrigger asChild>
+                        <Button size={"sm"} variant="outline" className="font-semibold">Show Services</Button>
+                    </DialogTrigger>
+                    <DialogContent className="max-w-full sm:max-w-[40vw]">
+                        <DialogHeader>
+                            <DialogTitle>Services</DialogTitle>
+                        </DialogHeader>
+                        <Table className="">
+                            <TableCaption>A list of services included in this appointment.</TableCaption>
+                            <TableHeader>
+                                <TableRow>
+                                    <TableHead className="">Name</TableHead>
+                                    <TableHead>Price (EGP)</TableHead>
+                                    <TableHead>Duration (min)</TableHead>
+
+                                </TableRow>
+                            </TableHeader>
+                            <TableBody>
+                                {services.map((service) => (
+                                    <TableRow key={service.service_id}>
+                                        <TableCell className="font-medium">{service.name}</TableCell>
+                                        <TableCell>{service.price}</TableCell>
+                                        <TableCell>{service.duration}</TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                            <TableFooter>
+                                <TableRow>
+                                    <TableCell >Total</TableCell>
+                                    <TableCell className="">{total_price}</TableCell>
+                                    <TableCell className="">{formattedTotalDuration}</TableCell>
+                                    {/* <TableCell className="text-right"></TableCell> */}
+                                </TableRow>
+                            </TableFooter>
+                        </Table>
+                    </DialogContent>
+                </Dialog>
+
+                return <div>{services.map(service => service.name).join(", ")}</div>
+            }
         },
         {
             accessorKey: "booking_date",
@@ -85,10 +142,7 @@ export default function AppointmentsTable({ appointments }: { appointments: Appo
 
     ]
 
-
     return (
         <DataTable columns={columns} data={appointments} />
-
-
     )
 }

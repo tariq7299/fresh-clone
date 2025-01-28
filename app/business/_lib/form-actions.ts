@@ -10,6 +10,7 @@ import { redirectToLoginIfNotAuthenticated } from "@/(auth)/_lib/redirect-to-log
 import { ErrorFormState, SuccessFormState } from "@/lib/definitions/definitions"
 import { SelectTimeClientErrors, SelectTimeFormData } from "./definitions"
 import { selectTimeFormSchema } from "./definitions"
+import { redirect } from "next/navigation"
 
 
 
@@ -90,7 +91,8 @@ export const handleBooking = async (
     }
 
     if (result.success) {
-        return result as SuccessFormState<SelectTimeClientErrors | null, SelectTimeFormData>
+        redirect(`/business/${businessId}/successful-appointment`)
+        // return result as SuccessFormState<SelectTimeClientErrors | null, SelectTimeFormData>
     }
     // redirectToLoginIfNotAuthenticated(result.apiMsgs, false)
     return result as ErrorFormState<SelectTimeClientErrors | null, SelectTimeFormData>

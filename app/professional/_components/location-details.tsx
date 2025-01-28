@@ -49,6 +49,7 @@ export default function LocationDetails({ setLocation, location, className }: { 
         apartment: '',
         building: ''
     })
+
     const [errors, setErrors] = useState<BusinessLocationDetailsErrors | null>(null)
 
     const handleSave = () => {
@@ -98,7 +99,7 @@ export default function LocationDetails({ setLocation, location, className }: { 
                             </DialogDescription>
                         </DialogHeader>
 
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-28 pb-24  h-[80vh] md:h-auto overflow-y-auto px-5">
+                        A <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-28 pb-24  h-[80vh] md:h-auto overflow-y-auto px-5">
 
                             <div className="col-span-2 md:col-span-3 space-y-1">
                                 <Label htmlFor="address" className="text-right font-bold ">

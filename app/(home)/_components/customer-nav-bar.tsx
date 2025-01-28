@@ -2,7 +2,7 @@
 'use client'
 
 import { ArrowLeftEndOnRectangleIcon, BriefcaseIcon } from '@heroicons/react/24/outline'
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, NotepadText } from 'lucide-react';
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -29,7 +29,14 @@ export default function CustomerNavBar({ fixed = false, hideInMobile = false, cl
         {
             title: 'For business',
             href: '/register?type=professional',
-            icon: (<BriefcaseIcon className='size-6' />)
+            icon: (<BriefcaseIcon className='size-6' />),
+            type: "other"
+        },
+        {
+            title: 'Appointments',
+            href: '/customer/dashboard/appointments',
+            icon: (<NotepadText />),
+            type: "normal"
         },
     ]
 
@@ -80,6 +87,16 @@ export default function CustomerNavBar({ fixed = false, hideInMobile = false, cl
                         </DropdownMenuTrigger>
                         <DropdownMenuContent className='w-56 p-2'>
 
+                            {navTabs.map((tab) =>
+                                tab.type === "normal" && (
+                                    <DropdownMenuItem key={tab.title} className=''>
+                                        <Link href={tab.href} className='font-semibold flex items-center gap-2  w-full'>
+                                            {tab.icon}
+                                            {tab.title}
+                                        </Link>
+                                    </DropdownMenuItem>
+                                ))}
+
                             <DropdownMenuItem className=''>
                                 <Link href="/login?sessionEnded=true" className='flex items-center gap-2  w-full'>
                                     <ArrowLeftEndOnRectangleIcon className='size-10' />
@@ -88,14 +105,16 @@ export default function CustomerNavBar({ fixed = false, hideInMobile = false, cl
                             </DropdownMenuItem>
                             <DropdownMenuSeparator className='  my-2 mx-2 ' />
                             <DropdownMenuLabel className='font-bold  text-base'>Other</DropdownMenuLabel>
-                            <DropdownMenuItem className=''>
-                                {navTabs.map((tab) => (
-                                    <Link key={tab.title} href={tab.href} className='font-semibold '>
-                                        {tab.title}
-                                    </Link>
-                                ))}
+                            {navTabs.map((tab) => (
+                                tab.type === "other" && (
+                                    <DropdownMenuItem key={tab.title} className=''>
+                                        <Link href={tab.href} className='font-semibold '>
+                                            {tab.title}
+                                        </Link>
+                                    </DropdownMenuItem>
+                                )
+                            ))}
 
-                            </DropdownMenuItem>
                             <DropdownMenuItem className=' text-accent-600  '>
                                 <p className=" flex  items-center gap-2  font-semibold "><GlobeAsiaAustraliaIcon className="h-6 w-5" /> English</p>
                             </DropdownMenuItem>

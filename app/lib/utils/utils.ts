@@ -7,7 +7,6 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-
 export function getRandomIntInclusive(min: number, max: number) {
   const minCeiled = Math.ceil(min);
   const maxFloored = Math.floor(max);
@@ -44,3 +43,13 @@ export function handleFormResponse<ApiDataResponseType, ClientFieldsErrors, Form
 export type Nullable<T> = {
   [P in keyof T]: T[P] | null;
 };
+
+// convert total duration in minutes to hours and mins
+export function getTotalDuration(totalDuration: number) {
+  const hours = Math.floor(totalDuration / 60)
+  const mins = totalDuration % 60
+  if (mins === 0) {
+    return `${hours} hour(s)`
+  }
+  return `${hours} hour(s) ${mins} min(s)`
+}
