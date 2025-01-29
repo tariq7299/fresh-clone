@@ -8,8 +8,6 @@ export default function DesktopCart({ services, businessId, businessCoverPhoto, 
 
     return <div className="border border-gray-200 rounded-lg p-5 space-y-4 shadow-sm">
 
-
-
         <div className=" sticky  bg-background  ">
             <DesktopCartHeader businessId={businessId} businessCoverPhoto={businessCoverPhoto} businessName={businessName} businessAddress={businessAddress} />
         </div>

@@ -24,9 +24,9 @@ export default function Home() {
       <div className="overflow-x-hidden">
 
         {/* Nav bar */}
-        <Suspense fallback={<NavBarSkeleton />}>
+        {/* <Suspense fallback={<NavBarSkeleton />}>
           <NavBar />
-        </Suspense>
+        </Suspense> */}
 
         <section className="px-5 md:px-7 py-36 lg:py-52 grid justify-center  relative items-center">
           <HeroSection />
