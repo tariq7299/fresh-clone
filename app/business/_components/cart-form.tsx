@@ -1,13 +1,11 @@
 "use client"
 
 import { Button } from "@/ui/components/custom/button";
-import { ApiService, ApiServicesWithCategory } from "@/professional/_lib/definitions";
-import { useState, useEffect } from "react";
-import { usePathname, useSearchParams, useRouter } from "next/navigation";
-import { getItemsFromSearchParams } from "../_lib/utils";
-import { createPageURL } from "@/business/_lib/utils";
+import { ApiServicesWithCategory } from "@/professional/_lib/definitions";
 import { useBusinessFormContext } from "@/lib/providers/business-form-provider";
 import useBookingCart from "../_lib/hooks/use-booking-cart";
+import { DesktopCartSkeleton } from "./skeletons";
+
 
 export default function DesktopCartForm({ servicesWithCategories }: { servicesWithCategories: ApiServicesWithCategory[] }) {
 
@@ -21,25 +19,7 @@ export default function DesktopCartForm({ servicesWithCategories }: { servicesWi
 
     if (isLoadingCartServices) {
         return (
-            <div className="flex flex-col gap-2 py-4">
-                {[1, 2, 3].map((i) => (
-                    <div key={i} className="flex justify-between items-start animate-pulse">
-                        <div className="space-y-2">
-                            <div className="h-4 w-32 bg-muted rounded"></div>
-                            <div className="h-3 w-20 bg-muted rounded"></div>
-                        </div>
-                        <div className="h-4 w-16 bg-muted rounded"></div>
-                    </div>
-                ))}
-
-                <div className="mt-4 border-t pt-4">
-                    <div className="flex justify-between items-center animate-pulse">
-                        <div className="h-5 w-20 bg-muted rounded"></div>
-                        <div className="h-4 w-24 bg-muted rounded"></div>
-                    </div>
-                    <div className="h-10 w-full bg-muted rounded mt-6"></div>
-                </div>
-            </div>
+            <DesktopCartSkeleton />
         )
     }
 

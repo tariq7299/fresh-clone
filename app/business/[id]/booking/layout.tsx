@@ -1,12 +1,8 @@
 
 import BusinessFormProvider from "@/lib/providers/business-form-provider";
-import SubmitButton from "@/ui/components/custom/submit-button";
 import BackButton from "@/ui/components/custom/back-button";
-import { X } from 'lucide-react';
-import { Button } from "@/ui/components/custom/button";
-import { Suspense } from "react";
-import { BookingPageSkeleton } from "@/business/_components/skeletons";
 import ExitStepsButton from "@/ui/components/custom/exit-steps-button";
+import { Suspense } from "react";
 
 export default async function BookingLayout({ children, desktopCart, mobileCart, params }: { children: React.ReactNode, desktopCart: React.ReactNode, mobileCart: React.ReactNode, params: Promise<{ id: string }> }) {
 
@@ -14,8 +10,6 @@ export default async function BookingLayout({ children, desktopCart, mobileCart,
     const closeButtonLink = `/business/${id}`
 
     return <>
-
-
 
         <BusinessFormProvider>
 

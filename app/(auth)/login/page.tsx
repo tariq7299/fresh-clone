@@ -14,7 +14,7 @@ export default function LoginPage() {
 
             {/* Iam using Suspense because Ima using useSearchParams in <LoginForm /> */}
 
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense >
                 <LoginForm />
             </Suspense>
 

@@ -1,16 +1,10 @@
 "use client"
 
-import { Button } from "@/ui/components/custom/button";
-import { ApiService, ApiServicesWithCategory } from "@/professional/_lib/definitions";
-import { useState, useEffect } from "react";
-import { usePathname, useSearchParams, useRouter } from "next/navigation";
-import { getItemsFromSearchParams } from "../_lib/utils";
-import { createPageURL } from "@/business/_lib/utils";
-import { useBusinessFormContext } from "@/lib/providers/business-form-provider";
-
-import SubmitButton from "@/ui/components/custom/submit-button";
-import useBookingCart from "../_lib/hooks/use-booking-cart";
+import { ApiServicesWithCategory } from "@/professional/_lib/definitions";
 import MobileCartForm from "./mobile-cart-form";
+import { Suspense } from "react";
+import { MobileCartSkeleton } from "./skeletons";
+
 
 
 export default function MobileCart({ servicesWithCategories }: { servicesWithCategories: ApiServicesWithCategory[] }) {
@@ -18,7 +12,9 @@ export default function MobileCart({ servicesWithCategories }: { servicesWithCat
 
     return <div className="flex justify-between items-center">
 
-        <MobileCartForm servicesWithCategories={servicesWithCategories} />
+        <Suspense fallback={<MobileCartSkeleton />}>
+            <MobileCartForm servicesWithCategories={servicesWithCategories} />
+        </Suspense>
 
 
         {/* <SubmitButton hasIcon={false} className="" /> */}

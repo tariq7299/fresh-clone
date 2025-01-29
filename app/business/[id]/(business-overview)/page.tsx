@@ -7,7 +7,8 @@ import { Button } from "@/ui/components/custom/button";
 import { Badge } from "@/ui/components/badge";
 import { ServicesOverview } from "../../_components/services-overview";
 import { BusinessHours } from "../../_components/business-hours";
-
+import { Suspense } from "react";
+import { ServicesOverviewSkeleton } from "../../_components/skeletons";
 export interface BusinessHour {
     day: 'sunday' | 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday';
     open: string | null;
@@ -112,8 +113,10 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
 
                     <div className="">
                         <h2 className="text-2xl md:text-4xl font-bold font-source-sans pb-3">Services</h2>
+                        <Suspense fallback={<ServicesOverviewSkeleton />}>
 
-                        <ServicesOverview services={businessData.services_with_categories} />
+                            <ServicesOverview services={businessData.services_with_categories} />
+                        </Suspense>
 
                         <Button isLink={true} href={`/business/${businessData.id}/booking/select-services`} variant={"outline"} className="w-full md:w-auto  md:p-5">See all</Button>
                     </div>

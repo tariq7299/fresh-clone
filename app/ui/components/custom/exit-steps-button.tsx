@@ -2,7 +2,6 @@
 
 import { Button } from "@/ui/components/custom/button";
 import { X } from "lucide-react";
-import { useSearchParams, usePathname } from "next/navigation";
 
 export default function ExitStepsButton({ href }: { href: string }) {
 

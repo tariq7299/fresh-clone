@@ -3,6 +3,8 @@ import { getBusinessData } from "@/business/_lib/data";
 import { Business } from "@/business/[id]/(business-overview)/page";
 import ServicesTabsScrollSpied from "@/business/_components/services-tabs-scroll-spied";
 import { AddServiceCard } from "@/business/_components/add-service-card";
+import { Suspense } from "react";
+import { AddServiceCardSkeleton } from "@/business/_components/skeletons";
 
 export default async function BookingPage(props: { params: Promise<{ id: string }>, searchParams: Promise<{ items: string }> }) {
 
@@ -32,9 +34,12 @@ export default async function BookingPage(props: { params: Promise<{ id: string 
                     <h2 className="text-2xl md:text-3xl font-bold font-source-sans pb-3">{serviceWithCategory.name}</h2>
 
                     {serviceWithCategory.services.map((service) => (
-                        <AddServiceCard key={service.id} service={service} />
+                        <Suspense key={service.id} fallback={<AddServiceCardSkeleton />}>
+                            <AddServiceCard service={service} />
+                        </Suspense>
                     ))}
                 </section>
+
             ))}
 
         </div>
