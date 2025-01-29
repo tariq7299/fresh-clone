@@ -13,9 +13,13 @@ export default function LoginPage() {
             <p className="text-muted-foreground text-sm text-center pb-4">Welcome back! Enter your details to access your account.</p>
 
             {/* Iam using Suspense because Ima using useSearchParams in <LoginForm /> */}
-            <LoginForm />
+
+            <Suspense fallback={<div>Loading...</div>}>
+                <LoginForm />
+            </Suspense>
 
         </div>
+
 
     )
 }
