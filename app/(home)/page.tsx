@@ -24,9 +24,9 @@ export default function Home() {
       <div className="overflow-x-hidden">
 
         {/* Nav bar */}
-        {/* <Suspense fallback={<NavBarSkeleton />}>
+        <Suspense fallback={<NavBarSkeleton />}>
           <NavBar />
-        </Suspense> */}
+        </Suspense>
 
         <section className="px-5 md:px-7 py-36 lg:py-52 grid justify-center  relative items-center">
           <HeroSection />
@@ -34,6 +34,7 @@ export default function Home() {
 
 
         <div className="space-y-36">
+
           {/* Gray section under hero section */}
           <section className="px-5 mb-10 md:mb-16 md:px-7 bg-secondary-100 h-20 md:h-24 flex items-center text-center justify-center text-xs md:text-base">
             <p className=" ">Beauty on your schedule. Explore local salons and spas with ease.</p>
@@ -51,8 +52,8 @@ export default function Home() {
             {/* Recently viewed section */}
             {/* <ShopsCarousel sectionTitle={(<h1 className="font-semibold font-source-sans text-left text-3xl  ">Recently viewed</h1>)} /> */}
 
+            {/* Recommended section */}
             <Suspense fallback={<ShopsCarouselSkeleton />}>
-              {/* Recommended section */}
               <RecommendedBusinesses />
             </Suspense>
 

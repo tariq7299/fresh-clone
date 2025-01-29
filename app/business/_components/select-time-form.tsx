@@ -99,6 +99,8 @@ export default function SelectTimeForm({ businessId, minDateToBook, maxDateToBoo
         })
     }, [formState]);
 
+    console.log("formState", formState)
+
     return <div className={cn("space-y-8", isPending ? "opacity-50 pointer-events-none" : "")}>
 
         <div className="flex justify-between items-center">

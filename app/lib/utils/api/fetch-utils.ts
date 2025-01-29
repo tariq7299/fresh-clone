@@ -1,5 +1,8 @@
 import { getSession } from "@/(auth)/_lib/sessions";
 import { ApiError } from "@/lib/definitions/api";
+import { setApiSuccessMsg } from "./setApiSuccessMsg";
+import { ApiResponse } from "@/lib/definitions/api";
+import { setApiErrorMsg } from "./setApiErrorMsg";
 
 type FetchOptions = {
     method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
@@ -11,11 +14,20 @@ type FetchOptions = {
     auth?: boolean;
 };
 
+type FetchApiResponse<T> = {
+    success: boolean;
+    status: number;
+    apiMsgs: string | string[];
+    code: number | string;
+    data: T | null;
+    errors: string | string[];
+}
 
 export async function fetchApi<T>(
     endpoint: string,
     options: FetchOptions = {}
-): Promise<T> {
+): Promise<FetchApiResponse<T>> {
+
     const {
         method = 'GET',
         body,
@@ -80,58 +92,115 @@ export async function fetchApi<T>(
 
             // Handle API errors
             if (!response.ok) {
-                throw new ApiError(
-                    data.success,
-                    response.status,
-                    data.message,
-                    data.code,
-                    data.data,
-                    data.errors
+                const errorMsg = setApiErrorMsg({ errResponse: data })
+                return {
+                    success: false,
+                    status: response.status,
+                    apiMsgs: errorMsg,
+                    code: data.code,
+                    data: data.data,
+                    errors: data.errors
+                }
+                // throw new ApiError(
+                //     data.success,
+                //     response.status,
+                //     data.message,
+                //     data.code,
+                //     data.data,
+                //     data.errors
 
-                );
+                // );
             }
 
-            return data as T;
+            const successMsg = setApiSuccessMsg({ successResponse: data })
+
+            return {
+                success: data.success,
+                status: response.status,
+                apiMsgs: successMsg,
+                code: data.code,
+                data: data.data,
+                errors: data.errors
+            }
+
+            // return data as T;
         }
 
         if (!response.ok) {
-            throw new Error(
-                'Something went wrong'
-            );
+            // throw new Error(
+            //     'Something went wrong'
+            // );
+            return {
+                success: false,
+                status: response.status,
+                apiMsgs: 'Something went wrong',
+                code: 500,
+                data: null,
+                errors: []
+            }
+
         }
 
-        // Handle non-JSON responses
-        return await response.text() as T;
+        const textResponse = await response.text()
+        console.log("FETCH_UTILS textResponse", textResponse)
+
+
+        return {
+            success: true,
+            status: response.status,
+            apiMsgs: 'Success',
+            code: 200,
+            data: textResponse as T,
+            errors: []
+        }
 
     } catch (error) {
+
         console.log("FETCH_UTILS errorrr", error)
         if (error instanceof ApiError) {
+            const errorMsg = setApiErrorMsg({ errResponse: error })
             console.log("FETCH_UTILS error", {
                 success: error.success,
                 status: error.status,
-                message: error.message,
+                apiMsgs: errorMsg,
                 code: error.code,
                 data: error.data,
                 errors: error.errors
             })
-            throw new ApiError(
-                error.success,
-                error.status,
-                error.message,
-                error.code,
-                error.data,
-                error.errors
+            return {
+                success: error.success,
+                status: error.status,
+                apiMsgs: errorMsg,
+                code: error.code,
+                data: error.data,
+                errors: error.errors
+            }
+            // throw new ApiError(
+            //     error.success,
+            //     error.status,
+            //     error.message,
+            //     error.code,
+            //     error.data,
+            //     error.errors
 
-            );
+            // );
+        }
+        return {
+            success: false,
+            status: 500,
+            apiMsgs: 'Network error',
+            code: 500,
+            data: null,
+            errors: []
         }
         // Make this network error in the future ( maybe you can like create a new class that inerit of something...)
-        throw new ApiError(
-            false,
-            500,
-            "Network error",
-            500,
-            null,
-            []
-        );
+        // throw new ApiError(
+        //     false,
+        //     500,
+        //     "Network error",
+        //     500,
+        //     null,
+        //     []
+        // );
     }
 } 

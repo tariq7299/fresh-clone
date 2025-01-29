@@ -9,7 +9,7 @@ function setApiErrorMsg({
     customErrorMsg?: string | null,
 }): string | string[] {
 
-    const statusCode = errResponse.status;
+    const statusCode = errResponse.code;
     const ErrorCode = errResponse.code;
 
     let errorMessage = customErrorMsg || (errResponse.errors && Object.keys(errResponse.errors).length > 0 ? errResponse.errors : errResponse.message)
@@ -50,9 +50,9 @@ function setApiErrorMsg({
             errorMessage = errorMessage || 'Service Unavailable: The server is currently unable to handle the request';
             break;
         default:
-            if (statusCode && statusCode >= 400 && statusCode < 500) {
+            if ((statusCode && Number(statusCode) >= 400 && Number(statusCode) < 500)) {
                 errorMessage = errorMessage || 'Client Error: The request contains bad syntax or cannot be fulfilled';
-            } else if (statusCode && statusCode >= 500) {
+            } else if (statusCode && Number(statusCode) >= 500) {
                 errorMessage = errorMessage || 'Server Error: The server failed to fulfill a valid request';
             } else {
                 errorMessage = errorMessage || 'An unknown error occurred, Please contact support!';

@@ -2,12 +2,15 @@ import { fetchApi } from "@/lib/utils/api/fetch-utils";
 
 export const getAppointments = async () => {
 
-    try {
-        const appointments = await fetchApi("/bookings/user")
-        return appointments?.data?.bookings || []
-    } catch (error) {
-        console.error(error)
-        throw new Error("Failed to fetch appointments")
+    // try {
+    const appointments = await fetchApi("/bookings/user")
+    if (appointments.success) {
+        return appointments.data?.bookings || []
     }
+    return []
+    // } catch (error) {
+    //     console.error(error)
+    //     throw new Error("Failed to fetch appointments")
+    // }
 
 }

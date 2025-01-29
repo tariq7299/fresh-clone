@@ -52,48 +52,65 @@ export const handleBooking = async (
         payment_method: "cash"
     }
 
-    let result;
+    // let result;
 
-    try {
-        // TODO:write types
-        const response = await fetchApi("/bookings", {
-            method: "POST",
-            body: formattedPayload
-        })
+    // try {
+    // TODO:write types
+    const response = await fetchApi("/bookings", {
+        method: "POST",
+        body: formattedPayload
+    })
 
-        const successMsg = setApiSuccessMsg({ successResponse: response })
+    // const successMsg = setApiSuccessMsg({ successResponse: response })
 
-
-
-
-        result = {
-            apiResponse: response,
-            success: true,
-            clientFieldsErrors: null,
-            apiDataResponse: response,
-            apiMsgs: successMsg,
-            formData: payload
-        }
-
-    } catch (error) {
-
-        const apiError = error as ApiError
-        // redirectToLoginIfNotAuthenticated(apiError.status, apiError.code, false)
-        const errorMsg = setApiErrorMsg({ errResponse: apiError })
-        result = {
-            apiResponse: apiError,
-            success: false,
-            clientFieldsErrors: null,
-            apiDataResponse: null,
-            apiMsgs: errorMsg,
-            formData: payload
-        }
-    }
-
-    if (result.success) {
+    if (response.success) {
+        // if (result.success) {
         redirect(`/business/${businessId}/successful-appointment`)
         // return result as SuccessFormState<SelectTimeClientErrors | null, SelectTimeFormData>
+        // }
+
     }
-    // redirectToLoginIfNotAuthenticated(result.apiMsgs, false)
-    return result as ErrorFormState<SelectTimeClientErrors | null, SelectTimeFormData>
+    console.log("response.apiMsgs", response.apiMsgs)
+    // redirectToLoginIfNotAuthenticated(response.apiMsgs, ["sessionEnded=true"])
+    return {
+        success: false,
+        clientFieldsErrors: null,
+        apiDataResponse: null,
+        apiMsgs: response.apiMsgs,
+        formData: payload
+    }
+
+
+
+
+    // result = {
+    //     apiResponse: response,
+    //     success: true,
+    //     clientFieldsErrors: null,
+    //     apiDataResponse: response,
+    //     apiMsgs: successMsg,
+    //     formData: payload
+    // }
+
+    // } catch (error) {
+
+    // const apiError = error as ApiError
+    // redirectToLoginIfNotAuthenticated(apiError.status, apiError.code, false)
+    // const errorMsg = setApiErrorMsg({ errResponse: apiError })
+    // result = {
+    //     apiResponse: apiError,
+    //     success: false,
+    //     clientFieldsErrors: null,
+    //     apiDataResponse: null,
+    //     apiMsgs: errorMsg,
+    //     formData: payload
+    // }
+    // }
+
+    // if (result.success) {
+    //     redirect(`/business/${businessId}/successful-appointment`)
+    //     // return result as SuccessFormState<SelectTimeClientErrors | null, SelectTimeFormData>
+    // }
+    // // redirectToLoginIfNotAuthenticated(result.apiMsgs, false)
+    // return result as ErrorFormState<SelectTimeClientErrors | null, SelectTimeFormData>
 }

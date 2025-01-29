@@ -12,27 +12,33 @@ import { Category } from "@/professional/onboarding/business-category/business-c
 
 export const getAllCategories = async () => {
 
-    try {
+    // try {
 
-        const categories = await fetchApi<ApiResponse<Category[]>>("/active-categories")
+    const categories = await fetchApi<ApiResponse<Category[]>>("/active-categories")
+    if (categories.success) {
         return categories.data
-    } catch (error) {
-        console.error('Database Error:', error);
-        throw new Error('Failed to fetch categories')
     }
+    return []
+    // } catch (error) {
+    //     console.error('Database Error:', error);
+    //     throw new Error('Failed to fetch categories')
+    // }
 }
 
 export const getAllServices = async () => {
 
-    try {
+    // try {
 
-        const response = await fetchApi<ApiResponse<ApiServicesWithCategory[]>>("/services/active-with-groups")
+    const response = await fetchApi<ApiResponse<ApiServicesWithCategory[]>>("/services/active-with-groups")
 
+    if (response.success) {
         return response.data
-
-    } catch (error) {
-        console.log("error", error)
-        throw new Error("Failed to fetch services")
     }
+    return []
+
+    // } catch (error) {
+    //     console.log("error", error)
+    //     throw new Error("Failed to fetch services")
+    // }
 }
 

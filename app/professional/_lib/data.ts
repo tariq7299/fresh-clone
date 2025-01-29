@@ -18,6 +18,7 @@ export const getBusinessStepFormData = async (stepName: string) => {
 
     const session = await getSession()
     const userId = session ? session.id : null
+
     if (!userId) {
         redirect("/login?sessionExpired=true")
     }
@@ -137,74 +138,76 @@ export const handleCreatingNewbusiness = async (): Promise<ApiResponse<BusinessO
         redirect("/login?sessionExpired=true")
     }
 
-    try {
+    // try {
 
-        const newBusiness = await prisma.business.findUnique({
-            where: {
-                userId: userId
+    const newBusiness = await prisma.business.findUnique({
+        where: {
+            userId: userId
+        },
+        select: {
+            id: true,
+            name_ar: true,
+            name_en: true,
+            description_ar: true,
+            description_en: true,
+            website_url: true,
+            capacity: true,
+            category_id: true,
+            gender_of_customers: true,
+            services: {
+                select: {
+                    service_id: true,
+                    duration: true,
+                    price: true
+                }
             },
-            select: {
-                id: true,
-                name_ar: true,
-                name_en: true,
-                description_ar: true,
-                description_en: true,
-                website_url: true,
-                capacity: true,
-                category_id: true,
-                gender_of_customers: true,
-                services: {
-                    select: {
-                        service_id: true,
-                        duration: true,
-                        price: true
-                    }
-                },
-                location: true
-            }
-        })
-
-
-
-        const formattedBusiness = {
-            ...newBusiness,
-            location: {
-                longitude: newBusiness?.location?.lng,
-                latitude: newBusiness?.location?.lat,
-                place_id: newBusiness?.location?.place_id,
-                address: newBusiness?.location?.address,
-                district: newBusiness?.location?.district,
-                city: newBusiness?.location?.city,
-                country: newBusiness?.location?.country,
-                directions: newBusiness?.location?.directions,
-                street: newBusiness?.location?.street,
-                apartment: newBusiness?.location?.apartment,
-                building: newBusiness?.location?.building,
-                // floor: newBusiness?.location?.floor,
-                online_business: newBusiness?.location?.online_business
-            },
-            gender: newBusiness?.gender_of_customers
+            location: true
         }
+    })
 
 
-        delete formattedBusiness.gender_of_customers
-        delete formattedBusiness.id
 
-        // Send request to   backend to create a business  
-
-        const successResponse = await fetchApi<ApiResponse<BusinessOnboarding>>("/businesses", {
-            method: "POST",
-            body: formattedBusiness
-        }) as ApiSucess<BusinessOnboarding>
-
-
-        return successResponse
-
-
-    } catch (errorResponse) {
-        console.error('Error creating new business:', errorResponse);
-        return errorResponse as ApiError
+    const formattedBusiness = {
+        ...newBusiness,
+        location: {
+            longitude: newBusiness?.location?.lng,
+            latitude: newBusiness?.location?.lat,
+            place_id: newBusiness?.location?.place_id,
+            address: newBusiness?.location?.address,
+            district: newBusiness?.location?.district,
+            city: newBusiness?.location?.city,
+            country: newBusiness?.location?.country,
+            directions: newBusiness?.location?.directions,
+            street: newBusiness?.location?.street,
+            apartment: newBusiness?.location?.apartment,
+            building: newBusiness?.location?.building,
+            // floor: newBusiness?.location?.floor,
+            online_business: newBusiness?.location?.online_business
+        },
+        gender: newBusiness?.gender_of_customers
     }
+
+
+    delete formattedBusiness.gender_of_customers
+    delete formattedBusiness.id
+
+    // Send request to   backend to create a business  
+
+    const response = await fetchApi<ApiResponse<BusinessOnboarding>>("/businesses", {
+        method: "POST",
+        body: formattedBusiness
+    })
+
+    if (response.success) {
+        return response
+    }
+    return response
+
+
+    // } catch (errorResponse) {
+    // console.error('Error creating new business:', errorRespo/nse);
+    // return errorResponse as ApiError
+    // }
 
 
 }
@@ -236,44 +239,43 @@ export const removeTempBusinessFormSumbissions = async (businessId: number) => {
 }
 
 export const getAppointments = async () => {
-    let result;
-    try {
-        const res = await fetchApi("/businesses/1/bookings", {
-            method: "GET"
-        })
 
-        const successMsg = setApiSuccessMsg({ successResponse: res })
+    // let result;
 
-        result = {
-            apiResponse: res,
-            success: true,
-            data: res.data.bookings,
-            msg: successMsg,
-        }
+    // try {
+    const res = await fetchApi("/businesses/1/bookings", {
+        method: "GET"
+    })
+
+    // const successMsg = setApiSuccessMsg({ successResponse: res })
 
 
-        // return appointments?.data || []
-    } catch (error) {
-        console.error('Error fetching appointments:', error);
-        const errorMsg = setApiErrorMsg({ errResponse: error })
-        result = {
-            apiResponse: error,
-            success: false,
-            data: null,
-            msg: errorMsg,
-        }
-
+    if (res.success) {
+        return res?.data?.bookings
     }
-
-    if (result.success) {
-        return result.data
-    }
-
-    console.log("result", result)
-
-    console.log("result.msg", result.msg)
-    redirectToLoginIfNotAuthenticated(result.msg, ["sessionEnded=true"])
+    redirectToLoginIfNotAuthenticated(res.apiMsgs, ["sessionEnded=true"])
     return []
+
+
+    // return appointments?.data || []
+    // } catch (error) {
+    // console.error('Error fetching appointments:', error);
+    // const errorMsg = setApiErrorMsg({ errResponse: error })
+    // result = {
+    //     apiResponse: error,
+    //     success: false,
+    //     data: null,
+    //     msg: errorMsg,
+    // }
+
+    // }
+
+    // if (result.success) {
+    //     return result.data
+    // }
+
+
+    // return []
 
 }
 

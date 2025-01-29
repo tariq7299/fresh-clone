@@ -11,6 +11,7 @@ import useLocalStorage from '@/lib/hooks/use-local-storage';
 import { useRouter } from 'next/navigation';
 import SecureLS from 'secure-ls';
 import { navigateToDashboard } from '@/(auth)/_lib/auth-client-services';
+import { redirectToLoginIfNotAuthenticated } from '@/(auth)/_lib/redirect-to-login-if-not-authenticated';
 
 export type BusinessCapacityFormData = {
     capacity?: number | string
@@ -71,14 +72,14 @@ export default function Form({ storedTempCapacity }: { storedTempCapacity: numbe
 
                     }
                 },
+                errorCallback: () => {
+                    redirectToLoginIfNotAuthenticated(formState.apiMsgs, ["sessionEnded=true"])
+                }
             })
         }
     }, [formState])
 
     return <form action={formAction} id="business-onboarding-form" className="flex flex-col gap-2 w-full">
-
-
-
 
 
         <div className="flex flex-col gap-2 ">

@@ -108,35 +108,45 @@ export const verifyOtp = async (formState: SuccessOtpFormState | ErrorOtpFormSta
     // Change the otp form string to number before sending it to the server
     const formDataPayload = { ...payload, otp: Number(payload.otp) }
     const url = payload.userRole === UserRole.Professional ? "/auth/stakeholder/verify-otp" : "/auth/user/verify-otp"
-    try {
+    // try {
 
-        const response = await fetchApi<ApiResponse<ApiResponseSessionData>>(url, {
-            method: 'POST',
-            body: formDataPayload,
-        }) as ApiSucess<ApiResponseSessionData>;
+    const response = await fetchApi<ApiResponse<ApiResponseSessionData>>(url, {
+        method: 'POST',
+        body: formDataPayload,
+    }) as ApiSucess<ApiResponseSessionData>;
 
-        const successMsg = setApiSuccessMsg({ successResponse: response })
+    if (response.success) {
+        // const successMsg = setApiSuccessMsg({ successResponse: response })
 
         sessionData = { ...response.data.user, token: response.data.token }
 
         await loginUserServerSide(sessionData)
 
+
         return {
             success: true,
             clientFieldsErrors: null,
             apiDataResponse: sessionData,
-            apiMsgs: successMsg,
+            apiMsgs: response.apiMsgs,
             formData: payload
         }
-    } catch (error) {
-        const errorMsg = setApiErrorMsg({ errResponse: error as ApiError })
-        return {
-            success: false,
-            clientFieldsErrors: null,
-            apiDataResponse: null,
-            apiMsgs: errorMsg,
-            formData: payload
-        }
+    }
+    // } catch (error) {
+    //     const errorMsg = setApiErrorMsg({ errResponse: error as ApiError })
+    //     return {
+    //         success: false,
+    //         clientFieldsErrors: null,
+    //         apiDataResponse: null,
+    //         apiMsgs: errorMsg,
+    //         formData: payload
+    //     }
+    // }
+    return {
+        success: false,
+        clientFieldsErrors: null,
+        apiDataResponse: null,
+        apiMsgs: response.apiMsgs,
+        formData: payload
     }
 
 }
@@ -166,37 +176,46 @@ export const register = async (formState: SuccessRegisterFormState | ErrorRegist
         }
     }
 
-    try {
+    // try {
 
-        const url = formState.formData.userRole === UserRole.Professional ? "/auth/stakeholder/register" : "/auth/user/register"
+    const url = formState.formData.userRole === UserRole.Professional ? "/auth/stakeholder/register" : "/auth/user/register"
 
-        // const { firstName, lastName, ...rest } = payload
-        // const formattedPayload = { ...rest, name: firstName + " " + lastName }
+    // const { firstName, lastName, ...rest } = payload
+    // const formattedPayload = { ...rest, name: firstName + " " + lastName }
 
-        const response = await fetchApi<ApiResponse<Omit<ApiResponseSessionData, "token">>>(url, {
-            method: 'POST',
-            body: payload,
-        }) as ApiSucess<Omit<ApiResponseSessionData, "token">>;
+    const response = await fetchApi<ApiResponse<Omit<ApiResponseSessionData, "token">>>(url, {
+        method: 'POST',
+        body: payload,
+    }) as ApiSucess<Omit<ApiResponseSessionData, "token">>;
 
-        const successMsg = setApiSuccessMsg({ successResponse: response })
-
+    if (response.success) {
         return {
             success: true,
             clientFieldsErrors: null,
             apiDataResponse: response.data.user,
-            apiMsgs: successMsg,
+            apiMsgs: response.apiMsgs,
             formData: payload
         }
 
-    } catch (error) {
-        const errorMsg = setApiErrorMsg({ errResponse: error as ApiError })
-        return {
-            success: false,
-            clientFieldsErrors: null,
-            apiDataResponse: null,
-            apiMsgs: errorMsg,
-            formData: payload
-        }
     }
+    return {
+        success: false,
+        clientFieldsErrors: null,
+        apiDataResponse: null,
+        apiMsgs: response.apiMsgs,
+        formData: payload
+    }
+
+    // } catch (error) {
+    //     const errorMsg = setApiErrorMsg({ errResponse: error as ApiError })
+    //     return {
+    //         success: false,
+    //         clientFieldsErrors: null,
+    //         apiDataResponse: null,
+    //         apiMsgs: errorMsg,
+    //         formData: payload
+    //     }
+    // }
+
 
 }

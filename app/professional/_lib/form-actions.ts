@@ -537,7 +537,14 @@ export const handleSubmitBusinessCapacity = async (formState: ErrorFormState<Bus
                 formData: { capacity: Number(formData.get("capacity")) || 0 }
             }
         } else {
-            throw new Error("Error submitting business capacity")
+            return {
+                success: false,
+                clientFieldsErrors: null,
+                apiDataResponse: null,
+                apiMsgs: response.apiMsgs,
+                formData: { capacity: Number(formData.get("capacity")) || 0 }
+            }
+            // throw new Error("Error submitting business capacity")
 
         }
 
@@ -548,9 +555,9 @@ export const handleSubmitBusinessCapacity = async (formState: ErrorFormState<Bus
         const errorMsg = setApiErrorMsg({ errResponse: error as ApiError })
 
         // Move this outside of the catch block
-        if (error instanceof ApiError) {
-            redirectToLoginIfNotAuthenticated(errorMsg)
-        }
+        // if (error instanceof ApiError) {
+        //     redirectToLoginIfNotAuthenticated(errorMsg)
+        // }
 
         return {
             success: false,
