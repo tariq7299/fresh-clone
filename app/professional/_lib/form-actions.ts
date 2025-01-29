@@ -3,7 +3,7 @@
 import { categories } from "@/ui/components/custom/category"
 import { z } from "zod"
 import prisma from "@/lib/prisma"
-import { createSession, getSession, updateSessionServer } from "@/(auth)/_lib/sessions"
+import { createSession, getSession } from "@/(auth)/_lib/sessions"
 import { redirect } from "next/navigation"
 import { SuccessFormState } from "@/lib/definitions/definitions"
 import { ErrorFormState } from "@/lib/definitions/definitions"
@@ -12,13 +12,11 @@ import { BusinessLocationErrors } from "../onboarding/business-location/business
 import { BusinessLocationFormData } from "../onboarding/business-location/business-location-form"
 import { BusinessCapacityFormData } from "../onboarding/business-capacity/business-capacity-form"
 import { BusinessCapacityFieldErrors } from "../onboarding/business-capacity/business-capacity-form"
-import { ApiError, ApiResponse, ApiSucess } from "@/lib/definitions/api"
-import { fetchApi } from "@/lib/utils/api/fetch-utils"
+import { ApiError } from "@/lib/definitions/api"
 import { setApiSuccessMsg } from "@/lib/utils/api/setApiSuccessMsg"
 import { setApiErrorMsg } from "@/lib/utils/api/setApiErrorMsg"
 import { handleCreatingNewbusiness, removeTempBusinessFormSumbissions } from "./data"
-import { SessionData } from "@/(auth)/_lib/definitions"
-import { redirectToLoginIfNotAuthenticated } from "@/(auth)/_lib/redirect-to-login-if-not-authenticated"
+
 const businessNameSchema = z.object({
     nameEn: z.string().trim().min(3, { message: "Business name (En) is required" }),
     nameAr: z.string().trim().min(3, { message: "Business name (Ar) is required" }),

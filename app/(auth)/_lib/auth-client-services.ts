@@ -21,7 +21,6 @@ export const logoutUserClientSide = (setSessionData: (sessionData: SessionData |
 
 export async function navigateToLogin(params: string[] = []) {
     const redirectUrl = "/login" + (params.length > 0 ? "?" + params.join("&") : "");
-    console.log("redirectUrl", redirectUrl)
     redirect("/login" + (params.length > 0 ? "?" + params.join("&") : ""), RedirectType.push)
 }
 

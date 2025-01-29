@@ -11,13 +11,31 @@ import {
     TableRow,
 } from "@/ui/components/table"
 
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuGroup,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuPortal,
+    DropdownMenuSeparator,
+    DropdownMenuShortcut,
+    DropdownMenuSub,
+    DropdownMenuSubContent,
+    DropdownMenuSubTrigger,
+    DropdownMenuTrigger,
+} from "@/ui/components/dropdown-menu"
+
 import { DataTable } from "@/ui/components/custom/data-table"
 
 import { ColumnDef } from "@tanstack/react-table"
 import { Badge } from "@/ui/components/badge"
 import { Button } from "@/ui/components/button"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/ui/components/dialog"
-import { getTotalDuration } from "@/lib/utils/utils"
+import { cn, getTotalDuration } from "@/lib/utils/utils"
+import { CreditCard, Settings, User } from "lucide-react"
+import { fetchApi } from "@/lib/utils/api/fetch-utils-client"
+import { useState } from "react"
 
 type Service = {
     service_id: number
@@ -40,7 +58,86 @@ type Appointment = {
     total_price: number
 }
 
+// Define your possible status options
+const STATUS_OPTIONS = ["completed", "cancelled"]
+
+// interface UpdateCellProps<TData> {
+//     row: Row<TData>
+//     table: Table<TData>
+// }
+
+async function updateStatusInBackend(id: string, status: string) {
+
+    try {
+        console.log("status", status)
+        // const response = await fetchApi(`/businesses/1/bookings/${id}/status?status=${status}`,
+        const response = await fetchApi(`/businesses/1/bookings/${id}/status?status=${status}`,
+            {
+                method: "POST",
+
+            }
+        )
+
+        console.log("response", response)
+
+    } catch (error) {
+    }
+}
+
+
+
+const UpdateStatusCell = <TData,>({ row, table }) => {
+    const [isUpdating, setIsUpdating] = useState(false)
+    const currentStatus = row.getValue("status") as string
+
+    const handleStatusUpdate = async (newStatus: string) => {
+        setIsUpdating(true)
+        try {
+            // Make your API call here
+            await updateStatusInBackend(row.original.id, newStatus)
+
+            // Update the table data
+            table.options.meta?.updateData(row.index, "status", newStatus)
+        } catch (error) {
+            console.error("Failed to update status:", error)
+            // Handle error (show toast, etc.)
+        } finally {
+            setIsUpdating(false)
+        }
+    }
+
+    return (
+        <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+                <Button
+                    variant="outline"
+                    disabled={isUpdating}
+                >
+                    {isUpdating ? "Updating..." : "Update Status"}
+                </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="space-y-1 ">
+                {STATUS_OPTIONS.map((status) => (
+                    <DropdownMenuItem
+                        key={status}
+                        onClick={() => handleStatusUpdate(status)}
+                        disabled={status === currentStatus}
+                        className={cn("cursor-pointer font-semibold", status === "completed" ? " " : status === "cancelled" ? " " : "")}
+                    >
+                        {status.charAt(0).toUpperCase() + status.slice(1)}
+                    </DropdownMenuItem>
+                ))}
+            </DropdownMenuContent>
+        </DropdownMenu>
+    )
+}
+
+
+
+
 export default function AppointmentsTable({ appointments }: { appointments: Appointment[] }) {
+
+    const [tableData, setTableData] = useState(appointments)
 
     const columns: ColumnDef<Appointment>[] = [
         {
@@ -68,8 +165,14 @@ export default function AppointmentsTable({ appointments }: { appointments: Appo
             header: "Status",
             cell: ({ row }) => {
                 const status = row.getValue("status") as string
-                return <Badge color={status === "pending" ? "warning" : status === "confirmed" ? "success" : "error"}>{status}</Badge>
+                return <Badge variant={status === "completed" ? "success" : status === "cancelled" ? "destructive" : "outline"}>{status}</Badge>
             }
+
+        },
+        {
+            accessorKey: "update_status",
+            header: "Update Status",
+            cell: ({ row, table }) => <UpdateStatusCell row={row} table={table} />
 
         },
         {

@@ -15,6 +15,7 @@ import {
     TableHeader,
     TableRow,
 } from "@/ui/components/table"
+import { useState } from "react"
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
@@ -25,14 +26,26 @@ export function DataTable<TData, TValue>({
     columns,
     data,
 }: DataTableProps<TData, TValue>) {
+
+    const [tableData, setTableData] = useState(data)
+
     const table = useReactTable({
-        data,
+        data: tableData,
         columns,
         getCoreRowModel: getCoreRowModel(),
+        meta: {
+            updateData: (rowIndex: number, columnId: string, value: string) => {
+                setTableData((prev) =>
+                    prev.map((row, index) =>
+                        index === rowIndex ? { ...row, [columnId]: value } : row
+                    )
+                );
+            },
+        }
     })
 
     return (
-        <div className="rounded-md border">
+        <div className="rounded-md ">
             <Table>
                 <TableHeader>
                     {table.getHeaderGroups().map((headerGroup) => (
