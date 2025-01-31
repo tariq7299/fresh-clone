@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils/utils";
 
 export default function SearchLocation2({ className, setOpen, open, handleSearch, handleSettingLocation, result, isSearching, inputPlaceholder, inputClassName, triggerIcon, popoverClassName, triggerIconWrapperClassName }: { className?: string, setOpen: (open: boolean) => void, open: boolean, handleSearch: (value: string) => void, handleSettingLocation: (place: any) => void, result: any, isSearching: boolean, inputPlaceholder: string, inputClassName: string, triggerIcon: React.ReactNode, popoverClassName: string, triggerIconWrapperClassName: string }) {
 
-    // const [value, setValue] = useState("")
+    const [value, setValue] = useState("")
 
     return <div className={cn("flex flex-col gap-2", className)}>
         <Popover open={open} onOpenChange={setOpen} data-side={"bottom"}>
@@ -23,7 +23,10 @@ export default function SearchLocation2({ className, setOpen, open, handleSearch
                         {triggerIcon}
                         {/* <MapPin className={cn("size-5 text-muted-foreground/70", iconClassName)} /> */}
                     </div>
-                    <Input onChange={(e) => handleSearch(e.target.value)} className={cn("w-full  p-6 ps-12", inputClassName)} placeholder={inputPlaceholder} />
+                    <Input value={value} onChange={(e) => {
+                        handleSearch(e.target.value)
+                        setValue(e.target.value)
+                    }} className={cn("w-full  p-6 ps-12", inputClassName)} placeholder={inputPlaceholder} />
                 </div>
             </PopoverAnchor>
 
@@ -37,6 +40,7 @@ export default function SearchLocation2({ className, setOpen, open, handleSearch
                             () => {
                                 setOpen(false)
                                 handleSettingLocation(place)
+                                setValue(place.formatted_address || "")
                             }
 
                         } className="text-md  w-full text-nowrap truncate hover:bg-muted cursor-pointer p-3  rounded-lg" key={place.formatted_address}>{place.formatted_address}</p>)}

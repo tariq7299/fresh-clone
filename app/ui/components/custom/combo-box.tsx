@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/24/outline'
+import { Check, ChevronsUpDown } from "lucide-react"
 import { cn } from "@/lib/utils/utils"
 import { Button } from "@/ui/components/custom/button";
 import {
@@ -24,7 +25,7 @@ import { ChevronsUpDownIcon } from "lucide-react";
 
 // Add types
 // export function Combobox<TFieldValues extends FieldValues, TName extends FieldPath<TFieldValues>>({ values, field, className, inputPlaceholder = "Select value...", searchPlaceholder = "Search..." }: ComboboxProps<TFieldValues, TName>) {
-export function Combobox({ triggerIconOnLeft = false, values, field, className, inputPlaceholder = "Select value...", searchPlaceholder = "Search...", triggerClassName = "", triggerIcon = <ChevronsUpDownIcon className="opacity-50" />, popoverClassName = "" }: { triggerIconOnLeft?: boolean, values: { id: number, name: string }[], field?: any, className?: string, inputPlaceholder?: string, searchPlaceholder?: string, triggerClassName?: string, triggerIcon?: React.ReactNode | null, popoverClassName?: string }) {
+export function Combobox({ triggerIconOnLeft = false, values, field, className, inputPlaceholder = "Select value...", searchPlaceholder = "Search...", triggerClassName = "", triggerIcon = <ChevronsUpDownIcon className="opacity-50" />, popoverClassName = "" }: { triggerIconOnLeft?: boolean, values: { id: number, name: string, icon: string }[], field?: any, className?: string, inputPlaceholder?: string, searchPlaceholder?: string, triggerClassName?: string, triggerIcon?: React.ReactNode | null, popoverClassName?: string }) {
 
 
     const [open, setOpen] = React.useState(false)
@@ -40,7 +41,12 @@ export function Combobox({ triggerIconOnLeft = false, values, field, className, 
 
                 >
                     {field.value && values.length > 0
-                        ? values.find((value: { id: number, name: string }) => value.id === field.value)?.name
+                        ? (
+                            <p className="font-semibold">
+                                {values.find((value: { id: number, name: string }) => value.id === field.value)?.name}
+                            </p>
+
+                        )
                         : inputPlaceholder}
                     <div className={cn("order-first", triggerIconOnLeft ? "order-first" : "")}>{triggerIcon}</div>
                 </Button>
@@ -63,7 +69,7 @@ export function Combobox({ triggerIconOnLeft = false, values, field, className, 
                                     <CommandEmpty>No value found.</CommandEmpty>
                                     <CommandGroup>
 
-                                        {values.map((value: { id: number, name: string }) => (
+                                        {values.map((value: { id: number, name: string, icon: string }) => (
                                             <CommandItem
                                                 key={value.id}
                                                 value={value.name}
@@ -72,14 +78,17 @@ export function Combobox({ triggerIconOnLeft = false, values, field, className, 
                                                     setOpen(false);
                                                 }}
                                             >
-                                                <CheckIcon
+                                                {value.icon && (<span className="size-6">{value.icon}</span>)} <span >{value.name}</span>
+                                                <Check
                                                     className={cn(
-                                                        "mr-2 h-4 w-4",
+                                                        "ml-auto size-5",
                                                         field.value === value.id ? "opacity-100" : "opacity-0"
                                                     )}
                                                 />
-                                                {value.name}
+                                                {/* {value.name} */}
                                             </CommandItem>
+
+
                                         ))}
                                     </CommandGroup>
                                 </>)}

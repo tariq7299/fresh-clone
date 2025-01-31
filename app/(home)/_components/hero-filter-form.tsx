@@ -15,8 +15,11 @@ import { useDebouncedCallback } from "use-debounce";
 import SearchLocation2 from "@/(home)/_components/search-location-2";
 
 export default function HeroFilterForm({ categories }: { categories: Category[] }) {
-
-    const formattedCategories = categories.length > 0 ? categories.map((category) => ({ id: category.id, name: category.name })) : []
+    const formattedCategories = categories.length > 0 ? categories.map((category) => ({
+        id: category.id,
+        name: category.name,
+        icon: ["💅", "💇", "👁️", "💆", "💈", "🪮", "💄"][Math.floor(Math.random() * 7)] // Random beauty-related emoji
+    })) : []
 
     const { defaultLng, defaultLat, loading, error } = useGeolocation();
     // State for controlling search results dropdown
@@ -100,6 +103,7 @@ export default function HeroFilterForm({ categories }: { categories: Category[] 
     const handleSettingLocation = (place: { formatted_address: string | undefined, geometry: { location?: { lat: () => number; lng: () => number; } | undefined } | undefined, place_id: string | undefined }) => {
         setOpen(false)
         setLocation({
+            formatted_address: place.formatted_address,
             lat: place.geometry?.location?.lat() ?? 0,
             lng: place.geometry?.location?.lng() ?? 0
         })
@@ -111,7 +115,7 @@ export default function HeroFilterForm({ categories }: { categories: Category[] 
 
 
     return (
-        <form >
+        <form>
 
             {/* Map component */}
             <MapComponent
@@ -147,6 +151,7 @@ export default function HeroFilterForm({ categories }: { categories: Category[] 
 
                 {/* Location search component */}
                 <SearchLocation2
+                    // address={location.formatted_address}
                     popoverClassName="w-[200px] sm:w-[400px] lg:w-[500px]"
                     triggerIcon={<MapPinIcon className="size-5 text-foreground" />}
                     triggerIconWrapperClassName="left-4 lg:left-0"
@@ -156,8 +161,8 @@ export default function HeroFilterForm({ categories }: { categories: Category[] 
                     handleSettingLocation={handleSettingLocation}
                     result={result}
                     isSearching={isSearching}
-                    inputPlaceholder="Search for a location..."
-                    inputClassName=" placeholder:text-foreground placeholder:text-sm sm:placeholder:text-sm md:placeholder:text-sm placeholder:font-normal focus-visible:ring-0  border-1 border-gray-200 lg:border-none px-4 py-6 ps-12 lg:p-2 lg:ps-8"
+                    inputPlaceholder="Current location"
+                    inputClassName=" placeholder:text-foreground placeholder:text-sm sm:placeholder:text-sm md:placeholder:text-sm placeholder:font-semibold focus-visible:ring-0  border-1 border-gray-200 lg:border-none px-4 py-6 ps-12 lg:p-2 lg:ps-8 font-semibold"
                 />
 
                 {/* <Combobox triggerIcon={<MapPinIcon className="size-6" />} triggerClassName={"border-0 w-full z-10 "} labelClassName={"font-semibold"} popoverClassName={"w-[200px] sm:w-[400px]"} /> */}
