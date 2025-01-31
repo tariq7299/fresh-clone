@@ -120,12 +120,12 @@ export default function HeroFilterForm({ categories }: { categories: Category[] 
                 center={location}
                 defaultZoom={15}
                 zoom={15}
-            >
+            >http://localhost:3000/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fbarber-shop-1.6ec3914b.jpg&w=3840&q=75
             </MapComponent>
 
 
             {/* Write types */}
-            <div className="flex gap-2 p-1.5 border rounded-lg justify-between mt-8 lg:mt-16 items-center bg-white  ">
+            <div className="flex gap-3 lg:gap-2 border rounded-lg justify-between mt-8 lg:mt-16 items-center bg-white flex-col lg:flex-row  p-3 lg:p-1.5">
 
                 {/* Pass in the categories */}
                 {/* Pass in the default category */}
@@ -137,18 +137,19 @@ export default function HeroFilterForm({ categories }: { categories: Category[] 
                     field={{ value: categoryId, onChange: (value: number) => setCategoryId(value) }}
                     triggerIconOnLeft={true}
                     triggerIcon={<MagnifyingGlassIcon className="size-5" />}
-                    triggerClassName={"border-0 w-full z-10 font-normal flex items-center justify-start gap-3 shadow-none hover:cursor-text hover:bg-background p-2 active:scale-100"}
+                    triggerClassName={" w-full z-10 font-normal flex items-center justify-start gap-3 shadow-none hover:cursor-text hover:bg-background px-4 py-6 lg:p-2 active:scale-100 text-sm border-1 border-gray-200 lg:border-none"}
                     popoverClassName={"w-[200px] sm:w-[400px] "} />
 
-                <div className="self-stretch h-6 my-auto">
-                    <Separator className=" me-1 my-auto" orientation="vertical" />
+                <div className="self-stretch h-6 my-auto hidden lg:block">
+                    <Separator className=" me-1 " orientation="vertical" />
                 </div>
 
 
                 {/* Location search component */}
                 <SearchLocation2
-                    popoverClassName="w-[200px] sm:w-[400px]"
+                    popoverClassName="w-[200px] sm:w-[400px] lg:w-[500px]"
                     triggerIcon={<MapPinIcon className="size-5 text-foreground" />}
+                    triggerIconWrapperClassName="left-4 lg:left-0"
                     className="grow w-full border-none"
                     setOpen={setOpen} open={open}
                     handleSearch={handleSearch}
@@ -156,14 +157,14 @@ export default function HeroFilterForm({ categories }: { categories: Category[] 
                     result={result}
                     isSearching={isSearching}
                     inputPlaceholder="Search for a location..."
-                    inputClassName="border-none placeholder:text-foreground !placeholder:text-sm md:placeholder:text-sm placeholder:font-normal focus-visible:ring-0 p-2 ps-8 "
+                    inputClassName=" placeholder:text-foreground placeholder:text-sm sm:placeholder:text-sm md:placeholder:text-sm placeholder:font-normal focus-visible:ring-0  border-1 border-gray-200 lg:border-none px-4 py-6 ps-12 lg:p-2 lg:ps-8"
                 />
 
                 {/* <Combobox triggerIcon={<MapPinIcon className="size-6" />} triggerClassName={"border-0 w-full z-10 "} labelClassName={"font-semibold"} popoverClassName={"w-[200px] sm:w-[400px]"} /> */}
 
 
 
-                <Button variant="default" className="inline-flex gap-2 items-center h-8 rounded-md px-3 2xs:h-10 2xs:px-8 font-semibold text-lg">  Search </Button>
+                <Button variant="default" className="inline-flex gap-2 items-center h-8 rounded-md px-3 2xs:h-10 2xs:px-8 text-lg w-full lg:w-auto font-bold">  Search </Button>
 
             </div>
         </form>

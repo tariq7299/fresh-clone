@@ -10,7 +10,7 @@ import {
 import { MapPin } from "lucide-react";
 import { cn } from "@/lib/utils/utils";
 
-export default function SearchLocation2({ className, setOpen, open, handleSearch, handleSettingLocation, result, isSearching, inputPlaceholder, inputClassName, triggerIcon, popoverClassName }: { className?: string, setOpen: (open: boolean) => void, open: boolean, handleSearch: (value: string) => void, handleSettingLocation: (place: any) => void, result: any, isSearching: boolean, inputPlaceholder: string, inputClassName: string, triggerIcon: React.ReactNode, popoverClassName: string }) {
+export default function SearchLocation2({ className, setOpen, open, handleSearch, handleSettingLocation, result, isSearching, inputPlaceholder, inputClassName, triggerIcon, popoverClassName, triggerIconWrapperClassName }: { className?: string, setOpen: (open: boolean) => void, open: boolean, handleSearch: (value: string) => void, handleSettingLocation: (place: any) => void, result: any, isSearching: boolean, inputPlaceholder: string, inputClassName: string, triggerIcon: React.ReactNode, popoverClassName: string, triggerIconWrapperClassName: string }) {
 
     // const [value, setValue] = useState("")
 
@@ -19,7 +19,7 @@ export default function SearchLocation2({ className, setOpen, open, handleSearch
             <PopoverAnchor>
                 {/* <p className=" font-bold pb-1">Where is your business located?</p> */}
                 <div className="relative">
-                    <div className="absolute left-0 top-1/2 -translate-y-1/2  ">
+                    <div className={cn("absolute left-4 top-1/2 -translate-y-1/2  ", triggerIconWrapperClassName)}>
                         {triggerIcon}
                         {/* <MapPin className={cn("size-5 text-muted-foreground/70", iconClassName)} /> */}
                     </div>
