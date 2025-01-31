@@ -3,7 +3,7 @@ import Link from "next/link"
 import Form from "@/business/_components/select-time-form"
 import { getAvailableSlots } from "@/business/_lib/data"
 import { getItemsFromSearchParams } from "@/business/_lib/utils"
-import { useBusinessFormContext } from "@/lib/providers/business-form-provider"
+import { useBusinessFormContext } from "@/_lib/providers/business-form-provider"
 
 export default async function TimePage(props: { searchParams: Promise<{ items: string }>, params: Promise<{ id: string }> }) {
 

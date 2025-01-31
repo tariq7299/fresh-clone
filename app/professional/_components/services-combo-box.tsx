@@ -2,8 +2,8 @@
 
 import * as React from "react"
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/24/outline'
-import { cn } from "@/lib/utils/utils"
-import { Button } from "@/ui/components/custom/button";
+import { cn } from "@/_lib/utils/utils"
+import { Button } from "@/_ui/components/custom/button";
 import {
     Command,
     CommandEmpty,
@@ -12,12 +12,12 @@ import {
     CommandItem,
     CommandList,
     CommandLoading
-} from "@/ui/components/command"
+} from "@/_ui/components/command"
 import {
     Popover,
     PopoverContent,
     PopoverTrigger,
-} from "@/ui/components/popover"
+} from "@/_ui/components/popover"
 import { Service, ApiServicesWithCategory, ApiService } from "@/professional/_lib/definitions"
 
 // import { ComboboxProps } from "@/helper/types"

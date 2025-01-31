@@ -3,8 +3,8 @@ import { getBusinessData } from "../../_lib/data";
 import Image from "next/image";
 import barberShop from "@/../public/barber-shop-2.jpg"
 import { Dot } from 'lucide-react';
-import { Button } from "@/ui/components/custom/button";
-import { Badge } from "@/ui/components/badge";
+import { Button } from "@/_ui/components/custom/button";
+import { Badge } from "@/_ui/components/badge";
 import { ServicesOverview } from "../../_components/services-overview";
 import { BusinessHours } from "../../_components/business-hours";
 import { Suspense } from "react";

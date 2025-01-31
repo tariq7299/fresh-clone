@@ -1,11 +1,11 @@
 
-import NavBar from "../ui/components/custom/nav-bar";
-import { Button } from "../ui/components/custom/button";
+import NavBar from "../_ui/components/custom/nav-bar";
+import { Button } from "../_ui/components/custom/button";
 import HeroSection from "./_components/hero-section";
-import ShopsCarousel from "../ui/components/custom/shops-carousel";
+import ShopsCarousel from "../_ui/components/custom/shops-carousel";
 import FeaturesSection from "./_components/features-section";
 import ChangingAvatar from "./_components/changing-avatar";
-import { Badge } from "@/ui/components/badge";
+import { Badge } from "@/_ui/components/badge";
 import Image from "next/image";
 import appleLogo from "@/../public/apple-logo.svg.png";
 import googleLogo from "@/../public/google-logo.png";
@@ -16,7 +16,7 @@ import TrendingBusinesses from "./_components/trending-businesses";
 import { ShopsCarouselSkeleton } from "./_components/skeletons";
 import { Suspense } from "react";
 import { NavBarSkeleton } from "./_components/skeletons";
-import Footer from "../ui/components/custom/footer";
+import Footer from "../_ui/components/custom/footer";
 
 export default function Home() {
   return (

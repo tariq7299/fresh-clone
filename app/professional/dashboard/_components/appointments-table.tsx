@@ -9,7 +9,7 @@ import {
     TableHead,
     TableHeader,
     TableRow,
-} from "@/ui/components/table"
+} from "@/_ui/components/table"
 
 import {
     DropdownMenu,
@@ -24,17 +24,17 @@ import {
     DropdownMenuSubContent,
     DropdownMenuSubTrigger,
     DropdownMenuTrigger,
-} from "@/ui/components/dropdown-menu"
+} from "@/_ui/components/dropdown-menu"
 
-import { DataTable } from "@/ui/components/custom/data-table"
+import { DataTable } from "@/_ui/components/custom/data-table"
 
 import { ColumnDef } from "@tanstack/react-table"
-import { Badge } from "@/ui/components/badge"
-import { Button } from "@/ui/components/button"
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/ui/components/dialog"
-import { cn, getTotalDuration } from "@/lib/utils/utils"
+import { Badge } from "@/_ui/components/badge"
+import { Button } from "@/_ui/components/button"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/_ui/components/dialog"
+import { cn, getTotalDuration } from "@/_lib/utils/utils"
 import { CreditCard, Settings, User } from "lucide-react"
-import { fetchApi } from "@/lib/utils/api/fetch-utils-client"
+import { fetchApi } from "@/_lib/utils/api/fetch-utils-client"
 import { useState } from "react"
 
 type Service = {

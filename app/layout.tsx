@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Source_Sans_3, Libre_Bodoni, Lora, Quicksand } from "next/font/google";
-import "./ui/globals.css";
-import SonnerToaster from "@/ui/ToasterSonner"
+import "./_ui/globals.css";
+import SonnerToaster from "@/_ui/ToasterSonner"
 
 // This is the provider for the nextui library
 // I am using this lib to be able to use the "date-input" component from the nextui library

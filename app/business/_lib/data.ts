@@ -1,5 +1,5 @@
-import { fetchApi } from "@/lib/utils/api/fetch-utils"
-import { ApiResponse } from "@/lib/definitions/api"
+import { fetchApi } from "@/_lib/utils/api/fetch-utils"
+import { ApiResponse } from "@/_lib/definitions/api"
 import { Slot } from "@/business/_lib/definitions"
 
 export const getBusinessData = async (id: string) => {

@@ -1,4 +1,4 @@
-import { Skeleton } from "@/ui/components/skeleton";
+import { Skeleton } from "@/_ui/components/skeleton";
 
 export default function LoadingBooking() {
     return <>

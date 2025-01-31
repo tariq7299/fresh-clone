@@ -1,6 +1,6 @@
 "use client"
 import { usePathname } from "next/navigation"
-import Steps from "../../ui/components/custom/steps"
+import Steps from "../../_ui/components/custom/steps"
 
 const ONBOARDING_STEPS = [
     {

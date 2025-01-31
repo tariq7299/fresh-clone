@@ -1,4 +1,4 @@
-import ShopsCarousel from "@/ui/components/custom/shops-carousel"
+import ShopsCarousel from "@/_ui/components/custom/shops-carousel"
 import { getRecommendedBusinesses } from "../_lib/data"
 
 export async function RecommendedBusinesses() {

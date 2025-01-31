@@ -1,6 +1,6 @@
 import { NotepadText } from "lucide-react";
 
-import { SidebarMenuButton } from "@/ui/components/sidebar"
+import { SidebarMenuButton } from "@/_ui/components/sidebar"
 import { Link } from "lucide-react"
 
 export function SidebarLink({ href, title, icon }: { href: string, title: string, icon: React.ReactNode }) {

@@ -4,7 +4,7 @@ import {
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
-} from "@/ui/components/sidebar"
+} from "@/_ui/components/sidebar"
 
 import { Link } from "lucide-react"
 

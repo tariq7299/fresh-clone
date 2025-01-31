@@ -1,5 +1,5 @@
 import { div } from "framer-motion/client";
-import { Skeleton } from "../../ui/components/skeleton"
+import { Skeleton } from "../../_ui/components/skeleton"
 
 export function ShopsCarouselSkeleton() {
     const fields = Array(5).fill(null);

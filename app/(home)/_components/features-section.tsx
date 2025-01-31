@@ -1,4 +1,4 @@
-import { Separator } from '@/ui/components/separator';
+import { Separator } from '@/_ui/components/separator';
 import { Award, HandPlatter, CalendarCheck2, ShieldCheck, Sparkles, Star } from 'lucide-react';
 
 export default function FeaturesSection() {

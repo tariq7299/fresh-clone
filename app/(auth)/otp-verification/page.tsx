@@ -1,5 +1,5 @@
 import OtpForm from "../_components/otp-form"
-import { Alert, AlertDescription, AlertTitle } from "@/ui/components/alert";
+import { Alert, AlertDescription, AlertTitle } from "@/_ui/components/alert";
 import { AlertCircle } from "lucide-react"
 import { UserRole } from "../_lib/definitions";
 

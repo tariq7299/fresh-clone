@@ -1,6 +1,6 @@
-import { ScrollBar } from "@/ui/components/scroll-area";
-import { ScrollArea } from "@/ui/components/scroll-area";
-import { Skeleton } from "@/ui/components/skeleton";
+import { ScrollBar } from "@/_ui/components/scroll-area";
+import { ScrollArea } from "@/_ui/components/scroll-area";
+import { Skeleton } from "@/_ui/components/skeleton";
 
 export function AddServiceCardSkeleton() {
     return <div className="w-full md:border border-gray-200 md:rounded-lg md:p-4">

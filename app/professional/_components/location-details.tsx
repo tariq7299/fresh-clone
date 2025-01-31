@@ -1,7 +1,7 @@
 "use client"
 
-import { cn } from "@/lib/utils/utils";
-import { Button } from "@/ui/components/custom/button"
+import { cn } from "@/_lib/utils/utils";
+import { Button } from "@/_ui/components/custom/button"
 import {
     Dialog,
     DialogContent,
@@ -10,10 +10,10 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
-} from "@/ui/components/dialog"
-import { Input } from "@/ui/components/input"
-import { Label } from "@/ui/components/label"
-import { Textarea } from "@/ui/components/textarea";
+} from "@/_ui/components/dialog"
+import { Input } from "@/_ui/components/input"
+import { Label } from "@/_ui/components/label"
+import { Textarea } from "@/_ui/components/textarea";
 import { useEffect, useState } from "react"
 import { BusinessLocationErrors } from "../onboarding/business-location/business-location-form"
 import { z } from "zod"

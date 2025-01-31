@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { FormState, SuccessFormState, ErrorFormState } from '@/lib/definitions/definitions'
+import { FormState, SuccessFormState, ErrorFormState } from '@/_lib/definitions/definitions'
 
 export const LoginFormSchema = z.object({
     email: z

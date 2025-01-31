@@ -4,16 +4,16 @@ import {
     InputOTPGroup,
     InputOTPSlot,
     InputOTPSeparator
-} from "@/ui/components/input-otp"
-import { Button } from "@/ui/components/custom/button"
+} from "@/_ui/components/input-otp"
+import { Button } from "@/_ui/components/custom/button"
 import { SuccessOtpFormState, ErrorOtpFormState, SessionData, UserRole } from "../_lib/definitions"
 import { useActionState, useEffect } from "react"
 import { verifyOtp } from "../_lib/form-actions"
-import { handleFormResponse } from "@/lib/utils/utils"
+import { handleFormResponse } from "@/_lib/utils/utils"
 import { loginUserClientSide, navigateToDashboard } from "../_lib/auth-client-services"
 import { useRouter } from "next/navigation"
-import useLocalStorage from "@/lib/hooks/use-local-storage";
-import { toastApiMsgs } from "@/lib/utils/api/toastApiMsgs"
+import useLocalStorage from "@/_lib/hooks/use-local-storage";
+import { toastApiMsgs } from "@/_lib/utils/api/toastApiMsgs"
 
 export default function OtpForm({ email = "", userRole, loginRequiredForBooking = false }: { email: string, userRole: UserRole.Professional | UserRole.Customer, loginRequiredForBooking?: boolean }) {
 

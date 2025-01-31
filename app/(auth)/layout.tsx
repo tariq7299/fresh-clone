@@ -2,8 +2,8 @@
 import { GlobeAsiaAustraliaIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import barberShop from "@/../public/barber-shop-4.jpg";
-import { cn } from "@/lib/utils/utils";
-import BackButton from "@/ui/components/custom/back-button";
+import { cn } from "@/_lib/utils/utils";
+import BackButton from "@/_ui/components/custom/back-button";
 import Link from "next/link";
 import React from "react";
 

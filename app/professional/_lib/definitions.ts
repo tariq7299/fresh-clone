@@ -1,4 +1,4 @@
-import { Nullable } from "@/lib/utils/utils";
+import { Nullable } from "@/_lib/utils/utils";
 import { Appointment as CustomerAppointment } from "@/customer/_lib/definitions";
 
 // Coming from api like that (before mapping and changing its keys)

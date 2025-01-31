@@ -1,4 +1,4 @@
-import { Button } from "@/ui/components/custom/button"
+import { Button } from "@/_ui/components/custom/button"
 import {
     Dialog,
     DialogContent,
@@ -7,13 +7,13 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
-} from "@/ui/components/dialog"
-import { Input } from "@/ui/components/input"
-import { Label } from "@/ui/components/label"
+} from "@/_ui/components/dialog"
+import { Input } from "@/_ui/components/input"
+import { Label } from "@/_ui/components/label"
 import { Service } from "@/professional/_lib/definitions"
 import { useState } from "react"
 import { z } from "zod"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, SelectGroup, SelectLabel } from '@/ui/components/select';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, SelectGroup, SelectLabel } from '@/_ui/components/select';
 
 const editServiceSchema = z.object({
     servicePrice: z.number().gte(1, { message: "Enter a valid price" }),

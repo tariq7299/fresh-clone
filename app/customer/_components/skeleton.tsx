@@ -1,8 +1,8 @@
-import { SidebarMenuSkeleton } from "@/ui/components/sidebar";
+import { SidebarMenuSkeleton } from "@/_ui/components/sidebar";
 
-import { SidebarMenuItem } from "@/ui/components/sidebar";
+import { SidebarMenuItem } from "@/_ui/components/sidebar";
 
-import { SidebarMenu } from "@/ui/components/sidebar";
+import { SidebarMenu } from "@/_ui/components/sidebar";
 
 export function SidebarSkeleton() {
     return (

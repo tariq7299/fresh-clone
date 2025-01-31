@@ -1,20 +1,20 @@
 "use client"
 
-import { Button } from "@/ui/components/custom/button";
-import { Label } from "@/ui/components/label";
-import { Input } from "@/ui/components/input";
+import { Button } from "@/_ui/components/custom/button";
+import { Label } from "@/_ui/components/label";
+import { Input } from "@/_ui/components/input";
 import Link from "next/link";
 import { useActionState, useEffect } from 'react'
 import { endUserSession } from "@/(auth)/_lib/auth-client-services";
 import { loginUserClientSide, navigateToDashboard } from "@/(auth)/_lib/auth-client-services";
 import { SuccessLoginFormState, ErrorLoginFormState, SessionData, UserRole } from "../_lib/definitions";
 import { useSearchParams } from 'next/navigation'
-import { Alert, AlertDescription, AlertTitle } from "@/ui/components/alert";
+import { Alert, AlertDescription, AlertTitle } from "@/_ui/components/alert";
 import { AlertCircle } from "lucide-react"
-import useLocalStorage from "@/lib/hooks/use-local-storage";
+import useLocalStorage from "@/_lib/hooks/use-local-storage";
 import { useRouter, usePathname } from 'next/navigation'
-import { handleFormResponse } from "@/lib/utils/utils";
-import { PasswordInput } from "@/ui/components/custom/password-input";
+import { handleFormResponse } from "@/_lib/utils/utils";
+import { PasswordInput } from "@/_ui/components/custom/password-input";
 import { login } from "../_lib/form-actions";
 // Constants
 const INITIAL_STATE: SuccessLoginFormState | ErrorLoginFormState = {

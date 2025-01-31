@@ -1,18 +1,18 @@
 "use client"
 
-import { Label } from "@/ui/components/label";
-import { Input } from "@/ui/components/input";
-import { Button } from "@/ui/components/custom/button";
+import { Label } from "@/_ui/components/label";
+import { Input } from "@/_ui/components/input";
+import { Button } from "@/_ui/components/custom/button";
 import Link from "next/link";
 import { SuccessRegisterFormState, ErrorRegisterFormState, SessionData, UserRole } from "../_lib/definitions";
 import { useActionState, useEffect } from "react";
 import { register } from "../_lib/form-actions";
-import { handleFormResponse } from "@/lib/utils/utils";
+import { handleFormResponse } from "@/_lib/utils/utils";
 import { navigateToDashboard, navigateToOtp } from "../_lib/auth-client-services";
-import useLocalStorage from "@/lib/hooks/use-local-storage";
+import useLocalStorage from "@/_lib/hooks/use-local-storage";
 import { logoutUserServerSide } from "../_lib/auth-server-services";
 import { logoutUserClientSide } from "../_lib/auth-client-services";
-import { PhoneInput } from "@/ui/components/custom/phone-input";
+import { PhoneInput } from "@/_ui/components/custom/phone-input";
 
 
 export default function RegisterForm({ userRole, loginRequiredForBooking = false }: { userRole: string, loginRequiredForBooking?: boolean }) {

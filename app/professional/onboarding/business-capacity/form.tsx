@@ -1,13 +1,13 @@
 "use client"
 
 import { useActionState, useEffect, useState } from 'react';
-import { useBusinessFormContext } from '../../../lib/providers/business-form-provider';
-import { ErrorFormState } from '@/lib/definitions/definitions';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, SelectGroup, SelectLabel } from '@/ui/components/select';
+import { useBusinessFormContext } from '../../../_lib/providers/business-form-provider';
+import { ErrorFormState } from '@/_lib/definitions/definitions';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, SelectGroup, SelectLabel } from '@/_ui/components/select';
 import { handleSubmitBusinessCapacity } from '@/professional/_lib/form-actions';
-import { handleFormResponse } from '@/lib/utils/utils';
+import { handleFormResponse } from '@/_lib/utils/utils';
 import { SessionData } from '@/(auth)/_lib/definitions';
-import useLocalStorage from '@/lib/hooks/use-local-storage';
+import useLocalStorage from '@/_lib/hooks/use-local-storage';
 import { useRouter } from 'next/navigation';
 import SecureLS from 'secure-ls';
 import { navigateToDashboard } from '@/(auth)/_lib/auth-client-services';

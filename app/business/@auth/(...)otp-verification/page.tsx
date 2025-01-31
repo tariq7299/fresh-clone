@@ -1,9 +1,9 @@
 "use client"
 
 import RegisterForm from "@/(auth)/_components/register-form";
-import { Alert, AlertDescription, AlertTitle } from "@/ui/components/alert";
-import { Button } from "@/ui/components/button";
-import { Dialog, DialogFooter, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/ui/components/dialog";
+import { Alert, AlertDescription, AlertTitle } from "@/_ui/components/alert";
+import { Button } from "@/_ui/components/button";
+import { Dialog, DialogFooter, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/_ui/components/dialog";
 import { AlertCircle } from "lucide-react";
 import { UserRole } from "@/(auth)/_lib/definitions";
 import OtpForm from "@/(auth)/_components/otp-form";

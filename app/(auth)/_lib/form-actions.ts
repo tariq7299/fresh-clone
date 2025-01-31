@@ -1,13 +1,13 @@
 "use server"
 
-import { setApiSuccessMsg } from '@/lib/utils/api/setApiSuccessMsg';
-import { setApiErrorMsg } from '@/lib/utils/api/setApiErrorMsg';
+import { setApiSuccessMsg } from '@/_lib/utils/api/setApiSuccessMsg';
+import { setApiErrorMsg } from '@/_lib/utils/api/setApiErrorMsg';
 import { redirectToOtpIfNotVerified } from "./redirect-otp-if-not-verified";
 import { loginUserServerSide, authenticateUser } from "./auth-server-services";
-import { ApiError, ApiSucess } from "@/lib/definitions/api";
+import { ApiError, ApiSucess } from "@/_lib/definitions/api";
 import { SessionData, LoginFormSchema, SuccessLoginFormState, ErrorLoginFormState, OtpFormSchema, SuccessOtpFormState, ErrorOtpFormState, UserRole } from "./definitions";
-import { fetchApi } from "@/lib/utils/api/fetch-utils";
-import { ApiResponse } from "@/lib/definitions/api";
+import { fetchApi } from "@/_lib/utils/api/fetch-utils";
+import { ApiResponse } from "@/_lib/definitions/api";
 import { ApiResponseSessionData } from "./definitions";
 import { RegisterFormSchema, SuccessRegisterFormState, ErrorRegisterFormState } from "./definitions";
 

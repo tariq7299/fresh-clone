@@ -1,4 +1,4 @@
-import { fetchApi } from "@/lib/utils/api/fetch-utils";
+import { fetchApi } from "@/_lib/utils/api/fetch-utils";
 
 export const getAppointments = async () => {
 

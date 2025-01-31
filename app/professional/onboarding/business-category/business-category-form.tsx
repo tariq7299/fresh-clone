@@ -1,5 +1,5 @@
 
-import { getAllCategories } from "@/lib/data";
+import { getAllCategories } from "@/_lib/data";
 import { getBusinessStepFormData } from "@/professional/_lib/data";
 import Form from "./form";
 

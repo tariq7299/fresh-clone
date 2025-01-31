@@ -1,9 +1,9 @@
 "use client";
 
-import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/ui/components/dialog";
+import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/_ui/components/dialog";
 import { useRouter } from "next/navigation";
 import LoginForm from "@/(auth)/_components/login-form";
-import { Button } from "@/ui/components/button";
+import { Button } from "@/_ui/components/button";
 import Link from "next/link";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import { usePathname, useSearchParams } from "next/navigation";

@@ -1,9 +1,9 @@
 "use client";
 
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/ui/components/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/_ui/components/dialog";
 import { useRouter } from "next/navigation";
 import LoginForm from "@/(auth)/_components/login-form";
-import { Button } from "@/ui/components/button";
+import { Button } from "@/_ui/components/button";
 
 export default function LoginPage() {
     const router = useRouter();

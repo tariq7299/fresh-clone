@@ -1,9 +1,9 @@
 'use client'
-import { Combobox } from "@/ui/components/combo-box";
-import { Separator } from "@/ui/components/separator";
-import { Button } from "@/ui/components/custom/button";
+import { Combobox } from "@/_ui/components/combo-box";
+import { Separator } from "@/_ui/components/separator";
+import { Button } from "@/_ui/components/custom/button";
 import { MagnifyingGlassIcon, MapPinIcon } from '@heroicons/react/24/outline'
-import { useGeolocation } from "@/lib/hooks/use-geo-location";
+import { useGeolocation } from "@/_lib/hooks/use-geo-location";
 
 
 export default function HeroFilterField() {

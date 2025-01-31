@@ -1,7 +1,7 @@
 "use client";
 import Link from 'next/link';
 import { FaceFrownIcon } from '@heroicons/react/24/outline';
-import { Button } from '@/ui/components/custom/button';
+import { Button } from '@/_ui/components/custom/button';
 import { RefreshCcw, Undo2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 

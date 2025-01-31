@@ -1,11 +1,11 @@
 
 "use client"
 
-import CategoryCard from "@/ui/components/custom/business-category-card";
+import CategoryCard from "@/_ui/components/custom/business-category-card";
 import { useActionState, useEffect } from "react";
-import { useBusinessFormContext } from "../../../lib/providers/business-form-provider";
+import { useBusinessFormContext } from "../../../_lib/providers/business-form-provider";
 import { BusinessCategoryFormData, handleSubmitBusinessCategory } from "../../_lib/form-actions";
-import { ErrorFormState } from "@/lib/definitions/definitions";
+import { ErrorFormState } from "@/_lib/definitions/definitions";
 
 
 export type Category = {

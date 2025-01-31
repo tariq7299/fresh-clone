@@ -1,10 +1,10 @@
 "use client"
 
-import { Button } from "@/ui/components/button"
+import { Button } from "@/_ui/components/button"
 import { logoutUserClientSide, navigateToLogin } from "@/(auth)/_lib/auth-client-services"
 import { logoutUserServerSide } from "@/(auth)/_lib/auth-server-services"
 import { SessionData } from "@/(auth)/_lib/definitions"
-import useLocalStorage from "@/lib/hooks/use-local-storage"
+import useLocalStorage from "@/_lib/hooks/use-local-storage"
 
 export default function AdminDashboard() {
     const [_, setSessionData] = useLocalStorage<SessionData | null>({ key: "user", defaultValue: null })

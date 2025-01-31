@@ -1,11 +1,11 @@
 "use server"
 
-import { ApiResponse } from "@/lib/definitions/api";
+import { ApiResponse } from "@/_lib/definitions/api";
 import { ApiResponseSessionData, SessionData } from "./definitions";
-import { fetchApi } from "@/lib/utils/api/fetch-utils";
+import { fetchApi } from "@/_lib/utils/api/fetch-utils";
 import { createSession, deleteSession, getSession } from '@/(auth)/_lib/sessions';
 import { redirect } from 'next/navigation'
-import { ApiError } from "@/lib/definitions/api";
+import { ApiError } from "@/_lib/definitions/api";
 
 export const authenticateUser = async (formData: FormData): Promise<ApiResponse<ApiResponseSessionData>> => {
     // try {

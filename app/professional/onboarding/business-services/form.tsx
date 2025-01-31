@@ -1,15 +1,15 @@
 "use client"
 
 import { useActionState, useEffect, useState } from 'react';
-import { Button } from '@/ui/components/custom/button';
+import { Button } from '@/_ui/components/custom/button';
 import { Plus, EllipsisVertical } from 'lucide-react';
 import { ServicesComboBox } from '@/professional/_components/services-combo-box';
 import { handleSubmitBusinessServices } from '@/professional/_lib/form-actions';
-import { useBusinessFormContext } from '../../../lib/providers/business-form-provider';
-import { cn } from '@/lib/utils/utils';
-import ServiceCard from '@/ui/components/custom/service-card';
+import { useBusinessFormContext } from '../../../_lib/providers/business-form-provider';
+import { cn } from '@/_lib/utils/utils';
+import ServiceCard from '@/_ui/components/custom/service-card';
 import { ApiService, ApiServicesWithCategory, Service, StoredService } from '@/professional/_lib/definitions';
-import { ErrorFormState } from '@/lib/definitions/definitions';
+import { ErrorFormState } from '@/_lib/definitions/definitions';
 
 /**
  * Gets the initial list of services to display in the form

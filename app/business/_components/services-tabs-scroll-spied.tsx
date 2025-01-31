@@ -4,7 +4,7 @@ import { createRef } from "react";
 
 import { useRef } from "react";
 
-import { cn } from "@/lib/utils/utils";
+import { cn } from "@/_lib/utils/utils";
 import { RefObject } from "react";
 import ScrollSpy from "react-scrollspy-navigation";
 

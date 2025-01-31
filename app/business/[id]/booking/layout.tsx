@@ -1,7 +1,7 @@
 
-import BusinessFormProvider from "@/lib/providers/business-form-provider";
-import BackButton from "@/ui/components/custom/back-button";
-import ExitStepsButton from "@/ui/components/custom/exit-steps-button";
+import BusinessFormProvider from "@/_lib/providers/business-form-provider";
+import BackButton from "@/_ui/components/custom/back-button";
+import ExitStepsButton from "@/_ui/components/custom/exit-steps-button";
 import { Suspense } from "react";
 
 export default async function BookingLayout({ children, desktopCart, mobileCart, params }: { children: React.ReactNode, desktopCart: React.ReactNode, mobileCart: React.ReactNode, params: Promise<{ id: string }> }) {

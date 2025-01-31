@@ -1,14 +1,14 @@
 "use client"
-import { Label } from '@/ui/components/label';
-import { Input } from '@/ui/components/input';
-import { Textarea } from '@/ui/components/textarea';
+import { Label } from '@/_ui/components/label';
+import { Input } from '@/_ui/components/input';
+import { Textarea } from '@/_ui/components/textarea';
 import { useActionState } from 'react';
 import { handleSubmitBusinessName, BusinessNameFormData, BusinessNameFieldErrors } from '@/professional/_lib/form-actions';
 import { useEffect, useState } from 'react';
-import { useBusinessFormContext } from '../../../lib/providers/business-form-provider';
-import { ErrorFormState } from '@/lib/definitions/definitions';
+import { useBusinessFormContext } from '../../../_lib/providers/business-form-provider';
+import { ErrorFormState } from '@/_lib/definitions/definitions';
 import { GenderOfCustomers, StoredTempBusinessInfo } from '../../_lib/definitions';
-import CategoryCard from '@/ui/components/custom/business-category-card';
+import CategoryCard from '@/_ui/components/custom/business-category-card';
 
 export default function Form({ storedTempBusinessInfo }: { storedTempBusinessInfo: StoredTempBusinessInfo | null }) {
 

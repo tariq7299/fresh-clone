@@ -1,18 +1,19 @@
 'use client'
 
-import { Combobox } from "@/ui/components/custom/combo-box";
-import { Separator } from "@/ui/components/separator";
-import { Button } from "@/ui/components/custom/button";
+import { Combobox } from "@/_ui/components/custom/combo-box";
+import { Separator } from "@/_ui/components/separator";
+import { Button } from "@/_ui/components/custom/button";
 import { MagnifyingGlassIcon, MapPinIcon } from '@heroicons/react/24/outline'
 import { MapPin } from 'lucide-react';
 
-import { useGeolocation } from "@/lib/hooks/use-geo-location";
+import { useGeolocation } from "@/_lib/hooks/use-geo-location";
 import { Category } from "@/business/_lib/definitions";
 import { useEffect, useState } from "react";
 import SearchLocation from "@/professional/_components/search-location";
 import { Map as MapComponent, Marker, MapCameraChangedEvent, useMapsLibrary, useMap } from "@vis.gl/react-google-maps";
 import { useDebouncedCallback } from "use-debounce";
 import SearchLocation2 from "@/(home)/_components/search-location-2";
+import { handleHeroFilterSearch } from "../_lib/form-actions";
 
 export default function HeroFilterForm({ categories }: { categories: Category[] }) {
     const formattedCategories = categories.length > 0 ? categories.map((category) => ({
@@ -113,9 +114,18 @@ export default function HeroFilterForm({ categories }: { categories: Category[] 
 
     const [categoryId, setCategoryId] = useState<number>(0)
 
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        handleHeroFilterSearch({
+            longitude: location.lng,
+            latitude: location.lat,
+            categoryId: categoryId
+        })
+    }
+
 
     return (
-        <form>
+        <form onSubmit={handleSubmit}>
 
             {/* Map component */}
             <MapComponent
@@ -136,12 +146,12 @@ export default function HeroFilterForm({ categories }: { categories: Category[] 
                 {/* Make the search field a combobox */}
 
                 <Combobox
-                    inputPlaceholder="Search for a category..."
+                    inputPlaceholder="All categories"
                     values={formattedCategories}
                     field={{ value: categoryId, onChange: (value: number) => setCategoryId(value) }}
                     triggerIconOnLeft={true}
                     triggerIcon={<MagnifyingGlassIcon className="size-5" />}
-                    triggerClassName={" w-full z-10 font-normal flex items-center justify-start gap-3 shadow-none hover:cursor-text hover:bg-background px-4 py-6 lg:p-2 active:scale-100 text-sm border-1 border-gray-200 lg:border-none"}
+                    triggerClassName={" w-full z-10 font-normal flex items-center justify-start gap-3 shadow-none hover:cursor-text hover:bg-background px-4 py-6 lg:p-2 active:scale-100 text-sm border-1 border-gray-200 lg:border-none font-semibold"}
                     popoverClassName={"w-[200px] sm:w-[400px] "} />
 
                 <div className="self-stretch h-6 my-auto hidden lg:block">

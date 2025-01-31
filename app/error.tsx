@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { TriangleAlert, RefreshCcw, Undo2 } from 'lucide-react';
-import { Button } from '@/ui/components/custom/button';
+import { Button } from '@/_ui/components/custom/button';
 import { useRouter } from 'next/navigation';
 export default function Error({
     error,

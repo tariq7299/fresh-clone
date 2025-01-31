@@ -1,6 +1,6 @@
 import { NavBarSkeleton } from "@/(home)/_components/skeletons";
-import Footer from "@/ui/components/custom/footer";
-import NavBar from "@/ui/components/custom/nav-bar";
+import Footer from "@/_ui/components/custom/footer";
+import NavBar from "@/_ui/components/custom/nav-bar";
 import { Suspense } from "react";
 
 export default function BusinessLayout({ children }: { children: React.ReactNode }) {

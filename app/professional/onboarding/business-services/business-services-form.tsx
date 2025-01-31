@@ -1,6 +1,6 @@
 import { getBusinessStepFormData } from '@/professional/_lib/data';
 import Form from './form';
-import { getAllServices } from '@/lib/data';
+import { getAllServices } from '@/_lib/data';
 import { StoredService } from '@/professional/_lib/definitions';
 
 

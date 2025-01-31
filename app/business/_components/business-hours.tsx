@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils/utils"
+import { cn } from "@/_lib/utils/utils"
 import { BusinessHour } from "@/business/[id]/(business-details)/page"
 export const BusinessHours = ({ business_hours, className }: { business_hours: BusinessHour[], className?: string }) => {
     return <div className={cn("", className)}>

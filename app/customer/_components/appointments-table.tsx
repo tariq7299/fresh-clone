@@ -9,15 +9,15 @@ import {
     TableHead,
     TableHeader,
     TableRow,
-} from "@/ui/components/table"
+} from "@/_ui/components/table"
 
-import { DataTable } from "@/ui/components/custom/data-table"
+import { DataTable } from "@/_ui/components/custom/data-table"
 
 import { ColumnDef } from "@tanstack/react-table"
-import { Badge } from "@/ui/components/badge"
-import { Button } from "@/ui/components/button"
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/ui/components/dialog"
-import { getTotalDuration } from "@/lib/utils/utils"
+import { Badge } from "@/_ui/components/badge"
+import { Button } from "@/_ui/components/button"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/_ui/components/dialog"
+import { getTotalDuration } from "@/_lib/utils/utils"
 import { Appointment, Service } from "../_lib/definitions"
 
 export default function AppointmentsTable({ appointments }: { appointments: Appointment[] }) {

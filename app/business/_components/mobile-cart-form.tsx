@@ -2,8 +2,8 @@
 
 import useBookingCart from "../_lib/hooks/use-booking-cart";
 import { ApiServicesWithCategory } from "@/professional/_lib/definitions";
-import { Button } from "@/ui/components/custom/button";
-import { useBusinessFormContext } from "@/lib/providers/business-form-provider";
+import { Button } from "@/_ui/components/custom/button";
+import { useBusinessFormContext } from "@/_lib/providers/business-form-provider";
 import { MobileCartSkeleton } from "./skeletons";
 
 export default function MobileCartForm({ servicesWithCategories }: { servicesWithCategories: ApiServicesWithCategory[] }) {

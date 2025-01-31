@@ -31,7 +31,14 @@ export default function HeroSection() {
 
                 {/* <HeroFilterField /> */}
 
-                <Suspense fallback={<div>Loading...</div>}>
+                <Suspense fallback={
+                    <div className="flex gap-3 lg:gap-2 border rounded-lg justify-between mt-8 lg:mt-16 items-center bg-white flex-col lg:flex-row p-3 lg:p-1.5">
+                        <div className="w-full lg:w-1/3 h-12 bg-gray-200 animate-pulse rounded-md"></div>
+                        <div className="hidden lg:block h-6 w-px bg-gray-200"></div>
+                        <div className="w-full lg:w-1/2 h-12 bg-gray-200 animate-pulse rounded-md"></div>
+                        <div className="w-full lg:w-auto h-12 bg-gray-200 animate-pulse rounded-md px-8"></div>
+                    </div>
+                }>
                     <HeroFilter />
                 </Suspense>
 

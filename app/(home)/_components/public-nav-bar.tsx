@@ -9,11 +9,11 @@ import {
     DropdownMenuLabel,
     DropdownMenuSeparator,
     DropdownMenuTrigger,
-} from "@/ui/components/dropdown-menu"
-import MobileNavMenu from '@/ui/components/custom/mobile-nav-menu'
-import { cn } from '@/lib/utils/utils'
+} from "@/_ui/components/dropdown-menu"
+import MobileNavMenu from '@/_ui/components/custom/mobile-nav-menu'
+import { cn } from '@/_lib/utils/utils'
 import { useEffect, useState } from 'react'
-import { Button } from '@/ui/components/custom/button'
+import { Button } from '@/_ui/components/custom/button'
 import Link from 'next/link'
 import { GlobeAsiaAustraliaIcon } from "@heroicons/react/24/outline";
 import useIsScrolled from '../_lib/hooks/use-is-scrolled'

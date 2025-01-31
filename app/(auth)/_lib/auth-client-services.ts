@@ -1,7 +1,7 @@
 import { SessionData, UserRole } from "./definitions";
 import SecureLS from "secure-ls";
 import { redirect, RedirectType } from 'next/navigation'
-import { toastApiMsgs } from "@/lib/utils/api/toastApiMsgs";
+import { toastApiMsgs } from "@/_lib/utils/api/toastApiMsgs";
 import { logoutUserServerSide, navigateToLoginWithSessionEnded } from "./auth-server-services";
 
 // This is the client side login function

@@ -1,8 +1,8 @@
 "use client"
 
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/ui/components/tabs";
-import { ScrollArea, ScrollBar } from "@/ui/components/scroll-area"
-import { Button } from "@/ui/components/custom/button";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/_ui/components/tabs";
+import { ScrollArea, ScrollBar } from "@/_ui/components/scroll-area"
+import { Button } from "@/_ui/components/custom/button";
 import { ApiServicesWithCategory } from "@/professional/_lib/definitions";
 import { useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";

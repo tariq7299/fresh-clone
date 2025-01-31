@@ -1,5 +1,5 @@
-import { Button } from "@/ui/components/button";
-import FullPageDone from "@/ui/components/custom/full-page-done";
+import { Button } from "@/_ui/components/button";
+import FullPageDone from "@/_ui/components/custom/full-page-done";
 import Link from "next/link";
 
 export default function BookingDonePage() {

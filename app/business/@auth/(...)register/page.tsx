@@ -2,8 +2,8 @@
 
 import RegisterForm from "@/(auth)/_components/register-form";
 import { UserRole } from "@/(auth)/_lib/definitions";
-import { Button } from "@/ui/components/button";
-import { Dialog, DialogFooter, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/ui/components/dialog";
+import { Button } from "@/_ui/components/button";
+import { Dialog, DialogFooter, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/_ui/components/dialog";
 import { useRouter, useSearchParams } from "next/navigation";
 
 export default function RegisterModal() {

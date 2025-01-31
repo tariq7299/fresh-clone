@@ -1,5 +1,5 @@
 import { getBusinessStepFormData } from '@/professional/_lib/data';
-import { getAllCategories } from '@/lib/data';
+import { getAllCategories } from '@/_lib/data';
 import BusinessCategoryForm, { StoredTempCategory } from '@/professional/onboarding/business-category/business-category-form';
 import { OnboardingBusinessCategorySkeleton } from '@/professional/_components/skeletons';
 import { Suspense } from 'react';

@@ -1,5 +1,5 @@
 import BusinessLocationForm from "@/professional/onboarding/business-location/business-location-form";
-import { MapProvider } from "@/lib/providers/map-providers";
+import { MapProvider } from "@/_lib/providers/map-providers";
 import { OnboardingBusinessLocationSkeleton } from "@/professional/_components/skeletons";
 import { Suspense } from "react";
 

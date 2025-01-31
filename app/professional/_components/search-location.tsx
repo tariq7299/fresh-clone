@@ -1,14 +1,14 @@
 "use client"
 
 import { useState } from "react";
-import { Input } from "@/ui/components/input";
+import { Input } from "@/_ui/components/input";
 import {
     Popover,
     PopoverContent,
     PopoverAnchor,
-} from "@/ui/components/popover"
+} from "@/_ui/components/popover"
 import { MapPin } from "lucide-react";
-import { cn } from "@/lib/utils/utils";
+import { cn } from "@/_lib/utils/utils";
 import { BusinessLocationErrors } from "../onboarding/business-location/business-location-form";
 
 export default function SearchLocation({ className, setOpen, open, handleSearch, handleSettingLocation, result, isSearching, clientFieldsErrors, online_business }: { className: string, setOpen: (open: boolean) => void, open: boolean, handleSearch: (value: string) => void, handleSettingLocation: (place: any) => void, result: any, isSearching: boolean, clientFieldsErrors: BusinessLocationErrors | null, online_business: boolean }) {
