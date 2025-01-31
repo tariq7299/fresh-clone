@@ -14,9 +14,16 @@ export const getAllCategories = async () => {
 
     // try {
 
-    const categories = await fetchApi<ApiResponse<Category[]>>("/active-categories")
+    const categories = await fetchApi<ApiResponse<Category[]>>("/active-categories",
+        {
+            cache: "force-cache",
+            tags: ["categories"],
+            revalidate: 3600
+        }
+    )
+
     if (categories.success) {
-        return categories.data
+        return categories?.data || []
     }
     return []
     // } catch (error) {

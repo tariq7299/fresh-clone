@@ -59,6 +59,7 @@ export type BusinessLocationFormData = z.infer<typeof businessLocationSchema>
 
 // TODO: Remove most of that code, and put it in didcated hook or provider, maybe use
 export default function Form({ storedTempLocation }: { storedTempLocation: StoredTempLocation | null }) {
+
     // State for handling loading states and transitions
     const [_, startTransition] = useTransition()
     const { setIsLoading } = useBusinessFormContext()

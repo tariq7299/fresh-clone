@@ -4,15 +4,7 @@ import { getBusinessStepFormData } from "@/professional/_lib/data";
 import Form from "./form";
 
 
-export type Category = {
-    id: number,
-    name: string,
-    description: string,
-}
 
-export type StoredTempCategory = {
-    id: number | null,
-}
 
 export default async function BusinessCategoryForm() {
 

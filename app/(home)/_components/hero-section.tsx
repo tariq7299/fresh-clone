@@ -1,6 +1,8 @@
 import Image from "next/image"
 import barberShop1 from "@/../public/barber-shop-1.jpg";
 import HeroFilterField from "./hero-filter-field";
+import HeroFilter from "./hero-filter";
+import { Suspense } from "react";
 
 export default function HeroSection() {
     return (
@@ -27,7 +29,11 @@ export default function HeroSection() {
                     Schedule local salon and wellness services
                 </h1>
 
-                <HeroFilterField />
+                {/* <HeroFilterField /> */}
+
+                <Suspense fallback={<div>Loading...</div>}>
+                    <HeroFilter />
+                </Suspense>
 
             </div>
         </>

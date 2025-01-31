@@ -38,6 +38,8 @@ export async function fetchApi<T>(
         auth = true,
     } = options;
 
+    console.log("FETCH_UTILS URL", endpoint)
+
     const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
     const url = `${baseUrl}${endpoint}`;

@@ -18,12 +18,13 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@/ui/components/popover"
+import { ChevronsUpDownIcon } from "lucide-react";
 // import { ComboboxProps } from "@/helper/types"
 // import { FieldValues, FieldPath } from "react-hook-form"
 
 // Add types
 // export function Combobox<TFieldValues extends FieldValues, TName extends FieldPath<TFieldValues>>({ values, field, className, inputPlaceholder = "Select value...", searchPlaceholder = "Search..." }: ComboboxProps<TFieldValues, TName>) {
-export function Combobox({ values, field, className, inputPlaceholder = "Select value...", searchPlaceholder = "Search..." }: { values: { id: number, name: string }[], field?: any, className?: string, inputPlaceholder?: string, searchPlaceholder?: string }) {
+export function Combobox({ triggerIconOnLeft = false, values, field, className, inputPlaceholder = "Select value...", searchPlaceholder = "Search...", triggerClassName = "", triggerIcon = <ChevronsUpDownIcon className="opacity-50" />, popoverClassName = "" }: { triggerIconOnLeft?: boolean, values: { id: number, name: string }[], field?: any, className?: string, inputPlaceholder?: string, searchPlaceholder?: string, triggerClassName?: string, triggerIcon?: React.ReactNode | null, popoverClassName?: string }) {
 
 
     const [open, setOpen] = React.useState(false)
@@ -35,15 +36,16 @@ export function Combobox({ values, field, className, inputPlaceholder = "Select 
                     variant="outline"
                     role="combobox"
                     aria-expanded={open}
-                    className=" justify-between"
+                    className={cn(" justify-between ", triggerClassName)}
+
                 >
                     {field.value && values.length > 0
                         ? values.find((value: { id: number, name: string }) => value.id === field.value)?.name
                         : inputPlaceholder}
-                    <ChevronUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                    <div className={cn("order-first", triggerIconOnLeft ? "order-first" : "")}>{triggerIcon}</div>
                 </Button>
             </PopoverTrigger>
-            <PopoverContent className=" p-0">
+            <PopoverContent className={cn(" p-0", popoverClassName)}    >
                 <Command filter={(value, search) => {
                     if (search && value.toLowerCase().trim().includes(search?.toLowerCase().trim())) {
                         return 1

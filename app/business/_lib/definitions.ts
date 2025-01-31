@@ -6,6 +6,16 @@ export interface Slot {
     // "is_available": boolean,
 }
 
+export type Category = {
+    id: number,
+    name: string,
+    description: string,
+}
+
+export type StoredTempCategory = {
+    id: number | null,
+}
+
 
 export type SelectTimeClientErrors = {
     slot?: string | string[],

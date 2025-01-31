@@ -42,26 +42,31 @@ const frameworks = [
     },
 ]
 
-export function Combobox({ triggerClassName = '', triggerIcon = (<ChevronsUpDown className="opacity-50" />), labelClassName = "", popoverClassName = "" }: { triggerClassName?: string, triggerIcon?: React.ReactNode | null, labelClassName?: string, popoverClassName?: string }) {
+export function Combobox({ triggerIconOnLeft = false, triggerClassName = '', triggerIcon = (<ChevronsUpDown className="opacity-50" />), labelClassName = "", popoverClassName = "" }: { triggerIconOnLeft?: boolean, triggerClassName?: string, triggerIcon?: React.ReactNode | null, labelClassName?: string, popoverClassName?: string }) {
     const [open, setOpen] = React.useState(false)
     const [value, setValue] = React.useState("")
 
     return (
         <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger asChild>
+
                 <Button
                     variant="outline"
                     role="combobox"
                     aria-expanded={open}
-                    className={cn("w-[200px] justify-between", triggerClassName)}
+                    className={cn(" flex",
+                        triggerClassName)}
                 >
-                    {value
-                        ? categories.find((framework) => framework.value === value)?.label
-                        : "Select a category..."}
-                    {triggerIcon}
+                    <p >
+                        {value
+                            ? categories.find((framework) => framework.value === value)?.label
+                            : "Select a category..."}
+                    </p>
+
+                    <div className={cn("", triggerIconOnLeft ? "order-first" : "")}>{triggerIcon}</div>
                 </Button>
             </PopoverTrigger>
-            <PopoverContent className={cn("w-[200px] p-0", popoverClassName)}>
+            <PopoverContent className={cn("p-0", popoverClassName)}>
                 <Command>
                     <CommandInput placeholder="nails..." />
                     <CommandList>
