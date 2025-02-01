@@ -1,6 +1,8 @@
 
+import { Suspense } from "react";
 import RegisterForm from "../_components/register-form";
 import { UserRole } from "../_lib/definitions";
+import Loading from "../loading";
 
 export default async function RegisterPage(props: {
     searchParams?: Promise<{
@@ -22,7 +24,10 @@ export default async function RegisterPage(props: {
             </h1>
             <p className="text-muted-foreground text-sm text-center pb-4">{type === UserRole.Professional ? "Create your account and streamline your salon management today." : "Create your account and book salons and spas near you today."}</p>
 
-            <RegisterForm userRole={type} />
+
+            <Suspense fallback={<Loading />}    >
+                <RegisterForm userRole={type} />
+            </Suspense>
 
         </div>
 

@@ -6,6 +6,7 @@ import SonnerToaster from "@/_ui/ToasterSonner"
 // This is the provider for the nextui library
 // I am using this lib to be able to use the "date-input" component from the nextui library
 import { NextUIProvider } from "@nextui-org/system";
+import { Suspense } from "react";
 
 const LibreBodoniSerif = Libre_Bodoni({
     variable: "--font-libre-bodoni-serif",
@@ -62,7 +63,11 @@ export default async function RootLayout({
         I am using this lib to be able to use the "date-input" component from the nextui library 
         */}
                 <NextUIProvider>
-                    <main>{children}</main>
+                    <main>
+                        <Suspense >
+                            {children}
+                        </Suspense>
+                    </main>
                     <SonnerToaster />
                 </NextUIProvider>
             </body>

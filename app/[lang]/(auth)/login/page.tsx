@@ -1,6 +1,7 @@
 
 import { Suspense } from "react";
 import LoginForm from "../_components/login-form";
+import Loading from "../loading";
 
 export default function LoginPage() {
 
@@ -14,7 +15,7 @@ export default function LoginPage() {
 
             {/* Iam using Suspense because Ima using useSearchParams in <LoginForm /> */}
 
-            <Suspense >
+            <Suspense fallback={<Loading />}    >
                 <LoginForm />
             </Suspense>
 

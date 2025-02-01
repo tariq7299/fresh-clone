@@ -3,6 +3,9 @@ import { Alert, AlertDescription, AlertTitle } from "@/_ui/components/alert";
 import { AlertCircle } from "lucide-react"
 import { UserRole } from "../_lib/definitions";
 import { Skeleton } from "@/_ui/components/skeleton";
+import { Suspense } from "react";
+import Loading from "../loading";
+
 export default async function OtpVerificationPage(props: {
     searchParams?: Promise<{
         notVerified?: string;
@@ -44,7 +47,10 @@ export default async function OtpVerificationPage(props: {
                 <p className="text-muted-foreground text-sm text-center pb-4">Please enter the 6-digit verification code sent to your email address</p>
 
                 {/* Iam not using Suspense because Iam passing the userRole as a prop to the OtpForm component, and not like in login-form.tsx where Iam using useSearchParams */}
-                <OtpForm email={email} userRole={userRole} />
+
+                <Suspense fallback={<Loading />}    >
+                    <OtpForm email={email} userRole={userRole} />
+                </Suspense>
 
 
             </div>
