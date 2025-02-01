@@ -1,7 +1,7 @@
 "use client"
 
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/_ui/components/dialog";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { usePathname } from "next/navigation";
 import {
     Select,
@@ -18,6 +18,7 @@ import { handleLanguageChange } from "@/_lib/actions";
 import { useState } from "react";
 import { Label } from "../label";
 import { cn } from "@/_lib/utils/utils";
+import { setLanguageCookie } from "@/_lib/actions";
 
 const LANGUAGES = [
     { code: 'en', name: 'English' },
@@ -34,16 +35,36 @@ export function LanguageSwitcherDialog({ hasTrigger = true, open, setOpen }: { h
 
     const pathname = usePathname()
     const params = useParams()
+    const router = useRouter()
     const currentLang = params.lang as string
+    const currentSearchParams = useSearchParams()
+
+    const [value, setValue] = useState(currentLang)
 
     console.log("currentLang", currentLang)
     console.log("params", params)
+
     // const [value, setValue] = useState(currentLang)
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        handleLanguageChange(new FormData(e.target as HTMLFormElement), pathname)
+        const formData = new FormData(e.target as HTMLFormElement)
+        const newLocale = formData.get("language") as "en" | "ar" || "en"
+        await setLanguageCookie(newLocale)
+
+        const newPath = pathname.replace(/^\/[a-z]{2}/, `/${newLocale}`)
+        const currentSearchParamsObject = new URLSearchParams(currentSearchParams)
+        router.replace(`${newPath}?${currentSearchParamsObject.toString()}`, {
+            scroll: false
+        })
+
+
+        // handleLanguageChange(new FormData(e.target as HTMLFormElement), pathname)
     }
+
+    console.log("value", value)
+
+
 
     return (
         <>
@@ -70,8 +91,8 @@ export function LanguageSwitcherDialog({ hasTrigger = true, open, setOpen }: { h
 
                                     <Label className=" font-bold">Language</Label>
                                     <Select defaultValue={currentLang} name="language"
-                                    // value={value}
-                                    // onValueChange={(e) => setValue(e)}
+                                        value={value}
+                                        onValueChange={(e) => setValue(e)}
                                     >
                                         <SelectTrigger className="w-full    " >
                                             <SelectValue placeholder="Select a language" />
@@ -88,7 +109,7 @@ export function LanguageSwitcherDialog({ hasTrigger = true, open, setOpen }: { h
                                         </SelectContent>
                                     </Select>
                                 </div>
-                                <Button type="submit" className="w-full">Change language</Button>
+                                <Button disabled={currentLang === value} type="submit" className="w-full font-bold">Change language</Button>
                             </form>
                         </DialogContent>
                     </Dialog>
@@ -107,7 +128,10 @@ export function LanguageSwitcherDialog({ hasTrigger = true, open, setOpen }: { h
                                 <div className="space-y-1">
 
                                     <Label className=" font-bold">Language</Label>
-                                    <Select defaultValue={currentLang} name="language">
+                                    <Select defaultValue={currentLang} name="language"
+                                        value={value}
+                                        onValueChange={(e) => setValue(e)}
+                                    >
                                         <SelectTrigger className="w-full    " >
                                             <SelectValue placeholder="Select a language" />
                                         </SelectTrigger>
@@ -123,7 +147,7 @@ export function LanguageSwitcherDialog({ hasTrigger = true, open, setOpen }: { h
                                         </SelectContent>
                                     </Select>
                                 </div>
-                                <Button type="submit" className="w-full">Change language</Button>
+                                <Button disabled={currentLang === value} type="submit" className="w-full font-bold">Change language</Button>
                             </form>
                         </DialogContent>
                     </Dialog>
