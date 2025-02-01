@@ -13,10 +13,10 @@ import {
     useSidebar,
 } from "@/_ui/components/sidebar"
 import Link from "next/link"
-import { SidebarTabs } from "@/business/_components/sidebar-menu"
+import { SidebarTabs } from "@/[lang]/business/_components/sidebar-menu"
 import { ChevronLeft, NotepadText } from "lucide-react"
 import { usePathname } from "next/navigation"
-import { SessionData } from "@/(auth)/_lib/definitions"
+import { SessionData } from "@/[lang]/(auth)/_lib/definitions"
 import { Button } from "@/_ui/components/button"
 import { cn } from "@/_lib/utils/utils"
 

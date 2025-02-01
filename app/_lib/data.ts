@@ -1,12 +1,12 @@
 import { fetchApi } from "@/_lib/utils/api/fetch-utils";
 import { ApiError } from "./definitions/api";
-import { getSession } from "@/(auth)/_lib/sessions";
+import { getSession } from "@/[lang]/(auth)/_lib/sessions";
 import { redirect } from "next/navigation";
-import { redirectToOtpIfNotVerified } from "@/(auth)/_lib/redirect-otp-if-not-verified";
-import { redirectToLoginIfNotAuthenticated } from "@/(auth)/_lib/redirect-to-login-if-not-authenticated";
-import { ApiServicesWithCategory } from "@/professional/_lib/definitions";
+import { redirectToOtpIfNotVerified } from "@/[lang]/(auth)/_lib/redirect-otp-if-not-verified";
+import { redirectToLoginIfNotAuthenticated } from "@/[lang]/(auth)/_lib/redirect-to-login-if-not-authenticated";
+import { ApiServicesWithCategory } from "@/[lang]/professional/_lib/definitions";
 import { ApiResponse } from "./definitions/api";
-import { Category } from "@/business/_lib/definitions";
+import { Category } from "@/[lang]/business/_lib/definitions";
 
 
 

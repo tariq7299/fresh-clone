@@ -1,10 +1,10 @@
 "use client"
 
-import { logoutUserClientSide } from "@/(auth)/_lib/auth-client-services";
-import { logoutUserServerSide } from "@/(auth)/_lib/auth-server-services";
-import { navigateToLogin } from "@/(auth)/_lib/auth-client-services";
+import { logoutUserClientSide } from "@/[lang]/(auth)/_lib/auth-client-services";
+import { logoutUserServerSide } from "@/[lang]/(auth)/_lib/auth-server-services";
+import { navigateToLogin } from "@/[lang]/(auth)/_lib/auth-client-services";
 import useLocalStorage from "@/_lib/hooks/use-local-storage";
-import { SessionData } from "@/(auth)/_lib/definitions";
+import { SessionData } from "@/[lang]/(auth)/_lib/definitions";
 import { Button } from "./button";
 
 export default function LogoutButton() {

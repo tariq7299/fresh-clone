@@ -1,4 +1,4 @@
-import { getSession } from "@/(auth)/_lib/sessions";
+import { getSession } from "@/[lang]/(auth)/_lib/sessions";
 import { ApiError } from "@/_lib/definitions/api";
 import { setApiSuccessMsg } from "./setApiSuccessMsg";
 import { ApiResponse } from "@/_lib/definitions/api";

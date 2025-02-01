@@ -33,7 +33,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "app/professional/onboarding/business-capacity"
+    "app/[lang]/professional/onboarding/business-capacity"
   ],
   "exclude": [
     "node_modules"
