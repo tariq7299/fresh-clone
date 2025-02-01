@@ -69,7 +69,6 @@ const STATUS_OPTIONS = ["completed", "cancelled"]
 async function updateStatusInBackend(id: string, status: string) {
 
     try {
-        console.log("status", status)
         // const response = await fetchApi(`/businesses/1/bookings/${id}/status?status=${status}`,
         const response = await fetchApi(`/businesses/1/bookings/${id}/status?status=${status}`,
             {
@@ -77,8 +76,6 @@ async function updateStatusInBackend(id: string, status: string) {
 
             }
         )
-
-        console.log("response", response)
 
     } catch (error) {
     }

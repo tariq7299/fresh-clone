@@ -46,7 +46,7 @@ export default function PublicNavBar({ fixed = false, hideInMobile = false }: { 
 
                 {/* Nav menue trigger on mobile devices */}
                 <div className="md:hidden">
-                    <MobileNavMenu authenticated={false} navTabs={navTabs} isScrolled={isScrolled} fixed={false} />
+                    <MobileNavMenu authenticated={false} navTabs={navTabs} isScrolled={isScrolled} fixed={fixed} />
                 </div>
 
                 {/*Closed navbar on desktop screens  */}

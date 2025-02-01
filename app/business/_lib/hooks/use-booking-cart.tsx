@@ -56,10 +56,6 @@ export default function useBookingCart({ servicesWithCategories }: { servicesWit
         const totalMins = (selectedServices.reduce((acc, curr) => acc + curr.duration, 0) % 60) ? (selectedServices.reduce((acc, curr) => acc + curr.duration, 0) % 60) : null
         const totalCount = selectedServices.length
 
-        console.log(totalAmount, totalCount, totalHours, totalMins)
-        const totalTest = (selectedServices.reduce((acc, curr) => acc + curr.duration, 0) % 60).toFixed(2)
-        console.log(totalTest)
-
         setSelectedItems({ items: selectedServices, totalAmount, totalHours, totalMins, totalCount })
 
 

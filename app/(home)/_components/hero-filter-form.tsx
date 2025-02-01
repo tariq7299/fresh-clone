@@ -13,7 +13,8 @@ import SearchLocation from "@/professional/_components/search-location";
 import { Map as MapComponent, Marker, MapCameraChangedEvent, useMapsLibrary, useMap } from "@vis.gl/react-google-maps";
 import { useDebouncedCallback } from "use-debounce";
 import SearchLocation2 from "@/(home)/_components/search-location-2";
-import { handleHeroFilterSearch } from "../_lib/form-actions";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import { createPageURL } from "@/business/_lib/utils";
 
 export default function HeroFilterForm({ categories }: { categories: Category[] }) {
     const formattedCategories = categories.length > 0 ? categories.map((category) => ({
@@ -27,6 +28,9 @@ export default function HeroFilterForm({ categories }: { categories: Category[] 
     const [open, setOpen] = useState(false)
 
     const [isSearching, setIsSearching] = useState(false)
+    const router = useRouter()
+    const pathname = usePathname()
+
 
     const map = useMap();
     // Load required Google Maps libraries
@@ -50,23 +54,19 @@ export default function HeroFilterForm({ categories }: { categories: Category[] 
         setPlacesService(new placesLibrary.PlacesService(map));
     }, [placesLibrary, map]);
 
-    console.log("placesService", placesService)
-
-
 
     const [location, setLocation] = useState<{
         lat: number,
-        lng: number
+        lng: number,
+        formatted_address: string
     }>({
         lat: defaultLat,
-        lng: defaultLng
+        lng: defaultLng,
+        formatted_address: ""
     })
-    console.log("result", result)
 
     // Debounced function to handle location search
     const handleSearch = useDebouncedCallback((query: string) => {
-
-        console.log("query", query)
 
         if (!placesService) return;
 
@@ -79,8 +79,6 @@ export default function HeroFilterForm({ categories }: { categories: Category[] 
             types: ["beauty_salon", "store", "shopping_mall", "establishment", "point_of_interest"]
         };
 
-        console.log("request", request)
-
 
         // Perform text search and update results
         placesService.textSearch(
@@ -90,8 +88,6 @@ export default function HeroFilterForm({ categories }: { categories: Category[] 
                 status: google.maps.places.PlacesServiceStatus
             ) => {
                 if (status === google.maps.places.PlacesServiceStatus.OK && results) {
-                    console.log("results", results)
-
                     setResult(results.length > 0 ? results.slice(0, 5).map(({ formatted_address, geometry, place_id }) => ({ formatted_address, geometry, place_id })) : [])
                     setIsSearching(false)
                     setOpen(true)
@@ -110,17 +106,17 @@ export default function HeroFilterForm({ categories }: { categories: Category[] 
         })
     }
 
-    console.log("formattedCategories", formattedCategories)
-
     const [categoryId, setCategoryId] = useState<number>(0)
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        handleHeroFilterSearch({
-            longitude: location.lng,
-            latitude: location.lat,
-            categoryId: categoryId
-        })
+        const params = new URLSearchParams()
+        params.set("longitude", String(location.lng))
+        params.set("lat", String(location.lng))
+        params.set("latitude", String(location.lat))
+        categoryId > 0 && params.set("categoryId", String(categoryId))
+        const url = createPageURL(`${pathname}search`, params)
+        router.push(url)
     }
 
 

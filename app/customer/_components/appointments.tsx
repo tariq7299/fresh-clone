@@ -43,10 +43,7 @@ export default async function Appointments() {
             total_price: row.booking_data.total_price
         }
     }
-
-
     ))
-    console.log("appointments", appointments)
 
     return (
         <div className="p-5 ps-7 pt-8 md:pt-32 size-full over">

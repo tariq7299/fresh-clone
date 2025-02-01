@@ -13,8 +13,6 @@ export default async function HeroFilter() {
 
     const categories = (await getAllCategories()) as Category[]
 
-    console.log("categories", categories)
-
 
     return <MapProvider>
         <HeroFilterForm categories={categories} />

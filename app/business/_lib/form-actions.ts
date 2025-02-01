@@ -70,7 +70,6 @@ export const handleBooking = async (
         // }
 
     }
-    console.log("response.apiMsgs", response.apiMsgs)
     // redirectToLoginIfNotAuthenticated(response.apiMsgs, ["sessionEnded=true"])
     return {
         success: false,

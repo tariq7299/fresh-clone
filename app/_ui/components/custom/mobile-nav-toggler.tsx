@@ -8,6 +8,10 @@ import { div } from "framer-motion/client";
 
 export default function MobileNavToggler({ fixed, isScrolled, authenticated, setIsOpen, isOpen }: { fixed: boolean, isScrolled: boolean, authenticated: boolean, setIsOpen: (isOpen: boolean) => void, isOpen: boolean }) {
 
+    console.log("fixed", fixed)
+    console.log("isScrolled", isScrolled)
+    console.log("authenticated", authenticated)
+
     return <>
         {authenticated ?
 
