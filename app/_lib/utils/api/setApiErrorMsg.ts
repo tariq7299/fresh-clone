@@ -9,14 +9,10 @@ function setApiErrorMsg({
     customErrorMsg?: string | null,
 }): string | string[] {
 
-    console.log("errResponse", errResponse)
-
     const statusCode = errResponse.code;
     const ErrorCode = errResponse.code;
 
     let errorMessage = customErrorMsg || (errResponse.errors && Object.keys(errResponse.errors).length > 0 ? errResponse.errors : null) || errResponse.message
-
-    console.log("errorMessage", errorMessage)
 
     if (statusCode === 401 && errResponse.message === "Unauthenticated.") {
         errorMessage = 'Session expired';

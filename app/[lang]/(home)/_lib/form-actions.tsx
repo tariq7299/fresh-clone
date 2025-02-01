@@ -10,19 +10,16 @@ export const handleSearch = async (data: {
     categoryId: number
 }) => {
 
-    console.log("handleSearch", data)
-
     const { longitude, latitude, categoryId } = data
 
     const url = categoryId > 0 ? `/active-businesses?category_id=${categoryId}&latitude=${latitude}&longitude=${longitude}&page=1` : `/active-businesses?latitude=${latitude}&longitude=${longitude}&page=1`
-    console.log("url", url)
+
 
     const response = await fetchApi(url)
 
     if (response.success) {
         return response.data
-        console.log("SUCESSSSSS", response)
-        // redirect("login")
+
     } else {
         return []
 

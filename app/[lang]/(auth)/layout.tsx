@@ -6,6 +6,7 @@ import { cn } from "@/_lib/utils/utils";
 import BackButton from "@/_ui/components/custom/back-button";
 import Link from "next/link";
 import React from "react";
+import { LanguageSwitcherDialog } from "@/_ui/components/custom/language-switcher-dialog";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     return (
@@ -23,7 +24,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 {children}
 
                 <div className="p-5 mt-auto">
-                    <p className=" flex items-center  gap-1 text-accent-600 font-semibold "><GlobeAsiaAustraliaIcon className="h-6 w-5" /> English</p>
+                    <LanguageSwitcherDialog />
                 </div>
 
             </div>

@@ -11,8 +11,6 @@ export default async function HeroSection({
     lang: 'en' | 'ar'
 }) {
 
-    console.log("langgggg", lang)
-
     const dict = await getDictionary(lang)
 
     return (

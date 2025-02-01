@@ -3,6 +3,7 @@ import { Badge } from "../badge";
 import appleLogo from "@/../public/apple-logo.svg.png";
 import googleLogo from "@/../public/google-logo.png";
 import Image from "next/image";
+import { LanguageSwitcherDialog } from "./language-switcher-dialog";
 
 export default function Footer({ className }: { className?: string }) {
     return <footer className={className}>
@@ -37,7 +38,9 @@ export default function Footer({ className }: { className?: string }) {
 
                     <p className="text-sm text-muted-foreground ">@2025 <span className="font-lora"></span>Lumière Inc.</p>
 
-                    <p className=" flex  items-center gap-1 text-accent-600 pe-0 md:pe-16 font-semibold"><GlobeAsiaAustraliaIcon className="h-6 w-5" /> English</p>
+                    <LanguageSwitcherDialog />
+
+                    {/* <p className=" flex  items-center gap-1 text-accent-600 pe-0 md:pe-16 font-semibold"><GlobeAsiaAustraliaIcon className="h-6 w-5" /> English</p> */}
 
 
 

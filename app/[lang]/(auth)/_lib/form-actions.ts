@@ -38,8 +38,6 @@ export const login = async (formState: SuccessLoginFormState | ErrorLoginFormSta
 
     const authenticateUserResponse = await authenticateUser(formData)
 
-    console.log("authenticateUserResponse", authenticateUserResponse)
-
     let sessionData: SessionData;
 
     if (authenticateUserResponse.success) {

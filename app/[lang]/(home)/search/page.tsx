@@ -21,10 +21,6 @@ export default async function SearchPage(props:
     const data = await handleSearch({ categoryId, longitude, latitude })
     const businesses = data?.businesses || []
 
-    console.log("searchParams", searchParams)
-    console.log("data", data)
-    console.log("businesses", businesses)
-
 
     return <div>
 

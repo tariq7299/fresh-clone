@@ -17,7 +17,9 @@ import { Button } from '@/_ui/components/custom/button'
 import Link from 'next/link'
 import { GlobeAsiaAustraliaIcon } from "@heroicons/react/24/outline";
 import useIsScrolled from '../_lib/hooks/use-is-scrolled'
-
+import { LanguageSwitcherDialog } from '@/_ui/components/custom/language-switcher-dialog'
+import { LanguageSwitcherTrigger } from '@/_ui/components/custom/language-switcher-dialog'
+import { useParams, useSearchParams } from 'next/navigation'
 
 export default function PublicNavBar({ fixed = false, hideInMobile = false }: { fixed?: boolean, hideInMobile?: boolean }) {
 
@@ -28,15 +30,21 @@ export default function PublicNavBar({ fixed = false, hideInMobile = false }: { 
             icon: (<BriefcaseIcon className='size-6' />)
         },
     ]
-
-
+    const [isLanguageDialogOpen, setIsLanguageDialogOpen] = useState(false)
+    const params = useParams()
     const isScrolled = useIsScrolled()
+
+    console.log("locale", params)
 
     return (
         <nav className={cn(' w-lvw  z-50 ',
             fixed ? 'bg-white shadow' : isScrolled ? 'bg-white shadow' : 'bg-transparent',
             hideInMobile ? 'hidden md:block fixed top-0 left-0' : 'fixed top-0 left-0'
         )}>
+
+
+
+            <LanguageSwitcherDialog hasTrigger={false} open={isLanguageDialogOpen} setOpen={setIsLanguageDialogOpen} />
 
             <div className="p-5 py-4 flex justify-between items-center max-w-[1440px] m-auto pe-7">
 
@@ -82,8 +90,8 @@ export default function PublicNavBar({ fixed = false, hideInMobile = false }: { 
                                     For business
                                 </Link>
                             </DropdownMenuItem>
-                            <DropdownMenuItem className=' text-accent-600  '>
-                                <p className=" flex  items-center gap-2  font-semibold "><GlobeAsiaAustraliaIcon className="h-6 w-5" /> English</p>
+                            <DropdownMenuItem className=' text-accent-600  ' onClick={() => setIsLanguageDialogOpen(true)}>
+                                <LanguageSwitcherTrigger />
                             </DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>

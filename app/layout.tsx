@@ -49,7 +49,6 @@ export default async function MainLayout({
 }>) {
 
     const locale = await params
-    console.log("locale", locale)
 
     return (
         <html lang={locale.lang}>
