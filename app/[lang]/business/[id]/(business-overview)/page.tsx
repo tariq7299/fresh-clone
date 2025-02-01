@@ -9,6 +9,7 @@ import { ServicesOverview } from "../../_components/services-overview";
 import { BusinessHours } from "../../_components/business-hours";
 import { Suspense } from "react";
 import { ServicesOverviewSkeleton } from "../../_components/skeletons";
+import { notFound } from "next/navigation";
 export interface BusinessHour {
     day: 'sunday' | 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday';
     open: string | null;
@@ -69,6 +70,10 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
     const id = params.id;
 
     const businessData = await getBusinessData(id) as Business
+
+    if (!businessData) {
+        notFound()
+    }
 
     const servicesCount = businessData.services_with_categories.reduce((acc, curr) => acc + curr.services.length, 0);
 
