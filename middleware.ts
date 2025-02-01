@@ -10,9 +10,19 @@ export default async function middleware(req: NextRequest) {
 
 
     // let response = await auth(req)
-    let response = localization(req)
-    return response
+    // let response = localization(req)
+    // return response
 
+    // Always check localization first
+    const localeResponse = localization(req)
+
+    // If localization requires a redirect, return immediately
+    if (localeResponse.status !== 200) {
+        return localeResponse
+    }
+
+    // Then check authentication
+    return await auth(req)
 
     // Remove this after you finish setting localization
     // return NextResponse.next()
