@@ -1,4 +1,3 @@
-
 'use client'
 
 import { ArrowLeftEndOnRectangleIcon, BriefcaseIcon } from '@heroicons/react/24/outline'
@@ -20,10 +19,14 @@ import { GlobeAsiaAustraliaIcon } from "@heroicons/react/24/outline";
 import useIsScrolled from '../_lib/hooks/use-is-scrolled'
 import Image from 'next/image'
 import userAvatar from "@/../public/avatars/avatar11.png"
+import { LanguageSwitcherDialog, LanguageSwitcherTrigger } from '@/_ui/components/custom/language-switcher-dialog'
+import { useParams } from 'next/navigation'
 
 export default function CustomerNavBar({ fixed = false, hideInMobile = false, className }: { fixed?: boolean, hideInMobile?: boolean, className?: string }) {
 
     const isScrolled = useIsScrolled()
+    const [isLanguageDialogOpen, setIsLanguageDialogOpen] = useState(false)
+    const params = useParams()
 
     const navTabs = [
         {
@@ -45,6 +48,8 @@ export default function CustomerNavBar({ fixed = false, hideInMobile = false, cl
             fixed ? 'bg-white shadow' : isScrolled ? 'bg-white shadow' : 'bg-transparent',
             hideInMobile ? 'hidden md:block fixed top-0 left-0' : 'fixed top-0 left-0'
         )}>
+
+            <LanguageSwitcherDialog hasTrigger={false} open={isLanguageDialogOpen} setOpen={setIsLanguageDialogOpen} />
 
             <div className={cn("p-5 py-4 flex justify-between items-center max-w-[1440px] m-auto pe-7", className)}>
 
@@ -115,8 +120,8 @@ export default function CustomerNavBar({ fixed = false, hideInMobile = false, cl
                                 )
                             ))}
 
-                            <DropdownMenuItem className=' text-accent-600  '>
-                                <p className=" flex  items-center gap-2  font-semibold "><GlobeAsiaAustraliaIcon className="h-6 w-5" /> English</p>
+                            <DropdownMenuItem className=' text-accent-600  ' onClick={() => setIsLanguageDialogOpen(true)}>
+                                <LanguageSwitcherTrigger />
                             </DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>

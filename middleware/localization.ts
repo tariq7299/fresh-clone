@@ -21,10 +21,9 @@ export const getLocale = (request: NextRequest) => {
 
     return finalLocale
 }
-
 export const localization = (request: NextRequest) => {
     // Check if there is any supported locale in the pathname
-    const { pathname } = request.nextUrl
+    const { pathname, search } = request.nextUrl
     const pathnameHasLocale = LOCALES.some(
         (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
     )
@@ -34,10 +33,11 @@ export const localization = (request: NextRequest) => {
 
     // Get locale from accept-language header or stored preference
     const locale = getLocale(request)
-    // const storedLocale = request.cookies.get('NEXT_LOCALE')?.value
-    // const finalLocale = storedLocale || locale || DEFAULT_LOCALE
+
+    // Preserve search params if they exist
+    const searchParams = search || ''
 
     return NextResponse.redirect(
-        new URL(`/${locale}${pathname}`, request.nextUrl)
+        new URL(`/${locale}${pathname}${searchParams}`, request.nextUrl)
     )
 }

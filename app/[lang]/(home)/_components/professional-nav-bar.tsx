@@ -1,4 +1,3 @@
-
 'use client'
 
 import { ArrowLeftEndOnRectangleIcon, ArrowRightEndOnRectangleIcon, BriefcaseIcon, } from '@heroicons/react/24/outline'
@@ -19,17 +18,23 @@ import { GlobeAsiaAustraliaIcon } from "@heroicons/react/24/outline";
 import useIsScrolled from '../_lib/hooks/use-is-scrolled'
 import Image from 'next/image'
 import userAvatar from "@/../public/avatars/avatar11.png"
+import { useState } from 'react'
+import { LanguageSwitcherDialog, LanguageSwitcherTrigger } from '@/_ui/components/custom/language-switcher-dialog'
+import { useParams } from 'next/navigation'
 
 export default function ProfessionalNavBar({ fixed = false, hideInMobile = false }: { fixed?: boolean, hideInMobile?: boolean }) {
 
-
+    const [isLanguageDialogOpen, setIsLanguageDialogOpen] = useState(false)
     const isScrolled = useIsScrolled()
+    const params = useParams()
 
     return (
         <nav className={cn(' w-lvw  z-50 ',
             fixed ? 'bg-white shadow' : isScrolled ? 'bg-white shadow' : 'bg-transparent',
             hideInMobile ? 'hidden md:block fixed top-0 left-0' : 'fixed top-0 left-0'
         )}>
+
+            <LanguageSwitcherDialog hasTrigger={false} open={isLanguageDialogOpen} setOpen={setIsLanguageDialogOpen} />
 
             <div className="p-5 py-4 flex justify-between items-center max-w-[1440px] m-auto pe-7">
 
@@ -48,10 +53,7 @@ export default function ProfessionalNavBar({ fixed = false, hideInMobile = false
                 )}>
 
                     <DropdownMenu>
-
-
                         <DropdownMenuTrigger asChild >
-
                             <Button borderType="fullRounded" variant="outline" className=" hover:bg-muted/50 bg-transparent inline-flex  font-source-sans font-semibold gap-2 group py-4 pe-3 ps-1 items-center ">
                                 <Image
                                     src={userAvatar}
@@ -74,15 +76,12 @@ export default function ProfessionalNavBar({ fixed = false, hideInMobile = false
                             </DropdownMenuItem>
                             <DropdownMenuSeparator className='  my-2 mx-2 ' />
                             <DropdownMenuLabel className='font-bold  text-base'>Other</DropdownMenuLabel>
-                            <DropdownMenuItem className=' text-accent-600  '>
-                                <p className=" flex  items-center gap-2  font-semibold "><GlobeAsiaAustraliaIcon className="h-6 w-5" /> English</p>
+                            <DropdownMenuItem className=' text-accent-600  ' onClick={() => setIsLanguageDialogOpen(true)}>
+                                <LanguageSwitcherTrigger />
                             </DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
                 </div>
-
-
-
 
             </div>
 

@@ -6,7 +6,9 @@ import { NavBarSkeleton } from "@/[lang]/(home)/_components/skeletons"
 import { getUserData } from "@/[lang]/(auth)/_lib/auth-server-services"
 import { NotepadText } from "lucide-react"
 
-export default async function ProfessionalDashboardLayout({ children }: { children: React.ReactNode }) {
+export default async function ProfessionalDashboardLayout({ children, params }: { children: React.ReactNode, params: { lang: string } }) {
+
+    const currentLang = params.lang as string
 
     const userData = await getUserData()
 
@@ -14,7 +16,7 @@ export default async function ProfessionalDashboardLayout({ children }: { childr
         {
             key: 'appointments',
             title: 'Appointments',
-            href: '/professional/dashboard/appointments',
+            href: `/${currentLang}/professional/dashboard/appointments`,
             icon: (<NotepadText />)
         },
         // {
