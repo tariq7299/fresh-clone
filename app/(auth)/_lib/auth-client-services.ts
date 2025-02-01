@@ -40,7 +40,8 @@ export async function navigateToOtp(email: string, userRole: UserRole.Profession
 export async function navigateToDashboard(role: UserRole) {
 
     if (role === UserRole.Professional) {
-        redirect("/professional/dashboard")
+        redirect("/professional/dashboard/appointments")
+        // redirect("/professional/dashboard")
     } else if (role === UserRole.Admin) {
         redirect("/admin/dashboard")
     } else if (role === UserRole.Customer) {

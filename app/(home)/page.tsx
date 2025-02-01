@@ -17,6 +17,7 @@ import { ShopsCarouselSkeleton } from "./_components/skeletons";
 import { Suspense } from "react";
 import { NavBarSkeleton } from "./_components/skeletons";
 import Footer from "../_ui/components/custom/footer";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -43,7 +44,7 @@ export default function Home() {
 
           {/* Apply you business now section */}
           <section className="px-5 md:px-7  text-center text-xl md:text-3xl">
-            <p className=" ">Want your business on <span className="font-lora font-bold">Lumière</span>? <span className="font-bold underline decoration-2 text-nowrap">Apply now</span></p>
+            <p className=" ">Want your business on <span className="font-lora font-bold">Lumière</span>? <Link href="/register?type=professional" className="font-bold underline decoration-2 text-nowrap">Apply now</Link></p>
           </section>
 
           {/*Shops Carousels  */}
