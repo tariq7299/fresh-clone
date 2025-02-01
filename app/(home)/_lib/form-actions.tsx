@@ -1,6 +1,7 @@
 "use server"
 
 import { fetchApi } from "@/_lib/utils/api/fetch-utils"
+import { pagination } from "@nextui-org/theme"
 import { redirect } from "next/dist/server/api-utils"
 
 export const handleSearch = async (data: {
@@ -19,10 +20,11 @@ export const handleSearch = async (data: {
     const response = await fetchApi(url)
 
     if (response.success) {
+        return response.data
         console.log("SUCESSSSSS", response)
         // redirect("login")
     } else {
-        console.log("FAILLLDEDD", response)
+        return []
 
     }
 

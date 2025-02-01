@@ -112,7 +112,6 @@ export default function HeroFilterForm({ categories }: { categories: Category[] 
         e.preventDefault()
         const params = new URLSearchParams()
         params.set("longitude", String(location.lng))
-        params.set("lat", String(location.lng))
         params.set("latitude", String(location.lat))
         categoryId > 0 && params.set("categoryId", String(categoryId))
         const url = createPageURL(`${pathname}search`, params)

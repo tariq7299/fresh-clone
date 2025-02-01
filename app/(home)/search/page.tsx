@@ -6,7 +6,7 @@ import barberShop from "@/../public/barber-shop-2.jpg"
 import { Badge } from "@/_ui/components/badge";
 import { Separator } from "@/_ui/components/separator";
 import { handleSearch } from "../_lib/form-actions";
-
+import Link from "next/link";
 
 
 export default async function SearchPage(props:
@@ -22,6 +22,7 @@ export default async function SearchPage(props:
     const businesses = data?.businesses || []
 
     console.log("searchParams", searchParams)
+    console.log("data", data)
     console.log("businesses", businesses)
 
 
@@ -42,18 +43,20 @@ export default async function SearchPage(props:
                 </div>
             ) : (
                 <>
-                    <div className="flex flex-col  ">
-                        <div className="overflow-hidden w-full rounded-lg">
-                            <Image priority={true} src={barberShop} alt="search hero" className="object-cover rounded-t-lg hover:scale-110 transistion ease-in-out delay-100 duration-300" />
-                        </div>
+                    {businesses.map((item: any) => (
+                        <Link key={item.id} href={`/business/${item.id}`} className="flex flex-col  ">
+                            <div className="overflow-hidden w-full rounded-lg">
+                                <Image priority={true} src={barberShop} alt="search hero" className="object-cover rounded-t-lg hover:scale-110 transistion ease-in-out delay-100 duration-300" />
+                            </div>
 
-                        <div className="space-y-1 pt-3  self-center grow-[1] text-left w-full">
-                            <p className="font-bold text-lg text-nowrap truncate ">Salon</p>
-                            {/* truncate this text */}
-                            <p className="text-muted-foreground text-nowrap text-xs md:text-base truncate">Desiadslkfajlsdf a;lksdfja;lkf</p>
-                            <Badge variant="outline">Nail</Badge>
-                        </div>
-                    </div>
+                            <div className="space-y-1 pt-3  self-center grow-[1] text-left w-full">
+                                <p className="font-bold text-lg text-nowrap truncate ">{item.name}</p>
+                                {/* truncate this text */}
+                                <p className="text-muted-foreground text-nowrap text-xs md:text-base truncate">{item.description}</p>
+                                <Badge variant="outline">{item.category.name}</Badge>
+                            </div>
+                        </Link>
+                    ))}
                     <Separator className="w-1/2 mx-auto" />
                 </>
             )}
