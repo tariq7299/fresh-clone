@@ -26,7 +26,7 @@ const QuicksandSans = Quicksand({
 });
 
 
-export default function RootWrapper({ children, }: { children: React.ReactNode }) {
+export default function RootLayout({ children, }: { children: React.ReactNode }) {
 
     // const locale = (await params)?.lang
     // const router = useRouter()
