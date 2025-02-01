@@ -192,6 +192,11 @@
   html {
     font-family: 'Quicksand', system-ui, sans-serif;
   }
+
+  #main-layout[dir="rtl"] {
+    direction: rtl !important;
+  }
+
   * {
     @apply border-border;
   }
@@ -201,6 +206,8 @@
   body {
     @apply font-medium;
   }
+
+ 
 }
 
 @layer utilities {

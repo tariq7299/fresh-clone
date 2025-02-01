@@ -33,9 +33,9 @@ export default async function HeroSection({
 
 
             <div className="max-w-xl lg:max-w-2xl relative ">
-                <h1 className="text-4xl  lg:text-7xl font-black text-start sm:text-start tracking-tight font-libre-bodoni scale-y-110 text-white">
+                <h1 className={`text-4xl  lg:text-7xl font-black text-start sm:text-start tracking-tight font-libre-bodoni scale-y-110 text-white ${lang === 'ar' ? 'font-arabic' : ''}`}>
                     {/* Schedule local salon and wellness services */}
-                    {dict.products.cart}
+                    {dict.home.hero.title}
                 </h1>
 
                 {/* <HeroFilterField /> */}
@@ -48,7 +48,7 @@ export default async function HeroSection({
                         <div className="w-full lg:w-auto h-12 bg-gray-200 animate-pulse rounded-md px-8"></div>
                     </div>
                 }>
-                    <HeroFilter />
+                    <HeroFilter lang={lang} />
                 </Suspense>
 
             </div>

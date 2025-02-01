@@ -5,8 +5,9 @@ import barberShop from "@/../public/barber-shop-4.jpg";
 import { cn } from "@/_lib/utils/utils";
 import BackButton from "@/_ui/components/custom/back-button";
 import Link from "next/link";
-import React from "react";
+import React, { Suspense } from "react";
 import { LanguageSwitcherDialog } from "@/_ui/components/custom/language-switcher-dialog";
+import Loading from "./loading";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     return (
@@ -21,7 +22,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 </div>
 
                 {/* Here is the content */}
-                {children}
+
+                <Suspense>
+                    {children}
+                </Suspense>
 
                 <div className="p-5 mt-auto">
                     <LanguageSwitcherDialog />

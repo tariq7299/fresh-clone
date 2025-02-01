@@ -1,5 +1,30 @@
 {
-    "products": {
-      "cart": "الل سم سمككشيبس"
+  "home": {
+    "hero": {
+      "title": "احجز خدمات الصالون والعناية المحلية",
+      "search": {
+        "service": "ما هي الخدمة التي تبحث عنها؟",
+        "location": "الموقع",
+        "search_button": "بحث",
+        "placeholder": {
+          "service": "ابحث عن الخدمات...",
+          "location": "أدخل موقعك..."
+        }
+      }
+    },
+    "nav": {
+      "login": "تسجيل الدخول",
+      "register": "إنشاء حساب",
+      "become_professional": "كن محترفًا",
+      "language": "English"
     }
+  },
+  "common": {
+    "loading": "جاري التحميل...",
+    "error": "حدث خطأ ما",
+    "try_again": "حاول مرة أخرى"
+  },
+  "products": {
+    "cart": "الل سم سمككشيبس"
   }
+}

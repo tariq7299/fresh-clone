@@ -1,5 +1,30 @@
 {
-    "products": {
-      "cart": "Add to cart"
+  "home": {
+    "hero": {
+      "title": "Schedule local salon and wellness services",
+      "search": {
+        "service": "What service are you looking for?",
+        "location": "Location",
+        "search_button": "Search",
+        "placeholder": {
+          "service": "Search for services...",
+          "location": "Enter your location..."
+        }
+      }
+    },
+    "nav": {
+      "login": "Sign In",
+      "register": "Sign Up",
+      "become_professional": "Become a Professional",
+      "language": "العربية"
     }
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "try_again": "Try again"
+  },
+  "products": {
+    "cart": "Add to cart"
   }
+}
