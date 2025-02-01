@@ -13,7 +13,7 @@ import SearchLocation from "@/[lang]/professional/_components/search-location";
 import { Map as MapComponent, Marker, MapCameraChangedEvent, useMapsLibrary, useMap } from "@vis.gl/react-google-maps";
 import { useDebouncedCallback } from "use-debounce";
 import SearchLocation2 from "@/[lang]/(home)/_components/search-location-2";
-import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import { useRouter, usePathname, useSearchParams, useParams } from "next/navigation";
 import { createPageURL } from "@/[lang]/business/_lib/utils";
 
 export default function HeroFilterForm({ categories }: { categories: Category[] }) {
@@ -30,6 +30,9 @@ export default function HeroFilterForm({ categories }: { categories: Category[] 
     const [isSearching, setIsSearching] = useState(false)
     const router = useRouter()
     const pathname = usePathname()
+
+    const params = useParams()
+    const { lang } = params
 
 
     const map = useMap();
@@ -114,7 +117,7 @@ export default function HeroFilterForm({ categories }: { categories: Category[] 
         params.set("longitude", String(location.lng))
         params.set("latitude", String(location.lat))
         categoryId > 0 && params.set("categoryId", String(categoryId))
-        const url = createPageURL(`${pathname}search`, params)
+        const url = createPageURL(`/${lang}/search`, params)
         router.push(url)
     }
 
