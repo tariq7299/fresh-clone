@@ -47,16 +47,16 @@ export async function auth(req: NextRequest) {
 
             if (
                 isPublicRoute &&
-                (!req.nextUrl.pathname.startsWith('/professional/dashboard'))
-            ) return NextResponse.redirect(new URL('/professional/dashboard', req.nextUrl))
+                (!req.nextUrl.pathname.startsWith(`/${locale}/professional/dashboard`))
+            ) return NextResponse.redirect(new URL(`/${locale}/professional/dashboard`, req.nextUrl))
 
             if (
-                ((req.nextUrl.pathname.startsWith('/admin')) || (req.nextUrl.pathname.startsWith('/customer'))) &&
-                !req.nextUrl.pathname.startsWith('/professional/onboarding')
-            ) return NextResponse.redirect(new URL('/professional/dashboard', req.nextUrl))
+                ((req.nextUrl.pathname.startsWith(`/${locale}/admin`)) || (req.nextUrl.pathname.startsWith(`/${locale}/customer`))) &&
+                !req.nextUrl.pathname.startsWith(`/${locale}/professional/onboarding`)
+            ) return NextResponse.redirect(new URL(`/${locale}/professional/dashboard`, req.nextUrl))
 
-            if (!session?.has_business && !req.nextUrl.pathname.startsWith('/professional/onboarding')) {
-                return NextResponse.redirect(new URL('/professional/onboarding/business-name', req.nextUrl))
+            if (!session?.has_business && !req.nextUrl.pathname.startsWith(`/${locale}/professional/onboarding`)) {
+                return NextResponse.redirect(new URL(`/${locale}/professional/onboarding/business-name`, req.nextUrl))
             }
 
             return NextResponse.next()
@@ -64,18 +64,18 @@ export async function auth(req: NextRequest) {
         } else if (session?.role === UserRole.Admin) {
             if (
                 isPublicRoute &&
-                !req.nextUrl.pathname.startsWith('/admin/dashboard')
-            ) return NextResponse.redirect(new URL('/admin/dashboard', req.nextUrl))
+                !req.nextUrl.pathname.startsWith(`/${locale}/admin/dashboard`)
+            ) return NextResponse.redirect(new URL(`/${locale}/admin/dashboard`, req.nextUrl))
 
-            if ((req.nextUrl.pathname.startsWith('/professional')) || (req.nextUrl.pathname.startsWith('/customer'))) return NextResponse.redirect(new URL('/admin/dashboard', req.nextUrl))
+            if ((req.nextUrl.pathname.startsWith(`/${locale}/professional`)) || (req.nextUrl.pathname.startsWith(`/${locale}/customer`))) return NextResponse.redirect(new URL(`/${locale}/admin/dashboard`, req.nextUrl))
 
             return NextResponse.next()
 
         } else {
 
-            if (isPublicRoute) return NextResponse.redirect(new URL('/', req.nextUrl))
+            if (isPublicRoute) return NextResponse.redirect(new URL(`/${locale}/`, req.nextUrl))
 
-            if ((req.nextUrl.pathname.startsWith('/professional')) || (req.nextUrl.pathname.startsWith('/admin'))) return NextResponse.redirect(new URL('/', req.nextUrl))
+            if ((req.nextUrl.pathname.startsWith(`/${locale}/professional`)) || (req.nextUrl.pathname.startsWith(`/${locale}/admin`))) return NextResponse.redirect(new URL(`/${locale}/`, req.nextUrl))
 
             return NextResponse.next()
         }
