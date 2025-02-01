@@ -48,6 +48,7 @@ export async function fetchApi<T>(
         headers: {
             'Accept-Language': 'en',
             'Content-Type': 'application/json',
+            'Accept': 'application/json, text/plain, */*',
             ...authHeaders,
             ...headers,
         },

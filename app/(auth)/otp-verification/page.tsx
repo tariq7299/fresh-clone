@@ -2,7 +2,7 @@ import OtpForm from "../_components/otp-form"
 import { Alert, AlertDescription, AlertTitle } from "@/_ui/components/alert";
 import { AlertCircle } from "lucide-react"
 import { UserRole } from "../_lib/definitions";
-
+import { Skeleton } from "@/_ui/components/skeleton";
 export default async function OtpVerificationPage(props: {
     searchParams?: Promise<{
         notVerified?: string;
@@ -20,6 +20,7 @@ export default async function OtpVerificationPage(props: {
 
     return (
         <>
+
             {notVerified && (
                 <div className="absolute top-0 left-0 w-full pt-20 p-5">
 

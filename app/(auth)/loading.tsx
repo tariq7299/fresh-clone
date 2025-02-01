@@ -4,9 +4,8 @@ import { Skeleton } from "@/_ui/components/skeleton";
 
 export default function Loading() {
     return (
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 w-full max-w-md p-5 my-auto">
             {/* Email field skeleton */}
-
             <div className="flex flex-col gap-2">
                 <Skeleton className="h-4 w-12" /> {/* Label */}
                 <Skeleton className="h-10 w-full rounded-md" /> {/* Input */}
@@ -27,5 +26,7 @@ export default function Loading() {
                 <Skeleton className="h-4 w-16" /> {/* "Sign up" link */}
             </div>
         </div>
+
+
     );
 }

@@ -38,13 +38,15 @@ export const login = async (formState: SuccessLoginFormState | ErrorLoginFormSta
 
     const authenticateUserResponse = await authenticateUser(formData)
 
+    console.log("authenticateUserResponse", authenticateUserResponse)
+
     let sessionData: SessionData;
 
     if (authenticateUserResponse.success) {
 
         sessionData = { ...authenticateUserResponse.data.user, token: authenticateUserResponse.data.token }
 
-        const successMsg = setApiSuccessMsg({ successResponse: authenticateUserResponse })
+        // const successMsg = setApiSuccessMsg({ successResponse: authenticateUserResponse })
 
         await loginUserServerSide(sessionData)
 
@@ -52,7 +54,7 @@ export const login = async (formState: SuccessLoginFormState | ErrorLoginFormSta
             success: true,
             clientFieldsErrors: null,
             apiDataResponse: sessionData,
-            apiMsgs: successMsg,
+            apiMsgs: authenticateUserResponse.apiMsgs,
             formData: {
                 email: formData.get('email') as string,
                 password: formData.get('password') as string,
@@ -63,13 +65,13 @@ export const login = async (formState: SuccessLoginFormState | ErrorLoginFormSta
 
         redirectToOtpIfNotVerified(authenticateUserResponse.status, authenticateUserResponse.code, formData.get('email') as string)
 
-        const errorMsg = setApiErrorMsg({ errResponse: authenticateUserResponse as ApiError })
+        // const errorMsg = setApiErrorMsg({ errResponse: authenticateUserResponse as ApiError })
 
         return {
             success: false,
             clientFieldsErrors: null,
             apiDataResponse: null,
-            apiMsgs: errorMsg,
+            apiMsgs: authenticateUserResponse.apiMsgs,
             formData: {
                 email: formData.get('email') as string,
                 password: formData.get('password') as string,

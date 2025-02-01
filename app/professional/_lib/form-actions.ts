@@ -550,7 +550,6 @@ export const handleSubmitBusinessCapacity = async (formState: ErrorFormState<Bus
 
     } catch (error) {
         console.error('Error submitting business capacity:', error);
-        const errorMsg = setApiErrorMsg({ errResponse: error as ApiError })
 
         // Move this outside of the catch block
         // if (error instanceof ApiError) {
@@ -561,7 +560,7 @@ export const handleSubmitBusinessCapacity = async (formState: ErrorFormState<Bus
             success: false,
             clientFieldsErrors: null,
             apiDataResponse: null,
-            apiMsgs: errorMsg,
+            apiMsgs: 'Error submitting business capacity',
             formData: { capacity: Number(formData.get("capacity")) || 0 }
         }
 
