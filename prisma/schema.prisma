@@ -30,7 +30,7 @@ model Business {
 
 model BusinessService {
   id          Int      @id @default(autoincrement())
-  business    Business @relation(fields: [businessId], references: [id])
+  business    Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
   businessId  Int
   service_id  Int
   duration    Int    
@@ -42,7 +42,7 @@ model BusinessService {
 
 model BusinessLocation {
   id          Int      @id @default(autoincrement())
-  business    Business @relation(fields: [businessId], references: [id])
+  business    Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
   businessId  Int      @unique
   lat         Float?    // Use Float for latitude
   lng         Float?    // Use Float for longitude

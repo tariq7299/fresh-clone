@@ -12,6 +12,8 @@ export default async function ProfessionalDashboardLayout({ children, params }: 
 
     const userData = await getUserData()
 
+
+
     const sidebarTabs = [
         {
             key: 'appointments',
