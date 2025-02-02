@@ -7,15 +7,19 @@ import { getUserData } from "@/[lang]/(auth)/_lib/auth-server-services"
 import { div } from "framer-motion/client"
 import { NotepadText } from "lucide-react"
 
-export default async function CustomerLayout({ children }: { children: React.ReactNode }) {
+export default async function CustomerLayout({ children, params }: { children: React.ReactNode, params: Promise<{ lang: string }> }) {
+
+    const currentLang = (await params).lang as string
 
     const userData = await getUserData()
+
+    console.log("currentLang", currentLang)
 
     const sidebarTabs = [
         {
             key: 'appointments',
             title: 'Appointments',
-            href: '/customer/dashboard/appointments',
+            href: `/${currentLang}/customer/dashboard/appointments`,
             icon: (<NotepadText />)
         },
         // {
