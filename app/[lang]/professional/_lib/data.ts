@@ -165,8 +165,6 @@ export const handleCreatingNewbusiness = async (): Promise<ApiResponse<BusinessO
         }
     })
 
-
-
     const formattedBusiness = {
         ...newBusiness,
         location: {
@@ -182,9 +180,9 @@ export const handleCreatingNewbusiness = async (): Promise<ApiResponse<BusinessO
             apartment: newBusiness?.location?.apartment,
             building: newBusiness?.location?.building,
             // floor: newBusiness?.location?.floor,
-            online_business: newBusiness?.location?.online_business
         },
-        gender: newBusiness?.gender_of_customers
+        gender: newBusiness?.gender_of_customers,
+        is_online: newBusiness?.location?.online_business
     }
 
 

@@ -33,6 +33,9 @@ export default function Form({ storedTempCapacity }: { storedTempCapacity: numbe
 
     const { setIsLoading } = useBusinessFormContext()
 
+
+
+
     const initialState: BusinessCapacityFormState = {
         success: false,
         clientFieldsErrors: null,
@@ -47,6 +50,8 @@ export default function Form({ storedTempCapacity }: { storedTempCapacity: numbe
 
     const [formState, formAction, isPending] = useActionState<BusinessCapacityFormState | void>(handleSubmitBusinessCapacity, initialState)
 
+    console.log("storedTempCapacity", storedTempCapacity)
+    console.log("FORM VALUES", formValues)
 
     useEffect(() => {
         setIsLoading(isPending)
@@ -84,7 +89,7 @@ export default function Form({ storedTempCapacity }: { storedTempCapacity: numbe
 
         <div className="flex flex-col gap-2 ">
             {/* <Label className="font-bold" htmlFor="capacity">Business capacity</Label> */}
-            <Select disabled={isPending} name="capacity" value={formValues.capacity?.toString() || ""} onValueChange={(value) => setFormValues({ capacity: Number(value) })}>
+            <Select disabled={isPending} name="capacity" value={formValues.capacity?.toString() || ""} onValueChange={(value) => setFormValues({ capacity: value })}>
                 <SelectTrigger className="w-full p-6 text-md">
                     <SelectValue placeholder="Select a your business capacity" />
                 </SelectTrigger>

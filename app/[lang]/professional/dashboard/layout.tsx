@@ -6,11 +6,13 @@ import { NavBarSkeleton } from "@/[lang]/(home)/_components/skeletons"
 import { getUserData } from "@/[lang]/(auth)/_lib/auth-server-services"
 import { NotepadText } from "lucide-react"
 
-export default async function ProfessionalDashboardLayout({ children, params }: { children: React.ReactNode, params: { lang: string } }) {
+export default async function ProfessionalDashboardLayout({ children, params }: { children: React.ReactNode, params: Promise<{ lang: string }> }) {
 
-    const currentLang = params.lang as string
+    const currentLang = (await params).lang as string
 
     const userData = await getUserData()
+
+
 
     const sidebarTabs = [
         {

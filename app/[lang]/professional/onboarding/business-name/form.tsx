@@ -62,7 +62,7 @@ export default function Form({ storedTempBusinessInfo }: { storedTempBusinessInf
         </div>
         <div className="flex flex-col gap-2">
             <Label className="font-bold" htmlFor="websiteUrl">Website (Optional)</Label>
-            <Input disabled={isPending} value={formValues.websiteUrl} onChange={(e) => setFormValues({ ...formValues, websiteUrl: e.target.value })} type="text" name="websiteUrl" id="websiteUrl" placeholder="https://www.bekkybarber.com" />
+            <Input type="url" disabled={isPending} value={formValues.websiteUrl} onChange={(e) => setFormValues({ ...formValues, websiteUrl: e.target.value })} name="websiteUrl" id="websiteUrl" placeholder="https://www.bekkybarber.com" />
             <p className="text-sm text-destructive ">{formState.clientFieldsErrors?.websiteUrl?.[0]}</p>
         </div>
         <div className="flex flex-col gap-2">

@@ -22,7 +22,7 @@ const businessNameSchema = z.object({
     nameAr: z.string().trim().min(3, { message: "Business name (Ar) is required" }),
     descriptionEn: z.string().trim().min(3, { message: "Description (En) is required" }),
     descriptionAr: z.string().trim().min(3, { message: "Description (Ar) is required" }),
-    websiteUrl: z.string().trim().min(3, { message: "Website URL is required" }),
+    websiteUrl: z.string().regex(/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/, { message: "Please enter a valid URL starting with http:// or https://" }).url({ message: "Please enter a valid URL" }),
     genderOfCustomers: z.enum(["male", "female", "both"], { message: "Please select a gender" })
 })
 
@@ -43,6 +43,8 @@ export type BusinessNameFieldErrors = {
     genderOfCustomers?: string | string[]
 }
 
+
+
 export type BusinessNameFormState = SuccessFormState<BusinessNameFormData, BusinessNameFormData> | ErrorFormState<BusinessNameFieldErrors |
     null, BusinessNameFormData>
 
@@ -57,6 +59,8 @@ export const handleSubmitBusinessName = async (formState: BusinessNameFormState,
         websiteUrl: formData.get("websiteUrl") as string || "",
         genderOfCustomers: formData.get("genderOfCustomers") as GenderOfCustomers || "",
     }
+
+    console.log("payload", payload)
 
     const session = await getSession()
     const userId = session ? session.id : null
@@ -115,7 +119,6 @@ export const handleSubmitBusinessName = async (formState: BusinessNameFormState,
         //     formData: payload
         // }
     }
-
 
     redirect("/professional/onboarding/business-category")
 }
@@ -474,8 +477,11 @@ export const handleSubmitBusinessCapacity = async (formState: ErrorFormState<Bus
     const userId = session ? session.id : null
     if (!userId || !session) redirect("/login?sessionEnded=true")
 
-
+    console.log("formData.get('capacity')", formData.get("capacity"))
     const validatedFields = businessCapacitySchema.safeParse({ capacity: Number(formData.get("capacity")) || 0 } as BusinessCapacityFormData)
+    console.log("validatedFields", validatedFields)
+
+
 
     if (!validatedFields.success) {
         return {
@@ -488,7 +494,6 @@ export const handleSubmitBusinessCapacity = async (formState: ErrorFormState<Bus
     }
 
     try {
-
 
         const business = await prisma.business.findUnique({
             where: {
