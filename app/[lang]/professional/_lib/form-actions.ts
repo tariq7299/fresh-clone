@@ -1,20 +1,17 @@
 "use server"
 
-import { categories } from "@/_ui/components/custom/category"
 import { z } from "zod"
 import prisma from "@/_lib/prisma"
 import { createSession, getSession } from "@/[lang]/(auth)/_lib/sessions"
 import { redirect } from "next/navigation"
 import { SuccessFormState } from "@/_lib/definitions/definitions"
 import { ErrorFormState } from "@/_lib/definitions/definitions"
-import { BusinessOnboarding, GenderOfCustomers, Service } from "./definitions"
+import { GenderOfCustomers, Service } from "./definitions"
 import { BusinessLocationErrors } from "../onboarding/business-location/business-location-form"
 import { BusinessLocationFormData } from "../onboarding/business-location/business-location-form"
 import { BusinessCapacityFormData } from "../onboarding/business-capacity/business-capacity-form"
 import { BusinessCapacityFieldErrors } from "../onboarding/business-capacity/business-capacity-form"
-import { ApiError } from "@/_lib/definitions/api"
 import { setApiSuccessMsg } from "@/_lib/utils/api/setApiSuccessMsg"
-import { setApiErrorMsg } from "@/_lib/utils/api/setApiErrorMsg"
 import { handleCreatingNewbusiness, removeTempBusinessFormSumbissions } from "./data"
 
 const businessNameSchema = z.object({
@@ -30,7 +27,7 @@ const businessCategorySchema = z.object({
     categoryId: z.string().trim().min(1, { message: "Please select a category" }),
 })
 
-// 
+
 export type BusinessNameFormData = z.infer<typeof businessNameSchema>
 export type BusinessCategoryFormData = z.infer<typeof businessCategorySchema>
 
@@ -42,8 +39,6 @@ export type BusinessNameFieldErrors = {
     websiteUrl?: string | string[]
     genderOfCustomers?: string | string[]
 }
-
-
 
 export type BusinessNameFormState = SuccessFormState<BusinessNameFormData, BusinessNameFormData> | ErrorFormState<BusinessNameFieldErrors |
     null, BusinessNameFormData>
@@ -122,7 +117,6 @@ export const handleSubmitBusinessName = async (formState: BusinessNameFormState,
 
     redirect("/professional/onboarding/business-category")
 }
-
 
 export const handleSubmitBusinessCategory = async (formState: ErrorFormState<{ categoryId?: string | string[] } | null, BusinessCategoryFormData>, formData: FormData): Promise<ErrorFormState<{ categoryId?: string[] | string } | null, BusinessCategoryFormData>> => {
 
@@ -270,7 +264,10 @@ export const handleSubmitBusinessServices = async (formData: Service[]): Promise
                 });
             }));
 
+        }, {
+            timeout: 10000, // Increase timeout to 10 seconds (10000 ms)
         });
+
 
     } catch (error) {
         console.error('Error submitting business services:', error);
@@ -477,7 +474,7 @@ export const handleSubmitBusinessCapacity = async (formState: ErrorFormState<Bus
     const userId = session ? session.id : null
     if (!userId || !session) redirect("/login?sessionEnded=true")
 
-    console.log("formData.get('capacity')", formData.get("capacity"))
+    console.log("formData.get('capacity')", Number(formData.get("capacity")))
     const validatedFields = businessCapacitySchema.safeParse({ capacity: Number(formData.get("capacity")) || 0 } as BusinessCapacityFormData)
     console.log("validatedFields", validatedFields)
 
