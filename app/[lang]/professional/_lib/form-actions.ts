@@ -55,8 +55,6 @@ export const handleSubmitBusinessName = async (formState: BusinessNameFormState,
         genderOfCustomers: formData.get("genderOfCustomers") as GenderOfCustomers || "",
     }
 
-    console.log("payload", payload)
-
     const session = await getSession()
     const userId = session ? session.id : null
     if (!userId) {
@@ -474,10 +472,7 @@ export const handleSubmitBusinessCapacity = async (formState: ErrorFormState<Bus
     const userId = session ? session.id : null
     if (!userId || !session) redirect("/login?sessionEnded=true")
 
-    console.log("formData.get('capacity')", Number(formData.get("capacity")))
     const validatedFields = businessCapacitySchema.safeParse({ capacity: Number(formData.get("capacity")) || 0 } as BusinessCapacityFormData)
-    console.log("validatedFields", validatedFields)
-
 
 
     if (!validatedFields.success) {

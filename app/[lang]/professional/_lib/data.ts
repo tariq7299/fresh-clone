@@ -251,6 +251,7 @@ export const getAppointments = async () => {
     if (res.success) {
         return res?.data?.bookings
     }
+
     redirectToLoginIfNotAuthenticated(res.apiMsgs, ["sessionEnded=true"])
     return []
 
