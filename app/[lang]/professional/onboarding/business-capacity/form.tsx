@@ -86,22 +86,42 @@ export default function Form({ storedTempCapacity }: { storedTempCapacity: numbe
 
     return <form action={formAction} id="business-onboarding-form" className="flex flex-col gap-2 w-full">
 
-
         <div className="flex flex-col gap-2 ">
+
+            <label htmlFor="capacity" className="font-bold sr-only">Business capacity</label>
+
             {/* <Label className="font-bold" htmlFor="capacity">Business capacity</Label> */}
-            <Select disabled={isPending} name="capacity" value={formValues.capacity?.toString() || ""} onValueChange={(value) => setFormValues({ capacity: value })}>
+            {/* <Select disabled={isPending} name="capacity" value={formValues.capacity?.toString() || ""} onValueChange={(value) => setFormValues({ capacity: value })}>
                 <SelectTrigger className="w-full p-6 text-md">
                     <SelectValue placeholder="Select a your business capacity" />
                 </SelectTrigger>
                 <SelectContent>
+
                     <SelectGroup>
                         <SelectLabel>Business capacity</SelectLabel>
                         {Array.from({ length: 10 }, (_, i) => i + 1).map(num => (
                             <SelectItem key={num} value={num.toString()}>{num} {num === 1 ? "person" : "people"}</SelectItem>
                         ))}
+
                     </SelectGroup>
                 </SelectContent>
-            </Select>
+            </Select> */}
+            <select
+
+                id="capacity"
+                name="capacity"
+                disabled={isPending}
+                value={String(formValues?.capacity)}
+                onChange={(e) => setFormValues({ capacity: e.target.value })}
+                className="w-full p-3 text-md border rounded-lg"
+            >
+                <option value="" disabled className="hover:bg-accent-100">Select your business capacity</option>
+                {Array.from({ length: 10 }, (_, i) => i + 1).map(num => (
+                    <option key={num} value={num.toString()}>
+                        {num} {num === 1 ? "person" : "people"}
+                    </option>
+                ))}
+            </select>
             {formState?.clientFieldsErrors?.capacity && <p className="text-destructive">{formState.clientFieldsErrors?.capacity}</p>}
         </div>
 
