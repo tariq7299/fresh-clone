@@ -65,9 +65,11 @@ export function DataTable<TData, TValue>({
     if (table.getRowModel().rows.length === 0) {
         return (
             <div className="flex items-center justify-center h-full flex-col text-muted-foreground">
-                <Empty className="w-[416px] h-[328px] mx-auto" />
+                <Empty className="md:size-3/5 mx-auto" />
                 <p className="">Your schedule is looking a little empty.</p>
             </div>
+
+
         )
     }
 
