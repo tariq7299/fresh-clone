@@ -26,6 +26,7 @@ import { Button } from "../button"
 import { Input } from "../input"
 import { Label } from "../label"
 import { Store, ChevronDown } from 'lucide-react';
+import Empty from "@/_ui/icons/empty";
 
 
 
@@ -61,8 +62,19 @@ export function DataTable<TData, TValue>({
         }
     })
 
+    if (table.getRowModel().rows.length === 0) {
+        return (
+            <div className="flex items-center justify-center h-full flex-col text-muted-foreground">
+                <Empty className="w-[416px] h-[328px] mx-auto" />
+                <p className="">Your schedule is looking a little empty.</p>
+            </div>
+        )
+    }
+
+
     return (
         <>
+
 
             <div className="pb-4">
 
@@ -129,7 +141,7 @@ export function DataTable<TData, TValue>({
                         ) : (
                             <TableRow>
                                 <TableCell colSpan={columns.length} className="h-24 text-center">
-                                    No results.
+                                    <p className="text-sm">No results.</p>
                                 </TableCell>
                             </TableRow>
                         )}
