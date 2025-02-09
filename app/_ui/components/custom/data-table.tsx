@@ -36,6 +36,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/_ui/components/select"
+import { Separator } from "../separator"
 
 
 const STATUS_OPTIONS = ["completed", "cancelled", "confirmed"]
@@ -110,11 +111,37 @@ export function DataTable<TData, TValue>({
                                     <SelectValue placeholder="Select status" />
                                 </SelectTrigger>
                                 <SelectContent>
-                                    {STATUS_OPTIONS.map((status) => (
-                                        <SelectItem key={status} value={status}>
-                                            {status}
-                                        </SelectItem>
-                                    ))}
+                                    <SelectGroup>
+
+                                        <div className='flex justify-between w-full items-center'>
+                                            <SelectLabel className="p-2">Status</SelectLabel>
+                                            <Button
+                                                // disabled={!field?.value}
+                                                variant="outline"
+                                                size="sm"
+                                                // TODO: clear the filter
+
+
+
+                                                onClick={(e) => {
+                                                    e.stopPropagation()
+                                                    // setValue(`${filter?.filter_name}.fieldValue`, "")
+                                                    console.log("clear")
+                                                }}
+                                            >
+                                                Clear
+                                            </Button>
+                                        </div>
+                                        <Separator className="h-1 w-full" />
+                                        {STATUS_OPTIONS.map((status) => (
+                                            <SelectItem key={status} value={status}>
+                                                {status}
+                                            </SelectItem>
+                                        ))}
+
+
+                                    </SelectGroup>
+
                                 </SelectContent>
                             </Select>
                         </div>
