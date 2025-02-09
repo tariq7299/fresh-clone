@@ -116,7 +116,7 @@ export default function AppointmentsTable({ appointments, filters }: Appointment
                     </DialogContent>
                 </Dialog>
 
-                return <div>{services.map(service => service.name).join(", ")}</div>
+                // return <div>{services.map(service => service.name).join(", ")}</div>
             }
         },
         {

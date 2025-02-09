@@ -27,8 +27,18 @@ import { Input } from "../input"
 import { Label } from "../label"
 import { Store, ChevronDown } from 'lucide-react';
 import Empty from "@/_ui/icons/empty";
+import {
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectLabel,
+    SelectTrigger,
+    SelectValue,
+} from "@/_ui/components/select"
 
 
+const STATUS_OPTIONS = ["completed", "cancelled", "confirmed"]
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
@@ -78,7 +88,40 @@ export function DataTable<TData, TValue>({
         <>
 
 
-            <div className="pb-4">
+            <div className="pb-4 flex items-center gap-2">
+
+                <Popover>
+                    <PopoverTrigger asChild>
+                        <Button variant="ghost" className="bg-transparent border border-gray-300 rounded-lg flex items-center gap-2" >
+                            <Store className="w-10 h-10 " />
+                            <p className="text-sm">Status</p>
+                            <ChevronDown className="w-4 h-4" />
+                        </Button>
+                    </PopoverTrigger>
+
+                    <PopoverContent className="md:min-w-[300px]">
+                        <div className="flex items-start gap-2 flex-col">
+                            <div className="flex gap-2 items-center">
+                                <Store className="size-6" />
+                                <Label className="text-md">Status</Label>
+                            </div>
+                            <Select>
+                                <SelectTrigger>
+                                    <SelectValue placeholder="Select status" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    {STATUS_OPTIONS.map((status) => (
+                                        <SelectItem key={status} value={status}>
+                                            {status}
+                                        </SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
+                        </div>
+
+
+                    </PopoverContent>
+                </Popover>
 
                 <Popover>
                     <PopoverTrigger asChild>
@@ -89,9 +132,7 @@ export function DataTable<TData, TValue>({
                         </Button>
                     </PopoverTrigger>
 
-
-
-                    <PopoverContent>
+                    <PopoverContent className="md:min-w-[300px]">
                         <div className="flex items-start gap-2 flex-col">
                             <div className="flex gap-2 items-center">
                                 <Store className="size-6" />
