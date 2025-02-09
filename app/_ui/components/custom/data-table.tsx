@@ -2,8 +2,10 @@
 
 import {
     ColumnDef,
+    ColumnFiltersState,
     flexRender,
     getCoreRowModel,
+    getFilteredRowModel,
     useReactTable,
 } from "@tanstack/react-table"
 
@@ -61,11 +63,17 @@ export function DataTable<TData, TValue>({
 
 
     const [tableData, setTableData] = useState(data)
+    const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>(
+        []
+
+    )
 
     const table = useReactTable({
         data: tableData,
         columns,
+        onColumnFiltersChange: setColumnFilters,
         getCoreRowModel: getCoreRowModel(),
+        getFilteredRowModel: getFilteredRowModel(),
         meta: {
             updateData: (rowIndex: number, columnId: string, value: string) => {
                 setTableData((prev) =>
@@ -74,19 +82,23 @@ export function DataTable<TData, TValue>({
                     )
                 );
             },
+        },
+        state: {
+            columnFilters,
         }
     })
 
-    if (table.getRowModel().rows.length === 0) {
-        return (
-            <div className="flex items-center justify-center h-full flex-col text-muted-foreground">
-                <Empty className="md:size-3/5 mx-auto" />
-                <p className="">Your schedule is looking a little empty.</p>
-            </div>
+
+    // if (table.getRowModel().rows.length === 0) {
+    //     return (
+    //         <div className="flex items-center justify-center h-full flex-col text-muted-foreground">
+    //             <Empty className="md:size-3/5 mx-auto" />
+    //             <p className="">Your schedule is looking a little empty.</p>
+    //         </div>
 
 
-        )
-    }
+    //     )
+    // }
 
     console.log("table.getAllColumns()", table.getAllColumns())
     console.log("table.getHeaderGroups()", table.getHeaderGroups())
@@ -128,12 +140,17 @@ export function DataTable<TData, TValue>({
                                                 <Label className="text-md">{table.getColumn(filter.colName)?.columnDef.header as React.ReactNode || filter.colName}</Label>
 
 
-
-
                                             </div>
 
-                                            <Input placeholder="Filter business name..." type="text" />
+                                            <Input
+                                                placeholder="Filter business name..." type="text"
+                                                value={table.getColumn(filter.colName)?.getFilterValue() as string ?? ""}
+                                                onChange={(e) => {
+                                                    table.getColumn(filter.colName)?.setFilterValue(e.target.value)
+                                                }}
+                                            />
                                         </>
+
 
                                     ) : (
                                         <>
