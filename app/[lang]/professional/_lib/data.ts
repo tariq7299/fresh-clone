@@ -1,15 +1,12 @@
 
-import { createSession, getSession } from "@/[lang]/(auth)/_lib/sessions";
+import { getSession } from "@/[lang]/(auth)/_lib/sessions";
 import prisma from "@/_lib/prisma";
 import { redirect } from "next/navigation";
 import { StoredTempCategory } from "../onboarding/business-category/business-category-form";
 import { BusinessOnboarding } from "./definitions";
 import { fetchApi } from "@/_lib/utils/api/fetch-utils";
-import { ApiResponse, ApiError, ApiSucess } from "@/_lib/definitions/api";
-import { SessionData } from "@/[lang]/(auth)/_lib/definitions";
-import SecureLS from "secure-ls";
-import { setApiErrorMsg } from "@/_lib/utils/api/setApiErrorMsg";
-import { setApiSuccessMsg } from "@/_lib/utils/api/setApiSuccessMsg";
+import { ApiResponse } from "@/_lib/definitions/api";
+
 import { redirectToLoginIfNotAuthenticated } from "@/[lang]/(auth)/_lib/redirect-to-login-if-not-authenticated";
 
 export const getBusinessStepFormData = async (stepName: string) => {

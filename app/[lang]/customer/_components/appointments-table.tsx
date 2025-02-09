@@ -19,8 +19,20 @@ import { Button } from "@/_ui/components/button"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/_ui/components/dialog"
 import { getTotalDuration } from "@/_lib/utils/utils"
 import { Appointment, Service } from "../_lib/definitions"
+import { Filter } from "./appointments"
 
-export default function AppointmentsTable({ appointments }: { appointments: Appointment[] }) {
+
+
+interface AppointmentsTableProps {
+    appointments: Appointment[]
+    filters?: Filter[]
+}
+
+
+
+
+export default function AppointmentsTable({ appointments, filters }: AppointmentsTableProps) {
+
 
     const columns: ColumnDef<Appointment>[] = [
         {
@@ -123,6 +135,7 @@ export default function AppointmentsTable({ appointments }: { appointments: Appo
     ]
 
     return (
-        <DataTable columns={columns} data={appointments} />
+        <DataTable filters={filters} columns={columns} data={appointments} />
     )
+
 }

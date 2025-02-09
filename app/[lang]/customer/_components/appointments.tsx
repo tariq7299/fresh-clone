@@ -1,6 +1,10 @@
 import { getAppointments } from "../_lib/data";
 import AppointmentsTable from "./appointments-table";
 
+export interface Filter {
+    type: "string" | "number" | "date" | "boolean" | "select"
+    colName: string
+}
 
 interface Service {
     id: number,
@@ -45,10 +49,22 @@ export default async function Appointments() {
     }
     ))
 
+    const filters: Filter[] = [
+        {
+            type: "string",
+            colName: "business_name"
+        },
+        {
+            type: "select",
+            colName: "status"
+        }
+    ]
+
+
     return (
         <div className="p-5 ps-14 pt-8 md:pt-24 size-full over">
             <h1 className="text-2xl md:text-3xl font-semibold font-source-sans pb-3">Appointments</h1>
-            <AppointmentsTable appointments={appointments} />
+            <AppointmentsTable filters={filters} appointments={appointments} />
         </div>
     )
 }
