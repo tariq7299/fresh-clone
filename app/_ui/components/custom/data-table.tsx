@@ -39,7 +39,11 @@ import {
 import { Separator } from "../separator"
 
 
-const STATUS_OPTIONS = ["completed", "cancelled", "confirmed"]
+const STATUS_OPTIONS = [
+    { id: "completed", label: "Completed" },
+    { id: "cancelled", label: "Cancelled" },
+    { id: "confirmed", label: "Confirmed" }
+]
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
@@ -84,93 +88,115 @@ export function DataTable<TData, TValue>({
         )
     }
 
+    console.log("table.getAllColumns()", table.getAllColumns())
+    console.log("table.getHeaderGroups()", table.getHeaderGroups())
+    console.log("table.getColumn()", table.getColumn("business_name"))
+
+
+
 
     return (
         <>
 
 
-            <div className="pb-4 flex items-center gap-2">
+            {filters && filters.length > 0 && (
+                <div className="pb-4 flex items-center gap-2">
 
-                <Popover>
-                    <PopoverTrigger asChild>
-                        <Button variant="ghost" className="bg-transparent border border-gray-300 rounded-lg flex items-center gap-2" >
-                            <Store className="w-10 h-10 " />
-                            <p className="text-sm">Status</p>
-                            <ChevronDown className="w-4 h-4" />
-                        </Button>
-                    </PopoverTrigger>
+                    {filters.map(filter => (
 
-                    <PopoverContent className="md:min-w-[300px]">
-                        <div className="flex items-start gap-2 flex-col">
-                            <div className="flex gap-2 items-center">
-                                <Store className="size-6" />
-                                <Label className="text-md">Status</Label>
-                            </div>
-                            <Select>
-                                <SelectTrigger>
-                                    <SelectValue placeholder="Select status" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <SelectGroup>
 
-                                        <div className='flex justify-between w-full items-center'>
-                                            <SelectLabel className="p-2">Status</SelectLabel>
-                                            <Button
-                                                // disabled={!field?.value}
-                                                variant="outline"
-                                                size="sm"
-                                                // TODO: clear the filter
+                        <Popover key={filter.colName}>
+                            <PopoverTrigger asChild>
+                                <Button variant="ghost" className="bg-transparent border border-gray-300 rounded-lg flex items-center gap-2" >
+                                    {filter.icon}
+                                    <p className="text-sm"> {table.getColumn(filter.colName)?.columnDef.header as React.ReactNode || filter.colName}</p>
+                                    <ChevronDown className="w-4 h-4" />
+                                </Button>
+
+
+                            </PopoverTrigger>
+                            <PopoverContent className="md:min-w-[300px]">
+
+
+                                <div className="flex items-start gap-2 flex-col">
+
+
+                                    {filter.type === "string" ? (
+                                        <>
+                                            <div className="flex gap-2 items-center">
+                                                {filter.icon}
+                                                <Label className="text-md">{table.getColumn(filter.colName)?.columnDef.header as React.ReactNode || filter.colName}</Label>
 
 
 
-                                                onClick={(e) => {
-                                                    e.stopPropagation()
-                                                    // setValue(`${filter?.filter_name}.fieldValue`, "")
-                                                    console.log("clear")
-                                                }}
-                                            >
-                                                Clear
-                                            </Button>
-                                        </div>
-                                        <Separator className="h-1 w-full" />
-                                        {STATUS_OPTIONS.map((status) => (
-                                            <SelectItem key={status} value={status}>
-                                                {status}
-                                            </SelectItem>
-                                        ))}
+
+                                            </div>
+
+                                            <Input placeholder="Filter business name..." type="text" />
+                                        </>
+
+                                    ) : (
+                                        <>
+                                            <div className="flex gap-2 items-center">
+                                                {filter.icon}
+                                                <Label className="text-md">{table.getColumn(filter.colName)?.columnDef.header as React.ReactNode || filter.colName}</Label>
 
 
-                                    </SelectGroup>
 
-                                </SelectContent>
-                            </Select>
-                        </div>
+                                            </div>
+                                            <Select>
+                                                <SelectTrigger>
+                                                    <SelectValue placeholder="Select value" />
+                                                </SelectTrigger>
+                                                <SelectContent>
+                                                    <SelectGroup>
+
+                                                        <div className='flex justify-between w-full items-center'>
+                                                            <SelectLabel className="p-2">{table.getColumn(filter.colName)?.columnDef.header as React.ReactNode || filter.colName}</SelectLabel>
+                                                            <Button
+                                                                // disabled={!field?.value}
+                                                                variant="outline"
+                                                                size="sm"
+                                                                // TODO: clear the filter
 
 
-                    </PopoverContent>
-                </Popover>
 
-                <Popover>
-                    <PopoverTrigger asChild>
-                        <Button variant="ghost" className="bg-transparent border border-gray-300 rounded-lg flex items-center gap-2" >
-                            <Store className="w-10 h-10 " />
-                            <p className="text-sm">Business Name</p>
-                            <ChevronDown className="w-4 h-4" />
-                        </Button>
-                    </PopoverTrigger>
 
-                    <PopoverContent className="md:min-w-[300px]">
-                        <div className="flex items-start gap-2 flex-col">
-                            <div className="flex gap-2 items-center">
-                                <Store className="size-6" />
-                                <Label className="text-md">Business Name</Label>
-                            </div>
-                            <Input placeholder="Filter business name..." type="text" />
-                        </div>
+                                                                onClick={(e) => {
+                                                                    e.stopPropagation()
+                                                                    // setValue(`${filter?.filter_name}.fieldValue`, "")
+                                                                    console.log("clear")
+                                                                }}
+                                                            >
+                                                                Clear
+                                                            </Button>
+                                                        </div>
+                                                        {filter.options?.map((option) => (
+                                                            <SelectItem key={option.id} value={option.id}>
+                                                                {option.label}
+                                                            </SelectItem>
+                                                        ))}
 
-                    </PopoverContent>
-                </Popover>
-            </div>
+
+                                                    </SelectGroup>
+
+                                                </SelectContent>
+                                            </Select>
+                                        </>
+                                    )}
+
+
+
+
+
+                                </div>
+
+                            </PopoverContent>
+                        </Popover>
+                    ))}
+                </div>
+            )}
+
 
             <div className="rounded-lg border">
 

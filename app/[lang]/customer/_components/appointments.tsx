@@ -1,10 +1,15 @@
+import { CheckCircle, Store } from "lucide-react";
 import { getAppointments } from "../_lib/data";
 import AppointmentsTable from "./appointments-table";
 
 export interface Filter {
     type: "string" | "number" | "date" | "boolean" | "select"
     colName: string
+    icon?: React.ReactNode
+    options?: { id: string, label: string }[]
 }
+
+
 
 interface Service {
     id: number,
@@ -52,13 +57,24 @@ export default async function Appointments() {
     const filters: Filter[] = [
         {
             type: "string",
-            colName: "business_name"
+            colName: "business_name",
+            icon: <Store className="size-6" />
         },
+
+
         {
             type: "select",
-            colName: "status"
+            colName: "status",
+            options: [
+                { id: "completed", label: "Completed" },
+                { id: "cancelled", label: "Cancelled" },
+                { id: "confirmed", label: "Confirmed" }
+            ],
+            icon: <CheckCircle className="size-6" />
         }
     ]
+
+
 
 
     return (
