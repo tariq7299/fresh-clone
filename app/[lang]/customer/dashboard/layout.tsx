@@ -45,17 +45,18 @@ export default async function CustomerLayout({ children, params }: { children: R
 
     return (
         <SidebarProvider>
-            <AppSidebar userData={userData} sidebarTabs={sidebarTabs} containerClass="pt-[70px]" triggerClass="top-16" />
+
+            <AppSidebar userData={userData} sidebarTabs={sidebarTabs} containerClass="pt-[70px]" triggerClass="top-18" />
 
             {/* Nav bar */}
             <Suspense fallback={<NavBarSkeleton />}>
-                <NavBar className="max-w-full" fixed={true} hideInMobile={true} />
+                <NavBar showForBusiness={false} className="!px-20 max-w-full" fixed={true} hideInMobile={true} />
             </Suspense>
 
             <div className="bg-gray-50 h-dvh w-full">
 
                 {/* Sidebar trigger on mobile */}
-                <SidebarTrigger className="md:hidden fixed top-0 left-0" />
+                <SidebarTrigger className="md:hidden fixed top-0 left-0 text-accent" />
                 {children}
             </div>
 

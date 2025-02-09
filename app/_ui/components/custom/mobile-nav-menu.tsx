@@ -30,7 +30,7 @@ export default function MobileNavMenu({ authenticated, navTabs, isScrolled, fixe
             )}>
 
                 <div className="bg-transparent  flex justify-between items-center p-5 mb-8">
-                    <p className={cn("text-2xl font-extrabold font-lora ")}>Lumière</p>
+                    <p className={cn("text-2xl font-bold font-cinzel ")}>Lumière</p>
 
                     <Button size="icon" variant={"ghost"} onClick={() => setIsOpen(!isOpen)}>
                         <XMarkIcon className='size-9' />

@@ -12,7 +12,7 @@ const LibreBodoniSerif = Libre_Bodoni({
     subsets: ["latin"],
 });
 const LoraSerif = Lora({
-    variable: "--font-lora-serif",
+    variable: "--font-cinzel-serif",
     subsets: ["latin"],
 });
 const SourceSans3Sans = Source_Sans_3({

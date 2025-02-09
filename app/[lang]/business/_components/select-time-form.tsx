@@ -104,7 +104,7 @@ export default function SelectTimeForm({ businessId, minDateToBook, maxDateToBoo
         <div className="flex justify-between items-center">
 
             <p className="text-xl font-black text-primary">
-                <span className="text-accent-600 text-5xl font-lora">{format(date || INITIAL_DATE, "d")}</span> {format(date || INITIAL_DATE, "MMMM")} {format(date || INITIAL_DATE, "yyyy")}
+                <span className="text-accent-600 text-5xl font-cinzel">{format(date || INITIAL_DATE, "d")}</span> {format(date || INITIAL_DATE, "MMMM")} {format(date || INITIAL_DATE, "yyyy")}
             </p>
             <Popover>
                 <PopoverTrigger asChild>

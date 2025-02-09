@@ -7,10 +7,11 @@ import { SessionData } from "@/[lang]/(auth)/_lib/definitions"
 import useLocalStorage from "@/_lib/hooks/use-local-storage"
 
 export default function AdminDashboard() {
+
     const [_, setSessionData] = useLocalStorage<SessionData | null>({ key: "user", defaultValue: null })
 
-
     return <div>
+
         Admin Dashboard
 
         <Button onClick={() => {

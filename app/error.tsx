@@ -28,7 +28,7 @@ export default function Error({
         <main className="flex h-dvh flex-col items-center justify-center gap-1 p-5">
 
             <TriangleAlert className='size-36 text-destructive-500' />
-            <h1 className="text-center font-lora text-4xl">An error occurred</h1>
+            <h1 className="text-center font-cinzel text-4xl">An error occurred</h1>
 
             <p className='text-center text-muted-foreground'>Looks like there was a problem loading this page. A reload will usually fix most issues.</p>
 

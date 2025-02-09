@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Source_Sans_3, Libre_Bodoni, Lora, Quicksand } from "next/font/google";
+import { Geist, Geist_Mono, Source_Sans_3, Libre_Bodoni, Lora, Quicksand, Cinzel } from "next/font/google";
 import "@/_ui/globals.css";
 import SonnerToaster from "@/_ui/ToasterSonner"
 
@@ -12,10 +12,14 @@ const LibreBodoniSerif = Libre_Bodoni({
     variable: "--font-libre-bodoni-serif",
     subsets: ["latin"],
 });
-const LoraSerif = Lora({
-    variable: "--font-lora-serif",
+const CinzelSerif = Cinzel({
+    variable: "--font-cinzel-serif",
     subsets: ["latin"],
 });
+// const LoraSerif = Lora({
+//     variable: "--font-cinzel-serif",
+//     subsets: ["latin"],
+// });
 const SourceSans3Sans = Source_Sans_3({
     variable: "--font-source-sans-3-sans",
     subsets: ["latin"],
@@ -56,7 +60,7 @@ export default async function RootLayout({
     return (
         <html lang={"en"} dir={"ltr"}>
             <body
-                className={`${LibreBodoniSerif.variable} ${LoraSerif.variable} ${SourceSans3Sans.variable} ${QuicksandSans.variable} antialiased `}
+                className={`${LibreBodoniSerif.variable} ${CinzelSerif.variable} ${SourceSans3Sans.variable} ${QuicksandSans.variable} antialiased `}
             >
                 {/* 
         This is the provider for the nextui library

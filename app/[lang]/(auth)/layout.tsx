@@ -18,7 +18,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
                 <div className="w-full sticky top-0 z-50 p-4 flex items-center gap-2 justify-between bg-background ">
                     <BackButton />
-                    <Link href="/" className={cn("text-2xl font-extrabold font-lora")}>Lumière</Link>
+                    <Link href="/" className={cn("text-2xl font-cinzel font-bold")}>Lumière</Link>
                 </div>
 
                 {/* Here is the content */}

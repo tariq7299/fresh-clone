@@ -27,7 +27,7 @@ export default function ForWhoDialog() {
 
                         <h1 className="text-center text-2xl font-bold font-source-sans">Get Started with the Right Experience
                         </h1>
-                        <p className="text-muted-foreground text-sm text-center pb-4">How would you like to use <span className="font-extrabold font-lora">Lumière</span>?</p>
+                        <p className="text-muted-foreground text-sm text-center pb-4">How would you like to use <span className="font-bold font-cinzel">Lumière</span>?</p>
 
                         <div className="flex flex-col gap-3">
                             {loginRequiredForBooking ? (
@@ -35,7 +35,7 @@ export default function ForWhoDialog() {
 
                                     <Link href="/register?type=customer?loginRequiredForBooking=true" className="flex  justify-between items-center p-4 border rounded-lg hover:bg-muted" replace>
                                         <div>
-                                            <p><span className="font-extrabold font-lora">Lumière</span> for customers</p>
+                                            <p><span className="font-bold font-cinzel">Lumière</span> for customers</p>
                                             <p>Book salons and spas near you</p>
                                         </div>
                                         <ArrowRightIcon className="size-5" />
@@ -43,7 +43,7 @@ export default function ForWhoDialog() {
 
                                     <Link href="/register?type=professional?loginRequiredForBooking=true" className="flex  justify-between items-center p-4 border rounded-lg hover:bg-muted" replace>
                                         <div>
-                                            <p><span className="font-extrabold font-lora">Lumière</span> for professionals</p>
+                                            <p><span className="font-bold font-cinzel">Lumière</span> for professionals</p>
                                             <p>Manage and grow your business</p>
                                         </div>
                                         <ArrowRightIcon className="size-5" />
@@ -55,7 +55,7 @@ export default function ForWhoDialog() {
                                 <>
                                     <Link href="/register?type=customer" className="flex  justify-between items-center p-4 border rounded-lg hover:bg-muted">
                                         <div>
-                                            <p><span className="font-extrabold font-lora">Lumière</span> for customers</p>
+                                            <p><span className="font-bold font-cinzel">Lumière</span> for customers</p>
                                             <p>Book salons and spas near you</p>
                                         </div>
                                         <ArrowRightIcon className="size-5" />
@@ -63,7 +63,7 @@ export default function ForWhoDialog() {
 
                                     <Link href="/register?type=professional" className="flex  justify-between items-center p-4 border rounded-lg hover:bg-muted">
                                         <div>
-                                            <p><span className="font-extrabold font-lora">Lumière</span> for professionals</p>
+                                            <p><span className="font-bold font-cinzel">Lumière</span> for professionals</p>
                                             <p>Manage and grow your business</p>
                                         </div>
                                         <ArrowRightIcon className="size-5" />

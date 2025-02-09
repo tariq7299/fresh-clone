@@ -5,5 +5,5 @@ export default async function NewBusinesses() {
 
     const newBusinesses = await getNewBusinesses()
 
-    return <ShopsCarousel data={newBusinesses} sectionTitle={<h1 className="font-semibold font-source-sans text-left  text-3xl ">New to <span className="font-lora text-3xl  font-bold">Lumière</span></h1>} />
+    return <ShopsCarousel data={newBusinesses} sectionTitle={<h1 className="font-semibold font-source-sans text-left  text-3xl ">New to <span className="font-cinzel text-3xl  font-bold">Lumière</span></h1>} />
 }

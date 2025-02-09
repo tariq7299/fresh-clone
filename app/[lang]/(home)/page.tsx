@@ -47,7 +47,7 @@ export default async function Home({ params }: { params: Promise<{ lang: 'en' | 
 
           {/* Apply you business now section */}
           <section className="px-5 md:px-7  text-center text-xl md:text-3xl">
-            <p className=" ">Want your business on <span className="font-lora font-bold">Lumière</span>? <Link href="/register?type=professional" className="font-bold underline decoration-2 text-nowrap">Apply now</Link></p>
+            <p className=" ">Want your business on <span className="font-cinzel font-bold">Lumière</span>? <Link href="/register?type=professional" className="font-bold underline decoration-2 text-nowrap">Apply now</Link></p>
           </section>
 
           {/*Shops Carousels  */}

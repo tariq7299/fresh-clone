@@ -22,11 +22,28 @@ import userAvatar from "@/../public/avatars/avatar11.png"
 import { LanguageSwitcherDialog, LanguageSwitcherTrigger } from '@/_ui/components/custom/language-switcher-dialog'
 import { useParams } from 'next/navigation'
 
-export default function CustomerNavBar({ fixed = false, hideInMobile = false, className }: { fixed?: boolean, hideInMobile?: boolean, className?: string }) {
+// Write types
+type UserData = {
+    id: number
+    role: string
+    full_name: string
+    first_name: string
+    last_name: string
+}
+
+export default function CustomerNavBar({
+    userData,
+    fixed = false,
+    hideInMobile = false,
+    showForBusiness = true,
+    className }: { userData: UserData, fixed?: boolean, hideInMobile?: boolean, showForBusiness?: boolean, className?: string }) {
 
     const isScrolled = useIsScrolled()
     const [isLanguageDialogOpen, setIsLanguageDialogOpen] = useState(false)
     const params = useParams()
+
+    // Get the first and last name of the user
+    // THen put the first letter of the first name and the first letter of the last name together
 
     const navTabs = [
         {
@@ -53,7 +70,7 @@ export default function CustomerNavBar({ fixed = false, hideInMobile = false, cl
 
             <div className={cn("p-5 py-4 flex justify-between items-center max-w-[1440px] m-auto pe-7", className)}>
 
-                <Link href="/" className={cn("text-2xl font-extrabold font-lora ",
+                <Link href="/" className={cn("text-2xl font-bold font-cinzel ",
                     fixed ? 'text-primary' : isScrolled ? 'text-primary' : 'text-background'
                 )}>Lumière</Link>
 
@@ -72,18 +89,23 @@ export default function CustomerNavBar({ fixed = false, hideInMobile = false, cl
                         isScrolled ? 'text-primary' : ' text-background'
                     )}>For business</Link> */}
 
-                    <Button borderType="fullRounded" isLink={true} variant="outline" href="/register?type=professional" className="bg-transparent font-source-sans font-semibold   hover:bg-muted/50">For business</Button>
+                    {showForBusiness && <Button borderType="fullRounded" isLink={true} variant="outline" href="/register?type=professional" className="bg-transparent font-source-sans font-semibold   hover:bg-muted/50">For business</Button>}
 
                     <DropdownMenu>
 
                         <DropdownMenuTrigger asChild >
 
-                            <Button borderType="fullRounded" variant="outline" className=" hover:bg-muted/50 bg-transparent inline-flex  font-source-sans font-semibold gap-2 group py-4 pe-3 ps-1 items-center ">
-                                <Image
+                            <Button borderType="fullRounded" variant="ghost" className=" hover:bg-muted/50 bg-transparent inline-flex  font-source-sans font-semibold gap-1 group  items-center py-1 px-0">
+
+                                <div className='rounded-full overflow-hidden bg-accent-100 text-accent-600 font-bold text-lg p-1 px-2'>
+                                    {userData.first_name.charAt(0)}{userData.last_name.charAt(0)}
+                                </div>
+
+                                {/* <Image
                                     src={userAvatar}
                                     alt="user avatar"
                                     className="size-8 "
-                                />
+                                /> */}
 
                                 <ChevronDown className='size-4 transition duration-200
                          group-data-[state=open]:rotate-180' />

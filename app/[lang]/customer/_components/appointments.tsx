@@ -46,7 +46,7 @@ export default async function Appointments() {
     ))
 
     return (
-        <div className="p-5 ps-7 pt-8 md:pt-32 size-full over">
+        <div className="p-5 ps-14 pt-8 md:pt-24 size-full over">
             <h1 className="text-2xl md:text-3xl font-semibold font-source-sans pb-3">Appointments</h1>
             <AppointmentsTable appointments={appointments} />
         </div>

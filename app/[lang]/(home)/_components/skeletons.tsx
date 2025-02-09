@@ -21,7 +21,7 @@ export function NavBarSkeleton() {
 
     return <div className="fixed top-0 left-0 w-lvw  z-50 bg-white">
         <div className="p-5 flex justify-between items-center max-w-[1440px] m-auto pe-7">
-            <div className="text-2xl font-extrabold font-lora text-primary">Lumière</div>
+            <div className="text-2xl font-bold font-cinzel text-primary">Lumière</div>
 
             <div className="hidden md:flex space-x-2 items-center">
                 <Skeleton className="w-[110px] h-[36px] rounded-full" />

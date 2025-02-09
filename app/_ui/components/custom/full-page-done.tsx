@@ -23,7 +23,7 @@ export default function FullPageDone({
 
         <div className="mx-auto space-y-4 max-w-screen-sm w-full">
 
-            <h1 className="text-5xl md:text-6xl font-bold font-lora text-start">{title}</h1>
+            <h1 className="text-5xl md:text-6xl font-bold font-cinzel text-start">{title}</h1>
 
             <div className="flex flex-col gap-4">
 

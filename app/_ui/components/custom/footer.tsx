@@ -12,7 +12,7 @@ export default function Footer({ className }: { className?: string }) {
             <div className="max-w-[1440px] py-6 m-auto px-5">
                 <div className="flex  items-center flex-col lg:flex-row  gap-5 justify-between">
 
-                    <p className="text-3xl font-extrabold font-lora ">Lumière</p>
+                    <p className="text-3xl font-bold font-cinzel ">Lumière</p>
 
                     <div className="flex justify-center gap-4 mlg:gap-11 flex-wrap text-sm lg:text-base font-semibold">
                         <p>Privacy policy</p>
@@ -36,7 +36,7 @@ export default function Footer({ className }: { className?: string }) {
             <div className="max-w-[1440px]  py-3 m-auto px-5">
                 <div className="flex  items-center flex-row  gap-5 justify-evenly md:justify-between md:pe-12">
 
-                    <p className="text-sm text-muted-foreground ">@2025 <span className="font-lora"></span>Lumière Inc.</p>
+                    <p className="text-sm text-muted-foreground ">@2025 <span className="font-cinzel"></span>Lumière Inc.</p>
 
                     <LanguageSwitcherDialog />
 

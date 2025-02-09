@@ -48,7 +48,7 @@ export default function PublicNavBar({ fixed = false, hideInMobile = false }: { 
 
             <div className="p-5 py-4 flex justify-between items-center max-w-[1440px] m-auto pe-7">
 
-                <Link href="/" className={cn("text-2xl font-extrabold font-lora ",
+                <Link href="/" className={cn("text-2xl font-bold font-cinzel ",
                     fixed ? 'text-primary' : isScrolled ? 'text-primary' : 'text-background'
                 )}>Lumière</Link>
 
