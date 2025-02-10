@@ -1,5 +1,6 @@
 import { fetchApi } from "@/_lib/utils/api/fetch-utils";
 import { AppointmentPageQueries } from "@/[lang]/customer/_lib/definitions"
+import { pagination } from "@nextui-org/theme";
 
 export const getAppointments = async (params: AppointmentPageQueries) => {
 
@@ -21,7 +22,9 @@ export const getAppointments = async (params: AppointmentPageQueries) => {
 
     const appointments = await fetchApi(backendUrl)
     if (appointments.success) {
-        return appointments.data?.bookings || []
+        return { appointments: appointments.data?.bookings || [], pagination: appointments.data?.pagination || null }
     }
-    return []
+    return { appointments: [], pagination: null }
+
+
 }

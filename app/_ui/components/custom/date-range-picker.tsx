@@ -20,7 +20,7 @@ export function DatePickerWithRange({
     className,
     defaultValue
 }: {
-    onDateChange: (date: DateRange | undefined) => void
+    onDateChange: (query: string | DateRange | undefined) => void
     defaultValue?: { from: string, to: string }
 
 } & React.HTMLAttributes<HTMLDivElement>) {

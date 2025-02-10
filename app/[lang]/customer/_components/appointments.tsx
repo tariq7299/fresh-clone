@@ -42,10 +42,11 @@ interface ApiAppointment {
 
 export default async function Appointments({ params }: { params: AppointmentPageQueries }) {
 
-    const appointments = await getAppointments(params).then(appointments => appointments.map((row: ApiAppointment) => {
+    const appointments = (await getAppointments(params)).appointments.map((row: ApiAppointment) => {
         const { user, business, booking_data, ...rest } = row
         return {
             ...rest,
+
             services: row.booking_data.services,
             business_name: business.name,
             business_address: business.address,
@@ -53,7 +54,9 @@ export default async function Appointments({ params }: { params: AppointmentPage
             total_price: row.booking_data.total_price
         }
     }
-    ))
+    )
+
+    const pagination = (await getAppointments(params)).pagination
 
     const filters: Filter[] = [
         {
@@ -77,7 +80,7 @@ export default async function Appointments({ params }: { params: AppointmentPage
     return (
         <div className="p-5 ps-14 pt-8 md:pt-24 size-full">
             <h1 className="text-2xl md:text-3xl font-bold text-accent pb-3 ">Appointments</h1>
-            <AppointmentsTable filters={filters} appointments={appointments} />
+            <AppointmentsTable filters={filters} appointments={appointments} pagination={pagination} />
         </div>
     )
 }

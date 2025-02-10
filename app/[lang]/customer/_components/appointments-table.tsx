@@ -34,7 +34,7 @@ interface AppointmentsTableProps {
 
 
 
-export default function AppointmentsTable({ appointments, filters }: AppointmentsTableProps) {
+export default function AppointmentsTable({ appointments, filters, pagination }: AppointmentsTableProps) {
 
 
     const columns: ColumnDef<Appointment>[] = [
@@ -139,7 +139,8 @@ export default function AppointmentsTable({ appointments, filters }: Appointment
     ]
 
     return (
-        <DataTable filters={filters} columns={columns} data={appointments} />
+        <DataTable filters={filters} columns={columns} data={appointments} pagination={pagination} />
     )
+
 
 }

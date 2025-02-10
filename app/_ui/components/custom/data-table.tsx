@@ -31,7 +31,18 @@ import { Store, ChevronDown } from 'lucide-react';
 import Empty from "@/_ui/icons/empty";
 
 import TableFilterInput from "./table-filter-input"
-import { useSearchParams } from "next/navigation"
+import { usePathname, useSearchParams } from "next/navigation"
+import {
+    Pagination,
+    PaginationContent,
+    PaginationEllipsis,
+    PaginationItem,
+    PaginationLink,
+    PaginationNext,
+    PaginationPrevious,
+} from "@/_ui/components/pagination"
+import { Pagination as PaginationType } from "@/_lib/definitions/definitions"
+import { cn } from "@/_lib/utils/utils"
 
 const STATUS_OPTIONS = [
     { id: "completed", label: "Completed" },
@@ -43,6 +54,7 @@ interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
     data: TData[]
     filters?: Filter[]
+    pagination?: PaginationType
 }
 
 
@@ -50,7 +62,8 @@ interface DataTableProps<TData, TValue> {
 export function DataTable<TData, TValue>({
     columns,
     data,
-    filters
+    filters,
+    pagination
 }: DataTableProps<TData, TValue>) {
 
 
@@ -64,6 +77,9 @@ export function DataTable<TData, TValue>({
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
 
     const searchParams = useSearchParams()
+
+    const pathname = usePathname()
+
 
     const table = useReactTable({
         data: tableData,
@@ -99,9 +115,17 @@ export function DataTable<TData, TValue>({
         )
     }
 
+    const returnPageUrl = (pageNo: string) => {
+        const newParams = new URLSearchParams(searchParams)
+        newParams.set("page", pageNo.toString())
+        return `${pathname}?${newParams.toString()}`
+    }
+
+
 
     return (
         <>
+
 
 
             {filters && filters.length > 0 && (
@@ -161,7 +185,74 @@ export function DataTable<TData, TValue>({
                         )}
                     </TableBody>
                 </Table>
+
             </div>
+
+            <Pagination className="py-4">
+                <PaginationContent>
+                    {/* <PaginationItem>
+
+                        {pagination?.prev_page_url && <PaginationPrevious href={pagination?.prev_page_url} />}
+                    </PaginationItem> */}
+
+                    {pagination?.links.map((link, index) => {
+                        if (link.label === "&laquo; Previous") {
+                            return (
+                                <PaginationItem key={index} className={cn(link.url ? "visible" : "invisible")}>
+                                    <PaginationPrevious href={returnPageUrl(String(Number(pagination?.current_page) - 1))} />
+                                </PaginationItem>
+
+
+
+                            );
+                        } else if (link.label === "Next &raquo;") {
+                            return (
+                                <PaginationItem key={index} className={cn(link.url ? "visible" : "invisible")}>
+                                    <PaginationNext href={returnPageUrl(String(Number(pagination?.current_page) + 1))} />
+                                </PaginationItem>
+
+                            );
+                        } else {
+                            return (
+                                <PaginationItem key={index}>
+
+                                    {link.active ? <PaginationLink href={returnPageUrl(link.label)} isActive>
+                                        {link.label}
+                                    </PaginationLink> :
+                                        <PaginationLink href={returnPageUrl(link.label)}>
+
+
+                                            {link.label}
+
+                                        </PaginationLink>}
+
+                                </PaginationItem>
+                            );
+                        }
+                    })}
+
+                    {/* 
+                    <PaginationItem>
+                        <PaginationLink href="#">1</PaginationLink>
+
+
+                    </PaginationItem>
+                    <PaginationItem>
+                        <PaginationLink href="#" isActive>
+                            2
+                        </PaginationLink>
+                    </PaginationItem>
+                    <PaginationItem>
+                        <PaginationLink href="#">3</PaginationLink>
+                    </PaginationItem>
+                    <PaginationItem>
+                        <PaginationEllipsis />
+                    </PaginationItem>
+                    <PaginationItem>
+                        <PaginationNext href="#" />
+                    </PaginationItem> */}
+                </PaginationContent>
+            </Pagination>
         </>
     )
 }
