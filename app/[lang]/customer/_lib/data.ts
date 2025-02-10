@@ -7,7 +7,16 @@ export const getAppointments = async (params: AppointmentPageQueries) => {
 
     for (const [paramKey, paramValue] of Object.entries(params)) {
         console.log(`${paramKey}: ${paramValue}`);
-        urlParams.set(paramKey, paramValue)
+        if (paramKey === "booking_date") {
+            const date = paramValue ? JSON.parse(paramValue) as { from: string, to: string } : null
+            console.log("dateAtBackend", date)
+            if (date) {
+                urlParams.set('date_from', date.from.toString())
+                urlParams.set('date_to', date.to.toString())
+            }
+        } else {
+            urlParams.set(paramKey, paramValue)
+        }
     }
 
     const backendUrl = `/bookings/user?${urlParams}`

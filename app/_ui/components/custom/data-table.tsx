@@ -29,16 +29,9 @@ import { Input } from "../input"
 import { Label } from "../label"
 import { Store, ChevronDown } from 'lucide-react';
 import Empty from "@/_ui/icons/empty";
-import {
-    Select,
-    SelectContent,
-    SelectGroup,
-    SelectItem,
-    SelectLabel,
-    SelectTrigger,
-    SelectValue,
-} from "@/_ui/components/select"
+
 import TableFilterInput from "./table-filter-input"
+import { useSearchParams } from "next/navigation"
 
 const STATUS_OPTIONS = [
     { id: "completed", label: "Completed" },
@@ -70,7 +63,9 @@ export function DataTable<TData, TValue>({
 
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
 
+    const searchParams = useSearchParams()
 
+    console.log("searchParams", searchParams)
 
     const table = useReactTable({
         data: tableData,
@@ -93,7 +88,8 @@ export function DataTable<TData, TValue>({
     })
 
 
-    if (tableData.length === 0) {
+
+    if (tableData.length === 0 && searchParams.size < 2) {
         return (
             <div className="flex items-center justify-center h-full flex-col text-muted-foreground">
                 <Empty className="md:size-3/5 mx-auto" />

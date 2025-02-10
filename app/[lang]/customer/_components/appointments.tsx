@@ -1,4 +1,4 @@
-import { CheckCircle, Store } from "lucide-react";
+import { Calendar, CheckCircle, Store } from "lucide-react";
 import { getAppointments } from "../_lib/data";
 import AppointmentsTable from "./appointments-table";
 import { Appointment } from "../_lib/definitions";
@@ -65,6 +65,12 @@ export default async function Appointments({ params }: { params: AppointmentPage
             colName: "business_name",
             icon: <Store className="size-6" />
         },
+        {
+            type: "date",
+            colName: "booking_date",
+            icon: <Calendar className="size-6" />
+        },
+
 
 
         {
@@ -83,7 +89,7 @@ export default async function Appointments({ params }: { params: AppointmentPage
 
 
     return (
-        <div className="p-5 ps-14 pt-8 md:pt-24 size-full overflow-y-hidden">
+        <div className="p-5 ps-14 pt-8 md:pt-24 size-full">
             <h1 className="text-2xl md:text-3xl font-bold text-accent pb-3 ">Appointments</h1>
             <AppointmentsTable filters={filters} appointments={appointments} />
         </div>

@@ -22,7 +22,10 @@ import {
 import { useReactTable, getCoreRowModel, getFilteredRowModel } from "@tanstack/react-table"
 import { useDebouncedCallback } from 'use-debounce';
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
-import { useState } from "react"
+import { useMemo, useState } from "react"
+import { DatePickerWithRange } from "./date-range-picker"
+import { format } from "date-fns"
+import * as React from "react"
 
 export default function TableFilterInput({ filter, filterLabel }: { filter: Filter, filterLabel: string | undefined }) {
 
@@ -34,26 +37,91 @@ export default function TableFilterInput({ filter, filterLabel }: { filter: Filt
     const searchParams = useSearchParams()
     const pathname = usePathname()
     const params = new URLSearchParams(searchParams)
-    const prevQuery = params.get(filterName)
+
+    const prevQuery = useMemo(() => {
+        if (filterName === "booking_date") {
+            const data = params.get('booking_date')
+            return data ? JSON.parse(data) : undefined
+        }
+        return params.get(filterName)
+    }, [params, filterName])
+
+
+
+
+
     console.log("prevQuery", prevQuery)
     // const [query, setQeury] = useState(prevQuery)
     const router = useRouter()
 
-    const handleFiltering = useDebouncedCallback((query) => {
-        const params = new URLSearchParams(searchParams)
+    let handleFiltering;
 
-        console.log(`Searching... ${query}`);
+    if (filterName === "booking_date" || filterName === "status") {
+        handleFiltering = (query: string | { from: string, to: string }) => {
+            const params = new URLSearchParams(searchParams)
 
-        // Set the page to be 1
-        params.set('page', '1');
-        if (query) {
-            params.set(filterName, query)
-        } else {
-            params.delete(filterName, query)
+            console.log(`Searching... ${query}`);
+
+            // Set the page to be 1
+            params.set('page', '1');
+            if (query) {
+                if (filterName === "booking_date" && typeof query !== "string") {
+                    const formattedDate = query?.from && query?.to ? {
+                        from: format(query.from, "yyyy-MM-dd"),
+                        to: format(query.to, "yyyy-MM-dd")
+                    } : undefined
+
+                    console.log("formattedDate", formattedDate)
+
+
+                    formattedDate && params.set(filterName, JSON.stringify(formattedDate))
+
+                } else {
+                    params.set(filterName, query.toString())
+                }
+
+            } else {
+                params.delete(filterName)
+            }
+
+
+            router.replace(`${pathname}?${params.toString()}`, { scroll: false })
         }
+    } else {
 
-        router.replace(`${pathname}?${params.toString()}`, { scroll: false })
-    }, 300)
+        handleFiltering = useDebouncedCallback((query: string | { from: string, to: string }) => {
+            const params = new URLSearchParams(searchParams)
+
+            console.log(`Searching... ${query}`);
+
+            // Set the page to be 1
+            params.set('page', '1');
+            if (query) {
+                if (filterName === "booking_date" && typeof query !== "string") {
+                    const formattedDate = query?.from && query?.to ? {
+                        from: format(query.from, "yyyy-MM-dd"),
+                        to: format(query.to, "yyyy-MM-dd")
+                    } : undefined
+
+                    console.log("formattedDate", formattedDate)
+
+
+                    formattedDate && params.set(filterName, JSON.stringify(formattedDate))
+
+                } else {
+                    params.set(filterName, query.toString())
+                }
+
+            } else {
+                params.delete(filterName)
+            }
+
+
+            router.replace(`${pathname}?${params.toString()}`, { scroll: false })
+        }, 300)
+
+    }
+
 
 
     return (
@@ -103,10 +171,11 @@ export default function TableFilterInput({ filter, filterLabel }: { filter: Filt
                             </>
 
 
-                        ) : (
+                        ) : filter.type === "select" ? (
                             <>
                                 <div className="flex gap-2 items-center">
                                     {filter.icon}
+
                                     <Label className="text-md">{filterLabel as React.ReactNode || filter.colName}</Label>
 
 
@@ -151,7 +220,25 @@ export default function TableFilterInput({ filter, filterLabel }: { filter: Filt
                                     </SelectContent>
                                 </Select>
                             </>
+                        ) : filter.type === "date" ? (
+                            <>
+                                <div className="flex gap-2 items-center">
+                                    {filter.icon}
+
+
+                                    <Label className="text-md">{filterLabel as React.ReactNode || filter.colName}</Label>
+
+
+
+                                </div>
+                                <DatePickerWithRange defaultValue={prevQuery} onDateChange={handleFiltering} />
+                            </>
+                        ) : (
+                            <></>
                         )}
+
+
+
 
 
 
