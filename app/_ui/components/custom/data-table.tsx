@@ -17,7 +17,7 @@ import {
     TableHeader,
     TableRow,
 } from "@/_ui/components/table"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Filter } from "@/[lang]/customer/_components/appointments"
 import {
     Popover,
@@ -62,7 +62,14 @@ export function DataTable<TData, TValue>({
 
 
     const [tableData, setTableData] = useState(data)
+
+
+    useEffect(() => {
+        setTableData(data)
+    }, [data])
+
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
+
 
 
     const table = useReactTable({
@@ -119,7 +126,9 @@ export function DataTable<TData, TValue>({
             )}
 
 
+
             <div className="rounded-lg border">
+
 
                 <Table>
                     <TableHeader className="bg-accent-100 text-gray-700">

@@ -20,3 +20,8 @@ export type Appointment = {
     total_duration: number
     total_price: number
 }
+
+export type AppointmentFilterNames = Pick<Appointment, "status">
+export type AppointmentPageQueries = AppointmentFilterNames & {
+    page: string
+}

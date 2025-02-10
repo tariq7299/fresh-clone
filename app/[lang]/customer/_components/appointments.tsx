@@ -1,7 +1,8 @@
 import { CheckCircle, Store } from "lucide-react";
 import { getAppointments } from "../_lib/data";
 import AppointmentsTable from "./appointments-table";
-
+import { Appointment } from "../_lib/definitions";
+import { AppointmentPageQueries } from "@/[lang]/customer/_lib/definitions"
 export interface Filter {
     type: "string" | "number" | "date" | "boolean" | "select"
     colName: string
@@ -39,9 +40,11 @@ interface ApiAppointment {
 }
 
 
-export default async function Appointments() {
+export default async function Appointments({ params }: { params: AppointmentPageQueries }) {
 
-    const appointments = await getAppointments().then(appointments => appointments.map((row: ApiAppointment) => {
+    console.log("paramsBEFOREFETCHING", params)
+
+    const appointments = await getAppointments(params).then(appointments => appointments.map((row: ApiAppointment) => {
         const { user, business, booking_data, ...rest } = row
         return {
             ...rest,
@@ -53,6 +56,8 @@ export default async function Appointments() {
         }
     }
     ))
+
+    console.log("appointments", appointments)
 
     const filters: Filter[] = [
         {
