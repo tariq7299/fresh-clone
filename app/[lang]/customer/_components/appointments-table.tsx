@@ -1,4 +1,4 @@
-"use client"
+
 
 import {
     Table,
@@ -18,25 +18,42 @@ import { Badge } from "@/_ui/components/badge"
 import { Button } from "@/_ui/components/button"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/_ui/components/dialog"
 import { getTotalDuration } from "@/_lib/utils/utils"
-import { Appointment, Service } from "../_lib/definitions"
-import { Filter } from "./appointments"
+import { Appointment, AppointmentPageQueries, Service } from "../_lib/definitions"
+import { Filter } from "../_lib/definitions"
 import AppointmentStatus from "@/_ui/components/custom/appoitment-status"
 import { Suspense } from "react"
 import { Pagination } from "@/_lib/definitions/definitions"
 import { Calendar, CheckCircle, Store } from "lucide-react";
+import { getAppointments } from "../_lib/data"
+import { ApiAppointment } from "../_lib/definitions"
+import TablePagination from "@/_ui/components/custom/table-pagination"
+import { DataTableSkeleton, TablePaginationSkeleton } from "./skeleton"
+
+
+
 
 export type Status = "cancelled" | "completed" | "confirmed"
 
-interface AppointmentsTableProps {
-    appointments: Appointment[]
-    pagination: Pagination
-}
+export default async function AppointmentsTable({ params }: { params: AppointmentPageQueries }) {
 
 
+    const data = await getAppointments(params)
 
+    const appointments = data.appointments.map((row: ApiAppointment) => {
+        const { user, business, booking_data, ...rest } = row
+        return {
 
+            ...rest,
 
-export default function AppointmentsTable({ appointments, pagination }: AppointmentsTableProps) {
+            services: row.booking_data.services,
+            business_name: business.name,
+            business_address: business.address,
+            total_duration: row.booking_data.total_duration,
+            total_price: row.booking_data.total_price
+        }
+    })
+
+    const pagination = data.pagination
 
 
     const columns: ColumnDef<Appointment>[] = [
@@ -159,10 +176,18 @@ export default function AppointmentsTable({ appointments, pagination }: Appointm
     ]
 
     return (
-        <Suspense fallback={<div>Loading...</div>}>
-            <DataTable filters={filters} columns={columns} data={appointments} pagination={pagination} />
-        </Suspense>
+        <>
+            {/* <Suspense fallback={<DataTableSkeleton />}> */}
+            <DataTable filters={filters} columns={columns} data={appointments} />
+            {/* </Suspense> */}
+            {/* <Suspense fallback={<TablePaginationSkeleton />}> */}
+            <TablePagination pagination={pagination} />
+            {/* </Suspense> */}
+        </>
+
+
     )
+
 
 
 

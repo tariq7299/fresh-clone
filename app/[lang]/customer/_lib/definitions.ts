@@ -26,3 +26,38 @@ export type AppointmentPageQueries = AppointmentFilterNames & {
     page: string
 }
 
+export interface Filter {
+    type: "string" | "number" | "date" | "boolean" | "select"
+    colName: string
+    icon?: React.ReactNode
+    options?: { id: string, label: string }[]
+}
+
+
+
+
+export interface ApiAppointment {
+    user: any,
+    business: {
+
+        id: number,
+        name: string,
+        address: string,
+    },
+    id: string,
+    booking_date: string,
+    start_time: string,
+    end_time: string,
+    status: string,
+    payment_method: string,
+    booking_data: {
+        services: {
+            id: string
+            name: string
+            price: number
+            duration: number
+        }[]
+        total_duration: number
+        total_price: number
+    }
+}
