@@ -50,9 +50,6 @@ export default function Form({ storedTempCapacity }: { storedTempCapacity: numbe
 
     const [formState, formAction, isPending] = useActionState<BusinessCapacityFormState | void>(handleSubmitBusinessCapacity, initialState)
 
-    console.log("storedTempCapacity", storedTempCapacity)
-    console.log("FORM VALUES", formValues)
-
     useEffect(() => {
         setIsLoading(isPending)
     }, [isPending])

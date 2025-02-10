@@ -41,11 +41,6 @@ export function LanguageSwitcherDialog({ hasTrigger = true, open, setOpen }: { h
 
     const [value, setValue] = useState(currentLang)
 
-    console.log("currentLang", currentLang)
-    console.log("params", params)
-
-    // const [value, setValue] = useState(currentLang)
-
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         const formData = new FormData(e.target as HTMLFormElement)
@@ -61,10 +56,6 @@ export function LanguageSwitcherDialog({ hasTrigger = true, open, setOpen }: { h
 
         // handleLanguageChange(new FormData(e.target as HTMLFormElement), pathname)
     }
-
-    console.log("value", value)
-
-
 
     return (
         <>

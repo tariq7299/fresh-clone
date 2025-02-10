@@ -65,8 +65,6 @@ export function DataTable<TData, TValue>({
 
     const searchParams = useSearchParams()
 
-    console.log("searchParams", searchParams)
-
     const table = useReactTable({
         data: tableData,
         columns,
@@ -100,12 +98,6 @@ export function DataTable<TData, TValue>({
 
         )
     }
-
-    console.log("table.getAllColumns()", table.getAllColumns())
-    console.log("table.getHeaderGroups()", table.getHeaderGroups())
-    console.log("table.getColumn()", table.getColumn("business_name"))
-
-
 
 
     return (

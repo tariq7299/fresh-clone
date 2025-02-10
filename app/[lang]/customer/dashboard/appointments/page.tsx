@@ -14,8 +14,6 @@ export default async function AppointmentsPage(props: {
 
     const params = await props?.searchParams
 
-    console.log("params", params)
-
     return (
         <Suspense fallback={<div>Loading...</div>}>
             <Appointments params={params} />

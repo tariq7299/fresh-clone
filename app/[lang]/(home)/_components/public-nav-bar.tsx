@@ -34,8 +34,6 @@ export default function PublicNavBar({ fixed = false, hideInMobile = false }: { 
     const params = useParams()
     const isScrolled = useIsScrolled()
 
-    console.log("locale", params)
-
     return (
         <nav className={cn(' w-lvw  z-50 ',
             fixed ? 'bg-white shadow' : isScrolled ? 'bg-white shadow' : 'bg-transparent',

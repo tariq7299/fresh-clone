@@ -16,22 +16,10 @@ export const getBusinessData = async (id: string) => {
         return business.data
     }
     return null
-    // } catch (error) {
-    //     console.log("error", error)
-    //     throw new Error("Failed to fetch business data")
-    // }
 
 }
 
 export const getAvailableSlots = async (id: number, date: string, service_ids: number[]): Promise<Slot[]> => {
-
-    // const formDataPayload = {
-    //     business_id: id,
-    //     date: date,
-    //     service_ids: service_ids
-    // }
-
-    // try {
 
     const response = await fetchApi<ApiResponse<{ slots: Slot[] }>>(`/businesses/available-slots`, {
         method: "POST",
@@ -46,9 +34,4 @@ export const getAvailableSlots = async (id: number, date: string, service_ids: n
         return response.data?.slots || []
     }
     return []
-
-    // } catch (error) {
-    //     console.log("error", error)
-    //     throw new Error("Failed to fetch slots")
-    // }
 }

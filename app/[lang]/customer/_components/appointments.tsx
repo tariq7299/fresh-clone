@@ -42,8 +42,6 @@ interface ApiAppointment {
 
 export default async function Appointments({ params }: { params: AppointmentPageQueries }) {
 
-    console.log("paramsBEFOREFETCHING", params)
-
     const appointments = await getAppointments(params).then(appointments => appointments.map((row: ApiAppointment) => {
         const { user, business, booking_data, ...rest } = row
         return {
@@ -57,22 +55,12 @@ export default async function Appointments({ params }: { params: AppointmentPage
     }
     ))
 
-    console.log("appointments", appointments)
-
     const filters: Filter[] = [
-        {
-            type: "string",
-            colName: "business_name",
-            icon: <Store className="size-6" />
-        },
         {
             type: "date",
             colName: "booking_date",
             icon: <Calendar className="size-6" />
         },
-
-
-
         {
             type: "select",
             colName: "status",
@@ -84,8 +72,6 @@ export default async function Appointments({ params }: { params: AppointmentPage
             icon: <CheckCircle className="size-6" />
         }
     ]
-
-
 
 
     return (

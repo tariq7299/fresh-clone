@@ -31,26 +31,6 @@ export function DatePickerWithRange({
         to: new Date(defaultValue.to),
     } : undefined)
 
-
-    // React.useEffect(() => {  
-
-    //     const formattedDate = date?.from && date?.to ? {
-    //         from: format(date.from, "yyyy-MM-dd"),
-    //         to: format(date.to, "yyyy-MM-dd")
-    //     } : undefined
-
-
-
-
-    //     formattedDate && onDateChange(formattedDate)
-
-    // }, [date])
-
-
-    console.log("date", date)
-
-
-
     return (
         <div className={cn("grid gap-2 w-full", className)}>
             <Popover >

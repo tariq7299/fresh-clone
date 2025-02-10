@@ -13,8 +13,6 @@ export default async function CustomerLayout({ children, params }: { children: R
 
     const userData = await getUserData()
 
-    console.log("currentLang", currentLang)
-
     const sidebarTabs = [
         {
             key: 'appointments',

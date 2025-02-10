@@ -53,10 +53,6 @@ export default async function RootLayout({
     params: Promise<{ lang: 'en' | 'ar' }>
 }>) {
 
-    // const locale = await params
-    // console.log("locale.lang", locale.lang)
-    // console.log("locale.lang", locale.lang === 'ar')
-
     return (
         <html lang={"en"} dir={"ltr"}>
             <body

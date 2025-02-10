@@ -45,45 +45,21 @@ export default function TableFilterInput({ filter, filterLabel }: { filter: Filt
         }
         return params.get(filterName)
     }, [params, filterName])
-
-
-
-
-
-    console.log("prevQuery", prevQuery)
-    // const [query, setQeury] = useState(prevQuery)
     const router = useRouter()
 
     let handleFiltering;
 
-    if (filterName === "booking_date" || filterName === "status") {
+    if (filterName === "status") {
         handleFiltering = (query: string | { from: string, to: string }) => {
             const params = new URLSearchParams(searchParams)
-
-            console.log(`Searching... ${query}`);
 
             // Set the page to be 1
             params.set('page', '1');
             if (query) {
-                if (filterName === "booking_date" && typeof query !== "string") {
-                    const formattedDate = query?.from && query?.to ? {
-                        from: format(query.from, "yyyy-MM-dd"),
-                        to: format(query.to, "yyyy-MM-dd")
-                    } : undefined
-
-                    console.log("formattedDate", formattedDate)
-
-
-                    formattedDate && params.set(filterName, JSON.stringify(formattedDate))
-
-                } else {
-                    params.set(filterName, query.toString())
-                }
-
+                params.set(filterName, query.toString())
             } else {
                 params.delete(filterName)
             }
-
 
             router.replace(`${pathname}?${params.toString()}`, { scroll: false })
         }
@@ -91,9 +67,6 @@ export default function TableFilterInput({ filter, filterLabel }: { filter: Filt
 
         handleFiltering = useDebouncedCallback((query: string | { from: string, to: string }) => {
             const params = new URLSearchParams(searchParams)
-
-            console.log(`Searching... ${query}`);
-
             // Set the page to be 1
             params.set('page', '1');
             if (query) {
@@ -102,10 +75,6 @@ export default function TableFilterInput({ filter, filterLabel }: { filter: Filt
                         from: format(query.from, "yyyy-MM-dd"),
                         to: format(query.to, "yyyy-MM-dd")
                     } : undefined
-
-                    console.log("formattedDate", formattedDate)
-
-
                     formattedDate && params.set(filterName, JSON.stringify(formattedDate))
 
                 } else {
