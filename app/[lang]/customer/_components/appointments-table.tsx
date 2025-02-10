@@ -20,13 +20,16 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { getTotalDuration } from "@/_lib/utils/utils"
 import { Appointment, Service } from "../_lib/definitions"
 import { Filter } from "./appointments"
+import AppointmentStatus from "@/_ui/components/custom/appoitment-status"
 
 
+export type Status = "cancelled" | "completed" | "confirmed"
 
 interface AppointmentsTableProps {
     appointments: Appointment[]
     filters?: Filter[]
 }
+
 
 
 
@@ -59,9 +62,10 @@ export default function AppointmentsTable({ appointments, filters }: Appointment
             accessorKey: "status",
             header: "Status",
             cell: ({ row }) => {
-                const status = row.getValue("status") as string
-                return <Badge color={status === "pending" ? "warning" : status === "confirmed" ? "success" : "error"}>{status}</Badge>
+                const status = row.getValue("status") as Status
+                return <AppointmentStatus type={status} />
             }
+
 
         },
         {

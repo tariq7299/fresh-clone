@@ -70,7 +70,12 @@
     --accent-700: 135 17% 32%;  /* #445f47 */
     --accent-800: 135 17% 25%;  /* #364a38 */
     --accent-900: 135 17% 15%;  /* #202c22 */
-    --accent-950: 135 17% 10%;  /* #151d16 */
+    --accent-950: 135 17% 10%;  /* #151d16 */ 
+
+    /* Accent2 Shades */ 
+    --accent2-100: 30 22% 96%;  /* #F8F6F4 */
+    --accent2-500: 21 26% 53%;  /* #A67E69 */ 
+
 
        /* Destructive Shades */
        --destructive-100: 0 100% 94%;
@@ -118,7 +123,11 @@
      
      /* Accent default light theme color */
      --accent:  var(--accent-500);
-     --accent-foreground: var(--accent-100);
+     --accent-foreground: var(--accent-100); 
+
+     /* Accent2 default light theme color */
+     --accent2:  var(--accent2-500);
+     --accent2-foreground: var(--accent2-100);
 
      /* Destructive default light theme color */
     --destructive: var(--destructive-500);
@@ -152,7 +161,8 @@
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
-  }
+  }  
+
   .dark {
     --background: 240 10% 3.9%;
     --foreground: 0 0% 98%;

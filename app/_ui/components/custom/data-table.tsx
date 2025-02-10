@@ -38,8 +38,6 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/_ui/components/select"
-import { Separator } from "../separator"
-
 
 const STATUS_OPTIONS = [
     { id: "completed", label: "Completed" },
@@ -89,16 +87,17 @@ export function DataTable<TData, TValue>({
     })
 
 
-    // if (table.getRowModel().rows.length === 0) {
-    //     return (
-    //         <div className="flex items-center justify-center h-full flex-col text-muted-foreground">
-    //             <Empty className="md:size-3/5 mx-auto" />
-    //             <p className="">Your schedule is looking a little empty.</p>
-    //         </div>
+    if (tableData.length === 0) {
+        return (
+            <div className="flex items-center justify-center h-full flex-col text-muted-foreground">
+                <Empty className="md:size-3/5 mx-auto" />
+
+                <p className="">Your schedule is looking a little empty.</p>
+            </div>
 
 
-    //     )
-    // }
+        )
+    }
 
     console.log("table.getAllColumns()", table.getAllColumns())
     console.log("table.getHeaderGroups()", table.getHeaderGroups())
