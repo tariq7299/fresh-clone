@@ -26,10 +26,10 @@ export function DatePickerWithRange({
 } & React.HTMLAttributes<HTMLDivElement>) {
 
 
-    const [date, setDate] = React.useState<DateRange | undefined>(defaultValue ? {
-        from: new Date(defaultValue.from),
-        to: new Date(defaultValue.to),
-    } : undefined)
+    const [date, setDate] = React.useState<DateRange | undefined>({
+        from: defaultValue?.from ? new Date(defaultValue.from) : undefined,
+        to: defaultValue?.to ? new Date(defaultValue.to) : undefined,
+    })
 
     return (
         <div className={cn("grid gap-2 w-full", className)}>

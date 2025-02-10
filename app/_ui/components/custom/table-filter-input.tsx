@@ -80,10 +80,10 @@ export default function TableFilterInput({ filter, filterLabel }: { filter: Filt
             params.set('page', '1');
             if (query) {
                 if (filterName === "booking_date" && typeof query !== "string") {
-                    const formattedDate = query?.from && query?.to ? {
-                        from: format(query.from, "yyyy-MM-dd"),
-                        to: format(query.to, "yyyy-MM-dd")
-                    } : undefined
+                    const formattedDate = {
+                        from: query?.from ? format(query.from, "yyyy-MM-dd") : undefined,
+                        to: query?.to ? format(query.to, "yyyy-MM-dd") : undefined
+                    }
                     formattedDate && params.set(filterName, JSON.stringify(formattedDate))
 
                 } else {
@@ -110,7 +110,7 @@ export default function TableFilterInput({ filter, filterLabel }: { filter: Filt
 
 
     return (
-        <div className="pb-4 flex items-center gap-2">
+        <div className=" flex items-center gap-2">
 
 
 
