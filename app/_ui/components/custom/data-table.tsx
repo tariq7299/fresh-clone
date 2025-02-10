@@ -38,6 +38,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/_ui/components/select"
+import TableFilterInput from "./table-filter-input"
 
 const STATUS_OPTIONS = [
     { id: "completed", label: "Completed" },
@@ -61,10 +62,8 @@ export function DataTable<TData, TValue>({
 
 
     const [tableData, setTableData] = useState(data)
-    const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>(
-        []
+    const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
 
-    )
 
     const table = useReactTable({
         data: tableData,
@@ -114,101 +113,7 @@ export function DataTable<TData, TValue>({
                 <div className="pb-4 flex items-center gap-2">
 
                     {filters.map(filter => (
-
-
-                        <Popover key={filter.colName}>
-                            <PopoverTrigger asChild>
-                                <Button variant="ghost" className="bg-transparent border border-gray-300 rounded-lg flex items-center gap-2" >
-                                    {filter.icon}
-                                    <p className="text-sm"> {table.getColumn(filter.colName)?.columnDef.header as React.ReactNode || filter.colName}</p>
-                                    <ChevronDown className="w-4 h-4" />
-                                </Button>
-
-
-                            </PopoverTrigger>
-                            <PopoverContent className="md:min-w-[300px]">
-
-
-                                <div className="flex items-start gap-2 flex-col">
-
-
-                                    {filter.type === "string" ? (
-                                        <>
-                                            <div className="flex gap-2 items-center">
-                                                {filter.icon}
-                                                <Label className="text-md">{table.getColumn(filter.colName)?.columnDef.header as React.ReactNode || filter.colName}</Label>
-
-
-                                            </div>
-
-                                            <Input
-                                                placeholder="Filter business name..." type="text"
-                                                value={table.getColumn(filter.colName)?.getFilterValue() as string ?? ""}
-                                                onChange={(e) => {
-                                                    table.getColumn(filter.colName)?.setFilterValue(e.target.value)
-                                                }}
-                                            />
-                                        </>
-
-
-                                    ) : (
-                                        <>
-                                            <div className="flex gap-2 items-center">
-                                                {filter.icon}
-                                                <Label className="text-md">{table.getColumn(filter.colName)?.columnDef.header as React.ReactNode || filter.colName}</Label>
-
-
-
-                                            </div>
-                                            <Select>
-                                                <SelectTrigger>
-                                                    <SelectValue placeholder="Select value" />
-                                                </SelectTrigger>
-                                                <SelectContent>
-                                                    <SelectGroup>
-
-                                                        <div className='flex justify-between w-full items-center'>
-                                                            <SelectLabel className="p-2">{table.getColumn(filter.colName)?.columnDef.header as React.ReactNode || filter.colName}</SelectLabel>
-                                                            <Button
-                                                                // disabled={!field?.value}
-                                                                variant="outline"
-                                                                size="sm"
-                                                                // TODO: clear the filter
-
-
-
-
-                                                                onClick={(e) => {
-                                                                    e.stopPropagation()
-                                                                    // setValue(`${filter?.filter_name}.fieldValue`, "")
-                                                                    console.log("clear")
-                                                                }}
-                                                            >
-                                                                Clear
-                                                            </Button>
-                                                        </div>
-                                                        {filter.options?.map((option) => (
-                                                            <SelectItem key={option.id} value={option.id}>
-                                                                {option.label}
-                                                            </SelectItem>
-                                                        ))}
-
-
-                                                    </SelectGroup>
-
-                                                </SelectContent>
-                                            </Select>
-                                        </>
-                                    )}
-
-
-
-
-
-                                </div>
-
-                            </PopoverContent>
-                        </Popover>
+                        <TableFilterInput key={filter.colName} filter={filter} filterLabel={table.getColumn(filter.colName)?.columnDef.header as string} />
                     ))}
                 </div>
             )}
