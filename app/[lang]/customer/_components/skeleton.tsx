@@ -6,6 +6,7 @@ import { SidebarMenu } from "@/_ui/components/sidebar";
 import { Skeleton } from "@/_ui/components/skeleton";
 import { getCoreRowModel, getFilteredRowModel } from "@tanstack/react-table";
 import { Filter } from "../_lib/definitions";
+import { Pagination, PaginationContent, PaginationItem } from "@/_ui/components/pagination";
 
 export function SidebarSkeleton() {
     return (
@@ -35,6 +36,26 @@ export function DataTableSkeletonWithPagination() {
                     ))}
                 </div>
             </div>
+
+            <Pagination className="py-4">
+                <PaginationContent>
+                    <PaginationItem>
+                        <Skeleton className="h-10 w-24" />
+                    </PaginationItem>
+                    <PaginationItem>
+                        <Skeleton className="h-10 w-10 rounded-md" />
+                    </PaginationItem>
+                    <PaginationItem>
+                        <Skeleton className="h-10 w-10 rounded-md" />
+                    </PaginationItem>
+                    <PaginationItem>
+                        <Skeleton className="h-10 w-10 rounded-md" />
+                    </PaginationItem>
+                    <PaginationItem>
+                        <Skeleton className="h-10 w-24" />
+                    </PaginationItem>
+                </PaginationContent>
+            </Pagination>
         </div>
     )
 }
@@ -59,14 +80,28 @@ export function DataTableSkeleton() {
 }
 
 
+
+
 export function TablePaginationSkeleton() {
     return (
-        <div className="rounded-lg border">
-            <div className="p-4 space-y-4">
-                {[...Array(5)].map((_, i) => (
-                    <Skeleton key={i} className="h-12 w-full" />
-                ))}
-            </div>
-        </div>
+        <Pagination className="py-4">
+            <PaginationContent>
+                <PaginationItem>
+                    <Skeleton className="h-10 w-24" />
+                </PaginationItem>
+                <PaginationItem>
+                    <Skeleton className="h-10 w-10 rounded-md" />
+                </PaginationItem>
+                <PaginationItem>
+                    <Skeleton className="h-10 w-10 rounded-md" />
+                </PaginationItem>
+                <PaginationItem>
+                    <Skeleton className="h-10 w-10 rounded-md" />
+                </PaginationItem>
+                <PaginationItem>
+                    <Skeleton className="h-10 w-24" />
+                </PaginationItem>
+            </PaginationContent>
+        </Pagination>
     )
 }

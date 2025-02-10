@@ -1,3 +1,5 @@
+"use client"
+
 
 
 import {
@@ -34,30 +36,13 @@ import { DataTableSkeleton, TablePaginationSkeleton } from "./skeleton"
 
 export type Status = "cancelled" | "completed" | "confirmed"
 
-export default async function AppointmentsTable({ params }: { params: AppointmentPageQueries }) {
+export default function AppointmentsTable({ params, appointments, pagination }: { params: AppointmentPageQueries, appointments: Appointment[], pagination: Pagination }) {
 
-
-    const data = await getAppointments(params)
-
-    const appointments = data.appointments.map((row: ApiAppointment) => {
-        const { user, business, booking_data, ...rest } = row
-        return {
-
-            ...rest,
-
-            services: row.booking_data.services,
-            business_name: business.name,
-            business_address: business.address,
-            total_duration: row.booking_data.total_duration,
-            total_price: row.booking_data.total_price
-        }
-    })
-
-    const pagination = data.pagination
 
 
     const columns: ColumnDef<Appointment>[] = [
         {
+
             accessorKey: "id",
             header: "ID"
         },
@@ -177,12 +162,13 @@ export default async function AppointmentsTable({ params }: { params: Appointmen
 
     return (
         <>
-            {/* <Suspense fallback={<DataTableSkeleton />}> */}
-            <DataTable filters={filters} columns={columns} data={appointments} />
-            {/* </Suspense> */}
-            {/* <Suspense fallback={<TablePaginationSkeleton />}> */}
-            <TablePagination pagination={pagination} />
-            {/* </Suspense> */}
+            <Suspense fallback={<DataTableSkeleton />}>
+                <DataTable filters={filters} columns={columns} data={appointments} />
+            </Suspense>
+            <Suspense fallback={<TablePaginationSkeleton />}>
+                <TablePagination pagination={pagination} />
+            </Suspense>
+
         </>
 
 
