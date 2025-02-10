@@ -24,8 +24,9 @@ import { useDebouncedCallback } from 'use-debounce';
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 import { useMemo, useState } from "react"
 import { DatePickerWithRange } from "./date-range-picker"
-import { format } from "date-fns"
+import { format, set } from "date-fns"
 import * as React from "react"
+import { DateRange } from "react-day-picker"
 
 export default function TableFilterInput({ filter, filterLabel }: { filter: Filter, filterLabel: string | undefined }) {
 
@@ -38,19 +39,27 @@ export default function TableFilterInput({ filter, filterLabel }: { filter: Filt
     const pathname = usePathname()
     const params = new URLSearchParams(searchParams)
 
+
     const prevQuery = useMemo(() => {
+
         if (filterName === "booking_date") {
             const data = params.get('booking_date')
             return data ? JSON.parse(data) : undefined
         }
         return params.get(filterName)
     }, [params, filterName])
+    const [value, setValue] = useState(prevQuery ?? "")
+
+    // React.useEffect(() => {
+    //     setValue(prevQuery ?? "")
+    // }, [prevQuery])
+
     const router = useRouter()
 
     let handleFiltering;
 
     if (filterName === "status") {
-        handleFiltering = (query: string | { from: string, to: string }) => {
+        handleFiltering = (query: string | DateRange | undefined) => {
             const params = new URLSearchParams(searchParams)
 
             // Set the page to be 1
@@ -65,7 +74,7 @@ export default function TableFilterInput({ filter, filterLabel }: { filter: Filt
         }
     } else {
 
-        handleFiltering = useDebouncedCallback((query: string | { from: string, to: string }) => {
+        handleFiltering = useDebouncedCallback((query: string | DateRange | undefined) => {
             const params = new URLSearchParams(searchParams)
             // Set the page to be 1
             params.set('page', '1');
@@ -89,6 +98,13 @@ export default function TableFilterInput({ filter, filterLabel }: { filter: Filt
             router.replace(`${pathname}?${params.toString()}`, { scroll: false })
         }, 300)
 
+    }
+
+    const handleClearingFilter = () => {
+        console.log("filterName", filterName)
+        params.delete(filterName)
+        router.replace(`${pathname}?${params.toString()}`, { scroll: false })
+        setValue("")
     }
 
 
@@ -150,7 +166,10 @@ export default function TableFilterInput({ filter, filterLabel }: { filter: Filt
 
 
                                 </div>
-                                <Select onValueChange={handleFiltering} defaultValue={prevQuery || ""}>
+                                <Select value={value} onValueChange={(v) => {
+                                    setValue(v)
+                                    handleFiltering(v)
+                                }} >
                                     <SelectTrigger>
                                         <SelectValue placeholder="Select value" />
                                     </SelectTrigger>
@@ -160,18 +179,11 @@ export default function TableFilterInput({ filter, filterLabel }: { filter: Filt
                                             <div className='flex justify-between w-full items-center'>
                                                 <SelectLabel className="p-2">{filterLabel as React.ReactNode || filter.colName}</SelectLabel>
                                                 <Button
-                                                    // disabled={!field?.value}
                                                     variant="outline"
                                                     size="sm"
-                                                    // TODO: clear the filter
-
-
-
-
                                                     onClick={(e) => {
                                                         e.stopPropagation()
-                                                        // setValue(`${filter?.filter_name}.fieldValue`, "")
-                                                        console.log("clear")
+                                                        handleClearingFilter()
                                                     }}
                                                 >
                                                     Clear
