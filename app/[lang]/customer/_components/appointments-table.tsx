@@ -21,20 +21,22 @@ import { getTotalDuration } from "@/_lib/utils/utils"
 import { Appointment, Service } from "../_lib/definitions"
 import { Filter } from "./appointments"
 import AppointmentStatus from "@/_ui/components/custom/appoitment-status"
-
+import { Suspense } from "react"
+import { Pagination } from "@/_lib/definitions/definitions"
+import { Calendar, CheckCircle, Store } from "lucide-react";
 
 export type Status = "cancelled" | "completed" | "confirmed"
 
 interface AppointmentsTableProps {
     appointments: Appointment[]
-    filters?: Filter[]
+    pagination: Pagination
 }
 
 
 
 
 
-export default function AppointmentsTable({ appointments, filters, pagination }: AppointmentsTableProps) {
+export default function AppointmentsTable({ appointments, pagination }: AppointmentsTableProps) {
 
 
     const columns: ColumnDef<Appointment>[] = [
@@ -138,9 +140,30 @@ export default function AppointmentsTable({ appointments, filters, pagination }:
 
     ]
 
+    const filters: Filter[] = [
+        {
+            type: "date",
+            colName: "booking_date",
+            icon: <Calendar className="size-6" />
+        },
+        {
+            type: "select",
+            colName: "status",
+            options: [
+                { id: "completed", label: "Completed" },
+                { id: "cancelled", label: "Cancelled" },
+                { id: "confirmed", label: "Confirmed" }
+            ],
+            icon: <CheckCircle className="size-6" />
+        }
+    ]
+
     return (
-        <DataTable filters={filters} columns={columns} data={appointments} pagination={pagination} />
+        <Suspense fallback={<div>Loading...</div>}>
+            <DataTable filters={filters} columns={columns} data={appointments} pagination={pagination} />
+        </Suspense>
     )
+
 
 
 }

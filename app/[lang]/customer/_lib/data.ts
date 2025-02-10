@@ -3,7 +3,6 @@ import { AppointmentPageQueries } from "@/[lang]/customer/_lib/definitions"
 import { pagination } from "@nextui-org/theme";
 
 export const getAppointments = async (params: AppointmentPageQueries) => {
-
     const urlParams = new URLSearchParams()
 
     for (const [paramKey, paramValue] of Object.entries(params)) {
@@ -20,11 +19,13 @@ export const getAppointments = async (params: AppointmentPageQueries) => {
 
     const backendUrl = `/bookings/user?${urlParams}`
 
+    // Add 5 second delay
+    await new Promise(resolve => setTimeout(resolve, 2000))
+
     const appointments = await fetchApi(backendUrl)
     if (appointments.success) {
         return { appointments: appointments.data?.bookings || [], pagination: appointments.data?.pagination || null }
     }
     return { appointments: [], pagination: null }
-
 
 }

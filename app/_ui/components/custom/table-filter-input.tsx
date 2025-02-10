@@ -60,7 +60,9 @@ export default function TableFilterInput({ filter, filterLabel }: { filter: Filt
 
     if (filterName === "status") {
         handleFiltering = (query: string | DateRange | undefined) => {
+
             const params = new URLSearchParams(searchParams)
+
 
             // Set the page to be 1
             params.set('page', '1');
@@ -74,7 +76,9 @@ export default function TableFilterInput({ filter, filterLabel }: { filter: Filt
         }
     } else {
 
+
         handleFiltering = useDebouncedCallback((query: string | DateRange | undefined) => {
+
             const params = new URLSearchParams(searchParams)
             // Set the page to be 1
             params.set('page', '1');
@@ -96,9 +100,11 @@ export default function TableFilterInput({ filter, filterLabel }: { filter: Filt
 
 
             router.replace(`${pathname}?${params.toString()}`, { scroll: false })
+
         }, 300)
 
     }
+
 
     const handleClearingFilter = () => {
         console.log("filterName", filterName)

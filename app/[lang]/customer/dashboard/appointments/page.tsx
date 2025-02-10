@@ -15,7 +15,7 @@ export default async function AppointmentsPage(props: {
     const params = await props?.searchParams
 
     return (
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense key={params.page + params?.status} fallback={<div>Loading...</div>}>
             <Appointments params={params} />
         </Suspense>
     )

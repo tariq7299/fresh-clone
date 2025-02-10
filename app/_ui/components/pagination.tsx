@@ -47,6 +47,7 @@ const PaginationLink = ({
   ...props
 }: PaginationLinkProps) => (
   <Link
+
     aria-current={isActive ? "page" : undefined}
     className={cn(
       "!rounded-full",

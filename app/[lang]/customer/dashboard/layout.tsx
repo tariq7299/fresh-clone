@@ -55,8 +55,11 @@ export default async function CustomerLayout({ children, params }: { children: R
 
                 {/* Sidebar trigger on mobile */}
                 <SidebarTrigger className="md:hidden fixed top-0 left-0 text-accent" />
-                {children}
+                <Suspense fallback={<div>Loading...</div>}>
+                    {children}
+                </Suspense>
             </div>
+
 
         </SidebarProvider>
 

@@ -17,7 +17,7 @@ import {
     TableHeader,
     TableRow,
 } from "@/_ui/components/table"
-import { useEffect, useState } from "react"
+import { Suspense, useEffect, useState } from "react"
 import { Filter } from "@/[lang]/customer/_components/appointments"
 import {
     Popover,
@@ -27,7 +27,7 @@ import {
 import { Button } from "../button"
 import { Input } from "../input"
 import { Label } from "../label"
-import { Store, ChevronDown } from 'lucide-react';
+import { Store, ChevronDown, Loader2 } from 'lucide-react';
 import Empty from "@/_ui/icons/empty";
 
 import TableFilterInput from "./table-filter-input"
@@ -80,7 +80,6 @@ export function DataTable<TData, TValue>({
 
     const pathname = usePathname()
 
-
     const table = useReactTable({
         data: tableData,
         columns,
@@ -124,27 +123,28 @@ export function DataTable<TData, TValue>({
 
 
     return (
+
         <>
 
 
 
             {filters && filters.length > 0 && (
                 <div className="pb-4 flex items-center gap-2">
-
                     {filters.map(filter => (
-                        <TableFilterInput key={filter.colName} filter={filter} filterLabel={table.getColumn(filter.colName)?.columnDef.header as string} />
+                        <Suspense key={filter.colName} fallback={<div>Loading...</div>}>
+                            <TableFilterInput key={filter.colName} filter={filter} filterLabel={table.getColumn(filter.colName)?.columnDef.header as string} />
+                        </Suspense>
                     ))}
                 </div>
+
+
             )}
 
 
 
             <div className="rounded-lg border">
-
-
                 <Table>
                     <TableHeader className="bg-accent-100 text-gray-700">
-
                         {table.getHeaderGroups().map((headerGroup) => (
                             <TableRow key={headerGroup.id}>
                                 {headerGroup.headers.map((header) => {
@@ -220,10 +220,7 @@ export function DataTable<TData, TValue>({
                                         {link.label}
                                     </PaginationLink> :
                                         <PaginationLink href={returnPageUrl(link.label)}>
-
-
                                             {link.label}
-
                                         </PaginationLink>}
 
                                 </PaginationItem>

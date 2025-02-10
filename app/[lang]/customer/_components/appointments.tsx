@@ -42,9 +42,12 @@ interface ApiAppointment {
 
 export default async function Appointments({ params }: { params: AppointmentPageQueries }) {
 
-    const appointments = (await getAppointments(params)).appointments.map((row: ApiAppointment) => {
+    const data = await getAppointments(params)
+
+    const appointments = data.appointments.map((row: ApiAppointment) => {
         const { user, business, booking_data, ...rest } = row
         return {
+
             ...rest,
 
             services: row.booking_data.services,
@@ -53,34 +56,17 @@ export default async function Appointments({ params }: { params: AppointmentPage
             total_duration: row.booking_data.total_duration,
             total_price: row.booking_data.total_price
         }
-    }
-    )
+    })
 
-    const pagination = (await getAppointments(params)).pagination
+    const pagination = data.pagination
 
-    const filters: Filter[] = [
-        {
-            type: "date",
-            colName: "booking_date",
-            icon: <Calendar className="size-6" />
-        },
-        {
-            type: "select",
-            colName: "status",
-            options: [
-                { id: "completed", label: "Completed" },
-                { id: "cancelled", label: "Cancelled" },
-                { id: "confirmed", label: "Confirmed" }
-            ],
-            icon: <CheckCircle className="size-6" />
-        }
-    ]
+
 
 
     return (
         <div className="p-5 ps-14 pt-8 md:pt-24 size-full">
             <h1 className="text-2xl md:text-3xl font-bold text-accent pb-3 ">Appointments</h1>
-            <AppointmentsTable filters={filters} appointments={appointments} pagination={pagination} />
+            <AppointmentsTable appointments={appointments} pagination={pagination} />
         </div>
     )
 }
