@@ -20,24 +20,6 @@ export default async function CustomerLayout({ children, params }: { children: R
             href: `/${currentLang}/customer/dashboard/appointments`,
             icon: (<NotepadText />)
         },
-        // {
-        //     key: 'reservations',
-        //     title: 'Reservations',
-        //     href: '/business/dashboard/reservations',
-        //     icon: (<NotepadText />)
-        // },
-        // {
-        //     key: 'sadfasdf',
-        //     title: 'sadfasdf',
-        //     href: '/business/dashboard/sadfasdf',
-        //     icon: (<NotepadText />)
-        // },
-        // {
-        //     key: 'sadfasddf',
-        //     title: 'sadfasddf',
-        //     href: '/business/dashboard/sadfasddf',
-        //     icon: (<NotepadText />)
-        // },
     ]
 
 
@@ -51,7 +33,7 @@ export default async function CustomerLayout({ children, params }: { children: R
                 <NavBar showForBusiness={false} className="!px-20 max-w-full" fixed={true} hideInMobile={true} />
             </Suspense>
 
-            <div className="  size-full h-dvh">
+            <div className="  size-full h-[90dvh]">
                 <Suspense fallback={<div>Loading...</div>}>
                     {children}
                 </Suspense>
