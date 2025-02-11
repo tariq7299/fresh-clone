@@ -31,8 +31,8 @@ export default function TablePagination({ pagination }: { pagination: Pagination
 
 
     return (
-        <Pagination className="py-4">
-            <PaginationContent>
+        <Pagination className="py-4 ">
+            <PaginationContent className="flex justify-center items-center flex-wrap gap-2">
 
                 {/* <PaginationItem>
 

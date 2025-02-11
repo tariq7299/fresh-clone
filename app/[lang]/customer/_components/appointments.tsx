@@ -15,13 +15,12 @@ export default async function Appointments({ params, }: { params: AppointmentPag
 
 
     return (
-        <div className="p-5 ps-14 pt-8 md:pt-24 size-full">
+        <div className="p-5  pt-8 md:pt-24 size-full">
             <h1 className="text-2xl md:text-3xl font-bold text-accent pb-3 ">Appointments</h1>
 
             <Suspense fallback={<DataTableFitlersSkeleton />}>
                 <AppointmentsFilters />
             </Suspense>
-
 
             <Suspense key={params?.page + params?.status + params?.booking_date} fallback={<DataTableSkeletonWithPagination />}>
                 <AppointmentsDataFetcher params={params} />

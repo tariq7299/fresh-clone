@@ -32,7 +32,7 @@ export default async function AppointmentsDataFetcher({ params }: { params: Appo
     if (appointments.length === 0 && Object.keys(params).length < 2) {
         return (
             <div className="flex items-center justify-center h-full flex-col text-muted-foreground">
-                <Empty className="md:size-3/5 mx-auto" />
+                <Empty className="md:size-2/5 mx-auto" />
                 <p className="">Your schedule is looking a little empty.</p>
             </div>
         )
