@@ -142,36 +142,36 @@ export default function AppointmentsTable({ params, appointments, pagination }: 
 
     ]
 
-    const filters: Filter[] = [
-        {
-            type: "date",
-            colName: "booking_date",
-            icon: <Calendar className="size-6" />
-        },
-        {
-            type: "select",
-            colName: "status",
-            options: [
-                { id: "completed", label: "Completed" },
-                { id: "cancelled", label: "Cancelled" },
-                { id: "confirmed", label: "Confirmed" }
-            ],
-            icon: <CheckCircle className="size-6" />
-        }
-    ]
+    // const filters: Filter[] = [
+    //     {
+    //         type: "date",
+    //         colName: "booking_date",
+    //         label: "Booking Date",
+    //         icon: <Calendar className="size-6" />
+    //     },
+    //     {
+    //         type: "select",
+    //         colName: "status",
+    //         label: "Status",
+    //         options: [
+    //             { id: "completed", label: "Completed" },
+    //             { id: "cancelled", label: "Cancelled" },
+    //             { id: "confirmed", label: "Confirmed" }
+    //         ],
+    //         icon: <CheckCircle className="size-6" />
+    //     }
+    // ]
 
     return (
         <>
             <Suspense fallback={<DataTableSkeleton />}>
-                <DataTable filters={filters} columns={columns} data={appointments} />
+                {/* <DataTable filters={filters} columns={columns} data={appointments} /> */}
+                <DataTable columns={columns} data={appointments} />
             </Suspense>
             <Suspense fallback={<TablePaginationSkeleton />}>
                 <TablePagination pagination={pagination} />
             </Suspense>
-
         </>
-
-
     )
 
 

@@ -2,10 +2,10 @@ import { fetchApi } from "@/_lib/utils/api/fetch-utils";
 import { AppointmentPageQueries } from "@/[lang]/customer/_lib/definitions"
 import { pagination } from "@nextui-org/theme";
 
-export const getAppointments = async (params: AppointmentPageQueries) => {
+export const getAppointments = async (params?: AppointmentPageQueries) => {
     const urlParams = new URLSearchParams()
 
-    for (const [paramKey, paramValue] of Object.entries(params)) {
+    for (const [paramKey, paramValue] of Object.entries(params ?? {})) {
         if (paramKey === "booking_date") {
             const date = paramValue ? JSON.parse(paramValue) as { from: string, to: string } : null
             if (date) {

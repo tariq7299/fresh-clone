@@ -199,12 +199,6 @@ export const handleCreatingNewbusiness = async (): Promise<ApiResponse<BusinessO
     return response
 
 
-    // } catch (errorResponse) {
-    // console.error('Error creating new business:', errorRespo/nse);
-    // return errorResponse as ApiError
-    // }
-
-
 }
 
 export const removeTempBusinessFormSumbissions = async (businessId: number) => {

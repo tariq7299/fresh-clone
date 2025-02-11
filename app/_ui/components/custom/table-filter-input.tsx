@@ -28,8 +28,9 @@ import { format, set } from "date-fns"
 import * as React from "react"
 import { DateRange } from "react-day-picker"
 
-export default function TableFilterInput({ filter, filterLabel }: { filter: Filter, filterLabel: string | undefined }) {
+export default function TableFilterInput({ filter }: { filter: Filter }) {
 
+    const filterLabel = filter.label
     const filterName = filter.colName
     // const filterLabel = table.getColumn(filter.colName)?.columnDef.header
 
@@ -76,7 +77,6 @@ export default function TableFilterInput({ filter, filterLabel }: { filter: Filt
         }
     } else {
 
-
         handleFiltering = useDebouncedCallback((query: string | DateRange | undefined) => {
 
             const params = new URLSearchParams(searchParams)
@@ -102,17 +102,14 @@ export default function TableFilterInput({ filter, filterLabel }: { filter: Filt
             router.replace(`${pathname}?${params.toString()}`, { scroll: false })
 
         }, 300)
-
     }
 
 
     const handleClearingFilter = () => {
-        console.log("filterName", filterName)
         params.delete(filterName)
         router.replace(`${pathname}?${params.toString()}`, { scroll: false })
         setValue("")
     }
-
 
 
     return (

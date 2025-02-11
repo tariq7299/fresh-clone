@@ -15,6 +15,9 @@ import { usePathname, useSearchParams } from "next/navigation"
 
 export default function TablePagination({ pagination }: { pagination: PaginationType }) {
 
+
+
+
     const searchParams = useSearchParams()
     const pathname = usePathname()
 

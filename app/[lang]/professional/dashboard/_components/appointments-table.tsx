@@ -134,8 +134,6 @@ const UpdateStatusCell = <TData,>({ row, table }) => {
 
 export default function AppointmentsTable({ appointments }: { appointments: Appointment[] }) {
 
-    const [tableData, setTableData] = useState(appointments)
-
     const columns: ColumnDef<Appointment>[] = [
         {
             accessorKey: "id",

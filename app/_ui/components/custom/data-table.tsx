@@ -32,6 +32,7 @@ import {
 } from "@/_ui/components/pagination"
 import { Pagination as PaginationType } from "@/_lib/definitions/definitions"
 import { cn } from "@/_lib/utils/utils"
+import { useRouter } from "next/navigation"
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
@@ -55,13 +56,10 @@ export function DataTable<TData, TValue>({
 
     useEffect(() => {
         setTableData(data)
+
     }, [data])
 
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
-
-    const searchParams = useSearchParams()
-
-
     const table = useReactTable({
         data: tableData,
         columns,
@@ -84,17 +82,17 @@ export function DataTable<TData, TValue>({
 
 
 
-    if (tableData.length === 0 && searchParams.size < 2) {
-        return (
-            <div className="flex items-center justify-center h-full flex-col text-muted-foreground">
-                <Empty className="md:size-3/5 mx-auto" />
+    // if (tableData.length === 0 && searchParams.size < 2) {
+    //     return (
+    //         <div className="flex items-center justify-center h-full flex-col text-muted-foreground">
+    //             <Empty className="md:size-3/5 mx-auto" />
 
-                <p className="">Your schedule is looking a little empty.</p>
-            </div>
+    //             <p className="">Your schedule is looking a little empty.</p>
+    //         </div>
 
 
-        )
-    }
+    //     )
+    // }
 
 
 
@@ -104,7 +102,7 @@ export function DataTable<TData, TValue>({
         <>
 
 
-
+            {/* 
             {filters && filters.length > 0 && (
                 <div className="pb-4 flex items-center gap-2">
                     {filters.map(filter => (
@@ -115,7 +113,7 @@ export function DataTable<TData, TValue>({
                 </div>
 
 
-            )}
+            )} */}
 
 
 
@@ -167,4 +165,4 @@ export function DataTable<TData, TValue>({
 
         </>
     )
-}
+} 

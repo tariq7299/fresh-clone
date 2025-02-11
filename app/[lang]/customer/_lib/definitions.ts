@@ -29,6 +29,7 @@ export type AppointmentPageQueries = AppointmentFilterNames & {
 export interface Filter {
     type: "string" | "number" | "date" | "boolean" | "select"
     colName: string
+    label: string
     icon?: React.ReactNode
     options?: { id: string, label: string }[]
 }

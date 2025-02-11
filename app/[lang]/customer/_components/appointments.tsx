@@ -1,45 +1,32 @@
 import AppointmentsTable from "./appointments-table";
-import { ApiAppointment, Appointment, AppointmentPageQueries } from "@/[lang]/customer/_lib/definitions"
+import { ApiAppointment, Appointment, AppointmentPageQueries, Filter } from "@/[lang]/customer/_lib/definitions"
 import { Suspense } from "react";
 import { DataTableSkeleton, DataTableSkeletonWithPagination } from "./skeleton";
 import { ColumnDef } from "@tanstack/react-table";
 import { getAppointments } from "../_lib/data";
+import AppointmentsDataFetcher from "./appointments-data-fetcher";
+import { CheckCircle } from "lucide-react";
+import { Calendar } from "lucide-react";
+import TableFilterInput from "@/_ui/components/custom/table-filter-input";
+import AppointmentsFilters from "./appointments-filters";
+import { DataTableFitlersSkeleton } from "./skeleton";
 
-
-
-export default async function Appointments({ params }: { params: AppointmentPageQueries }) {
-
-    const data = await getAppointments(params)
-
-    const appointments = data.appointments.map((row: ApiAppointment) => {
-        const { user, business, booking_data, ...rest } = row
-
-        return {
-
-            ...rest,
-
-            services: row.booking_data.services,
-            business_name: business.name,
-            business_address: business.address,
-            total_duration: row.booking_data.total_duration,
-            total_price: row.booking_data.total_price
-        }
-    })
-
-
-
-
-    const pagination = data.pagination
-
+export default async function Appointments({ params, }: { params: AppointmentPageQueries }) {
 
 
     return (
         <div className="p-5 ps-14 pt-8 md:pt-24 size-full">
             <h1 className="text-2xl md:text-3xl font-bold text-accent pb-3 ">Appointments</h1>
-            <AppointmentsTable params={params} appointments={appointments} pagination={pagination} />
+
+            <Suspense fallback={<DataTableFitlersSkeleton />}>
+                <AppointmentsFilters />
+            </Suspense>
+
+
+            <Suspense key={params?.page + params?.status + params?.booking_date} fallback={<DataTableSkeletonWithPagination />}>
+                <AppointmentsDataFetcher params={params} />
+            </Suspense>
         </div>
-
-
 
 
     )
