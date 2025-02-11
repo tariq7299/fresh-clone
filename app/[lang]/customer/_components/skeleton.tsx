@@ -39,9 +39,9 @@ export function DataTableSkeletonWithPagination() {
                     <PaginationItem>
                         <Skeleton className="h-10 w-10 rounded-md" />
                     </PaginationItem>
-                    <PaginationclearItem>
+                    <PaginationItem>
                         <Skeleton className="h-10 w-10 rounded-md" />
-                    </PaginationclearItem>
+                    </PaginationItem>
                     <PaginationItem>
                         <Skeleton className="h-10 w-10 rounded-md" />
                     </PaginationItem>
