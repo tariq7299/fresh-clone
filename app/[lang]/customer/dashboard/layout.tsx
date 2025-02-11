@@ -7,7 +7,7 @@ import { getUserData } from "@/[lang]/(auth)/_lib/auth-server-services"
 import { div } from "framer-motion/client"
 import { NotepadText } from "lucide-react"
 import BgColor from "@/_ui/components/custom/bg-color"
-
+import { CustomerSidebar } from "../_components/sidebar"
 
 export default async function CustomerLayout({ children, params }: { children: React.ReactNode, params: Promise<{ lang: string }> }) {
 
@@ -28,7 +28,7 @@ export default async function CustomerLayout({ children, params }: { children: R
     return (
         <SidebarProvider>
             <BgColor color="#F5F5F6" />
-            {userData && <AppSidebar userData={userData} sidebarTabs={sidebarTabs} containerClass="pt-[70px]" triggerClass="top-18" />}
+            {userData && <CustomerSidebar userData={userData} sidebarTabs={sidebarTabs} containerClass="pt-[70px]" triggerClass="top-18" />}
 
             {/* Nav bar */}
             <Suspense fallback={<NavBarSkeleton />}>

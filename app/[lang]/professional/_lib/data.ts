@@ -8,6 +8,7 @@ import { fetchApi } from "@/_lib/utils/api/fetch-utils";
 import { ApiResponse } from "@/_lib/definitions/api";
 
 import { redirectToLoginIfNotAuthenticated } from "@/[lang]/(auth)/_lib/redirect-to-login-if-not-authenticated";
+import { AppointmentPageQueries } from "@/[lang]/customer/_lib/definitions";
 
 export const getBusinessStepFormData = async (stepName: string) => {
 
@@ -227,45 +228,71 @@ export const removeTempBusinessFormSumbissions = async (businessId: number) => {
     }
 }
 
-export const getAppointments = async () => {
+// export const getAppointments = async () => {
 
-    // let result;
+//     // let result;
 
-    // try {
-    const res = await fetchApi("/businesses/1/bookings", {
-        method: "GET"
-    })
+//     // try {
+//     const res = await fetchApi("/businesses/1/bookings", {
+//         method: "GET"
+//     })
 
-    // const successMsg = setApiSuccessMsg({ successResponse: res })
+//     // const successMsg = setApiSuccessMsg({ successResponse: res })
 
 
-    if (res.success) {
-        return res?.data?.bookings
+//     if (res.success) {
+//         return res?.data?.bookings
+//     }
+
+//     redirectToLoginIfNotAuthenticated(res.apiMsgs, ["sessionEnded=true"])
+//     return []
+
+
+//     // return appointments?.data || []
+//     // } catch (error) {
+//     // console.error('Error fetching appointments:', error);
+//     // const errorMsg = setApiErrorMsg({ errResponse: error })
+//     // result = {
+//     //     apiResponse: error,
+//     //     success: false,
+//     //     data: null,
+//     //     msg: errorMsg,
+//     // }
+
+//     // }
+
+//     // if (result.success) {
+//     //     return result.data
+//     // }
+
+
+//     // return []
+
+// }
+
+export const getAppointments = async (params?: AppointmentPageQueries) => {
+    const urlParams = new URLSearchParams()
+
+    for (const [paramKey, paramValue] of Object.entries(params ?? {})) {
+        if (paramKey === "booking_date") {
+            const date = paramValue ? JSON.parse(paramValue) as { from: string, to: string } : null
+            if (date) {
+                date?.from && urlParams.set('date_from', date.from.toString())
+                date?.to && urlParams.set('date_to', date.to.toString())
+            }
+        } else {
+            urlParams.set(paramKey, paramValue)
+        }
     }
 
-    redirectToLoginIfNotAuthenticated(res.apiMsgs, ["sessionEnded=true"])
-    return []
+    const backendUrl = `/businesses/bookings?${urlParams}`
 
-
-    // return appointments?.data || []
-    // } catch (error) {
-    // console.error('Error fetching appointments:', error);
-    // const errorMsg = setApiErrorMsg({ errResponse: error })
-    // result = {
-    //     apiResponse: error,
-    //     success: false,
-    //     data: null,
-    //     msg: errorMsg,
-    // }
-
-    // }
-
-    // if (result.success) {
-    //     return result.data
-    // }
-
-
-    // return []
+    const response = await fetchApi(backendUrl)
+    if (response.success) {
+        return { appointments: response.data?.bookings || [], pagination: response.data?.pagination || null }
+    }
+    redirectToLoginIfNotAuthenticated(response.apiMsgs, ["sessionEnded=true"])
+    return { appointments: [], pagination: null }
 
 }
 

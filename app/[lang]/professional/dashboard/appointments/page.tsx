@@ -1,6 +1,10 @@
 import { getAppointments } from "@/[lang]/professional/_lib/data";
 import AppointmentsTable from "@/[lang]/professional/dashboard/_components/appointments-table";
 import { AppointmentPageQueries } from "@/[lang]/customer/_lib/definitions";
+import { Suspense } from "react";
+import { DataTableFitlersSkeleton, DataTableSkeletonWithPagination } from "@/[lang]/customer/_components/skeleton";
+import AppointmentsFilters from "@/[lang]/professional/dashboard/_components/appointments-filters";
+import AppointmentsTableWrapper from "@/[lang]/professional/dashboard/_components/appointments-table-wrapper";
 
 
 interface Service {
@@ -37,23 +41,33 @@ export default async function AppointmentsPage(props: {
 
     const params = await props?.searchParams
 
-    const appointments = await getAppointments().then(appointments => appointments.map((row: ApiAppointment) => {
-        const { user, business, booking_data, ...rest } = row
-        return {
-            ...rest,
-            services: row.booking_data.services,
-            business_name: business.name,
-            business_address: business.address,
-            total_duration: row.booking_data.total_duration,
-            total_price: row.booking_data.total_price
-        }
-    }
-    ))
+    // const appointments = await getAppointments().then(appointments => appointments.map((row: ApiAppointment) => {
+    //     const { user, business, booking_data, ...rest } = row
+    //     return {
+    //         ...rest,
+    //         services: row.booking_data.services,
+    //         business_name: business.name,
+    //         business_address: business.address,
+    //         total_duration: row.booking_data.total_duration,
+    //         total_price: row.booking_data.total_price
+    //     }
+    // }
+    // ))
 
     return (
         <div className="p-5 ps-7 pt-8 md:pt-14 size-full over">
             <h1 className="text-2xl md:text-3xl font-bold text-accent pb-4">Appointments</h1>
-            <AppointmentsTable appointments={appointments} />
+
+            <Suspense fallback={<DataTableFitlersSkeleton />}>
+                <AppointmentsFilters />
+            </Suspense>
+
+
+            <Suspense key={params?.page + params?.status + params?.booking_date} fallback={<DataTableSkeletonWithPagination />}>
+                <AppointmentsTableWrapper params={params} />
+            </Suspense>
+
+
         </div>
     )
 }

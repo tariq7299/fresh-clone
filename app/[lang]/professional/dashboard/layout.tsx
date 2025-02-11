@@ -6,6 +6,8 @@ import { NavBarSkeleton } from "@/[lang]/(home)/_components/skeletons"
 import { getUserData } from "@/[lang]/(auth)/_lib/auth-server-services"
 import { NotepadText } from "lucide-react"
 import BgColor from "@/_ui/components/custom/bg-color"
+import { ProfessionalSidebar } from "../_components/sidebar"
+
 
 export default async function ProfessionalDashboardLayout({ children, params }: { children: React.ReactNode, params: Promise<{ lang: string }> }) {
 
@@ -27,9 +29,10 @@ export default async function ProfessionalDashboardLayout({ children, params }: 
     return (
         <SidebarProvider>
             <BgColor color="#F5F5F6" />
-            {userData && <AppSidebar userData={userData} sidebarTabs={sidebarTabs} triggerClass="top-0" />}
 
-            <div className="p-5 pb-0 md:ps-14 size-full">
+            {userData && <ProfessionalSidebar userData={userData} sidebarTabs={sidebarTabs} triggerClass="top-0" containerClass="bg-gradient-to-b from-[#638C6D]  to-[#1B261E] " />}
+
+            <div className="p-5 pb-0 md:ps-14 size-full ">
                 <Suspense>
                     {children}
                 </Suspense>

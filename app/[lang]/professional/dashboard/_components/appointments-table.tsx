@@ -35,7 +35,11 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { cn, getTotalDuration } from "@/_lib/utils/utils"
 import { CreditCard, Settings, User } from "lucide-react"
 import { fetchApi } from "@/_lib/utils/api/fetch-utils-client"
-import { useState } from "react"
+import { Suspense, useState } from "react"
+import { DataTableSkeleton } from "@/[lang]/customer/_components/skeleton"
+import TablePagination from "@/_ui/components/custom/table-pagination"
+import { TablePaginationSkeleton } from "@/[lang]/customer/_components/skeleton"
+import { Pagination } from "@/[lang]/customer/_lib/definitions"
 
 type Service = {
     service_id: number
@@ -132,7 +136,7 @@ const UpdateStatusCell = <TData,>({ row, table }) => {
 
 
 
-export default function AppointmentsTable({ appointments }: { appointments: Appointment[] }) {
+export default function AppointmentsTable({ appointments, pagination }: { appointments: Appointment[], pagination: Pagination }) {
 
     const columns: ColumnDef<Appointment>[] = [
         {
@@ -241,6 +245,13 @@ export default function AppointmentsTable({ appointments }: { appointments: Appo
     ]
 
     return (
-        <DataTable columns={columns} data={appointments} />
+        <>
+            <Suspense fallback={<DataTableSkeleton />}>
+                <DataTable columns={columns} data={appointments} />
+            </Suspense>
+            <Suspense fallback={<TablePaginationSkeleton />}>
+                <TablePagination pagination={pagination} />
+            </Suspense>
+        </>
     )
 }

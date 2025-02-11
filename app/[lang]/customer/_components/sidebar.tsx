@@ -22,7 +22,7 @@ import { cn } from "@/_lib/utils/utils"
 import { UserData } from "@/[lang]/(auth)/_lib/definitions"
 
 
-export function AppSidebar({ userData, sidebarTabs, containerClass, triggerClass }: {
+export function CustomerSidebar({ userData, sidebarTabs, containerClass, triggerClass }: {
     userData: UserData,
     sidebarTabs: {
         key: string,
@@ -53,7 +53,7 @@ export function AppSidebar({ userData, sidebarTabs, containerClass, triggerClass
             <SidebarTrigger className={cn("md:hidden fixed top-2 left-2 text-accent", (isMobile && userData.role === "customer") ? "hidden" : "block")} />
 
 
-            <Sidebar className={cn("bg-background", open ? "p-0" : " ", containerClass)} collapsible={"icon"}>
+            <Sidebar className={cn("bg-background", containerClass)} collapsible={"icon"}>
 
 
                 <SidebarTrigger className={cn("text-accent hidden md:inline-flex fixed  transition-all duration-250  ease-in-out ", open ? " left-64" : " left-12", triggerClass)} />
@@ -65,7 +65,7 @@ export function AppSidebar({ userData, sidebarTabs, containerClass, triggerClass
                 </SidebarHeader>
 
                 <SidebarContent >
-                    <SidebarMenu className={cn(open ? "" : "flex justify-center items-center")}>
+                    <SidebarMenu className={cn(open ? "px-2 " : "flex justify-center items-center")}>
                         {sidebarTabs.map((tab) => (
                             <SidebarMenuItem key={tab.key}>
                                 {/* <SidebarMenuButton asChild isActive={pathname === tab.href}> */}

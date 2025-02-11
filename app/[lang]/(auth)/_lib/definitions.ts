@@ -49,7 +49,7 @@ export type User = {
     is_verified: boolean;
 }
 
-export type UserData = Pick<User, "id" | "role" | "full_name" | "first_name" | "last_name">
+export type UserData = Pick<User, "id" | "role" | "full_name" | "first_name" | "last_name" | "email">
 
 export type SessionData = User & {
     token: string;
