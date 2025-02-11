@@ -116,7 +116,7 @@ export default function CustomerNavBar({
 
                             {navTabs.map((tab) =>
                                 tab.type === "normal" && (
-                                    <DropdownMenuItem key={tab.title} className=''>
+                                    <DropdownMenuItem key={tab.title} className='' asChild>
                                         <Link href={tab.href} className='font-semibold flex items-center gap-2  w-full'>
                                             {tab.icon}
                                             {tab.title}
@@ -124,7 +124,7 @@ export default function CustomerNavBar({
                                     </DropdownMenuItem>
                                 ))}
 
-                            <DropdownMenuItem className=''>
+                            <DropdownMenuItem className='' asChild>
                                 <Link href="/login?sessionEnded=true" className='flex items-center gap-2  w-full'>
                                     <ArrowLeftEndOnRectangleIcon className='size-10' />
                                     <p className='font-semibold'>Log out </p>
@@ -134,7 +134,7 @@ export default function CustomerNavBar({
                             <DropdownMenuLabel className='font-bold  text-base'>Other</DropdownMenuLabel>
                             {navTabs.map((tab) => (
                                 tab.type === "other" && (
-                                    <DropdownMenuItem key={tab.title} className=''>
+                                    <DropdownMenuItem key={tab.title} className='' asChild>
                                         <Link href={tab.href} className='font-semibold '>
                                             {tab.title}
                                         </Link>

@@ -50,11 +50,6 @@ export default function TableFilterInput({ filter }: { filter: Filter }) {
         return params.get(filterName)
     }, [params, filterName])
     const [value, setValue] = useState(prevQuery ?? "")
-
-    // React.useEffect(() => {
-    //     setValue(prevQuery ?? "")
-    // }, [prevQuery])
-
     const router = useRouter()
 
     let handleFiltering;
@@ -104,7 +99,6 @@ export default function TableFilterInput({ filter }: { filter: Filter }) {
         }, 300)
     }
 
-
     const handleClearingFilter = () => {
         params.delete(filterName)
         router.replace(`${pathname}?${params.toString()}`, { scroll: false })
@@ -138,8 +132,6 @@ export default function TableFilterInput({ filter }: { filter: Filter }) {
                                 <div className="flex gap-2 items-center">
                                     {filter.icon}
                                     <Label className="text-md">{filterLabel as React.ReactNode || filter.colName}</Label>
-
-
                                 </div>
 
                                 <Input
@@ -149,13 +141,6 @@ export default function TableFilterInput({ filter }: { filter: Filter }) {
                                         handleFiltering(e.target.value)
                                     }}
                                 />
-                                {/* <Input
-                                    placeholder="Filter business name..." type="text"
-                                    value={table.getColumn(filter.colName)?.getFilterValue() as string ?? ""}
-                                    onChange={(e) => {
-                                        table.getColumn(filter.colName)?.setFilterValue(e.target.value)
-                                    }}
-                                /> */}
                             </>
 
 
@@ -163,10 +148,7 @@ export default function TableFilterInput({ filter }: { filter: Filter }) {
                             <>
                                 <div className="flex gap-2 items-center">
                                     {filter.icon}
-
                                     <Label className="text-md">{filterLabel as React.ReactNode || filter.colName}</Label>
-
-
 
                                 </div>
                                 <Select value={value} onValueChange={(v) => {
@@ -182,6 +164,7 @@ export default function TableFilterInput({ filter }: { filter: Filter }) {
                                             <div className='flex justify-between w-full items-center'>
                                                 <SelectLabel className="p-2">{filterLabel as React.ReactNode || filter.colName}</SelectLabel>
                                                 <Button
+                                                    disabled={!value}
                                                     variant="outline"
                                                     size="sm"
                                                     onClick={(e) => {
@@ -208,14 +191,14 @@ export default function TableFilterInput({ filter }: { filter: Filter }) {
                             <>
                                 <div className="flex gap-2 items-center">
                                     {filter.icon}
-
-
                                     <Label className="text-md">{filterLabel as React.ReactNode || filter.colName}</Label>
-
-
-
                                 </div>
-                                <DatePickerWithRange defaultValue={prevQuery} onDateChange={handleFiltering} />
+                                <DatePickerWithRange value={value} defaultValue={prevQuery} onDateChange={setValue} />
+
+                                <div className="flex gap-2">
+                                    <Button disabled={!value} variant="outline" size="sm" onClick={handleClearingFilter}>Clear</Button>
+                                    <Button disabled={!value} variant="outline" size="sm" onClick={() => handleFiltering(value)}>Apply</Button>
+                                </div>
                             </>
                         ) : (
                             <></>

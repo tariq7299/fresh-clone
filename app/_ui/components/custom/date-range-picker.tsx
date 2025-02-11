@@ -18,18 +18,24 @@ import {
 export function DatePickerWithRange({
     onDateChange,
     className,
-    defaultValue
+    value
 }: {
     onDateChange: (query: string | DateRange | undefined) => void
-    defaultValue?: { from: string, to: string }
-
+    value?: { from: string, to: string }
 } & React.HTMLAttributes<HTMLDivElement>) {
 
 
     const [date, setDate] = React.useState<DateRange | undefined>({
-        from: defaultValue?.from ? new Date(defaultValue.from) : undefined,
-        to: defaultValue?.to ? new Date(defaultValue.to) : undefined,
+        from: value?.from ? new Date(value.from) : undefined,
+        to: value?.to ? new Date(value.to) : undefined,
     })
+
+    React.useEffect(() => {
+        setDate({
+            from: value?.from ? new Date(value.from) : undefined,
+            to: value?.to ? new Date(value.to) : undefined,
+        })
+    }, [value])
 
     return (
         <div className={cn("grid gap-2 w-full", className)}>
