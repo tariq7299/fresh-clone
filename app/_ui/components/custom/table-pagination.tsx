@@ -15,13 +15,8 @@ import { usePathname, useSearchParams } from "next/navigation"
 
 export default function TablePagination({ pagination }: { pagination: PaginationType }) {
 
-
-
-
     const searchParams = useSearchParams()
     const pathname = usePathname()
-
-
 
     const returnPageUrl = (pageNo: string) => {
         const newParams = new URLSearchParams(searchParams)
@@ -33,11 +28,6 @@ export default function TablePagination({ pagination }: { pagination: Pagination
     return (
         <Pagination className="py-4 ">
             <PaginationContent className="flex justify-center items-center flex-wrap gap-2">
-
-                {/* <PaginationItem>
-
-                        {pagination?.prev_page_url && <PaginationPrevious href={pagination?.prev_page_url} />}
-                    </PaginationItem> */}
 
                 {pagination?.links.map((link, index) => {
                     if (link.label === "&laquo; Previous") {
@@ -71,27 +61,6 @@ export default function TablePagination({ pagination }: { pagination: Pagination
                         );
                     }
                 })}
-
-                {/* 
-                    <PaginationItem>
-                        <PaginationLink href="#">1</PaginationLink>
-
-
-                    </PaginationItem>
-                    <PaginationItem>
-                        <PaginationLink href="#" isActive>
-                            2
-                        </PaginationLink>
-                    </PaginationItem>
-                    <PaginationItem>
-                        <PaginationLink href="#">3</PaginationLink>
-                    </PaginationItem>
-                    <PaginationItem>
-                        <PaginationEllipsis />
-                    </PaginationItem>
-                    <PaginationItem>
-                        <PaginationNext href="#" />
-                    </PaginationItem> */}
             </PaginationContent>
         </Pagination>
     )

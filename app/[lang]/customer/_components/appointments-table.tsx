@@ -1,7 +1,5 @@
 "use client"
 
-
-
 import {
     Table,
     TableBody,
@@ -12,33 +10,21 @@ import {
     TableHeader,
     TableRow,
 } from "@/_ui/components/table"
-
 import { DataTable } from "@/_ui/components/custom/data-table"
-
 import { ColumnDef } from "@tanstack/react-table"
-import { Badge } from "@/_ui/components/badge"
 import { Button } from "@/_ui/components/button"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/_ui/components/dialog"
 import { getTotalDuration } from "@/_lib/utils/utils"
-import { Appointment, AppointmentPageQueries, Service } from "../_lib/definitions"
-import { Filter } from "../_lib/definitions"
+import { Appointment, Service } from "../_lib/definitions"
 import AppointmentStatus from "@/_ui/components/custom/appoitment-status"
 import { Suspense } from "react"
 import { Pagination } from "@/_lib/definitions/definitions"
-import { Calendar, CheckCircle, Store } from "lucide-react";
-import { getAppointments } from "../_lib/data"
-import { ApiAppointment } from "../_lib/definitions"
 import TablePagination from "@/_ui/components/custom/table-pagination"
 import { DataTableSkeleton, TablePaginationSkeleton } from "./skeleton"
+import { Status } from "../_lib/definitions"
 
 
-
-
-export type Status = "cancelled" | "completed" | "confirmed"
-
-export default function AppointmentsTable({ params, appointments, pagination }: { params: AppointmentPageQueries, appointments: Appointment[], pagination: Pagination }) {
-
-
+export default function AppointmentsTable({ appointments, pagination }: { appointments: Appointment[], pagination: Pagination }) {
 
     const columns: ColumnDef<Appointment>[] = [
         {
@@ -142,30 +128,9 @@ export default function AppointmentsTable({ params, appointments, pagination }: 
 
     ]
 
-    // const filters: Filter[] = [
-    //     {
-    //         type: "date",
-    //         colName: "booking_date",
-    //         label: "Booking Date",
-    //         icon: <Calendar className="size-6" />
-    //     },
-    //     {
-    //         type: "select",
-    //         colName: "status",
-    //         label: "Status",
-    //         options: [
-    //             { id: "completed", label: "Completed" },
-    //             { id: "cancelled", label: "Cancelled" },
-    //             { id: "confirmed", label: "Confirmed" }
-    //         ],
-    //         icon: <CheckCircle className="size-6" />
-    //     }
-    // ]
-
     return (
         <>
             <Suspense fallback={<DataTableSkeleton />}>
-                {/* <DataTable filters={filters} columns={columns} data={appointments} /> */}
                 <DataTable columns={columns} data={appointments} />
             </Suspense>
             <Suspense fallback={<TablePaginationSkeleton />}>

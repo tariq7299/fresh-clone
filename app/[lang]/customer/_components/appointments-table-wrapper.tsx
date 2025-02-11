@@ -1,14 +1,11 @@
 import AppointmentsTable from "./appointments-table";
-import { ApiAppointment, Appointment, AppointmentPageQueries } from "@/[lang]/customer/_lib/definitions"
-import { Suspense } from "react";
-import { DataTableSkeleton, DataTableSkeletonWithPagination } from "./skeleton";
-import { ColumnDef } from "@tanstack/react-table";
+import { ApiAppointment, AppointmentPageQueries } from "@/[lang]/customer/_lib/definitions"
 import { getAppointments } from "../_lib/data";
 import Empty from "@/_ui/icons/empty";
 
 
 
-export default async function AppointmentsDataFetcher({ params }: { params: AppointmentPageQueries }) {
+export default async function AppointmentsTableWrapper({ params }: { params: AppointmentPageQueries }) {
 
     const formattedParams = { ...params, page: params.page ?? "1" }
 
@@ -38,6 +35,6 @@ export default async function AppointmentsDataFetcher({ params }: { params: Appo
         )
     }
 
-    return <AppointmentsTable params={params} appointments={appointments} pagination={pagination} />
+    return <AppointmentsTable appointments={appointments} pagination={pagination} />
 
 }

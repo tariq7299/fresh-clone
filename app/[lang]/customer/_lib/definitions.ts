@@ -22,6 +22,7 @@ export type Appointment = {
 }
 
 export type AppointmentFilterNames = Pick<Appointment, "status" | "booking_date">
+
 export type AppointmentPageQueries = AppointmentFilterNames & {
     page: string
 }
@@ -34,8 +35,7 @@ export interface Filter {
     options?: { id: string, label: string }[]
 }
 
-
-
+export type Status = "cancelled" | "completed" | "confirmed"
 
 export interface ApiAppointment {
     user: any,
