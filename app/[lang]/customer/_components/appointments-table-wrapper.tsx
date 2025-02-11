@@ -28,9 +28,11 @@ export default async function AppointmentsTableWrapper({ params }: { params: App
 
     if (appointments.length === 0 && Object.keys(params).length < 2) {
         return (
-            <div className="flex items-center justify-center h-full flex-col text-muted-foreground">
-                <Empty className="md:size-2/5 mx-auto" />
-                <p className="">Your schedule is looking a little empty.</p>
+            <div className="flex items-center justify-center flex-col text-muted-foreground size-full h-[80vh]">
+                <div className="md:size-2/5 mx-auto">
+                    <Empty className="" />
+                    <p className="text-center">Your schedule is looking a little empty.</p>
+                </div>
             </div>
         )
     }

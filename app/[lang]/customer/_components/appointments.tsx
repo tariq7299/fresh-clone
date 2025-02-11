@@ -19,7 +19,5 @@ export default async function Appointments({ params, }: { params: AppointmentPag
                 <AppointmentsTableWrapper params={params} />
             </Suspense>
         </div>
-
-
     )
 }

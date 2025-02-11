@@ -13,7 +13,6 @@ export default async function ProfessionalDashboardLayout({ children, params }: 
     const userData = await getUserData()
 
 
-
     const sidebarTabs = [
         {
             key: 'appointments',
@@ -21,24 +20,6 @@ export default async function ProfessionalDashboardLayout({ children, params }: 
             href: `/${currentLang}/professional/dashboard/appointments`,
             icon: (<NotepadText />)
         },
-        // {
-        //     key: 'reservations',
-        //     title: 'Reservations',
-        //     href: '/business/dashboard/reservations',
-        //     icon: (<NotepadText />)
-        // },
-        // {
-        //     key: 'sadfasdf',
-        //     title: 'sadfasdf',
-        //     href: '/business/dashboard/sadfasdf',
-        //     icon: (<NotepadText />)
-        // },
-        // {
-        //     key: 'sadfasddf',
-        //     title: 'sadfasddf',
-        //     href: '/business/dashboard/sadfasddf',
-        //     icon: (<NotepadText />)
-        // },
     ]
 
 
@@ -47,11 +28,8 @@ export default async function ProfessionalDashboardLayout({ children, params }: 
             <AppSidebar userData={userData} sidebarTabs={sidebarTabs} triggerClass="top-0" />
 
             <div className="bg-gray-50 h-dvh w-full">
-                {/* <div className=""> */}
-                <SidebarTrigger className="md:hidden fixed top-0 left-0" />
                 {children}
             </div>
-            {/* </div> */}
         </SidebarProvider>
 
     )
