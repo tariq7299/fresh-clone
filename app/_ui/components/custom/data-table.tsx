@@ -8,7 +8,6 @@ import {
     getFilteredRowModel,
     useReactTable,
 } from "@tanstack/react-table"
-
 import {
     Table,
     TableBody,
@@ -17,43 +16,23 @@ import {
     TableHeader,
     TableRow,
 } from "@/_ui/components/table"
-import { Suspense, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { Filter } from "@/[lang]/customer/_lib/definitions"
-import Empty from "@/_ui/icons/empty";
-import TableFilterInput from "./table-filter-input"
-import { usePathname, useSearchParams } from "next/navigation"
-import {
-    Pagination,
-    PaginationContent,
-    PaginationItem,
-    PaginationLink,
-    PaginationNext,
-    PaginationPrevious,
-} from "@/_ui/components/pagination"
-import { Pagination as PaginationType } from "@/_lib/definitions/definitions"
-import { cn } from "@/_lib/utils/utils"
-import { useRouter } from "next/navigation"
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
     data: TData[]
     filters?: Filter[]
-
 }
-
 
 
 export function DataTable<TData, TValue>({
     columns,
     data,
-    filters,
-
 }: DataTableProps<TData, TValue>) {
 
 
     const [tableData, setTableData] = useState(data)
-
-
     useEffect(() => {
         setTableData(data)
 
@@ -81,41 +60,9 @@ export function DataTable<TData, TValue>({
     })
 
 
-
-    // if (tableData.length === 0 && searchParams.size < 2) {
-    //     return (
-    //         <div className="flex items-center justify-center h-full flex-col text-muted-foreground">
-    //             <Empty className="md:size-3/5 mx-auto" />
-
-    //             <p className="">Your schedule is looking a little empty.</p>
-    //         </div>
-
-
-    //     )
-    // }
-
-
-
-
     return (
 
         <>
-
-
-            {/* 
-            {filters && filters.length > 0 && (
-                <div className="pb-4 flex items-center gap-2">
-                    {filters.map(filter => (
-                        <Suspense key={filter.colName} fallback={<div>Loading...</div>}>
-                            <TableFilterInput key={filter.colName} filter={filter} filterLabel={table.getColumn(filter.colName)?.columnDef.header as string} />
-                        </Suspense>
-                    ))}
-                </div>
-
-
-            )} */}
-
-
 
             <div className="rounded-lg border">
                 <Table>
@@ -160,7 +107,6 @@ export function DataTable<TData, TValue>({
                         )}
                     </TableBody>
                 </Table>
-
             </div>
 
         </>
