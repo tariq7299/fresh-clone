@@ -21,6 +21,7 @@ import Image from 'next/image'
 import userAvatar from "@/../public/avatars/avatar11.png"
 import { LanguageSwitcherDialog, LanguageSwitcherTrigger } from '@/_ui/components/custom/language-switcher-dialog'
 import { useParams } from 'next/navigation'
+import UserInitialsBadge from '@/_ui/components/custom/user-initials-badge';
 
 // Write types
 type UserData = {
@@ -78,16 +79,13 @@ export default function CustomerNavBar({
                 <div className={cn("md:hidden",
                     hideInMobile ? 'hidden' : ''
                 )}>
-                    <MobileNavMenu authenticated={true} navTabs={navTabs} isScrolled={isScrolled} fixed={fixed} />
+                    <MobileNavMenu userData={userData} authenticated={true} navTabs={navTabs} isScrolled={isScrolled} fixed={fixed} />
                 </div>
 
                 {/*Closed navbar on desktop screens  */}
                 <div className={cn("hidden md:inline-flex space-x-2 items-center",
                     fixed ? 'text-primary' : isScrolled ? 'text-primary' : ' text-background'
                 )}>
-                    {/* <Link href="/register?type=professional" className={cn("font-semibold",
-                        isScrolled ? 'text-primary' : ' text-background'
-                    )}>For business</Link> */}
 
                     {showForBusiness && <Button borderType="fullRounded" isLink={true} variant="outline" href="/register?type=professional" className="bg-transparent font-source-sans font-semibold   hover:bg-muted/50">For business</Button>}
 
@@ -95,20 +93,12 @@ export default function CustomerNavBar({
 
                         <DropdownMenuTrigger asChild >
 
-                            <Button borderType="fullRounded" variant="ghost" className=" hover:bg-muted/50 bg-transparent inline-flex  font-source-sans font-semibold gap-1 group  items-center py-1 px-0">
+                            <Button borderType="fullRounded" variant="ghost" className=" hover:bg-muted/50 bg-transparent inline-flex  gap-1 group items-center py-1 px-0">
 
-                                <div className='rounded-full overflow-hidden bg-accent-100 text-accent-600 font-bold text-lg p-1 px-2'>
-                                    {userData.first_name.charAt(0)}{userData.last_name.charAt(0)}
-                                </div>
 
-                                {/* <Image
-                                    src={userAvatar}
-                                    alt="user avatar"
-                                    className="size-8 "
-                                /> */}
+                                <UserInitialsBadge firstName={userData.first_name} lastName={userData.last_name} />
 
-                                <ChevronDown className='size-4 transition duration-200
-                         group-data-[state=open]:rotate-180' />
+                                <ChevronDown className='size-4 transition duration-200 group-data-[state=open]:rotate-180' />
 
                             </Button>
                         </DropdownMenuTrigger>

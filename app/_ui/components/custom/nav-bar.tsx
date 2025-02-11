@@ -9,13 +9,10 @@ export default async function NavBar({ fixed = false, hideInMobile = false, clas
 
     const userData = await getUserData()
 
-
-
-
     return <>
         {
             userData && userData.role === 'customer' ? <CustomerNavBar userData={userData} className={className} fixed={fixed} hideInMobile={hideInMobile} showForBusiness={showForBusiness} />
-                : userData && userData.role === 'professional' ? <ProfessionalNavBar fixed={fixed} hideInMobile={hideInMobile} /> : <PublicNavBar fixed={fixed} hideInMobile={hideInMobile} />
+                : userData && userData.role === 'professional' ? <ProfessionalNavBar userData={userData} fixed={fixed} hideInMobile={hideInMobile} /> : <PublicNavBar fixed={fixed} hideInMobile={hideInMobile} />
         }
     </>
 

@@ -22,7 +22,7 @@ import { useState } from 'react'
 import { LanguageSwitcherDialog, LanguageSwitcherTrigger } from '@/_ui/components/custom/language-switcher-dialog'
 import { useParams } from 'next/navigation'
 
-export default function ProfessionalNavBar({ fixed = false, hideInMobile = false }: { fixed?: boolean, hideInMobile?: boolean }) {
+export default function ProfessionalNavBar({ fixed = false, hideInMobile = false, userData }: { fixed?: boolean, hideInMobile?: boolean, userData: UserData }) {
 
     const [isLanguageDialogOpen, setIsLanguageDialogOpen] = useState(false)
     const isScrolled = useIsScrolled()
@@ -44,7 +44,7 @@ export default function ProfessionalNavBar({ fixed = false, hideInMobile = false
 
                 {/* Nav menue trigger on mobile devices */}
                 <div className="md:hidden">
-                    <MobileNavMenu authenticated={true} navTabs={[]} isScrolled={isScrolled} fixed={fixed} />
+                    <MobileNavMenu userData={userData} authenticated={true} navTabs={[]} isScrolled={isScrolled} fixed={fixed} />
                 </div>
 
                 {/*Closed navbar on desktop screens  */}

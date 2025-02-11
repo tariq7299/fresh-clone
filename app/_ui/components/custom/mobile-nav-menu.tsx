@@ -6,7 +6,17 @@ import { Button } from '@/_ui/components/custom/button'
 import Link from 'next/link'
 import { GlobeAsiaAustraliaIcon } from "@heroicons/react/24/outline";
 import MobileNavToggler from './mobile-nav-toggler'
-export default function MobileNavMenu({ authenticated, navTabs, isScrolled, fixed }: { authenticated: boolean, navTabs: { title: string, href: string, icon: JSX.Element }[], isScrolled: boolean, fixed: boolean }) {
+
+// Write types
+type UserData = {
+    id: number
+    role: string
+    full_name: string
+    first_name: string
+    last_name: string
+}
+
+export default function MobileNavMenu({ authenticated, navTabs, isScrolled, fixed, userData }: { authenticated: boolean, navTabs: { title: string, href: string, icon: JSX.Element }[], isScrolled: boolean, fixed: boolean, userData: UserData }) {
 
     const [isOpen, setIsOpen] = useState(false)
 
@@ -19,7 +29,7 @@ export default function MobileNavMenu({ authenticated, navTabs, isScrolled, fixe
                 )} />
             </Button> */}
 
-            <MobileNavToggler setIsOpen={setIsOpen} fixed={fixed} isScrolled={isScrolled} authenticated={authenticated} isOpen={isOpen} />
+            <MobileNavToggler setIsOpen={setIsOpen} fixed={fixed} isScrolled={isScrolled} authenticated={authenticated} isOpen={isOpen} userData={userData} />
 
             {/* The opend nav menu on mobile screens */}
             <div className={cn(
