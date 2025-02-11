@@ -6,7 +6,8 @@ import { NavBarSkeleton } from "@/[lang]/(home)/_components/skeletons"
 import { getUserData } from "@/[lang]/(auth)/_lib/auth-server-services"
 import { div } from "framer-motion/client"
 import { NotepadText } from "lucide-react"
-import "@/_ui/bg-color.css"
+import BgColor from "@/_ui/components/custom/bg-color"
+
 
 export default async function CustomerLayout({ children, params }: { children: React.ReactNode, params: Promise<{ lang: string }> }) {
 
@@ -26,14 +27,15 @@ export default async function CustomerLayout({ children, params }: { children: R
 
     return (
         <SidebarProvider>
-            <AppSidebar userData={userData} sidebarTabs={sidebarTabs} containerClass="pt-[70px]" triggerClass="top-18" />
+            <BgColor color="#F5F5F6" />
+            {userData && <AppSidebar userData={userData} sidebarTabs={sidebarTabs} containerClass="pt-[70px]" triggerClass="top-18" />}
 
             {/* Nav bar */}
             <Suspense fallback={<NavBarSkeleton />}>
                 <NavBar showForBusiness={false} className="!px-20 max-w-full" fixed={true} />
             </Suspense>
 
-            <div className="p-5 pt-24 md:ps-14 size-full">
+            <div className="p-5 pt-24 pb-0 md:ps-14 size-full">
                 <Suspense>
                     {children}
                 </Suspense>

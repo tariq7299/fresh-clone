@@ -6,15 +6,7 @@ import { Button } from '@/_ui/components/custom/button'
 import Link from 'next/link'
 import { GlobeAsiaAustraliaIcon } from "@heroicons/react/24/outline";
 import MobileNavToggler from './mobile-nav-toggler'
-
-// Write types
-type UserData = {
-    id: number
-    role: string
-    full_name: string
-    first_name: string
-    last_name: string
-}
+import { UserData } from '@/[lang]/(auth)/_lib/definitions';
 
 export default function MobileNavMenu({ authenticated, navTabs, isScrolled, fixed, userData }: { authenticated: boolean, navTabs: { title: string, href: string, icon: JSX.Element }[], isScrolled: boolean, fixed: boolean, userData: UserData }) {
 
@@ -22,13 +14,6 @@ export default function MobileNavMenu({ authenticated, navTabs, isScrolled, fixe
 
     return (
         <>
-
-            {/* <Button size="icon" variant={"ghost"} onClick={() => setIsOpen(!isOpen)}>
-                <Bars3Icon className={cn('size-10 ',
-                    fixed ? 'text-foreground' : isScrolled ? 'text-foreground' : 'text-background hover:text-foreground'
-                )} />
-            </Button> */}
-
             <MobileNavToggler setIsOpen={setIsOpen} fixed={fixed} isScrolled={isScrolled} authenticated={authenticated} isOpen={isOpen} userData={userData} />
 
             {/* The opend nav menu on mobile screens */}

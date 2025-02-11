@@ -51,6 +51,7 @@
     "react-scrollspy-navigation": "^2.0.6",
     "secure-ls": "^2.0.0",
     "sonner": "^1.7.1",
+    "styled-jsx": "^5.1.6",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
     "ts-node": "^10.9.2",

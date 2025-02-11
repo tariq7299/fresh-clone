@@ -19,11 +19,11 @@ import { usePathname } from "next/navigation"
 import { SessionData } from "@/[lang]/(auth)/_lib/definitions"
 import { Button } from "@/_ui/components/button"
 import { cn } from "@/_lib/utils/utils"
-
+import { UserData } from "@/[lang]/(auth)/_lib/definitions"
 
 
 export function AppSidebar({ userData, sidebarTabs, containerClass, triggerClass }: {
-    userData: Pick<SessionData, "full_name" | "id" | "role" | "first_name" | "last_name">,
+    userData: UserData,
     sidebarTabs: {
         key: string,
         title: string,
@@ -50,7 +50,7 @@ export function AppSidebar({ userData, sidebarTabs, containerClass, triggerClass
 
 
             {/* Sidebar trigger on mobile */}
-            <SidebarTrigger className={cn("md:hidden fixed top-0 left-0 text-accent", (isMobile && userData.role === "customer") ? "hidden" : "block")} />
+            <SidebarTrigger className={cn("md:hidden fixed top-2 left-2 text-accent", (isMobile && userData.role === "customer") ? "hidden" : "block")} />
 
 
             <Sidebar className={cn("bg-background", open ? "p-3" : " ", containerClass)} collapsible={"icon"}>

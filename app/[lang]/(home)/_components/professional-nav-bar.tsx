@@ -21,6 +21,7 @@ import userAvatar from "@/../public/avatars/avatar11.png"
 import { useState } from 'react'
 import { LanguageSwitcherDialog, LanguageSwitcherTrigger } from '@/_ui/components/custom/language-switcher-dialog'
 import { useParams } from 'next/navigation'
+import { UserData } from '@/[lang]/(auth)/_lib/definitions';
 
 export default function ProfessionalNavBar({ fixed = false, hideInMobile = false, userData }: { fixed?: boolean, hideInMobile?: boolean, userData: UserData }) {
 

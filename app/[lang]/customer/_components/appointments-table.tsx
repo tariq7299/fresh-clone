@@ -138,8 +138,4 @@ export default function AppointmentsTable({ appointments, pagination }: { appoin
             </Suspense>
         </>
     )
-
-
-
-
 }

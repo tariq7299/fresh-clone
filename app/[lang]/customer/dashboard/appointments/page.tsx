@@ -20,7 +20,7 @@ export default async function AppointmentsPage(props: {
 
     return (
         <div className="size-full ">
-            <h1 className="text-2xl md:text-3xl font-bold text-accent ">Appointments</h1>
+            <h1 className="text-2xl md:text-3xl font-bold text-accent pb-4">Appointments</h1>
 
             <Suspense fallback={<DataTableFitlersSkeleton />}>
                 <AppointmentsFilters />

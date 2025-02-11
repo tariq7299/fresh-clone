@@ -22,15 +22,7 @@ import userAvatar from "@/../public/avatars/avatar11.png"
 import { LanguageSwitcherDialog, LanguageSwitcherTrigger } from '@/_ui/components/custom/language-switcher-dialog'
 import { useParams } from 'next/navigation'
 import UserInitialsBadge from '@/_ui/components/custom/user-initials-badge';
-
-// Write types
-type UserData = {
-    id: number
-    role: string
-    full_name: string
-    first_name: string
-    last_name: string
-}
+import { UserData } from '@/[lang]/(auth)/_lib/definitions';
 
 export default function CustomerNavBar({
     userData,
