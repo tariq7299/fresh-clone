@@ -58,7 +58,7 @@ export function ProfessionalSidebar({ userData, sidebarTabs, containerClass, tri
 
                 <SidebarTrigger className={cn("text-accent hidden md:inline-flex fixed  transition-all duration-250  ease-in-out ", open ? " left-64" : " left-12", triggerClass)} />
 
-                <SidebarHeader className={cn(open ? " py-2" : "flex justify-center items-center")}>
+                <SidebarHeader className={cn(open ? " py-2 px-4" : "flex justify-center items-center")}>
 
                     {/* <div className="flex justify-between items-center flex-col"> */}
 
@@ -99,10 +99,10 @@ export function ProfessionalSidebar({ userData, sidebarTabs, containerClass, tri
                 </SidebarHeader>
 
                 <SidebarContent >
-                    <SidebarMenu className={cn("px-2 pt-7", open ? "" : "flex justify-center items-center")}>
+                    <SidebarMenu className={cn("px-4 pt-7", open ? "" : "flex justify-center items-center")}>
                         {sidebarTabs.map((tab) => (
                             <SidebarMenuItem key={tab.key} >
-                                {/* <SidebarMenuButton asChild isActive={pathname === tab.href}> */}
+                                {/* <SidebarMenuButton a sChild isActive={pathname === tab.href}> */}
                                 <SidebarMenuButton asChild isActive={pathname === tab.href} className={cn("data-[active=true]:bg-accent-100 py-5 data-[active=true]:text-primary data-[active=true]:font-semibold", open ? "" : " flex justify-center items-center")}>
                                     <Link className="" href={tab.href}>
                                         {tab.icon}

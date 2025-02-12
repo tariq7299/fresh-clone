@@ -58,14 +58,14 @@ export function CustomerSidebar({ userData, sidebarTabs, containerClass, trigger
 
                 <SidebarTrigger className={cn("text-accent hidden md:inline-flex fixed  transition-all duration-250  ease-in-out ", open ? " left-64" : " left-12", triggerClass)} />
 
-                <SidebarHeader className={cn(open ? " py-2" : "flex justify-center items-center")}>
+                <SidebarHeader className={cn(open ? " py-2 px-4" : "flex justify-center items-center")}>
 
                     {/* TODO: Create a header component */}
                     {open ? <p className="text-lg font-bold font-source-sans"> {userData?.full_name}</p> : <p className="text-lg font-bold font-source-sans"> {userData?.first_name.charAt(0) + userData?.last_name.charAt(0)}</p>}
                 </SidebarHeader>
 
                 <SidebarContent >
-                    <SidebarMenu className={cn(open ? "px-2 " : "flex justify-center items-center")}>
+                    <SidebarMenu className={cn(open ? "px-4 " : "flex justify-center items-center")}>
                         {sidebarTabs.map((tab) => (
                             <SidebarMenuItem key={tab.key}>
                                 {/* <SidebarMenuButton asChild isActive={pathname === tab.href}> */}

@@ -32,7 +32,7 @@ export default async function CustomerLayout({ children, params }: { children: R
 
             {/* Nav bar */}
             <Suspense fallback={<NavBarSkeleton />}>
-                <NavBar showForBusiness={false} className="!px-20 max-w-full" fixed={true} />
+                <NavBar showForBusiness={false} className="!px-4 md:!px-20 max-w-full" fixed={true} />
             </Suspense>
 
             <div className="p-5 pt-24 pb-0 md:ps-14 size-full">
