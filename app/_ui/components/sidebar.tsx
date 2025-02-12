@@ -200,7 +200,7 @@ const Sidebar = React.forwardRef<
           <SheetContent
             data-sidebar="sidebar"
             data-mobile="true"
-            className="w-[--sidebar-width]  text-sidebar-foreground [&>button]:hidden bg-background p-2"
+            className={cn("w-[--sidebar-width]  text-sidebar-foreground [&>button]:hidden bg-background p-2", className)}
             style={
               {
                 "--sidebar-width": SIDEBAR_WIDTH_MOBILE,

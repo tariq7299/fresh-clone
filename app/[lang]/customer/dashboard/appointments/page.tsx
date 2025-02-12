@@ -1,24 +1,16 @@
-
-
-
-import { Appointment, Filter } from "@/[lang]/customer/_lib/definitions"
+import { Filter } from "@/[lang]/customer/_lib/definitions"
 import { AppointmentPageQueries } from "@/[lang]/customer/_lib/definitions"
 import { Suspense } from "react"
-import { DataTableFitlersSkeleton, DataTableSkeletonWithPagination } from "@/[lang]/customer/_components/skeleton"
+import { DataTableSkeletonWithPagination } from "@/[lang]/customer/_components/skeleton"
 import AppointmentsTableWrapper from "../../_components/appointments-table-wrapper"
-import AppointmentsFilters from "../../_components/appointments-filters"
 import TableFilters from "@/_ui/components/custom/table-filters"
 import { getAppointments } from "@/[lang]/customer/_lib/data"
-import { Calendar } from "lucide-react"
-import { CheckCircle } from "lucide-react"
-
+import { Calendar, CheckCircle } from "lucide-react"
 
 export default async function AppointmentsPage(props: {
     searchParams: Promise<AppointmentPageQueries>
 }) {
-
     const params = await props?.searchParams
-
     const appointments = (await getAppointments()).appointments
 
     const filters: Filter[] = [
@@ -42,16 +34,12 @@ export default async function AppointmentsPage(props: {
     ]
 
     return (
-        <div className="size-full ">
+        <div className="size-full">
             <h1 className="text-2xl md:text-3xl font-bold text-accent pb-4">Appointments</h1>
-
             <TableFilters filters={filters} data={appointments} />
-
             <Suspense key={params?.page + params?.status + params?.booking_date} fallback={<DataTableSkeletonWithPagination />}>
                 <AppointmentsTableWrapper params={params} />
             </Suspense>
         </div>
     )
-
-
 }

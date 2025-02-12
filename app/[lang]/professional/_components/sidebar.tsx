@@ -41,8 +41,6 @@ export function ProfessionalSidebar({ userData, sidebarTabs, containerClass, tri
 
     const { state, open, setOpen, isMobile } = useSidebar()
 
-    console.log("isMobile", isMobile)
-    console.log("userData.role", userData.role)
 
 
     return (
@@ -54,7 +52,7 @@ export function ProfessionalSidebar({ userData, sidebarTabs, containerClass, tri
             <SidebarTrigger className={cn("md:hidden fixed top-2 left-2 text-accent")} />
 
 
-            <Sidebar className={cn("bg-background", open ? "p-0" : " ", containerClass)} collapsible={"icon"}>
+            <Sidebar className={cn("", containerClass)} collapsible={"icon"}>
 
 
                 <SidebarTrigger className={cn("text-accent hidden md:inline-flex fixed  transition-all duration-250  ease-in-out ", open ? " left-64" : " left-12", triggerClass)} />
