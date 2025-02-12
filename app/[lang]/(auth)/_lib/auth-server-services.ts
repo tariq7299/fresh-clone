@@ -49,3 +49,11 @@ export async function getUserData() {
     return { id, role, full_name, first_name, last_name, email }
 }
 
+export async function logoutUserFromBackend() {
+    const response = await fetchApi('/auth/logout', {
+        method: 'POST',
+    })
+    return response
+}
+
+

@@ -1,38 +1,13 @@
 import { getAppointments } from "@/[lang]/professional/_lib/data";
-import { AppointmentPageQueries, Filter } from "@/[lang]/customer/_lib/definitions";
+import { AppointmentPageQueries, Filter } from "@/_lib/definitions/appointments";
 import { Suspense } from "react";
-import { DataTableSkeletonWithPagination } from "@/[lang]/customer/_components/skeleton";
+import { DataTableSkeletonWithPagination } from "@/_ui/components/custom/skeletons";
 import AppointmentsTableWrapper from "@/[lang]/professional/dashboard/_components/appointments-table-wrapper";
 import TableFilters from "@/_ui/components/custom/table-filters";
 import { Calendar } from "lucide-react";
 import { CheckCircle } from "lucide-react";
 
-interface Service {
-    service_id: number,
-    name: string,
-    price: number,
-    duration: number,
-}
 
-interface ApiAppointment {
-    user: any,
-    business: {
-        id: number,
-        name: string,
-        address: string,
-    },
-    id: string,
-    booking_date: string,
-    start_time: string,
-    end_time: string,
-    status: string,
-    payment_method: string,
-    booking_data: {
-        services: Service[]
-        total_duration: number
-        total_price: number
-    }
-}
 
 
 export default async function AppointmentsPage(props: {
@@ -62,7 +37,6 @@ export default async function AppointmentsPage(props: {
             icon: <CheckCircle className="size-6" />
         }
     ]
-
 
     return (
         <div className="p-5 ps-7 pt-8 md:pt-14 size-full over">

@@ -15,14 +15,12 @@ import { cn } from '@/_lib/utils/utils'
 import { useEffect, useState } from 'react'
 import { Button } from '@/_ui/components/custom/button'
 import Link from 'next/link'
-import { GlobeAsiaAustraliaIcon } from "@heroicons/react/24/outline";
 import useIsScrolled from '../_lib/hooks/use-is-scrolled'
-import Image from 'next/image'
-import userAvatar from "@/../public/avatars/avatar11.png"
 import { LanguageSwitcherDialog, LanguageSwitcherTrigger } from '@/_ui/components/custom/language-switcher-dialog'
 import { useParams } from 'next/navigation'
 import UserInitialsBadge from '@/_ui/components/custom/user-initials-badge';
 import { UserData } from '@/[lang]/(auth)/_lib/definitions';
+import AuthButton from '@/_ui/components/custom/auth-button';
 
 export default function CustomerNavBar({
     userData,
@@ -87,8 +85,7 @@ export default function CustomerNavBar({
 
                             <Button borderType="fullRounded" variant="ghost" className=" hover:bg-muted/50 bg-transparent inline-flex  gap-1 group items-center py-1 px-0">
 
-
-                                <UserInitialsBadge firstName={userData.first_name} lastName={userData.last_name} />
+                                {userData && <UserInitialsBadge firstName={userData.first_name} lastName={userData.last_name} />}
 
                                 <ChevronDown className='size-4 transition duration-200 group-data-[state=open]:rotate-180' />
 
@@ -107,10 +104,8 @@ export default function CustomerNavBar({
                                 ))}
 
                             <DropdownMenuItem className='' asChild>
-                                <Link href="/login?sessionEnded=true" className='flex items-center gap-2  w-full'>
-                                    <ArrowLeftEndOnRectangleIcon className='size-10' />
-                                    <p className='font-semibold'>Log out </p>
-                                </Link>
+
+                                <AuthButton authenticated={true} className='flex justify-start items-center gap-2 w-full font-semibold' />
                             </DropdownMenuItem>
                             <DropdownMenuSeparator className='  my-2 mx-2 ' />
                             <DropdownMenuLabel className='font-bold  text-base'>Other</DropdownMenuLabel>
@@ -124,7 +119,7 @@ export default function CustomerNavBar({
                                 )
                             ))}
 
-                            <DropdownMenuItem className=' text-accent-600  ' onClick={() => setIsLanguageDialogOpen(true)}>
+                            <DropdownMenuItem className=' text-accent-600  ' onClick={() => setIsLanguageDialogOpen(true)} asChild>
                                 <LanguageSwitcherTrigger />
                             </DropdownMenuItem>
                         </DropdownMenuContent>

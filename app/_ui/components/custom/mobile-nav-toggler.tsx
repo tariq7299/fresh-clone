@@ -14,11 +14,12 @@ type UserData = {
     full_name: string
     first_name: string
     last_name: string
-}
+} | null
+
 export default function MobileNavToggler({ fixed, isScrolled, authenticated, setIsOpen, isOpen, userData }: { fixed: boolean, isScrolled: boolean, authenticated: boolean, setIsOpen: (isOpen: boolean) => void, isOpen: boolean, userData: UserData }) {
 
     return <>
-        {authenticated ?
+        {authenticated && userData ?
 
             <Button size="icon" variant={"ghost"} className={cn("bg-background/20 rounded-full p-1  w-14 h-auto",
                 authenticated ? "bg-background/20 rounded-full p-1  w-14 h-auto" : ""

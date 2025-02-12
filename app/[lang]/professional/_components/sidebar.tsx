@@ -22,6 +22,7 @@ import { cn } from "@/_lib/utils/utils"
 import { UserData } from "@/[lang]/(auth)/_lib/definitions"
 import UserInitialsBadge from "@/_ui/components/custom/user-initials-badge"
 import { div } from "framer-motion/client"
+import AuthButton from "@/_ui/components/custom/auth-button"
 
 export function ProfessionalSidebar({ userData, sidebarTabs, containerClass, triggerClass }: {
     userData: UserData,
@@ -85,7 +86,7 @@ export function ProfessionalSidebar({ userData, sidebarTabs, containerClass, tri
                                 <Link href="/" className={cn("text-accent-foreground text-4xl font-bold font-cinzel ")}>L</Link>
                             </div>
                             <div className="flex justify-center items-center gap-2">
-                                <UserInitialsBadge firstName={userData?.first_name} lastName={userData?.last_name} />
+                                {userData && <UserInitialsBadge firstName={userData.first_name} lastName={userData.last_name} />}
 
                             </div>
                         </>
@@ -127,10 +128,16 @@ export function ProfessionalSidebar({ userData, sidebarTabs, containerClass, tri
                         <SidebarMenuItem  >
                             {/* <SidebarMenuButton asChild isActive={pathname === tab.href}> */}
                             <SidebarMenuButton asChild isActive={pathname === "/logout"} className={cn("text-accent-foreground data-[active=true]:bg-accent-100 py-5 data-[active=true]:text-primary data-[active=true]:font-semibold", open ? "" : " flex justify-center items-center")}>
-                                <Link className="" href={"/logout"}>
+                                {/* <Link className="" href={"/logout"}>
                                     <LogOut />
                                     <span className={cn(open ? "" : "hidden")}>Logout</span>
-                                </Link>
+                                </Link> */}
+
+                                <AuthButton authenticated={true} className='flex justify-start items-center gap-2 w-full font-semibold' >
+                                    <LogOut />
+                                    <span className={cn(open ? "" : "hidden")}>Log out</span>
+                                </AuthButton>
+
                             </SidebarMenuButton>
                         </SidebarMenuItem>
                     </SidebarMenu>

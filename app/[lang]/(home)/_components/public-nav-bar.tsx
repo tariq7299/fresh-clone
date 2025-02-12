@@ -1,4 +1,3 @@
-
 'use client'
 
 import { ArrowRightEndOnRectangleIcon, BriefcaseIcon, ChevronDownIcon } from '@heroicons/react/24/outline'
@@ -12,14 +11,14 @@ import {
 } from "@/_ui/components/dropdown-menu"
 import MobileNavMenu from '@/_ui/components/custom/mobile-nav-menu'
 import { cn } from '@/_lib/utils/utils'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Button } from '@/_ui/components/custom/button'
 import Link from 'next/link'
-import { GlobeAsiaAustraliaIcon } from "@heroicons/react/24/outline";
 import useIsScrolled from '../_lib/hooks/use-is-scrolled'
 import { LanguageSwitcherDialog } from '@/_ui/components/custom/language-switcher-dialog'
 import { LanguageSwitcherTrigger } from '@/_ui/components/custom/language-switcher-dialog'
-import { useParams, useSearchParams } from 'next/navigation'
+import { useParams } from 'next/navigation'
+import AuthButton from '@/_ui/components/custom/auth-button'
 
 export default function PublicNavBar({ fixed = false, hideInMobile = false }: { fixed?: boolean, hideInMobile?: boolean }) {
 
@@ -52,7 +51,7 @@ export default function PublicNavBar({ fixed = false, hideInMobile = false }: { 
 
                 {/* Nav menue trigger on mobile devices */}
                 <div className="md:hidden">
-                    <MobileNavMenu authenticated={false} navTabs={navTabs} isScrolled={isScrolled} fixed={fixed} />
+                    <MobileNavMenu userData={null} authenticated={false} navTabs={navTabs} isScrolled={isScrolled} fixed={fixed} />
                 </div>
 
                 {/*Closed navbar on desktop screens  */}
@@ -76,10 +75,13 @@ export default function PublicNavBar({ fixed = false, hideInMobile = false }: { 
                         <DropdownMenuContent className='w-56 p-2'>
 
                             <DropdownMenuItem className=''>
-                                <Link href="/login" className='flex items-center gap-2  w-full'>
+                                {/* <Link href="/login" className='flex items-center gap-2  w-full'>
                                     <ArrowRightEndOnRectangleIcon className='size-10' />
                                     <p className='font-semibold'>Log In </p>
-                                </Link>
+                                </Link> */}
+
+                                <AuthButton authenticated={false} className='flex items-center gap-2 w-full font-semibold' />
+
                             </DropdownMenuItem>
                             <DropdownMenuSeparator className='  my-2 mx-2 ' />
                             <DropdownMenuLabel className='font-bold  text-base'>Other</DropdownMenuLabel>

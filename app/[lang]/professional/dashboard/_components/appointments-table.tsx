@@ -37,28 +37,29 @@ import { fetchApi } from "@/_lib/utils/api/fetch-utils-client"
 import { Suspense, useState } from "react"
 import TablePagination from "@/_ui/components/custom/table-pagination"
 import { TablePaginationSkeleton, DataTableSkeleton } from "@/_ui/components/custom/skeletons"
-import { Pagination } from "@/[lang]/customer/_lib/definitions"
+import { Pagination } from "@/_lib/definitions/definitions"
+import { Appointment, Service } from "@/_lib/definitions/appointments"
 
-type Service = {
-    service_id: number
-    name: string
-    price: number
-    duration: number
-}
+// type Service = {
+//     service_id: number
+//     name: string
+//     price: number
+//     duration: number
+// }
 
-type Appointment = {
-    id: string
-    booking_date: string
-    start_time: string
-    end_time: string
-    status: string
-    payment_method: string
-    services: Service[]
-    // business_name: string
-    // business_address: string
-    total_duration: number
-    total_price: number
-}
+// type Appointment = {
+//     id: string
+//     booking_date: string
+//     start_time: string
+//     end_time: string
+//     status: string
+//     payment_method: string
+//     services: Service[]
+//     // business_name: string
+//     // business_address: string
+//     total_duration: number
+//     total_price: number
+// }
 
 // Define your possible status options
 const STATUS_OPTIONS = ["completed", "cancelled"]

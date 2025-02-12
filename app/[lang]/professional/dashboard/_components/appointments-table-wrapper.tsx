@@ -1,5 +1,5 @@
 import AppointmentsTable from "./appointments-table";
-import { ApiAppointment, AppointmentPageQueries } from "@/[lang]/customer/_lib/definitions"
+import { ApiAppointment, AppointmentPageQueries } from "@/_lib/definitions/appointments"
 import { getAppointments } from "@/[lang]/professional/_lib/data";
 import Empty from "@/_ui/icons/empty";
 

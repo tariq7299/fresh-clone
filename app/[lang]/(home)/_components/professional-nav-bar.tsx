@@ -22,6 +22,7 @@ import { useState } from 'react'
 import { LanguageSwitcherDialog, LanguageSwitcherTrigger } from '@/_ui/components/custom/language-switcher-dialog'
 import { useParams } from 'next/navigation'
 import { UserData } from '@/[lang]/(auth)/_lib/definitions';
+import AuthButton from '@/_ui/components/custom/auth-button';
 
 export default function ProfessionalNavBar({ fixed = false, hideInMobile = false, userData }: { fixed?: boolean, hideInMobile?: boolean, userData: UserData }) {
 
@@ -69,15 +70,12 @@ export default function ProfessionalNavBar({ fixed = false, hideInMobile = false
                         </DropdownMenuTrigger>
                         <DropdownMenuContent className='w-56 p-2'>
 
-                            <DropdownMenuItem className=''>
-                                <Link href="/login?sessionEnded=true" className='flex items-center gap-2  w-full'>
-                                    <ArrowLeftEndOnRectangleIcon className='size-10' />
-                                    <p className='font-semibold'>Log out </p>
-                                </Link>
+                            <DropdownMenuItem className='' asChild>
+                                <AuthButton authenticated={true} className='flex justify-start items-center gap-2 w-full font-semibold' />
                             </DropdownMenuItem>
                             <DropdownMenuSeparator className='  my-2 mx-2 ' />
                             <DropdownMenuLabel className='font-bold  text-base'>Other</DropdownMenuLabel>
-                            <DropdownMenuItem className=' text-accent-600  ' onClick={() => setIsLanguageDialogOpen(true)}>
+                            <DropdownMenuItem className=' text-accent-600  ' onClick={() => setIsLanguageDialogOpen(true)} asChild>
                                 <LanguageSwitcherTrigger />
                             </DropdownMenuItem>
                         </DropdownMenuContent>

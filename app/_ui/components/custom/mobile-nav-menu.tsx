@@ -1,10 +1,9 @@
 'use client'
 import { useState } from 'react'
 import { cn } from '@/_lib/utils/utils'
-import { ArrowRightEndOnRectangleIcon, Bars3Icon, XMarkIcon, ChevronRightIcon, BriefcaseIcon } from '@heroicons/react/24/outline'
+import { ArrowRightEndOnRectangleIcon, XMarkIcon, ChevronRightIcon, GlobeAsiaAustraliaIcon } from '@heroicons/react/24/outline'
 import { Button } from '@/_ui/components/custom/button'
 import Link from 'next/link'
-import { GlobeAsiaAustraliaIcon } from "@heroicons/react/24/outline";
 import MobileNavToggler from './mobile-nav-toggler'
 import { UserData } from '@/[lang]/(auth)/_lib/definitions';
 
