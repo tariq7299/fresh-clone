@@ -33,12 +33,10 @@ import { Badge } from "@/_ui/components/badge"
 import { Button } from "@/_ui/components/button"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/_ui/components/dialog"
 import { cn, getTotalDuration } from "@/_lib/utils/utils"
-import { CreditCard, Settings, User } from "lucide-react"
 import { fetchApi } from "@/_lib/utils/api/fetch-utils-client"
 import { Suspense, useState } from "react"
-import { DataTableSkeleton } from "@/[lang]/customer/_components/skeleton"
 import TablePagination from "@/_ui/components/custom/table-pagination"
-import { TablePaginationSkeleton } from "@/[lang]/customer/_components/skeleton"
+import { TablePaginationSkeleton, DataTableSkeleton } from "@/_ui/components/custom/skeletons"
 import { Pagination } from "@/[lang]/customer/_lib/definitions"
 
 type Service = {

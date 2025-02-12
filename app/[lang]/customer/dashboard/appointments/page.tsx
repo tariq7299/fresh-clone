@@ -1,7 +1,7 @@
 import { Filter } from "@/[lang]/customer/_lib/definitions"
 import { AppointmentPageQueries } from "@/[lang]/customer/_lib/definitions"
 import { Suspense } from "react"
-import { DataTableSkeletonWithPagination } from "@/[lang]/customer/_components/skeleton"
+import { DataTableSkeletonWithPagination } from "@/_ui/components/custom/skeletons"
 import AppointmentsTableWrapper from "../../_components/appointments-table-wrapper"
 import TableFilters from "@/_ui/components/custom/table-filters"
 import { getAppointments } from "@/[lang]/customer/_lib/data"

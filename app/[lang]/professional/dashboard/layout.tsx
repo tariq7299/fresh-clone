@@ -1,11 +1,8 @@
-import { SidebarProvider, SidebarTrigger } from "@/_ui/components/sidebar"
-import { AppSidebar } from "@/_ui/components/custom/app-sidebar"
+import { SidebarProvider } from "@/_ui/components/sidebar"
 import { Suspense } from "react"
-import NavBar from "@/_ui/components/custom/nav-bar"
-import { NavBarSkeleton } from "@/[lang]/(home)/_components/skeletons"
 import { getUserData } from "@/[lang]/(auth)/_lib/auth-server-services"
 import { NotepadText } from "lucide-react"
-import BgColor from "@/_ui/components/custom/bg-color"
+import ChangeBodyColor from "@/_ui/components/custom/change-body-color"
 import { ProfessionalSidebar } from "../_components/sidebar"
 
 
@@ -28,7 +25,7 @@ export default async function ProfessionalDashboardLayout({ children, params }: 
 
     return (
         <SidebarProvider>
-            <BgColor color="#F5F5F6" />
+            <ChangeBodyColor color="#F5F5F6" />
 
             {userData && <ProfessionalSidebar userData={userData} sidebarTabs={sidebarTabs} triggerClass="top-0" containerClass="bg-gradient-to-b from-[#638C6D]  to-[#1B261E] " />}
 

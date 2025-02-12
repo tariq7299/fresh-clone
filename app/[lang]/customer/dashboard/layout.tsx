@@ -6,7 +6,7 @@ import { NavBarSkeleton } from "@/[lang]/(home)/_components/skeletons"
 import { getUserData } from "@/[lang]/(auth)/_lib/auth-server-services"
 import { div } from "framer-motion/client"
 import { NotepadText } from "lucide-react"
-import BgColor from "@/_ui/components/custom/bg-color"
+import BgColor from "@/_ui/components/custom/change-body-color"
 import { CustomerSidebar } from "../_components/sidebar"
 
 export default async function CustomerLayout({ children, params }: { children: React.ReactNode, params: Promise<{ lang: string }> }) {

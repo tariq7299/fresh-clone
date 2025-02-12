@@ -20,8 +20,7 @@ import AppointmentStatus from "@/_ui/components/custom/appoitment-status"
 import { Suspense } from "react"
 import { Pagination } from "@/_lib/definitions/definitions"
 import TablePagination from "@/_ui/components/custom/table-pagination"
-import { DataTableSkeleton, TablePaginationSkeleton } from "./skeleton"
-import { Status } from "../_lib/definitions"
+import { DataTableSkeleton, TablePaginationSkeleton } from "@/_ui/components/custom/skeletons"
 
 
 export default function AppointmentsTable({ appointments, pagination }: { appointments: Appointment[], pagination: Pagination }) {
