@@ -10,9 +10,8 @@ interface LoginPageProps {
 
 export default async function Page({ params }: LoginPageProps) {
 
-    const { lang } = await params;
-
-    const dict = await getDictionary(lang);
+    const lang = (await params)?.lang
+    const dict = await getDictionary(lang)
 
     return <LoginDialog dict={dict} />
 }

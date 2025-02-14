@@ -3,8 +3,8 @@
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/_ui/components/dialog";
 import { useRouter } from "next/navigation";
 import LoginForm from "@/[lang]/(auth)/_components/login-form";
-// import { Suspense } from "react";
-// import Loading from "@/[lang]/(auth)/loading";
+import { Suspense } from "react";
+import Loading from "@/[lang]/(auth)/loading";
 
 export default function LoginDialog({ dict }: { dict: any }) {
 
@@ -22,9 +22,9 @@ export default function LoginDialog({ dict }: { dict: any }) {
                     </DialogDescription>
                 </DialogHeader>
                 <div className="py-4">
-                    {/* <Suspense fallback={<Loading />}> */}
-                    <LoginForm dict={dict} />
-                    {/* </Suspense> */}
+                    <Suspense fallback={<Loading />}>
+                        <LoginForm dict={dict} />
+                    </Suspense>
                 </div>
             </DialogContent>
         </Dialog>

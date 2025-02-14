@@ -10,8 +10,8 @@ interface LoginPageProps {
 }
 
 export default async function LoginPage({ params }: LoginPageProps) {
-    const { lang } = await params;
-    const dict = await getDictionary(lang);
+    const lang = (await params)?.lang
+    const dict = await getDictionary(lang)
 
     return (
         <div className="mt-auto flex flex-col gap-2 w-full max-w-md p-5 pt-20">

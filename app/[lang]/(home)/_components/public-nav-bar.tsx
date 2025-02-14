@@ -72,7 +72,7 @@ export default function PublicNavBar({ dict, fixed = false, hideInMobile = false
                         </DropdownMenuTrigger>
                         <DropdownMenuContent className='w-56 p-2'>
 
-                            <DropdownMenuItem className=''>
+                            <DropdownMenuItem className='' asChild>
                                 {/* <Link href="/login" className='flex items-center gap-2  w-full'>
                                     <ArrowRightEndOnRectangleIcon className='size-10' />
                                     <p className='font-semibold'>Log In </p>
