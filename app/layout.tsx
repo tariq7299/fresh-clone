@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Source_Sans_3, Libre_Bodoni, Lora, Quicksand, Cinzel } from "next/font/google";
+import { Cairo, Almarai, Source_Sans_3, Libre_Bodoni, Lora, Quicksand, Cinzel } from "next/font/google";
 import "@/_ui/globals.css";
 import SonnerToaster from "@/_ui/ToasterSonner"
 
@@ -29,6 +29,16 @@ const QuicksandSans = Quicksand({
     variable: "--font-Quicksand-sans",
     subsets: ["latin"],
 });
+const AlmaraiSans = Almarai({
+    variable: "--font-Almarai-sans",
+    subsets: ["latin"],
+    weight: ["300", "400", "700", "800"],
+});
+
+const CairoSans = Cairo({
+    variable: "--font-Cairo-sans",
+    subsets: ["latin"],
+});
 
 // const geistMono = Geist_Mono({
 //   variable: "--font-geist-mono",
@@ -55,23 +65,28 @@ export default async function RootLayout({
 
     return (
         <html lang={"en"} dir={"ltr"}>
-            <body
-                className={`${LibreBodoniSerif.variable} ${CinzelSerif.variable} ${SourceSans3Sans.variable} ${QuicksandSans.variable} antialiased `}
-            >
-                {/* 
-        This is the provider for the nextui library
-        I am using this lib to be able to use the "date-input" component from the nextui library 
-        */}
-                <NextUIProvider>
-                    <main>
-                        <Suspense >
-                            {children}
-                        </Suspense>
-                    </main>
-                    <SonnerToaster />
-                </NextUIProvider>
-            </body>
+            <Suspense >
+                {children}
+            </Suspense>
         </html>
+        // <html lang={"en"} dir={"ltr"}>
+        //     <body
+        //         className={`${LibreBodoniSerif.variable} ${CinzelSerif.variable} ${SourceSans3Sans.variable} ${QuicksandSans.variable} ${AlmaraiSans.variable} ${CairoSans.variable} antialiased `}
+        //     >
+        //         {/* 
+        // This is the provider for the nextui library
+        // I am using this lib to be able to use the "date-input" component from the nextui library 
+        // */}
+        //         <NextUIProvider>
+        //             <main>
+        //                 <Suspense >
+        //                     {children}
+        //                 </Suspense>
+        //             </main>
+        //             <SonnerToaster />
+        //         </NextUIProvider>
+        //     </body>
+        // </html>
 
     );
 }

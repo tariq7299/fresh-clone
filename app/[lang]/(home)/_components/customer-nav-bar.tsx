@@ -56,41 +56,43 @@ export default function CustomerNavBar({
             fixed ? 'bg-white shadow' : isScrolled ? 'bg-white shadow' : 'bg-transparent',
             hideInMobile ? 'hidden md:block fixed top-0 left-0' : 'fixed top-0 left-0'
         )}>
-            {/* 
-            <LanguageSwitcherDialog hasTrigger={false} open={isLanguageDialogOpen} setOpen={setIsLanguageDialogOpen} /> */}
+
 
             <div className={cn("p-5 py-4 flex justify-between items-center max-w-[1440px] m-auto pe-7", className)}>
 
+                {/* Create a component for the link called "Logo" */}
                 <Link href="/" className={cn("text-2xl font-bold font-cinzel ",
                     fixed ? 'text-primary' : isScrolled ? 'text-primary' : 'text-background'
                 )}>Lumière</Link>
 
-                {/* Nav menue trigger on mobile devices */}
+                {/* Nav menu trigger on mobile devices */}
                 <div className={cn("md:hidden",
                     hideInMobile ? 'hidden' : ''
                 )}>
                     <MobileNavMenu userData={userData} authenticated={true} navTabs={navTabs} isScrolled={isScrolled} fixed={fixed} />
                 </div>
 
-                {/*Closed navbar on desktop screens  */}
+                {/* Closed navbar on desktop screens  */}
                 <div className={cn("hidden md:inline-flex space-x-2 items-center",
                     fixed ? 'text-primary' : isScrolled ? 'text-primary' : ' text-background'
                 )}>
 
+                    {/* Create a component for the button called "NavButton" */}
+                    {/* This will take a title, href */}
                     {showForBusiness && <Button borderType="fullRounded" isLink={true} variant="outline" href="/register?type=professional" className="bg-transparent font-source-sans font-semibold   hover:bg-muted/50">For business</Button>}
 
+                    {/* Create a component for the dropdown menu called "NavMenu" */}
                     <DropdownMenu>
 
                         <DropdownMenuTrigger asChild >
-
                             <Button borderType="fullRounded" variant="ghost" className=" hover:bg-muted/50 bg-transparent inline-flex  gap-1 group items-center py-1 px-0">
 
                                 {userData && <UserInitialsBadge firstName={userData.first_name} lastName={userData.last_name} />}
 
                                 <ChevronDown className='size-4 transition duration-200 group-data-[state=open]:rotate-180' />
-
                             </Button>
                         </DropdownMenuTrigger>
+
                         <DropdownMenuContent className='w-56 p-2'>
 
                             {navTabs.map((tab) =>
@@ -104,11 +106,12 @@ export default function CustomerNavBar({
                                 ))}
 
                             <DropdownMenuItem className='' asChild>
-
                                 <AuthButton authenticated={true} className='flex justify-start items-center gap-2 w-full font-semibold' />
                             </DropdownMenuItem>
                             <DropdownMenuSeparator className='  my-2 mx-2 ' />
+
                             <DropdownMenuLabel className='font-bold  text-base'>Other</DropdownMenuLabel>
+
                             {navTabs.map((tab) => (
                                 tab.type === "other" && (
                                     <DropdownMenuItem key={tab.title} className='' asChild>
@@ -124,6 +127,7 @@ export default function CustomerNavBar({
                             </DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
+
                 </div>
 
 

@@ -200,12 +200,18 @@
 }
 
 @layer base {
-  html {
+  /* html {
     font-family: 'Quicksand', system-ui, sans-serif;
-  }
+  } */
 
   #main-layout[dir="rtl"] {
     direction: rtl !important;
+  }
+  #main-layout[dir="ltr"] {
+    font-family: 'Quicksand', system-ui, sans-serif;
+  }
+  #main-layout[dir="rtl"] {
+    font-family: 'Almarai', system-ui, sans-serif;
   }
 
   * {

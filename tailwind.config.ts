@@ -132,10 +132,11 @@ export default {
 			},
 			fontFamily: {
 				'libre-bodoni': ['"Libre Bodoni"', 'serif'],
-				// 'lora': ['Lora', 'serif'],
 				'quicksand': ['"Quicksand"', 'sans-serif'],
 				'source-sans': ['"Source Sans 3"', 'sans-serif'],
 				'cinzel': ['"Cinzel"', 'serif'],
+				'almarai': ['"Almarai"', 'sans-serif'],
+				'cairo': ['"Cairo"', 'sans-serif'],
 			},
 			screens: {
 				"3xs": "320px",
