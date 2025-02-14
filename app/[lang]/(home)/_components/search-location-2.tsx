@@ -19,7 +19,7 @@ export default function SearchLocation2({ className, setOpen, open, handleSearch
             <PopoverAnchor>
                 {/* <p className=" font-bold pb-1">Where is your business located?</p> */}
                 <div className="relative">
-                    <div className={cn("absolute left-4 top-1/2 -translate-y-1/2  ", triggerIconWrapperClassName)}>
+                    <div className={cn("absolute left-4 rtl:right-0 top-1/2 -translate-y-1/2  ", triggerIconWrapperClassName)}>
                         {triggerIcon}
                         {/* <MapPin className={cn("size-5 text-muted-foreground/70", iconClassName)} /> */}
                     </div>

@@ -5,9 +5,11 @@ import HeroFilter from "./hero-filter";
 import { Suspense } from "react";
 
 export default async function HeroSection({
-    dict
+    dict,
+    lang
 }: {
-    dict: any
+    dict: any,
+    lang: "en" | "ar"
 }) {
 
 
@@ -31,7 +33,7 @@ export default async function HeroSection({
 
 
             <div className="max-w-xl lg:max-w-2xl relative ">
-                <h1 className={`text-4xl  lg:text-7xl font-black text-start sm:text-start tracking-tight font-libre-bodoni rtl:font-cairo scale-y-110 text-white `}>
+                <h1 className={`text-4xl  lg:text-7xl font-bold text-start sm:text-start tracking-tight font-libre-bodoni rtl:font-cairo scale-y-110 text-white `}>
                     {/* Schedule local salon and wellness services */}
                     {dict.home.hero.title}
                 </h1>
@@ -46,7 +48,7 @@ export default async function HeroSection({
                         <div className="w-full lg:w-auto h-12 bg-gray-200 animate-pulse rounded-md px-8"></div>
                     </div>
                 }>
-                    <HeroFilter dict={dict} />
+                    <HeroFilter lang={lang} dict={dict} />
                 </Suspense>
 
             </div>

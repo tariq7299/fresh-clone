@@ -10,7 +10,7 @@ import { Category } from "@/[lang]/business/_lib/definitions";
 
 
 
-export const getAllCategories = async () => {
+export const getAllCategories = async (lang: "en" | "ar") => {
 
     // try {
 
@@ -18,7 +18,8 @@ export const getAllCategories = async () => {
         {
             cache: "force-cache",
             tags: ["categories"],
-            revalidate: 3600
+            revalidate: 3600,
+            lang
         }
     )
 

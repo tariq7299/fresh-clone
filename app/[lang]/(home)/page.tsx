@@ -34,7 +34,7 @@ export default async function Home({ params }: { params: Promise<{ lang: 'en' | 
         </Suspense>
 
         <section className="px-5 md:px-7 py-36 lg:py-52 grid justify-center  relative items-center">
-          <HeroSection dict={dict} />
+          <HeroSection dict={dict} lang={lang} />
         </section>
 
 
@@ -42,13 +42,13 @@ export default async function Home({ params }: { params: Promise<{ lang: 'en' | 
 
           {/* Gray section under hero section */}
           <section className="px-5 mb-10 md:mb-16 md:px-7 bg-secondary-100 h-20 md:h-24 flex items-center text-center justify-center text-xs md:text-base">
-            <p className=" ">Beauty on your schedule. Explore local salons and spas with ease.</p>
+            <p className=" ">{dict.home.hero.gray_area_text}</p>
 
           </section>
 
           {/* Apply you business now section */}
           <section className="px-5 md:px-7  text-center text-xl md:text-3xl">
-            <p className=" ">Want your business on <span className="font-cinzel font-bold">Lumière</span>? <Link href="/register?type=professional" className="font-bold underline decoration-2 text-nowrap">Apply now</Link></p>
+            <p className=" ">{dict.home.apply_now_text} <span className="font-cinzel font-bold">Lumière</span>? <Link href="/register?type=professional" className="font-bold underline decoration-2 text-nowrap">{dict.home.apply_now_action}</Link></p>
           </section>
 
           {/*Shops Carousels  */}
@@ -59,33 +59,31 @@ export default async function Home({ params }: { params: Promise<{ lang: 'en' | 
 
             {/* Recommended section */}
             <Suspense fallback={<ShopsCarouselSkeleton />}>
-              <RecommendedBusinesses />
+              <RecommendedBusinesses dict={dict} lang={lang} />
             </Suspense>
 
             {/* New to Lumière section */}
             <Suspense fallback={<ShopsCarouselSkeleton />}>
-              <NewBusinesses />
+              <NewBusinesses dict={dict} lang={lang} />
             </Suspense>
 
             {/* Trending section */}
             <Suspense fallback={<ShopsCarouselSkeleton />}>
-              <TrendingBusinesses />
+              <TrendingBusinesses dict={dict} lang={lang} />
             </Suspense>
 
 
           </section>
 
-
           <section className=" px-5 md:px-7   text-center ">
             <div className="bg-background  max-w-[1440px] m-auto  rounded-xl   flex flex-col justify-center items-center gap-2">
 
-              <h1 className="font-libre-bodoni lg:text-5xl font-bold text-primary text-center text-4xl">Looking good has never been this convenient!</h1>
+              <h1 className="font-libre-bodoni lg:text-5xl font-bold text-primary text-center text-4xl">{dict.home.looking_good_section.title}</h1>
 
-              <h2 className="text-primary pb-5">Your next appointment is waiting. Tap to book now!</h2>
+              <h2 className="text-primary pb-5">{dict.home.looking_good_section.description}</h2>
 
-
-              <Button size="lg" variant="accent" className="">Book a service</Button>
-              <p className="text-xs  text-muted-foreground pb-6 md:pb-10">No credit card required</p>
+              <Button size="lg" variant="accent" className="">{dict.home.looking_good_section.button}</Button>
+              <p className="text-xs  text-muted-foreground pb-6 md:pb-10">{dict.home.looking_good_section.no_credit_required}</p>
 
               <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-3 gap-24 ">
                 <ChangingAvatar className="" />
@@ -99,10 +97,10 @@ export default async function Home({ params }: { params: Promise<{ lang: 'en' | 
 
           <section className="px-5 md:px-7 ">
             {/* Features/benefits section */}
-            <FeaturesSection />
+            <FeaturesSection dict={dict} />
           </section>
 
-          <Footer />
+          <Footer dict={dict} />
         </div>
 
 

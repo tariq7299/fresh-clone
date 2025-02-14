@@ -3,10 +3,12 @@ import { fetchApi } from "@/_lib/utils/api/fetch-utils"
 
 
 // TODO: write types
-export const getRecommendedBusinesses = async () => {
+export const getRecommendedBusinesses = async (lang: 'en' | 'ar') => {
     "use server"
     // try {
-    const res = await fetchApi("/recommended-businesses/recommended")
+
+    console.log("getRecommendedBusinessesLANG", lang)
+    const res = await fetchApi("/recommended-businesses/recommended", { lang })
 
     if (res.success) {
         return res.data
@@ -21,10 +23,10 @@ export const getRecommendedBusinesses = async () => {
 }
 
 // TODO: write types
-export const getNewBusinesses = async () => {
+export const getNewBusinesses = async (lang: 'en' | 'ar') => {
 
     // try {
-    const res = await fetchApi("/recommended-businesses/new")
+    const res = await fetchApi("/recommended-businesses/new", { lang })
 
     // return res.data
 
@@ -42,10 +44,10 @@ export const getNewBusinesses = async () => {
 }
 
 // TODO: write types
-export const getTrendingBusinesses = async () => {
+export const getTrendingBusinesses = async (lang: 'en' | 'ar') => {
 
     // try {
-    const res = await fetchApi("/recommended-businesses/trending")
+    const res = await fetchApi(`/recommended-businesses/trending`, { lang })
 
     if (res.success) {
         return res.data

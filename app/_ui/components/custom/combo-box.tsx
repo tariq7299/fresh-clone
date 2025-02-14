@@ -67,10 +67,11 @@ export function Combobox({ triggerIconOnLeft = false, values, field, className, 
                             : (
                                 <>
                                     <CommandEmpty>No value found.</CommandEmpty>
-                                    <CommandGroup>
+                                    <CommandGroup className="">
 
                                         {values.map((value: { id: number, name: string, icon: string }) => (
                                             <CommandItem
+                                                className=" flex items-center justify-between py-2"
                                                 key={value.id}
                                                 value={value.name}
                                                 onSelect={() => {
@@ -78,10 +79,13 @@ export function Combobox({ triggerIconOnLeft = false, values, field, className, 
                                                     setOpen(false);
                                                 }}
                                             >
-                                                {value.icon && (<span className="size-6">{value.icon}</span>)} <span >{value.name}</span>
+                                                <div>
+                                                    {value.icon &&
+                                                        (<span className="size-6">{value.icon}</span>)} <span >{value.name}</span>
+                                                </div>
                                                 <Check
                                                     className={cn(
-                                                        "ml-auto size-5",
+                                                        " size-5",
                                                         field.value === value.id ? "opacity-100" : "opacity-0"
                                                     )}
                                                 />

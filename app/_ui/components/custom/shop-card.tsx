@@ -26,7 +26,7 @@ function ShopCard({ className = '', item }: { className?: string, item: any }) {
             </div>
 
 
-            <div className="space-y-1 p-2.5  self-center grow-[1] text-left w-full">
+            <div className="space-y-1 p-2.5  self-center grow-[1] text-start w-full">
                 <p className="font-bold text-lg text-nowrap truncate ">{item.name}</p>
                 {/* truncate this text */}
                 <p className="text-muted-foreground text-nowrap text-xs md:text-base truncate">{item.description}</p>

@@ -16,8 +16,54 @@
         "location": "Location", 
         "search_button": "Search",
         "placeholder": {
-          "service": "Search for services...",
-          "location": "Enter your location..."
+          "category_trigger_placeholder": "All categories",
+          "search_placeholder": "Search...",
+          "location_trigger_placeholder": "Current location"
+        }
+      },
+      "gray_area_text": "Beauty on your schedule. Explore local salons and spas with ease."
+    },
+    "apply_now_text": "Want your business on",
+    "apply_now_action": "Apply now",
+    "recommended": "Recommended",
+    "new_to_lumière": "New to",
+    "trending": "Trending",
+    "looking_good_section": {
+      "title": "Looking good has never been this convenient!",
+      "description": "Your next appointment is waiting. Tap to book now!",
+      "button": "Book now",
+      "no_credit_required": "No credit card required"
+    },
+    "the_lumière_difference": {
+      "title": "The Lumière Difference",
+      "for_business_owners": {
+        "title": "For business owners",
+        "advanced_booking": {
+          "title": "Advanced Booking Management",
+          "description": "Effortlessly track and manage appointments, cancellations, and client details."
+        },
+        "slot_optimization": {
+          "title": "Free Slot Optimization", 
+          "description": "Maximize bookings by efficiently displaying open slots to customers."
+        },
+        "service_management": {
+          "title": "Service Management",
+          "description": "Add, edit, and organize your offerings to ensure clients see exactly what you provide."
+        }
+      },
+      "for_customers": {
+        "title": "For customers",
+        "simple_booking": {
+          "title": "Simple Booking Interface",
+          "description": "Find and book beauty and wellness services in just a few clicks."
+        },
+        "real_time": {
+          "title": "Real-Time Availability",
+          "description": "View updated schedules and available slots instantly."
+        },
+        "personalized": {
+          "title": "Personalized Experience",
+          "description": "Discover services tailored to your preferences and needs."
         }
       }
     }
@@ -29,5 +75,13 @@
   },
   "products": {
     "cart": "Add to cart"
+  },
+  "footer": {
+    "privacy_policy": "Privacy policy",
+    "terms_of_service": "Terms of service",
+    "terms_of_use": "Terms of use",
+    "coming_soon": "Coming soon",
+    "copyright": "©2025 Lumière Inc."
   }
-}
+}  
+

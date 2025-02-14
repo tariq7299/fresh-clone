@@ -144,7 +144,7 @@ export default function HeroFilterForm({ categories, dict }: { categories: Categ
                 {/* Make the search field a combobox */}
 
                 <Combobox
-                    inputPlaceholder="All categories"
+                    inputPlaceholder={dict.home.hero.search.placeholder.category_trigger_placeholder}
                     values={formattedCategories}
                     field={{ value: categoryId, onChange: (value: number) => setCategoryId(value) }}
                     triggerIconOnLeft={true}
@@ -169,7 +169,7 @@ export default function HeroFilterForm({ categories, dict }: { categories: Categ
                     handleSettingLocation={handleSettingLocation}
                     result={result}
                     isSearching={isSearching}
-                    inputPlaceholder="Current location"
+                    inputPlaceholder={dict.home.hero.search.placeholder.location_trigger_placeholder}
                     inputClassName=" placeholder:text-foreground placeholder:text-sm sm:placeholder:text-sm md:placeholder:text-sm placeholder:font-semibold focus-visible:ring-0  border-1 border-gray-200 lg:border-none px-4 py-6 ps-12 lg:p-2 lg:ps-8 font-semibold"
                 />
 
@@ -177,7 +177,7 @@ export default function HeroFilterForm({ categories, dict }: { categories: Categ
 
 
 
-                <Button variant="default" className="inline-flex gap-2 items-center h-8 rounded-md px-3 2xs:h-10 2xs:px-8 text-lg w-full lg:w-auto font-bold">  Search </Button>
+                <Button variant="default" className="inline-flex gap-2 items-center h-8 rounded-md px-3 2xs:h-10 2xs:px-8 text-lg w-full lg:w-auto font-bold">  {dict.home.hero.search.search_button} </Button>
 
             </div>
         </form>

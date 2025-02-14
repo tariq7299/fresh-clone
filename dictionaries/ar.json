@@ -10,24 +10,77 @@
   },
   "home": {
     "hero": {
-      "title": "احجز خدمات الصالون والعناية المحلية",
+      "title": "احجز خدمات الصالون والعافية المحلية",
       "search": {
         "service": "ما هي الخدمة التي تبحث عنها؟",
         "location": "الموقع",
         "search_button": "بحث",
         "placeholder": {
-          "service": "ابحث عن الخدمات...",
-          "location": "أدخل موقعك..."
+          "category_trigger_placeholder": "جميع الفئات",
+          "search_placeholder": "بحث...",
+          "location_trigger_placeholder": "الموقع الحالي"
+        }
+      },
+      "gray_area_text": "الجمال حسب جدولك. استكشف صالونات التجميل والسبا المحلية بسهولة."
+    },
+    "apply_now_text": "هل تريد عملك على",
+    "apply_now_action": "قدم الآن",
+    "recommended": "موصى به",
+    "new_to_lumière": "جديد في",
+    "trending": "رائج",
+    "looking_good_section": {
+      "title": "لم يكن الظهور بمظهر جيد بهذه السهولة من قبل!",
+      "description": "موعدك القادم في انتظارك. انقر للحجز الآن!",
+      "button": "احجز الآن",
+      "no_credit_required": "لا حاجة لبطاقة ائتمان"
+    },
+    "the_lumière_difference": {
+      "title": "ما يميز لوميير",
+      "for_business_owners": {
+        "title": "لأصحاب الأعمال",
+        "advanced_booking": {
+          "title": "إدارة الحجوزات المتقدمة",
+          "description": "تتبع وإدارة المواعيد والإلغاءات وتفاصيل العملاء بسهولة."
+        },
+        "slot_optimization": {
+          "title": "تحسين الفترات المتاحة",
+          "description": "زيادة الحجوزات من خلال عرض الفترات المتاحة للعملاء بكفاءة."
+        },
+        "service_management": {
+          "title": "إدارة الخدمات",
+          "description": "أضف وعدل ونظم خدماتك لضمان رؤية العملاء بالضبط لما تقدمه."
+        }
+      },
+      "for_customers": {
+        "title": "للعملاء",
+        "simple_booking": {
+          "title": "واجهة حجز بسيطة",
+          "description": "ابحث واحجز خدمات التجميل والعافية بنقرات قليلة."
+        },
+        "real_time": {
+          "title": "التوفر في الوقت الفعلي",
+          "description": "اطلع على الجداول والمواعيد المتاحة فورياً."
+        },
+        "personalized": {
+          "title": "تجربة مخصصة",
+          "description": "اكتشف الخدمات المصممة حسب تفضيلاتك واحتياجاتك."
         }
       }
     }
   },
   "common": {
-    "loading": "جاري التحميل...",
+    "loading": "جارٍ التحميل...",
     "error": "حدث خطأ ما",
     "try_again": "حاول مرة أخرى"
   },
   "products": {
     "cart": "أضف إلى السلة"
+  },
+  "footer": {
+    "privacy_policy": "سياسة الخصوصية",
+    "terms_of_service": "شروط الخدمة",
+    "terms_of_use": "شروط الاستخدام",
+    "coming_soon": "قريباً",
+    "copyright": "©2025 لوميير"
   }
 }
