@@ -6,11 +6,11 @@ export default function FeaturesSection({ dict }: { dict: any }) {
         <>
             <div className="max-w-[1440px] m-auto ">
 
-                <h1 className="font-semibold font-source-sans text-start text-2xl md:text-3xl pb-16">
+                <h1 className="font-semibold font-source-sans rtl:font-cairo rtl:font-bold text-start text-2xl md:text-3xl pb-16">
                     {dict.home.the_lumière_difference.title}
                 </h1>
 
-                <h2 className="font-source-sans font-bold text-xl pb-11 lg:pb-7">{dict.home.the_lumière_difference.for_business_owners.title}</h2>
+                <h2 className="font-source-sans rtl:font-cairo rtl:font-bold font-bold text-xl pb-11 lg:pb-7">{dict.home.the_lumière_difference.for_business_owners.title}</h2>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 ">
 
@@ -33,7 +33,7 @@ export default function FeaturesSection({ dict }: { dict: any }) {
                 </div>
                 <Separator className="w-[50vw] max-w-[370px] m-auto my-16 lg:my-10"></Separator>
 
-                <h2 className="font-source-sans font-bold text-xl pb-11 lg:pb-7">{dict.home.the_lumière_difference.for_customers.title}</h2>
+                <h2 className="font-source-sans rtl:font-cairo rtl:font-bold font-bold text-xl pb-11 lg:pb-7">{dict.home.the_lumière_difference.for_customers.title}</h2>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 ">
 

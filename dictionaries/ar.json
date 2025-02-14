@@ -115,6 +115,52 @@
     "business_hours": {
       "title": "أوقات العمل",
       "closed": "مغلق"
+    },
+    "select_services": {
+      "title": "اختر الخدمات"
+    },
+    "add_service_card": {
+      "duration_min": "دقيقة",
+      "currency": "جنيه"
+    },
+    "cart": {
+      "title": "حجزك",
+      "empty": {
+        "title": "سلة التسوق فارغة",
+        "description": "أضف خدمات إلى سلة التسوق للمتابعة"
+      },
+      "total": "المجموع",
+      "duration": "المدة",
+      "services": "خدمات",
+      "next": "التالي",
+      "clear_cart": "تفريغ السلة",
+      "min": "دقيقة",
+      "hours": "ساعة",
+      "loading": "جاري التحميل...",
+      "business_details": {
+        "alt_text": "صورة غلاف المتجر"
+      }
+    },
+    "select_time": {
+      "title": "اختر الوقت",
+      "pick_date": "اختر تاريخ",
+      "no_services": "لم يتم اختيار خدمات",
+      "fully_booked": "محجوز بالكامل في هذا التاريخ",
+      "loading": "جاري التحميل...",
+      "month": {
+        "january": "يناير",
+        "february": "فبراير",
+        "march": "مارس",
+        "april": "أبريل",
+        "may": "مايو",
+        "june": "يونيو",
+        "july": "يوليو",
+        "august": "أغسطس",
+        "september": "سبتمبر",
+        "october": "أكتوبر",
+        "november": "نوفمبر",
+        "december": "ديسمبر"
+      }
     }
   }
 }

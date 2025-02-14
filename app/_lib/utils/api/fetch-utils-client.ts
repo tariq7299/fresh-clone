@@ -10,6 +10,7 @@ type FetchOptions = {
     revalidate?: number;
     tags?: string[];
     auth?: boolean;
+    lang?: "en" | "ar";
 };
 
 
@@ -24,6 +25,7 @@ export async function fetchApi<T>(
         cache,
         revalidate,
         tags,
+        lang = 'en',
         auth = true,
     } = options;
 
@@ -37,7 +39,7 @@ export async function fetchApi<T>(
     // Only add token if auth is true
     let authHeaders = {};
 
-    //  **if CLIENT SIDE**
+    //  **if CLIENT SIDE**  
     // This auth sending token will be used in client side !,
     if (auth && typeof window !== 'undefined' && token) {
         authHeaders = { Authorization: `Bearer ${token}` };
@@ -46,7 +48,7 @@ export async function fetchApi<T>(
     const fetchOptions: RequestInit = {
         method,
         headers: {
-            'Accept-Language': 'en',
+            'Accept-Language': lang,
             'Content-Type': 'application/json',
             'Accept': 'application/json, text/plain, */*',
             ...authHeaders,

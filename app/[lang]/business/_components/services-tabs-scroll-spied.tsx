@@ -30,6 +30,6 @@ export default function ServicesTabsScrollSpied({ tabTitles }: { tabTitles: stri
                 <a href={`#${title}`} className={cn(" px-4 py-2 rounded-full font-bold  text-foreground", "data-[active=true]:bg-foreground data-[active=true]:text-background hover:bg-muted  ")} key={title} ref={tabsRefs.current[index]}>{title}</a>
             ))}
         </div>
-        <div className="absolute bottom-0 right-0 w-20 h-full  bg-gradient-to-l from-background to-transparent"></div>
+        <div className="absolute bottom-0 right-0 rtl:left-0 rtl:right-auto w-20 h-full  bg-gradient-to-l rtl:bg-gradient-to-r from-background to-transparent"></div>
     </ScrollSpy>
 }

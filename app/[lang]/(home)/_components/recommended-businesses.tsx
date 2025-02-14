@@ -5,7 +5,5 @@ export async function RecommendedBusinesses({ dict, lang }: { dict: any, lang: '
 
     const recommendedBusinesses = await getRecommendedBusinesses(lang)
 
-    console.log("langRECOMMENDEDBUSINESSES", lang)
-
     return <ShopsCarousel lang={lang} data={recommendedBusinesses} sectionTitle={<h1 className="font-semibold font-source-sans rtl:font-cairo rtl:font-bold text-start  text-3xl ">{dict.home.recommended}</h1>} />
 }

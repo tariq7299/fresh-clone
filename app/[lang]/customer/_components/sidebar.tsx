@@ -40,9 +40,6 @@ export function CustomerSidebar({ userData, sidebarTabs, containerClass, trigger
 
     const { state, open, setOpen, isMobile } = useSidebar()
 
-    console.log("isMobile", isMobile)
-    console.log("userData.role", userData.role)
-
 
     return (
 

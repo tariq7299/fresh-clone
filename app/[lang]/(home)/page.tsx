@@ -48,7 +48,7 @@ export default async function Home({ params }: { params: Promise<{ lang: 'en' | 
 
           {/* Apply you business now section */}
           <section className="px-5 md:px-7  text-center text-xl md:text-3xl">
-            <p className=" ">{dict.home.apply_now_text} <span className="font-cinzel font-bold">Lumière</span>? <Link href="/register?type=professional" className="font-bold underline decoration-2 text-nowrap">{dict.home.apply_now_action}</Link></p>
+            <p className=" ">{dict.home.apply_now_text} <span className="font-cinzel font-bold">Lumière</span>؟ <Link href="/register?type=professional" className="font-bold underline decoration-2 text-nowrap">{dict.home.apply_now_action}</Link></p>
           </section>
 
           {/*Shops Carousels  */}
@@ -78,7 +78,7 @@ export default async function Home({ params }: { params: Promise<{ lang: 'en' | 
           <section className=" px-5 md:px-7   text-center ">
             <div className="bg-background  max-w-[1440px] m-auto  rounded-xl   flex flex-col justify-center items-center gap-2">
 
-              <h1 className="font-libre-bodoni lg:text-5xl font-bold text-primary text-center text-4xl">{dict.home.looking_good_section.title}</h1>
+              <h1 className="font-libre-bodoni rtl:font-cairo rtl:font-bold lg:text-5xl font-bold text-primary text-center text-4xl">{dict.home.looking_good_section.title}</h1>
 
               <h2 className="text-primary pb-5">{dict.home.looking_good_section.description}</h2>
 

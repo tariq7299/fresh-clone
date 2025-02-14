@@ -18,8 +18,35 @@ import { SuccessFormState, ErrorFormState } from "@/_lib/definitions/definitions
 import { SelectTimeClientErrors, SelectTimeFormData } from "../_lib/definitions"
 import { useBusinessFormContext } from "@/_lib/providers/business-form-provider"
 import { redirectToLoginIfNotAuthenticated } from "@/[lang]/(auth)/_lib/redirect-to-login-if-not-authenticated"
+import { getMonthName } from "@/_lib/utils/utils"
 
-export default function SelectTimeForm({ businessId, minDateToBook, maxDateToBook, defaultSlots, serviceIds }: { businessId: number, minDateToBook: Date, maxDateToBook: Date, defaultSlots: string[], serviceIds: number[] }) {
+interface SelectTimeFormProps {
+    businessId: number;
+    minDateToBook: Date;
+    maxDateToBook: Date;
+    defaultSlots: string[];
+    serviceIds: number[];
+    lang: "en" | "ar";
+    dict: {
+        business_page: {
+            select_time: {
+                pick_date: string;
+                fully_booked: string;
+                loading: string;
+            }
+        }
+    }
+}
+
+export default function SelectTimeForm({
+    businessId,
+    minDateToBook,
+    maxDateToBook,
+    defaultSlots,
+    serviceIds,
+    dict,
+    lang
+}: SelectTimeFormProps) {
 
     const router = useRouter();
     const INITIAL_DATE = minDateToBook;
@@ -103,8 +130,8 @@ export default function SelectTimeForm({ businessId, minDateToBook, maxDateToBoo
 
         <div className="flex justify-between items-center">
 
-            <p className="text-xl font-black text-primary">
-                <span className="text-accent-600 text-5xl font-cinzel">{format(date || INITIAL_DATE, "d")}</span> {format(date || INITIAL_DATE, "MMMM")} {format(date || INITIAL_DATE, "yyyy")}
+            <p className="text-xl font-black text-primary rtl:font-cairo">
+                <span className="text-accent-600 text-5xl font-cinzel">{format(date || INITIAL_DATE, "d")}</span> {getMonthName(date?.getMonth() || INITIAL_DATE.getMonth(), lang)} {format(date || INITIAL_DATE, "yyyy")}
             </p>
             <Popover>
                 <PopoverTrigger asChild>
@@ -161,14 +188,16 @@ export default function SelectTimeForm({ businessId, minDateToBook, maxDateToBoo
                     slots.map((slot, index) => (
                         <label key={slot} htmlFor={slot} className="flex justify-start grow border-b md:border border-gray-200 md:rounded-lg p-4 md:p-5 cursor-pointer hover:bg-accent/5 transition-colors duration-150 relative">
                             <input defaultChecked={formState.formData.slot === slot} type="radio" id={slot} className="peer hidden appearance-none" name="slot" value={slot} />
-                            <p className="text-xl font-semibold peer-checked:text-accent-600">{slot}</p>
+                            <p className="text-xl font-semibold peer-checked:text-accent-600 rtl:font-cairo">{slot}</p>
                             <div className="peer-checked:ring-2 peer-checked:ring-accent peer-checked:bg-accent/5 absolute inset-0 rounded-lg transition-all duration-150"></div>
                         </label>
                     ))
                 ) : (
                     <div className="min-h-[400px] flex flex-col items-center justify-center gap-4 md:border md:border-gray-200 rounded-lg">
                         <CalendarOff className="text-accent size-14 sm:size-16 md:size-16" />
-                        <p className="text-xl font-bold">Fully booked on this date</p>
+                        <p className="text-xl font-bold rtl:font-cairo">
+                            {dict.business_page.select_time.fully_booked}
+                        </p>
                     </div>
                 )}
 

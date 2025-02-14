@@ -115,6 +115,52 @@
     "business_hours": {
       "title": "Opening times",
       "closed": "Closed"
+    },
+    "select_services": {
+      "title": "Select services"
+    },
+    "add_service_card": {
+      "duration_min": "min",
+      "currency": "EGP"
+    },
+    "cart": {
+      "title": "Your booking",
+      "empty": {
+        "title": "Your cart is empty",
+        "description": "Add services to your cart to continue booking"
+      },
+      "total": "Total",
+      "duration": "Duration",
+      "services": "services",
+      "next": "Next",
+      "clear_cart": "Clear cart",
+      "hours": "hour(s)",
+      "min": "min",
+      "loading": "Loading...",
+      "business_details": {
+        "alt_text": "Business cover photo"
+      }
+    },
+    "select_time": {
+      "title": "Select time",
+      "pick_date": "Pick a date",
+      "no_services": "No services selected",
+      "fully_booked": "Fully booked on this date",
+      "loading": "Loading...",
+      "month": {
+        "january": "January",
+        "february": "February",
+        "march": "March",
+        "april": "April",
+        "may": "May",
+        "june": "June",
+        "july": "July",
+        "august": "August",
+        "september": "September",
+        "october": "October",
+        "november": "November",
+        "december": "December"
+      }
     }
   }
 }  

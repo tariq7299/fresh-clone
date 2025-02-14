@@ -12,7 +12,6 @@ import { cp } from "fs";
 
 export default async function HeroFilter({ dict, lang }: { dict: any, lang: "en" | "ar" }) {
 
-    console.log("langFILTER", lang)
     const categories = (await getAllCategories(lang)) as Category[]
 
 
