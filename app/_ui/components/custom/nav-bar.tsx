@@ -5,9 +5,16 @@ import CustomerNavBar from '@/[lang]/(home)/_components/customer-nav-bar'
 import ProfessionalNavBar from '@/[lang]/(home)/_components/professional-nav-bar'
 import PublicNavBar from '@/[lang]/(home)/_components/public-nav-bar'
 
-export default async function NavBar({ fixed = false, hideInMobile = false, className, showForBusiness = true }: { fixed?: boolean, hideInMobile?: boolean, className?: string, showForBusiness?: boolean }) {
+export default async function NavBar({
+    dict,
+    fixed = false,
+    hideInMobile = false,
+    className,
+    showForBusiness = true
+}: { dict: any, fixed?: boolean, hideInMobile?: boolean, className?: string, showForBusiness?: boolean }) {
 
     const userData = await getUserData()
+
 
     return <>
         {
@@ -17,7 +24,7 @@ export default async function NavBar({ fixed = false, hideInMobile = false, clas
                 userData && userData.role === 'professional' ?
                     <ProfessionalNavBar userData={userData} fixed={fixed} hideInMobile={hideInMobile} />
                     :
-                    <PublicNavBar fixed={fixed} hideInMobile={hideInMobile} />
+                    <PublicNavBar dict={dict} fixed={fixed} hideInMobile={hideInMobile} />
         }
     </>
 

@@ -16,7 +16,7 @@ import SearchLocation2 from "@/[lang]/(home)/_components/search-location-2";
 import { useRouter, usePathname, useSearchParams, useParams } from "next/navigation";
 import { createPageURL } from "@/[lang]/business/_lib/utils";
 
-export default function HeroFilterForm({ categories }: { categories: Category[] }) {
+export default function HeroFilterForm({ categories, dict }: { categories: Category[], dict: any }) {
     const formattedCategories = categories.length > 0 ? categories.map((category) => ({
         id: category.id,
         name: category.name,

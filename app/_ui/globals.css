@@ -200,12 +200,15 @@
 }
 
 @layer base {
-  /* html {
-    font-family: 'Quicksand', system-ui, sans-serif;
-  } */
+
 
   #main-layout[dir="rtl"] {
     direction: rtl !important;
+
+    /* .flex:not(.flex-col) {
+      flex-direction: row-reverse !important;
+    } */
+   
   }
   #main-layout[dir="ltr"] {
     font-family: 'Quicksand', system-ui, sans-serif;

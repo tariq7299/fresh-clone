@@ -9,12 +9,12 @@ import { Category } from "@/[lang]/business/_lib/definitions";
 import { MapProvider } from "@/_lib/providers/map-providers";
 
 
-export default async function HeroFilter() {
+export default async function HeroFilter({ dict }: { dict: any }) {
 
     const categories = (await getAllCategories()) as Category[]
 
 
     return <MapProvider>
-        <HeroFilterForm categories={categories} />
+        <HeroFilterForm categories={categories} dict={dict} />
     </MapProvider>
 }

@@ -3,15 +3,13 @@ import barberShop1 from "@/../public/barber-shop-1.jpg";
 import HeroFilterField from "./hero-filter-field";
 import HeroFilter from "./hero-filter";
 import { Suspense } from "react";
-import { getDictionary } from "@/_lib/dictionaries";
 
 export default async function HeroSection({
-    lang
+    dict
 }: {
-    lang: 'en' | 'ar'
+    dict: any
 }) {
 
-    const dict = await getDictionary(lang)
 
     return (
         <>
@@ -33,7 +31,7 @@ export default async function HeroSection({
 
 
             <div className="max-w-xl lg:max-w-2xl relative ">
-                <h1 className={`text-4xl  lg:text-7xl font-black text-start sm:text-start tracking-tight font-libre-bodoni scale-y-110 text-white ${lang === 'ar' ? 'font-arabic' : ''}`}>
+                <h1 className={`text-4xl  lg:text-7xl font-black text-start sm:text-start tracking-tight font-libre-bodoni rtl:font-cairo scale-y-110 text-white `}>
                     {/* Schedule local salon and wellness services */}
                     {dict.home.hero.title}
                 </h1>
@@ -48,7 +46,7 @@ export default async function HeroSection({
                         <div className="w-full lg:w-auto h-12 bg-gray-200 animate-pulse rounded-md px-8"></div>
                     </div>
                 }>
-                    <HeroFilter lang={lang} />
+                    <HeroFilter dict={dict} />
                 </Suspense>
 
             </div>

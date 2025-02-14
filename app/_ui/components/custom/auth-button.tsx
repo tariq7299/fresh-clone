@@ -12,7 +12,7 @@ import { logoutUserFromBackend } from "@/[lang]/(auth)/_lib/auth-server-services
 import { toastApiMsgs } from "@/_lib/utils/api/toastApiMsgs";
 import { useState } from "react";
 import { ArrowLeftEndOnRectangleIcon, ArrowRightEndOnRectangleIcon } from "@heroicons/react/24/outline";
-export default function AuthButton({ authenticated, className, children }: { authenticated: boolean, className?: string, children?: React.ReactNode }) {
+export default function AuthButton({ authenticated, className, children, dict }: { authenticated: boolean, className?: string, children?: React.ReactNode, dict: any }) {
     const [_, setSessionData] = useLocalStorage<SessionData | null>({ key: "user", defaultValue: null })
 
     const [isLoading, setIsLoading] = useState(false)
@@ -38,11 +38,11 @@ export default function AuthButton({ authenticated, className, children }: { aut
 
     if (authenticated) {
         return <Button loading={isLoading} onClick={handleLogout} size={"lg"} variant={"ghost"} className={cn("h-auto", className)} disabled={isLoading}>
-            {children ? children : (<><ArrowLeftEndOnRectangleIcon className='size-10' />Log out</>)}
+            {children ? children : (<><ArrowLeftEndOnRectangleIcon className='size-10' />{dict.nav.logout}</>)}
         </Button>
     } else {
         return <Link href="/login" className={cn("", className)}>
-            {children ? children : (<><ArrowRightEndOnRectangleIcon className='size-10' /> Log in</>)}
+            {children ? children : (<><ArrowRightEndOnRectangleIcon className='size-10' />{dict.nav.login}</>)}
         </Link>
     }
 }

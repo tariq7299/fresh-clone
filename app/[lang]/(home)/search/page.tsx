@@ -7,10 +7,13 @@ import { Badge } from "@/_ui/components/badge";
 import { Separator } from "@/_ui/components/separator";
 import { handleSearch } from "../_lib/form-actions";
 import Link from "next/link";
-
+import { getDictionary } from "@/_lib/dictionaries";
 
 export default async function SearchPage(props:
-    { searchParams: Promise<{ categoryId: string, latitude: string, longitude: string }> }
+    {
+        searchParams: Promise<{ categoryId: string, latitude: string, longitude: string }>
+        params: Promise<{ lang: 'en' | 'ar' }>
+    }
 ) {
 
     const searchParams = await props?.searchParams
@@ -20,13 +23,15 @@ export default async function SearchPage(props:
 
     const data = await handleSearch({ categoryId, longitude, latitude })
     const businesses = data?.businesses || []
+    const lang = (await props.params)?.lang
+    const dict = await getDictionary(lang)
 
 
     return <div>
 
         {/* Nav bar */}
         <Suspense fallback={<NavBarSkeleton />}>
-            <NavBar fixed={true} />
+            <NavBar fixed={true} dict={dict} />
         </Suspense>
 
         <div className="grid grid-cols-1 max-w-2xl mx-auto p-5 mt-24 space-y-12">

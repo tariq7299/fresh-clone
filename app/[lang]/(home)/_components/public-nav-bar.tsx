@@ -20,7 +20,7 @@ import { LanguageSwitcherTrigger } from '@/_ui/components/custom/language-switch
 import { useParams } from 'next/navigation'
 import AuthButton from '@/_ui/components/custom/auth-button'
 
-export default function PublicNavBar({ fixed = false, hideInMobile = false }: { fixed?: boolean, hideInMobile?: boolean }) {
+export default function PublicNavBar({ dict, fixed = false, hideInMobile = false }: { dict: any, fixed?: boolean, hideInMobile?: boolean }) {
 
     const navTabs = [
         {
@@ -30,20 +30,18 @@ export default function PublicNavBar({ fixed = false, hideInMobile = false }: { 
         },
     ]
     const [isLanguageDialogOpen, setIsLanguageDialogOpen] = useState(false)
-    const params = useParams()
     const isScrolled = useIsScrolled()
 
     return (
+
         <nav className={cn(' w-lvw  z-50 ',
             fixed ? 'bg-white shadow' : isScrolled ? 'bg-white shadow' : 'bg-transparent',
             hideInMobile ? 'hidden md:block fixed top-0 left-0' : 'fixed top-0 left-0'
         )}>
 
-
-
             <LanguageSwitcherDialog hasTrigger={false} open={isLanguageDialogOpen} setOpen={setIsLanguageDialogOpen} />
 
-            <div className="p-5 py-4 flex justify-between items-center max-w-[1440px] m-auto pe-7">
+            <div className="p-5 py-4 flex justify-between items-center max-w-[1440px] m-auto ">
 
                 <Link href="/" className={cn("text-2xl font-bold font-cinzel ",
                     fixed ? 'text-primary' : isScrolled ? 'text-primary' : 'text-background'
@@ -55,20 +53,20 @@ export default function PublicNavBar({ fixed = false, hideInMobile = false }: { 
                 </div>
 
                 {/*Closed navbar on desktop screens  */}
-                <div className={cn("hidden md:inline-flex space-x-2 items-center",
+                <div className={cn("hidden md:inline-flex ltr:space-x-2 rtl:gap-2 items-center",
                     fixed ? 'text-primary' : isScrolled ? 'text-primary' : ' text-background'
                 )}>
                     {/* <Link href="/register?type=professional" className={cn("font-semibold",
                         isScrolled ? 'text-primary' : ' text-background'
                     )}>For business</Link> */}
 
-                    <Button borderType="fullRounded" isLink={true} variant="outline" href="/register?type=professional" className="bg-transparent font-source-sans font-semibold   hover:bg-muted/50">For business</Button>
+                    <Button borderType="fullRounded" isLink={true} variant="outline" href="/register?type=professional" className="bg-transparent font-source-sans rtl:font-almarai font-semibold  hover:bg-muted/50">{dict.nav.for_business}</Button>
 
-                    <DropdownMenu>
+                    <DropdownMenu >
 
                         <DropdownMenuTrigger asChild >
-                            <Button borderType="fullRounded" variant="outline" className=" hover:bg-muted/50 bg-transparent inline-flex space-x-3  font-source-sans font-semibold gap-2 group ">
-                                Menu <ChevronDownIcon className='size-4 transition duration-200
+                            <Button borderType="fullRounded" variant="outline" className=" hover:bg-muted/50 bg-transparent inline-flex font-source-sans rtl:font-almarai font-semibold gap-2 group ">
+                                {dict.nav.menue_trigger} <ChevronDownIcon className='size-4 transition duration-200
                          group-data-[state=open]:rotate-180' />
                             </Button>
                         </DropdownMenuTrigger>
@@ -80,14 +78,14 @@ export default function PublicNavBar({ fixed = false, hideInMobile = false }: { 
                                     <p className='font-semibold'>Log In </p>
                                 </Link> */}
 
-                                <AuthButton authenticated={false} className='flex items-center gap-2 w-full font-semibold' />
+                                <AuthButton dict={dict} authenticated={false} className='flex  items-center gap-2 w-full font-semibold' />
 
                             </DropdownMenuItem>
                             <DropdownMenuSeparator className='  my-2 mx-2 ' />
-                            <DropdownMenuLabel className='font-bold  text-base'>Other</DropdownMenuLabel>
+                            <DropdownMenuLabel className='rtl:font-black font-bold  text-base'>{dict.nav.other}</DropdownMenuLabel>
                             <DropdownMenuItem className=''>
                                 <Link href="/register?type=professional" className='font-semibold '>
-                                    For business
+                                    {dict.nav.for_business}
                                 </Link>
                             </DropdownMenuItem>
                             <DropdownMenuItem className=' text-accent-600  ' onClick={() => setIsLanguageDialogOpen(true)}>

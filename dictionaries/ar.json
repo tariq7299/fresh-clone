@@ -1,4 +1,13 @@
 {
+  "nav": {
+    "menue_trigger": "القائمة",
+    "appointments": "المواعيد",
+    "login": "تسجيل الدخول",
+    "register": "إنشاء حساب",
+    "for_business": "للأعمال",
+    "logout": "تسجيل الخروج",
+    "other": "أخرى"
+  },
   "home": {
     "hero": {
       "title": "احجز خدمات الصالون والعناية المحلية",
@@ -11,12 +20,6 @@
           "location": "أدخل موقعك..."
         }
       }
-    },
-    "nav": {
-      "login": "تسجيل الدخول",
-      "register": "إنشاء حساب",
-      "become_professional": "كن محترفًا",
-      "language": "English"
     }
   },
   "common": {
@@ -25,6 +28,6 @@
     "try_again": "حاول مرة أخرى"
   },
   "products": {
-    "cart": "الل سم سمككشيبس"
+    "cart": "أضف إلى السلة"
   }
 }

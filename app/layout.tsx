@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cairo, Almarai, Source_Sans_3, Libre_Bodoni, Lora, Quicksand, Cinzel } from "next/font/google";
+import { Cairo, Almarai, Source_Sans_3, Libre_Bodoni, Quicksand, Cinzel } from "next/font/google";
 import "@/_ui/globals.css";
 import SonnerToaster from "@/_ui/ToasterSonner"
 
@@ -7,6 +7,7 @@ import SonnerToaster from "@/_ui/ToasterSonner"
 // I am using this lib to be able to use the "date-input" component from the nextui library
 import { NextUIProvider } from "@nextui-org/system";
 import { Suspense } from "react";
+
 
 const LibreBodoniSerif = Libre_Bodoni({
     variable: "--font-libre-bodoni-serif",
@@ -16,15 +17,10 @@ const CinzelSerif = Cinzel({
     variable: "--font-cinzel-serif",
     subsets: ["latin"],
 });
-// const LoraSerif = Lora({
-//     variable: "--font-cinzel-serif",
-//     subsets: ["latin"],
-// });
 const SourceSans3Sans = Source_Sans_3({
     variable: "--font-source-sans-3-sans",
     subsets: ["latin"],
 });
-
 const QuicksandSans = Quicksand({
     variable: "--font-Quicksand-sans",
     subsets: ["latin"],
@@ -39,11 +35,6 @@ const CairoSans = Cairo({
     variable: "--font-Cairo-sans",
     subsets: ["latin"],
 });
-
-// const geistMono = Geist_Mono({
-//   variable: "--font-geist-mono",
-//   subsets: ["latin"],
-// });
 
 
 export async function generateStaticParams() {
@@ -65,28 +56,23 @@ export default async function RootLayout({
 
     return (
         <html lang={"en"} dir={"ltr"}>
-            <Suspense >
-                {children}
-            </Suspense>
+            <body
+                className={`${LibreBodoniSerif.variable} ${CinzelSerif.variable} ${SourceSans3Sans.variable} ${QuicksandSans.variable} ${AlmaraiSans.variable} ${CairoSans.variable} antialiased `}
+            >
+                {/* 
+        This is the provider for the nextui library
+        I am using this lib to be able to use the "date-input" component from the nextui library 
+        */}
+                <NextUIProvider>
+                    <Suspense >
+                        <main>
+                            {children}
+                        </main>
+                    </Suspense>
+                    <SonnerToaster />
+                </NextUIProvider>
+            </body>
         </html>
-        // <html lang={"en"} dir={"ltr"}>
-        //     <body
-        //         className={`${LibreBodoniSerif.variable} ${CinzelSerif.variable} ${SourceSans3Sans.variable} ${QuicksandSans.variable} ${AlmaraiSans.variable} ${CairoSans.variable} antialiased `}
-        //     >
-        //         {/* 
-        // This is the provider for the nextui library
-        // I am using this lib to be able to use the "date-input" component from the nextui library 
-        // */}
-        //         <NextUIProvider>
-        //             <main>
-        //                 <Suspense >
-        //                     {children}
-        //                 </Suspense>
-        //             </main>
-        //             <SonnerToaster />
-        //         </NextUIProvider>
-        //     </body>
-        // </html>
 
     );
 }

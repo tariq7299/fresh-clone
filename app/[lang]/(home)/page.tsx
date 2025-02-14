@@ -18,10 +18,11 @@ import { Suspense } from "react";
 import { NavBarSkeleton } from "./_components/skeletons";
 import Footer from "../../_ui/components/custom/footer";
 import Link from "next/link";
-
+import { getDictionary } from "@/_lib/dictionaries";
 export default async function Home({ params }: { params: Promise<{ lang: 'en' | 'ar' }> }) {
 
   const lang = (await params)?.lang
+  const dict = await getDictionary(lang)
 
   return (
     <>
@@ -29,11 +30,11 @@ export default async function Home({ params }: { params: Promise<{ lang: 'en' | 
 
         {/* Nav bar */}
         <Suspense fallback={<NavBarSkeleton />}>
-          <NavBar />
+          <NavBar dict={dict} />
         </Suspense>
 
         <section className="px-5 md:px-7 py-36 lg:py-52 grid justify-center  relative items-center">
-          <HeroSection lang={lang} />
+          <HeroSection dict={dict} />
         </section>
 
 
