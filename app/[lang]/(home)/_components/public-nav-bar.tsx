@@ -39,7 +39,7 @@ export default function PublicNavBar({ dict, fixed = false, hideInMobile = false
             hideInMobile ? 'hidden md:block fixed top-0 left-0' : 'fixed top-0 left-0'
         )}>
 
-            <LanguageSwitcherDialog hasTrigger={false} open={isLanguageDialogOpen} setOpen={setIsLanguageDialogOpen} />
+            <LanguageSwitcherDialog hasTrigger={false} open={isLanguageDialogOpen} setOpen={setIsLanguageDialogOpen} dict={dict} />
 
             <div className="p-5 py-4 flex justify-between items-center max-w-[1440px] m-auto ">
 
@@ -89,7 +89,7 @@ export default function PublicNavBar({ dict, fixed = false, hideInMobile = false
                                 </Link>
                             </DropdownMenuItem>
                             <DropdownMenuItem className=' text-accent-600  ' onClick={() => setIsLanguageDialogOpen(true)}>
-                                <LanguageSwitcherTrigger />
+                                <LanguageSwitcherTrigger dict={dict} />
                             </DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>

@@ -68,10 +68,12 @@
       }
     }
   },
-  "common": {
-    "loading": "Loading...",
-    "error": "Something went wrong",
-    "try_again": "Try again"
+  "search": {
+    "no_results": {
+      "title": "No results found",
+      "description": "Try adjusting your search or location to find what you're looking for"
+    },
+    "business_image_alt": "Business image"
   },
   "products": {
     "cart": "Add to cart"
@@ -82,6 +84,38 @@
     "terms_of_use": "Terms of use",
     "coming_soon": "Coming soon",
     "copyright": "©2025 Lumière Inc."
+  },
+  "language_switcher": {
+    "title": "Change Language",
+    "description": "Choose your preferred language for the best experience",
+    "language_label": "Select Language",
+    "select_placeholder": "Select a language",
+    "languages_group": "Available Languages",
+    "change_button": "Change Language"
+  },
+  "business_page": {
+    "open_until": "Open until",
+    "get_directions": "Get Directions",
+    "services": {
+      "title": "Services",
+      "see_all": "See all",
+      "services_available": "services available"
+    },
+    "about": {
+      "title": "About",
+      "map_alt": "Salon location on map"
+    },
+    "booking": {
+      "book_now": "Book now"
+    },
+    "services_overview": {
+      "book": "Book",
+      "duration_min": "min"
+    },
+    "business_hours": {
+      "title": "Opening times",
+      "closed": "Closed"
+    }
   }
 }  
 

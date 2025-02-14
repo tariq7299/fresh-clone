@@ -25,13 +25,13 @@ const LANGUAGES = [
     { code: 'ar', name: 'العربية' },
 ]
 
-export function LanguageSwitcherTrigger({ className }: { className?: string }) {
+export function LanguageSwitcherTrigger({ className, dict }: { className?: string, dict: any }) {
     const params = useParams()
     const currentLang = params.lang as string
     return <p className={cn(" flex  items-center gap-2  font-semibold ", className)}><GlobeAsiaAustraliaIcon className="h-6 w-5" /> {LANGUAGES.find(lang => lang.code === currentLang)?.name}</p>
 }
 
-export function LanguageSwitcherDialog({ hasTrigger = true, open, setOpen, className }: { hasTrigger?: boolean, open?: boolean, setOpen?: (open: boolean) => void, className?: string }) {
+export function LanguageSwitcherDialog({ hasTrigger = true, open, setOpen, className, dict }: { hasTrigger?: boolean, open?: boolean, setOpen?: (open: boolean) => void, className?: string, dict: any }) {
 
     const pathname = usePathname()
     const params = useParams()
@@ -52,14 +52,10 @@ export function LanguageSwitcherDialog({ hasTrigger = true, open, setOpen, class
         router.replace(`${newPath}?${currentSearchParamsObject.toString()}`, {
             scroll: false
         })
-
-
-        // handleLanguageChange(new FormData(e.target as HTMLFormElement), pathname)
     }
 
     return (
         <>
-
             {
                 hasTrigger ?
                     <Dialog>
@@ -72,26 +68,26 @@ export function LanguageSwitcherDialog({ hasTrigger = true, open, setOpen, class
 
                         <DialogContent className="sm:max-w-[425px] p-8">
                             <DialogHeader className="pb-2">
-                                <DialogTitle className="text-3xl font-bold p">Change language</DialogTitle>
+                                <DialogTitle className="text-3xl font-bold p">{dict.language_switcher.title}</DialogTitle>
                                 <DialogDescription>
-                                    Please select the language you want to use.
+                                    {dict.language_switcher.description}
                                 </DialogDescription>
                             </DialogHeader>
 
                             <form onSubmit={handleSubmit} className="space-y-6">
                                 <div className="space-y-1">
 
-                                    <Label className=" font-bold">Language</Label>
+                                    <Label className=" font-bold">{dict.language_switcher.language_label}</Label>
                                     <Select defaultValue={currentLang} name="language"
                                         value={value}
                                         onValueChange={(e) => setValue(e)}
                                     >
                                         <SelectTrigger className="w-full    " >
-                                            <SelectValue placeholder="Select a language" />
+                                            <SelectValue placeholder={dict.language_switcher.select_placeholder} />
                                         </SelectTrigger>
                                         <SelectContent>
                                             <SelectGroup>
-                                                <SelectLabel>Languages</SelectLabel>
+                                                <SelectLabel>{dict.language_switcher.languages_group}</SelectLabel>
                                                 {LANGUAGES.map((lang) => (
                                                     <SelectItem key={lang.code} value={lang.code}>
                                                         {lang.name}
@@ -101,7 +97,7 @@ export function LanguageSwitcherDialog({ hasTrigger = true, open, setOpen, class
                                         </SelectContent>
                                     </Select>
                                 </div>
-                                <Button disabled={currentLang === value} type="submit" className="w-full font-bold">Change language</Button>
+                                <Button disabled={currentLang === value} type="submit" className="w-full font-bold">{dict.language_switcher.change_button}</Button>
                             </form>
                         </DialogContent>
                     </Dialog>
@@ -110,26 +106,26 @@ export function LanguageSwitcherDialog({ hasTrigger = true, open, setOpen, class
 
                         <DialogContent className="sm:max-w-[425px] p-8">
                             <DialogHeader className="pb-2">
-                                <DialogTitle className="text-3xl font-bold p">Change language</DialogTitle>
+                                <DialogTitle className="text-3xl font-bold p">{dict.language_switcher.title}</DialogTitle>
                                 <DialogDescription>
-                                    Please select the language you want to use.
+                                    {dict.language_switcher.description}
                                 </DialogDescription>
                             </DialogHeader>
 
                             <form onSubmit={handleSubmit} className="space-y-6">
                                 <div className="space-y-1">
 
-                                    <Label className=" font-bold">Language</Label>
+                                    <Label className=" font-bold">{dict.language_switcher.language_label}</Label>
                                     <Select defaultValue={currentLang} name="language"
                                         value={value}
                                         onValueChange={(e) => setValue(e)}
                                     >
                                         <SelectTrigger className="w-full    " >
-                                            <SelectValue placeholder="Select a language" />
+                                            <SelectValue placeholder={dict.language_switcher.select_placeholder} />
                                         </SelectTrigger>
                                         <SelectContent>
                                             <SelectGroup>
-                                                <SelectLabel>Languages</SelectLabel>
+                                                <SelectLabel>{dict.language_switcher.languages_group}</SelectLabel>
                                                 {LANGUAGES.map((lang) => (
                                                     <SelectItem key={lang.code} value={lang.code}>
                                                         {lang.name}
@@ -139,12 +135,11 @@ export function LanguageSwitcherDialog({ hasTrigger = true, open, setOpen, class
                                         </SelectContent>
                                     </Select>
                                 </div>
-                                <Button disabled={currentLang === value} type="submit" className="w-full font-bold">Change language</Button>
+                                <Button disabled={currentLang === value} type="submit" className="w-full font-bold">{dict.language_switcher.change_button}</Button>
                             </form>
                         </DialogContent>
                     </Dialog>
             }
         </>
-
     )
 }

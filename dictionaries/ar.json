@@ -68,10 +68,12 @@
       }
     }
   },
-  "common": {
-    "loading": "جارٍ التحميل...",
-    "error": "حدث خطأ ما",
-    "try_again": "حاول مرة أخرى"
+  "search": {
+    "no_results": {
+      "title": "لم يتم العثور على نتائج",
+      "description": "حاول تعديل البحث أو الموقع للعثور على ما تبحث عنه"
+    },
+    "business_image_alt": "صورة العمل"
   },
   "products": {
     "cart": "أضف إلى السلة"
@@ -82,5 +84,37 @@
     "terms_of_use": "شروط الاستخدام",
     "coming_soon": "قريباً",
     "copyright": "©2025 لوميير"
+  },
+  "language_switcher": {
+    "title": "تغيير اللغة",
+    "description": "اختر لغتك المفضلة للحصول على أفضل تجربة",
+    "language_label": "اختر اللغة",
+    "select_placeholder": "اختر لغة",
+    "languages_group": "اللغات المتاحة",
+    "change_button": "تغيير اللغة"
+  },
+  "business_page": {
+    "open_until": "مفتوح حتى",
+    "get_directions": "احصل على الاتجاهات",
+    "services": {
+      "title": "الخدمات",
+      "see_all": "عرض الكل",
+      "services_available": "خدمات متوفرة"
+    },
+    "about": {
+      "title": "عن المتجر",
+      "map_alt": "موقع الصالون على الخريطة"
+    },
+    "booking": {
+      "book_now": "احجز الآن"
+    },
+    "services_overview": {
+      "book": "احجز",
+      "duration_min": "دقيقة"
+    },
+    "business_hours": {
+      "title": "أوقات العمل",
+      "closed": "مغلق"
+    }
   }
 }

@@ -16,6 +16,7 @@ export default async function SearchPage(props:
     }
 ) {
 
+
     const searchParams = await props?.searchParams
     const categoryId = Number(searchParams?.categoryId) || 0
     const longitude = Number(searchParams?.longitude) || 0
@@ -39,15 +40,15 @@ export default async function SearchPage(props:
             {businesses.length === 0 ? (
                 <div className="flex flex-col items-center justify-center text-center space-y-4">
                     <div className="text-4xl">🔍</div>
-                    <h2 className="text-2xl font-bold text-gray-800">No businesses found</h2>
-                    <p className="text-gray-600">Try adjusting your search criteria or exploring a different location</p>
+                    <h2 className="text-2xl font-bold text-gray-800">{dict.search.no_results.title}</h2>
+                    <p className="text-gray-600">{dict.search.no_results.description}</p>
                 </div>
             ) : (
                 <>
                     {businesses.map((item: any) => (
                         <Link key={item.id} href={`/business/${item.id}`} className="flex flex-col  ">
                             <div className="overflow-hidden w-full rounded-lg">
-                                <Image priority={true} src={barberShop} alt="search hero" className="object-cover rounded-t-lg hover:scale-110 transistion ease-in-out delay-100 duration-300" />
+                                <Image priority={true} src={barberShop} alt={dict.search.business_image_alt} className="object-cover rounded-t-lg hover:scale-110 transistion ease-in-out delay-100 duration-300" />
                             </div>
 
                             <div className="space-y-1 pt-3  self-center grow-[1] text-left w-full">

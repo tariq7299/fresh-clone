@@ -2,14 +2,15 @@ import { fetchApi } from "@/_lib/utils/api/fetch-utils"
 import { ApiResponse } from "@/_lib/definitions/api"
 import { Slot } from "@/[lang]/business/_lib/definitions"
 
-export const getBusinessData = async (id: string) => {
+export const getBusinessData = async (id: string, lang: "en" | "ar") => {
 
     // try {
     // TODO: Add incoming business type `ApiResponse`
     const business = await fetchApi(`/active-businesses/${id}`, {
         cache: "force-cache",
         tags: ["business-details"],
-        revalidate: 3600
+        revalidate: 3600,
+        lang
     })
 
     if (business.success) {

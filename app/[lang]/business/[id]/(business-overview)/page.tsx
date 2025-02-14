@@ -10,6 +10,8 @@ import { BusinessHours } from "../../_components/business-hours";
 import { Suspense } from "react";
 import { ServicesOverviewSkeleton } from "../../_components/skeletons";
 import { notFound } from "next/navigation";
+import { getDictionary } from "@/_lib/dictionaries";
+
 export interface BusinessHour {
     day: 'sunday' | 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday';
     open: string | null;
@@ -65,11 +67,13 @@ export interface Business {
 }
 
 
-export default async function Page(props: { params: Promise<{ id: string }> }) {
+export default async function Page(props: { params: Promise<{ id: string, lang: "en" | "ar" }> }) {
     const params = await props.params;
     const id = params.id;
+    const lang = params.lang;
 
-    const businessData = await getBusinessData(id) as Business
+    const businessData = await getBusinessData(id, lang) as Business
+    const dict = await getDictionary(lang)
 
     if (!businessData) {
         notFound()
@@ -92,16 +96,16 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
             <div className="p-5 ">
 
                 <div className="flex items-center gap-2 flex-wrap">
-                    <h1 className="text-3xl md:text-5xl   font-bold font-source-sans pb-1 md:pb-0">{businessData.name} </h1>
+                    <h1 className="text-3xl md:text-5xl   font-bold font-source-sans  rtl:font-bold pb-1 md:pb-0 rtl:font-cairo rtl:pb-3">{businessData.name} </h1>
                     <Badge variant="outline" className="text-sm md:text-md">{businessData.category.name}</Badge>
                 </div>
 
                 <div className="flex flex-col md:flex-row items-start md:items-start  md:gap-1">
-                    <p className=" text-muted-foreground">Open until 10:00 PM</p>
+                    <p className=" text-muted-foreground">{dict.business_page.open_until} 10:00 PM</p>
                     <Dot className="hidden md:block" />
                     <p className=" text-muted-foreground">{businessData.location.address} </p>
 
-                    <a href={`https://www.google.com/maps/dir/?api=1&destination=${businessData.location.coordinates.latitude},${businessData.location.coordinates.longitude}`} className=" text-accent ">   Get Directions</a>
+                    <a href={`https://www.google.com/maps/dir/?api=1&destination=${businessData.location.coordinates.latitude},${businessData.location.coordinates.longitude}`} className=" text-accent font-bold ">   {dict.business_page.get_directions}</a>
 
                 </div>
 
@@ -117,35 +121,43 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
                 <div className="grid grid-cols-1 space-y-14 pt-14 max-w-screen-md ">
 
                     <div className="">
-                        <h2 className="text-2xl md:text-4xl font-bold font-source-sans pb-3">Services</h2>
+                        <h2 className="text-2xl md:text-4xl font-bold font-source-sans rtl:font-cairo rtl:font-bold pb-3">{dict.business_page.services.title}</h2>
                         <Suspense fallback={<ServicesOverviewSkeleton />}>
-
-                            <ServicesOverview services={businessData.services_with_categories} />
+                            <ServicesOverview
+                                services={businessData.services_with_categories}
+                                dict={dict}
+                            />
                         </Suspense>
 
-                        <Button isLink={true} href={`/business/${businessData.id}/booking/select-services`} variant={"outline"} className="w-full md:w-auto  md:p-5">See all</Button>
+                        <Button isLink={true} href={`/business/${businessData.id}/booking/select-services`} variant={"outline"} className="w-full md:w-auto  md:p-5">
+                            {dict.business_page.services.see_all}
+                        </Button>
                     </div>
 
                     <div>
                         <div className="pb-6">
 
-                            <h2 className="text-2xl md:text-4xl font-bold font-source-sans pb-1">About</h2>
+                            <h2 className="text-2xl md:text-4xl font-bold font-source-sans rtl:font-cairo rtl:font-bold pb-1">{dict.business_page.about.title}</h2>
                             <p className=" ">{businessData.description}</p>
                         </div>
                         <div className="rounded-lg overflow-hidden">
                             <img
                                 className=""
                                 src={`https://api.mapbox.com/styles/v1/mapbox/streets-v12/static/pin-s+555555(${businessData.location.coordinates.latitude},${businessData.location.coordinates.longitude})/${businessData.location.coordinates.latitude},${businessData.location.coordinates.longitude},9.26,0/884x472@2x?access_token=pk.eyJ1IjoidGFyaXE3Mjk5IiwiYSI6ImNtNjZ5NDYydTA1NGMycXIyN3YwMDdya28ifQ.PLTA5eR2eDKUFwM8IiOjEQ`}
-                                alt="Salon location on map"
+                                alt={dict.business_page.about.map_alt}
                                 loading="lazy"
                             />
 
 
                         </div>
-                        <p className=" text-muted-foreground pt-4">{businessData.location.address} <a href={`https://www.google.com/maps/dir/?api=1&destination=${businessData.location.coordinates.latitude},${businessData.location.coordinates.longitude}`} className=" text-accent ">Get Directions</a></p>
+                        <p className=" text-muted-foreground pt-4">{businessData.location.address} <a href={`https://www.google.com/maps/dir/?api=1&destination=${businessData.location.coordinates.latitude},${businessData.location.coordinates.longitude}`} className=" text-accent font-bold ">{dict.business_page.get_directions}</a></p>
                     </div>
 
-                    <BusinessHours business_hours={businessData.business_hours} className="pb-6" />
+                    <BusinessHours
+                        business_hours={businessData.business_hours}
+                        className="pb-6"
+                        dict={dict}
+                    />
 
                 </div>
 
@@ -160,11 +172,11 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
 
             <div className="flex justify-between w-full max-w-[1440px] m-auto items-center p-5">
                 <h1 className="hidden md:block text-lg md:text-2xl font-semibold">{businessData.name}</h1>
-                <p className="text-muted-foreground md:hidden">{servicesCount} services available</p>
+                <p className="text-muted-foreground md:hidden">{servicesCount} {dict.business_page.services.services_available}</p>
 
                 <div className="flex items-center gap-4">
-                    <p className=" hidden md:block ">{servicesCount} services available</p>
-                    <Button href={`/business/${businessData.id}/booking/select-services`} size={"lg"} isLink={true} className="text-md md:text-lg font-semibold ">Book now</Button>
+                    <p className=" hidden md:block ">{servicesCount} {dict.business_page.services.services_available}</p>
+                    <Button href={`/business/${businessData.id}/booking/select-services`} size={"lg"} isLink={true} className="text-md md:text-lg font-semibold ">{dict.business_page.booking.book_now}</Button>
                 </div>
             </div>
         </div>
