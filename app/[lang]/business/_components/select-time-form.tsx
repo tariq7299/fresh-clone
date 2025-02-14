@@ -131,7 +131,7 @@ export default function SelectTimeForm({
         <div className="flex justify-between items-center">
 
             <p className="text-xl font-black text-primary rtl:font-cairo">
-                <span className="text-accent-600 text-5xl font-cinzel">{format(date || INITIAL_DATE, "d")}</span> {getMonthName(date?.getMonth() || INITIAL_DATE.getMonth(), lang)} {format(date || INITIAL_DATE, "yyyy")}
+                <span className="text-accent-600 text-5xl font-cinzel rtl:font-cairo">{format(date || INITIAL_DATE, "d")}</span> {getMonthName(date?.getMonth() || INITIAL_DATE.getMonth(), lang)} {format(date || INITIAL_DATE, "yyyy")}
             </p>
             <Popover>
                 <PopoverTrigger asChild>

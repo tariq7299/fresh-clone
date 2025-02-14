@@ -162,6 +162,28 @@
         "december": "December"
       }
     }
+  },
+  "auth": {
+    "login": {
+      "title": "Login",
+      "description": "Please log in or create an account to book appointments",
+      "email": {
+        "label": "Email",
+        "placeholder": "john.doe@example.com"
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "MySecurePass123!"
+      },
+      "continue": "Continue",
+      "checking": "Checking...",
+      "first_time": "First time?",
+      "sign_up": "Sign up",
+      "session_expired": {
+        "title": "Error",
+        "description": "Your session has expired. Please log in again."
+      }
+    }
   }
 }  
 

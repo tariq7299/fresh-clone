@@ -162,5 +162,27 @@
         "december": "ديسمبر"
       }
     }
+  },
+  "auth": {
+    "login": {
+      "title": "تسجيل الدخول",
+      "description": "الرجاء تسجيل الدخول أو إنشاء حساب لحجز المواعيد",
+      "email": {
+        "label": "البريد الإلكتروني",
+        "placeholder": "john.doe@example.com"
+      },
+      "password": {
+        "label": "كلمة المرور",
+        "placeholder": "MySecurePass123!"
+      },
+      "continue": "متابعة",
+      "checking": "جاري التحقق...",
+      "first_time": "مستخدم جديد؟",
+      "sign_up": "إنشاء حساب",
+      "session_expired": {
+        "title": "خطأ",
+        "description": "انتهت صلاحية جلستك. الرجاء تسجيل الدخول مرة أخرى."
+      }
+    }
   }
 }

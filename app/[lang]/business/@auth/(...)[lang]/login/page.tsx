@@ -1,25 +1,18 @@
-"use client";
-
+import { getDictionary } from "@/_lib/dictionaries";
+import LoginDialog from "@/[lang]/business/_components/login-dialog";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/_ui/components/dialog";
-import { useRouter } from "next/navigation";
-import LoginForm from "@/[lang]/(auth)/_components/login-form";
-import { Button } from "@/_ui/components/button";
 
-export default function LoginPage() {
-    const router = useRouter();
+interface LoginPageProps {
+    params: Promise<{
+        lang: "en" | "ar";
+    }>;
+}
 
-    return (
-        <Dialog open={true} onOpenChange={() => router.back()}>
-            <DialogContent className="sm:max-w-[425px] p-8">
-                <DialogHeader className="">
-                    <DialogTitle className="text-3xl font-bold p">Login</DialogTitle>
-                    <DialogDescription>Please log in or create an account to book appointments.
-                    </DialogDescription>
-                </DialogHeader>
-                <div className="py-4">
-                    <LoginForm />
-                </div>
-            </DialogContent>
-        </Dialog>
-    );
+export default async function Page({ params }: LoginPageProps) {
+
+    const { lang } = await params;
+
+    const dict = await getDictionary(lang);
+
+    return <LoginDialog dict={dict} />
 }

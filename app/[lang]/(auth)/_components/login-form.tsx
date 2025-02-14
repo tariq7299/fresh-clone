@@ -12,7 +12,7 @@ import { useSearchParams } from 'next/navigation'
 import { Alert, AlertDescription, AlertTitle } from "@/_ui/components/alert";
 import { AlertCircle } from "lucide-react"
 import useLocalStorage from "@/_lib/hooks/use-local-storage";
-import { useRouter, usePathname } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { handleFormResponse } from "@/_lib/utils/utils";
 import { PasswordInput } from "@/_ui/components/custom/password-input";
 import { login } from "../_lib/form-actions";
@@ -28,9 +28,34 @@ const INITIAL_STATE: SuccessLoginFormState | ErrorLoginFormState = {
     }
 };
 
-export default function LoginForm() {
+interface LoginFormProps {
+    dict: {
+        auth: {
+            login: {
+                email: {
+                    label: string;
+                    placeholder: string;
+                };
+                password: {
+                    label: string;
+                    placeholder: string;
+                };
+                continue: string;
+                checking: string;
+                first_time: string;
+                sign_up: string;
+                session_expired: {
+                    title: string;
+                    description: string;
+                };
+            };
+        };
+    };
+}
+
+export default function LoginForm({ dict }: LoginFormProps) {
     const router = useRouter()
-    const pathname = usePathname()
+    // const pathname = usePathname()
 
     const [_, setSessionData] = useLocalStorage<SessionData | null>({ key: "user", defaultValue: null })
 
@@ -78,9 +103,9 @@ export default function LoginForm() {
                 <div className="absolute top-0 left-0 w-full pt-20 p-5">
                     <Alert variant="destructive">
                         <AlertCircle className="h-4 w-4" />
-                        <AlertTitle>Error</AlertTitle>
+                        <AlertTitle>{dict.auth.login.session_expired.title}</AlertTitle>
                         <AlertDescription>
-                            Your session has expired. Please log in again.
+                            {dict.auth.login.session_expired.description}
                         </AlertDescription>
                     </Alert>
                 </div>
@@ -91,36 +116,44 @@ export default function LoginForm() {
                     defaultValue={formState?.formData?.email}
                     disabled={isPending}
                     required={true}
-                    label="Email"
+                    label={dict.auth.login.email.label}
                     name="email"
                     type="email"
-                    placeholder="john.doe@example.com"
+                    placeholder={dict.auth.login.email.placeholder}
                     error={formState?.clientFieldsErrors?.email?.[0]}
                 />
 
                 <div className="flex flex-col gap-2">
-                    <Label htmlFor="password">Password</Label>
+                    <Label htmlFor="password" className="rtl:font-cairo">
+                        {dict.auth.login.password.label}
+                    </Label>
                     <PasswordInput
                         defaultValue={formState?.formData?.password}
                         disabled={isPending}
                         required={true}
                         name="password"
-                        placeholder="MySecurePass123!"
+                        placeholder={dict.auth.login.password.placeholder}
                     />
-                    {formState?.clientFieldsErrors?.password?.[0] && <p className="text-red-500 text-sm">{formState?.clientFieldsErrors?.password?.[0]}</p>}
+                    {formState?.clientFieldsErrors?.password?.[0] && (
+                        <p className="text-red-500 text-sm">
+                            {formState?.clientFieldsErrors?.password?.[0]}
+                        </p>
+                    )}
                 </div>
 
                 <Button
                     loading={isPending}
                     variant="default"
-                    className="w-full font-bold"
+                    className="w-full font-bold rtl:font-cairo"
                     disabled={isPending}
                 >
-                    {isPending ? 'Checking...' : 'Continue'}
+                    {isPending ? dict.auth.login.checking : dict.auth.login.continue}
                 </Button>
 
                 <div className="flex flex-col justify-center items-center">
-                    <p className="font-bold text-center">First time?</p>
+                    <p className="font-bold text-center rtl:font-cairo">
+                        {dict.auth.login.first_time}
+                    </p>
 
                     {/* If the login is required for booking, and replace the link with the for-who page, instead of pushing, so if i go back, i will not be redirected to the login page ! and instead i will be redirected to the 'business/[id]/booking/time' page */}
                     {loginRequiredForBooking ? (
@@ -129,14 +162,17 @@ export default function LoginForm() {
                                 type: userRole,
                                 loginRequiredForBooking: 'true'
                             }).toString()}`}
-                            className="text-center text-accent text-sm"
+                            className="text-center text-accent text-sm rtl:font-cairo"
                             replace={true}
                         >
-                            Sign up
+                            {dict.auth.login.sign_up}
                         </Link>
                     ) : (
-                        <Link href="/for-who" className="text-center text-accent text-sm">
-                            Sign up
+                        <Link
+                            href="/for-who"
+                            className="text-center text-accent text-sm rtl:font-cairo"
+                        >
+                            {dict.auth.login.sign_up}
                         </Link>
                     )}
 
@@ -162,7 +198,7 @@ interface FormFieldProps {
 function FormField({ label, name, type, placeholder, error, disabled, defaultValue, required }: FormFieldProps) {
     return (
         <div className="flex flex-col gap-2">
-            <Label htmlFor={name}>{label}</Label>
+            <Label htmlFor={name} className="rtl:font-cairo">{label}</Label>
             <Input
                 required={required}
                 type={type}
@@ -171,8 +207,9 @@ function FormField({ label, name, type, placeholder, error, disabled, defaultVal
                 placeholder={placeholder}
                 disabled={disabled}
                 defaultValue={defaultValue}
+                className="rtl:font-cairo"
             />
-            {error && <p className="text-red-500 text-sm">{error}</p>}
+            {error && <p className="text-red-500 text-sm rtl:font-cairo">{error}</p>}
         </div>
     );
 }

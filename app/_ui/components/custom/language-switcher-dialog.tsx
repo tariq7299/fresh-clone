@@ -66,7 +66,7 @@ export function LanguageSwitcherDialog({ hasTrigger = true, open, setOpen, class
                             </Button>
                         </DialogTrigger>
 
-                        <DialogContent className="sm:max-w-[425px] p-8">
+                        <DialogContent className="sm:max-w-[425px] p-8 pt-10">
                             <DialogHeader className="pb-2">
                                 <DialogTitle className="text-3xl font-bold p">{dict.language_switcher.title}</DialogTitle>
                                 <DialogDescription>

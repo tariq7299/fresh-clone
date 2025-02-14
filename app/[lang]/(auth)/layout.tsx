@@ -8,8 +8,11 @@ import Link from "next/link";
 import React, { Suspense } from "react";
 import { LanguageSwitcherDialog } from "@/_ui/components/custom/language-switcher-dialog";
 import Loading from "./loading";
+import { getDictionary } from "@/_lib/dictionaries";
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default async function Layout({ params, children }: { params: Promise<{ lang: "en" | "ar" }>, children: React.ReactNode }) {
+    const { lang } = await params;
+    const dict = await getDictionary(lang);
     return (
         <div className="grid grid-cols-1 md:grid-cols-2  min-h-dvh " >
 
@@ -28,7 +31,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 </Suspense>
 
                 <div className="p-5 mt-auto">
-                    <LanguageSwitcherDialog />
+                    <LanguageSwitcherDialog dict={dict} />
                 </div>
 
             </div>
