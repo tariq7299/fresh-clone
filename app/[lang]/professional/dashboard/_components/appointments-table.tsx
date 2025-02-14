@@ -39,6 +39,7 @@ import TablePagination from "@/_ui/components/custom/table-pagination"
 import { TablePaginationSkeleton, DataTableSkeleton } from "@/_ui/components/custom/skeletons"
 import { Pagination } from "@/_lib/definitions/definitions"
 import { Appointment, Service } from "@/_lib/definitions/appointments"
+import AppointmentStatus from "@/_ui/components/custom/appoitment-status"
 
 // type Service = {
 //     service_id: number
@@ -142,14 +143,6 @@ export default function AppointmentsTable({ appointments, pagination }: { appoin
             accessorKey: "id",
             header: "ID"
         },
-        // {
-        //     accessorKey: "business_name",
-        //     header: "Business Name"
-        // },
-        // {
-        //     accessorKey: "business_address",
-        //     header: "Business Address"
-        // },
         {
             accessorKey: "total_duration",
             header: "Total Duration"
@@ -163,7 +156,7 @@ export default function AppointmentsTable({ appointments, pagination }: { appoin
             header: "Status",
             cell: ({ row }) => {
                 const status = row.getValue("status") as string
-                return <Badge variant={status === "completed" ? "success" : status === "cancelled" ? "destructive" : "outline"}>{status}</Badge>
+                return <AppointmentStatus type={status} />
             }
 
         },

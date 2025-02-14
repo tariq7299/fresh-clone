@@ -23,10 +23,11 @@ import { LanguageSwitcherDialog, LanguageSwitcherTrigger } from '@/_ui/component
 import { useParams } from 'next/navigation'
 import { UserData } from '@/[lang]/(auth)/_lib/definitions';
 import AuthButton from '@/_ui/components/custom/auth-button';
+import UserInitialsBadge from '@/_ui/components/custom/user-initials-badge';
 
 export default function ProfessionalNavBar({ fixed = false, hideInMobile = false, userData }: { fixed?: boolean, hideInMobile?: boolean, userData: UserData }) {
 
-    const [isLanguageDialogOpen, setIsLanguageDialogOpen] = useState(false)
+    // const [isLanguageDialogOpen, setIsLanguageDialogOpen] = useState(false)
     const isScrolled = useIsScrolled()
     const params = useParams()
 
@@ -36,7 +37,7 @@ export default function ProfessionalNavBar({ fixed = false, hideInMobile = false
             hideInMobile ? 'hidden md:block fixed top-0 left-0' : 'fixed top-0 left-0'
         )}>
 
-            <LanguageSwitcherDialog hasTrigger={false} open={isLanguageDialogOpen} setOpen={setIsLanguageDialogOpen} />
+            {/* <LanguageSwitcherDialog hasTrigger={false} open={isLanguageDialogOpen} setOpen={setIsLanguageDialogOpen} /> */}
 
             <div className="p-5 py-4 flex justify-between items-center max-w-[1440px] m-auto pe-7">
 
@@ -56,7 +57,14 @@ export default function ProfessionalNavBar({ fixed = false, hideInMobile = false
 
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild >
-                            <Button borderType="fullRounded" variant="outline" className=" hover:bg-muted/50 bg-transparent inline-flex  font-source-sans font-semibold gap-2 group py-4 pe-3 ps-1 items-center ">
+                            <Button borderType="fullRounded" variant="ghost" className=" hover:bg-muted/50 bg-transparent inline-flex  gap-1 group items-center py-1 px-0">
+
+                                {userData && <UserInitialsBadge firstName={userData.first_name} lastName={userData.last_name} />}
+
+                                <ChevronDown className='size-4 transition duration-200 group-data-[state=open]:rotate-180' />
+                            </Button>
+
+                            {/* <Button borderType="fullRounded" variant="outline" className=" hover:bg-muted/50 bg-transparent inline-flex  font-source-sans font-semibold gap-2 group py-4 pe-3 ps-1 items-center ">
                                 <Image
                                     src={userAvatar}
                                     alt="user avatar"
@@ -66,7 +74,8 @@ export default function ProfessionalNavBar({ fixed = false, hideInMobile = false
                                 <ChevronDown className='size-4 transition duration-200
                          group-data-[state=open]:rotate-180' />
 
-                            </Button>
+                            </Button> */}
+
                         </DropdownMenuTrigger>
                         <DropdownMenuContent className='w-56 p-2'>
 
@@ -75,8 +84,8 @@ export default function ProfessionalNavBar({ fixed = false, hideInMobile = false
                             </DropdownMenuItem>
                             <DropdownMenuSeparator className='  my-2 mx-2 ' />
                             <DropdownMenuLabel className='font-bold  text-base'>Other</DropdownMenuLabel>
-                            <DropdownMenuItem className=' text-accent-600  ' onClick={() => setIsLanguageDialogOpen(true)} asChild>
-                                <LanguageSwitcherTrigger />
+                            <DropdownMenuItem className='   ' asChild>
+                                <LanguageSwitcherDialog className='w-full' />
                             </DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>

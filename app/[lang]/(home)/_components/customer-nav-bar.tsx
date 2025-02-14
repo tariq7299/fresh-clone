@@ -30,7 +30,7 @@ export default function CustomerNavBar({
     className }: { userData: UserData, fixed?: boolean, hideInMobile?: boolean, showForBusiness?: boolean, className?: string }) {
 
     const isScrolled = useIsScrolled()
-    const [isLanguageDialogOpen, setIsLanguageDialogOpen] = useState(false)
+    // const [isLanguageDialogOpen, setIsLanguageDialogOpen] = useState(false)
     const params = useParams()
 
     // Get the first and last name of the user
@@ -56,8 +56,8 @@ export default function CustomerNavBar({
             fixed ? 'bg-white shadow' : isScrolled ? 'bg-white shadow' : 'bg-transparent',
             hideInMobile ? 'hidden md:block fixed top-0 left-0' : 'fixed top-0 left-0'
         )}>
-
-            <LanguageSwitcherDialog hasTrigger={false} open={isLanguageDialogOpen} setOpen={setIsLanguageDialogOpen} />
+            {/* 
+            <LanguageSwitcherDialog hasTrigger={false} open={isLanguageDialogOpen} setOpen={setIsLanguageDialogOpen} /> */}
 
             <div className={cn("p-5 py-4 flex justify-between items-center max-w-[1440px] m-auto pe-7", className)}>
 
@@ -119,8 +119,8 @@ export default function CustomerNavBar({
                                 )
                             ))}
 
-                            <DropdownMenuItem className=' text-accent-600  ' onClick={() => setIsLanguageDialogOpen(true)} asChild>
-                                <LanguageSwitcherTrigger />
+                            <DropdownMenuItem className='   ' asChild>
+                                <LanguageSwitcherDialog className='w-full' />
                             </DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
