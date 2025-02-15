@@ -19,10 +19,10 @@ export default async function NavBar({
     return <>
         {
             userData && userData.role === 'customer' ?
-                <CustomerNavBar userData={userData} className={className} fixed={fixed} hideInMobile={hideInMobile} showForBusiness={showForBusiness} />
+                <CustomerNavBar userData={userData} className={className} fixed={fixed} hideInMobile={hideInMobile} showForBusiness={showForBusiness} dict={dict} />
                 :
                 userData && userData.role === 'professional' ?
-                    <ProfessionalNavBar userData={userData} fixed={fixed} hideInMobile={hideInMobile} />
+                    <ProfessionalNavBar userData={userData} fixed={fixed} hideInMobile={hideInMobile} dict={dict} />
                     :
                     <PublicNavBar dict={dict} fixed={fixed} hideInMobile={hideInMobile} />
         }

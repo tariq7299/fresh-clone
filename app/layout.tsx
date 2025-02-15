@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Cairo, Almarai, Source_Sans_3, Libre_Bodoni, Quicksand, Cinzel } from "next/font/google";
 import "@/_ui/globals.css";
-import SonnerToaster from "@/_ui/ToasterSonner"
 
 // This is the provider for the nextui library
 // I am using this lib to be able to use the "date-input" component from the nextui library
@@ -69,7 +68,7 @@ export default async function RootLayout({
                             {children}
                         </main>
                     </Suspense>
-                    <SonnerToaster />
+
                 </NextUIProvider>
             </body>
         </html>

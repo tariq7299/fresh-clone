@@ -7,7 +7,7 @@ import Link from 'next/link'
 import MobileNavToggler from './mobile-nav-toggler'
 import { UserData } from '@/[lang]/(auth)/_lib/definitions';
 
-export default function MobileNavMenu({ authenticated, navTabs, isScrolled, fixed, userData }: { authenticated: boolean, navTabs: { title: string, href: string, icon: JSX.Element }[], isScrolled: boolean, fixed: boolean, userData: UserData }) {
+export default function MobileNavMenu({ authenticated, navTabs, isScrolled, fixed, userData, dict }: { authenticated: boolean, navTabs: { title: string, href: string, icon: JSX.Element }[], isScrolled: boolean, fixed: boolean, userData: UserData, dict: any }) {
 
     const [isOpen, setIsOpen] = useState(false)
 

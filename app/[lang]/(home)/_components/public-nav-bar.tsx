@@ -30,13 +30,14 @@ export default function PublicNavBar({ dict, fixed = false, hideInMobile = false
                 )} />
 
                 <div className="md:hidden">
-                    <MobileNavMenu userData={null} authenticated={false} navTabs={navTabs} isScrolled={isScrolled} fixed={fixed} />
+                    <MobileNavMenu userData={null} authenticated={false} navTabs={navTabs} isScrolled={isScrolled} fixed={fixed} dict={dict} />
                 </div>
 
                 <div className={cn("hidden md:inline-flex ltr:space-x-2 rtl:gap-2 items-center",
                     fixed ? 'text-primary' : isScrolled ? 'text-primary' : ' text-background'
                 )}>
                     <NavButton href="/register?type=professional">{dict.nav.for_business}</NavButton>
+
                     <DeskTopNavMenu dict={dict} navTabs={navTabs} />
                 </div>
             </div>
