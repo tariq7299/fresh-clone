@@ -4,12 +4,11 @@ import { Suspense } from "react";
 import { OnboardingBusinessNameSkeleton } from "@/[lang]/professional/_components/skeletons";
 
 interface BusinessNamePageProps {
-    params: {
-        lang: "en" | "ar"
-    };
+    params: Promise<{ lang: "en" | "ar" }>
 }
 
-export default async function BusinessNamePage({ params: { lang } }: BusinessNamePageProps) {
+export default async function BusinessNamePage({ params }: BusinessNamePageProps) {
+    const { lang } = await params
     const dict = await getDictionary(lang);
 
     return (

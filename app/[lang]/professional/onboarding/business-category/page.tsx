@@ -4,12 +4,14 @@ import { Suspense } from "react";
 import { OnboardingBusinessCategorySkeleton } from "@/[lang]/professional/_components/skeletons";
 
 interface BusinessCategoryPageProps {
-    params: {
-        lang: "en" | "ar"
-    };
-}
+    params: Promise<{ lang: "en" | "ar" }>
+    lang: "en" | "ar"
+};
 
-export default async function BusinessCategoryPage({ params: { lang } }: BusinessCategoryPageProps) {
+export default async function BusinessCategoryPage({ params }: BusinessCategoryPageProps) {
+
+    const { lang } = await params
+
     const dict = await getDictionary(lang);
 
     return (
@@ -28,7 +30,7 @@ export default async function BusinessCategoryPage({ params: { lang } }: Busines
                 </div>
             </div>
             <Suspense fallback={<OnboardingBusinessCategorySkeleton />}>
-                <BusinessCategoryForm dict={dict} />
+                <BusinessCategoryForm lang={lang} dict={dict} />
             </Suspense>
         </div>
     );

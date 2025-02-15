@@ -18,7 +18,7 @@ export type StoredTempCategory = {
     id: number | null,
 }
 
-export default function Form({ storedTempCategory, categories }: { storedTempCategory: StoredTempCategory | null, categories: Category[] }) {
+export default function Form({ storedTempCategory, categories, dict }: { storedTempCategory: StoredTempCategory | null, categories: Category[], dict: any }) {
 
     const { setIsLoading } = useBusinessFormContext()
 
@@ -28,9 +28,11 @@ export default function Form({ storedTempCategory, categories }: { storedTempCat
         apiDataResponse: null,
         apiMsgs: "",
         formData: {
-            categoryId: storedTempCategory?.id ? String(storedTempCategory?.id) : "",
+            categoryId: storedTempCategory?.id ? String(storedTempCategory?.id) : "4",
         }
     }
+
+    console.log("initialState", initialState)
 
     const [formState, formAction, isPending] = useActionState(handleSubmitBusinessCategory, initialState)
 
@@ -39,10 +41,12 @@ export default function Form({ storedTempCategory, categories }: { storedTempCat
         setIsLoading(isPending)
     }, [isPending])
 
+    console.log("formState.clientFieldsErrors", formState.clientFieldsErrors)
+
     return <form action={formAction} id="business-onboarding-form" className="flex flex-col gap-2 w-full  items-stretch m-auto  ">
 
 
-        {formState.clientFieldsErrors?.categoryId && <p className="text-destructive text-sm py-2">You must select a category</p>}
+        <p className="text-destructive text-sm py-2">{dict.onboarding.business_category.form.category_id[formState.clientFieldsErrors?.categoryId?.[0] as keyof typeof dict.onboarding.business_category.form.category_id]}</p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 justify-items-stretch md:grid-cols-3 ">
             {categories.map((category: any) => (

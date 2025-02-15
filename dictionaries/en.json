@@ -261,36 +261,47 @@
       "form": {
         "name_en": {
           "label": "Business name (En)",
-          "placeholder": "Bekky Barber"
+          "placeholder": "Bekky Barber",
+          "required_error": "Business name (En) is required"
         },
         "name_ar": {
           "label": "Business name (Ar)",
-          "placeholder": "بيكي باربر"
+          "placeholder": "بيكي باربر",
+          "required_error": "Business name (Ar) is required"
         },
         "description_en": {
           "label": "Description (En)",
-          "placeholder": "Bekky Barber is a barber shop that..."
+          "placeholder": "Bekky Barber is a barber shop that...",
+          "required_error": "Description (En) is required"
         },
         "description_ar": {
           "label": "Description (Ar)",
-          "placeholder": "بيكي باربر هو محل حلاقة أنيق يقدم خدمات متنوعة، بما في ذلك الحلاقة وتهذيب الذقن ."
+          "placeholder": "بيكي باربر هو محل حلاقة أنيق يقدم خدمات متنوعة، بما في ذلك الحلاقة وتهذيب الذقن .",
+          "required_error": "Description (Ar) is required"
         },
         "website": {
           "label": "Website (Optional)",
-          "placeholder": "https://www.bekkybarber.com"
+          "placeholder": "https://www.bekkybarber.com",
+          "invalid_url_error": "Please enter a valid URL"
         },
         "gender": {
           "label": "Who is your business for?",
           "men": "Men",
           "women": "Women",
-          "both": "Both"
+          "both": "Both",
+          "required_error": "Please select a gender"
         }
       }
     },
     "business_category": {
       "title": "What's your speciality?",
       "subtitle": "Account setup",
-      "description": "Choose a category that best describes your business."
+      "description": "Choose a category that best describes your business.",
+      "form": {
+        "category_id": {
+          "required_error": "Please select a category"
+        }
+      }
     }
   }
 }  

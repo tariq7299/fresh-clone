@@ -29,7 +29,7 @@ export default function CategoryCard({ categoryName, categoryIconUrl = "/categor
 
         </div>
         <div className={cn(
-            "absolute top-2 right-2 bg-accent text-background rounded-lg p-0.5 scale-75",
+            "absolute top-2 right-2 rtl:left-2 rtl:right-auto bg-accent text-background rounded-lg p-0.5 scale-75",
             "opacity-0 ", // Hidden by default
             "transition-all duration-200",
             "peer-checked:opacity-100 peer-checked:scale-100" // Show and scale up when checked

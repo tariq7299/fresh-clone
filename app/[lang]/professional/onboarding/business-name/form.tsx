@@ -92,35 +92,35 @@ export default function Form({ storedTempBusinessInfo, dict }: FormProps) {
                 id="nameEn"
                 placeholder={dict.onboarding.business_name.form.name_en.placeholder}
             />
-            <p className="text-sm text-destructive rtl:font-cairo">{formState.clientFieldsErrors?.nameEn?.[0]}</p>
+            <p className="text-sm text-destructive rtl:font-cairo">{dict.onboarding.business_name.form.name_en[formState.clientFieldsErrors?.nameEn?.[0] as keyof typeof dict.onboarding.business_name.form.name_en]}</p>
         </div>
         <div className="flex flex-col gap-2">
             <Label className="font-bold rtl:font-cairo" htmlFor="nameAr">
                 {dict.onboarding.business_name.form.name_ar.label}
             </Label>
             <Input disabled={isPending} value={formValues.nameAr} onChange={(e) => setFormValues({ ...formValues, nameAr: e.target.value })} type="text" name="nameAr" id="nameAr" placeholder={dict.onboarding.business_name.form.name_ar.placeholder} />
-            <p className="text-sm text-destructive rtl:font-cairo">{formState.clientFieldsErrors?.nameAr?.[0]}</p>
+            <p className="text-sm text-destructive rtl:font-cairo">{dict.onboarding.business_name.form.name_ar[formState.clientFieldsErrors?.nameAr?.[0] as keyof typeof dict.onboarding.business_name.form.name_ar]}</p>
         </div>
         <div className="flex flex-col gap-2">
             <Label className="font-bold rtl:font-cairo" htmlFor="descriptionEn">
                 {dict.onboarding.business_name.form.description_en.label}
             </Label>
             <Textarea dir="ltr" disabled={isPending} value={formValues.descriptionEn} onChange={(e) => setFormValues({ ...formValues, descriptionEn: e.target.value })} name="descriptionEn" id="descriptionEn" placeholder={dict.onboarding.business_name.form.description_en.placeholder} />
-            <p className="text-sm text-destructive rtl:font-cairo">{formState.clientFieldsErrors?.descriptionEn?.[0]}</p>
+            <p className="text-sm text-destructive rtl:font-cairo">{dict.onboarding.business_name.form.description_en[formState.clientFieldsErrors?.descriptionEn?.[0] as keyof typeof dict.onboarding.business_name.form.description_en]}</p>
         </div>
         <div className="flex flex-col gap-2">
             <Label className="font-bold rtl:font-cairo" htmlFor="descriptionAr">
                 {dict.onboarding.business_name.form.description_ar.label}
             </Label>
             <Textarea disabled={isPending} value={formValues.descriptionAr} onChange={(e) => setFormValues({ ...formValues, descriptionAr: e.target.value })} name="descriptionAr" id="descriptionAr" placeholder={dict.onboarding.business_name.form.description_ar.placeholder} />
-            <p className="text-sm text-destructive rtl:font-cairo">{formState.clientFieldsErrors?.descriptionAr?.[0]}</p>
+            <p className="text-sm text-destructive rtl:font-cairo">{dict.onboarding.business_name.form.description_ar[formState.clientFieldsErrors?.descriptionAr?.[0] as keyof typeof dict.onboarding.business_name.form.description_ar]}</p>
         </div>
         <div className="flex flex-col gap-2">
             <Label className="font-bold rtl:font-cairo" htmlFor="websiteUrl">
                 {dict.onboarding.business_name.form.website.label}
             </Label>
             <Input dir="ltr" type="url" disabled={isPending} value={formValues.websiteUrl} onChange={(e) => setFormValues({ ...formValues, websiteUrl: e.target.value })} name="websiteUrl" id="websiteUrl" placeholder={dict.onboarding.business_name.form.website.placeholder} />
-            <p className="text-sm text-destructive rtl:font-cairo">{formState.clientFieldsErrors?.websiteUrl?.[0]}</p>
+            <p className="text-sm text-destructive rtl:font-cairo">{dict.onboarding.business_name.form.website[formState.clientFieldsErrors?.websiteUrl?.[0] as keyof typeof dict.onboarding.business_name.form.website]}</p>
         </div>
         <div className="flex flex-col gap-2">
             <Label className="font-bold rtl:font-cairo" htmlFor="genderOfCustomers">
@@ -158,7 +158,7 @@ export default function Form({ storedTempBusinessInfo, dict }: FormProps) {
                     categoryIconHeight={48}
                 />
             </div>
-            <p className="text-sm text-destructive rtl:font-cairo">{formState.clientFieldsErrors?.genderOfCustomers?.[0]}</p>
+            <p className="text-sm text-destructive rtl:font-cairo">{dict.onboarding.business_name.form.gender[formState.clientFieldsErrors?.genderOfCustomers?.[0] as keyof typeof dict.onboarding.business_name.form.gender]}</p>
         </div>
 
     </form>

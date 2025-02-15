@@ -7,8 +7,9 @@ import { getDictionary } from "@/_lib/dictionaries";
 import { Suspense } from "react";
 
 
-export default async function ProfessionalOnboardingLayout({ params: { lang }, children }: { params: { lang: "en" | "ar" }, children: React.ReactNode }) {
+export default async function ProfessionalOnboardingLayout({ params, children }: { params: Promise<{ lang: "en" | "ar" }>, children: React.ReactNode }) {
 
+    const lang = (await params).lang
     const dict = await getDictionary(lang);
 
     return <div className=" w-lvw">

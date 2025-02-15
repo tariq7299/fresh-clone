@@ -14,17 +14,19 @@ import { BusinessCapacityFieldErrors } from "../onboarding/business-capacity/bus
 import { setApiSuccessMsg } from "@/_lib/utils/api/setApiSuccessMsg"
 import { handleCreatingNewbusiness, removeTempBusinessFormSumbissions } from "./data"
 
+
+
 const businessNameSchema = z.object({
-    nameEn: z.string().trim().min(3, { message: "Business name (En) is required" }),
-    nameAr: z.string().trim().min(3, { message: "Business name (Ar) is required" }),
-    descriptionEn: z.string().trim().min(3, { message: "Description (En) is required" }),
-    descriptionAr: z.string().trim().min(3, { message: "Description (Ar) is required" }),
-    websiteUrl: z.string().regex(/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/, { message: "Please enter a valid URL starting with http:// or https://" }).url({ message: "Please enter a valid URL" }),
-    genderOfCustomers: z.enum(["male", "female", "both"], { message: "Please select a gender" })
+    nameEn: z.string().trim().min(3, { message: "required_error" }),
+    nameAr: z.string().trim().min(3, { message: "required_error" }),
+    descriptionEn: z.string().trim().min(3, { message: "required_error" }),
+    descriptionAr: z.string().trim().min(3, { message: "required_error" }),
+    websiteUrl: z.string().regex(/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/, { message: "invalid_url_error" }).url({ message: "invalid_url_error" }),
+    genderOfCustomers: z.enum(["male", "female", "both"], { message: "required_error" })
 })
 
 const businessCategorySchema = z.object({
-    categoryId: z.string().trim().min(1, { message: "Please select a category" }),
+    categoryId: z.string().trim().min(1, { message: "required_error" }),
 })
 
 
@@ -126,7 +128,9 @@ export const handleSubmitBusinessCategory = async (formState: ErrorFormState<{ c
 
     try {
 
-        const validatedFields = businessCategorySchema.safeParse({ categoryId: formData.get("categoryId") })
+        console.log("formData.get('categoryId')", formData.get("categoryId"))
+
+        const validatedFields = businessCategorySchema.safeParse({ categoryId: formData.get("categoryId") ?? "" })
 
         if (!validatedFields.success) {
             return {

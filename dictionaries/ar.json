@@ -261,36 +261,47 @@
       "form": {
         "name_en": {
           "label": "اسم العمل (بالإنجليزية)",
-          "placeholder": "Bekky Barber"
+          "placeholder": "Bekky Barber",
+          "required_error": "اسم العمل (بالإنجليزية) مطلوب"
         },
         "name_ar": {
           "label": "اسم العمل (بالعربية)",
-          "placeholder": "بيكي باربر"
+          "placeholder": "بيكي باربر",
+          "required_error": "اسم العمل (بالعربية) مطلوب"
         },
         "description_en": {
           "label": "الوصف (بالإنجليزية)",
-          "placeholder": "Bekky Barber is a barber shop that..."
+          "placeholder": "Bekky Barber is a barber shop that...",
+          "required_error": "الوصف (بالإنجليزية) مطلوب"
         },
         "description_ar": {
           "label": "الوصف (بالعربية)",
-          "placeholder": "بيكي باربر هو محل حلاقة أنيق يقدم خدمات متنوعة، بما في ذلك الحلاقة وتهذيب الذقن ."
+          "placeholder": "بيكي باربر هو محل حلاقة أنيق يقدم خدمات متنوعة، بما في ذلك الحلاقة وتهذيب الذقن .",
+          "required_error": "الوصف (بالعربية) مطلوب"
         },
         "website": {
           "label": "الموقع الإلكتروني (اختياري)",
-          "placeholder": "https://www.bekkybarber.com"
+          "placeholder": "https://www.bekkybarber.com",
+          "invalid_url_error": "الموقع الإلكتروني غير صالح"
         },
         "gender": {
           "label": "لمن عملك مخصص؟",
           "men": "رجال",
           "women": "نساء",
-          "both": "كلاهما"
+          "both": "كلاهما",
+          "required_error": "الجنس مطلوب"
         }
       }
     },
     "business_category": {
       "title": "ما هو تخصصك؟",
       "subtitle": "إعداد الحساب",
-      "description": "اختر الفئة التي تصف عملك بشكل أفضل"
+      "description": "اختر الفئة التي تصف عملك بشكل أفضل",
+      "form": {
+        "category_id": {
+          "required_error": "الفئة مطلوبة"
+        }
+      }
     }
   }
 }
