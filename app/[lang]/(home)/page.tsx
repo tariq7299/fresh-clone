@@ -19,6 +19,7 @@ import { NavBarSkeleton } from "./_components/skeletons";
 import Footer from "../../_ui/components/custom/footer";
 import Link from "next/link";
 import { getDictionary } from "@/_lib/dictionaries";
+
 export default async function Home({ params }: { params: Promise<{ lang: 'en' | 'ar' }> }) {
 
   const lang = (await params)?.lang
