@@ -248,6 +248,12 @@
       "description": "Manage and grow your business"
     },
     "cancel": "Cancel"
+  },
+  "onboarding": {
+    "submit_button": {
+      "continue": "Continue",
+      "loading": "Loading..."
+    }
   }
 }  
 

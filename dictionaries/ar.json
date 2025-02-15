@@ -248,5 +248,11 @@
       "description": "أدر وطور عملك"
     },
     "cancel": "إلغاء"
+  },
+  "onboarding": {
+    "submit_button": {
+      "continue": "متابعة",
+      "loading": "جاري التحميل..."
+    }
   }
 }

@@ -3,10 +3,12 @@ import OnboardingSteps from "../_components/onboarding-steps";
 import BackButton from "@/_ui/components/custom/back-button";
 import BusinessFormProvider from "../../../_lib/providers/business-form-provider";
 import SubmitButton from "../../../_ui/components/custom/submit-button";
+import { getDictionary } from "@/_lib/dictionaries";
 
 
-export default function ProfessionalOnboardingLayout({ children }: { children: React.ReactNode }) {
+export default async function ProfessionalOnboardingLayout({ params: { lang }, children }: { params: { lang: "en" | "ar" }, children: React.ReactNode }) {
 
+    const dict = await getDictionary(lang);
 
     return <div className=" w-lvw">
         <BusinessFormProvider>
@@ -17,11 +19,9 @@ export default function ProfessionalOnboardingLayout({ children }: { children: R
                 <div className="flex justify-between items-center py-3">
                     <BackButton />
 
-
-                    {/* <Button onClick size={"lg"} variant={"ghost"} className="font-bold px-0 py-0 lg:hidden">Log out</Button> */}
                     <LogoutButton />
 
-                    <SubmitButton className="hidden lg:flex text-md" />
+                    <SubmitButton className="hidden lg:flex text-md" dict={dict} />
 
                 </div>
             </div>
@@ -29,7 +29,7 @@ export default function ProfessionalOnboardingLayout({ children }: { children: R
             {children}
 
             <div className=" fixed bottom-0 left-0 w-full bg-background px-5 py-3.5 flex justify-center items-center border-t-1 lg:hidden">
-                <SubmitButton className="w-full" />
+                <SubmitButton className="w-full" dict={dict} />
             </div>
 
         </BusinessFormProvider>
