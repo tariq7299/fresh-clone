@@ -12,7 +12,8 @@ import { logoutUserFromBackend } from "@/[lang]/(auth)/_lib/auth-server-services
 import { toastApiMsgs } from "@/_lib/utils/api/toastApiMsgs";
 import { useState } from "react";
 import { ArrowLeftEndOnRectangleIcon, ArrowRightEndOnRectangleIcon } from "@heroicons/react/24/outline";
-export default function AuthButton({ authenticated, className, children, dict }: { authenticated: boolean, className?: string, children?: React.ReactNode, dict: any }) {
+
+export default function AuthButton({ authenticated, className, children, dict, iconSize = "10" }: { authenticated: boolean, className?: string, children?: React.ReactNode, dict: any, iconSize?: string }) {
     const [_, setSessionData] = useLocalStorage<SessionData | null>({ key: "user", defaultValue: null })
 
     const [isLoading, setIsLoading] = useState(false)
@@ -37,12 +38,12 @@ export default function AuthButton({ authenticated, className, children, dict }:
     }
 
     if (authenticated) {
-        return <Button loading={isLoading} onClick={handleLogout} size={"lg"} variant={"ghost"} className={cn("h-auto", className)} disabled={isLoading}>
-            {children ? children : (<><ArrowLeftEndOnRectangleIcon className='size-10' />{dict.nav.logout}</>)}
+        return <Button loading={isLoading} onClick={handleLogout} size={"lg"} variant={"ghost"} className={cn(" justify-start font-semibold h-auto", className)} disabled={isLoading}>
+            {children ? children : (<><ArrowLeftEndOnRectangleIcon className={`size-${iconSize}`} />{dict.nav.logout}</>)}
         </Button>
     } else {
-        return <Link href="/login" className={cn("", className)}>
-            {children ? children : (<><ArrowRightEndOnRectangleIcon className='size-10' />{dict.nav.login}</>)}
-        </Link>
+        return <Button variant={"ghost"} isLink href="/login" className={cn("justify-start font-semibold h-auto", className)}>
+            {children ? children : (<><ArrowRightEndOnRectangleIcon className={`size-${iconSize}`} />{dict.nav.login}</>)}
+        </Button>
     }
 }

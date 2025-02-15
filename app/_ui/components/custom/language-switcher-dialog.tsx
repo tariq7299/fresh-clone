@@ -31,7 +31,7 @@ export function LanguageSwitcherTrigger({ className, dict }: { className?: strin
     return <p className={cn(" flex  items-center gap-2  font-semibold ", className)}><GlobeAsiaAustraliaIcon className="h-6 w-5" /> {LANGUAGES.find(lang => lang.code === currentLang)?.name}</p>
 }
 
-export function LanguageSwitcherDialog({ hasTrigger = true, open, setOpen, className, dict }: { hasTrigger?: boolean, open?: boolean, setOpen?: (open: boolean) => void, className?: string, dict: any }) {
+export function LanguageSwitcherDialog({ iconSize = "5", hasTrigger = true, open, setOpen, className, dict }: { iconSize?: string, hasTrigger?: boolean, open?: boolean, setOpen?: (open: boolean) => void, className?: string, dict: any }) {
 
     const pathname = usePathname()
     const params = useParams()
@@ -58,11 +58,12 @@ export function LanguageSwitcherDialog({ hasTrigger = true, open, setOpen, class
         <>
             {
                 hasTrigger ?
+
                     <Dialog>
                         <DialogTrigger asChild>
-                            <Button variant="ghost" className={cn("w-full text-accent-600 h-auto flex justify-start  items-center gap-2  font-semibold  ", className)}>
-                                <GlobeAsiaAustraliaIcon className="h-6 w-5" />
-                                <p className="  ">{LANGUAGES.find(lang => lang.code === currentLang)?.name}</p>
+                            <Button variant="ghost" className={cn(`[&_svg]:size-6`, "w-full text-accent-600 h-auto flex justify-start  items-center gap-2 font-semibold  ", className)}>
+                                <GlobeAsiaAustraliaIcon className={`!size-${iconSize} `} />
+                                {LANGUAGES.find(lang => lang.code === currentLang)?.name}
                             </Button>
                         </DialogTrigger>
 

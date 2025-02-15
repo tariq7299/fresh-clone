@@ -43,7 +43,7 @@ export default function DeskTopNavMenu({ dict, navTabs, authenticated = false, u
                 <p className='font-semibold'>Log In </p>
             </Link> */}
 
-                <AuthButton dict={dict} authenticated={false} className='flex  items-center gap-2 w-full font-semibold' />
+                <AuthButton dict={dict} authenticated={false} className=' ' />
 
             </DropdownMenuItem>
 
