@@ -253,6 +253,44 @@
     "submit_button": {
       "continue": "Continue",
       "loading": "Loading..."
+    },
+    "business_name": {
+      "title": "Tell us about your business",
+      "subtitle": "Account setup",
+      "description": "Fill in your business details to get started.",
+      "form": {
+        "name_en": {
+          "label": "Business name (En)",
+          "placeholder": "Bekky Barber"
+        },
+        "name_ar": {
+          "label": "Business name (Ar)",
+          "placeholder": "بيكي باربر"
+        },
+        "description_en": {
+          "label": "Description (En)",
+          "placeholder": "Bekky Barber is a barber shop that..."
+        },
+        "description_ar": {
+          "label": "Description (Ar)",
+          "placeholder": "بيكي باربر هو محل حلاقة أنيق يقدم خدمات متنوعة، بما في ذلك الحلاقة وتهذيب الذقن ."
+        },
+        "website": {
+          "label": "Website (Optional)",
+          "placeholder": "https://www.bekkybarber.com"
+        },
+        "gender": {
+          "label": "Who is your business for?",
+          "men": "Men",
+          "women": "Women",
+          "both": "Both"
+        }
+      }
+    },
+    "business_category": {
+      "title": "What's your speciality?",
+      "subtitle": "Account setup",
+      "description": "Choose a category that best describes your business."
     }
   }
 }  

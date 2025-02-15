@@ -4,6 +4,7 @@ import BackButton from "@/_ui/components/custom/back-button";
 import BusinessFormProvider from "../../../_lib/providers/business-form-provider";
 import SubmitButton from "../../../_ui/components/custom/submit-button";
 import { getDictionary } from "@/_lib/dictionaries";
+import { Suspense } from "react";
 
 
 export default async function ProfessionalOnboardingLayout({ params: { lang }, children }: { params: { lang: "en" | "ar" }, children: React.ReactNode }) {
@@ -26,7 +27,9 @@ export default async function ProfessionalOnboardingLayout({ params: { lang }, c
                 </div>
             </div>
 
-            {children}
+            <Suspense>
+                {children}
+            </Suspense>
 
             <div className=" fixed bottom-0 left-0 w-full bg-background px-5 py-3.5 flex justify-center items-center border-t-1 lg:hidden">
                 <SubmitButton className="w-full" dict={dict} />

@@ -253,6 +253,44 @@
     "submit_button": {
       "continue": "متابعة",
       "loading": "جاري التحميل..."
+    },
+    "business_name": {
+      "title": "أخبرنا عن عملك",
+      "subtitle": "إعداد الحساب",
+      "description": "املأ تفاصيل عملك للبدء",
+      "form": {
+        "name_en": {
+          "label": "اسم العمل (بالإنجليزية)",
+          "placeholder": "Bekky Barber"
+        },
+        "name_ar": {
+          "label": "اسم العمل (بالعربية)",
+          "placeholder": "بيكي باربر"
+        },
+        "description_en": {
+          "label": "الوصف (بالإنجليزية)",
+          "placeholder": "Bekky Barber is a barber shop that..."
+        },
+        "description_ar": {
+          "label": "الوصف (بالعربية)",
+          "placeholder": "بيكي باربر هو محل حلاقة أنيق يقدم خدمات متنوعة، بما في ذلك الحلاقة وتهذيب الذقن ."
+        },
+        "website": {
+          "label": "الموقع الإلكتروني (اختياري)",
+          "placeholder": "https://www.bekkybarber.com"
+        },
+        "gender": {
+          "label": "لمن عملك مخصص؟",
+          "men": "رجال",
+          "women": "نساء",
+          "both": "كلاهما"
+        }
+      }
+    },
+    "business_category": {
+      "title": "ما هو تخصصك؟",
+      "subtitle": "إعداد الحساب",
+      "description": "اختر الفئة التي تصف عملك بشكل أفضل"
     }
   }
 }

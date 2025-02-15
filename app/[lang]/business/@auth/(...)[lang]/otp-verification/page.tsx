@@ -1,13 +1,4 @@
-"use client"
-
-import RegisterForm from "@/[lang]/(auth)/_components/register-form";
-import { Alert, AlertDescription, AlertTitle } from "@/_ui/components/alert";
-import { Button } from "@/_ui/components/button";
-import { Dialog, DialogFooter, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/_ui/components/dialog";
-import { AlertCircle } from "lucide-react";
 import { UserRole } from "@/[lang]/(auth)/_lib/definitions";
-import OtpForm from "@/[lang]/(auth)/_components/otp-form";
-import { useSearchParams, useRouter } from "next/navigation";
 import { getDictionary } from "@/_lib/dictionaries";
 import OtpDialog from "@/[lang]/business/_components/otp-dialog";
 
