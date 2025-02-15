@@ -39,7 +39,7 @@ const PhoneInput: React.ForwardRefExoticComponent<PhoneInputProps> =
             return (
                 <RPNInput.default
                     ref={ref}
-                    className={cn("flex", className)}
+                    className={cn("flex justify-start", className)}
                     flagComponent={FlagComponent}
                     countrySelectComponent={CountrySelect}
                     inputComponent={InputComponent}
@@ -63,7 +63,7 @@ PhoneInput.displayName = "PhoneInput";
 const InputComponent = React.forwardRef<HTMLInputElement, InputProps>(
     ({ className, ...props }, ref) => (
         <Input
-            className={cn("rounded-e-lg rounded-s-none", className)}
+            className={cn("rounded-e-lg rtl:rounded-e-none rtl:rounded-s-lg rounded-s-none", className)}
             {...props}
             ref={ref}
         />
@@ -105,7 +105,7 @@ const CountrySelect = ({
                     <FlagComponent country={value} countryName={value} />
                     <ChevronDown
                         className={cn(
-                            "-mr-2 h-4 w-4 opacity-50",
+                            " h-4 w-4 opacity-50",
                             disabled ? "hidden" : "opacity-100",
                         )}
                     />
@@ -115,8 +115,10 @@ const CountrySelect = ({
                 <Command>
                     <CommandList>
                         <ScrollArea className="h-72">
-                            <CommandInput placeholder="Search country..." />
-                            <CommandEmpty>No country found.</CommandEmpty>
+                            <CommandInput className="rtl:hidden" placeholder="Search country..." />
+                            <CommandEmpty className="rtl:hidden">No country found.</CommandEmpty>
+                            <CommandInput className="rtl:block hidden" placeholder="بحث في الدولة" />
+                            <CommandEmpty className="rtl:block hidden">لا يوجد دولة.</CommandEmpty>
                             <CommandGroup>
                                 {options
                                     .filter((x) => x.value)

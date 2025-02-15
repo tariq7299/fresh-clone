@@ -1,32 +1,22 @@
-"use client"
+import { getDictionary } from "@/_lib/dictionaries";
+import RegisterDialog from "@/[lang]/business/_components/register-dialog";
+import Loading from "@/[lang]/(auth)/loading";
+import { Suspense } from "react";
 
-import RegisterForm from "@/[lang]/(auth)/_components/register-form";
-import { UserRole } from "@/[lang]/(auth)/_lib/definitions";
-import { Button } from "@/_ui/components/button";
-import { Dialog, DialogFooter, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/_ui/components/dialog";
-import { useRouter, useSearchParams } from "next/navigation";
+interface RegisterPageProps {
+    params: Promise<{
+        lang: "en" | "ar";
+    }>;
+}
 
-export default function RegisterModal() {
+export default async function Page({ params }: RegisterPageProps) {
 
-    const searchParams = useSearchParams();
+    const lang = (await params)?.lang;
+    const validLang = lang === "en" || lang === "ar" ? lang : "en";
+    const dict = await getDictionary(validLang);
 
-    const loginRequiredForBooking = searchParams.get("loginRequiredForBooking") === "true";
-    const type = searchParams.get("type") || "";
-
-
-    const router = useRouter();
-    return <Dialog open={true} onOpenChange={() => router.back()}   >
-        <DialogContent className="sm:max-w-[525px] p-8">
-            <DialogHeader>
-                <DialogTitle className="text-3xl font-bold">Register</DialogTitle>
-                <DialogDescription>
-                    Please create an account to book appointments.
-                </DialogDescription>
-            </DialogHeader>
-            <div className="py-4">
-                <RegisterForm userRole={UserRole.Customer} loginRequiredForBooking={loginRequiredForBooking} />
-            </div>
-        </DialogContent>
-    </Dialog>
+    return <Suspense fallback={<Loading />}>
+        <RegisterDialog dict={dict} />
+    </Suspense>
 
 }

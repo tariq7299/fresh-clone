@@ -183,6 +183,47 @@
         "title": "Error",
         "description": "Your session has expired. Please log in again."
       }
+    },
+    "register": {
+      "title": "Register",
+      "description": {
+        "customer": "Create your account and book salons and spas near you today.",
+        "professional": "Create your account and streamline your salon management today."
+      },
+      "first_name": {
+        "label": "First Name",
+        "placeholder": "John"
+      },
+      "last_name": {
+        "label": "Last Name",
+        "placeholder": "Smith"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "john.smith@example.com"
+      },
+      "phone": {
+        "label": "Phone number",
+        "placeholder": "0501234567"
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "MySecurePass123!"
+      },
+      "confirm_password": {
+        "label": "Confirm Password",
+        "placeholder": "MySecurePass123!"
+      },
+      "continue": "Continue",
+      "checking": "Checking...",
+      "have_account": {
+        "customer": "Have a customer account?",
+        "professional": "Have a business account?"
+      },
+      "sign_in": {
+        "customer": "Sign in as a customer",
+        "professional": "Sign in as a professional"
+      }
     }
   }
 }  

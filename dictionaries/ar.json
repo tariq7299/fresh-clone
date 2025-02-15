@@ -183,6 +183,47 @@
         "title": "خطأ",
         "description": "انتهت صلاحية جلستك. الرجاء تسجيل الدخول مرة أخرى."
       }
+    },
+    "register": {
+      "title": "إنشاء حساب",
+      "description": {
+        "customer": "أنشئ حسابك واحجز في الصالونات والسبا القريبة منك اليوم.",
+        "professional": "أنشئ حسابك وقم بإدارة صالونك بكفاءة اليوم."
+      },
+      "first_name": {
+        "label": "الاسم الأول",
+        "placeholder": "محمد"
+      },
+      "last_name": {
+        "label": "اسم العائلة",
+        "placeholder": "أحمد"
+      },
+      "email": {
+        "label": "البريد الإلكتروني",
+        "placeholder": "john.smith@example.com"
+      },
+      "phone": {
+        "label": "رقم الهاتف",
+        "placeholder": "0501234567"
+      },
+      "password": {
+        "label": "كلمة المرور",
+        "placeholder": "MySecurePass123!"
+      },
+      "confirm_password": {
+        "label": "تأكيد كلمة المرور",
+        "placeholder": "MySecurePass123!"
+      },
+      "continue": "متابعة",
+      "checking": "جاري التحقق...",
+      "have_account": {
+        "customer": "لديك حساب عميل؟",
+        "professional": "لديك حساب أعمال؟"
+      },
+      "sign_in": {
+        "customer": "تسجيل الدخول كعميل",
+        "professional": "تسجيل الدخول كمحترف"
+      }
     }
   }
 }
