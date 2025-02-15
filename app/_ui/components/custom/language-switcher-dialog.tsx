@@ -60,7 +60,7 @@ export function LanguageSwitcherDialog({ hasTrigger = true, open, setOpen, class
                 hasTrigger ?
                     <Dialog>
                         <DialogTrigger asChild>
-                            <Button variant="ghost" className={cn("text-accent-600 h-auto flex justify-start  items-center gap-2  font-semibold  ", className)}>
+                            <Button variant="ghost" className={cn("w-full text-accent-600 h-auto flex justify-start  items-center gap-2  font-semibold  ", className)}>
                                 <GlobeAsiaAustraliaIcon className="h-6 w-5" />
                                 <p className="  ">{LANGUAGES.find(lang => lang.code === currentLang)?.name}</p>
                             </Button>

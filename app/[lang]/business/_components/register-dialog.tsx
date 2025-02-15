@@ -58,6 +58,7 @@ export default function RegisterDialog({ dict }: RegisterDialogProps) {
     const router = useRouter();
     const searchParams = useSearchParams();
     const loginRequiredForBooking = searchParams.get("loginRequiredForBooking") === "true";
+    const type = searchParams.get("type");
 
     return (
         <Dialog open={true} onOpenChange={() => router.back()}>
@@ -67,12 +68,12 @@ export default function RegisterDialog({ dict }: RegisterDialogProps) {
                         {dict.auth.register.title}
                     </DialogTitle>
                     <DialogDescription className="rtl:font-cairo">
-                        {dict.auth.register.description.customer}
+                        {type === "customer" ? dict.auth.register.description.customer : dict.auth.register.description.professional}
                     </DialogDescription>
                 </DialogHeader>
                 <div className="py-4">
                     <RegisterForm
-                        userRole={UserRole.Customer}
+                        userRole={type as UserRole}
                         loginRequiredForBooking={loginRequiredForBooking}
                         dict={dict}
                     />

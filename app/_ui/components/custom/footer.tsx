@@ -38,7 +38,9 @@ export default function Footer({ dict, className }: { dict: any, className?: str
 
                     <p className="text-sm text-muted-foreground ">{dict.footer.copyright}</p>
 
-                    <LanguageSwitcherDialog dict={dict} />
+                    <div>
+                        <LanguageSwitcherDialog dict={dict} />
+                    </div>
 
                     {/* <p className=" flex  items-center gap-1 text-accent-600 pe-0 md:pe-16 font-semibold"><GlobeAsiaAustraliaIcon className="h-6 w-5" /> English</p> */}
 

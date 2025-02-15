@@ -240,6 +240,7 @@ export default function RegisterForm({ userRole, loginRequiredForBooking = false
                     <Link
                         href="/login"
                         className="text-center text-accent text-sm rtl:font-cairo"
+                        replace
                     >
                         {userRole === UserRole.Professional
                             ? dict.auth.register.sign_in.professional

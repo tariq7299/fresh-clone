@@ -22,7 +22,7 @@ export default async function RegisterPage({ params, searchParams }: RegisterPag
     if (!type) throw new Error("No user type provided for register page!");
 
     return (
-        <div className="mt-auto flex flex-col gap-2 w-full max-w-md p-5 pt-20">
+        <div className="mt-auto flex flex-col gap-2 w-full max-w-md p-5 pt-0">
             <h1 className="text-center text-2xl font-bold font-source-sans rtl:font-cairo">
                 {dict.auth.register.title}
             </h1>

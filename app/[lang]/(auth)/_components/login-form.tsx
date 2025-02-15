@@ -171,6 +171,7 @@ export default function LoginForm({ dict }: LoginFormProps) {
                         <Link
                             href="/for-who"
                             className="text-center text-accent text-sm rtl:font-cairo"
+                            replace
                         >
                             {dict.auth.login.sign_up}
                         </Link>
