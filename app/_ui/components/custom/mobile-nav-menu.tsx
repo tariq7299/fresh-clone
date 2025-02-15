@@ -31,18 +31,18 @@ export default function MobileNavMenu({ authenticated, navTabs, isScrolled, fixe
 
                 <ul className='space-y-5 font-bold text-lg'>
                     <li className='p-5 bg-background rounded-xl border-solid border border-gray-200'>
-                        <AuthButton className='flex justify-start items-center gap-3 h-auto w-full text-md font-semibold p-0' authenticated={authenticated} dict={dict} iconSize='6' />
+                        <AuthButton className='flex justify-start items-center gap-3 h-auto w-full text-md font-bold p-0' authenticated={authenticated} dict={dict} iconSize='6' />
                     </li>
 
                     <li className='p-5 bg-background rounded-xl border-solid border border-gray-200 space-y-6'>
                         {navTabs && navTabs?.length > 0 && navTabs.map((tab) => (
-                            <Link key={tab.title} className='flex items-center gap-3' href={tab.href}>
-                                {tab.icon} {tab.title}
-                                <ChevronRightIcon className='size-4 ml-auto' />
+                            <Link key={tab.title} className='flex items-center justify-between' href={tab.href}>
+                                <p className='flex items-center gap-3'>{tab.icon} {tab.title}</p>
+                                <ChevronRightIcon className='size-4 rtl:rotate-180' />
                             </Link>
                         ))}
 
-                        <LanguageSwitcherDialog iconSize='6' className='w-full justify-start text-md h-auto p-0 gap-3' dict={dict} />
+                        <LanguageSwitcherDialog iconSize='6' className=' font-bold w-full justify-start text-md h-auto p-0 gap-3' dict={dict} />
                     </li>
                 </ul>
             </div>

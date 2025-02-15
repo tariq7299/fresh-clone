@@ -1,12 +1,13 @@
 'use client'
 
-import { BriefcaseIcon } from '@heroicons/react/24/outline'
+
 import { cn } from '@/_lib/utils/utils'
 import useIsScrolled from '../_lib/hooks/use-is-scrolled'
 import MobileNavMenu from '@/_ui/components/custom/mobile-nav-menu'
 import Logo from '@/_ui/components/custom/logo'
 import NavButton from '@/_ui/components/custom/nav-button'
 import DeskTopNavMenu from '@/_ui/components/custom/desk-top-nav-menu'
+import { BriefcaseIcon } from 'lucide-react';
 
 export default function PublicNavBar({ dict, fixed = false, hideInMobile = false }: { dict: any, fixed?: boolean, hideInMobile?: boolean }) {
     const navTabs = [

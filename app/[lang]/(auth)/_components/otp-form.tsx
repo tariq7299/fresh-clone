@@ -15,10 +15,21 @@ import { useRouter } from "next/navigation"
 import useLocalStorage from "@/_lib/hooks/use-local-storage";
 import { toastApiMsgs } from "@/_lib/utils/api/toastApiMsgs"
 
-export default function OtpForm({ email = "", userRole, loginRequiredForBooking = false }: { email: string, userRole: UserRole.Professional | UserRole.Customer, loginRequiredForBooking?: boolean }) {
+interface OtpFormProps {
+    email: string;
+    userRole: UserRole.Professional | UserRole.Customer;
+    loginRequiredForBooking?: boolean;
+    dict: {
+        auth: {
+            otp: {
+                verify: string;
+                verifying: string;
+            };
+        };
+    };
+}
 
-
-
+export default function OtpForm({ email = "", userRole, loginRequiredForBooking = false, dict }: OtpFormProps) {
     const INITIAL_STATE: SuccessOtpFormState | ErrorOtpFormState = {
         success: false,
         clientFieldsErrors: null,
@@ -32,12 +43,10 @@ export default function OtpForm({ email = "", userRole, loginRequiredForBooking 
         }
     };
 
-
     const [formState, formAction, isPending] = useActionState(verifyOtp, INITIAL_STATE);
-    const router = useRouter()
-    const [_, setSessionData] = useLocalStorage<SessionData | null>({ key: "user", defaultValue: null })
+    const router = useRouter();
+    const [_, setSessionData] = useLocalStorage<SessionData | null>({ key: "user", defaultValue: null });
 
-    // Handle form submission response
     useEffect(() => {
         handleFormResponse({
             formState,
@@ -58,33 +67,32 @@ export default function OtpForm({ email = "", userRole, loginRequiredForBooking 
     }, [formState]);
 
     return (
-        <>
+        <form action={formAction} className="flex flex-col gap-4 justify-center items-center" dir="ltr">
+            <InputOTP name="otp" maxLength={6} disabled={isPending || !email}>
+                <InputOTPGroup>
+                    <InputOTPSlot index={0} />
+                    <InputOTPSlot index={1} />
+                </InputOTPGroup>
+                <InputOTPSeparator />
+                <InputOTPGroup>
+                    <InputOTPSlot index={2} />
+                    <InputOTPSlot index={3} />
+                </InputOTPGroup>
+            </InputOTP>
+            {formState?.clientFieldsErrors?.otp?.[0] && (
+                <p className="text-red-500 text-sm rtl:font-cairo">
+                    {formState?.clientFieldsErrors?.otp?.[0]}
+                </p>
+            )}
 
-            <form action={formAction} className="flex flex-col gap-4 justify-center items-center">
-                <InputOTP name="otp" maxLength={6} disabled={isPending || !email}>
-                    <InputOTPGroup>
-                        <InputOTPSlot index={0} />
-                        <InputOTPSlot index={1} />
-                    </InputOTPGroup>
-                    <InputOTPSeparator />
-                    <InputOTPGroup>
-                        <InputOTPSlot index={2} />
-                        <InputOTPSlot index={3} />
-                    </InputOTPGroup>
-                </InputOTP>
-                {formState?.clientFieldsErrors?.otp?.[0] && <p className="text-red-500 text-sm">{formState?.clientFieldsErrors?.otp?.[0]}</p>}
-
-                <Button
-                    loading={isPending}
-                    variant="default"
-                    className="font-bold w-full max-w-[150px]"
-                    disabled={isPending || !email}
-                >
-                    {isPending ? 'Verifying...' : 'Verify'}
-                </Button>
-
-            </form>
-        </>
-
+            <Button
+                loading={isPending}
+                variant="default"
+                className="font-bold w-full max-w-[150px] rtl:font-cairo"
+                disabled={isPending || !email}
+            >
+                {isPending ? dict.auth.otp.verifying : dict.auth.otp.verify}
+            </Button>
+        </form>
     )
 }

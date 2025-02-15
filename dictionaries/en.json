@@ -224,6 +224,16 @@
         "customer": "Sign in as a customer",
         "professional": "Sign in as a professional"
       }
+    },
+    "otp": {
+      "title": "OTP Verification",
+      "description": "Please enter the 6-digit verification code sent to your email address",
+      "verify": "Verify",
+      "verifying": "Verifying...",
+      "email_verification": {
+        "title": "Email Verification Required",
+        "description": "Your account requires email verification to continue. Please check your email for a 6-digit verification code and enter it below."
+      }
     }
   },
   "for_who": {
