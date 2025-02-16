@@ -275,7 +275,24 @@ export default function Form({
 
 
             {/* Location search component */}
-            <SearchLocation online_business={location.online_business} className={cn(location.online_business ? "pointer-events-none" : location.place_id && location.lat && location.lng ? "hidden" : "block")} setOpen={setOpen} open={open} handleSearch={handleSearch} handleSettingLocation={handleSettingLocation} result={result} isSearching={isSearching} clientFieldsErrors={formState.clientFieldsErrors} dict={dict} />
+            <SearchLocation
+                online_business={location.online_business}
+                className={cn(
+                    location.online_business
+                        ? "pointer-events-none"
+                        : location.place_id && location.lat && location.lng
+                            ? "hidden"
+                            : "block"
+                )}
+                setOpen={setOpen}
+                open={open}
+                handleSearch={handleSearch}
+                handleSettingLocation={handleSettingLocation}
+                result={result}
+                isSearching={isSearching}
+                clientFieldsErrors={formState.clientFieldsErrors}
+                dict={dict}
+            />
 
             {/* Display selected location details */}
             <LocationDetails setLocation={setLocation} location={location} className={cn(

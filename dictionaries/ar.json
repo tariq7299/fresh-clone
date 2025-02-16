@@ -399,6 +399,33 @@
           "cancel": "إلغاء",
           "save": "حفظ التغييرات"
         }
+      },
+      "validation": {
+        "address_required": "العنوان مطلوب",
+        "location_required": "الموقع مطلوب",
+        "country_required": "البلد مطلوب",
+        "city_required": "ادخل مدينة صالحة",
+        "district_required": "ادخل حي صالح",
+        "street_required": "ادخل شارع صالح",
+        "building_required": "ادخل مبنى صالح",
+        "apartment_required": "ادخل شقة صالحة",
+        "directions_required": "ادخل اتجاهات صالحة"
+      }
+    },
+    "business_capacity": {
+      "title": "كم عميل يمكنك خدمته في وقت واحد؟",
+      "subtitle": "إعداد الحساب",
+      "description": "هذا يساعدنا على فهم قدرة عملك وتحسين جدول الحجوزات",
+      "form": {
+        "select": {
+          "label": "سعة العمل",
+          "placeholder": "اختر سعة عملك",
+          "person": "شخص",
+          "people": "أشخاص"
+        },
+        "validation": {
+          "required_error": "الرجاء اختيار سعة عملك"
+        }
       }
     }
   }

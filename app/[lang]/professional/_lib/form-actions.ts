@@ -293,11 +293,11 @@ const businessLocationSchema = z.object({
             online_business: z.literal(false),
             lat: z.number(),
             lng: z.number(),
-            place_id: z.string().trim().min(1, { message: "Please provide a location" }),
-            address: z.string().trim().min(1, { message: "Please provide a location" }),
+            place_id: z.string().trim().min(1, { message: "location_required" }),
+            address: z.string().trim().min(1, { message: "address_required" }),
             district: z.string().optional(),
             city: z.string().optional(),
-            country: z.string().trim().min(1, { message: "Please provide a location" }),
+            country: z.string().trim().min(1, { message: "country_required" }),
             directions: z.string().optional(),
             street: z.string().optional(),
             apartment: z.string().optional(),
@@ -466,7 +466,7 @@ export const handleSubmitBusinessLocation = async (formData: BusinessLocationFor
 }
 
 const businessCapacitySchema = z.object({
-    capacity: z.number().gte(1, { message: "Please enter a valid capacity" }).lte(10, { message: "Please enter a valid capacity" })
+    capacity: z.number().gte(1, { message: "required_error" }).lte(10, { message: "required_error" })
 })
 
 // TODO: Write types

@@ -34,6 +34,11 @@ export default function SearchLocation({
     online_business: boolean,
     dict: any
 }) {
+
+
+    console.log("clientFieldsErrors", clientFieldsErrors)
+
+
     return <div className={cn("flex flex-col gap-2", className)}>
         <Popover open={open} onOpenChange={setOpen} data-side={"bottom"}>
             <PopoverAnchor>
@@ -48,9 +53,8 @@ export default function SearchLocation({
                         className={cn("w-full p-6 ps-12 ")}
                     />
                 </div>
-                {clientFieldsErrors?.address && (
-                    <p className="text-sm text-destructive pt-2">{clientFieldsErrors?.address}</p>
-                )}
+
+                <p className="text-sm text-destructive pt-2">{dict.onboarding.business_location.validation[clientFieldsErrors?.place_id]}</p>
             </PopoverAnchor>
 
             <PopoverContent

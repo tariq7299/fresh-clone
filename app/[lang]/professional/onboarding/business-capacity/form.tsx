@@ -3,7 +3,6 @@
 import { useActionState, useEffect, useState } from 'react';
 import { useBusinessFormContext } from '../../../../_lib/providers/business-form-provider';
 import { ErrorFormState } from '@/_lib/definitions/definitions';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, SelectGroup, SelectLabel } from '@/_ui/components/select';
 import { handleSubmitBusinessCapacity } from '@/[lang]/professional/_lib/form-actions';
 import { handleFormResponse } from '@/_lib/utils/utils';
 import { SessionData } from '@/[lang]/(auth)/_lib/definitions';
@@ -12,6 +11,7 @@ import { useRouter } from 'next/navigation';
 import SecureLS from 'secure-ls';
 import { navigateToDashboard } from '@/[lang]/(auth)/_lib/auth-client-services';
 import { redirectToLoginIfNotAuthenticated } from '@/[lang]/(auth)/_lib/redirect-to-login-if-not-authenticated';
+import { Dictionary } from '@/dictionaries/types';
 
 export type BusinessCapacityFormData = {
     capacity?: number | string
@@ -25,16 +25,16 @@ export type BusinessCapacityFieldErrors = {
 export type BusinessCapacityFormState = ErrorFormState<BusinessCapacityFieldErrors | null, BusinessCapacityFormData>
 
 // TODO: Write types
-export default function Form({ storedTempCapacity }: { storedTempCapacity: number | null }) {
-
-
+export default function Form({
+    storedTempCapacity,
+    dict
+}: {
+    storedTempCapacity: number | null,
+    dict: Dictionary
+}) {
     const [_, setSessionData] = useLocalStorage<SessionData | null>({ key: "user", defaultValue: null })
     const router = useRouter()
-
     const { setIsLoading } = useBusinessFormContext()
-
-
-
 
     const initialState: BusinessCapacityFormState = {
         success: false,
@@ -47,7 +47,6 @@ export default function Form({ storedTempCapacity }: { storedTempCapacity: numbe
     }
 
     const [formValues, setFormValues] = useState<BusinessCapacityFormData>(initialState.formData)
-
     const [formState, formAction, isPending] = useActionState<BusinessCapacityFormState | void>(handleSubmitBusinessCapacity, initialState)
 
     useEffect(() => {
@@ -59,19 +58,12 @@ export default function Form({ storedTempCapacity }: { storedTempCapacity: numbe
             handleFormResponse({
                 formState,
                 successCallback: async () => {
-
                     if (formState.apiDataResponse) {
-
                         const sessionData = formState.apiDataResponse as SessionData
-
                         const ls = new SecureLS()
                         ls.set('token', sessionData.token)
                         setSessionData({ ...sessionData, has_business: true })
-
-                        // Redirect to professional dashboard
                         navigateToDashboard(sessionData.role)
-
-
                     }
                 },
                 errorCallback: () => {
@@ -81,47 +73,36 @@ export default function Form({ storedTempCapacity }: { storedTempCapacity: numbe
         }
     }, [formState])
 
-    return <form action={formAction} id="business-onboarding-form" className="flex flex-col gap-2 w-full">
-
-        <div className="flex flex-col gap-2 ">
-
-            <label htmlFor="capacity" className="font-bold sr-only">Business capacity</label>
-
-            {/* <Label className="font-bold" htmlFor="capacity">Business capacity</Label> */}
-            {/* <Select disabled={isPending} name="capacity" value={formValues.capacity?.toString() || ""} onValueChange={(value) => setFormValues({ capacity: value })}>
-                <SelectTrigger className="w-full p-6 text-md">
-                    <SelectValue placeholder="Select a your business capacity" />
-                </SelectTrigger>
-                <SelectContent>
-
-                    <SelectGroup>
-                        <SelectLabel>Business capacity</SelectLabel>
-                        {Array.from({ length: 10 }, (_, i) => i + 1).map(num => (
-                            <SelectItem key={num} value={num.toString()}>{num} {num === 1 ? "person" : "people"}</SelectItem>
-                        ))}
-
-                    </SelectGroup>
-                </SelectContent>
-            </Select> */}
-            <select
-
-                id="capacity"
-                name="capacity"
-                disabled={isPending}
-                value={String(formValues?.capacity)}
-                onChange={(e) => setFormValues({ capacity: e.target.value })}
-                className="w-full p-3 text-md border rounded-lg"
-            >
-                <option value="" disabled className="hover:bg-accent-100">Select your business capacity</option>
-                {Array.from({ length: 10 }, (_, i) => i + 1).map(num => (
-                    <option key={num} value={num.toString()}>
-                        {num} {num === 1 ? "person" : "people"}
+    return (
+        <form action={formAction} id="business-onboarding-form" className="flex flex-col gap-2 w-full">
+            <div className="flex flex-col gap-2">
+                <label htmlFor="capacity" className="font-bold sr-only">
+                    {dict.onboarding.business_capacity.form.select.label}
+                </label>
+                <select
+                    id="capacity"
+                    name="capacity"
+                    disabled={isPending}
+                    value={String(formValues?.capacity)}
+                    onChange={(e) => setFormValues({ capacity: e.target.value })}
+                    className="w-full p-3 text-md border rounded-lg"
+                >
+                    <option value="" disabled className="hover:bg-accent-100">
+                        {dict.onboarding.business_capacity.form.select.placeholder}
                     </option>
-                ))}
-            </select>
-            {formState?.clientFieldsErrors?.capacity && <p className="text-destructive">{formState.clientFieldsErrors?.capacity}</p>}
-        </div>
+                    {Array.from({ length: 10 }, (_, i) => i + 1).map(num => (
+                        <option key={num} value={num.toString()}>
+                            {num} {num === 1
+                                ? dict.onboarding.business_capacity.form.select.person
+                                : dict.onboarding.business_capacity.form.select.people}
+                        </option>
+                    ))}
+                </select>
 
-
-    </form>
+                <p className="text-destructive">
+                    {dict.onboarding.business_capacity.form.validation[formState?.clientFieldsErrors?.capacity as keyof typeof dict.onboarding.business_capacity.form.validation]}
+                </p>
+            </div>
+        </form>
+    )
 }

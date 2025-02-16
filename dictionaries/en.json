@@ -399,6 +399,33 @@
           "cancel": "Cancel",
           "save": "Save changes"
         }
+      },
+      "validation": {
+        "address_required": "Please enter an address",
+        "location_required": "Please provide a location",
+        "country_required": "Please provide a country",
+        "city_required": "Please provide a valid city",
+        "district_required": "Please provide a valid district",
+        "street_required": "Please provide a valid street",
+        "building_required": "Please provide a valid building",
+        "apartment_required": "Please provide a valid apartment",
+        "directions_required": "Please provide valid directions"
+      }
+    },
+    "business_capacity": {
+      "title": "How many clients can you serve at once?",
+      "subtitle": "Account setup",
+      "description": "This helps us understand your business capacity and optimize your booking schedule",
+      "form": {
+        "select": {
+          "label": "Business capacity",
+          "placeholder": "Select your business capacity",
+          "person": "person",
+          "people": "people"
+        },
+        "validation": {
+          "required_error": "Please select your business capacity"
+        }
       }
     }
   }

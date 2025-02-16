@@ -20,10 +20,10 @@ import { z } from "zod"
 import { BusinessLocationFormData } from "@/[lang]/professional/onboarding/business-location/business-location-form"
 
 const locationDetailsSchema = z.object({
-    address: z.string().trim().min(1, { message: "Please provide a location" }),
+    address: z.string().trim().min(1, { message: "address_required" }),
     district: z.string().optional(),
     city: z.string().optional(),
-    country: z.string().trim().min(1, { message: "Please provide a location" }),
+    country: z.string().trim().min(1, { message: "country_required" }),
     directions: z.string().optional(),
     street: z.string().optional(),
     apartment: z.string().optional(),
@@ -131,7 +131,7 @@ export default function LocationDetails({
                                     value={value.address}
                                     onChange={(e) => setValue({ ...value, address: e.target.value })}
                                 />
-                                {errors?.address && <p className=" text-destructive text-sm col-span-3 pt-2">{errors?.address}</p>}
+                                {errors?.address && <p className=" text-destructive text-sm col-span-3 pt-2">{dict.onboarding.business_location.validation[errors?.address]}</p>}
                             </div>
 
                             <div className="col-span-2 md:col-span-1 space-y-1">
@@ -161,7 +161,7 @@ export default function LocationDetails({
                                     value={value.district}
                                     onChange={(e) => setValue({ ...value, district: e.target.value })}
                                 />
-                                {errors?.district && <p className=" text-destructive text-sm col-span-3 pt-2">{errors?.district}</p>}
+                                {errors?.district && <p className=" text-destructive text-sm col-span-3 pt-2">{dict.onboarding.business_location.validation[errors?.district]}</p>}
                             </div>
 
                             <div className="col-span-1 md:col-span-2 space-y-1">
@@ -176,7 +176,7 @@ export default function LocationDetails({
                                     value={value.country}
                                     onChange={(e) => setValue({ ...value, country: e.target.value })}
                                 />
-                                {errors?.country && <p className=" text-destructive text-sm col-span-3 pt-2">{errors?.country}</p>}
+                                {errors?.country && <p className=" text-destructive text-sm col-span-3 pt-2">{dict.onboarding.business_location.validation[errors?.country]}</p>}
                             </div>
 
                             <div className="col-span-2 md:col-span-2 space-y-1">
@@ -191,7 +191,7 @@ export default function LocationDetails({
                                     value={value.street}
                                     onChange={(e) => setValue({ ...value, street: e.target.value })}
                                 />
-                                {errors?.street && <p className=" text-destructive text-sm col-span-3 pt-2">{errors?.street}</p>}
+                                {errors?.street && <p className=" text-destructive text-sm col-span-3 pt-2">{dict.onboarding.business_location.validation[errors?.street]}</p>}
                             </div>
 
                             <div className="col-span-1 md:col-span-1 space-y-1">
@@ -206,7 +206,7 @@ export default function LocationDetails({
                                     value={value.building}
                                     onChange={(e) => setValue({ ...value, building: e.target.value })}
                                 />
-                                {errors?.building && <p className=" text-destructive text-sm col-span-3 pt-2">{errors?.building}</p>}
+                                {errors?.building && <p className=" text-destructive text-sm col-span-3 pt-2">{dict.onboarding.business_location.validation[errors?.building]}</p>}
                             </div>
 
                             <div className="col-span-1 md:col-span-1 space-y-1">
@@ -221,7 +221,7 @@ export default function LocationDetails({
                                     value={value.apartment}
                                     onChange={(e) => setValue({ ...value, apartment: e.target.value })}
                                 />
-                                {errors?.apartment && <p className=" text-destructive text-sm col-span-3 pt-2">{errors?.apartment}</p>}
+                                {errors?.apartment && <p className=" text-destructive text-sm col-span-3 pt-2">{dict.onboarding.business_location.validation[errors?.apartment]}</p>}
                             </div>
 
                             <div className="col-span-2 md:col-span-4 space-y-1">
@@ -235,7 +235,7 @@ export default function LocationDetails({
                                     value={value.directions}
                                     onChange={(e) => setValue({ ...value, directions: e.target.value })}
                                 />
-                                {errors?.directions && <p className=" text-destructive text-sm col-span-3 pt-2">{errors?.directions}</p>}
+                                {errors?.directions && <p className=" text-destructive text-sm col-span-3 pt-2">{dict.onboarding.business_location.validation[errors?.directions]}</p>}
                             </div>
 
 
