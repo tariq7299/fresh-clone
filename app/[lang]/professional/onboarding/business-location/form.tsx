@@ -15,6 +15,7 @@ import { z } from "zod";
 import { useBusinessFormContext } from "../../../../_lib/providers/business-form-provider";
 import { StoredTempLocation } from "../../_lib/definitions";
 import { OnboardingBusinessLocationSkeleton } from "@/[lang]/professional/_components/skeletons";
+import { Dictionary } from "@/dictionaries/types";
 
 export const businessLocationSchema = z.discriminatedUnion('online_business', [
     // When online_business is true, don't allow any other fields
@@ -58,7 +59,13 @@ export type BusinessLocationErrors = {
 export type BusinessLocationFormData = z.infer<typeof businessLocationSchema>
 
 // TODO: Remove most of that code, and put it in didcated hook or provider, maybe use
-export default function Form({ storedTempLocation }: { storedTempLocation: StoredTempLocation | null }) {
+export default function Form({
+    storedTempLocation,
+    dict  // Add dictionary prop
+}: {
+    storedTempLocation: StoredTempLocation | null,
+    dict: Dictionary
+}) {
 
     // State for handling loading states and transitions
     const [_, startTransition] = useTransition()
@@ -268,25 +275,31 @@ export default function Form({ storedTempLocation }: { storedTempLocation: Store
 
 
             {/* Location search component */}
-            <SearchLocation online_business={location.online_business} className={cn(location.online_business ? "pointer-events-none" : location.place_id && location.lat && location.lng ? "hidden" : "block")} setOpen={setOpen} open={open} handleSearch={handleSearch} handleSettingLocation={handleSettingLocation} result={result} isSearching={isSearching} clientFieldsErrors={formState.clientFieldsErrors} />
+            <SearchLocation online_business={location.online_business} className={cn(location.online_business ? "pointer-events-none" : location.place_id && location.lat && location.lng ? "hidden" : "block")} setOpen={setOpen} open={open} handleSearch={handleSearch} handleSettingLocation={handleSettingLocation} result={result} isSearching={isSearching} clientFieldsErrors={formState.clientFieldsErrors} dict={dict} />
 
             {/* Display selected location details */}
             <LocationDetails setLocation={setLocation} location={location} className={cn(
                 "pb-4",
-                location.online_business ? "hidden" : location.place_id && location.lat && location.lng ? "flex" : "hidden")} />
+                location.online_business ? "hidden" : location.place_id && location.lat && location.lng ? "flex" : "hidden")} dict={dict} />
 
             <div className={cn(
                 "space-y-4",
                 location.online_business ? "hidden" : location.place_id && location.lat && location.lng ? "block" : "hidden")}>
                 <div>
-
-                    <h2 className="text-lg font-bold">Is the pin in the right place?</h2>
-                    <p className="text-sm text-muted-foreground ">If not, you can drag it to the correct location</p>
+                    <h2 className="text-lg font-bold rtl:font-cairo">
+                        {dict.onboarding.business_location.pin_location_title}
+                    </h2>
+                    <p className="text-sm text-muted-foreground">
+                        {dict.onboarding.business_location.pin_location_description}
+                    </p>
                 </div>
 
                 {/* Map component with marker */}
                 <MapComponent
-                    className={cn("rounded-lg w-full h-[320px] overflow-hidden", location.online_business ? "hidden" : location.place_id && location.lat && location.lng ? "block" : "hidden")}
+                    className={cn("rounded-lg w-full h-[320px] overflow-hidden",
+                        location.online_business ? "hidden" :
+                            location.place_id && location.lat && location.lng ? "block" : "hidden"
+                    )}
                     defaultCenter={center}
                     center={center}
                     defaultZoom={15}
@@ -305,13 +318,24 @@ export default function Form({ storedTempLocation }: { storedTempLocation: Store
 
 
             {/* Mobile/online services checkbox */}
-            <div className="flex items-center space-x-2">
-                <Checkbox checked={location.online_business} onCheckedChange={() => setLocation({ ...location, online_business: !location.online_business })} variant="accent" id="terms" className="size-6 border-gray-300 " />
+            <div className="flex items-center space-x-2 rtl:space-x-reverse">
+                <Checkbox
+                    id="online-business"
+                    checked={location.online_business}
+                    onCheckedChange={(checked) => {
+                        setLocation({
+                            ...location,
+                            online_business: checked === true
+                        })
+                    }}
+                    variant="accent"
+                    className="size-6 border-gray-300"
+                />
                 <label
-                    htmlFor="terms"
-                    className=" cursor-pointer font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    htmlFor="online-business"
+                    className="cursor-pointer font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 >
-                    I don't have a business address (mobile and online services only)
+                    {dict.onboarding.business_location.online_business_label}
                 </label>
             </div>
         </form>

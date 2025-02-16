@@ -344,8 +344,63 @@
           "service_required": "Please add at least one service"
         }
       }
+    },
+    "business_location": {
+      "title": "Where's your business located?",
+      "subtitle": "Account setup",
+      "description": "This is where your business is located. Your billing and legal name can be added later.",
+      "search_placeholder": "Search for your business location...",
+      "pin_location_title": "Is the pin in the right place?",
+      "pin_location_description": "If not, you can drag it to the correct location",
+      "online_business_label": "I don't have a business address (mobile and online services only)",
+      "search": {
+        "title": "Where is your business located?",
+        "searching": "Searching for your address..."
+      },
+      "location_details": {
+        "edit": "Edit",
+        "title": "Edit location details",
+        "description": "Make changes to your location details here. Click save when you're done.",
+        "fields": {
+          "address": {
+            "label": "Address",
+            "placeholder": "e.g. 123 Main Street"
+          },
+          "city": {
+            "label": "City",
+            "placeholder": "e.g. New York"
+          },
+          "district": {
+            "label": "District",
+            "placeholder": "e.g. Manhattan"
+          },
+          "country": {
+            "label": "Country",
+            "placeholder": "e.g. United States"
+          },
+          "street": {
+            "label": "Street",
+            "placeholder": "e.g. Main Street"
+          },
+          "building": {
+            "label": "Building",
+            "placeholder": "e.g. Building A"
+          },
+          "apartment": {
+            "label": "Apartment",
+            "placeholder": "e.g. Apt 4B"
+          },
+          "directions": {
+            "label": "Directions",
+            "placeholder": "e.g. Enter through the main entrance, take elevator to 4th floor"
+          }
+        },
+        "actions": {
+          "cancel": "Cancel",
+          "save": "Save changes"
+        }
+      }
     }
   }
-
 }  
 

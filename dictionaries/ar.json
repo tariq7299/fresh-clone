@@ -344,6 +344,62 @@
           "service_required": "الرجاء إضافة خدمة واحدة على الأقل"
         }
       }
+    },
+    "business_location": {
+      "title": "أين يقع عملك؟",
+      "subtitle": "إعداد الحساب",
+      "description": "هذا هو موقع عملك. يمكن إضافة عنوان الفواتير والاسم القانوني لاحقاً.",
+      "search_placeholder": "ابحث عن موقع عملك...",
+      "pin_location_title": "هل الدبوس في المكان الصحيح؟",
+      "pin_location_description": "إذا لم يكن كذلك، يمكنك سحبه إلى الموقع الصحيح",
+      "online_business_label": "ليس لدي عنوان عمل (خدمات متنقلة وعبر الإنترنت فقط)",
+      "search": {
+        "title": "أين يقع عملك؟",
+        "searching": "جاري البحث عن عنوانك..."
+      },
+      "location_details": {
+        "edit": "تعديل",
+        "title": "تعديل تفاصيل الموقع",
+        "description": "قم بإجراء تغييرات على تفاصيل موقعك هنا. انقر على حفظ عند الانتهاء.",
+        "fields": {
+          "address": {
+            "label": "العنوان",
+            "placeholder": "مثال: شارع 123 الرئيسي"
+          },
+          "city": {
+            "label": "المدينة",
+            "placeholder": "مثال: القاهرة"
+          },
+          "district": {
+            "label": "الحي",
+            "placeholder": "مثال: المعادي"
+          },
+          "country": {
+            "label": "البلد",
+            "placeholder": "مثال: مصر"
+          },
+          "street": {
+            "label": "الشارع",
+            "placeholder": "مثال: شارع الرئيسي"
+          },
+          "building": {
+            "label": "المبنى",
+            "placeholder": "مثال: مبنى أ"
+          },
+          "apartment": {
+            "label": "الشقة",
+            "placeholder": "مثال: شقة 4ب"
+          },
+          "directions": {
+            "label": "الاتجاهات",
+            "placeholder": "مثال: ادخل من المدخل الرئيسي، خذ المصعد إلى الطابق الرابع"
+          }
+        },
+        "actions": {
+          "cancel": "إلغاء",
+          "save": "حفظ التغييرات"
+        }
+      }
     }
   }
 }
