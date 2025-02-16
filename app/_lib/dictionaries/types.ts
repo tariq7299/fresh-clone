@@ -51,6 +51,26 @@ export type Dictionary = {
                     currency: string;
                     duration_unit: string;
                 };
+                filters: {
+                    clear: string;
+                    apply: string;
+                    business_name: {
+                        placeholder: string;
+                    };
+                    status: {
+                        placeholder: string;
+                        label: string;
+                        options: {
+                            completed: string;
+                            cancelled: string;
+                            confirmed: string;
+                        };
+                    };
+                    date: {
+                        placeholder: string;
+                        label: string;
+                    };
+                };
             };
         },
         sidebar: {

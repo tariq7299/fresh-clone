@@ -432,7 +432,7 @@
   "dashboard": {
     "appointments": {
       "title": "المواعيد",
-      "empty": "جدولك يبدو فارغاً قليلاً.",
+      "empty": "جدولك يبدو فارغاً قليلاً",
       "table": {
         "columns": {
           "id": "المعرف",
@@ -457,6 +457,26 @@
           "total": "المجموع",
           "currency": "جنيه",
           "duration_unit": "دقيقة"
+        },
+        "filters": {
+          "clear": "مسح",
+          "apply": "تطبيق",
+          "business_name": {
+            "placeholder": "تصفية اسم العمل..."
+          },
+          "status": {
+            "placeholder": "اختر الحالة",
+            "label": "الحالة",
+            "options": {
+              "completed": "مكتمل",
+              "cancelled": "ملغي",
+              "confirmed": "مؤكد"
+            }
+          },
+          "date": {
+            "placeholder": "اختر نطاق التاريخ",
+            "label": "نطاق التاريخ"
+          }
         }
       }
     },

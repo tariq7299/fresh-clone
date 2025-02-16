@@ -41,7 +41,7 @@ export default async function AppointmentsPage(props: {
             <h1 className="text-2xl md:text-3xl font-bold text-accent rtl:font-cairo pb-4">
                 {dict.dashboard.appointments.title}
             </h1>
-            <TableFilters filters={filters} data={appointments} />
+            <TableFilters filters={filters} data={appointments} dict={dict} />
             <Suspense key={searchParams?.page + searchParams?.status + searchParams?.booking_date}
                 fallback={<DataTableSkeletonWithPagination />}>
                 <AppointmentsTableWrapper searchParams={searchParams} lang={lang} dict={dict} />

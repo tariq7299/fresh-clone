@@ -457,6 +457,26 @@
           "total": "Total",
           "currency": "EGP",
           "duration_unit": "min"
+        },
+        "filters": {
+          "clear": "Clear",
+          "apply": "Apply",
+          "business_name": {
+            "placeholder": "Filter business name..."
+          },
+          "status": {
+            "placeholder": "Select status",
+            "label": "Status",
+            "options": {
+              "completed": "Completed",
+              "cancelled": "Cancelled",
+              "confirmed": "Confirmed"
+            }
+          },
+          "date": {
+            "placeholder": "Select date range",
+            "label": "Date Range"
+          }
         }
       }
     },

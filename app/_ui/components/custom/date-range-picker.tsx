@@ -16,10 +16,12 @@ import {
 } from "@/_ui/components/popover"
 
 export function DatePickerWithRange({
+    placeholder = "Pick a date",
     onDateChange,
     className,
     value
 }: {
+    placeholder?: string,
     onDateChange: (query: string | DateRange | undefined) => void
     value?: { from: string, to: string }
 } & React.HTMLAttributes<HTMLDivElement>) {
@@ -60,7 +62,7 @@ export function DatePickerWithRange({
                                 format(date.from, "LLL dd, y")
                             )
                         ) : (
-                            <span>Pick a date</span>
+                            <span>{placeholder}</span>
                         )}
                     </Button>
                 </PopoverTrigger>

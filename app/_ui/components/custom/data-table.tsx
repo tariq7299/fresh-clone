@@ -29,6 +29,7 @@ interface DataTableProps<TData, TValue> {
 export function DataTable<TData, TValue>({
     columns,
     data,
+    dict
 }: DataTableProps<TData, TValue>) {
 
 
@@ -101,7 +102,7 @@ export function DataTable<TData, TValue>({
                         ) : (
                             <TableRow>
                                 <TableCell colSpan={columns.length} className="h-24 text-center">
-                                    <p className="text-sm">No results.</p>
+                                    <p className="text-sm">{dict.dashboard.appointments.empty}</p>
                                 </TableCell>
                             </TableRow>
                         )}

@@ -17,7 +17,7 @@ import { SidebarTabs } from "@/[lang]/business/_components/sidebar-menu"
 import { ChevronLeft, LogOut, NotepadText, Settings } from "lucide-react"
 import { usePathname } from "next/navigation"
 import { SessionData } from "@/[lang]/(auth)/_lib/definitions"
-import { Button } from "@/_ui/components/button"
+import { Button } from "@/_ui/components/custom/button"
 import { cn } from "@/_lib/utils/utils"
 import { UserData } from "@/[lang]/(auth)/_lib/definitions"
 import UserInitialsBadge from "@/_ui/components/custom/user-initials-badge"
@@ -117,10 +117,10 @@ export function ProfessionalSidebar({ side, dict, userData, sidebarTabs, contain
                         <SidebarMenuItem  >
                             {/* <SidebarMenuButton asChild isActive={pathname === tab.href}> */}
                             <SidebarMenuButton asChild isActive={pathname === "/settings"} className={cn("text-accent-foreground data-[active=true]:bg-accent-100 py-5 data-[active=true]:text-primary data-[active=true]:font-semibold font-semi", open ? "" : " flex justify-center items-center")}>
-                                <Link className="" href={"/settings"}>
+                                <Button variant="ghost" isLink className="w-full font-normal justify-start" href={"/settings"}>
                                     <Settings />
                                     <span className={cn(open ? "" : "hidden")}>{dict.dashboard.sidebar.settings}</span>
-                                </Link>
+                                </Button>
                             </SidebarMenuButton>
                         </SidebarMenuItem>
                         <SidebarMenuItem  >

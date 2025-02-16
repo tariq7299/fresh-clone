@@ -37,9 +37,16 @@ import { format, set } from "date-fns"
 import * as React from "react"
 // Import DateRange type for date picker
 import { DateRange } from "react-day-picker"
+import { Dictionary } from "@/_lib/dictionaries/types"
 
 // Main component that handles table filtering
-export default function TableFilterInput({ filter }: { filter: Filter }) {
+export default function TableFilterInput({
+    filter,
+    dict
+}: {
+    filter: Filter,
+    dict: Dictionary
+}) {
 
     // Extract filter properties
     const filterLabel = filter.label
@@ -141,7 +148,8 @@ export default function TableFilterInput({ filter }: { filter: Filter }) {
                                 </div>
 
                                 <Input
-                                    placeholder="Filter business name..." type="text"
+                                    placeholder={dict.dashboard.appointments.table.filters.business_name.placeholder}
+                                    type="text"
                                     defaultValue={prevQuery ?? ""}
                                     onChange={(e) => {
                                         handleFiltering(e.target.value)
@@ -159,7 +167,7 @@ export default function TableFilterInput({ filter }: { filter: Filter }) {
                                     handleFiltering(v)
                                 }} >
                                     <SelectTrigger>
-                                        <SelectValue placeholder="Select value" />
+                                        <SelectValue placeholder={dict.dashboard.appointments.table.filters.status.placeholder} />
                                     </SelectTrigger>
                                     <SelectContent>
                                         <SelectGroup>
@@ -175,12 +183,13 @@ export default function TableFilterInput({ filter }: { filter: Filter }) {
                                                         handleClearingFilter()
                                                     }}
                                                 >
-                                                    Clear
+                                                    {dict.dashboard.appointments.table.filters.clear}
                                                 </Button>
                                             </div>
                                             {/* Render select options */}
                                             {filter.options?.map((option: { id: string, label: string }) => (
                                                 <SelectItem key={option.id} value={option.id}>
+                                                    {/* {dict.dashboard.appointments.table.filters.status.options[option.id as keyof typeof dict.dashboard.appointments.table.filters.status.options]} */}
                                                     {option.label}
                                                 </SelectItem>
                                             ))}
@@ -192,19 +201,31 @@ export default function TableFilterInput({ filter }: { filter: Filter }) {
                             <>
                                 <div className="flex gap-2 items-center">
                                     {filter.icon}
-                                    <Label className="text-md">{filterLabel as React.ReactNode || filter.colName}</Label>
+                                    <Label className="text-md">{dict.dashboard.appointments.table.filters.date.label}</Label>
                                 </div>
                                 {/* Custom date range picker component */}
-                                <DatePickerWithRange value={value} defaultValue={prevQuery} onDateChange={setValue} />
+                                <DatePickerWithRange value={value} defaultValue={prevQuery} onDateChange={setValue} placeholder={dict.dashboard.appointments.table.filters.date.placeholder} />
                                 {/* Date filter actions */}
                                 <div className="flex gap-2">
-                                    <Button disabled={!value} variant="outline" size="sm" onClick={handleClearingFilter}>Clear</Button>
-                                    <Button disabled={!value} variant="outline" size="sm" onClick={() => handleFiltering(value)}>Apply</Button>
+                                    <Button
+                                        disabled={!value}
+                                        variant="outline"
+                                        size="sm"
+                                        onClick={handleClearingFilter}
+                                    >
+                                        {dict.dashboard.appointments.table.filters.clear}
+                                    </Button>
+                                    <Button
+                                        disabled={!value}
+                                        variant="outline"
+                                        size="sm"
+                                        onClick={() => handleFiltering(value)}
+                                    >
+                                        {dict.dashboard.appointments.table.filters.apply}
+                                    </Button>
                                 </div>
                             </>
-                        ) : (
-                            <></>
-                        )}
+                        ) : null}
                     </div>
                 </PopoverContent>
             </Popover>

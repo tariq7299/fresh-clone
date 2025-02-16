@@ -194,7 +194,7 @@ export default function AppointmentsTable({
                         </DialogTrigger>
                         <DialogContent className="max-w-full sm:max-w-[40vw]">
                             <DialogHeader>
-                                <DialogTitle>
+                                <DialogTitle className="pt-2">
                                     {dict.dashboard.appointments.table.services_dialog.title}
                                 </DialogTitle>
                             </DialogHeader>
@@ -254,7 +254,7 @@ export default function AppointmentsTable({
     return (
         <>
             <Suspense fallback={<DataTableSkeleton />}>
-                <DataTable columns={columns} data={appointments} />
+                <DataTable columns={columns} data={appointments} dict={dict} />
             </Suspense>
             <Suspense fallback={<TablePaginationSkeleton />}>
                 <TablePagination pagination={pagination} lang={lang} />
