@@ -21,13 +21,13 @@ export default async function AppointmentsPage(props: {
         {
             type: "date",
             colName: "booking_date",
-            label: "Booking Date",
+            label: dict.dashboard.appointments.table.columns.booking_date,
             icon: <Calendar className="size-6" />
         },
         {
             type: "select",
             colName: "status",
-            label: "Status",
+            label: dict.dashboard.appointments.table.columns.status,
             options: [
                 { id: "completed", label: "Completed" },
                 { id: "cancelled", label: "Cancelled" },
@@ -39,10 +39,17 @@ export default async function AppointmentsPage(props: {
 
     return (
         <div className="size-full">
-            <h1 className="text-2xl md:text-3xl font-bold text-accent pb-4">Appointments</h1>
-            <TableFilters filters={filters} data={appointments} dict={dict} lang={currentLang} />
-            <Suspense key={searchParams?.page + searchParams?.status + searchParams?.booking_date} fallback={<DataTableSkeletonWithPagination />}>
-                <AppointmentsTableWrapper searchParams={searchParams} dict={dict} lang={currentLang} />
+            <h1 className="text-2xl md:text-3xl font-bold text-accent pb-4">
+                {dict.dashboard.appointments.title}
+            </h1>
+            <TableFilters filters={filters} data={appointments} dict={dict} />
+            <Suspense key={searchParams?.page + searchParams?.status + searchParams?.booking_date}
+                fallback={<DataTableSkeletonWithPagination />}>
+                <AppointmentsTableWrapper
+                    searchParams={searchParams}
+                    dict={dict}
+                    lang={currentLang}
+                />
             </Suspense>
         </div>
     )

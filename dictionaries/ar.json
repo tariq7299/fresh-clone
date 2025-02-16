@@ -444,7 +444,9 @@
           "services": "الخدمة",
           "booking_date": "تاريخ الحجز",
           "start_time": "وقت البدء",
-          "end_time": "وقت الانتهاء"
+          "end_time": "وقت الانتهاء",
+          "business_name": "اسم العمل",
+          "business_address": "عنوان العمل"
         },
         "actions": {
           "show_services": "عرض الخدمات",

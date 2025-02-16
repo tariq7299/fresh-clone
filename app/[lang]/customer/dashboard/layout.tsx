@@ -21,7 +21,7 @@ export default async function CustomerLayout({ children, params }: { children: R
     const sidebarTabs = [
         {
             key: 'appointments',
-            title: 'Appointments',
+            title: dict.dashboard.appointments.title,
             href: `/${currentLang}/customer/dashboard/appointments`,
             icon: (<NotepadText />)
         },

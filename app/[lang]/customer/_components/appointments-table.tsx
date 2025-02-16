@@ -29,73 +29,73 @@ export default function AppointmentsTable({ appointments, pagination, dict, lang
 
     const columns: ColumnDef<Appointment>[] = [
         {
-
             accessorKey: "id",
-            header: "ID"
+            header: dict.dashboard.appointments.table.columns.id
         },
         {
             accessorKey: "business_name",
-            header: "Business Name"
+            header: dict.dashboard.appointments.table.columns.business_name
         },
         {
             accessorKey: "business_address",
-            header: "Business Address"
+            header: dict.dashboard.appointments.table.columns.business_address
         },
         {
             accessorKey: "total_duration",
-            header: "Total Duration"
+            header: dict.dashboard.appointments.table.columns.total_duration
         },
         {
             accessorKey: "total_price",
-            header: "Total Price"
+            header: dict.dashboard.appointments.table.columns.total_price
         },
         {
             accessorKey: "status",
-            header: "Status",
+            header: dict.dashboard.appointments.table.columns.status,
             cell: ({ row }) => {
                 const status = row.getValue("status") as Status
                 return <AppointmentStatus type={status} />
             }
-
-
         },
         {
             accessorKey: "payment_method",
-            header: "Payment Method"
+            header: dict.dashboard.appointments.table.columns.payment_method
         },
         {
             accessorKey: "services",
-            header: "Services",
+            header: dict.dashboard.appointments.table.columns.services,
             cell: ({ row }) => {
                 const services = row.getValue("services") as Service[]
                 const total_duration = row.getValue("total_duration") as number
                 const total_price = row.getValue("total_price") as number
                 const formattedTotalDuration = getTotalDuration(total_duration, lang)
 
-                return <ReservedServicesDialog services={services} total_duration={formattedTotalDuration} total_price={total_price} dict={dict} lang={lang} />
-
-                // return <div>{services.map(service => service.name).join(", ")}</div>
+                return <ReservedServicesDialog
+                    services={services}
+                    total_duration={formattedTotalDuration}
+                    total_price={total_price}
+                    dict={dict}
+                    lang={lang}
+                />
             }
         },
         {
             accessorKey: "booking_date",
-            header: "Booking Date"
+            header: dict.dashboard.appointments.table.columns.booking_date
         },
         {
             accessorKey: "start_time",
-            header: "Start Time"
+            header: dict.dashboard.appointments.table.columns.start_time
         },
         {
             accessorKey: "end_time",
-            header: "End Time"
-        },
-
+            header: dict.dashboard.appointments.table.columns.end_time
+        }
     ]
 
     return (
         <>
             <Suspense fallback={<DataTableSkeleton />}>
-                <DataTable columns={columns} data={appointments} />
+                <DataTable columns={columns} data={appointments} dict={dict} />
             </Suspense>
             <Suspense fallback={<TablePaginationSkeleton />}>
                 <TablePagination pagination={pagination} lang={lang} />

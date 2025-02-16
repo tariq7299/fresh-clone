@@ -444,7 +444,9 @@
           "services": "Service",
           "booking_date": "Booking Date",
           "start_time": "Start Time",
-          "end_time": "End Time"
+          "end_time": "End Time",
+          "business_name": "Business Name",
+          "business_address": "Business Address"
         },
         "actions": {
           "show_services": "Show Services",
