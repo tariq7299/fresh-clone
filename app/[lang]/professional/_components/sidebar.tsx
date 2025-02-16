@@ -23,7 +23,7 @@ import { UserData } from "@/[lang]/(auth)/_lib/definitions"
 import UserInitialsBadge from "@/_ui/components/custom/user-initials-badge"
 import { div } from "framer-motion/client"
 import AuthButton from "@/_ui/components/custom/auth-button"
-import { Dictionary } from "@/_lib/dictionaries/types"
+import { Dictionary } from "@/_lib/definitions/dictionary"
 
 export function ProfessionalSidebar({ side, dict, userData, sidebarTabs, containerClass, triggerClass }: {
     userData: UserData,

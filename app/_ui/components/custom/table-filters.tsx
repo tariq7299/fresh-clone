@@ -2,7 +2,7 @@ import { Filter } from "@/[lang]/customer/_lib/definitions";
 import TableFilterInput from "./table-filter-input";
 import { Suspense } from "react";
 import { DataTableFitlerSkeleton } from "@/[lang]/customer/_components/skeleton";
-import { Dictionary } from "@/_lib/dictionaries/types";
+import { Dictionary } from "@/_lib/definitions/dictionary";
 
 export default function TableFilters({ filters, data, dict }: { filters: Filter[], data: any, dict: Dictionary }) {
     return (

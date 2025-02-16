@@ -22,7 +22,7 @@ import { Pagination } from "@/_lib/definitions/definitions"
 import TablePagination from "@/_ui/components/custom/table-pagination"
 import { DataTableSkeleton, TablePaginationSkeleton } from "@/_ui/components/custom/skeletons"
 import ReservedServicesDialog from "@/_ui/components/custom/reserved-services-dialog"
-import { Dictionary } from "@/_lib/dictionaries/types"
+import { Dictionary } from "@/_lib/definitions/dictionary"
 
 
 export default function AppointmentsTable({ appointments, pagination, dict, lang }: { appointments: Appointment[], pagination: Pagination, dict: Dictionary, lang: "en" | "ar" }) {

@@ -40,7 +40,7 @@ import { TablePaginationSkeleton, DataTableSkeleton } from "@/_ui/components/cus
 import { Pagination } from "@/_lib/definitions/definitions"
 import { Appointment, Service } from "@/_lib/definitions/appointments"
 import AppointmentStatus from "@/_ui/components/custom/appoitment-status"
-import { Dictionary } from "@/_lib/dictionaries/types"
+import { Dictionary } from "@/_lib/definitions/dictionary"
 import ReservedServicesDialog from "@/_ui/components/custom/reserved-services-dialog"
 
 

@@ -3,7 +3,7 @@ import { Button } from "@/_ui/components/button"
 import { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "@/_ui/components/table"
 import { getTotalDuration } from "@/_lib/utils/utils"
 import { Service } from "@/_lib/definitions/appointments"
-import { Dictionary } from "@/_lib/dictionaries/types"
+import { Dictionary } from "@/_lib/definitions/dictionary"
 
 export default function ReservedServicesDialog({ services, total_duration, total_price, dict, lang }: { services: Service[], total_duration: string, total_price: number, dict: Dictionary, lang: "en" | "ar" }) {
 

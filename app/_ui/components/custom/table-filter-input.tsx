@@ -37,7 +37,7 @@ import { format, set } from "date-fns"
 import * as React from "react"
 // Import DateRange type for date picker
 import { DateRange } from "react-day-picker"
-import { Dictionary } from "@/_lib/dictionaries/types"
+import { Dictionary } from "@/_lib/definitions/dictionary"
 
 // Main component that handles table filtering
 export default function TableFilterInput({

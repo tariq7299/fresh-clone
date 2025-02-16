@@ -2,7 +2,7 @@ import AppointmentsTable from "./appointments-table";
 import { ApiAppointment, AppointmentPageQueries } from "@/_lib/definitions/appointments"
 import { getAppointments } from "../_lib/data";
 import Empty from "@/_ui/icons/empty";
-import { Dictionary } from "@/_lib/dictionaries/types";
+import { Dictionary } from "@/_lib/definitions/dictionary";
 
 
 
