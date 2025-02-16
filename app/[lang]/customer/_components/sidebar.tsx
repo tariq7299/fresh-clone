@@ -22,7 +22,7 @@ import { cn } from "@/_lib/utils/utils"
 import { UserData } from "@/[lang]/(auth)/_lib/definitions"
 
 
-export function CustomerSidebar({ userData, sidebarTabs, containerClass, triggerClass }: {
+export function CustomerSidebar({ userData, sidebarTabs, containerClass, triggerClass, side }: {
     userData: UserData,
     sidebarTabs: {
         key: string,
@@ -31,7 +31,8 @@ export function CustomerSidebar({ userData, sidebarTabs, containerClass, trigger
         icon: React.ReactNode
     }[],
     containerClass?: string,
-    triggerClass?: string
+    triggerClass?: string,
+    side: "left" | "right"
 }) {
 
 
@@ -47,18 +48,28 @@ export function CustomerSidebar({ userData, sidebarTabs, containerClass, trigger
 
 
             {/* Sidebar trigger on mobile */}
-            <SidebarTrigger className={cn("md:hidden fixed top-2 left-2 text-accent", (isMobile && userData.role === "customer") ? "hidden" : "block")} />
+            <SidebarTrigger className={cn("md:hidden fixed top-2 left-2 text-accent", (isMobile) ? "hidden" : "block")} />
 
 
-            <Sidebar className={cn("bg-background", containerClass)} collapsible={"icon"}>
+            <Sidebar className={cn("bg-background", containerClass)} collapsible={"icon"} side={side}>
 
-
-                <SidebarTrigger className={cn("text-accent hidden md:inline-flex fixed  transition-all duration-250  ease-in-out ", open ? " left-64" : " left-12", triggerClass)} />
+                <SidebarTrigger className={cn("text-accent hidden md:inline-flex fixed  transition-all duration-250  ease-in-out ", open ?
+                    side === "left" ? "left-64" : "right-64" : side === "left" ? "left-12"
+                        : "right-12", triggerClass)} />
 
                 <SidebarHeader className={cn(open ? " py-2 px-4" : "flex justify-center items-center")}>
 
                     {/* TODO: Create a header component */}
-                    {open ? <p className="text-lg font-bold font-source-sans"> {userData?.full_name}</p> : <p className="text-lg font-bold font-source-sans"> {userData?.first_name.charAt(0) + userData?.last_name.charAt(0)}</p>}
+                    {open ?
+                        <>
+                            {userData && <p className="text-lg font-bold font-source-sans"> {userData?.full_name}</p>}
+                        </>
+                        :
+                        <>
+                            {userData && <p className="text-lg font-bold font-source-sans"> {userData?.first_name?.charAt(0) + userData?.last_name?.charAt(0)}</p>}
+                        </>
+                    }
+
                 </SidebarHeader>
 
                 <SidebarContent >

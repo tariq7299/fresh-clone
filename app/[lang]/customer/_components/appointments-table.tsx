@@ -21,9 +21,11 @@ import { Suspense } from "react"
 import { Pagination } from "@/_lib/definitions/definitions"
 import TablePagination from "@/_ui/components/custom/table-pagination"
 import { DataTableSkeleton, TablePaginationSkeleton } from "@/_ui/components/custom/skeletons"
+import ReservedServicesDialog from "@/_ui/components/custom/reserved-services-dialog"
+import { Dictionary } from "@/_lib/dictionaries/types"
 
 
-export default function AppointmentsTable({ appointments, pagination }: { appointments: Appointment[], pagination: Pagination }) {
+export default function AppointmentsTable({ appointments, pagination, dict, lang }: { appointments: Appointment[], pagination: Pagination, dict: Dictionary, lang: "en" | "ar" }) {
 
     const columns: ColumnDef<Appointment>[] = [
         {
@@ -68,46 +70,9 @@ export default function AppointmentsTable({ appointments, pagination }: { appoin
                 const services = row.getValue("services") as Service[]
                 const total_duration = row.getValue("total_duration") as number
                 const total_price = row.getValue("total_price") as number
-                const formattedTotalDuration = getTotalDuration(total_duration)
+                const formattedTotalDuration = getTotalDuration(total_duration, lang)
 
-                return <Dialog >
-                    <DialogTrigger asChild>
-                        <Button size={"sm"} variant="outline" className="font-semibold">Show Services</Button>
-                    </DialogTrigger>
-                    <DialogContent className="max-w-full sm:max-w-[40vw]">
-                        <DialogHeader>
-                            <DialogTitle>Services</DialogTitle>
-                        </DialogHeader>
-                        <Table className="">
-                            <TableCaption>A list of services included in this appointment.</TableCaption>
-                            <TableHeader>
-                                <TableRow>
-                                    <TableHead className="">Name</TableHead>
-                                    <TableHead>Price (EGP)</TableHead>
-                                    <TableHead>Duration (min)</TableHead>
-
-                                </TableRow>
-                            </TableHeader>
-                            <TableBody>
-                                {services.map((service) => (
-                                    <TableRow key={service.service_id}>
-                                        <TableCell className="font-medium">{service.name}</TableCell>
-                                        <TableCell>{service.price}</TableCell>
-                                        <TableCell>{service.duration}</TableCell>
-                                    </TableRow>
-                                ))}
-                            </TableBody>
-                            <TableFooter>
-                                <TableRow>
-                                    <TableCell >Total</TableCell>
-                                    <TableCell className="">{total_price}</TableCell>
-                                    <TableCell className="">{formattedTotalDuration}</TableCell>
-                                    {/* <TableCell className="text-right"></TableCell> */}
-                                </TableRow>
-                            </TableFooter>
-                        </Table>
-                    </DialogContent>
-                </Dialog>
+                return <ReservedServicesDialog services={services} total_duration={formattedTotalDuration} total_price={total_price} dict={dict} lang={lang} />
 
                 // return <div>{services.map(service => service.name).join(", ")}</div>
             }
@@ -133,7 +98,7 @@ export default function AppointmentsTable({ appointments, pagination }: { appoin
                 <DataTable columns={columns} data={appointments} />
             </Suspense>
             <Suspense fallback={<TablePaginationSkeleton />}>
-                <TablePagination pagination={pagination} />
+                <TablePagination pagination={pagination} lang={lang} />
             </Suspense>
         </>
     )

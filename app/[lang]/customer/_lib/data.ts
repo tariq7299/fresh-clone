@@ -1,7 +1,7 @@
 import { fetchApi } from "@/_lib/utils/api/fetch-utils";
 import { AppointmentPageQueries } from "@/[lang]/customer/_lib/definitions"
 
-export const getAppointments = async (params?: AppointmentPageQueries) => {
+export const getAppointments = async (params?: AppointmentPageQueries, lang?: "en" | "ar") => {
     const urlParams = new URLSearchParams()
 
     for (const [paramKey, paramValue] of Object.entries(params ?? {})) {
@@ -18,7 +18,7 @@ export const getAppointments = async (params?: AppointmentPageQueries) => {
 
     const backendUrl = `/bookings/user?${urlParams}`
 
-    const appointments = await fetchApi(backendUrl)
+    const appointments = await fetchApi(backendUrl, { lang })
     if (appointments.success) {
         return { appointments: appointments.data?.bookings || [], pagination: appointments.data?.pagination || null }
     }

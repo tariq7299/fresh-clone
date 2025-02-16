@@ -73,9 +73,9 @@ export function ProfessionalSidebar({ side, dict, userData, sidebarTabs, contain
 
                                 <Link href="/" className={cn("text-accent-foreground text-2xl font-bold font-cinzel ")}>Lumière</Link>
                             </div>
-                            <div className="flex justify-start items-center gap-2">
+                            <div className="flex justify-start items-center gap-2 ">
                                 {userData && <UserInitialsBadge firstName={userData?.first_name} lastName={userData?.last_name} />}
-                                <div className="flex flex-col">
+                                <div className="flex flex-col ">
                                     <p className=" text-accent-foreground"> {userData?.full_name}</p>
                                     <p className="text-sm text-accent-foreground"> {userData?.email}</p>
 
@@ -87,8 +87,8 @@ export function ProfessionalSidebar({ side, dict, userData, sidebarTabs, contain
                             <div className="flex justify-center items-center p-9 mb-4">
                                 <Link href="/" className={cn("text-accent-foreground text-4xl font-bold font-cinzel ")}>L</Link>
                             </div>
-                            <div className="flex justify-center items-center gap-2 ">
-                                {userData && <UserInitialsBadge firstName={userData.first_name} lastName={userData.last_name} />}
+                            <div className="flex justify-center items-center gap-2 px-4">
+                                {userData && <UserInitialsBadge showLastName={false} firstName={userData.first_name} lastName={userData.last_name} />}
 
                             </div>
                         </>

@@ -41,41 +41,16 @@ import { Pagination } from "@/_lib/definitions/definitions"
 import { Appointment, Service } from "@/_lib/definitions/appointments"
 import AppointmentStatus from "@/_ui/components/custom/appoitment-status"
 import { Dictionary } from "@/_lib/dictionaries/types"
-// import { DictionaryContext } from "@/_contexts/DictionaryContext"
+import ReservedServicesDialog from "@/_ui/components/custom/reserved-services-dialog"
 
-// type Service = {
-//     service_id: number
-//     name: string
-//     price: number
-//     duration: number
-// }
 
-// type Appointment = {
-//     id: string
-//     booking_date: string
-//     start_time: string
-//     end_time: string
-//     status: string
-//     payment_method: string
-//     services: Service[]
-//     // business_name: string
-//     // business_address: string
-//     total_duration: number
-//     total_price: number
-// }
 
 // Define your possible status options
 const STATUS_OPTIONS = ["completed", "cancelled"]
 
-// interface UpdateCellProps<TData> {
-//     row: Row<TData>
-//     table: Table<TData>
-// }
-
 async function updateStatusInBackend(id: string, status: string) {
 
     try {
-        // const response = await fetchApi(`/businesses/1/bookings/${id}/status?status=${status}`,
         const response = await fetchApi(`/businesses/1/bookings/${id}/status?status=${status}`,
             {
                 method: "POST",
@@ -181,60 +156,10 @@ export default function AppointmentsTable({
             header: dict.dashboard.appointments.table.columns.services,
             cell: ({ row }) => {
                 const services = row.getValue("services") as Service[]
-                const total_duration = row.getValue("total_duration") as number
                 const total_price = row.getValue("total_price") as number
-                const formattedTotalDuration = getTotalDuration(total_duration, lang)
+                const formattedTotalDuration = getTotalDuration(row.getValue("total_duration") as number, lang)
 
-                return (
-                    <Dialog>
-                        <DialogTrigger asChild>
-                            <Button size="sm" variant="outline" className="font-semibold">
-                                {dict.dashboard.appointments.table.actions.show_services}
-                            </Button>
-                        </DialogTrigger>
-                        <DialogContent className="max-w-full sm:max-w-[40vw]">
-                            <DialogHeader>
-                                <DialogTitle className="pt-2">
-                                    {dict.dashboard.appointments.table.services_dialog.title}
-                                </DialogTitle>
-                            </DialogHeader>
-                            <Table>
-                                <TableCaption>
-                                    {dict.dashboard.appointments.table.services_dialog.caption}
-                                </TableCaption>
-                                <TableHeader>
-                                    <TableRow>
-                                        <TableHead>{dict.dashboard.appointments.table.columns.services}</TableHead>
-                                        <TableHead>
-                                            {dict.dashboard.appointments.table.columns.total_price} ({dict.dashboard.appointments.table.services_dialog.currency})
-                                        </TableHead>
-                                        <TableHead>
-                                            {dict.dashboard.appointments.table.columns.total_duration}
-                                        </TableHead>
-                                    </TableRow>
-                                </TableHeader>
-                                <TableBody>
-                                    {services.map((service) => (
-                                        <TableRow key={service.service_id}>
-                                            <TableCell className="font-medium">{service.name}</TableCell>
-                                            <TableCell>{service.price}</TableCell>
-                                            <TableCell>{service.duration}</TableCell>
-                                        </TableRow>
-                                    ))}
-                                </TableBody>
-                                <TableFooter>
-                                    <TableRow>
-                                        <TableCell>
-                                            {dict.dashboard.appointments.table.services_dialog.total}
-                                        </TableCell>
-                                        <TableCell>{total_price}</TableCell>
-                                        <TableCell>{formattedTotalDuration}</TableCell>
-                                    </TableRow>
-                                </TableFooter>
-                            </Table>
-                        </DialogContent>
-                    </Dialog>
-                )
+                return <ReservedServicesDialog services={services} total_duration={formattedTotalDuration} total_price={total_price} dict={dict} lang={lang} />
             }
         },
         {

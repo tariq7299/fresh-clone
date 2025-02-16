@@ -6,11 +6,15 @@ import AppointmentsTableWrapper from "../../_components/appointments-table-wrapp
 import TableFilters from "@/_ui/components/custom/table-filters"
 import { getAppointments } from "@/[lang]/customer/_lib/data"
 import { Calendar, CheckCircle } from "lucide-react"
+import { getDictionary } from "@/_lib/dictionaries"
 
 export default async function AppointmentsPage(props: {
+    params: Promise<{ lang: "en" | "ar" }>,
     searchParams: Promise<AppointmentPageQueries>
 }) {
-    const params = await props?.searchParams
+    const currentLang = (await props.params).lang
+    const dict = await getDictionary(currentLang)
+    const searchParams = await props?.searchParams
     const appointments = (await getAppointments()).appointments
 
     const filters: Filter[] = [
@@ -36,9 +40,9 @@ export default async function AppointmentsPage(props: {
     return (
         <div className="size-full">
             <h1 className="text-2xl md:text-3xl font-bold text-accent pb-4">Appointments</h1>
-            <TableFilters filters={filters} data={appointments} />
-            <Suspense key={params?.page + params?.status + params?.booking_date} fallback={<DataTableSkeletonWithPagination />}>
-                <AppointmentsTableWrapper params={params} />
+            <TableFilters filters={filters} data={appointments} dict={dict} lang={currentLang} />
+            <Suspense key={searchParams?.page + searchParams?.status + searchParams?.booking_date} fallback={<DataTableSkeletonWithPagination />}>
+                <AppointmentsTableWrapper searchParams={searchParams} dict={dict} lang={currentLang} />
             </Suspense>
         </div>
     )

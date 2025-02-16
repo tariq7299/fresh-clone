@@ -144,11 +144,11 @@ export default function TableFilterInput({
                             <>
                                 <div className="flex gap-2 items-center">
                                     {filter.icon}
-                                    <Label className="text-md">{filterLabel as React.ReactNode || filter.colName}</Label>
+                                    <Label className="text-md">{filterLabel}</Label>
                                 </div>
 
                                 <Input
-                                    placeholder={dict.dashboard.appointments.table.filters.business_name.placeholder}
+                                    placeholder={dict.table.string.placeholder}
                                     type="text"
                                     defaultValue={prevQuery ?? ""}
                                     onChange={(e) => {
@@ -160,14 +160,14 @@ export default function TableFilterInput({
                             <>
                                 <div className="flex gap-2 items-center">
                                     {filter.icon}
-                                    <Label className="text-md">{filterLabel as React.ReactNode || filter.colName}</Label>
+                                    <Label className="text-md">{filterLabel}</Label>
                                 </div>
                                 <Select value={value} onValueChange={(v) => {
                                     setValue(v)
                                     handleFiltering(v)
                                 }} >
                                     <SelectTrigger>
-                                        <SelectValue placeholder={dict.dashboard.appointments.table.filters.status.placeholder} />
+                                        <SelectValue placeholder={dict.table.filters.select.placeholder} />
                                     </SelectTrigger>
                                     <SelectContent>
                                         <SelectGroup>
@@ -189,7 +189,7 @@ export default function TableFilterInput({
                                             {/* Render select options */}
                                             {filter.options?.map((option: { id: string, label: string }) => (
                                                 <SelectItem key={option.id} value={option.id}>
-                                                    {/* {dict.dashboard.appointments.table.filters.status.options[option.id as keyof typeof dict.dashboard.appointments.table.filters.status.options]} */}
+
                                                     {option.label}
                                                 </SelectItem>
                                             ))}
@@ -201,10 +201,10 @@ export default function TableFilterInput({
                             <>
                                 <div className="flex gap-2 items-center">
                                     {filter.icon}
-                                    <Label className="text-md">{dict.dashboard.appointments.table.filters.date.label}</Label>
+                                    <Label className="text-md">{filterLabel}</Label>
                                 </div>
                                 {/* Custom date range picker component */}
-                                <DatePickerWithRange value={value} defaultValue={prevQuery} onDateChange={setValue} placeholder={dict.dashboard.appointments.table.filters.date.placeholder} />
+                                <DatePickerWithRange value={value} defaultValue={prevQuery} onDateChange={setValue} placeholder={dict.table.filters.date.placeholder} />
                                 {/* Date filter actions */}
                                 <div className="flex gap-2">
                                     <Button
@@ -213,7 +213,7 @@ export default function TableFilterInput({
                                         size="sm"
                                         onClick={handleClearingFilter}
                                     >
-                                        {dict.dashboard.appointments.table.filters.clear}
+                                        {dict.table.filters.clear}
                                     </Button>
                                     <Button
                                         disabled={!value}
@@ -221,7 +221,7 @@ export default function TableFilterInput({
                                         size="sm"
                                         onClick={() => handleFiltering(value)}
                                     >
-                                        {dict.dashboard.appointments.table.filters.apply}
+                                        {dict.table.filters.apply}
                                     </Button>
                                 </div>
                             </>

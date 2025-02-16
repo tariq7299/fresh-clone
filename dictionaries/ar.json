@@ -485,5 +485,21 @@
       "settings": "الإعدادات",
       "logout": "تسجيل الخروج"
     }
+  },
+  "table": {
+    "empty": "لا توجد نتائج.",
+    "filters": {
+      "clear": "مسح",
+      "apply": "تطبيق",
+      "date": {
+        "placeholder": "اختر نطاق التاريخ"
+      },
+      "select": {
+        "placeholder": "اختر قيمة"
+      },
+      "string": {
+        "placeholder": "تصفية حسب..."
+      }
+    }
   }
 }

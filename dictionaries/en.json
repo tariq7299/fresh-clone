@@ -485,6 +485,22 @@
       "settings": "Settings",
       "logout": "Log out"
     }
+  },
+  "table": {
+    "empty": "No results.",
+    "filters": {
+      "clear": "Clear",
+      "apply": "Apply",
+      "date": {
+        "placeholder": "Select date range"
+      },
+      "select": {
+        "placeholder": "Select a value"
+      },
+      "string": {
+        "placeholder": "Filter by..."
+      }
+    }
   }
 }  
 
