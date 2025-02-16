@@ -302,6 +302,29 @@
           "required_error": "الفئة مطلوبة"
         }
       }
+    },
+    "business_services": {
+      "title": "بناء قائمة خدماتك",
+      "subtitle": "إعداد الحساب",
+      "description": "اختر خدمة ثم اضغط على 'إضافة' لإضافتها إلى قائمتك",
+      "form": {
+        "add_button": "إضافة",
+        "service_select": {
+          "placeholder": "اختر خدمة...",
+          "empty": "لم يتم العثور على خدمات",
+          "search_placeholder": "ابحث عن خدمة..."
+        },
+        "service_card": {
+          "price": "السعر",
+          "duration": "المدة",
+          "minutes": "دقيقة",
+          "remove": "إزالة الخدمة",
+          "currency": "جنيه"
+        },
+        "validation": {
+          "required": "الرجاء إضافة خدمة واحدة على الأقل"
+        }
+      }
     }
   }
 }

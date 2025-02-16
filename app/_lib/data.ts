@@ -28,11 +28,13 @@ export const getAllCategories = async (lang: "en" | "ar") => {
     // }
 }
 
-export const getAllServices = async () => {
+export const getAllServices = async (lang: "en" | "ar") => {
 
     // try {
 
-    const response = await fetchApi<ApiResponse<ApiServicesWithCategory[]>>("/services/active-with-groups")
+    const response = await fetchApi<ApiResponse<ApiServicesWithCategory[]>>("/services/active-with-groups", {
+        lang
+    })
 
     if (response.success) {
         return response.data

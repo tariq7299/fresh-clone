@@ -6,10 +6,10 @@ import { StoredService } from '@/[lang]/professional/_lib/definitions';
 
 
 
-export default async function BusinessServicesForm() {
+export default async function BusinessServicesForm({ lang, dict }: { lang: "en" | "ar", dict: any }) {
 
     // Get all services from backend
-    const services = await getAllServices()
+    const services = await getAllServices(lang)
     if (services && services.length === 0 || !services) throw new Error("Services list is empty")
 
     // Get the services from the db that the user has submitted before
@@ -19,5 +19,5 @@ export default async function BusinessServicesForm() {
 
 
 
-    return <Form services={services} stroredTempServices={stroredTempServices} />
+    return <Form services={services} stroredTempServices={stroredTempServices} dict={dict} />
 }

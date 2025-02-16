@@ -25,7 +25,7 @@ import { Service, ApiServicesWithCategory, ApiService } from "@/[lang]/professio
 
 // Add types
 // export function Combobox<TFieldValues extends FieldValues, TName extends FieldPath<TFieldValues>>({ values, field, className, inputPlaceholder = "Select value...", searchPlaceholder = "Search..." }: ComboboxProps<TFieldValues, TName>) {
-export function ServicesComboBox({ servicesList, selectedService, setSelectedService, className, inputPlaceholder = "Select value...", searchPlaceholder = "Search..." }: { servicesList: ApiServicesWithCategory[], selectedService: Service, setSelectedService: any, className?: string, inputPlaceholder?: string, searchPlaceholder?: string }) {
+export function ServicesComboBox({ servicesList, selectedService, setSelectedService, className, inputPlaceholder = "Select value...", searchPlaceholder = "Search...", emptyText = "No value found." }: { servicesList: ApiServicesWithCategory[], selectedService: Service, setSelectedService: any, className?: string, inputPlaceholder?: string, searchPlaceholder?: string, emptyText?: string }) {
 
 
     const [open, setOpen] = React.useState(false)
@@ -61,7 +61,7 @@ export function ServicesComboBox({ servicesList, selectedService, setSelectedSer
                             : (
                                 <>
 
-                                    <CommandEmpty>No value found.</CommandEmpty>
+                                    <CommandEmpty>{emptyText}</CommandEmpty>
 
                                     {servicesList.map((item: { name: string, services: ApiService[] }) => (
                                         <CommandGroup key={item.name} heading={item.name}>
@@ -69,7 +69,7 @@ export function ServicesComboBox({ servicesList, selectedService, setSelectedSer
                                             {item.services.map((service: ApiService) => (
 
                                                 <CommandItem
-                                                    className=""
+                                                    className="ms-4 flex items-center justify-between"
                                                     key={service.id}
                                                     value={service.name}
                                                     onSelect={() => {
@@ -85,13 +85,13 @@ export function ServicesComboBox({ servicesList, selectedService, setSelectedSer
                                                 >
 
 
+                                                    {service.name}
                                                     <CheckIcon
                                                         className={cn(
-                                                            "mr-2 h-4 w-4",
+                                                            " h-4 w-4",
                                                             Number(selectedService.serviceId) === service.id ? "opacity-100" : "opacity-0"
                                                         )}
                                                     />
-                                                    {service.name}
                                                 </CommandItem>
                                             ))}
                                         </CommandGroup>

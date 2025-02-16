@@ -302,6 +302,29 @@
           "required_error": "Please select a category"
         }
       }
+    },
+    "business_services": {
+      "title": "Build Your Service List",
+      "subtitle": "Account setup",
+      "description": "Choose a service then press 'Add' add it to your list.",
+      "form": {
+        "add_button": "Add",
+        "service_select": {
+          "search_placeholder": "Search for a service...",
+          "placeholder": "Select a service...",
+          "empty": "No services found"
+        },
+        "service_card": {
+          "price": "Price",
+          "duration": "Duration",
+          "minutes": "minutes",
+          "remove": "Remove service",
+          "currency": "EGP"
+        },
+        "validation": {
+          "required": "Please add at least one service"
+        }
+      }
     }
   }
 }  

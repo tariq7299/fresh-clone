@@ -57,22 +57,47 @@ function getInitialSelectedServicesList(services: ApiServicesWithCategory[], str
     }))
 }
 
+interface FormProps {
+    services: ApiServicesWithCategory[];
+    stroredTempServices: StoredService[] | null;
+    dict: {
+        onboarding: {
+            business_services: {
+                form: {
+                    add_button: string;
+                    service_select: {
+                        placeholder: string;
+                        empty: string;
+                        search_placeholder: string;
+                    };
+                    service_card: {
+                        price: string;
+                        duration: string;
+                        minutes: string;
+                        remove: string;
+                        currency: string;
+                    };
+                    validation: {
+                        required: string;
+                    };
+                };
+            };
+        };
+    };
+}
 
-
-export default function Form({ services, stroredTempServices }: { services: ApiServicesWithCategory[], stroredTempServices: StoredService[] | null }) {
-
-    // I am using this because I want to show the loading state in button found in the parent component
-    const { setIsLoading } = useBusinessFormContext()
+export default function Form({ services, stroredTempServices, dict }: FormProps) {
+    const { setIsLoading } = useBusinessFormContext();
     const initialSelectedServicesList = getInitialSelectedServicesList(services, stroredTempServices);
-    const [selectedServicesList, setSelectedServicesList] = useState<Service[]>(initialSelectedServicesList)
+    const [selectedServicesList, setSelectedServicesList] = useState<Service[]>(initialSelectedServicesList);
     const [selectedService, setSelectedService] = useState({
         serviceCategory: "",
         serviceId: -1,
         serviceName: "",
         servicePrice: 0,
         serviceDuration: 0,
-        serviceCurrency: "",
-    })
+        serviceCurrency: dict.onboarding.business_services.form.service_card.currency,
+    });
 
     const INITIAL_FORM_STATE: ErrorFormState<{ service?: string } | null, Service[]> = {
         success: false,
@@ -107,7 +132,7 @@ export default function Form({ services, stroredTempServices }: { services: ApiS
                 serviceName: "",
                 servicePrice: 0,
                 serviceDuration: 0,
-                serviceCurrency: "",
+                serviceCurrency: dict.onboarding.business_services.form.service_card.currency,
             })
 
         } else {
@@ -118,7 +143,7 @@ export default function Form({ services, stroredTempServices }: { services: ApiS
                 serviceName: selectedService.serviceName,
                 servicePrice: selectedService.servicePrice,
                 serviceDuration: selectedService.serviceDuration,
-                serviceCurrency: "EGP"
+                serviceCurrency: dict.onboarding.business_services.form.service_card.currency
             }, ...selectedServicesList])
 
             // Clear the selected service (this will just unselect the service form the combobox element)
@@ -128,7 +153,7 @@ export default function Form({ services, stroredTempServices }: { services: ApiS
                 serviceName: "",
                 servicePrice: 0,
                 serviceDuration: 0,
-                serviceCurrency: "",
+                serviceCurrency: dict.onboarding.business_services.form.service_card.currency,
             })
         }
     }
@@ -144,12 +169,16 @@ export default function Form({ services, stroredTempServices }: { services: ApiS
         return
     };
 
-    return <form onSubmit={handleSubmit} id="business-onboarding-form" className="flex flex-col gap-2 w-full ">
+    return <form onSubmit={handleSubmit} id="business-onboarding-form" className="flex flex-col gap-2 w-full">
         {/* Main container with responsive max width and vertical padding */}
 
 
         {/* Display validation error if service selection is empty */}
-        {formState.clientFieldsErrors?.service && <p className="text-destructive text-sm py-2">{formState.clientFieldsErrors?.service}</p>}
+        {formState.clientFieldsErrors?.service && (
+            <p className="text-destructive text-sm py-2 rtl:font-cairo">
+                {dict.onboarding.business_services.form.validation.required}
+            </p>
+        )}
 
         {/* Service selection controls - ComboBox and Add button */}
         <div className={cn('flex max-w-xl gap-2 justify-center items-center mx-auto w-full pb-4',
@@ -158,15 +187,23 @@ export default function Form({ services, stroredTempServices }: { services: ApiS
         )}>
             {/* Dropdown for selecting services */}
             <ServicesComboBox
-                className=' w-full '
+                className='w-full'
                 servicesList={services}
                 selectedService={selectedService}
                 setSelectedService={setSelectedService}
+                inputPlaceholder={dict.onboarding.business_services.form.service_select.placeholder}
+                searchPlaceholder={dict.onboarding.business_services.form.service_select.search_placeholder}
+                emptyText={dict.onboarding.business_services.form.service_select.empty}
             />
 
             {/* Add button with plus icon */}
-            <Button type='button' onClick={handleAddingService} className='font-bold flex items-center gap-2'>
-                Add<Plus className='size-4' />
+            <Button
+                type='button'
+                onClick={handleAddingService}
+                className='font-bold flex items-center gap-2 rtl:font-cairo'
+            >
+                {dict.onboarding.business_services.form.add_button}
+                <Plus className='size-4' />
             </Button>
         </div>
 
@@ -182,6 +219,7 @@ export default function Form({ services, stroredTempServices }: { services: ApiS
                     service={selectedService}
                     services={selectedServicesList}
                     setServices={setSelectedServicesList}
+                    dict={dict.onboarding.business_services.form.service_card}
                 />
             ))}
         </div>
