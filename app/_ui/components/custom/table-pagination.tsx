@@ -13,7 +13,7 @@ import { cn } from "@/_lib/utils/utils"
 import { usePathname, useSearchParams } from "next/navigation"
 
 
-export default function TablePagination({ pagination }: { pagination: PaginationType }) {
+export default function TablePagination({ pagination, lang }: { pagination: PaginationType, lang: "en" | "ar" }) {
 
     const searchParams = useSearchParams()
     const pathname = usePathname()
@@ -30,19 +30,19 @@ export default function TablePagination({ pagination }: { pagination: Pagination
             <PaginationContent className="flex justify-center items-center flex-wrap gap-2">
 
                 {pagination?.links.map((link, index) => {
-                    if (link.label === "&laquo; Previous") {
+                    if (link.label === "&laquo; Previous" || link.label === "pagination.previous") {
                         return (
                             <PaginationItem key={index} className={cn(link.url ? "visible" : "invisible")}>
-                                <PaginationPrevious href={returnPageUrl(String(Number(pagination?.current_page) - 1))} />
+                                <PaginationPrevious href={returnPageUrl(String(Number(pagination?.current_page) - 1))} lang={lang} />
                             </PaginationItem>
 
 
 
                         );
-                    } else if (link.label === "Next &raquo;") {
+                    } else if (link.label === "Next &raquo;" || link.label === "pagination.next") {
                         return (
                             <PaginationItem key={index} className={cn(link.url ? "visible" : "invisible")}>
-                                <PaginationNext href={returnPageUrl(String(Number(pagination?.current_page) + 1))} />
+                                <PaginationNext href={returnPageUrl(String(Number(pagination?.current_page) + 1))} lang={lang} />
                             </PaginationItem>
 
                         );

@@ -428,6 +428,43 @@
         }
       }
     }
+  },
+  "dashboard": {
+    "appointments": {
+      "title": "Appointments",
+      "empty": "Your schedule is looking a little empty.",
+      "table": {
+        "columns": {
+          "id": "ID",
+          "total_duration": "Duration",
+          "total_price": "Price",
+          "status": "Status",
+          "update_status": "Update Status",
+          "payment_method": "Payment Method",
+          "services": "Service",
+          "booking_date": "Booking Date",
+          "start_time": "Start Time",
+          "end_time": "End Time"
+        },
+        "actions": {
+          "show_services": "Show Services",
+          "update_status": "Update Status",
+          "updating": "Updating..."
+        },
+        "services_dialog": {
+          "title": "Services",
+          "caption": "A list of services included in this appointment.",
+          "total": "Total",
+          "currency": "EGP",
+          "duration_unit": "min"
+        }
+      }
+    },
+    "sidebar": {
+      "appointments": "Appointments",
+      "settings": "Settings",
+      "logout": "Log out"
+    }
   }
 }  
 

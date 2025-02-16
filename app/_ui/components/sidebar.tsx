@@ -4,7 +4,7 @@ import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { VariantProps, cva } from "class-variance-authority"
 // import { PanelLeft } from "lucide-react"
-import { PanelRightOpen, PanelLeftOpen } from "lucide-react"
+import { PanelRightOpen, PanelLeftOpen, PanelLeft } from "lucide-react"
 
 import { useIsMobile } from "@/_lib/hooks/use-mobile"
 import { cn } from "@/_lib/utils/utils"
@@ -283,7 +283,7 @@ const SidebarTrigger = React.forwardRef<
       }}
       {...props}
     >
-      {open ? <PanelRightOpen className="" /> : <PanelLeftOpen className="" />}
+      {open ? <PanelLeftOpen className="" /> : <PanelRightOpen className="" />}
       <span className="sr-only">Toggle Sidebar</span>
     </Button>
   )

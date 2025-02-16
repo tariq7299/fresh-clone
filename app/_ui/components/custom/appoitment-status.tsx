@@ -13,11 +13,16 @@ export default function AppointmentStatus({ type }: { type: Status }) {
         type === "cancelled" ? "bg-destructive-100 text-destructive-600 hover:bg-destructive-200" :
             type === "completed" ? "bg-success-100 text-success-600 hover:bg-success-200" :
                 "bg-accent2-100 text-accent2 hover:bg-accent2-500/20")}>
-        {type === "completed" ? <HeartHandshake className="w-3.5 h-3.5 mr-1" /> :
-            type === "cancelled" ? <Ban className="w-3.5 h-3.5 mr-1" /> :
-                <CircleCheck className="w-3.5 h-3.5 mr-1" />}
 
-        {type}
+        <div className="flex items-center gap-1">
+
+            {type === "completed" ? <HeartHandshake className="w-3.5 h-3.5" /> :
+                type === "cancelled" ? <Ban className="w-3.5 h-3.5" /> :
+                    <CircleCheck className="w-3.5 h-3.5" />}
+            {type}
+        </div>
+
+
     </Badge>
 
 

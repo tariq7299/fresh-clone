@@ -34,12 +34,14 @@ import { Button } from "@/_ui/components/button"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/_ui/components/dialog"
 import { cn, getTotalDuration } from "@/_lib/utils/utils"
 import { fetchApi } from "@/_lib/utils/api/fetch-utils-client"
-import { Suspense, useState } from "react"
+import { Suspense, useState, useContext } from "react"
 import TablePagination from "@/_ui/components/custom/table-pagination"
 import { TablePaginationSkeleton, DataTableSkeleton } from "@/_ui/components/custom/skeletons"
 import { Pagination } from "@/_lib/definitions/definitions"
 import { Appointment, Service } from "@/_lib/definitions/appointments"
 import AppointmentStatus from "@/_ui/components/custom/appoitment-status"
+import { Dictionary } from "@/_lib/dictionaries/types"
+// import { DictionaryContext } from "@/_contexts/DictionaryContext"
 
 // type Service = {
 //     service_id: number
@@ -85,23 +87,23 @@ async function updateStatusInBackend(id: string, status: string) {
     }
 }
 
+type UpdateStatusCellProps = {
+    row: Row<Appointment>;
+    table: Table<Appointment>;
+}
 
-
-const UpdateStatusCell = <TData,>({ row, table }) => {
+const UpdateStatusCell = ({ row, table, dict }: UpdateStatusCellProps) => {
     const [isUpdating, setIsUpdating] = useState(false)
     const currentStatus = row.getValue("status") as string
+    // const dict = useContext(DictionaryContext)
 
     const handleStatusUpdate = async (newStatus: string) => {
         setIsUpdating(true)
         try {
-            // Make your API call here
             await updateStatusInBackend(row.original.id, newStatus)
-
-            // Update the table data
             table.options.meta?.updateData(row.index, "status", newStatus)
         } catch (error) {
             console.error("Failed to update status:", error)
-            // Handle error (show toast, etc.)
         } finally {
             setIsUpdating(false)
         }
@@ -110,11 +112,10 @@ const UpdateStatusCell = <TData,>({ row, table }) => {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <Button
-                    variant="outline"
-                    disabled={isUpdating}
-                >
-                    {isUpdating ? "Updating..." : "Update Status"}
+                <Button variant="outline" disabled={isUpdating}>
+                    {isUpdating
+                        ? dict.dashboard.appointments.table.actions.updating
+                        : dict.dashboard.appointments.table.actions.update_status}
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="space-y-1 ">
@@ -133,107 +134,121 @@ const UpdateStatusCell = <TData,>({ row, table }) => {
     )
 }
 
-
-
-
-export default function AppointmentsTable({ appointments, pagination }: { appointments: Appointment[], pagination: Pagination }) {
+export default function AppointmentsTable({
+    appointments,
+    pagination,
+    dict,
+    lang
+}: {
+    appointments: Appointment[];
+    pagination: Pagination;
+    dict: Dictionary;
+    lang: "en" | "ar";
+}) {
 
     const columns: ColumnDef<Appointment>[] = [
         {
             accessorKey: "id",
-            header: "ID"
+            header: dict.dashboard.appointments.table.columns.id,
         },
         {
             accessorKey: "total_duration",
-            header: "Total Duration"
+            header: dict.dashboard.appointments.table.columns.total_duration
         },
         {
             accessorKey: "total_price",
-            header: "Total Price"
+            header: dict.dashboard.appointments.table.columns.total_price
         },
         {
             accessorKey: "status",
-            header: "Status",
+            header: dict.dashboard.appointments.table.columns.status,
             cell: ({ row }) => {
                 const status = row.getValue("status") as string
                 return <AppointmentStatus type={status} />
             }
-
         },
         {
             accessorKey: "update_status",
-            header: "Update Status",
-            cell: ({ row, table }) => <UpdateStatusCell row={row} table={table} />
-
+            header: dict.dashboard.appointments.table.columns.update_status,
+            cell: ({ row, table }) => <UpdateStatusCell row={row} table={table} dict={dict} />
         },
         {
             accessorKey: "payment_method",
-            header: "Payment Method"
+            header: dict.dashboard.appointments.table.columns.payment_method
         },
         {
             accessorKey: "services",
-            header: "Services",
+            header: dict.dashboard.appointments.table.columns.services,
             cell: ({ row }) => {
                 const services = row.getValue("services") as Service[]
                 const total_duration = row.getValue("total_duration") as number
                 const total_price = row.getValue("total_price") as number
-                const formattedTotalDuration = getTotalDuration(total_duration)
+                const formattedTotalDuration = getTotalDuration(total_duration, lang)
 
-                return <Dialog >
-                    <DialogTrigger asChild>
-                        <Button size={"sm"} variant="outline" className="font-semibold">Show Services</Button>
-                    </DialogTrigger>
-                    <DialogContent className="max-w-full sm:max-w-[40vw]">
-                        <DialogHeader>
-                            <DialogTitle>Services</DialogTitle>
-                        </DialogHeader>
-                        <Table className="">
-                            <TableCaption>A list of services included in this appointment.</TableCaption>
-                            <TableHeader>
-                                <TableRow>
-                                    <TableHead className="">Name</TableHead>
-                                    <TableHead>Price (EGP)</TableHead>
-                                    <TableHead>Duration (min)</TableHead>
-
-                                </TableRow>
-                            </TableHeader>
-                            <TableBody>
-                                {services.map((service) => (
-                                    <TableRow key={service.service_id}>
-                                        <TableCell className="font-medium">{service.name}</TableCell>
-                                        <TableCell>{service.price}</TableCell>
-                                        <TableCell>{service.duration}</TableCell>
+                return (
+                    <Dialog>
+                        <DialogTrigger asChild>
+                            <Button size="sm" variant="outline" className="font-semibold">
+                                {dict.dashboard.appointments.table.actions.show_services}
+                            </Button>
+                        </DialogTrigger>
+                        <DialogContent className="max-w-full sm:max-w-[40vw]">
+                            <DialogHeader>
+                                <DialogTitle>
+                                    {dict.dashboard.appointments.table.services_dialog.title}
+                                </DialogTitle>
+                            </DialogHeader>
+                            <Table>
+                                <TableCaption>
+                                    {dict.dashboard.appointments.table.services_dialog.caption}
+                                </TableCaption>
+                                <TableHeader>
+                                    <TableRow>
+                                        <TableHead>{dict.dashboard.appointments.table.columns.services}</TableHead>
+                                        <TableHead>
+                                            {dict.dashboard.appointments.table.columns.total_price} ({dict.dashboard.appointments.table.services_dialog.currency})
+                                        </TableHead>
+                                        <TableHead>
+                                            {dict.dashboard.appointments.table.columns.total_duration}
+                                        </TableHead>
                                     </TableRow>
-                                ))}
-                            </TableBody>
-                            <TableFooter>
-                                <TableRow>
-                                    <TableCell >Total</TableCell>
-                                    <TableCell className="">{total_price}</TableCell>
-                                    <TableCell className="">{formattedTotalDuration}</TableCell>
-                                    {/* <TableCell className="text-right"></TableCell> */}
-                                </TableRow>
-                            </TableFooter>
-                        </Table>
-                    </DialogContent>
-                </Dialog>
-
-                return <div>{services.map(service => service.name).join(", ")}</div>
+                                </TableHeader>
+                                <TableBody>
+                                    {services.map((service) => (
+                                        <TableRow key={service.service_id}>
+                                            <TableCell className="font-medium">{service.name}</TableCell>
+                                            <TableCell>{service.price}</TableCell>
+                                            <TableCell>{service.duration}</TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
+                                <TableFooter>
+                                    <TableRow>
+                                        <TableCell>
+                                            {dict.dashboard.appointments.table.services_dialog.total}
+                                        </TableCell>
+                                        <TableCell>{total_price}</TableCell>
+                                        <TableCell>{formattedTotalDuration}</TableCell>
+                                    </TableRow>
+                                </TableFooter>
+                            </Table>
+                        </DialogContent>
+                    </Dialog>
+                )
             }
         },
         {
             accessorKey: "booking_date",
-            header: "Booking Date"
+            header: dict.dashboard.appointments.table.columns.booking_date
         },
         {
             accessorKey: "start_time",
-            header: "Start Time"
+            header: dict.dashboard.appointments.table.columns.start_time
         },
         {
             accessorKey: "end_time",
-            header: "End Time"
-        },
-
+            header: dict.dashboard.appointments.table.columns.end_time
+        }
     ]
 
     return (
@@ -242,7 +257,7 @@ export default function AppointmentsTable({ appointments, pagination }: { appoin
                 <DataTable columns={columns} data={appointments} />
             </Suspense>
             <Suspense fallback={<TablePaginationSkeleton />}>
-                <TablePagination pagination={pagination} />
+                <TablePagination pagination={pagination} lang={lang} />
             </Suspense>
         </>
     )

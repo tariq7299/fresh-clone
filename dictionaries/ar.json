@@ -428,5 +428,42 @@
         }
       }
     }
+  },
+  "dashboard": {
+    "appointments": {
+      "title": "المواعيد",
+      "empty": "جدولك يبدو فارغاً قليلاً.",
+      "table": {
+        "columns": {
+          "id": "المعرف",
+          "total_duration": "المدة",
+          "total_price": "السعر",
+          "status": "الحالة",
+          "update_status": "تحديث الحالة",
+          "payment_method": "طريقة الدفع",
+          "services": "الخدمة",
+          "booking_date": "تاريخ الحجز",
+          "start_time": "وقت البدء",
+          "end_time": "وقت الانتهاء"
+        },
+        "actions": {
+          "show_services": "عرض الخدمات",
+          "update_status": "تحديث الحالة",
+          "updating": "جاري التحديث..."
+        },
+        "services_dialog": {
+          "title": "الخدمات",
+          "caption": "قائمة الخدمات المضمنة في هذا الموعد.",
+          "total": "المجموع",
+          "currency": "جنيه",
+          "duration_unit": "دقيقة"
+        }
+      }
+    },
+    "sidebar": {
+      "appointments": "المواعيد",
+      "settings": "الإعدادات",
+      "logout": "تسجيل الخروج"
+    }
   }
 }

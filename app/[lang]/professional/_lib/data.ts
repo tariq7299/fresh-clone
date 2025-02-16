@@ -270,7 +270,7 @@ export const removeTempBusinessFormSumbissions = async (businessId: number) => {
 
 // }
 
-export const getAppointments = async (params?: AppointmentPageQueries) => {
+export const getAppointments = async (params?: AppointmentPageQueries, lang?: "en" | "ar") => {
     const urlParams = new URLSearchParams()
 
     for (const [paramKey, paramValue] of Object.entries(params ?? {})) {
@@ -287,7 +287,7 @@ export const getAppointments = async (params?: AppointmentPageQueries) => {
 
     const backendUrl = `/businesses/bookings?${urlParams}`
 
-    const response = await fetchApi(backendUrl)
+    const response = await fetchApi(backendUrl, { lang })
     if (response.success) {
         return { appointments: response.data?.bookings || [], pagination: response.data?.pagination || null }
     }

@@ -23,8 +23,9 @@ import { UserData } from "@/[lang]/(auth)/_lib/definitions"
 import UserInitialsBadge from "@/_ui/components/custom/user-initials-badge"
 import { div } from "framer-motion/client"
 import AuthButton from "@/_ui/components/custom/auth-button"
+import { Dictionary } from "@/_lib/dictionaries/types"
 
-export function ProfessionalSidebar({ userData, sidebarTabs, containerClass, triggerClass }: {
+export function ProfessionalSidebar({ side, dict, userData, sidebarTabs, containerClass, triggerClass }: {
     userData: UserData,
     sidebarTabs: {
         key: string,
@@ -33,7 +34,9 @@ export function ProfessionalSidebar({ userData, sidebarTabs, containerClass, tri
         icon: React.ReactNode
     }[],
     containerClass?: string,
-    triggerClass?: string
+    triggerClass?: string,
+    dict: Dictionary,
+    side: "left" | "right"
 }) {
 
 
@@ -53,15 +56,14 @@ export function ProfessionalSidebar({ userData, sidebarTabs, containerClass, tri
             <SidebarTrigger className={cn("md:hidden fixed top-2 left-2 text-accent")} />
 
 
-            <Sidebar className={cn("", containerClass)} collapsible={"icon"}>
+            <Sidebar className={cn("", containerClass)} collapsible={"icon"} side={side}>
 
 
-                <SidebarTrigger className={cn("text-accent hidden md:inline-flex fixed  transition-all duration-250  ease-in-out ", open ? " left-64" : " left-12", triggerClass)} />
+                <SidebarTrigger className={cn("text-accent hidden md:inline-flex fixed  transition-all duration-250  ease-in-out ", open ?
+                    side === "left" ? "left-64" : "right-64" : side === "left" ? "left-12"
+                        : "right-12", triggerClass)} />
 
                 <SidebarHeader className={cn(open ? " py-2 px-4" : "flex justify-center items-center")}>
-
-                    {/* <div className="flex justify-between items-center flex-col"> */}
-
 
                     {/* TODO: Create a header component */}
                     {open ?
@@ -72,7 +74,7 @@ export function ProfessionalSidebar({ userData, sidebarTabs, containerClass, tri
                                 <Link href="/" className={cn("text-accent-foreground text-2xl font-bold font-cinzel ")}>Lumière</Link>
                             </div>
                             <div className="flex justify-start items-center gap-2">
-                                <UserInitialsBadge firstName={userData?.first_name} lastName={userData?.last_name} />
+                                {userData && <UserInitialsBadge firstName={userData?.first_name} lastName={userData?.last_name} />}
                                 <div className="flex flex-col">
                                     <p className=" text-accent-foreground"> {userData?.full_name}</p>
                                     <p className="text-sm text-accent-foreground"> {userData?.email}</p>
@@ -85,16 +87,12 @@ export function ProfessionalSidebar({ userData, sidebarTabs, containerClass, tri
                             <div className="flex justify-center items-center p-9 mb-4">
                                 <Link href="/" className={cn("text-accent-foreground text-4xl font-bold font-cinzel ")}>L</Link>
                             </div>
-                            <div className="flex justify-center items-center gap-2">
+                            <div className="flex justify-center items-center gap-2 ">
                                 {userData && <UserInitialsBadge firstName={userData.first_name} lastName={userData.last_name} />}
 
                             </div>
                         </>
-
-                        // <p className="text-lg font-bold font-source-sans"> {userData?.first_name.charAt(0) + userData?.last_name.charAt(0)}
-                        // </p>
                     }
-                    {/* </div> */}
 
                 </SidebarHeader>
 
@@ -118,24 +116,24 @@ export function ProfessionalSidebar({ userData, sidebarTabs, containerClass, tri
                     <SidebarMenu className={cn("px-2 pb-12", open ? "" : "flex justify-center items-center")}>
                         <SidebarMenuItem  >
                             {/* <SidebarMenuButton asChild isActive={pathname === tab.href}> */}
-                            <SidebarMenuButton asChild isActive={pathname === "/settings"} className={cn("text-accent-foreground data-[active=true]:bg-accent-100 py-5 data-[active=true]:text-primary data-[active=true]:font-semibold", open ? "" : " flex justify-center items-center")}>
+                            <SidebarMenuButton asChild isActive={pathname === "/settings"} className={cn("text-accent-foreground data-[active=true]:bg-accent-100 py-5 data-[active=true]:text-primary data-[active=true]:font-semibold font-semi", open ? "" : " flex justify-center items-center")}>
                                 <Link className="" href={"/settings"}>
                                     <Settings />
-                                    <span className={cn(open ? "" : "hidden")}>Settings</span>
+                                    <span className={cn(open ? "" : "hidden")}>{dict.dashboard.sidebar.settings}</span>
                                 </Link>
                             </SidebarMenuButton>
                         </SidebarMenuItem>
                         <SidebarMenuItem  >
                             {/* <SidebarMenuButton asChild isActive={pathname === tab.href}> */}
-                            <SidebarMenuButton asChild isActive={pathname === "/logout"} className={cn("text-accent-foreground data-[active=true]:bg-accent-100 py-5 data-[active=true]:text-primary data-[active=true]:font-semibold", open ? "" : " flex justify-center items-center")}>
+                            <SidebarMenuButton asChild isActive={pathname === "/logout"} className={cn("text-accent-foreground data-[active=true]:bg-accent-100 py-5 data-[active=true]:text-primary data-[active=true]:font-semibold font-semi", open ? "" : " flex justify-center items-center")}>
                                 {/* <Link className="" href={"/logout"}>
                                     <LogOut />
                                     <span className={cn(open ? "" : "hidden")}>Logout</span>
                                 </Link> */}
 
-                                <AuthButton authenticated={true} className='flex justify-start items-center gap-2 w-full font-semibold' >
+                                <AuthButton authenticated={true} className='flex justify-start items-center gap-2 w-full font-normal' dict={dict}>
                                     <LogOut />
-                                    <span className={cn(open ? "" : "hidden")}>Log out</span>
+                                    <span className={cn(open ? "" : "hidden")}>{dict.dashboard.sidebar.logout}</span>
                                 </AuthButton>
 
                             </SidebarMenuButton>

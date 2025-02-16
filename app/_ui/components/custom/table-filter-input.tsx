@@ -24,8 +24,6 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/_ui/components/select"
-// Import table utilities from TanStack
-import { useReactTable, getCoreRowModel, getFilteredRowModel } from "@tanstack/react-table"
 // Import debounce hook for delayed filtering
 import { useDebouncedCallback } from 'use-debounce';
 // Import Next.js navigation hooks

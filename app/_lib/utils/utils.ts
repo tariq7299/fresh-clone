@@ -45,13 +45,13 @@ export type Nullable<T> = {
 };
 
 // convert total duration in minutes to hours and mins
-export function getTotalDuration(totalDuration: number) {
+export function getTotalDuration(totalDuration: number, lang: "en" | "ar") {
   const hours = Math.floor(totalDuration / 60)
   const mins = totalDuration % 60
   if (mins === 0) {
-    return `${hours} hour(s)`
+    return lang === "en" ? `${hours} hour(s)` : `${hours} ساعة`
   }
-  return `${hours} hour(s) ${mins} min(s)`
+  return lang === "en" ? `${hours} hour(s) ${mins} min(s)` : `${hours} ساعة ${mins} دقيقة `
 }
 
 export const getMonthName = (month: number, lang: "en" | "ar") => {
