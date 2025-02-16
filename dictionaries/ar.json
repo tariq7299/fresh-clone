@@ -316,13 +316,32 @@
         },
         "service_card": {
           "price": "السعر",
-          "duration": "المدة",
+          "duration": "المدة", 
           "minutes": "دقيقة",
           "remove": "إزالة الخدمة",
-          "currency": "جنيه"
+          "currency": "جنيه",
+          "actions": {
+            "edit": "تعديل",
+            "delete": "حذف"
+          },
+          "edit_dialog": {
+            "title": "تعديل",
+            "description": "قم بإجراء تغييرات على خدمتك هنا. انقر على حفظ عند الانتهاء.",
+            "duration": {
+              "label": "المدة",
+              "group_label": "المدة", 
+              "unit": "دقيقة",
+              "validation": "أدخل مدة صالحة"
+            },
+            "price": {
+              "label": "السعر",
+              "validation": "أدخل قيمة صالحة"
+            },
+            "save": "حفظ التغييرات"
+          }
         },
         "validation": {
-          "required": "الرجاء إضافة خدمة واحدة على الأقل"
+          "service_required": "الرجاء إضافة خدمة واحدة على الأقل"
         }
       }
     }

@@ -15,18 +15,23 @@ import { useState } from "react"
 import { z } from "zod"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, SelectGroup, SelectLabel } from '@/_ui/components/select';
 
-const editServiceSchema = z.object({
-    servicePrice: z.number().gte(1, { message: "Enter a valid price" }),
-    serviceDuration: z.number().gte(1, { message: "Enter a valid duration" }),
+
+const createEditServiceSchema = (dict: any) => z.object({
+    servicePrice: z.number().gte(1, { message: dict.edit_dialog.price.validation }),
+    serviceDuration: z.number().gte(1, { message: dict.edit_dialog.duration.validation }),
 })
 
-
-export default function EditServiceDialog({ currentService, services, setServices }: {
+export default function EditServiceDialog({
+    currentService,
+    services,
+    setServices,
+    dict
+}: {
     currentService: Service,
     services: Service[],
-    setServices: (services: Service[]) => void
+    setServices: (services: Service[]) => void,
+    dict: any
 }) {
-
     const [isOpen, setIsOpen] = useState(false)
 
     const [value, setValue] = useState({
@@ -39,25 +44,36 @@ export default function EditServiceDialog({ currentService, services, setService
     })
 
     const handleSaveChanges = () => {
-
         setValue({ ...value, errors: { servicePrice: [], serviceDuration: [] } })
 
-        const validatedData = editServiceSchema.safeParse({ servicePrice: Number(value.servicePrice), serviceDuration: Number(value.serviceDuration) })
-        if (!validatedData.success) {
+        const editServiceSchema = createEditServiceSchema(dict)
+        const validatedData = editServiceSchema.safeParse({
+            servicePrice: Number(value.servicePrice),
+            serviceDuration: Number(value.serviceDuration)
+        })
 
+        if (!validatedData.success) {
             if (validatedData.error.flatten().fieldErrors.servicePrice) {
-                setValue({ ...value, errors: { servicePrice: validatedData.error.flatten().fieldErrors.servicePrice, serviceDuration: [] } })
+                setValue({
+                    ...value, errors: {
+                        servicePrice: validatedData.error.flatten().fieldErrors.servicePrice,
+                        serviceDuration: []
+                    }
+                })
             }
 
             if (validatedData.error.flatten().fieldErrors.serviceDuration) {
-                setValue({ ...value, errors: { servicePrice: [], serviceDuration: validatedData.error.flatten().fieldErrors.serviceDuration } })
+                setValue({
+                    ...value, errors: {
+                        servicePrice: [],
+                        serviceDuration: validatedData.error.flatten().fieldErrors.serviceDuration
+                    }
+                })
             }
 
             return
         }
-        // Create a new array by mapping over the existing services
-        // For the service being edited, update its price and duration
-        // Leave all other services unchanged
+
         const updatedServicesList = services.map((service) => {
             if (service.serviceId === currentService.serviceId) {
                 return {
@@ -76,68 +92,62 @@ export default function EditServiceDialog({ currentService, services, setService
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
-
-                <Button variant="ghost" className="w-full justify-start  p-2 hover:bg-accent-100/80  font-semibold transition-colors duration-200 ease-in-out">Edit</Button>
+                <Button variant="ghost" className="w-full justify-start p-2 hover:bg-accent-100/80 font-semibold transition-colors duration-200 ease-in-out">
+                    {dict.actions.edit}
+                </Button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px]">
+            <DialogContent className="sm:max-w-[425px] ">
                 <DialogHeader>
-                    <DialogTitle>Edit <span className="font-bold">{currentService?.serviceName}</span></DialogTitle>
+                    <DialogTitle className="pt-6">
+                        {dict.edit_dialog.title}{" "}
+                        <span className="font-bold">{currentService?.serviceName}</span>
+                    </DialogTitle>
                     <DialogDescription>
-                        Make changes to your service here. Click save when you're done.
+                        {dict.edit_dialog.description}
                     </DialogDescription>
                 </DialogHeader>
                 <div className="grid gap-4 py-4">
                     <div className="grid grid-cols-4 items-center gap-4">
                         <Label htmlFor="name" className="text-right">
-                            Duration
+                            {dict.edit_dialog.duration.label}
                         </Label>
-                        <div className=" col-span-3">
-                            <div className="relative roudned-lg  ">
-                                <Select name="duration" value={value.serviceDuration?.toString() || ""} onValueChange={(e) => setValue({ ...value, serviceDuration: Number(e) })}>
-                                    <SelectTrigger className="w-full  text-md">
-                                        <SelectValue placeholder="Select a your business capacity" />
+                        <div className="col-span-3">
+                            <div className="relative rounded-lg">
+                                <Select
+                                    name="duration"
+                                    value={value.serviceDuration?.toString() || ""}
+                                    onValueChange={(e) => setValue({ ...value, serviceDuration: Number(e) })}
+                                >
+                                    <SelectTrigger className="w-full text-md">
+                                        <SelectValue placeholder="Select duration" />
                                     </SelectTrigger>
                                     <SelectContent>
                                         <SelectGroup>
-                                            <SelectLabel>Duration</SelectLabel>
+                                            <SelectLabel>{dict.edit_dialog.duration.group_label}</SelectLabel>
                                             {[15, 30, 45, 60, 75, 90, 105, 120].map((duration) => (
                                                 <SelectItem key={duration} value={duration.toString()}>
-                                                    <span className="text-sm">{duration} min</span>
+                                                    <span className="text-sm">
+                                                        {duration} {dict.edit_dialog.duration.unit}
+                                                    </span>
                                                 </SelectItem>
                                             ))}
-
                                         </SelectGroup>
                                     </SelectContent>
                                 </Select>
-
-                                {/* <p className="absolute right-9 top-1/2 -translate-y-1/2 text-muted-foreground text-xs italic p-2">min</p> */}
                             </div>
-                            {value.errors.serviceDuration && value?.errors?.serviceDuration?.length > 0 && <p className=" text-destructive text-sm col-span-3 pt-2">{value?.errors?.serviceDuration?.[0]}</p>}
-
+                            {value.errors.serviceDuration?.length > 0 && (
+                                <p className="text-destructive text-sm col-span-3 pt-2">
+                                    {value.errors.serviceDuration[0]}
+                                </p>
+                            )}
                         </div>
-                        {/* <div className=" col-span-3">
-                            <div className="relative roudned-lg  ">
-                                <Input
-                                    id="name"
-                                    type="number"
-                                    className="remove-default-input-styles"
-                                    value={value.serviceDuration}
-                                    onChange={(e) => setValue({ ...value, serviceDuration: Number(e.target.value) })}
-                                />
-                                <p className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground text-xs italic p-2">min</p>
-                            </div>
-                            {value.errors.serviceDuration && value?.errors?.serviceDuration?.length > 0 && <p className=" text-destructive text-sm col-span-3 pt-2">{value?.errors?.serviceDuration?.[0]}</p>}
-
-                        </div> */}
                     </div>
                     <div className="grid grid-cols-4 items-center gap-4">
                         <Label htmlFor="username" className="text-right">
-                            Price
+                            {dict.edit_dialog.price.label}
                         </Label>
-                        <div className=" col-span-3">
-
-
-                            <div className="relative roudned-lg  col-span-3">
+                        <div className="col-span-3">
+                            <div className="relative rounded-lg col-span-3">
                                 <Input
                                     type="number"
                                     id="username"
@@ -145,16 +155,22 @@ export default function EditServiceDialog({ currentService, services, setService
                                     value={value.servicePrice}
                                     onChange={(e) => setValue({ ...value, servicePrice: Number(e.target.value) })}
                                 />
-                                <p className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground text-xs italic p-2">{currentService?.serviceCurrency}</p>
-
+                                <p className="absolute right-2 rtl:left-2 rtl:right-auto top-1/2 -translate-y-1/2 text-muted-foreground text-xs italic p-2">
+                                    {currentService?.serviceCurrency}
+                                </p>
                             </div>
-
-                            {value.errors.servicePrice && value?.errors?.servicePrice?.length > 0 && <p className=" text-destructive text-sm col-span-3 pt-2">{value?.errors?.servicePrice?.[0]}</p>}
+                            {value.errors.servicePrice?.length > 0 && (
+                                <p className="text-destructive text-sm col-span-3 pt-2">
+                                    {value.errors.servicePrice[0]}
+                                </p>
+                            )}
                         </div>
                     </div>
                 </div>
                 <DialogFooter>
-                    <Button type="button" onClick={handleSaveChanges}>Save changes</Button>
+                    <Button type="button" onClick={handleSaveChanges}>
+                        {dict.edit_dialog.save}
+                    </Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>

@@ -169,16 +169,17 @@ export default function Form({ services, stroredTempServices, dict }: FormProps)
         return
     };
 
+    console.log("formState.clientFieldsErrors", formState.clientFieldsErrors)
+    console.log("dict", dict)
+
     return <form onSubmit={handleSubmit} id="business-onboarding-form" className="flex flex-col gap-2 w-full">
         {/* Main container with responsive max width and vertical padding */}
 
 
         {/* Display validation error if service selection is empty */}
-        {formState.clientFieldsErrors?.service && (
-            <p className="text-destructive text-sm py-2 rtl:font-cairo">
-                {dict.onboarding.business_services.form.validation.required}
-            </p>
-        )}
+        <p className="text-destructive text-sm py-2 rtl:font-cairo">
+            {dict.onboarding.business_services.form.validation[formState.clientFieldsErrors?.service as keyof typeof dict.onboarding.business_services.form.validation]}
+        </p>
 
         {/* Service selection controls - ComboBox and Add button */}
         <div className={cn('flex max-w-xl gap-2 justify-center items-center mx-auto w-full pb-4',

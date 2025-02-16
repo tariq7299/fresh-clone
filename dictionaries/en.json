@@ -317,15 +317,35 @@
         "service_card": {
           "price": "Price",
           "duration": "Duration",
-          "minutes": "minutes",
+          "minutes": "min",
           "remove": "Remove service",
-          "currency": "EGP"
+          "currency": "EGP",
+          "actions": {
+            "edit": "Edit",
+            "delete": "Delete"
+          },
+          "edit_dialog": {
+            "title": "Edit",
+            "description": "Make changes to your service here. Click save when you're done.",
+            "duration": {
+              "label": "Duration",
+              "group_label": "Duration",
+              "unit": "min",
+              "validation": "Enter a valid duration"
+            },
+            "price": {
+              "label": "Price",
+              "validation": "Enter a valid price"
+            },
+            "save": "Save changes"
+          }
         },
         "validation": {
-          "required": "Please add at least one service"
+          "service_required": "Please add at least one service"
         }
       }
     }
   }
+
 }  
 

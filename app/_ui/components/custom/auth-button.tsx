@@ -14,6 +14,7 @@ import { useState } from "react";
 import { ArrowLeftEndOnRectangleIcon, ArrowRightEndOnRectangleIcon } from "@heroicons/react/24/outline";
 
 export default function AuthButton({ authenticated, className, children, dict, iconSize = "10" }: { authenticated: boolean, className?: string, children?: React.ReactNode, dict: any, iconSize?: string }) {
+
     const [_, setSessionData] = useLocalStorage<SessionData | null>({ key: "user", defaultValue: null })
 
     const [isLoading, setIsLoading] = useState(false)
@@ -38,11 +39,11 @@ export default function AuthButton({ authenticated, className, children, dict, i
     }
 
     if (authenticated) {
-        return <Button loading={isLoading} onClick={handleLogout} size={"lg"} variant={"ghost"} className={cn(" justify-start font-semibold h-auto", className)} disabled={isLoading}>
+        return <Button loading={isLoading} onClick={handleLogout} size={"lg"} variant={"ghost"} className={cn("w-full justify-start font-semibold h-auto", className)} disabled={isLoading}>
             {children ? children : (<><ArrowLeftEndOnRectangleIcon className={`size-${iconSize}`} />{dict.nav.logout}</>)}
         </Button>
     } else {
-        return <Button variant={"ghost"} isLink href="/login" className={cn("justify-start font-semibold h-auto", className)}>
+        return <Button variant={"ghost"} isLink href="/login" className={cn("w-full justify-start font-semibold h-auto", className)}>
             {children ? children : (<><ArrowRightEndOnRectangleIcon className={`size-${iconSize}`} />{dict.nav.login}</>)}
         </Button>
     }

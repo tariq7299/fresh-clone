@@ -182,7 +182,7 @@ export const handleSubmitBusinessServices = async (formData: Service[]): Promise
         return {
             success: false,
             clientFieldsErrors: {
-                service: "You must add at least one service"
+                service: "service_required"
             },
             apiDataResponse: null,
             apiMsgs: "",
