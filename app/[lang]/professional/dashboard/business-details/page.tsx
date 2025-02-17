@@ -1,3 +1,5 @@
+"use client"
+
 import { Info, Camera, ImagePlus, X } from 'lucide-react';
 import { Button } from '@/_ui/components/custom/button';
 import { Label, } from '@/_ui/components/label';
@@ -12,8 +14,96 @@ import {
     SelectValue,
 } from "@/_ui/components/select"
 import { Textarea } from '@/_ui/components/textarea';
+import { MapProvider } from "@/_lib/providers/map-providers";
+import { cn } from '@/_lib/utils/utils';
+import { Map as MapComponent, Marker, MapCameraChangedEvent, useMapsLibrary, useMap } from "@vis.gl/react-google-maps";
+import { Checkbox } from '@/_ui/components/checkbox';
+import { useGeolocation } from "@/_lib/hooks/use-geo-location";
+import { useEffect, useState } from "react";
+
 
 export default function BusinessDetails() {
+
+
+    const { defaultLng, defaultLat, loading, error } = useGeolocation();
+
+
+    // Load required Google Maps libraries
+    const placesLibrary = useMapsLibrary('places');
+    const geoLibrary = useMapsLibrary('geocoding');
+    // Load core library for custom marker icon
+    const coreLibrary = useMapsLibrary('core');
+
+
+    // Initialize Places and Geocoding services
+    const [placesService, setPlacesService] = useState<google.maps.places.PlacesService | null>(null);
+    const [geocodingService, setGeocodingService] = useState<google.maps.Geocoder | null>(null);
+
+    const map = useMap();
+
+    // Initialize Places service when library and map are loaded
+    useEffect(() => {
+        if (!placesLibrary || !map) return;
+        setPlacesService(new placesLibrary.PlacesService(map));
+    }, [placesLibrary, map]);
+
+    // Initialize Geocoding service when library and map are loaded
+    useEffect(() => {
+        if (!geoLibrary || !map) return;
+        setGeocodingService(new geoLibrary.Geocoder());
+    }, [geoLibrary, map]);
+
+
+
+    // State for storing complete address details
+    const [location, setLocation] = useState({
+        lat: defaultLat,
+        lng: defaultLng,
+        place_id: "",
+        address: "",
+        building: "",
+        apartment: "",
+        street: "",
+        district: "",
+        city: "",
+        country: "",
+        directions: "",
+        online_business: false
+    })
+
+
+    // State for tracking map center coordinates
+    const [center, setCenter] = useState<{
+        lat: number,
+        lng: number
+    }>({
+        lat: defaultLat,
+        lng: defaultLng
+    })
+
+
+    // Configure custom marker icon
+    const customIcon = coreLibrary ? {
+        url: '/pin.png',
+        scaledSize: new coreLibrary.Size(30, 30),
+        size: new coreLibrary.Size(65, 65)
+    } : undefined;
+
+
+
+    // Handle map camera position changes
+    const handleCameraChange = (ev: MapCameraChangedEvent) => {
+        // if (location.online_business) return
+        setCenter(ev.detail.center)
+        setLocation({
+            ...location,
+            lat: ev.detail.center.lat,
+            lng: ev.detail.center.lng
+        })
+    };
+
+
+
     return <div className="p-5 ps-7 pt-8 md:pt-14 size-full max-w-7xl">
 
         <section className='pb-4 space-y-2'>
@@ -51,7 +141,7 @@ export default function BusinessDetails() {
 
                     <h3 className='text-sm font-semibold'>Upload pictures</h3>
 
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6  gap-4 w-full max-w-[600px] place-items-center md:place-items-start">
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 w-full max-w-[600px] place-items-center md:place-items-start">
 
                         <div className='border border-gray-200 p-2 flex justify-center items-center text-muted-foreground  bg-background rounded-lg group overflow-hidden transform transition duration-300 ease-in-out hover:-translate-y-3 hover:drop-shadow-lg size-24'>
                             <ImagePlus className='size-5' />
@@ -72,19 +162,19 @@ export default function BusinessDetails() {
 
                             {/* <Button size="sm"></Button> */}
                         </div>
-                        <div className='rounded-lg border border-gray-200 p-2 flex justify-center items-center text-muted-foreground  bg-background size-24'>
+                        <div className=' border border-gray-200 p-2 flex justify-center items-center text-muted-foreground  bg-background size-24 rounded-lg group overflow-hidden transform transition duration-300 ease-in-out hover:-translate-y-3 hover:drop-shadow-lg'>
                             <ImagePlus className='size-5' />
                         </div>
-                        <div className='rounded-lg border border-gray-200 p-2 flex justify-center items-center text-muted-foreground  bg-background size-24'>
+                        <div className=' border border-gray-200 p-2 flex justify-center items-center text-muted-foreground  bg-background size-24 rounded-lg group overflow-hidden transform transition duration-300 ease-in-out hover:-translate-y-3 hover:drop-shadow-lg'>
                             <ImagePlus className='size-5' />
                         </div>
-                        <div className='rounded-lg border border-gray-200 p-2 flex justify-center items-center text-muted-foreground  bg-background size-24'>
+                        <div className='border border-gray-200 p-2 flex justify-center items-center text-muted-foreground  bg-background size-24 rounded-lg group overflow-hidden transform transition duration-300 ease-in-out hover:-translate-y-3 hover:drop-shadow-lg'>
                             <ImagePlus className='size-5' />
                         </div>
-                        <div className='rounded-lg border border-gray-200 p-2 flex justify-center items-center text-muted-foreground  bg-background size-24'>
+                        <div className=' border border-gray-200 p-2 flex justify-center items-center text-muted-foreground  bg-background size-24 rounded-lg group overflow-hidden transform transition duration-300 ease-in-out hover:-translate-y-3 hover:drop-shadow-lg'>
                             <ImagePlus className='size-5' />
                         </div>
-                        <div className='rounded-lg border border-gray-200 p-2 flex justify-center items-center text-muted-foreground  bg-background size-24'>
+                        <div className='border border-gray-200 p-2 flex justify-center items-center text-muted-foreground  bg-background size-24 rounded-lg group overflow-hidden transform transition duration-300 ease-in-out hover:-translate-y-3 hover:drop-shadow-lg'>
                             <ImagePlus className='size-5' />
                         </div>
 
@@ -97,7 +187,7 @@ export default function BusinessDetails() {
                 <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 w-full">
 
                     <div className="space-y-2 ">
-                        <Label className="font-bold rtl:font-cairo" htmlFor="nameEn">
+                        <Label className="font-semibold rtl:font-cairo" htmlFor="nameEn">
                             Business Name (En)
                         </Label>
                         <Input
@@ -114,7 +204,7 @@ export default function BusinessDetails() {
                     </div>
 
                     <div className="space-y-2">
-                        <Label className="font-bold rtl:font-cairo" htmlFor="nameEn">
+                        <Label className="font-semibold rtl:font-cairo" htmlFor="nameEn">
                             Business Name (Ar)
                         </Label>
                         <Input
@@ -130,7 +220,7 @@ export default function BusinessDetails() {
                         />
                     </div>
                     <div className="space-y-2">
-                        <Label className="font-bold rtl:font-cairo" htmlFor="nameEn">
+                        <Label className="font-semibold rtl:font-cairo" htmlFor="nameEn">
                             Specialization
                         </Label>
                         <Select required>
@@ -152,7 +242,7 @@ export default function BusinessDetails() {
 
                     <div className="space-y-2 flex justify-end flex-col">
                         <Label className=" flex items-start gap-1" htmlFor="nameEn">
-                            Capacity <span className='inline-flex text-xs gap-1 text-muted-foreground justify-center items-center '><Info className="size-3 " /> How many customers you can serve at once ?</span>
+                            Capacity <div className='inline-flex text-xs gap-1 text-muted-foreground justify-center items-start lg:items-start '><Info className="size-4 " /> How many customers you can serve at once ?</div>
                         </Label>
                         <Select required>
                             <SelectTrigger className="">
@@ -204,7 +294,7 @@ export default function BusinessDetails() {
                     </div>
 
                     <div className="space-y-2 col-span-1 lg:col-span-2 xl:col-span-3">
-                        <Label className="font-bold rtl:font-cairo" htmlFor="descriptionAr">
+                        <Label className="font-semibold rtl:font-cairo" htmlFor="descriptionAr">
                             Desctiption (En)
                         </Label>
                         <Textarea
@@ -216,7 +306,7 @@ export default function BusinessDetails() {
 
                     </div>
                     <div className="space-y-2 col-span-1 lg:col-span-2 xl:col-span-3">
-                        <Label className="font-bold rtl:font-cairo" htmlFor="descriptionAr">
+                        <Label className="font-semibold rtl:font-cairo" htmlFor="descriptionAr">
                             Desctiption (Ar)
                         </Label>
                         <Textarea
@@ -245,7 +335,7 @@ export default function BusinessDetails() {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full">
 
                     <div className="col-span-2 md:col-span-3 space-y-1">
-                        <Label htmlFor="address" className="text-right font-bold">
+                        <Label htmlFor="address" className="text-right font-semibold">
                             Address
                         </Label>
                         <Input
@@ -260,7 +350,7 @@ export default function BusinessDetails() {
                     </div>
 
                     <div className="col-span-2 md:col-span-1 space-y-1">
-                        <Label htmlFor="city" className="text-right font-bold">
+                        <Label htmlFor="city" className="text-right font-semibold">
                             City
                         </Label>
                         <Input
@@ -275,7 +365,7 @@ export default function BusinessDetails() {
                     </div>
 
                     <div className="col-span-1 md:col-span-2 space-y-1">
-                        <Label htmlFor="district" className="text-right font-bold">
+                        <Label htmlFor="district" className="text-right font-semibold">
                             District
                         </Label>
                         <Input
@@ -290,7 +380,7 @@ export default function BusinessDetails() {
                     </div>
 
                     <div className="col-span-1 md:col-span-2 space-y-1">
-                        <Label htmlFor="country" className="text-right font-bold">
+                        <Label htmlFor="country" className="text-right font-semibold">
                             Country
                         </Label>
                         <Input
@@ -305,7 +395,7 @@ export default function BusinessDetails() {
                     </div>
 
                     <div className="col-span-2 md:col-span-2 space-y-1">
-                        <Label htmlFor="street" className="text-right font-bold">
+                        <Label htmlFor="street" className="text-right font-semibold">
                             Street
                         </Label>
                         <Input
@@ -320,7 +410,7 @@ export default function BusinessDetails() {
                     </div>
 
                     <div className="col-span-1 md:col-span-1 space-y-1">
-                        <Label htmlFor="building" className="text-right font-bold">
+                        <Label htmlFor="building" className="text-right font-semibold">
                             Building
                         </Label>
                         <Input
@@ -335,7 +425,7 @@ export default function BusinessDetails() {
                     </div>
 
                     <div className="col-span-1 md:col-span-1 space-y-1">
-                        <Label htmlFor="apartment" className="text-right font-bold">
+                        <Label htmlFor="apartment" className="text-right font-semibold">
                             Apartment
                         </Label>
                         <Input
@@ -350,7 +440,7 @@ export default function BusinessDetails() {
                     </div>
 
                     <div className="col-span-2 md:col-span-4 space-y-1">
-                        <Label htmlFor="directions" className="text-right font-bold">
+                        <Label htmlFor="directions" className="text-right font-semibold">
                             Directions
                         </Label>
                         <Textarea
@@ -366,12 +456,65 @@ export default function BusinessDetails() {
 
                 </div>
 
+                <div className={cn(
+                    "space-y-4 w-full")}>
+                    <div>
+                        <h3 className="text-lg font-bold rtl:font-cairo">
+                            Pin your location on the map
+                        </h3>
+
+                    </div>
+
+                    {/* Map component with marker */}
+                    <MapComponent
+                        className={cn("rounded-lg w-full h-[320px] overflow-hidden")}
+                        defaultCenter={center}
+                        center={center}
+                        defaultZoom={15}
+                        gestureHandling={'greedy'}
+                        disableDefaultUI={true}
+                        onCameraChanged={handleCameraChange}
+                    >
+                        <Marker
+                            icon={customIcon}
+                            position={center}
+                            draggable={false}
+                        />
+                    </MapComponent>
+
+                </div>
+
+
+                {/* Mobile/online services checkbox */}
+                <div className="flex items-center space-x-2 rtl:space-x-reverse">
+                    <Checkbox
+                        id="online-business"
+                        checked={location.online_business}
+                        onCheckedChange={(checked) => {
+                            setLocation({
+                                ...location,
+                                online_business: checked === true
+                            })
+                        }}
+                        variant="accent"
+                        className="size-6 border-gray-300"
+                    />
+                    <label
+                        htmlFor="online-business"
+                        className="cursor-pointer font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    >
+                        Online services
+                    </label>
+                </div>
+
+
+
+
             </div >
+
         </section >
 
 
-
     </div >
-
 }
 

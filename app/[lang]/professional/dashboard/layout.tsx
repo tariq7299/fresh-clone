@@ -6,7 +6,7 @@ import ChangeBodyColor from "@/_ui/components/custom/change-body-color"
 import { ProfessionalSidebar } from "../_components/sidebar"
 import { getDictionary } from "@/_lib/dictionaries";
 import { BriefcaseBusiness } from 'lucide-react';
-
+import { MapProvider } from "@/_lib/providers/map-providers";
 export default async function ProfessionalDashboardLayout({ children, params }: { children: React.ReactNode, params: Promise<{ lang: "en" | "ar" }> }) {
 
     const currentLang = (await params).lang as "en" | "ar"
@@ -46,24 +46,26 @@ export default async function ProfessionalDashboardLayout({ children, params }: 
 
     return (
         <SidebarProvider>
-            {/* <ChangeBodyColor color="#F5F5F6" /> */}
+            <MapProvider>
+                {/* <ChangeBodyColor color="#F5F5F6" /> */}
 
-            {userData &&
-                <ProfessionalSidebar
-                    side={currentLang === "ar" ? "right" : "left"}
-                    dict={dict}
-                    userData={userData}
-                    sidebarTabs={sidebarTabs}
-                    triggerClass="top-0"
-                    containerClass="bg-gradient-to-b from-[#638C6D]  to-[#1B261E] "
-                />
-            }
+                {userData &&
+                    <ProfessionalSidebar
+                        side={currentLang === "ar" ? "right" : "left"}
+                        dict={dict}
+                        userData={userData}
+                        sidebarTabs={sidebarTabs}
+                        triggerClass="top-0"
+                        containerClass="bg-gradient-to-b from-[#638C6D]  to-[#1B261E] "
+                    />
+                }
 
-            <div className="p-5 pb-0 md:ps-14 size-full ">
-                <Suspense>
-                    {children}
-                </Suspense>
-            </div>
+                <div className="p-5 pb-0 md:ps-14 size-full ">
+                    <Suspense>
+                        {children}
+                    </Suspense>
+                </div>
+            </MapProvider>
 
         </SidebarProvider>
 
