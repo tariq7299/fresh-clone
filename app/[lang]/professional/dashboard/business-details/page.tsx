@@ -20,7 +20,7 @@ import { Map as MapComponent, Marker, MapCameraChangedEvent, useMapsLibrary, use
 import { Checkbox } from '@/_ui/components/checkbox';
 import { useGeolocation } from "@/_lib/hooks/use-geo-location";
 import { useEffect, useState } from "react";
-
+import CategoryIcon from "@/_ui/components/custom/category-icon";
 
 export default function BusinessDetails() {
 
@@ -123,6 +123,8 @@ export default function BusinessDetails() {
 
         {/* Business identity Section */}
         <section className='space-y-2 pb-4'>
+
+            <CategoryIcon category="hair" width={100} height={100} fill="blue" />
 
             <h2 className='text-lg font-semibold'>Business identity</h2>
 
