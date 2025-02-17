@@ -33,7 +33,7 @@ export default async function HeroSection({
 
 
             <div className="max-w-xl lg:max-w-2xl relative ">
-                <h1 className={`text-4xl  lg:text-7xl font-bold text-start sm:text-start tracking-tight font-libre-bodoni rtl:font-cairo scale-y-110 text-white `}>
+                <h1 className={`text-4xl  lg:text-7xl font-bold text-start sm:text-start tracking-tight font-libre-bodoni rtl:font-cairo scale-y-110 text-white !leading-tight`}>
                     {/* Schedule local salon and wellness services */}
                     {dict.home.hero.title}
                 </h1>

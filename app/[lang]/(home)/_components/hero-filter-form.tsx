@@ -137,7 +137,7 @@ export default function HeroFilterForm({ categories, dict }: { categories: Categ
 
 
             {/* Write types */}
-            <div className="flex gap-3 lg:gap-2 border rounded-lg justify-between mt-8 lg:mt-16 items-center bg-white flex-col lg:flex-row  p-3 lg:p-1.5">
+            <div className="flex gap-3 lg:gap-2 border rounded-lg justify-between mt-8 lg:mt-12 items-center bg-white flex-col lg:flex-row  p-3 lg:p-1.5">
 
                 {/* Pass in the categories */}
                 {/* Pass in the default category */}
