@@ -4,7 +4,8 @@ import { getUserData } from "@/[lang]/(auth)/_lib/auth-server-services"
 import { NotepadText } from "lucide-react"
 import ChangeBodyColor from "@/_ui/components/custom/change-body-color"
 import { ProfessionalSidebar } from "../_components/sidebar"
-import { getDictionary } from "@/_lib/dictionaries"
+import { getDictionary } from "@/_lib/dictionaries";
+import { BriefcaseBusiness } from 'lucide-react';
 
 export default async function ProfessionalDashboardLayout({ children, params }: { children: React.ReactNode, params: Promise<{ lang: "en" | "ar" }> }) {
 
@@ -17,16 +18,35 @@ export default async function ProfessionalDashboardLayout({ children, params }: 
     const sidebarTabs = [
         {
             key: 'appointments',
+            collapsible: false,
             title: dict.dashboard.sidebar.appointments,
             href: `/${currentLang}/professional/dashboard/appointments`,
             icon: (<NotepadText />)
         },
+        {
+            key: "business",
+            collapsible: true,
+            title: "Business",
+            icon: (<BriefcaseBusiness />),
+            children: [{
+                key: "business-details",
+                title: "Business Details",
+                href: `/${currentLang}/professional/dashboard/business-details`,
+                icon: null
+            },
+            {
+                key: "business-services",
+                title: "Services",
+                href: `/${currentLang}/professional/dashboard/business-services`,
+                icon: null
+            }]
+        }
     ]
 
 
     return (
         <SidebarProvider>
-            <ChangeBodyColor color="#F5F5F6" />
+            {/* <ChangeBodyColor color="#F5F5F6" /> */}
 
             {userData &&
                 <ProfessionalSidebar

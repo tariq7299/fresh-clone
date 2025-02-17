@@ -38,7 +38,7 @@ export default async function AppointmentsPage(props: {
 
     return (
         <div className="p-5 ps-7 pt-8 md:pt-14 size-full over">
-            <h1 className="text-2xl md:text-3xl font-bold text-accent rtl:font-cairo pb-4">
+            <h1 className="text-2xl md:text-4xl font-semibold rtl:font-cairo pb-4">
                 {dict.dashboard.appointments.title}
             </h1>
             <TableFilters filters={filters} data={appointments} dict={dict} />

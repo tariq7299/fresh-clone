@@ -152,7 +152,7 @@ export default function HeroFilterForm({ categories, dict }: { categories: Categ
                     triggerClassName={" w-full z-10 font-normal flex items-center justify-start gap-3 shadow-none hover:cursor-text hover:bg-background px-4 py-6 lg:p-2 active:scale-100 text-sm border-1 border-gray-200 lg:border-none font-semibold"}
                     popoverClassName={"w-[200px] sm:w-[400px] "} />
 
-                <div className="self-stretch h-6 my-auto hidden lg:block">
+                <div className="self-stretch h-6 my-auto hid                                                                      en lg:block">
                     <Separator className=" me-1 " orientation="vertical" />
                 </div>
 

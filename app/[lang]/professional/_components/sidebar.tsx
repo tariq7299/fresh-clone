@@ -10,11 +10,18 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
     SidebarTrigger,
+    SidebarMenuSub,
+    SidebarMenuSubItem,
     useSidebar,
 } from "@/_ui/components/sidebar"
+import {
+    Collapsible,
+    CollapsibleContent,
+    CollapsibleTrigger,
+} from "@/_ui/components/collapsible"
 import Link from "next/link"
 import { SidebarTabs } from "@/[lang]/business/_components/sidebar-menu"
-import { ChevronLeft, LogOut, NotepadText, Settings } from "lucide-react"
+import { ChevronLeft, ChevronRight, LogOut, NotepadText, Settings } from "lucide-react"
 import { usePathname } from "next/navigation"
 import { SessionData } from "@/[lang]/(auth)/_lib/definitions"
 import { Button } from "@/_ui/components/custom/button"
@@ -29,9 +36,16 @@ export function ProfessionalSidebar({ side, dict, userData, sidebarTabs, contain
     userData: UserData,
     sidebarTabs: {
         key: string,
+        collapsible: boolean,
         title: string,
-        href: string,
-        icon: React.ReactNode
+        href?: string,
+        icon: React.ReactNode | null,
+        children?: {
+            key: string,
+            title: string,
+            href: string,
+            icon: React.ReactNode | null
+        }[]
     }[],
     containerClass?: string,
     triggerClass?: string,
@@ -97,20 +111,66 @@ export function ProfessionalSidebar({ side, dict, userData, sidebarTabs, contain
                 </SidebarHeader>
 
                 <SidebarContent >
-                    <SidebarMenu className={cn("px-4 pt-7", open ? "" : "flex justify-center items-center")}>
-                        {sidebarTabs.map((tab) => (
-                            <SidebarMenuItem key={tab.key} >
-                                {/* <SidebarMenuButton a sChild isActive={pathname === tab.href}> */}
-                                <SidebarMenuButton asChild isActive={pathname === tab.href} className={cn("data-[active=true]:bg-accent-100 py-5 data-[active=true]:text-primary data-[active=true]:font-semibold", open ? "" : " flex justify-center items-center")}>
-                                    <Link className="" href={tab.href}>
-                                        {tab.icon}
-                                        <span className={cn(open ? "" : "hidden")}>{tab.title}</span>
-                                    </Link>
-                                </SidebarMenuButton>
-                            </SidebarMenuItem>
-                        ))}
+                    <SidebarMenu className={cn("px-4 pt-7 text-accent-foreground", open ? "" : "flex justify-center items-center")}>
+                        {sidebarTabs.map((tab) =>
+                            tab.collapsible ? (
+                                <Collapsible key={tab.key} defaultOpen className="group/collapsible">
+                                    <SidebarMenuItem>
+                                        <CollapsibleTrigger asChild>
+                                            <SidebarMenuButton className="flex justify-between items-center">
+                                                <p className="flex items-center gap-2">{tab.icon} {tab.title}</p>   <ChevronRight className=" transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+                                            </SidebarMenuButton>
+                                        </CollapsibleTrigger>
+                                        <CollapsibleContent>
+                                            <SidebarMenuSub>
+                                                {tab.children?.map(childTab => (
+                                                    <SidebarMenuSubItem
+                                                        key={childTab.key}
+
+                                                    >
+                                                        <SidebarMenuButton
+                                                            asChild
+                                                            isActive={pathname === childTab.href}
+                                                            className={cn(
+                                                                "data-[active=true]:bg-accent-100 py-5 data-[active=true]:text-primary data-[active=true]:font-semibold",
+                                                                open ? "" : "flex justify-center items-center"
+                                                            )}
+                                                        >
+                                                            <Link className="" href={childTab.href}>
+                                                                {childTab.icon}
+                                                                <span className={cn(open ? "" : "hidden")}>
+                                                                    {childTab.title}
+                                                                </span>
+                                                            </Link>
+                                                        </SidebarMenuButton>
+                                                    </SidebarMenuSubItem>
+                                                ))}
+                                            </SidebarMenuSub>
+                                        </CollapsibleContent>
+                                    </SidebarMenuItem>
+                                </Collapsible>
+                            ) : (
+                                <SidebarMenuItem key={tab.key}>
+                                    <SidebarMenuButton
+                                        asChild
+                                        isActive={pathname === tab.href}
+                                        className={cn(
+                                            "data-[active=true]:bg-accent-100 py-5 data-[active=true]:text-primary data-[active=true]:font-semibold",
+                                            open ? "" : "flex justify-center items-center"
+                                        )}
+                                    >
+                                        <Link className="" href={tab.href ?? "#"}>
+                                            {tab.icon}
+                                            <span className={cn(open ? "" : "hidden")}>
+                                                {tab.title}
+                                            </span>
+                                        </Link>
+                                    </SidebarMenuButton>
+                                </SidebarMenuItem>
+                            )
+                        )}
                     </SidebarMenu>
-                </SidebarContent>
+                </SidebarContent >
 
                 <SidebarFooter >
                     <SidebarMenu className={cn("px-2 pb-12", open ? "" : "flex justify-center items-center")}>
@@ -140,7 +200,7 @@ export function ProfessionalSidebar({ side, dict, userData, sidebarTabs, contain
                         </SidebarMenuItem>
                     </SidebarMenu>
                 </SidebarFooter>
-            </Sidebar>
+            </Sidebar >
 
         </>
     )
