@@ -22,7 +22,82 @@ import { useGeolocation } from "@/_lib/hooks/use-geo-location";
 import { useEffect, useState } from "react";
 import CategoryIcon from "@/_ui/components/custom/category-icon";
 
+
 export default function BusinessDetails() {
+
+    const categories = [
+        {
+            id: "5",
+            name: "Hair & styling",
+            icon: "hair"
+        },
+        {
+            id: "1",
+            name: "Nails",
+            icon: "nails"
+        },
+        {
+            id: "13",
+            name: "Eyebrows & eyelashes",
+            icon: "eyelashes"
+        },
+        {
+            id: "8",
+            name: "Massage",
+            icon: "massage"
+        },
+        {
+            id: "14",
+            name: "Barbering",
+            icon: "beard"
+        },
+        {
+            id: "3",
+            name: "Hair removal",
+            icon: "shaving"
+        },
+        {
+            id: "4",
+            name: "Facials & skincare",
+            icon: "skincare"
+        },
+        {
+            id: "11",
+            name: "Injectables & fillers",
+            icon: "lips"
+        },
+        {
+            id: "6",
+            name: "Body",
+            icon: "body"
+        },
+        {
+            id: "15",
+            name: "Tattoo & piercing",
+            icon: "tattoo"
+        },
+        {
+            id: "12",
+            name: "Makeup",
+            icon: "makeup"
+        },
+        {
+            id: "2",
+            name: "Medical & dental",
+            icon: "face"
+        },
+        {
+            id: "7",
+            name: "Counseling & holistic",
+            icon: "holicist"
+        },
+        {
+            id: "9",
+            name: "Fitness",
+            icon: "fitness"
+        }
+    ]
+
 
 
     const { defaultLng, defaultLat, loading, error } = useGeolocation();
@@ -106,6 +181,12 @@ export default function BusinessDetails() {
 
     return <div className="p-5 ps-7 pt-8 md:pt-14 size-full max-w-7xl">
 
+
+        <CategoryIcon className="fill-accent size-20" category="hair" />
+        <CategoryIcon className="fill-accent size-20" category="beard" />
+        <CategoryIcon className="fill-accent size-20" category="eyebrows" />
+        <CategoryIcon className="fill-accent size-20" category="shaving" />
+
         <section className='pb-4 space-y-2'>
             <h1 className="text-2xl md:text-4xl font-semibold  rtl:font-cairo ">
                 Business Details
@@ -124,7 +205,10 @@ export default function BusinessDetails() {
         {/* Business identity Section */}
         <section className='space-y-2 pb-4'>
 
-            <CategoryIcon category="hair" width={100} height={100} fill="blue" />
+
+
+            {/* <SvgComponent width={200} height={200} fill="blue" /> */}
+            <CategoryIcon category="massage" className="fill-accent" />
 
             <h2 className='text-lg font-semibold'>Business identity</h2>
 
@@ -227,16 +311,18 @@ export default function BusinessDetails() {
                         </Label>
                         <Select required>
                             <SelectTrigger className="">
-                                <SelectValue placeholder="Select a fruit" />
+                                <SelectValue placeholder="Select a category" />
                             </SelectTrigger>
                             <SelectContent>
                                 <SelectGroup>
-                                    <SelectLabel>Fruits</SelectLabel>
-                                    <SelectItem value="apple">Apple</SelectItem>
-                                    <SelectItem value="banana">Banana</SelectItem>
-                                    <SelectItem value="blueberry">Blueberry</SelectItem>
-                                    <SelectItem value="grapes">Grapes</SelectItem>
-                                    <SelectItem value="pineapple">Pineapple</SelectItem>
+                                    <SelectLabel>Categories</SelectLabel>
+                                    {categories.map(category => (
+                                        <SelectItem className='' key={category.id} value={category.name}>
+                                            <div className='flex items-center gap-2 '>
+                                                <CategoryIcon category={category.icon} className="fill-accent size-20" />{category.name}
+                                            </div>
+                                        </SelectItem>
+                                    ))}
                                 </SelectGroup>
                             </SelectContent>
                         </Select>
