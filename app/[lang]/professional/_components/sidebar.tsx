@@ -117,8 +117,10 @@ export function ProfessionalSidebar({ side, dict, userData, sidebarTabs, contain
                                 <Collapsible key={tab.key} defaultOpen className="group/collapsible">
                                     <SidebarMenuItem>
                                         <CollapsibleTrigger asChild>
-                                            <SidebarMenuButton className="flex justify-between items-center">
-                                                <p className="flex items-center gap-2">{tab.icon} {tab.title}</p>   <ChevronRight className=" transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+                                            <SidebarMenuButton className="">
+                                                {tab.icon}
+                                                <span>{tab.title}</span>
+                                                <ChevronRight className="transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90 ml-auto" />
                                             </SidebarMenuButton>
                                         </CollapsibleTrigger>
                                         <CollapsibleContent>
@@ -137,10 +139,8 @@ export function ProfessionalSidebar({ side, dict, userData, sidebarTabs, contain
                                                             )}
                                                         >
                                                             <Link className="" href={childTab.href}>
-                                                                {childTab.icon}
-                                                                <span className={cn(open ? "" : "hidden")}>
-                                                                    {childTab.title}
-                                                                </span>
+                                                                {childTab.icon} {childTab.title}
+
                                                             </Link>
                                                         </SidebarMenuButton>
                                                     </SidebarMenuSubItem>

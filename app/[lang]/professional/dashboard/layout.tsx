@@ -21,13 +21,13 @@ export default async function ProfessionalDashboardLayout({ children, params }: 
             collapsible: false,
             title: dict.dashboard.sidebar.appointments,
             href: `/${currentLang}/professional/dashboard/appointments`,
-            icon: (<NotepadText />)
+            icon: (<NotepadText className="size-5" />)
         },
         {
             key: "business",
             collapsible: true,
             title: "Business",
-            icon: (<BriefcaseBusiness />),
+            icon: (<BriefcaseBusiness className="size-5" />),
             children: [{
                 key: "business-details",
                 title: "Business Details",

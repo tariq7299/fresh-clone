@@ -179,8 +179,7 @@ export default function BusinessDetails() {
 
 
 
-    return <div className="p-5 ps-7 pt-8 md:pt-14 size-full max-w-7xl">
-
+    return <div className="p-0 md:pt-14 size-full max-w-7xl">
 
         <section className='pb-4 space-y-2'>
             <h1 className="text-2xl md:text-4xl font-semibold  rtl:font-cairo ">
