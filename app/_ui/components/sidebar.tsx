@@ -567,7 +567,7 @@ const SidebarMenuButton = React.forwardRef<
         data-sidebar="menu-button"
         data-size={size}
         data-active={isActive}
-        className={cn(sidebarMenuButtonVariants({ variant, size }), className)}
+        className={cn("hover:bg-background/20", sidebarMenuButtonVariants({ variant, size }), className)}
         {...props}
       />
     )

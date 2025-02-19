@@ -36,6 +36,7 @@ export function ProfessionalSidebar({ side, dict, userData, sidebarTabs, contain
     userData: UserData,
     sidebarTabs: {
         key: string,
+        placement: "middle" | "footer",
         collapsible: boolean,
         title: string,
         href?: string,
@@ -112,7 +113,7 @@ export function ProfessionalSidebar({ side, dict, userData, sidebarTabs, contain
 
                 <SidebarContent >
                     <SidebarMenu className={cn("px-4 pt-7 text-accent-foreground", open ? "" : "flex justify-center items-center")}>
-                        {sidebarTabs.map((tab) =>
+                        {sidebarTabs.filter((tab) => tab.placement === "middle").map((tab) =>
                             tab.collapsible ? (
                                 <Collapsible key={tab.key} defaultOpen className="group/collapsible">
                                     <SidebarMenuItem>
@@ -174,30 +175,27 @@ export function ProfessionalSidebar({ side, dict, userData, sidebarTabs, contain
 
                 <SidebarFooter >
                     <SidebarMenu className={cn("px-2 pb-12", open ? "" : "flex justify-center items-center")}>
-                        <SidebarMenuItem  >
-                            {/* <SidebarMenuButton asChild isActive={pathname === tab.href}> */}
-                            <SidebarMenuButton asChild isActive={pathname === "/settings"} className={cn("text-accent-foreground data-[active=true]:bg-accent-100 py-5 data-[active=true]:text-primary data-[active=true]:font-semibold font-semi", open ? "" : " flex justify-center items-center")}>
-                                <Button variant="ghost" isLink className="w-full font-normal justify-start" href={"/settings"}>
-                                    <Settings />
-                                    <span className={cn(open ? "" : "hidden")}>{dict.dashboard.sidebar.settings}</span>
-                                </Button>
-                            </SidebarMenuButton>
-                        </SidebarMenuItem>
-                        <SidebarMenuItem  >
-                            {/* <SidebarMenuButton asChild isActive={pathname === tab.href}> */}
-                            <SidebarMenuButton asChild isActive={pathname === "/logout"} className={cn("text-accent-foreground data-[active=true]:bg-accent-100 py-5 data-[active=true]:text-primary data-[active=true]:font-semibold font-semi", open ? "" : " flex justify-center items-center")}>
-                                {/* <Link className="" href={"/logout"}>
-                                    <LogOut />
-                                    <span className={cn(open ? "" : "hidden")}>Logout</span>
-                                </Link> */}
-
-                                <AuthButton authenticated={true} className='flex justify-start items-center gap-2 w-full font-normal' dict={dict}>
-                                    <LogOut />
-                                    <span className={cn(open ? "" : "hidden")}>{dict.dashboard.sidebar.logout}</span>
-                                </AuthButton>
-
-                            </SidebarMenuButton>
-                        </SidebarMenuItem>
+                        {sidebarTabs.filter((tab) => tab.placement === "footer").map((tab) =>
+                            tab.key === "logout" ? (
+                                <SidebarMenuItem key={tab.key}>
+                                    <SidebarMenuButton asChild isActive={pathname === tab.href} className={cn("text-accent-foreground data-[active=true]:bg-accent-100 py-5 data-[active=true]:text-primary data-[active=true]:font-semibold font-semi", open ? "" : " flex justify-center items-center")}>
+                                        <AuthButton authenticated={true} className='flex justify-start items-center gap-2 w-full font-normal' dict={dict}>
+                                            <LogOut />
+                                            <span className={cn(open ? "" : "hidden")}>{dict.dashboard.sidebar.logout}</span>
+                                        </AuthButton>
+                                    </SidebarMenuButton>
+                                </SidebarMenuItem>
+                            ) : (
+                                <SidebarMenuItem key={tab.key}>
+                                    <SidebarMenuButton asChild isActive={pathname === tab.href} className={cn("text-accent-foreground data-[active=true]:bg-accent-100 py-5 data-[active=true]:text-primary data-[active=true]:font-semibold font-semi", open ? "" : " flex justify-center items-center")}>
+                                        <Link className="w-full font-normal justify-start" href={tab?.href ?? ""}>
+                                            {tab.icon}
+                                            <span className={cn(open ? "" : "hidden")}>{tab.title}</span>
+                                        </Link>
+                                    </SidebarMenuButton>
+                                </SidebarMenuItem>
+                            )
+                        )}
                     </SidebarMenu>
                 </SidebarFooter>
             </Sidebar >

@@ -1,12 +1,13 @@
 import { SidebarProvider } from "@/_ui/components/sidebar"
 import { Suspense } from "react"
 import { getUserData } from "@/[lang]/(auth)/_lib/auth-server-services"
-import { NotepadText } from "lucide-react"
+import { NotepadText, Settings, LogOut } from "lucide-react"
 import ChangeBodyColor from "@/_ui/components/custom/change-body-color"
 import { ProfessionalSidebar } from "../_components/sidebar"
 import { getDictionary } from "@/_lib/dictionaries";
 import { BriefcaseBusiness } from 'lucide-react';
 import { MapProvider } from "@/_lib/providers/map-providers";
+
 export default async function ProfessionalDashboardLayout({ children, params }: { children: React.ReactNode, params: Promise<{ lang: "en" | "ar" }> }) {
 
     const currentLang = (await params).lang as "en" | "ar"
@@ -18,6 +19,7 @@ export default async function ProfessionalDashboardLayout({ children, params }: 
     const sidebarTabs = [
         {
             key: 'appointments',
+            placement: "middle",
             collapsible: false,
             title: dict.dashboard.sidebar.appointments,
             href: `/${currentLang}/professional/dashboard/appointments`,
@@ -27,6 +29,7 @@ export default async function ProfessionalDashboardLayout({ children, params }: 
             key: "business",
             collapsible: true,
             title: "Business",
+            placement: "middle",
             icon: (<BriefcaseBusiness className="size-5" />),
             children: [{
                 key: "business-details",
@@ -40,7 +43,22 @@ export default async function ProfessionalDashboardLayout({ children, params }: 
                 href: `/${currentLang}/professional/dashboard/business-services`,
                 icon: null
             }]
-        }
+        },
+        {
+            key: 'settings',
+            placement: "footer",
+            collapsible: false,
+            title: dict.dashboard.sidebar.settings,
+            href: `/${currentLang}/professional/dashboard/settings`,
+            icon: (<Settings className="size-5" />)
+        },
+        {
+            key: 'logout',
+            placement: "footer",
+            collapsible: false,
+            title: "Logout",
+            icon: (<LogOut className="size-5" />)
+        },
     ]
 
 
