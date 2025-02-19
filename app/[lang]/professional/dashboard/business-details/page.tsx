@@ -1,6 +1,6 @@
 "use client"
 
-import { Info, Camera, ImagePlus, X } from 'lucide-react';
+import { Info, Camera, ImagePlus, X, Trash2, Moon } from 'lucide-react';
 import { Button } from '@/_ui/components/custom/button';
 import { Label, } from '@/_ui/components/label';
 import { Input } from '@/_ui/components/input';
@@ -21,6 +21,10 @@ import { Checkbox } from '@/_ui/components/checkbox';
 import { useGeolocation } from "@/_lib/hooks/use-geo-location";
 import { useEffect, useState } from "react";
 import CategoryIcon from "@/_ui/components/custom/category-icon";
+import { Switch } from "@/_ui/components/switch";
+import { TimeInput } from "@heroui/date-input";
+
+
 
 
 export default function BusinessDetails() {
@@ -97,7 +101,6 @@ export default function BusinessDetails() {
             icon: "fitness"
         }
     ]
-
 
 
     const { defaultLng, defaultLat, loading, error } = useGeolocation();
@@ -189,7 +192,7 @@ export default function BusinessDetails() {
             <div className="flex gap-1 justify-start items-center text-destructive text-sm">
                 <Info className="size-4 " />
                 <p className="">
-                    Note: After editing your data, your account will be pending until the changes are reviewed and approved.
+                    Note: After editing some of your data will be pending until the changes are reviewed and approved.
                 </p>
             </div>
 
@@ -201,16 +204,16 @@ export default function BusinessDetails() {
 
 
 
-            {/* <SvgComponent width={200} height={200} fill="blue" /> */}
-            {/* <CategoryIcon category="shaving" className="fill-accent size-32" /> */}
-
             <h2 className='text-lg font-semibold'>Business identity</h2>
 
             <div className='bg-muted rounded-lg p-6 flex flex-col space-y-6 md:space-y-4 justify-center items-center'>
 
                 {/* Business Logo */}
                 <div className='flex gap-2 flex-col justify-center items-center w-full'>
-                    <div className='rounded-full  size-24 border border-gray-200 flex justify-center items-center bg-background text-muted-foreground'>
+                    <div className='rounded-full size-24 border border-gray-200 flex justify-center items-center bg-background text-muted-foreground relative p-1'>
+                        <Button variant={"ghost"} className="absolute bottom-0 -right-2 group-hover:block p-2">
+                            <Trash2 className="size-5 text-destructive" />
+                        </Button>
                         <Camera className='size-5' />
                     </div>
                     <p className='text-sm font-semibold'>Business Logo</p>
@@ -387,18 +390,108 @@ export default function BusinessDetails() {
                             name="descriptionAr" id="descriptionAr" placeholder={"description in english"} />
 
                     </div>
+
                     <div className="space-y-2 col-span-1 lg:col-span-2 xl:col-span-3">
-                        <Label className="font-semibold rtl:font-cairo" htmlFor="descriptionAr">
+                        <Label className="font-semibold rtl:font-cairo flex justify-between items-center" htmlFor="descriptionAr">
                             Desctiption (Ar)
+                            <span className="text-warning-600 text-sm">Changes under review</span>
                         </Label>
                         <Textarea
                             dir="rtl"
+                            className="ring-2 ring-warning-600"
                             // disabled={isPending}
                             // value={formValues.descriptionAr}
                             // onChange={(e) => setFormValues({ ...formValues, descriptionAr: e.target.value })}
                             name="descriptionAr" id="descriptionAr" placeholder={"description in english"} />
                     </div>
 
+                    <div className="col-span-1 lg:col-span-2 xl:col-span-3 space-y-2 flex flex-col w-full ">
+                        <Label className="font-semibold rtl:font-cairo">
+                            Working Hours
+                        </Label>
+
+                        <div className='bg-background rounded-lg p-4 space-y-3 '>
+
+                            <div className=" w-full  grid grid-cols-3 gap-4">
+
+                                <div className='flex items-center justify-between gap-2 pe-0 lg:pe- xl:pe-32 col-span-3 lg:col-span-1'>
+                                    <Label className="font-semibold text-[16px]">Saturday</Label>
+                                    <Switch className='data-[state=checked]:bg-accent' id="airplane-mode" />
+                                </div>
+                                <div className='flex items-center justify-start gap-2 border border-gray-200 rounded-lg px-3  py-1 h-10 text-muted-foreground bg-muted col-span-3 lg:col-span-2 '>
+                                    <Moon className='size-5' /> Closed
+                                </div>
+
+
+                            </div>
+
+                            <div className=" w-full  grid grid-cols-3 gap-4">
+
+                                <div className='flex items-center justify-between gap-2 pe-0 xl:pe-32 col-span-3 lg:col-span-1'>
+                                    <Label className="font-semibold text-[16px]">Saturday</Label>
+                                    <Switch className='data-[state=checked]:bg-accent' id="airplane-mode" />
+                                </div>
+                                <div className=' items-center justify-start gap-2 border border-gray-200 rounded-lg px-3  py-1 h-10 text-muted-foreground bg-muted col-span-3 lg:col-span-2 hidden lg:flex'>
+                                    <Moon className='size-5' /> Closed
+                                </div>
+
+
+                            </div>
+
+                            <div className=" w-full  grid grid-cols-3 gap-4">
+                                <div className='flex items-center justify-between gap-2 grow-[1] pe-0  xl:pe-32'>
+                                    <Label className="font-semibold text-[16px]">Saturday</Label>
+                                    <Switch className='data-[state=checked]:bg-accent' id="airplane-mode" />
+                                </div>
+                                <div className='flex items-center justify-between gap-2 border border-gray-200 rounded-lg px-3  grow-[2] py-1'>
+                                    <span className='text-sm text-muted-foreground'>From</span>
+                                    <TimeInput classNames={{
+                                        base: "w-min",
+                                        inputWrapper: "shadow-none p-1 !h-auto !min-h-2 w-min bg-transparent",
+
+                                    }} />
+                                </div>
+                                <div className='flex items-center justify-between gap-2 border border-gray-200 rounded-lg px-3 py-1  grow-[2]'>
+                                    <span className='text-sm text-muted-foreground'>To</span>
+                                    <TimeInput classNames={{
+                                        base: "w-min",
+                                        inputWrapper: "shadow-none p-1 !h-auto min-h-2 w-min bg-transparent",
+                                    }} />
+                                </div>
+
+
+                            </div>
+
+                            <div className=" w-full  grid grid-cols-3 gap-4">
+                                <div className='flex items-center justify-between gap-2 grow-[1] pe-0 xl:pe-32'>
+                                    <Label className="font-semibold text-[16px]">Saturday</Label>
+                                    <Switch className='data-[state=checked]:bg-accent' id="airplane-mode" />
+                                </div>
+                                <div className='flex items-center justify-between gap-2 border border-gray-200 rounded-lg px-3  grow-[2] py-1'>
+                                    <span className='text-sm text-muted-foreground'>From</span>
+                                    <TimeInput classNames={{
+                                        base: "w-min",
+                                        inputWrapper: "shadow-none p-1 !h-auto !min-h-2 w-min bg-transparent",
+
+                                    }} />
+                                </div>
+                                <div className='flex items-center justify-between gap-2 border border-gray-200 rounded-lg px-3 py-1  grow-[2]'>
+                                    <span className='text-sm text-muted-foreground'>To</span>
+                                    <TimeInput classNames={{
+                                        base: "w-min",
+                                        inputWrapper: "shadow-none p-1 !h-auto min-h-2 w-min bg-transparent",
+                                    }} />
+                                </div>
+
+
+                            </div>
+
+
+
+                        </div>
+
+
+                    </div>
 
 
                 </div >
@@ -568,7 +661,7 @@ export default function BusinessDetails() {
 
 
                 {/* Mobile/online services checkbox */}
-                <div className="flex items-center space-x-2 rtl:space-x-reverse">
+                <div className="flex items-center space-x-2 rtl:space-x-reverse w-full justify-start">
                     <Checkbox
                         id="online-business"
                         checked={location.online_business}
