@@ -13,6 +13,7 @@ import Body from "@/_ui/icons/body";
 import EyeLashes from "@/_ui/icons/eye lashes";
 import Fitness from "@/_ui/icons/fitness";
 import Holicist from "@/_ui/icons/holicist";
+import { cn } from "@/_lib/utils/utils";
 
 
 interface CategoryIconProps {
@@ -24,38 +25,37 @@ export default function CategoryIcon({ className, category }: CategoryIconProps)
 
     switch (category.toLowerCase()) {
         case "hair":
-            return <Hair className={className} />;
+            return <Hair className={cn(className, "fill-accent")} />;
         case "beard":
-            return <Beard className={className} />;
+            return <Beard className={cn(className, "fill-accent")} />;
         case "eyebrows":
-            return <Eyebrows className={className} />;
+            return <Eyebrows className={cn(className, "fill-transparent text-accent")} />;
         case "face":
-            return <FaceSpray className={className} />;
+            return <FaceSpray className={cn(className, "fill-accent")} />;
         case "lips":
-            return <LipFiller className={className} />;
+            return <LipFiller className={cn(className, "fill-accent")} />;
         case "makeup":
-            return <MakeupBrush className={className} />;
+            return <MakeupBrush className={cn(className, "fill-accent")} />;
         case "nails":
-            return <Nails className={className} />;
+            return <Nails className={cn(className, "fill-accent")} />;
         case "shaving":
-            return <Razor className={className} />;
+            return <Razor className={cn(className, "fill-transparent text-accent")} />;
         case "skincare":
-            return <Skincare className={className} />;
+            return <Skincare className={cn(className, "fill-accent")} />;
         case "tattoo":
-            return <Tatto className={className} />;
+            return <Tatto className={cn(className, "fill-transparent text-accent")} />;
         case "body":
-            return <Body className={className} />;
+            return <Body className={cn(className, "fill-accent")} />;
         case "massage":
-            return <BodyMessage className={className} />;
+            return <BodyMessage className={cn(className, "fill-accent")} />;
         case "eyelashes":
-            return <EyeLashes className={className} />;
+            return <EyeLashes className={cn(className, "fill-accent")} />;
         case "fitness":
-            return <Fitness className={className} />;
+            return <Fitness className={cn(className, "fill-accent")} />;
         case "holicist":
-            return <Holicist className={className} />;
+            return <Holicist className={cn(className, "fill-accent")} />;
         default:
-            return <Hair className={className} />; // Default to hair icon
+            return <Hair className={cn(className, "fill-accent")} />; // Default to hair icon
     }
 }
-
 

@@ -182,11 +182,6 @@ export default function BusinessDetails() {
     return <div className="p-5 ps-7 pt-8 md:pt-14 size-full max-w-7xl">
 
 
-        <CategoryIcon className="fill-accent size-20" category="hair" />
-        <CategoryIcon className="fill-accent size-20" category="beard" />
-        <CategoryIcon className="fill-accent size-20" category="eyebrows" />
-        <CategoryIcon className="fill-accent size-20" category="shaving" />
-
         <section className='pb-4 space-y-2'>
             <h1 className="text-2xl md:text-4xl font-semibold  rtl:font-cairo ">
                 Business Details
@@ -208,7 +203,7 @@ export default function BusinessDetails() {
 
 
             {/* <SvgComponent width={200} height={200} fill="blue" /> */}
-            <CategoryIcon category="massage" className="fill-accent" />
+            {/* <CategoryIcon category="shaving" className="fill-accent size-32" /> */}
 
             <h2 className='text-lg font-semibold'>Business identity</h2>
 
@@ -319,7 +314,7 @@ export default function BusinessDetails() {
                                     {categories.map(category => (
                                         <SelectItem className='' key={category.id} value={category.name}>
                                             <div className='flex items-center gap-2 '>
-                                                <CategoryIcon category={category.icon} className="fill-accent size-20" />{category.name}
+                                                <CategoryIcon category={category.icon} className=" size-8" />{category.name}
                                             </div>
                                         </SelectItem>
                                     ))}
