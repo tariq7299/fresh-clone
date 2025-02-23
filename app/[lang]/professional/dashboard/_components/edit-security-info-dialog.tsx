@@ -71,6 +71,7 @@ export default function EditSecurityInfoDialog() {
                                 name="current_password"
                                 className="ps-12 bg-background"
                                 placeholder="Old password"
+                                disabled={isPending}
                             // value={value.servicePrice}
                             // onChange={(e) => setValue({ ...value, servicePrice: Number(e.target.value) })}
                             />
@@ -78,6 +79,9 @@ export default function EditSecurityInfoDialog() {
                                 <Lock className="w-4 h-4" />
                             </p>
                         </div>
+                        <p className="text-destructive text-sm">
+                            {formState?.clientFieldsErrors?.current_password?.[0]}
+                        </p>
 
                     </div>
 
@@ -89,6 +93,7 @@ export default function EditSecurityInfoDialog() {
                                 name="new_password"
                                 className="ps-12 bg-background"
                                 placeholder="New password"
+                                disabled={isPending}
                             // value={value.servicePrice}
                             // onChange={(e) => setValue({ ...value, servicePrice: Number(e.target.value) })}
                             />
@@ -96,6 +101,9 @@ export default function EditSecurityInfoDialog() {
                                 <Lock className="w-4 h-4" />
                             </p>
                         </div>
+                        <p className="text-destructive text-sm">
+                            {formState?.clientFieldsErrors?.new_password?.[0]}
+                        </p>
 
                     </div>
 
@@ -107,6 +115,7 @@ export default function EditSecurityInfoDialog() {
                                 name="new_password_confirmation"
                                 className="ps-12 bg-background"
                                 placeholder="Confirm new password"
+                                disabled={isPending}
                             // value={value.servicePrice}
                             // onChange={(e) => setValue({ ...value, servicePrice: Number(e.target.value) })}
                             />
@@ -114,6 +123,9 @@ export default function EditSecurityInfoDialog() {
                                 <Lock className="w-4 h-4" />
                             </p>
                         </div>
+                        <p className="text-destructive text-sm">
+                            {formState?.clientFieldsErrors?.new_password_confirmation?.[0]}
+                        </p>
 
                     </div>
 
@@ -121,7 +133,7 @@ export default function EditSecurityInfoDialog() {
                 </div>
                 <DialogFooter className="">
                     <Button type="submit" disabled={isPending} loading={isPending}>
-                        Save changes
+                        Change Password
                     </Button>
                     <Button type="button" variant="outline" onClick={() => setOpen(false)}>
                         Cancel

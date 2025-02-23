@@ -47,7 +47,7 @@ export default async function SettingsForm() {
 
             </div>
 
-            <div className="flex justify-end items-center w-full">
+            <div className="flex justify-end items-center w-full pt-2">
 
                 <EditPersonalInfoDialog professionalInfo={professionalInfo} />
 
@@ -69,6 +69,7 @@ export default async function SettingsForm() {
                                 id="old_password"
                                 className="ps-12 bg-background"
                                 placeholder="Old password"
+
                             // value={value.servicePrice}
                             // onChange={(e) => setValue({ ...value, servicePrice: Number(e.target.value) })}
                             />
@@ -116,10 +117,8 @@ export default async function SettingsForm() {
                 </div>
 
             </div>
-            <div className="flex justify-end items-center w-full">
-
+            <div className="flex justify-end items-center w-full pt-2">
                 <EditSecurityInfoDialog />
-
             </div>
         </section>
     </>

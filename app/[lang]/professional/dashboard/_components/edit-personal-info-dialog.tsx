@@ -71,7 +71,7 @@ export default function EditPersonalInfoDialog({ professionalInfo }: {
                         </DialogDescription>
                     </DialogHeader>
 
-                    <PersonalInputs data={formState.formData} isPending={isPending} />
+                    <PersonalInputs errors={formState.clientFieldsErrors} data={formState.formData} isPending={isPending} />
 
 
                     <DialogFooter className="">
