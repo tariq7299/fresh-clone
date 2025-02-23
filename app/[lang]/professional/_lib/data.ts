@@ -228,47 +228,6 @@ export const removeTempBusinessFormSumbissions = async (businessId: number) => {
     }
 }
 
-// export const getAppointments = async () => {
-
-//     // let result;
-
-//     // try {
-//     const res = await fetchApi("/businesses/1/bookings", {
-//         method: "GET"
-//     })
-
-//     // const successMsg = setApiSuccessMsg({ successResponse: res })
-
-
-//     if (res.success) {
-//         return res?.data?.bookings
-//     }
-
-//     redirectToLoginIfNotAuthenticated(res.apiMsgs, ["sessionEnded=true"])
-//     return []
-
-
-//     // return appointments?.data || []
-//     // } catch (error) {
-//     // console.error('Error fetching appointments:', error);
-//     // const errorMsg = setApiErrorMsg({ errResponse: error })
-//     // result = {
-//     //     apiResponse: error,
-//     //     success: false,
-//     //     data: null,
-//     //     msg: errorMsg,
-//     // }
-
-//     // }
-
-//     // if (result.success) {
-//     //     return result.data
-//     // }
-
-
-//     // return []
-
-// }
 
 export const getAppointments = async (params?: AppointmentPageQueries, lang?: "en" | "ar") => {
     const urlParams = new URLSearchParams()
@@ -296,3 +255,17 @@ export const getAppointments = async (params?: AppointmentPageQueries, lang?: "e
 
 }
 
+export const getProfessionalInfo = async (lang?: "en" | "ar") => {
+    const session = await getSession()
+    const userId = session ? session.id : null
+    if (!userId) {
+        redirectToLoginIfNotAuthenticated("Session expired", ["sessionEnded=true"])
+    }
+
+    const response = await fetchApi("/auth/profile", { lang })
+    if (response.success) {
+        return response.data
+    }
+    redirectToLoginIfNotAuthenticated(response.apiMsgs, ["sessionEnded=true"])
+    return null
+}

@@ -11,6 +11,7 @@ export default async function AppointmentsPage(props: {
     searchParams: Promise<AppointmentPageQueries>,
     params: Promise<{ lang: "en" | "ar" }>
 }) {
+
     const searchParams = await props?.searchParams
     const lang = (await props.params).lang
     const dict = await getDictionary(lang)
