@@ -6,7 +6,14 @@ import { Label } from "@/_ui/components/label"
 import { Lock } from "lucide-react"
 import { PasswordInput } from "@/_ui/components/custom/password-input"
 
-export default function EditSecurityInfoDialog() {
+export default function EditSecurityInfoDialog({ securityInfo }: {
+    securityInfo: {
+        password: string,
+        password_confirmation: string
+    }
+}) {
+
+
     return <Dialog >
         <DialogTrigger asChild>
             <Button className="">
@@ -22,7 +29,7 @@ export default function EditSecurityInfoDialog() {
                     Edit your security information
                 </DialogDescription>
             </DialogHeader>
-            <div className='grid grid-cols-2 gap-4 w-full  overflow-y-auto p-1'>
+            <div className='grid grid-cols-1 md:grid-cols-2 gap-4 w-full  overflow-y-auto p-1'>
 
                 <div className='flex flex-col space-y-2'>
                     <Label className='text-sm font-semibold'>Old Password</Label>

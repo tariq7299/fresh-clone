@@ -262,6 +262,7 @@ export const getProfessionalInfo = async (lang?: "en" | "ar") => {
         redirectToLoginIfNotAuthenticated("Session expired", ["sessionEnded=true"])
     }
 
+
     const response = await fetchApi("/auth/profile", { lang })
     if (response.success) {
         return response.data

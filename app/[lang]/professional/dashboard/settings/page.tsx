@@ -1,5 +1,7 @@
 import Form from "../_components/settings-form"
 import { getProfessionalInfo } from "@/[lang]/professional/_lib/data"
+import SettingsFormSkeleton from "../_components/settings-form-skeleton"
+import { Suspense } from "react"
 
 export default function SettingsPage() {
 
@@ -12,7 +14,12 @@ export default function SettingsPage() {
                 </h1>
             </section>
 
-            <Form />
+            <Suspense fallback={<SettingsFormSkeleton />}>
+                <section className='space-y-2 pb-8'>
+                    <Form />
+                </section>
+            </Suspense>
+
         </div>
     )
 }
