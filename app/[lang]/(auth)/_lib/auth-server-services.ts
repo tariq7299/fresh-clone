@@ -6,6 +6,7 @@ import { fetchApi } from "@/_lib/utils/api/fetch-utils";
 import { createSession, deleteSession, getSession } from '@/[lang]/(auth)/_lib/sessions';
 import { redirect } from 'next/navigation'
 import { ApiError } from "@/_lib/definitions/api";
+import { redirectToLoginIfNotAuthenticated } from "./redirect-to-login-if-not-authenticated";
 
 export const authenticateUser = async (formData: FormData): Promise<ApiResponse<ApiResponseSessionData>> => {
     // try {
@@ -53,6 +54,7 @@ export async function logoutUserFromBackend() {
     const response = await fetchApi('/auth/logout', {
         method: 'POST',
     })
+    // redirectToLoginIfNotAuthenticated(response.apiMsgs, ["sessionEnded=true"])
     return response
 }
 

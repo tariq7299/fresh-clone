@@ -19,11 +19,6 @@ export const handleUpdateProfessionalPersonalInfo = async (formState: PersonalIn
         email: formData.get("email") as string || "",
     }
 
-    const session = await getSession()
-    const userId = session ? session.id : null
-    if (!userId) {
-        redirectToLoginIfNotAuthenticated("Session expired", ["sessionEnded=true"])
-    }
 
 
     const validatedFields = personalInfoSchema.safeParse(payload)
@@ -68,14 +63,9 @@ export const handleUpdateProfessionalPersonalInfo = async (formState: PersonalIn
 export const handleUpdateProfessionalSecurityInfo = async (formState: SecurityInfoFormState, formData: FormData): Promise<SecurityInfoFormState> => {
 
     const payload = {
-        password: formData.get("password") as string || "",
-        password_confirmation: formData.get("password_confirmation") as string || "",
-    }
-
-    const session = await getSession()
-    const userId = session ? session.id : null
-    if (!userId) {
-        redirectToLoginIfNotAuthenticated("Session expired", ["sessionEnded=true"])
+        current_password: formData.get("current_password") as string || "",
+        new_password: formData.get("new_password") as string || "",
+        new_password_confirmation: formData.get("new_password_confirmation") as string || "",
     }
 
 

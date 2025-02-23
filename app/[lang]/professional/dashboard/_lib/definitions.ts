@@ -22,18 +22,20 @@ export type PersonalInfoFormState = SuccessFormState<PersonalInfoFormData, Perso
     null, PersonalInfoFormData>
 
 export const securityInfoSchema = z.object({
-    password: z.string().trim().min(1, { message: 'Please enter your password' }),
-    password_confirmation: z.string().trim().min(1, { message: 'Please enter your password confirmation' }),
-}).refine((data) => data.password === data.password_confirmation, {
+    current_password: z.string().trim().min(1, { message: 'Please enter your old password' }),
+    new_password: z.string().trim().min(1, { message: 'Please enter your password' }),
+    new_password_confirmation: z.string().trim().min(1, { message: 'Please enter your password confirmation' }),
+}).refine((data) => data.new_password === data.new_password_confirmation, {
     message: "Passwords do not match",
-    path: ["password_confirmation"],
+    path: ["new_password_confirmation"],
 })
 
 export type SecurityInfoFormData = z.infer<typeof securityInfoSchema>
 
 export type SecurityInfoFieldErrors = {
-    password?: string | string[]
-    password_confirmation?: string | string[]
+    current_password?: string | string[]
+    new_password?: string | string[]
+    new_password_confirmation?: string | string[]
 }
 
 export type SecurityInfoFormState = SuccessFormState<SecurityInfoFormData, SecurityInfoFormData> | ErrorFormState<SecurityInfoFieldErrors |

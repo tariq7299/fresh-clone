@@ -48,6 +48,7 @@ export default function EditPersonalInfoDialog({ professionalInfo }: {
     }, [formState])
 
     const [open, setOpen] = useState(false)
+
     return (
         // <form action={formAction}>
 
@@ -58,6 +59,7 @@ export default function EditPersonalInfoDialog({ professionalInfo }: {
                 </Button>
             </DialogTrigger>
             <DialogContent >
+
                 <form action={formAction} className="  grid w-full  gap-4  ">
 
                     <DialogHeader className="">
