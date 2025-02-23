@@ -202,8 +202,6 @@ export default function BusinessDetails() {
         {/* Business identity Section */}
         <section className='space-y-2 pb-4'>
 
-
-
             <h2 className='text-lg font-semibold'>Business identity</h2>
 
             <div className='bg-muted rounded-lg p-6 flex flex-col space-y-6 md:space-y-4 justify-center items-center'>
@@ -497,6 +495,7 @@ export default function BusinessDetails() {
                 </div >
 
             </div >
+
         </section >
 
         {/* Location Section */}

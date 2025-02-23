@@ -1,3 +1,5 @@
+"use client"
+
 import * as React from 'react'
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline'
 import { Button } from './button'
